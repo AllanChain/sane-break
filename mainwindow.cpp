@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include <LayerShellQt/Shell>
 #include <QApplication>
 #include <QLabel>
 #include <QProgressBar>
@@ -9,6 +10,13 @@
 #include <cmath>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
+
+  setStyleSheet("background: rgba(0, 0, 0, 30%);");
+  setAttribute(Qt::WA_TranslucentBackground);
+  setAttribute(Qt::WA_ShowWithoutActivating);
+  setWindowFlags(Qt::Dialog | Qt::WindowDoesNotAcceptFocus |
+                 Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+
   QWidget *centralWidget = new QWidget(this);
   setCentralWidget(centralWidget);
 
@@ -18,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   label->setAlignment(Qt::AlignCenter);
   layout->addWidget(label);
 
-  int totalTime = 10 * 1000;
+  int totalTime = 4 * 1000;
 
   QProgressBar *progressBar = new QProgressBar(); // Create progress bar
   progressBar->setMaximum(totalTime);
@@ -41,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     remainingTime -= 10;
     progressBar->setValue(remainingTime);
     countdownLabel->setText(
-        QString("Time remaining: %1 seconds").arg(floor(remainingTime / 1000)));
+        QString("Time remaining: %1 seconds").arg(round(remainingTime / 1000)));
     if (remainingTime <= 0) {
       timer->stop();
       this->close();
