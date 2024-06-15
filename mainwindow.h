@@ -14,6 +14,6 @@ public:
 
 private:
   bool isIdle = true;
-  float remainingTime;
+  int remainingTime;
 };
 #endif // MAINWINDOW_H

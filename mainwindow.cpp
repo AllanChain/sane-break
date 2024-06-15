@@ -12,9 +12,11 @@
 
 int totalTime = 10 * 1000;
 
+#define FRAME_RATE 25
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
-  setStyleSheet("background: rgba(0, 0, 0, 30%);");
+  setStyleSheet("background: rgba(59, 66, 82, 30%);");
   setAttribute(Qt::WA_TranslucentBackground);
   setAttribute(Qt::WA_ShowWithoutActivating);
   setWindowFlags(Qt::Dialog | Qt::WindowDoesNotAcceptFocus |
@@ -34,36 +36,44 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   QProgressBar *progressBar = new QProgressBar(); // Create progress bar
   progressBar->setStyleSheet("background: transparent;");
   progressBar->setMaximum(totalTime);
+  progressBar->setTextVisible(false);
   layout->addWidget(progressBar);
+
+  progressBar->setValue(totalTime);
+  countdownLabel->setText(QString("Time remaining: %1 seconds").arg(totalTime));
 
   remainingTime = totalTime;
 
-  progressBar->setValue(remainingTime);
-  countdownLabel->setText(
-      QString("Time remaining: %1 seconds").arg(remainingTime));
+  QTimer *countdownTimer = new QTimer(this);
+  countdownTimer->setInterval(1000 / FRAME_RATE);
 
-  QTimer *timer = new QTimer(this); // Create timer
-  timer->setInterval(10);
-
-  QObject::connect(timer, &QTimer::timeout, [=]() {
-    if (this->isIdle) {
-      this->remainingTime -= 10;
+  QObject::connect(countdownTimer, &QTimer::timeout, [=]() {
+    this->remainingTime -= 1000 / FRAME_RATE;
+    if (!this->isIdle) { // Keep resetting time if not idle
+      if (this->remainingTime < totalTime - 500) {
+        this->remainingTime = totalTime;
+      }
+      setStyleSheet(QString("background: rgba(235, 203, 139, %1);")
+                        .arg(sin(this->remainingTime * 3.14 / 1000) / 5 + 0.5));
     }
     progressBar->setValue(this->remainingTime);
     countdownLabel->setText(QString("Time remaining: %1 seconds")
-                                .arg(round(this->remainingTime / 1000)));
+                                .arg(round(float(this->remainingTime) / 1000)));
     if (this->remainingTime <= 0) {
-      timer->stop();
+      countdownTimer->stop();
       this->close();
     }
   });
 
-  timer->start(); // Start timer
+  countdownTimer->start();
 }
 
 MainWindow::~MainWindow() {}
 
-void MainWindow::onIdleStart() { this->isIdle = true; }
+void MainWindow::onIdleStart() {
+  setStyleSheet("background: rgba(0, 0, 0, 30%);");
+  this->isIdle = true;
+}
 void MainWindow::onIdleEnd() {
   this->isIdle = false;
   this->remainingTime = totalTime;
