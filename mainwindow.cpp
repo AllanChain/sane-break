@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+
 #include <LayerShellQt/Shell>
 #include <QApplication>
 #include <QLabel>
@@ -9,6 +10,8 @@
 #include <QWindow>
 #include <cmath>
 
+int totalTime = 10 * 1000;
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
   setStyleSheet("background: rgba(0, 0, 0, 30%);");
@@ -17,26 +20,23 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   setWindowFlags(Qt::Dialog | Qt::WindowDoesNotAcceptFocus |
                  Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
 
+  resize(300, 100);
   QWidget *centralWidget = new QWidget(this);
   setCentralWidget(centralWidget);
 
   QVBoxLayout *layout = new QVBoxLayout(centralWidget);
 
-  QLabel *label = new QLabel("Hello World");
-  label->setAlignment(Qt::AlignCenter);
-  layout->addWidget(label);
-
-  int totalTime = 4 * 1000;
-
-  QProgressBar *progressBar = new QProgressBar(); // Create progress bar
-  progressBar->setMaximum(totalTime);
-  layout->addWidget(progressBar);
-
   QLabel *countdownLabel = new QLabel(); // Create countdown label
+  countdownLabel->setStyleSheet("background: transparent;");
   countdownLabel->setAlignment(Qt::AlignCenter);
   layout->addWidget(countdownLabel);
 
-  float remainingTime = totalTime;
+  QProgressBar *progressBar = new QProgressBar(); // Create progress bar
+  progressBar->setStyleSheet("background: transparent;");
+  progressBar->setMaximum(totalTime);
+  layout->addWidget(progressBar);
+
+  remainingTime = totalTime;
 
   progressBar->setValue(remainingTime);
   countdownLabel->setText(
@@ -45,12 +45,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   QTimer *timer = new QTimer(this); // Create timer
   timer->setInterval(10);
 
-  QObject::connect(timer, &QTimer::timeout, [=]() mutable {
-    remainingTime -= 10;
-    progressBar->setValue(remainingTime);
-    countdownLabel->setText(
-        QString("Time remaining: %1 seconds").arg(round(remainingTime / 1000)));
-    if (remainingTime <= 0) {
+  QObject::connect(timer, &QTimer::timeout, [=]() {
+    if (this->isIdle) {
+      this->remainingTime -= 10;
+    }
+    progressBar->setValue(this->remainingTime);
+    countdownLabel->setText(QString("Time remaining: %1 seconds")
+                                .arg(round(this->remainingTime / 1000)));
+    if (this->remainingTime <= 0) {
       timer->stop();
       this->close();
     }
@@ -60,3 +62,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 }
 
 MainWindow::~MainWindow() {}
+
+void MainWindow::onIdleStart() { this->isIdle = true; }
+void MainWindow::onIdleEnd() {
+  this->isIdle = false;
+  this->remainingTime = totalTime;
+}
