@@ -9,6 +9,7 @@
 #include <QVBoxLayout>
 #include <QWindow>
 #include <cmath>
+#include <qtimer.h>
 #include <qwindowdefs.h>
 
 int totalTime = 10 * 1000;
@@ -46,19 +47,21 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   countdownTimer = new QTimer(this);
   countdownTimer->setInterval(1000 / FRAME_RATE);
 
-  forceBreakTimer = new QTimer(this);
-  forceBreakTimer->setInterval(30 * 1000);
-  forceBreakTimer->setSingleShot(true);
-
-  QObject::connect(countdownTimer, &QTimer::timeout, this, &MainWindow::tick);
-  QObject::connect(forceBreakTimer, &QTimer::timeout, [=]() {
+  QTimer::singleShot(30 * 1000, [=]() { // Force break
     setStyleSheet("background: #2e3440;");
     this->setGeometry(this->screen()->geometry());
     this->isForceBreak = true;
   });
+  QTimer::singleShot(2000, [=]() { // Go fullscreen when idle for 2 sec
+    if (isIdle) {
+      setStyleSheet("background: #2e3440;");
+      this->setGeometry(this->screen()->geometry());
+    }
+  });
+
+  QObject::connect(countdownTimer, &QTimer::timeout, this, &MainWindow::tick);
 
   countdownTimer->start();
-  forceBreakTimer->start();
 }
 
 MainWindow::~MainWindow() {}
@@ -77,7 +80,6 @@ void MainWindow::tick() {
                               .arg(round(float(remainingTime) / 1000)));
   if (remainingTime <= 0) {
     countdownTimer->stop();
-    forceBreakTimer->stop();
     destroy();
   }
 }
@@ -85,12 +87,14 @@ void MainWindow::tick() {
 void MainWindow::onIdleStart() {
   if (this->isForceBreak)
     return;
+  setGeometry(this->screen()->geometry());
   setStyleSheet("background: rgb(59, 66, 82);");
   this->isIdle = true;
 }
 void MainWindow::onIdleEnd() {
   if (this->isForceBreak)
     return;
+  resize(300, 100);
   this->isIdle = false;
   this->remainingTime = totalTime;
 }

@@ -29,26 +29,23 @@ void onBreak() {
   }
 
   QObject::connect(KIdleTime::instance(), &KIdleTime::resumingFromIdle, [=]() {
-    KIdleTime::instance()->addIdleTimeout(1000);
+    KIdleTime::instance()->addIdleTimeout(2000);
     for (auto w : windows) {
       if (w->isVisible())
         w->onIdleEnd();
     }
   });
-  QObject::connect(KIdleTime::instance(), &KIdleTime::timeoutReached,
-                   [=](int id, int timeout) {
-                     bool shouldCatchResume = false;
-                     if (timeout == 1000) {
-                       for (auto w : windows) {
-                         if (w->isVisible()) {
-                           w->onIdleStart();
-                           shouldCatchResume = true;
-                         }
-                       }
-                     }
-                     if (shouldCatchResume)
-                       KIdleTime::instance()->catchNextResumeEvent();
-                   });
+  QObject::connect(KIdleTime::instance(), &KIdleTime::timeoutReached, [=]() {
+    bool shouldCatchResume = false;
+    for (auto w : windows) {
+      if (w->isVisible()) {
+        w->onIdleStart();
+        shouldCatchResume = true;
+      }
+    }
+    if (shouldCatchResume)
+      KIdleTime::instance()->catchNextResumeEvent();
+  });
   KIdleTime::instance()->catchNextResumeEvent();
 }
 

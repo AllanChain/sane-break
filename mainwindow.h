@@ -22,7 +22,6 @@ private:
   bool isForceBreak = false;
   int remainingTime;
   QTimer *countdownTimer;
-  QTimer *forceBreakTimer;
   QProgressBar *progressBar;
   QLabel *countdownLabel;
 };
