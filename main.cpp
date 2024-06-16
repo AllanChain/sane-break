@@ -15,7 +15,8 @@ int main(int argc, char *argv[]) {
   for (QScreen *screen : screens) {
     MainWindow *w = new MainWindow();
     windows.append(w);
-    w->window()->setScreen(screen);
+    w->setGeometry(screen->geometry());
+    w->resize(300, 100);
     w->show();
     w->hide();
     if (auto window = LayerShellQt::Window::get(w->windowHandle())) {
@@ -23,7 +24,7 @@ int main(int argc, char *argv[]) {
       window->setCloseOnDismissed(true);
       window->setLayer(Window::LayerOverlay);
       window->setKeyboardInteractivity(Window::KeyboardInteractivityNone);
-      window->setAnchors(Window::AnchorBottom);
+      window->setAnchors(Window::AnchorTop);
     }
     w->show();
   }

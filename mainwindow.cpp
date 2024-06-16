@@ -9,6 +9,7 @@
 #include <QVBoxLayout>
 #include <QWindow>
 #include <cmath>
+#include <qwindowdefs.h>
 
 int totalTime = 10 * 1000;
 
@@ -16,13 +17,12 @@ int totalTime = 10 * 1000;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
-  setStyleSheet("background: rgba(59, 66, 82, 30%);");
+  setStyleSheet("background: rgba(59, 66, 82, 50%);");
   setAttribute(Qt::WA_TranslucentBackground);
   setAttribute(Qt::WA_ShowWithoutActivating);
   setWindowFlags(Qt::Dialog | Qt::WindowDoesNotAcceptFocus |
                  Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
 
-  resize(300, 100);
   QWidget *centralWidget = new QWidget(this);
   setCentralWidget(centralWidget);
 
@@ -47,9 +47,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   QTimer *countdownTimer = new QTimer(this);
   countdownTimer->setInterval(1000 / FRAME_RATE);
 
+  QTimer *forceBreakTimer = new QTimer(this);
+  forceBreakTimer->setInterval(30 * 1000);
+  forceBreakTimer->setSingleShot(true);
+
   QObject::connect(countdownTimer, &QTimer::timeout, [=]() {
     this->remainingTime -= 1000 / FRAME_RATE;
-    if (!this->isIdle) { // Keep resetting time if not idle
+    if (!this->shouldCountDown()) { // Keep resetting time if not idle
       if (this->remainingTime < totalTime - 500) {
         this->remainingTime = totalTime;
       }
@@ -64,17 +68,27 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
       this->close();
     }
   });
+  QObject::connect(forceBreakTimer, &QTimer::timeout, [=]() {
+    setStyleSheet("background: black;");
+    this->setGeometry(this->screen()->geometry());
+    this->isForceBreak = true;
+  });
 
   countdownTimer->start();
+  forceBreakTimer->start();
 }
 
 MainWindow::~MainWindow() {}
 
 void MainWindow::onIdleStart() {
+  if (this->isForceBreak)
+    return;
   setStyleSheet("background: rgba(0, 0, 0, 30%);");
   this->isIdle = true;
 }
 void MainWindow::onIdleEnd() {
+  if (this->isForceBreak)
+    return;
   this->isIdle = false;
   this->remainingTime = totalTime;
 }
