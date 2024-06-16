@@ -1,14 +1,13 @@
 #include "mainwindow.h"
-#include <KIdleTime>
 
+#include <KIdleTime>
 #include <LayerShellQt/Shell>
 #include <LayerShellQt/Window>
 #include <QApplication>
 #include <QScreen>
+#include <QTimer>
 
-int main(int argc, char *argv[]) {
-  QApplication a(argc, argv);
-  LayerShellQt::Shell::useLayerShell();
+void onBreak() {
   QList<MainWindow *> windows;
   QList<QScreen *> screens = QApplication::screens();
 
@@ -28,22 +27,40 @@ int main(int argc, char *argv[]) {
     }
     w->show();
   }
+
   QObject::connect(KIdleTime::instance(), &KIdleTime::resumingFromIdle, [=]() {
     KIdleTime::instance()->addIdleTimeout(1000);
     for (auto w : windows) {
-      w->onIdleEnd();
+      if (w->isVisible())
+        w->onIdleEnd();
     }
   });
   QObject::connect(KIdleTime::instance(), &KIdleTime::timeoutReached,
                    [=](int id, int timeout) {
+                     bool shouldCatchResume = false;
                      if (timeout == 1000) {
-                       KIdleTime::instance()->catchNextResumeEvent();
                        for (auto w : windows) {
-                         w->onIdleStart();
+                         if (w->isVisible()) {
+                           w->onIdleStart();
+                           shouldCatchResume = true;
+                         }
                        }
                      }
+                     if (shouldCatchResume)
+                       KIdleTime::instance()->catchNextResumeEvent();
                    });
   KIdleTime::instance()->catchNextResumeEvent();
+}
 
+int main(int argc, char *argv[]) {
+  QApplication a(argc, argv);
+  LayerShellQt::Shell::useLayerShell();
+  QTimer *breakTimer = new QTimer();
+  breakTimer->setInterval(20 * 1000);
+
+  QObject::connect(breakTimer, &QTimer::timeout, onBreak);
+
+  breakTimer->start();
+  onBreak();
   return a.exec();
 }

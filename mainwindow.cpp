@@ -17,10 +17,10 @@ int totalTime = 10 * 1000;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
-  setStyleSheet("background: rgba(59, 66, 82, 50%);");
+  setStyleSheet("background: rgb(59, 66, 82);");
   setAttribute(Qt::WA_TranslucentBackground);
   setAttribute(Qt::WA_ShowWithoutActivating);
-  setWindowFlags(Qt::Dialog | Qt::WindowDoesNotAcceptFocus |
+  setWindowFlags(Qt::ToolTip | Qt::WindowDoesNotAcceptFocus |
                  Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
 
   QWidget *centralWidget = new QWidget(this);
@@ -28,12 +28,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
   QVBoxLayout *layout = new QVBoxLayout(centralWidget);
 
-  QLabel *countdownLabel = new QLabel(); // Create countdown label
+  countdownLabel = new QLabel();
   countdownLabel->setStyleSheet("background: transparent;");
   countdownLabel->setAlignment(Qt::AlignCenter);
   layout->addWidget(countdownLabel);
 
-  QProgressBar *progressBar = new QProgressBar(); // Create progress bar
+  progressBar = new QProgressBar();
   progressBar->setStyleSheet("background: transparent;");
   progressBar->setMaximum(totalTime);
   progressBar->setTextVisible(false);
@@ -41,35 +41,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
   progressBar->setValue(totalTime);
   countdownLabel->setText(QString("Time remaining: %1 seconds").arg(totalTime));
-
   remainingTime = totalTime;
 
-  QTimer *countdownTimer = new QTimer(this);
+  countdownTimer = new QTimer(this);
   countdownTimer->setInterval(1000 / FRAME_RATE);
 
-  QTimer *forceBreakTimer = new QTimer(this);
+  forceBreakTimer = new QTimer(this);
   forceBreakTimer->setInterval(30 * 1000);
   forceBreakTimer->setSingleShot(true);
 
-  QObject::connect(countdownTimer, &QTimer::timeout, [=]() {
-    this->remainingTime -= 1000 / FRAME_RATE;
-    if (!this->shouldCountDown()) { // Keep resetting time if not idle
-      if (this->remainingTime < totalTime - 500) {
-        this->remainingTime = totalTime;
-      }
-      setStyleSheet(QString("background: rgba(235, 203, 139, %1);")
-                        .arg(sin(this->remainingTime * 3.14 / 1000) / 5 + 0.5));
-    }
-    progressBar->setValue(this->remainingTime);
-    countdownLabel->setText(QString("Time remaining: %1 seconds")
-                                .arg(round(float(this->remainingTime) / 1000)));
-    if (this->remainingTime <= 0) {
-      countdownTimer->stop();
-      this->close();
-    }
-  });
+  QObject::connect(countdownTimer, &QTimer::timeout, this, &MainWindow::tick);
   QObject::connect(forceBreakTimer, &QTimer::timeout, [=]() {
-    setStyleSheet("background: black;");
+    setStyleSheet("background: #2e3440;");
     this->setGeometry(this->screen()->geometry());
     this->isForceBreak = true;
   });
@@ -80,10 +63,29 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
 MainWindow::~MainWindow() {}
 
+void MainWindow::tick() {
+  remainingTime -= 1000 / FRAME_RATE;
+  if (!shouldCountDown()) { // Keep resetting time if not idle
+    if (remainingTime < totalTime - 500) {
+      remainingTime = totalTime;
+    }
+    setStyleSheet(QString("background: rgba(235, 203, 139, %1);")
+                      .arg(sin(remainingTime * 3.14 / 1000) / 5 + 0.5));
+  }
+  progressBar->setValue(this->remainingTime);
+  countdownLabel->setText(QString("Time remaining: %1 seconds")
+                              .arg(round(float(remainingTime) / 1000)));
+  if (remainingTime <= 0) {
+    countdownTimer->stop();
+    forceBreakTimer->stop();
+    destroy();
+  }
+}
+
 void MainWindow::onIdleStart() {
   if (this->isForceBreak)
     return;
-  setStyleSheet("background: rgba(0, 0, 0, 30%);");
+  setStyleSheet("background: rgb(59, 66, 82);");
   this->isIdle = true;
 }
 void MainWindow::onIdleEnd() {
