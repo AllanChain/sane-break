@@ -9,17 +9,17 @@
 #include <QSettings>
 #include <QTimer>
 
-#include "break/winmanager.h"
+#include "break/scheduler.h"
 
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
   LayerShellQt::Shell::useLayerShell();
+  QCoreApplication::setOrganizationName("Allan Chain");
+  QCoreApplication::setOrganizationDomain("allanchain.github.io");
+  QCoreApplication::setApplicationName("Sane Break");
 
-  BreakWindowManager *breakManager = new BreakWindowManager();
-  QObject::connect(breakManager, &BreakWindowManager::timeout, [=]() {
-    QTimer::singleShot(20 * 1000, breakManager, &BreakWindowManager::show);
-  });
+  BreakScheduler *scheduler = new BreakScheduler();
+  scheduler->start();
 
-  breakManager->show();
   return a.exec();
 }
