@@ -27,9 +27,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="9.0892684"
-     inkscape:cx="18.978425"
-     inkscape:cy="25.359577"
+     inkscape:zoom="7.3215016"
+     inkscape:cx="18.916885"
+     inkscape:cy="41.180077"
      inkscape:window-width="1536"
      inkscape:window-height="896"
      inkscape:window-x="0"
@@ -38,18 +38,6 @@
      inkscape:current-layer="layer1" />
   <defs
      id="defs1">
-    <linearGradient
-       id="linearGradient3"
-       inkscape:collect="always">
-      <stop
-         style="stop-color:#bbf7d0;stop-opacity:1"
-         offset="0"
-         id="stop3" />
-      <stop
-         style="stop-color:#f0fdf4;stop-opacity:1"
-         offset="1"
-         id="stop4" />
-    </linearGradient>
     <linearGradient
        id="linearGradient1"
        inkscape:collect="always">
@@ -71,17 +59,6 @@
        x2="6.3500004"
        y2="12.570409"
        gradientUnits="userSpaceOnUse" />
-    <radialGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient3"
-       id="radialGradient4"
-       cx="6.36689"
-       cy="6.1613154"
-       fx="6.36689"
-       fy="6.1613154"
-       r="2.6674226"
-       gradientTransform="matrix(1,0,0,1.4620571,0,-2.4263896)"
-       gradientUnits="userSpaceOnUse" />
   </defs>
   <g
      inkscape:label="Layer 1"
@@ -93,31 +70,33 @@
        cx="6.3500004"
        cy="6.3500004"
        r="6.2204084" />
+    <circle
+       style="fill:#052e16;stroke:#2dd4bf;stroke-width:0.79375;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       id="path13"
+       cx="6.3499999"
+       cy="6.3499999"
+       r="1.8520833" />
+    <circle
+       style="fill:#f0fdf4;stroke:none;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       id="path14"
+       cx="6.8149586"
+       cy="6.3669724"
+       r="0.26458332" />
+    <circle
+       style="fill:#f0fdf4;stroke:none;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       id="path15"
+       cx="7.292954"
+       cy="5.3308101"
+       r="0.52916664" />
     <path
-       style="fill:url(#radialGradient4);stroke:none;stroke-width:0.264583;stroke-linejoin:round;stroke-dasharray:none"
-       d="m 6.3500002,9.1512009 c -3.2472029,-0.022352 -3.8097108,-2.9595972 -3e-7,-7.7998481 3.7010841,4.9087552 3.4549676,7.7869834 3e-7,7.7998481 z"
-       id="path2"
+       style="fill:#dcfce7;stroke:none;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       d="m 0.9208411,6.7282932 c 0,0 3.7306954,-7.26312802 11.0586839,-0.7905946 0,0 -5.7680975,-2.5990046 -11.0586839,0.7905946 z"
+       id="path16"
        sodipodi:nodetypes="ccc" />
     <path
-       style="fill:none;stroke:#052e16;stroke-width:0.264583;stroke-linejoin:round;stroke-dasharray:none;stroke-linecap:round"
-       d="m 6.3500002,10.60322 0,-6.1294514"
-       id="path4"
-       sodipodi:nodetypes="cc" />
-    <path
-       style="fill:none;stroke:#052e16;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
-       d="M 6.3499999,5.8151513 5.2584328,5.0376431"
-       id="path5" />
-    <path
-       style="fill:none;stroke:#052e16;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
-       d="M 6.3881114,5.8151513 7.4796785,5.0376431"
-       id="path6" />
-    <path
-       style="fill:none;stroke:#052e16;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
-       d="M 6.3499999,7.4026514 5.2584328,6.6251434"
-       id="path7" />
-    <path
-       style="fill:none;stroke:#052e16;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
-       d="M 6.3881114,7.4026514 7.4796785,6.6251432"
-       id="path8" />
+       style="fill:#dcfce7;stroke:none;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       d="m 1.4373269,7.0896216 c 0,0 4.7163029,6.2430854 10.4194891,-0.8188564 0,0 -5.1418644,4.0312168 -10.4194891,0.8188564 z"
+       id="path17"
+       sodipodi:nodetypes="ccc" />
   </g>
 </svg>
