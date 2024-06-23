@@ -13,8 +13,7 @@ class BreakWindow : public QMainWindow {
  public:
   BreakWindow(QWidget *parent = nullptr);
   ~BreakWindow();
-  void setTime(int remainingTime);
-  void tickWarning(int remainingTime);
+  void tick(int remainingTime);
   void setFullScreen();
   void resizeToNormal();
 
@@ -22,5 +21,6 @@ class BreakWindow : public QMainWindow {
   QProgressBar *progressBar;
   QLabel *countdownLabel;
   bool timeHasSet = false;
+  bool isSmallWindow = true;
 };
 #endif  // SANE_BREAK_WINDOW_H

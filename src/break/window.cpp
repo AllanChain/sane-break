@@ -34,7 +34,7 @@ BreakWindow::BreakWindow(QWidget *parent) : QMainWindow(parent) {
 
 BreakWindow::~BreakWindow() {}
 
-void BreakWindow::setTime(int remainingTime) {
+void BreakWindow::tick(int remainingTime) {
   if (!timeHasSet) {
     progressBar->setMaximum(remainingTime);
     timeHasSet = true;
@@ -42,16 +42,18 @@ void BreakWindow::setTime(int remainingTime) {
   progressBar->setValue(remainingTime);
   countdownLabel->setText(QString("Time remaining: %1 seconds")
                               .arg(round(float(remainingTime) / 1000)));
-}
-
-void BreakWindow::tickWarning(int remainingTime) {
-  setStyleSheet(QString("background: rgba(235, 203, 139, %1);")
-                    .arg(sin(remainingTime * 3.14 / 1000) / 5 + 0.5));
+  if (isSmallWindow)
+    setStyleSheet(QString("background: rgba(235, 203, 139, %1);")
+                      .arg(sin(remainingTime * 3.14 / 1000) / 5 + 0.5));
 }
 
 void BreakWindow::setFullScreen() {
   setStyleSheet("background: #2e3440;");
-  this->setGeometry(this->screen()->geometry());
+  setGeometry(screen()->geometry());
+  isSmallWindow = false;
 }
 
-void BreakWindow::resizeToNormal() { resize(300, 100); }
+void BreakWindow::resizeToNormal() {
+  resize(300, 100);
+  isSmallWindow = true;
+}

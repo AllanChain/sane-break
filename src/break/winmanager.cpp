@@ -71,8 +71,6 @@ void BreakWindowManager::tick() {
     if (remainingTime < TOTAL_TIME - 500) {
       remainingTime = TOTAL_TIME;
     }
-    for (auto w : windows)
-      if (!shouldCountDown) w->tickWarning(remainingTime);
   }
   if (remainingTime <= 0) {
     countdownTimer->stop();
@@ -84,7 +82,7 @@ void BreakWindowManager::tick() {
     emit timeout();
     return;
   }
-  for (auto w : windows) w->setTime(remainingTime);
+  for (auto w : windows) w->tick(remainingTime);
 }
 
 void BreakWindowManager::onIdleStart() {
