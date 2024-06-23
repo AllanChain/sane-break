@@ -1,14 +1,15 @@
 #include <LayerShellQt/Shell>
 #include <LayerShellQt/Window>
 #include <QApplication>
+#include <QSettings>
 
 #include "app.h"
 
 int main(int argc, char *argv[]) {
   LayerShellQt::Shell::useLayerShell();
-  QCoreApplication::setOrganizationName("Allan Chain");
-  QCoreApplication::setOrganizationDomain("allanchain.github.io");
-  QCoreApplication::setApplicationName("Sane Break");
+  QCoreApplication::setOrganizationName("SaneBreak");
+  QCoreApplication::setApplicationName("SaneBreak");
+  QSettings::setDefaultFormat(QSettings::IniFormat);
 
   QApplication a(argc, argv);
   SaneBreakApp *app = new SaneBreakApp();
