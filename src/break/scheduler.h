@@ -13,8 +13,8 @@ class BreakScheduler : public QObject {
   ~BreakScheduler();
   void start();
   int remainingTime();
-  int nextScheduleTime();
-  int nextBreakInterval();
+  int scheduleInterval();
+  int breakTime();
 
  private:
   BreakWindowManager* breakManager;

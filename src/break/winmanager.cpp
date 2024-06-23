@@ -15,7 +15,9 @@
 #define TOTAL_TIME 10000
 #define FRAME_RATE 25
 
-BreakWindowManager::BreakWindowManager() : QObject() {}
+BreakWindowManager::BreakWindowManager() : QObject() {
+  countdownTimer = new QTimer(this);
+}
 BreakWindowManager::~BreakWindowManager(){};
 
 void BreakWindowManager::createWindows() {
@@ -43,7 +45,6 @@ void BreakWindowManager::createWindows() {
 void BreakWindowManager::show() {
   remainingTime = TOTAL_TIME;
   createWindows();
-  countdownTimer = new QTimer(this);
   countdownTimer->setInterval(1000 / FRAME_RATE);
 
   connect(countdownTimer, &QTimer::timeout, this, &BreakWindowManager::tick);

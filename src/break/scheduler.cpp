@@ -9,27 +9,27 @@
 BreakScheduler::BreakScheduler() : QObject() {
   breakManager = new BreakWindowManager();
   timer = new QTimer();
+  timer->setSingleShot(true);
 };
 BreakScheduler::~BreakScheduler(){};
 
 void BreakScheduler::start() {
-  breakManager->show();
-  /*timer->singleShot(nextScheduleTime(), breakManager,*/
-  /*                  &BreakWindowManager::show);*/
+  connect(timer, &QTimer::timeout, breakManager, &BreakWindowManager::show);
+  timer->start(scheduleInterval());
   connect(breakManager, &BreakWindowManager::timeout, [=]() {
-    timer->singleShot(nextScheduleTime(), breakManager,
-                      &BreakWindowManager::show);
+    connect(timer, &QTimer::timeout, breakManager, &BreakWindowManager::show);
+    timer->start(scheduleInterval());
   });
 }
 
 int BreakScheduler::remainingTime() { return timer->remainingTime(); }
 
-int BreakScheduler::nextBreakInterval() {
+int BreakScheduler::breakTime() {
   QSettings settings;
-  return settings.value("break/interval", 20 * 1000).toInt();
+  return settings.value("break/break-time", 20 * 1000).toInt();
 }
 
-int BreakScheduler::nextScheduleTime() {
+int BreakScheduler::scheduleInterval() {
   QSettings settings;
-  return settings.value("schedule/interval", 20 * 60 * 1000).toInt();
+  return settings.value("break/schedule", 20 * 60 * 1000).toInt();
 }
