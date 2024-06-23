@@ -17,6 +17,12 @@
 
 BreakWindowManager::BreakWindowManager() : QObject() {
   countdownTimer = new QTimer(this);
+  countdownTimer->setInterval(1000 / FRAME_RATE);
+  connect(countdownTimer, &QTimer::timeout, this, &BreakWindowManager::tick);
+  connect(KIdleTime::instance(), &KIdleTime::timeoutReached, this,
+          &BreakWindowManager::onIdleStart);
+  connect(KIdleTime::instance(), &KIdleTime::resumingFromIdle, this,
+          &BreakWindowManager::onIdleEnd);
 }
 BreakWindowManager::~BreakWindowManager(){};
 
@@ -44,14 +50,10 @@ void BreakWindowManager::createWindows() {
 
 void BreakWindowManager::show() {
   remainingTime = TOTAL_TIME;
+  isIdle = true;
+  isForceBreak = false;
   createWindows();
-  countdownTimer->setInterval(1000 / FRAME_RATE);
 
-  connect(countdownTimer, &QTimer::timeout, this, &BreakWindowManager::tick);
-  connect(KIdleTime::instance(), &KIdleTime::timeoutReached, this,
-          &BreakWindowManager::onIdleStart);
-  connect(KIdleTime::instance(), &KIdleTime::resumingFromIdle, this,
-          &BreakWindowManager::onIdleEnd);
   QTimer::singleShot(2 * 1000, [=]() {  // Go fullscreen when idle for 2 sec
     if (isIdle)
       for (auto w : windows) w->setFullScreen();
