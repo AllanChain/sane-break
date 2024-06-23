@@ -16,7 +16,7 @@
 #define FRAME_RATE 25
 
 BreakWindowManager::BreakWindowManager() : QObject() {}
-BreakWindowManager::~BreakWindowManager(){};
+BreakWindowManager::~BreakWindowManager() {};
 
 void BreakWindowManager::createWindows() {
   QList<QScreen *> screens = QApplication::screens();

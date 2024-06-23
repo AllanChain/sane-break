@@ -16,12 +16,9 @@ int main(int argc, char *argv[]) {
   LayerShellQt::Shell::useLayerShell();
 
   BreakWindowManager *breakManager = new BreakWindowManager();
-  QObject::connect(breakManager, &BreakWindowManager::timeout,
-                   [=]() {
-                     QTimer::singleShot(20 * 1000, breakManager,
-                                        &BreakWindowManager::show);
-                   });
-
+  QObject::connect(breakManager, &BreakWindowManager::timeout, [=]() {
+    QTimer::singleShot(20 * 1000, breakManager, &BreakWindowManager::show);
+  });
 
   breakManager->show();
   return a.exec();
