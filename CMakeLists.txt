@@ -17,11 +17,7 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 find_package(KF6 REQUIRED COMPONENTS IdleTime)
 find_package(LayerShellQt REQUIRED)
 
-set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-)
+file(GLOB_RECURSE PROJECT_SOURCES "src/*.cpp" "src/*.h")
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(sane-break

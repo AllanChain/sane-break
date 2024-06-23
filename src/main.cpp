@@ -1,18 +1,20 @@
-#include "mainwindow.h"
+#include "break/window.h"
 
 #include <KIdleTime>
 #include <LayerShellQt/Shell>
 #include <LayerShellQt/Window>
 #include <QApplication>
 #include <QScreen>
+#include <QSettings>
 #include <QTimer>
+#include <qcoreapplication.h>
 
 void onBreak() {
-  QList<MainWindow *> windows;
+  QList<BreakWindow *> windows;
   QList<QScreen *> screens = QApplication::screens();
 
   for (QScreen *screen : screens) {
-    MainWindow *w = new MainWindow();
+    BreakWindow *w = new BreakWindow();
     windows.append(w);
     w->setGeometry(screen->geometry());
     w->resize(300, 100);

@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "window.h"
 
 #include <LayerShellQt/Shell>
 #include <QApplication>
@@ -16,7 +16,7 @@ int totalTime = 10 * 1000;
 
 #define FRAME_RATE 25
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
+BreakWindow::BreakWindow(QWidget *parent) : QMainWindow(parent) {
 
   setStyleSheet("background: rgb(59, 66, 82);");
   setAttribute(Qt::WA_TranslucentBackground);
@@ -59,14 +59,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     }
   });
 
-  QObject::connect(countdownTimer, &QTimer::timeout, this, &MainWindow::tick);
+  QObject::connect(countdownTimer, &QTimer::timeout, this, &BreakWindow::tick);
 
   countdownTimer->start();
 }
 
-MainWindow::~MainWindow() {}
+BreakWindow::~BreakWindow() {}
 
-void MainWindow::tick() {
+void BreakWindow::tick() {
   remainingTime -= 1000 / FRAME_RATE;
   if (!shouldCountDown()) { // Keep resetting time if not idle
     if (remainingTime < totalTime - 500) {
@@ -84,14 +84,14 @@ void MainWindow::tick() {
   }
 }
 
-void MainWindow::onIdleStart() {
+void BreakWindow::onIdleStart() {
   if (this->isForceBreak)
     return;
   setGeometry(this->screen()->geometry());
   setStyleSheet("background: rgb(59, 66, 82);");
   this->isIdle = true;
 }
-void MainWindow::onIdleEnd() {
+void BreakWindow::onIdleEnd() {
   if (this->isForceBreak)
     return;
   resize(300, 100);

@@ -1,17 +1,17 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef SANE_BREAK_WINDOW_H
+#define SANE_BREAK_WINDOW_H
 
 #include <QMainWindow>
 #include <qlabel.h>
 #include <qprogressbar.h>
 #include <qtimer.h>
 
-class MainWindow : public QMainWindow {
+class BreakWindow : public QMainWindow {
   Q_OBJECT
 
 public:
-  MainWindow(QWidget *parent = nullptr);
-  ~MainWindow();
+  BreakWindow(QWidget *parent = nullptr);
+  ~BreakWindow();
   void tick();
   void onIdleStart();
   void onIdleEnd();
@@ -25,4 +25,4 @@ private:
   QProgressBar *progressBar;
   QLabel *countdownLabel;
 };
-#endif // MAINWINDOW_H
+#endif // SANE_BREAK_WINDOW_H
