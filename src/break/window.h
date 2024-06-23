@@ -1,28 +1,26 @@
 #ifndef SANE_BREAK_WINDOW_H
 #define SANE_BREAK_WINDOW_H
 
+#include <QLabel>
+#include <QList>
 #include <QMainWindow>
-#include <qlabel.h>
-#include <qprogressbar.h>
-#include <qtimer.h>
+#include <QProgressBar>
+#include <QTimer>
 
 class BreakWindow : public QMainWindow {
   Q_OBJECT
 
-public:
+ public:
   BreakWindow(QWidget *parent = nullptr);
   ~BreakWindow();
-  void tick();
-  void onIdleStart();
-  void onIdleEnd();
-  bool shouldCountDown() { return isIdle || isForceBreak; }
+  void setTime(int remainingTime);
+  void tickWarning(int remainingTime);
+  void setFullScreen();
+  void resizeToNormal();
 
-private:
-  bool isIdle = true;
-  bool isForceBreak = false;
-  int remainingTime;
-  QTimer *countdownTimer;
+ private:
   QProgressBar *progressBar;
   QLabel *countdownLabel;
+  bool timeHasSet = false;
 };
-#endif // SANE_BREAK_WINDOW_H
+#endif  // SANE_BREAK_WINDOW_H

@@ -1,4 +1,5 @@
-#include "break/window.h"
+#include <qcoreapplication.h>
+#include <qobject.h>
 
 #include <KIdleTime>
 #include <LayerShellQt/Shell>
@@ -7,59 +8,21 @@
 #include <QScreen>
 #include <QSettings>
 #include <QTimer>
-#include <qcoreapplication.h>
 
-void onBreak() {
-  QList<BreakWindow *> windows;
-  QList<QScreen *> screens = QApplication::screens();
-
-  for (QScreen *screen : screens) {
-    BreakWindow *w = new BreakWindow();
-    windows.append(w);
-    w->setGeometry(screen->geometry());
-    w->resize(300, 100);
-    w->show();
-    w->hide();
-    if (auto window = LayerShellQt::Window::get(w->windowHandle())) {
-      using namespace LayerShellQt;
-      window->setCloseOnDismissed(true);
-      window->setLayer(Window::LayerOverlay);
-      window->setKeyboardInteractivity(Window::KeyboardInteractivityNone);
-      window->setAnchors(Window::AnchorTop);
-    }
-    w->show();
-  }
-
-  QObject::connect(KIdleTime::instance(), &KIdleTime::resumingFromIdle, [=]() {
-    KIdleTime::instance()->addIdleTimeout(2000);
-    for (auto w : windows) {
-      if (w->isVisible())
-        w->onIdleEnd();
-    }
-  });
-  QObject::connect(KIdleTime::instance(), &KIdleTime::timeoutReached, [=]() {
-    bool shouldCatchResume = false;
-    for (auto w : windows) {
-      if (w->isVisible()) {
-        w->onIdleStart();
-        shouldCatchResume = true;
-      }
-    }
-    if (shouldCatchResume)
-      KIdleTime::instance()->catchNextResumeEvent();
-  });
-  KIdleTime::instance()->catchNextResumeEvent();
-}
+#include "break/winmanager.h"
 
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
   LayerShellQt::Shell::useLayerShell();
-  QTimer *breakTimer = new QTimer();
-  breakTimer->setInterval(20 * 1000);
 
-  QObject::connect(breakTimer, &QTimer::timeout, onBreak);
+  BreakWindowManager *breakManager = new BreakWindowManager();
+  QObject::connect(breakManager, &BreakWindowManager::timeout,
+                   [=]() {
+                     QTimer::singleShot(20 * 1000, breakManager,
+                                        &BreakWindowManager::show);
+                   });
 
-  breakTimer->start();
-  onBreak();
+
+  breakManager->show();
   return a.exec();
 }
