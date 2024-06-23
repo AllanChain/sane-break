@@ -10,7 +10,7 @@ BreakScheduler::BreakScheduler() : QObject() {
   breakManager = new BreakWindowManager();
   timer = new QTimer();
 };
-BreakScheduler::~BreakScheduler() {};
+BreakScheduler::~BreakScheduler(){};
 
 void BreakScheduler::start() {
   breakManager->show();
