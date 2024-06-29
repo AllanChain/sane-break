@@ -1,7 +1,6 @@
 #include "winmanager.h"
 
 #ifdef __linux
-#include <KIdleTime>
 #include <LayerShellQt/Shell>
 #include <LayerShellQt/Window>
 #endif
@@ -12,6 +11,7 @@
 #include <QSettings>
 #include <QTimer>
 
+#include "idle/system.h"
 #include "window.h"
 
 #define TOTAL_TIME 10000
@@ -20,13 +20,12 @@
 BreakWindowManager::BreakWindowManager() : QObject() {
   countdownTimer = new QTimer(this);
   countdownTimer->setInterval(1000 / FRAME_RATE);
+  idleTimer = SystemIdleTime::createIdleTimer();
   connect(countdownTimer, &QTimer::timeout, this, &BreakWindowManager::tick);
-#ifdef __linux
-  connect(KIdleTime::instance(), &KIdleTime::timeoutReached, this,
+  connect(idleTimer, &SystemIdleTime::idleStart, this,
           &BreakWindowManager::onIdleStart);
-  connect(KIdleTime::instance(), &KIdleTime::resumingFromIdle, this,
+  connect(idleTimer, &SystemIdleTime::idleEnd, this,
           &BreakWindowManager::onIdleEnd);
-#endif
 }
 BreakWindowManager::~BreakWindowManager(){};
 
@@ -70,9 +69,7 @@ void BreakWindowManager::show() {
   });
 
   countdownTimer->start();
-#ifdef __linux
-  KIdleTime::instance()->catchNextResumeEvent();
-#endif
+  idleTimer->startWatching();
 }
 
 void BreakWindowManager::tick() {
@@ -90,6 +87,7 @@ void BreakWindowManager::tick() {
       w->deleteLater();
     }
     windows.clear();
+    idleTimer->stopWatching();
     emit timeout();
     return;
   }
@@ -102,10 +100,6 @@ void BreakWindowManager::onIdleStart() {
     w->setFullScreen();
   }
   isIdle = true;
-  // Listen to next idle end
-#ifdef __linux
-  KIdleTime::instance()->catchNextResumeEvent();
-#endif
 }
 
 void BreakWindowManager::onIdleEnd() {
@@ -115,8 +109,4 @@ void BreakWindowManager::onIdleEnd() {
   }
   isIdle = false;
   remainingTime = TOTAL_TIME;
-  // Listen to next idle start
-#ifdef __linux
-  KIdleTime::instance()->addIdleTimeout(2000);
-#endif
 }

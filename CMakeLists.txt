@@ -21,6 +21,7 @@ qt_add_executable(sane-break
     ${PROJECT_SOURCES}
 )
 
+target_include_directories(sane-break PRIVATE "src")
 target_link_libraries(sane-break PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
@@ -29,6 +30,12 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     find_package(LayerShellQt REQUIRED)
     target_link_libraries(sane-break PRIVATE KF6::IdleTime)
     target_link_libraries(sane-break PUBLIC LayerShellQt::Interface)
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    find_library(IOKit NAMES IOKit)
+    find_library(CoreFoundation NAMES CoreFoundation)
+    target_link_libraries(sane-break PRIVATE "-framework IOKit")
+    target_link_libraries(sane-break PRIVATE "-framework CoreFoundation")
+    set_target_properties(sane-break PROPERTIES LINK_FLAGS "-Wl,-F/Library/Frameworks")
 endif()
 
 set_target_properties(sane-break PROPERTIES

@@ -4,6 +4,7 @@
 #include <QList>
 #include <QObject>
 
+#include "idle/system.h"
 #include "window.h"
 
 class BreakWindowManager : public QObject {
@@ -23,6 +24,7 @@ class BreakWindowManager : public QObject {
   bool isForceBreak = false;
   QList<BreakWindow *> windows;
   QTimer *countdownTimer;
+  SystemIdleTime *idleTimer;
   void createWindows();
   void tick();
   void onIdleStart();
