@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QLabel>
 #include <QProgressBar>
+#include <QRect>
 #include <QScreen>
 #include <QTimer>
 #include <QVBoxLayout>
@@ -53,6 +54,11 @@ void BreakWindow::setFullScreen() {
 }
 
 void BreakWindow::resizeToNormal() {
-  resize(300, 100);
+  QRect rect = screen()->geometry();
+  int screenWidth = rect.width();
+  rect.setWidth(300);
+  rect.setHeight(100);
+  rect.setX(screenWidth / 2 - 150);
+  setGeometry(rect);
   isSmallWindow = true;
 }

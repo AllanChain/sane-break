@@ -35,9 +35,8 @@ void BreakWindowManager::createWindows() {
   for (QScreen *screen : screens) {
     BreakWindow *w = new BreakWindow();
     windows.append(w);
-    QRect geometry = screen->geometry();
-    geometry.setSize(QSize(300, 100));
-    w->setGeometry(geometry);
+    w->setGeometry(screen->geometry());
+    w->resizeToNormal();
     w->show();
     w->hide();
 #ifdef __linux
