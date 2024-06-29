@@ -9,8 +9,6 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${ECM_MODULE_PATH} )
-
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
@@ -33,6 +31,7 @@ target_link_libraries(sane-break PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
+    list(APPEND CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
     find_package(KF6 REQUIRED COMPONENTS IdleTime)
     find_package(LayerShellQt REQUIRED)
     target_link_libraries(sane-break PRIVATE KF6::IdleTime)
