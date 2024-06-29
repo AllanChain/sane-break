@@ -16,6 +16,13 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 file(GLOB_RECURSE PROJECT_SOURCES "src/*.cpp" "src/*.h" "resources.qrc")
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    set(MACOSX_BUNDLE_ICON_FILE icon.icns)
+    set(SANE_BREAK_ICON ${CMAKE_CURRENT_SOURCE_DIR}/images/icon.icns)
+    set_source_files_properties(${SANE_BREAK_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+    list(APPEND PROJECT_SOURCES ${SANE_BREAK_ICON})
+endif()
+
 qt_add_executable(sane-break
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
@@ -35,7 +42,6 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     find_library(CoreFoundation NAMES CoreFoundation)
     target_link_libraries(sane-break PRIVATE "-framework IOKit")
     target_link_libraries(sane-break PRIVATE "-framework CoreFoundation")
-    set_target_properties(sane-break PROPERTIES LINK_FLAGS "-Wl,-F/Library/Frameworks")
 endif()
 
 set_target_properties(sane-break PROPERTIES
