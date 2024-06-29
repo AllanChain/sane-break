@@ -1,8 +1,10 @@
 #include "winmanager.h"
 
+#ifdef __linux
 #include <KIdleTime>
 #include <LayerShellQt/Shell>
 #include <LayerShellQt/Window>
+#endif
 #include <QApplication>
 #include <QList>
 #include <QObject>
@@ -19,10 +21,12 @@ BreakWindowManager::BreakWindowManager() : QObject() {
   countdownTimer = new QTimer(this);
   countdownTimer->setInterval(1000 / FRAME_RATE);
   connect(countdownTimer, &QTimer::timeout, this, &BreakWindowManager::tick);
+#ifdef __linux
   connect(KIdleTime::instance(), &KIdleTime::timeoutReached, this,
           &BreakWindowManager::onIdleStart);
   connect(KIdleTime::instance(), &KIdleTime::resumingFromIdle, this,
           &BreakWindowManager::onIdleEnd);
+#endif
 }
 BreakWindowManager::~BreakWindowManager(){};
 
@@ -37,6 +41,7 @@ void BreakWindowManager::createWindows() {
     w->setGeometry(geometry);
     w->show();
     w->hide();
+#ifdef __linux
     if (auto window = LayerShellQt::Window::get(w->windowHandle())) {
       using namespace LayerShellQt;
       window->setCloseOnDismissed(true);
@@ -44,6 +49,7 @@ void BreakWindowManager::createWindows() {
       window->setKeyboardInteractivity(Window::KeyboardInteractivityNone);
       window->setAnchors(Window::AnchorTop);
     }
+#endif
     w->show();
   }
 }
@@ -64,7 +70,9 @@ void BreakWindowManager::show() {
   });
 
   countdownTimer->start();
+#ifdef __linux
   KIdleTime::instance()->catchNextResumeEvent();
+#endif
 }
 
 void BreakWindowManager::tick() {
@@ -95,7 +103,9 @@ void BreakWindowManager::onIdleStart() {
   }
   isIdle = true;
   // Listen to next idle end
+#ifdef __linux
   KIdleTime::instance()->catchNextResumeEvent();
+#endif
 }
 
 void BreakWindowManager::onIdleEnd() {
@@ -106,5 +116,7 @@ void BreakWindowManager::onIdleEnd() {
   isIdle = false;
   remainingTime = TOTAL_TIME;
   // Listen to next idle start
+#ifdef __linux
   KIdleTime::instance()->addIdleTimeout(2000);
+#endif
 }

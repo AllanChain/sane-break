@@ -9,13 +9,10 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${ECM_MODULE_PATH} )
 
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
-find_package(KF6 REQUIRED COMPONENTS IdleTime)
-find_package(LayerShellQt REQUIRED)
 
 file(GLOB_RECURSE PROJECT_SOURCES "src/*.cpp" "src/*.h" "resources.qrc")
 
@@ -24,11 +21,15 @@ qt_add_executable(sane-break
     ${PROJECT_SOURCES}
 )
 
-target_link_libraries(sane-break PRIVATE
-    Qt${QT_VERSION_MAJOR}::Widgets
-    KF6::IdleTime
-)
-target_link_libraries(sane-break PUBLIC LayerShellQt::Interface)
+target_link_libraries(sane-break PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
+    find_package(KF6 REQUIRED COMPONENTS IdleTime)
+    find_package(LayerShellQt REQUIRED)
+    target_link_libraries(sane-break PRIVATE KF6::IdleTime)
+    target_link_libraries(sane-break PUBLIC LayerShellQt::Interface)
+endif()
 
 set_target_properties(sane-break PROPERTIES
     ${BUNDLE_ID_OPTION}

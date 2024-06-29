@@ -1,6 +1,5 @@
 #include "window.h"
 
-#include <LayerShellQt/Shell>
 #include <QApplication>
 #include <QLabel>
 #include <QProgressBar>
