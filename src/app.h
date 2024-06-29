@@ -7,7 +7,7 @@
 #include <QSystemTrayIcon>
 #include <QTimer>
 
-#include "break/scheduler.h"
+#include "break/winmanager.h"
 
 class SaneBreakApp : public QObject {
   Q_OBJECT
@@ -15,21 +15,24 @@ class SaneBreakApp : public QObject {
   SaneBreakApp();
   ~SaneBreakApp();
   void start();
+  int scheduleInterval();
+  int breakTime();
+  void breakNow();
 
  signals:
   void quit();
 
- private slots:
-  void updateNextBreakTime();
-
  private:
   QSystemTrayIcon *icon;
-  BreakScheduler *breakScheduler;
-  QTimer *updateTimer;
+  BreakWindowManager *breakManager;
+  QTimer *countDownTimer;
   QMenu *menu;
   QAction *quitAction;
   QAction *nextBreakAction;
+  QAction *breakNowAction;
   void createMenu();
+  void tick();
+  int secondsToNextBreak;
 };
 
 #endif  // SANE_TRAY_H
