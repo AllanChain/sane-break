@@ -36,7 +36,7 @@ void BreakWindowManager::createWindows() {
     BreakWindow *w = new BreakWindow();
     windows.append(w);
     w->setGeometry(screen->geometry());
-    w->resizeToNormal();
+    w->initSize();
     w->show();
     w->hide();
 #ifdef __linux

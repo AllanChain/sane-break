@@ -1,0 +1,15 @@
+QLabel {
+  background: transparent;
+  color: #eceff4;
+}
+BreakWindow[isFullScreen="true"] QLabel {
+  font-size: 20px;
+}
+QProgressBar {
+  border-radius: 5px;
+  height: 5px;
+  background: transparent;
+}
+QProgressBar::chunk {
+  background: #eceff4;
+}
