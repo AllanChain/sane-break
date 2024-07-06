@@ -17,6 +17,7 @@ class SaneBreakApp : public QObject {
   void start();
   int scheduleInterval();
   int breakTime();
+  int smallBreaksBeforeBig();
   void breakNow();
 
  signals:
@@ -29,7 +30,8 @@ class SaneBreakApp : public QObject {
   QMenu *menu;
   QAction *quitAction;
   QAction *nextBreakAction;
-  QAction *breakNowAction;
+  QAction *bigBreakAction;
+  int breakCycleCount = 1;
   void createMenu();
   void tick();
   int secondsToNextBreak;

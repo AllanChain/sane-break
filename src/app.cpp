@@ -31,30 +31,30 @@ void SaneBreakApp::start() {
 void SaneBreakApp::tick() {
   secondsToNextBreak--;
   if (secondsToNextBreak <= 0) {
-    secondsToNextBreak = scheduleInterval();
-    countDownTimer->stop();
-    breakManager->show();
+    breakNow();
+    return;
   }
   int seconds = secondsToNextBreak;
   int minutes = seconds / 60;
   seconds %= 60;
-  if (minutes > 0) {
-    nextBreakAction->setText(
-        QString("Next break %1 min %2 secs").arg(minutes).arg(seconds));
-  } else {
-    nextBreakAction->setText(QString("Next break %1 secs").arg(seconds));
-  }
+  nextBreakAction->setText(
+      QString("Next break (%1:%2)").arg(minutes).arg(seconds));
+  bigBreakAction->setText(
+      QString("Big Break (after %1 breaks)").arg(smallBreaksBeforeBig()));
 }
 
 void SaneBreakApp::createMenu() {
   menu = new QMenu();
   nextBreakAction = new QAction("Next Break", this);
-  nextBreakAction->setDisabled(true);
   menu->addAction(nextBreakAction);
+  connect(nextBreakAction, &QAction::triggered, [=]() { breakNow(); });
 
-  breakNowAction = new QAction("Break Now", this);
-  menu->addAction(breakNowAction);
-  connect(breakNowAction, &QAction::triggered, this, &SaneBreakApp::breakNow);
+  bigBreakAction = new QAction("Big Break", this);
+  menu->addAction(bigBreakAction);
+  connect(bigBreakAction, &QAction::triggered, [=]() {
+    breakCycleCount = 0;
+    breakNow();
+  });
 
   quitAction = new QAction("Quit", this);
   menu->addAction(quitAction);
@@ -64,12 +64,23 @@ void SaneBreakApp::createMenu() {
 void SaneBreakApp::breakNow() {
   secondsToNextBreak = scheduleInterval();
   countDownTimer->stop();
-  breakManager->show();
+  breakManager->show(breakTime());
+  breakCycleCount++;
+}
+
+int SaneBreakApp::smallBreaksBeforeBig() {
+  QSettings settings;
+  int breakEvery = settings.value("break/big-break-every", 3).toInt();
+  breakCycleCount %= breakEvery;
+  return (breakEvery - breakCycleCount) % breakEvery;
 }
 
 int SaneBreakApp::breakTime() {
   QSettings settings;
-  return settings.value("break/break-time", 20).toInt();
+  if (smallBreaksBeforeBig() == 0)
+    return settings.value("break/big-break-time", 60).toInt();
+  else
+    return settings.value("break/small-break-time", 20).toInt();
 }
 
 int SaneBreakApp::scheduleInterval() {

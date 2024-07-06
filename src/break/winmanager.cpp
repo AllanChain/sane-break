@@ -14,7 +14,6 @@
 #include "idle/system.h"
 #include "window.h"
 
-#define TOTAL_TIME 10000
 #define FRAME_RATE 25
 
 BreakWindowManager::BreakWindowManager() : QObject() {
@@ -52,8 +51,9 @@ void BreakWindowManager::createWindows() {
   }
 }
 
-void BreakWindowManager::show() {
-  remainingTime = TOTAL_TIME;
+void BreakWindowManager::show(int breakTime) {
+  remainingTime = breakTime * 1000;
+  totalTime = breakTime * 1000;
   isIdle = true;
   isForceBreak = false;
   createWindows();
@@ -75,8 +75,8 @@ void BreakWindowManager::tick() {
   remainingTime -= countdownTimer->interval();
   bool shouldCountDown = isForceBreak || isIdle;
   if (!shouldCountDown) {
-    if (remainingTime < TOTAL_TIME - 500) {
-      remainingTime = TOTAL_TIME;
+    if (remainingTime < totalTime - 500) {
+      remainingTime = totalTime;
     }
   }
   if (remainingTime <= 0) {
@@ -107,5 +107,5 @@ void BreakWindowManager::onIdleEnd() {
     w->resizeToNormal();
   }
   isIdle = false;
-  remainingTime = TOTAL_TIME;
+  remainingTime = totalTime;
 }

@@ -14,7 +14,7 @@ class BreakWindowManager : public QObject {
   BreakWindowManager();
   ~BreakWindowManager();
   int remainingTime;
-  void show();
+  void show(int breakTime);
 
  signals:
   void timeout();
@@ -22,6 +22,7 @@ class BreakWindowManager : public QObject {
  private:
   bool isIdle = true;
   bool isForceBreak = false;
+  int totalTime;
   QList<BreakWindow *> windows;
   QTimer *countdownTimer;
   SystemIdleTime *idleTimer;
