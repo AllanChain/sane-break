@@ -32,15 +32,28 @@ void SaneBreakApp::tick() {
   secondsToNextBreak--;
   if (secondsToNextBreak <= 0) {
     breakNow();
+    icon->setIcon(QIcon(":/images/icon.png"));
     return;
+  }
+  if (secondsToNextBreak <= 10) {
+    icon->setIcon(secondsToNextBreak % 2 == 0
+                      ? QIcon(":/images/icon-yellow.png")
+                      : QIcon(":/images/icon-lime.png"));
+  } else if (secondsToNextBreak == 60) {
+    icon->setIcon(QIcon(":/images/icon-lime.png"));
   }
   int seconds = secondsToNextBreak;
   int minutes = seconds / 60;
   seconds %= 60;
-  nextBreakAction->setText(
-      QString("Next break (%1:%2)").arg(minutes).arg(seconds));
+  icon->setToolTip(QString("Sane Break\n%1 break %2:%3")
+                       .arg(smallBreaksBeforeBig() == 0 ? "big" : "small")
+                       .arg(minutes)
+                       .arg(seconds, 2, 10, QChar('0')));  // Pad zero
+  nextBreakAction->setText(QString("Next break after %1:%2")
+                               .arg(minutes)
+                               .arg(seconds, 2, 10, QChar('0')));
   bigBreakAction->setText(
-      QString("Big Break (after %1 breaks)").arg(smallBreaksBeforeBig()));
+      QString("Big break after %1 breaks").arg(smallBreaksBeforeBig()));
 }
 
 void SaneBreakApp::createMenu() {
@@ -55,6 +68,8 @@ void SaneBreakApp::createMenu() {
     breakCycleCount = 0;
     breakNow();
   });
+
+  menu->addSeparator();
 
   quitAction = new QAction("Quit", this);
   menu->addAction(quitAction);
