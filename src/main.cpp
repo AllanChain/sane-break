@@ -8,9 +8,6 @@
 #include "app.h"
 
 int main(int argc, char *argv[]) {
-#ifdef __linux
-  LayerShellQt::Shell::useLayerShell();
-#endif
   QCoreApplication::setOrganizationName("SaneBreak");
   QCoreApplication::setApplicationName("SaneBreak");
   QSettings::setDefaultFormat(QSettings::IniFormat);

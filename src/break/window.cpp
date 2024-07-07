@@ -23,6 +23,7 @@ BreakWindow::BreakWindow(QWidget *parent) : QMainWindow(parent) {
 
   QVBoxLayout *layout = new QVBoxLayout(centralWidget);
   layout->setAlignment(Qt::AlignCenter);
+  layout->setSpacing(20);
 
   countdownLabel = new QLabel();
   countdownLabel->setAlignment(Qt::AlignCenter);

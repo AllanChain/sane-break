@@ -25,6 +25,9 @@ BreakWindowManager::BreakWindowManager() : QObject() {
           &BreakWindowManager::onIdleStart);
   connect(idleTimer, &SystemIdleTime::idleEnd, this,
           &BreakWindowManager::onIdleEnd);
+#ifdef __linux
+  LayerShellQt::Shell::useLayerShell();
+#endif
 }
 BreakWindowManager::~BreakWindowManager(){};
 

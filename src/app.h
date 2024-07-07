@@ -8,6 +8,7 @@
 #include <QTimer>
 
 #include "break/winmanager.h"
+#include "preferences/window.h"
 
 class SaneBreakApp : public QObject {
   Q_OBJECT
@@ -24,13 +25,15 @@ class SaneBreakApp : public QObject {
   void quit();
 
  private:
+  PreferenceWindow *prefWindow;
   QSystemTrayIcon *icon;
   BreakWindowManager *breakManager;
   QTimer *countDownTimer;
   QMenu *menu;
-  QAction *quitAction;
   QAction *nextBreakAction;
   QAction *bigBreakAction;
+  QAction *openPreferenceAction;
+  QAction *quitAction;
   int breakCycleCount = 1;
   void createMenu();
   void tick();

@@ -7,7 +7,11 @@
 #include <QSystemTrayIcon>
 #include <QTimer>
 
+#include "preferences/default.h"
+#include "preferences/window.h"
+
 SaneBreakApp::SaneBreakApp() : QObject() {
+  prefWindow = new PreferenceWindow();
   breakManager = new BreakWindowManager();
   createMenu();
   icon = new QSystemTrayIcon(this);
@@ -71,6 +75,15 @@ void SaneBreakApp::createMenu() {
 
   menu->addSeparator();
 
+  openPreferenceAction = new QAction("Preferences", this);
+  menu->addAction(openPreferenceAction);
+  connect(openPreferenceAction, &QAction::triggered, [this]() {
+    prefWindow->loadSettings();
+    prefWindow->show();
+  });
+
+  menu->addSeparator();
+
   quitAction = new QAction("Quit", this);
   menu->addAction(quitAction);
   connect(quitAction, &QAction::triggered, this, &SaneBreakApp::quit);
@@ -85,7 +98,8 @@ void SaneBreakApp::breakNow() {
 
 int SaneBreakApp::smallBreaksBeforeBig() {
   QSettings settings;
-  int breakEvery = settings.value("break/big-break-every", 3).toInt();
+  int breakEvery =
+      settings.value("break/big-after", SANE_BREAK_BIG_AFTER).toInt();
   breakCycleCount %= breakEvery;
   return (breakEvery - breakCycleCount) % breakEvery;
 }
@@ -93,12 +107,12 @@ int SaneBreakApp::smallBreaksBeforeBig() {
 int SaneBreakApp::breakTime() {
   QSettings settings;
   if (smallBreaksBeforeBig() == 0)
-    return settings.value("break/big-break-time", 60).toInt();
+    return settings.value("break/big-for", SANE_BREAK_BIG_FOR).toInt();
   else
-    return settings.value("break/small-break-time", 20).toInt();
+    return settings.value("break/small-for", SANE_BREAK_SMALL_FOR).toInt();
 }
 
 int SaneBreakApp::scheduleInterval() {
   QSettings settings;
-  return settings.value("break/schedule", 20 * 60).toInt();
+  return settings.value("break/small-every", SANE_BREAK_SMALL_EVERY).toInt();
 }
