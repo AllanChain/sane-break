@@ -4,6 +4,7 @@
 #include <QIcon>
 #include <QLabel>
 #include <QMainWindow>
+#include <QPushButton>
 #include <QSettings>
 #include <QSlider>
 #include <QVBoxLayout>
@@ -110,6 +111,18 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
           [bigBreakForLabel](int value) {
             bigBreakForLabel->setText(QString("%1 sec").arg(value));
           });
+
+  QHBoxLayout *bottomButtonLayout = new QHBoxLayout();
+  QPushButton *resetButton = new QPushButton("Reset");
+  connect(resetButton, &QPushButton::pressed, this,
+          &PreferenceWindow::loadSettings);
+  bottomButtonLayout->addWidget(resetButton);
+  bottomButtonLayout->addStretch();
+  QPushButton *saveButton = new QPushButton("Save");
+  connect(saveButton, &QPushButton::pressed, this,
+          &PreferenceWindow::saveSettings);
+  bottomButtonLayout->addWidget(saveButton);
+  layout->addLayout(bottomButtonLayout);
 }
 
 void PreferenceWindow::loadSettings() {
