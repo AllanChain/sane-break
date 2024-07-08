@@ -23,23 +23,25 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   layout->setAlignment(Qt::AlignCenter);
   layout->setSpacing(20);
 
+  QHBoxLayout *titleLayout = new QHBoxLayout();
+  titleLayout->setAlignment(Qt::AlignLeft);
+
   QLabel *imageLabel = new QLabel();
   QPixmap pixmap = QPixmap(":/images/icon@192.png");
   pixmap.setDevicePixelRatio(2.0);
   imageLabel->setPixmap(pixmap);
   imageLabel->setAlignment(Qt::AlignCenter);
   imageLabel->setMargin(20);
-  layout->addWidget(imageLabel);
+  titleLayout->addWidget(imageLabel);
+
+  QLabel *title = new QLabel("Sane Break");
+  title->setProperty("title", "h1");
+  titleLayout->addWidget(title);
+
+  layout->addLayout(titleLayout);
 
   QLabel *titleSmall = new QLabel("Small Break");
-  QFont titleFont = titleSmall->font();
-  titleFont.setBold(true);
-  if (titleFont.pixelSize() > 0) {
-    titleFont.setPixelSize(titleFont.pixelSize() * 1.5);
-  } else {
-    titleFont.setPointSize(titleFont.pointSize() * 1.5);
-  }
-  titleSmall->setFont(titleFont);
+  titleSmall->setProperty("title", "h2");
   layout->addWidget(titleSmall);
 
   QGridLayout *smallBreakForm = new QGridLayout();
@@ -53,25 +55,27 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   smallBreakEverySlider->setTickPosition(QSlider::TicksBelow);
   smallBreakForm->addWidget(smallBreakEverySlider, 0, 1);
 
-  smallBreakEveryLabel = new QLabel();
+  QLabel *smallBreakEveryLabel = new QLabel();
   smallBreakForm->addWidget(smallBreakEveryLabel, 0, 2);
-  connect(smallBreakEverySlider, &QSlider::valueChanged, [this](int value) {
-    smallBreakEveryLabel->setText(QString("%1 min").arg(value));
-  });
+  connect(smallBreakEverySlider, &QSlider::valueChanged,
+          [smallBreakEveryLabel](int value) {
+            smallBreakEveryLabel->setText(QString("%1 min").arg(value));
+          });
 
   smallBreakForSlider = new QSlider(Qt::Horizontal);
   smallBreakForSlider->setMaximum(60);
   smallBreakForSlider->setTickPosition(QSlider::TicksBelow);
   smallBreakForm->addWidget(smallBreakForSlider, 1, 1);
 
-  smallBreakForLabel = new QLabel();
+  QLabel *smallBreakForLabel = new QLabel();
   smallBreakForm->addWidget(smallBreakForLabel, 1, 2);
-  connect(smallBreakForSlider, &QSlider::valueChanged, [this](int value) {
-    smallBreakForLabel->setText(QString("%1 sec").arg(value));
-  });
+  connect(smallBreakForSlider, &QSlider::valueChanged,
+          [smallBreakForLabel](int value) {
+            smallBreakForLabel->setText(QString("%1 sec").arg(value));
+          });
 
   QLabel *titleBig = new QLabel("Big Break");
-  titleBig->setFont(titleFont);
+  titleBig->setProperty("title", "h2");
   layout->addWidget(titleBig);
 
   QGridLayout *bigBreakForm = new QGridLayout();
@@ -85,11 +89,12 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   bigBreakAfterSlider->setTickPosition(QSlider::TicksBelow);
   bigBreakForm->addWidget(bigBreakAfterSlider, 0, 1);
 
-  bigBreakAfterLabel = new QLabel();
+  QLabel *bigBreakAfterLabel = new QLabel();
   bigBreakForm->addWidget(bigBreakAfterLabel, 0, 2);
-  connect(bigBreakAfterSlider, &QSlider::valueChanged, [this](int value) {
-    bigBreakAfterLabel->setText(QString("%1 small breaks").arg(value));
-  });
+  connect(bigBreakAfterSlider, &QSlider::valueChanged,
+          [bigBreakAfterLabel](int value) {
+            bigBreakAfterLabel->setText(QString("%1 small breaks").arg(value));
+          });
 
   bigBreakForSlider = new QSlider(Qt::Horizontal);
   bigBreakForSlider->setMaximum(300);
@@ -99,11 +104,12 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   bigBreakForSlider->setTickPosition(QSlider::TicksBelow);
   bigBreakForm->addWidget(bigBreakForSlider, 1, 1);
 
-  bigBreakForLabel = new QLabel();
+  QLabel *bigBreakForLabel = new QLabel();
   bigBreakForm->addWidget(bigBreakForLabel, 1, 2);
-  connect(bigBreakForSlider, &QSlider::valueChanged, [this](int value) {
-    bigBreakForLabel->setText(QString("%1 sec").arg(value));
-  });
+  connect(bigBreakForSlider, &QSlider::valueChanged,
+          [bigBreakForLabel](int value) {
+            bigBreakForLabel->setText(QString("%1 sec").arg(value));
+          });
 }
 
 void PreferenceWindow::loadSettings() {

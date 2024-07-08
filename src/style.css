@@ -1,15 +1,25 @@
-QLabel {
+BreakWindow QLabel {
   background: transparent;
   color: #eceff4;
 }
 BreakWindow[isFullScreen="true"] QLabel {
   font-size: 20px;
 }
-QProgressBar {
+BreakWindow QProgressBar {
   border-radius: 5px;
   height: 5px;
   background: transparent;
 }
-QProgressBar::chunk {
+BreakWindow QProgressBar::chunk {
   background: #eceff4;
+}
+
+PreferenceWindow QLabel[title="h1"] {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+PreferenceWindow QLabel[title="h2"] {
+  font-size: 18px;
+  font-weight: bold;
 }

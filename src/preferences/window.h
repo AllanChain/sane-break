@@ -16,12 +16,8 @@ class PreferenceWindow : public QMainWindow {
  private:
   void closeEvent(QCloseEvent *event);
   QSlider *smallBreakEverySlider;
-  QLabel *smallBreakEveryLabel;
   QSlider *smallBreakForSlider;
-  QLabel *smallBreakForLabel;
   QSlider *bigBreakAfterSlider;
-  QLabel *bigBreakAfterLabel;
   QSlider *bigBreakForSlider;
-  QLabel *bigBreakForLabel;
 };
 #endif  // SANE_PREFERENCES_H
