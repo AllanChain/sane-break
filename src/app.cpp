@@ -75,18 +75,20 @@ void SaneBreakApp::createMenu() {
 
   menu->addSeparator();
 
-  openPreferenceAction = new QAction("Preferences", this);
-  menu->addAction(openPreferenceAction);
-  connect(openPreferenceAction, &QAction::triggered, [this]() {
-    prefWindow->loadSettings();
-    prefWindow->show();
-  });
+  QMenu *postponeMenu = menu->addMenu("Postpone");
+  connect(postponeMenu->addAction("30 min"), &QAction::triggered,
+          [this]() { secondsToNextBreak += 30 * 60; });
+  connect(postponeMenu->addAction("1 h"), &QAction::triggered,
+          [this]() { secondsToNextBreak += 60 * 60; });
+  connect(postponeMenu->addAction("Quit"), &QAction::triggered, this,
+          &SaneBreakApp::quit);
 
   menu->addSeparator();
 
-  quitAction = new QAction("Quit", this);
-  menu->addAction(quitAction);
-  connect(quitAction, &QAction::triggered, this, &SaneBreakApp::quit);
+  connect(menu->addAction("Preferences"), &QAction::triggered, [this]() {
+    prefWindow->loadSettings();
+    prefWindow->show();
+  });
 }
 
 void SaneBreakApp::breakNow() {

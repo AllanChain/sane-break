@@ -32,8 +32,6 @@ class SaneBreakApp : public QObject {
   QMenu *menu;
   QAction *nextBreakAction;
   QAction *bigBreakAction;
-  QAction *openPreferenceAction;
-  QAction *quitAction;
   int breakCycleCount = 1;
   void createMenu();
   void tick();
