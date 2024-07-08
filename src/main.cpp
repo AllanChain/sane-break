@@ -12,15 +12,18 @@ int main(int argc, char *argv[]) {
   QCoreApplication::setApplicationName("SaneBreak");
   QSettings::setDefaultFormat(QSettings::IniFormat);
 
-  QFile styleSheet(":/src/style.css");
-
   QApplication a(argc, argv);
+  a.setApplicationDisplayName("Sane Break");
+  SaneBreakApp *app = new SaneBreakApp();
+
+  QFile styleSheet(":/src/style.css");
   if (styleSheet.open(QIODevice::ReadOnly | QIODevice::Text))
     a.setStyleSheet(styleSheet.readAll());
-  SaneBreakApp *app = new SaneBreakApp();
-  app->start();
+
+  a.setQuitOnLastWindowClosed(false);
   a.connect(app, &SaneBreakApp::quit, &a, &QCoreApplication::quit,
             Qt::QueuedConnection);
 
+  app->start();
   return a.exec();
 }
