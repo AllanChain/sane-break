@@ -25,11 +25,11 @@ BreakWindow::BreakWindow(QWidget *parent) : QMainWindow(parent) {
   layout->setAlignment(Qt::AlignCenter);
   layout->setSpacing(20);
 
-  countdownLabel = new QLabel();
+  countdownLabel = new QLabel(this);
   countdownLabel->setAlignment(Qt::AlignCenter);
   layout->addWidget(countdownLabel);
 
-  progressBar = new QProgressBar();
+  progressBar = new QProgressBar(this);
   progressBar->setTextVisible(false);
   layout->addWidget(progressBar);
 
