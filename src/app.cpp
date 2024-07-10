@@ -46,6 +46,10 @@ void SaneBreakApp::tick() {
   } else if (secondsToNextBreak == 60) {
     icon->setIcon(QIcon(":/images/icon-lime.png"));
   }
+  updateMenu();
+}
+
+void SaneBreakApp::updateMenu() {
   int seconds = secondsToNextBreak;
   int minutes = seconds / 60;
   seconds %= 60;
@@ -77,9 +81,9 @@ void SaneBreakApp::createMenu() {
 
   QMenu *postponeMenu = menu->addMenu("Postpone");
   connect(postponeMenu->addAction("30 min"), &QAction::triggered,
-          [this]() { secondsToNextBreak += 30 * 60; });
+          [this]() { postpone(30 * 60); });
   connect(postponeMenu->addAction("1 h"), &QAction::triggered,
-          [this]() { secondsToNextBreak += 60 * 60; });
+          [this]() { postpone(60 * 60); });
   connect(postponeMenu->addAction("Quit"), &QAction::triggered, this,
           &SaneBreakApp::quit);
 
@@ -93,9 +97,15 @@ void SaneBreakApp::createMenu() {
 
 void SaneBreakApp::breakNow() {
   secondsToNextBreak = scheduleInterval();
+  updateMenu();
   countDownTimer->stop();
   breakManager->show(breakTime());
   breakCycleCount++;
+}
+
+void SaneBreakApp::postpone(int secs) {
+  secondsToNextBreak += secs;
+  if (!countDownTimer->isActive()) breakManager->close();
 }
 
 int SaneBreakApp::smallBreaksBeforeBig() {

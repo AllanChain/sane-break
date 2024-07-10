@@ -20,6 +20,7 @@ class SaneBreakApp : public QObject {
   int breakTime();
   int smallBreaksBeforeBig();
   void breakNow();
+  void postpone(int secs);
 
  signals:
   void quit();
@@ -35,6 +36,7 @@ class SaneBreakApp : public QObject {
   int breakCycleCount = 1;
   void createMenu();
   void tick();
+  void updateMenu();
   int secondsToNextBreak;
 };
 

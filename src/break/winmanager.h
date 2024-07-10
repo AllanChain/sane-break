@@ -15,6 +15,7 @@ class BreakWindowManager : public QObject {
   ~BreakWindowManager();
   int remainingTime;
   void show(int breakTime);
+  void close();
 
  signals:
   void timeout();

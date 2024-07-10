@@ -74,6 +74,17 @@ void BreakWindowManager::show(int breakTime) {
   idleTimer->startWatching();
 }
 
+void BreakWindowManager::close() {
+  countdownTimer->stop();
+  for (auto w : windows) {
+    w->close();
+    w->deleteLater();
+  }
+  windows.clear();
+  idleTimer->stopWatching();
+  emit timeout();
+}
+
 void BreakWindowManager::tick() {
   remainingTime -= countdownTimer->interval();
   bool shouldCountDown = isForceBreak || isIdle;
@@ -82,17 +93,7 @@ void BreakWindowManager::tick() {
       remainingTime = totalTime;
     }
   }
-  if (remainingTime <= 0) {
-    countdownTimer->stop();
-    for (auto w : windows) {
-      w->close();
-      w->deleteLater();
-    }
-    windows.clear();
-    idleTimer->stopWatching();
-    emit timeout();
-    return;
-  }
+  if (remainingTime <= 0) return close();
   for (auto w : windows) w->tick(remainingTime);
 }
 
