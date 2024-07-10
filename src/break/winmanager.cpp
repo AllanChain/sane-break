@@ -29,7 +29,7 @@ BreakWindowManager::BreakWindowManager() : QObject() {
   LayerShellQt::Shell::useLayerShell();
 #endif
 }
-BreakWindowManager::~BreakWindowManager(){};
+BreakWindowManager::~BreakWindowManager() {};
 
 void BreakWindowManager::createWindows() {
   QList<QScreen *> screens = QApplication::screens();

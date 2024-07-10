@@ -7,8 +7,8 @@
 class SystemIdleTime : public QObject {
   Q_OBJECT
  public:
-  virtual void startWatching(){};
-  virtual void stopWatching(){};
+  virtual void startWatching() {};
+  virtual void stopWatching() {};
   static SystemIdleTime* createIdleTimer();
  signals:
   void idleStart();

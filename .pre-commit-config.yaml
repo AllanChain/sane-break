@@ -1,5 +1,5 @@
 repos:
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: 'v17.0.6'  # Use the sha / tag you want to point at
+    rev: 'v18.1.8'
     hooks:
       - id: clang-format
