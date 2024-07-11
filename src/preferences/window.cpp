@@ -58,7 +58,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
 
   QLabel *smallBreakEveryLabel = new QLabel();
   smallBreakForm->addWidget(smallBreakEveryLabel, 0, 2);
-  connect(smallBreakEverySlider, &QSlider::valueChanged,
+  connect(smallBreakEverySlider, &QSlider::valueChanged, this,
           [smallBreakEveryLabel](int value) {
             smallBreakEveryLabel->setText(QString("%1 min").arg(value));
           });
@@ -70,7 +70,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
 
   QLabel *smallBreakForLabel = new QLabel();
   smallBreakForm->addWidget(smallBreakForLabel, 1, 2);
-  connect(smallBreakForSlider, &QSlider::valueChanged,
+  connect(smallBreakForSlider, &QSlider::valueChanged, this,
           [smallBreakForLabel](int value) {
             smallBreakForLabel->setText(QString("%1 sec").arg(value));
           });
@@ -92,7 +92,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
 
   QLabel *bigBreakAfterLabel = new QLabel();
   bigBreakForm->addWidget(bigBreakAfterLabel, 0, 2);
-  connect(bigBreakAfterSlider, &QSlider::valueChanged,
+  connect(bigBreakAfterSlider, &QSlider::valueChanged, this,
           [bigBreakAfterLabel](int value) {
             bigBreakAfterLabel->setText(QString("%1 small breaks").arg(value));
           });
@@ -107,7 +107,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
 
   QLabel *bigBreakForLabel = new QLabel();
   bigBreakForm->addWidget(bigBreakForLabel, 1, 2);
-  connect(bigBreakForSlider, &QSlider::valueChanged,
+  connect(bigBreakForSlider, &QSlider::valueChanged, this,
           [bigBreakForLabel](int value) {
             bigBreakForLabel->setText(QString("%1 sec").arg(value));
           });

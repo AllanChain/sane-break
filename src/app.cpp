@@ -22,7 +22,7 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   countDownTimer = new QTimer();
   countDownTimer->setInterval(1000);
   connect(countDownTimer, &QTimer::timeout, this, &SaneBreakApp::tick);
-  connect(breakManager, &BreakWindowManager::timeout,
+  connect(breakManager, &BreakWindowManager::timeout, this,
           [this]() { countDownTimer->start(); });
 }
 SaneBreakApp::~SaneBreakApp() {}
@@ -68,11 +68,11 @@ void SaneBreakApp::createMenu() {
   menu = new QMenu();
   nextBreakAction = new QAction("Next Break", this);
   menu->addAction(nextBreakAction);
-  connect(nextBreakAction, &QAction::triggered, [=]() { breakNow(); });
+  connect(nextBreakAction, &QAction::triggered, this, [=]() { breakNow(); });
 
   bigBreakAction = new QAction("Big Break", this);
   menu->addAction(bigBreakAction);
-  connect(bigBreakAction, &QAction::triggered, [=]() {
+  connect(bigBreakAction, &QAction::triggered, this, [=]() {
     breakCycleCount = 0;
     breakNow();
   });
@@ -80,16 +80,16 @@ void SaneBreakApp::createMenu() {
   menu->addSeparator();
 
   QMenu *postponeMenu = menu->addMenu("Postpone");
-  connect(postponeMenu->addAction("30 min"), &QAction::triggered,
+  connect(postponeMenu->addAction("30 min"), &QAction::triggered, this,
           [this]() { postpone(30 * 60); });
-  connect(postponeMenu->addAction("1 h"), &QAction::triggered,
+  connect(postponeMenu->addAction("1 h"), &QAction::triggered, this,
           [this]() { postpone(60 * 60); });
   connect(postponeMenu->addAction("Quit"), &QAction::triggered, this,
           &SaneBreakApp::quit);
 
   menu->addSeparator();
 
-  connect(menu->addAction("Preferences"), &QAction::triggered, [this]() {
+  connect(menu->addAction("Preferences"), &QAction::triggered, this, [this]() {
     prefWindow->loadSettings();
     prefWindow->show();
   });

@@ -1,5 +1,7 @@
 #include "winmanager.h"
 
+#include <utility>
+
 #ifdef __linux
 #include <LayerShellQt/Shell>
 #include <LayerShellQt/Window>
@@ -32,7 +34,7 @@ BreakWindowManager::~BreakWindowManager() {};
 void BreakWindowManager::createWindows() {
   QList<QScreen *> screens = QApplication::screens();
 
-  for (QScreen *screen : screens) {
+  for (QScreen *screen : std::as_const(screens)) {
     BreakWindow *w = new BreakWindow();
     windows.append(w);
     w->initSize(screen);
@@ -58,23 +60,25 @@ void BreakWindowManager::show(int breakTime) {
   isForceBreak = false;
   createWindows();
 
-  QTimer::singleShot(2 * 1000, [=]() {  // Go fullscreen when idle for 2 sec
-    if (isIdle)
-      for (auto w : windows) w->setFullScreen();
-  });
-  QTimer::singleShot(30 * 1000, [=]() {  // Force break
+  QTimer::singleShot(2 * 1000, this,
+                     [=]() {  // Go fullscreen when idle for 2 sec
+                       if (isIdle)
+                         for (auto w : std::as_const(windows))
+                           w->setFullScreen();
+                     });
+  QTimer::singleShot(30 * 1000, this, [=]() {  // Force break
     isForceBreak = true;
-    for (auto w : windows) w->setFullScreen();
+    for (auto w : std::as_const(windows)) w->setFullScreen();
   });
 
-  for (auto w : windows) w->start(breakTime);
+  for (auto w : std::as_const(windows)) w->start(breakTime);
   countdownTimer->start();
   idleTimer->startWatching();
 }
 
 void BreakWindowManager::close() {
   countdownTimer->stop();
-  for (auto w : windows) {
+  for (auto w : std::as_const(windows)) {
     w->close();
     w->deleteLater();
   }
@@ -86,17 +90,17 @@ void BreakWindowManager::close() {
 void BreakWindowManager::tick() {
   bool shouldCountDown = isForceBreak || isIdle;
   if (!shouldCountDown) {
-    for (auto w : windows) w->setTime(remainingTime);
+    for (auto w : std::as_const(windows)) w->setTime(remainingTime);
   } else {
     remainingTime--;
-    for (auto w : windows) w->setTime(remainingTime);
+    for (auto w : std::as_const(windows)) w->setTime(remainingTime);
   }
   if (remainingTime <= 0) return close();
 }
 
 void BreakWindowManager::onIdleStart() {
   if (isForceBreak || remainingTime <= 0) return;
-  for (auto w : windows) {
+  for (auto w : std::as_const(windows)) {
     w->setFullScreen();
   }
   isIdle = true;
@@ -104,7 +108,7 @@ void BreakWindowManager::onIdleStart() {
 
 void BreakWindowManager::onIdleEnd() {
   if (isForceBreak || remainingTime <= 0) return;
-  for (auto w : windows) {
+  for (auto w : std::as_const(windows)) {
     w->resizeToNormal();
   }
   isIdle = false;

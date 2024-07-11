@@ -4,11 +4,11 @@
 #include <KIdleTime>
 
 IdleTimeKDE::IdleTimeKDE() : SystemIdleTime() {
-  connect(KIdleTime::instance(), &KIdleTime::timeoutReached, [this]() {
+  connect(KIdleTime::instance(), &KIdleTime::timeoutReached, this, [this]() {
     emit idleStart();
     if (isWatching) KIdleTime::instance()->catchNextResumeEvent();
   });
-  connect(KIdleTime::instance(), &KIdleTime::resumingFromIdle, [this]() {
+  connect(KIdleTime::instance(), &KIdleTime::resumingFromIdle, this, [this]() {
     emit idleEnd();
     if (isWatching) KIdleTime::instance()->addIdleTimeout(2000);
   });
