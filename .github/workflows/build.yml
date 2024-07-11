@@ -1,0 +1,75 @@
+# Modified from (GPL):
+# https://github.com/travisgoodspeed/maskromtool/blob/master/.github/workflows/build.yml
+
+name: Build
+
+env:
+  CL: /MP # Multi-threaded compilation for MSVC
+
+on: [workflow_dispatch, push]
+
+jobs:
+  Build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+        include:
+        - os: windows-latest
+          os-caption: Windows
+        - os: macos-latest
+          os-caption: MacOS
+
+    runs-on: ${{matrix.os}}
+    steps:
+    - name: Clone Project
+      uses: actions/checkout@v4
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v4
+      with:
+        version: 6.7.2
+
+    - name: Configure MSVC (Windows)
+      if: contains(matrix.os, 'windows')
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Make Project
+      run: |
+        mkdir build
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=Release ..
+
+    - name: Build Project (Windows)
+      if: contains(matrix.os, 'windows')
+      run: |
+        cd build
+        msbuild sane-break.sln /property:Configuration=Release -maxcpucount
+
+    - name: Build Project (macOS)
+      if: contains(matrix.os, 'macos')
+      run: |
+        cd build
+        make -j3
+
+    - name: Packing (Windows)
+      if: contains(matrix.os, 'windows')
+      run: |
+        cd build
+        windeployqt --no-compiler-runtime release
+        move release ..\
+
+    - name: Packing (macOs)
+      if: contains(matrix.os, 'macos')
+      run: |
+        mkdir release
+        cp -rf build/sane-break.app release/
+        cd release
+        macdeployqt sane-break.app -dmg
+        rm -rf sane-break.app
+
+    - name: Create Artifact
+      uses: actions/upload-artifact@v4
+      with:
+         name: "sane-break (${{matrix.os-caption}})"
+         path: ./release/
