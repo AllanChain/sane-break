@@ -88,14 +88,14 @@ void BreakWindow::resizeToNormal() {
   QPropertyAnimation *resizeAnim = new QPropertyAnimation(this, "geometry");
   QRect rect = screen()->geometry();
   QRect targetGeometry =
-      QRect(rect.x() - rect.width() / 2 - 200, rect.y(), 300, 100);
+      QRect(rect.x() + rect.width() / 2 - 200, rect.y(), 300, 100);
   resizeAnim->setStartValue(geometry());
   resizeAnim->setEndValue(targetGeometry);
   resizeAnim->setDuration(100);
   resizeAnim->start();
 }
 
-void BreakWindow::initSize() {
-  QRect rect = screen()->geometry();
-  setGeometry(rect.x() - rect.width() / 2 - 200, rect.y(), 300, 100);
+void BreakWindow::initSize(QScreen *screen) {
+  QRect rect = screen->geometry();
+  setGeometry(rect.x() + rect.width() / 2 - 200, rect.y(), 300, 100);
 }

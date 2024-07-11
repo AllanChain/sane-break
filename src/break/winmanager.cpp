@@ -35,8 +35,7 @@ void BreakWindowManager::createWindows() {
   for (QScreen *screen : screens) {
     BreakWindow *w = new BreakWindow();
     windows.append(w);
-    w->setGeometry(screen->geometry());
-    w->initSize();
+    w->initSize(screen);
     w->show();
     w->hide();
 #ifdef __linux

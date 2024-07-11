@@ -20,7 +20,7 @@ class BreakWindow : public QMainWindow {
   void resetProgressbar();
   void setFullScreen();
   void resizeToNormal();
-  void initSize();
+  void initSize(QScreen *screen);
   void colorChanged();
 
  private:
