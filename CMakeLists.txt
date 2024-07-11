@@ -41,6 +41,8 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     find_library(CoreFoundation NAMES CoreFoundation)
     target_link_libraries(sane-break PRIVATE "-framework IOKit")
     target_link_libraries(sane-break PRIVATE "-framework CoreFoundation")
+    set_target_properties(sane-break PROPERTIES
+        MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/MacOSXBundleInfo.plist.in")
 endif()
 
 set_target_properties(sane-break PROPERTIES
