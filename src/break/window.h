@@ -15,17 +15,19 @@ class BreakWindow : public QMainWindow {
  public:
   BreakWindow(QWidget *parent = nullptr);
   ~BreakWindow();
-  void tick(int remainingTime);
+  void start(int totalTime);
+  void setTime(int remainingTime);
+  void resetProgressbar();
   void setFullScreen();
   void resizeToNormal();
   void initSize();
   void colorChanged();
 
  private:
-  QProgressBar *progressBar;
+  int totalTime;
   QLabel *countdownLabel;
   QColor backgroundColor;
+  QPropertyAnimation *progressAnim;
   QPropertyAnimation *bgAnim;
-  bool timeHasSet = false;
 };
 #endif  // SANE_BREAK_WINDOW_H

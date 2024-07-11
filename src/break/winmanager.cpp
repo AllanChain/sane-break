@@ -14,11 +14,9 @@
 #include "idle/system.h"
 #include "window.h"
 
-#define FRAME_RATE 25
-
 BreakWindowManager::BreakWindowManager() : QObject() {
   countdownTimer = new QTimer(this);
-  countdownTimer->setInterval(1000 / FRAME_RATE);
+  countdownTimer->setInterval(1000);
   idleTimer = SystemIdleTime::createIdleTimer();
   connect(countdownTimer, &QTimer::timeout, this, &BreakWindowManager::tick);
   connect(idleTimer, &SystemIdleTime::idleStart, this,
@@ -55,8 +53,8 @@ void BreakWindowManager::createWindows() {
 }
 
 void BreakWindowManager::show(int breakTime) {
-  remainingTime = breakTime * 1000;
-  totalTime = breakTime * 1000;
+  remainingTime = breakTime;
+  totalTime = breakTime;
   isIdle = true;
   isForceBreak = false;
   createWindows();
@@ -70,6 +68,7 @@ void BreakWindowManager::show(int breakTime) {
     for (auto w : windows) w->setFullScreen();
   });
 
+  for (auto w : windows) w->start(breakTime);
   countdownTimer->start();
   idleTimer->startWatching();
 }
@@ -86,15 +85,14 @@ void BreakWindowManager::close() {
 }
 
 void BreakWindowManager::tick() {
-  remainingTime -= countdownTimer->interval();
   bool shouldCountDown = isForceBreak || isIdle;
   if (!shouldCountDown) {
-    if (remainingTime < totalTime - 500) {
-      remainingTime = totalTime;
-    }
+    for (auto w : windows) w->setTime(remainingTime);
+  } else {
+    remainingTime--;
+    for (auto w : windows) w->setTime(remainingTime);
   }
   if (remainingTime <= 0) return close();
-  for (auto w : windows) w->tick(remainingTime);
 }
 
 void BreakWindowManager::onIdleStart() {

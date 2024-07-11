@@ -29,16 +29,19 @@ BreakWindow::BreakWindow(QWidget *parent) : QMainWindow(parent) {
   countdownLabel->setAlignment(Qt::AlignCenter);
   layout->addWidget(countdownLabel);
 
-  progressBar = new QProgressBar(this);
+  QProgressBar *progressBar = new QProgressBar();
   progressBar->setTextVisible(false);
   layout->addWidget(progressBar);
+
+  progressAnim = new QPropertyAnimation(progressBar, "value");
+  progressAnim->setStartValue(100);
+  progressAnim->setEndValue(0);
 
   bgAnim = new QPropertyAnimation(this, "color");
   bgAnim->setStartValue(QColor(235, 203, 139, 100));
   bgAnim->setEndValue(QColor(46, 52, 64, 255));
   bgAnim->setDuration(500);
   bgAnim->setLoopCount(-1);
-  bgAnim->start();
 }
 
 BreakWindow::~BreakWindow() {}
@@ -52,14 +55,20 @@ void BreakWindow::colorChanged() {
                     .arg(backgroundColor.alpha()));
 }
 
-void BreakWindow::tick(int remainingTime) {
-  if (!timeHasSet) {
-    progressBar->setMaximum(remainingTime);
-    timeHasSet = true;
+void BreakWindow::start(int totalTime) {
+  this->totalTime = totalTime;
+  progressAnim->setDuration(totalTime * 1000);
+  bgAnim->start();
+  setTime(totalTime);
+}
+
+void BreakWindow::setTime(int remainingTime) {
+  if (remainingTime == totalTime) {
+    progressAnim->stop();
+    progressAnim->start();
   }
-  progressBar->setValue(remainingTime);
-  countdownLabel->setText(QString("Time remaining: %1 seconds")
-                              .arg(round(float(remainingTime) / 1000)));
+  countdownLabel->setText(
+      QString("Time remaining: %1 seconds").arg(round(float(remainingTime))));
 }
 
 void BreakWindow::setFullScreen() {
