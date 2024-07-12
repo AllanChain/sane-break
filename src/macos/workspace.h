@@ -16,8 +16,11 @@
 // along with the Private Internet Access Desktop Client.  If not, see
 // <https://www.gnu.org/licenses/>.
 
-#ifndef SANE_BREAK_MAC_WINDOW_H
-#define SANE_BREAK_MAC_WINDOW_H
+#include <qglobal.h>
+
+#ifdef Q_OS_MACOS
+#ifndef SANE_MACOS_WORKSPACE_H
+#define SANE_MACOS_WORKSPACE_H
 
 #include <QWindow>
 
@@ -25,4 +28,5 @@
 // NSWindowCollectionBehaviorCanJoinAllSpaces)
 void macSetAllWorkspaces(QWindow *window);
 
-#endif  // SANE_BREAK_MAC_WINDOW_H
+#endif  // SANE_MACOS_WORKSPACE_H
+#endif  // Q_OS_MACOS

@@ -7,8 +7,8 @@
 #include <QSystemTrayIcon>
 #include <QTimer>
 
-#include "preferences/default.h"
-#include "preferences/window.h"
+#include "default-pref.h"
+#include "pref-window.h"
 
 SaneBreakApp::SaneBreakApp() : QObject() {
   prefWindow = new PreferenceWindow();

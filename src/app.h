@@ -7,8 +7,8 @@
 #include <QSystemTrayIcon>
 #include <QTimer>
 
-#include "break/winmanager.h"
-#include "preferences/window.h"
+#include "pref-window.h"
+#include "window-manager.h"
 
 class SaneBreakApp : public QObject {
   Q_OBJECT

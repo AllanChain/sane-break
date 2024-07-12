@@ -1,5 +1,5 @@
-#ifndef SANE_IDLE_SYSTEM_H
-#define SANE_IDLE_SYSTEM_H
+#ifndef SANE_BREAK_IDLE_H
+#define SANE_BREAK_IDLE_H
 
 #include <QObject>
 #include <QTimer>
@@ -15,4 +15,4 @@ class SystemIdleTime : public QObject {
   void idleEnd();
 };
 
-#endif  // SANE_IDLE_SYSTEM_H
+#endif  // SANE_BREAK_IDLE_H

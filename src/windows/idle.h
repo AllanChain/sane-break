@@ -1,11 +1,12 @@
 #include <qglobal.h>
+
 #ifdef Q_OS_WIN
 #ifndef SANE_IDLE_WINDOWS_H
 #define SANE_IDLE_WINDOWS_H
 
 #include <QTimer>
 
-#include "system.h"
+#include "idle-time.h"
 
 int systemIdleTime();
 

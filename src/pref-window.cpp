@@ -1,4 +1,4 @@
-#include "window.h"
+#include "pref-window.h"
 
 #include <QGridLayout>
 #include <QIcon>
@@ -9,7 +9,7 @@
 #include <QSlider>
 #include <QVBoxLayout>
 
-#include "preferences/default.h"
+#include "default-pref.h"
 
 PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   setWindowFlag(Qt::Dialog);

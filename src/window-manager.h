@@ -4,8 +4,8 @@
 #include <QList>
 #include <QObject>
 
-#include "idle/system.h"
-#include "window.h"
+#include "break-window.h"
+#include "idle-time.h"
 
 class BreakWindowManager : public QObject {
   Q_OBJECT

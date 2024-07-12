@@ -1,10 +1,12 @@
-#ifdef __APPLE__
+#include <qglobal.h>
+
+#ifdef Q_OS_MACOS
 #ifndef SANE_IDLE_DARWIN_H
 #define SANE_IDLE_DARWIN_H
 
 #include <QTimer>
 
-#include "system.h"
+#include "idle-time.h"
 
 int systemIdleTime();
 
@@ -22,4 +24,4 @@ class IdleTimeDarwin : public SystemIdleTime {
 };
 
 #endif  // SANE_IDLE_DARWIN_H
-#endif  // __APPLE__
+#endif  // Q_OS_MACOS

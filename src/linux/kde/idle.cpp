@@ -1,7 +1,9 @@
-#ifdef __linux
-#include "kde.h"
+#include <qglobal.h>
 
+#ifdef Q_OS_LINUX
 #include <KIdleTime>
+
+#include "idle.h"
 
 IdleTimeKDE::IdleTimeKDE() : SystemIdleTime() {
   connect(KIdleTime::instance(), &KIdleTime::timeoutReached, this, [this]() {
@@ -20,4 +22,4 @@ void IdleTimeKDE::startWatching() {
 }
 
 void IdleTimeKDE::stopWatching() { isWatching = false; }
-#endif  // __linux
+#endif  // Q_OS_LINUX

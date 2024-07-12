@@ -16,9 +16,12 @@
 // along with the Private Internet Access Desktop Client.  If not, see
 // <https://www.gnu.org/licenses/>.
 
-#include "macos_window.h"
+#include <qglobal.h>
+
+#ifdef Q_OS_MACOS
 #import <AppKit/AppKit.h>
 #include <QWindow>
+#include "workspace.h"
 
 namespace {
 NSWindow *macGetNativeWindow(const QWindow *window) {
@@ -39,3 +42,4 @@ void macSetAllWorkspaces(QWindow *window) {
   NSWindow *pNativeWindow = macGetNativeWindow(window);
   [pNativeWindow setCollectionBehavior:NSWindowCollectionBehaviorCanJoinAllSpaces];
 }
+#endif  // Q_OS_MACOS

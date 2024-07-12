@@ -1,10 +1,12 @@
-#ifdef __APPLE__
-#include "darwin.h"
+#include <qglobal.h>
 
+#ifdef Q_OS_MACOS
 #include <CoreFoundation/CoreFoundation.h>
 #include <IOKit/IOKitLib.h>
 
 #include <QTimer>
+
+#include "idle.h"
 
 IdleTimeDarwin::IdleTimeDarwin() : SystemIdleTime() {
   timer = new QTimer();
@@ -59,4 +61,4 @@ int systemIdleTime() {
   }
   return idlesecs;
 }
-#endif  // __APPLE__
+#endif  // Q_OS_MACOS

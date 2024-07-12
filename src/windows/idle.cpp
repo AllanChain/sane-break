@@ -1,11 +1,12 @@
 #include <qglobal.h>
+
 #ifdef Q_OS_WIN
 
 #include <windows.h>
 
 #include <QTimer>
 
-#include "windows.h"
+#include "idle.h"
 
 IdleTimeWindows::IdleTimeWindows() : SystemIdleTime() {
   timer = new QTimer();

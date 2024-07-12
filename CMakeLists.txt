@@ -12,13 +12,21 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
-file(GLOB_RECURSE PROJECT_SOURCES "src/*.cpp" "src/*.h" "src/*.mm" "resources.qrc")
+file(GLOB PROJECT_SOURCES "src/*.cpp" "src/*.h" "resources.qrc")
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    file(GLOB_RECURSE PROJECT_SOURCES_LINUX "src/linux/*")
+    list(APPEND PROJECT_SOURCES ${PROJECT_SOURCES_LINUX})
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    file(GLOB_RECURSE PROJECT_SOURCES_MACOS "src/macos/*")
+    list(APPEND PROJECT_SOURCES ${PROJECT_SOURCES_MACOS})
     set(MACOSX_BUNDLE_ICON_FILE icon.icns)
     set(SANE_BREAK_ICON ${CMAKE_CURRENT_SOURCE_DIR}/images/icon.icns)
     set_source_files_properties(${SANE_BREAK_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
     list(APPEND PROJECT_SOURCES ${SANE_BREAK_ICON})
+elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    file(GLOB_RECURSE PROJECT_SOURCES_WINDOWS "src/windows/*")
+    list(APPEND PROJECT_SOURCES ${PROJECT_SOURCES_WINDOWS})
 endif()
 
 qt_add_executable(sane-break

@@ -1,4 +1,4 @@
-#include "winmanager.h"
+#include "window-manager.h"
 
 #include <qglobal.h>
 
@@ -8,7 +8,7 @@
 #include <LayerShellQt/Shell>
 #include <LayerShellQt/Window>
 #elif defined Q_OS_MACOS
-#include "macos_window.h"
+#include "macos/workspace.h"
 #endif
 #include <QApplication>
 #include <QList>
@@ -17,8 +17,8 @@
 #include <QSettings>
 #include <QTimer>
 
-#include "idle/system.h"
-#include "window.h"
+#include "break-window.h"
+#include "idle-time.h"
 
 BreakWindowManager::BreakWindowManager() : QObject() {
   countdownTimer = new QTimer(this);

@@ -1,10 +1,12 @@
-#ifdef __linux
+#include <qglobal.h>
+
+#ifdef Q_OS_LINUX
 #ifndef SANE_IDLE_KDE_H
 #define SANE_IDLE_KDE_H
 
 #include <QTimer>
 
-#include "system.h"
+#include "idle-time.h"
 
 int systemIdleTime();
 
@@ -20,4 +22,4 @@ class IdleTimeKDE : public SystemIdleTime {
 };
 
 #endif  // SANE_IDLE_KDE_H
-#endif  // __linux
+#endif  // Q_OS_LINUX
