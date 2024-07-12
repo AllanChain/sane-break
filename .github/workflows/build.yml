@@ -56,7 +56,7 @@ jobs:
       if: contains(matrix.os, 'windows')
       run: |
         cd build
-        windeployqt --no-compiler-runtime release
+        windeployqt --release --no-compiler-runtime --no-opengl-sw release
         move release ..\
 
     - name: Packing (macOs)
