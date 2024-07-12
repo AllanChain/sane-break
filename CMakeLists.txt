@@ -12,7 +12,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
-file(GLOB PROJECT_SOURCES "src/*.cpp" "src/*.h" "resources.qrc")
+file(GLOB PROJECT_SOURCES "src/*.cpp" "src/*.h" "resources/index.qrc")
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
     file(GLOB_RECURSE PROJECT_SOURCES_LINUX "src/linux/*")
@@ -21,7 +21,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     file(GLOB_RECURSE PROJECT_SOURCES_MACOS "src/macos/*")
     list(APPEND PROJECT_SOURCES ${PROJECT_SOURCES_MACOS})
     set(MACOSX_BUNDLE_ICON_FILE icon.icns)
-    set(SANE_BREAK_ICON ${CMAKE_CURRENT_SOURCE_DIR}/images/icon.icns)
+    set(SANE_BREAK_ICON ${CMAKE_CURRENT_SOURCE_DIR}/packaging/macos/icon.icns)
     set_source_files_properties(${SANE_BREAK_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
     list(APPEND PROJECT_SOURCES ${SANE_BREAK_ICON})
 elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
@@ -50,7 +50,8 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     target_link_libraries(sane-break PRIVATE "-framework IOKit")
     target_link_libraries(sane-break PRIVATE "-framework CoreFoundation")
     set_target_properties(sane-break PROPERTIES
-        MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/MacOSXBundleInfo.plist.in")
+        MACOSX_BUNDLE_INFO_PLIST
+        "${CMAKE_CURRENT_SOURCE_DIR}/packaging/macos/MacOSXBundleInfo.plist.in")
 endif()
 
 set_target_properties(sane-break PROPERTIES

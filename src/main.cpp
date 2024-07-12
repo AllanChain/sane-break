@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
   a.setApplicationDisplayName("Sane Break");
   SaneBreakApp *app = new SaneBreakApp();
 
-  QFile styleSheet(":/src/style.css");
+  QFile styleSheet(":/style.css");
   if (styleSheet.open(QIODevice::ReadOnly | QIODevice::Text))
     a.setStyleSheet(styleSheet.readAll());
 

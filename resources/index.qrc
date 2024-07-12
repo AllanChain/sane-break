@@ -4,6 +4,6 @@
     <file>images/icon@192.png</file>
     <file>images/icon-lime.png</file>
     <file>images/icon-yellow.png</file>
-    <file>src/style.css</file>
+    <file>style.css</file>
   </qresource>
 </RCC>
