@@ -38,7 +38,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=Release ..
+        cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
 
     - name: Build Project (Windows)
       if: contains(matrix.os, 'windows')
