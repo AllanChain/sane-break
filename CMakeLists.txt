@@ -12,7 +12,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
-file(GLOB_RECURSE PROJECT_SOURCES "src/*.cpp" "src/*.h" "resources.qrc")
+file(GLOB_RECURSE PROJECT_SOURCES "src/*.cpp" "src/*.h" "src/*.mm" "resources.qrc")
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     set(MACOSX_BUNDLE_ICON_FILE icon.icns)

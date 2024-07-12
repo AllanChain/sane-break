@@ -1,10 +1,14 @@
 #include "winmanager.h"
 
+#include <qglobal.h>
+
 #include <utility>
 
-#ifdef __linux
+#ifdef Q_OS_LINUX
 #include <LayerShellQt/Shell>
 #include <LayerShellQt/Window>
+#elif defined Q_OS_MACOS
+#include "macos_window.h"
 #endif
 #include <QApplication>
 #include <QList>
@@ -25,7 +29,7 @@ BreakWindowManager::BreakWindowManager() : QObject() {
           &BreakWindowManager::onIdleStart);
   connect(idleTimer, &SystemIdleTime::idleEnd, this,
           &BreakWindowManager::onIdleEnd);
-#ifdef __linux
+#ifdef Q_OS_LINUX
   LayerShellQt::Shell::useLayerShell();
 #endif
 }
@@ -40,7 +44,7 @@ void BreakWindowManager::createWindows() {
     w->initSize(screen);
     w->show();
     w->hide();
-#ifdef __linux
+#ifdef Q_OS_LINUX
     if (auto window = LayerShellQt::Window::get(w->windowHandle())) {
       using namespace LayerShellQt;
       window->setCloseOnDismissed(true);
@@ -48,6 +52,8 @@ void BreakWindowManager::createWindows() {
       window->setKeyboardInteractivity(Window::KeyboardInteractivityNone);
       window->setAnchors(Window::AnchorTop);
     }
+#elif defined Q_OS_MACOS
+    macSetAllWorkspaces(w->windowHandle());
 #endif
     w->show();
   }
