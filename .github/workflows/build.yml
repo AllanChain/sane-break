@@ -53,15 +53,24 @@ jobs:
 
     - name: Packing (Windows)
       if: contains(matrix.os, 'windows')
-      working-directory: build
       run: |
-        move Release ..
+        mkdir release
+        move build\Release\sane-break.exe release
 
     - name: Packing (macOs)
       if: contains(matrix.os, 'macos')
       run: |
         mkdir release
-        hdiutil create -volname "Sane Break" -srcfolder build/sane-break.app -ov release/sane-break.dmg
+        brew install create-dmg
+        create-dmg \
+          --volname "Sane Break" \
+          --hide-extension "sane-break.app" \
+          --window-size 600 450 \
+          --icon-size 94 \
+          --icon "sane-break" 141 249 \
+          --app-drop-link 458 249 \
+          "release/sane-break.dmg" \
+          "build/sane-break.app"
 
     - name: Create Artifact
       uses: actions/upload-artifact@v4
