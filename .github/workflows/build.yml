@@ -3,9 +3,6 @@
 
 name: Build
 
-env:
-  CL: /MP # Multi-threaded compilation for MSVC
-
 on: [workflow_dispatch, push]
 
 jobs:
@@ -16,60 +13,58 @@ jobs:
         os: [windows-latest, macos-latest]
         include:
         - os: windows-latest
-          os-caption: Windows
+          os-caption: windows
         - os: macos-latest
-          os-caption: MacOS
+          os-caption: macos
 
     runs-on: ${{matrix.os}}
     steps:
-    - name: Clone Project
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@v4
-      with:
-        version: 6.7.2
+      run: |
+        cd ..
+        curl -LO https://github.com/AllanChain/static-qt6/releases/download/v6.7.2-2/qt-6.7.2-static-${{matrix.os-caption}}.zip
+        7z x qt-6.7.2-static-${{matrix.os-caption}}.zip
 
     - name: Configure MSVC (Windows)
       if: contains(matrix.os, 'windows')
       uses: ilammy/msvc-dev-cmd@v1
 
     - name: Make Project
+      env:
+        CMAKE_TOOLCHAIN_FILE: ../../qt6_static_64/lib/cmake/Qt6/qt.toolchain.cmake
       run: |
         mkdir build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
+        cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" ..
 
     - name: Build Project (Windows)
       if: contains(matrix.os, 'windows')
-      run: |
-        cd build
-        msbuild sane-break.sln /property:Configuration=Release -maxcpucount
+      working-directory: build
+      env:
+        CL: /MP # Build with multiple processes
+      run: msbuild sane-break.sln /property:Configuration=Release -maxcpucount
 
     - name: Build Project (macOS)
       if: contains(matrix.os, 'macos')
-      run: |
-        cd build
-        make -j3
+      working-directory: build
+      run: make -j3
 
     - name: Packing (Windows)
       if: contains(matrix.os, 'windows')
+      working-directory: build
       run: |
-        cd build
-        windeployqt --release --no-compiler-runtime --no-opengl-sw release
-        move release ..\
+        move Release ..
 
     - name: Packing (macOs)
       if: contains(matrix.os, 'macos')
       run: |
         mkdir release
-        cp -rf build/sane-break.app release/
-        cd release
-        macdeployqt sane-break.app -dmg
-        rm -rf sane-break.app
+        hdiutil create -volname "Sane Break" -srcfolder build/sane-break.app -ov release/sane-break.dmg
 
     - name: Create Artifact
       uses: actions/upload-artifact@v4
       with:
          name: "sane-break (${{matrix.os-caption}})"
-         path: ./release/
+         path: ./release/*
