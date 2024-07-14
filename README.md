@@ -28,3 +28,27 @@ Therefore, I created Sane Break to poilitely remind myself to have a break and a
 - Polite: First a blinking small window, you can finish the current task, and it grows fullscreen when you are AFK, forcing you to look away.
 - Small: No fancy stuff, just a small app.
 - Cross-platform: Supporting KDE Wayland, macOS, and Windows.
+
+## 🎬 Demo video
+
+https://github.com/user-attachments/assets/b6a15675-8122-4848-ba4e-44a687179394
+
+## Compiling from source
+
+For Linux users, currently the only way to install Sane Break is to compile it from source.
+Make sure you have `layer-shell-qt` and `kidletime` for Qt6 installed.
+```bash
+git clone https://github.com/AllanChain/sane-break
+cd sane-break
+mkdir build
+cd build
+cmake ..
+make
+```
+
+## To do list
+
+- Create AUR package
+- Support non-KDE and X11 environments
+- Auto postpone breaks when system idle for a long time
+- Stop breaks while in screen sharing?
