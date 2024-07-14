@@ -32,7 +32,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   titleLayout->setAlignment(Qt::AlignLeft);
 
   QLabel *imageLabel = new QLabel();
-  QPixmap pixmap = QPixmap(":/images/icon@192.png");
+  QPixmap pixmap = QPixmap(":/images/icon-256.png");
   pixmap.setDevicePixelRatio(2.0);
   imageLabel->setPixmap(pixmap);
   imageLabel->setAlignment(Qt::AlignCenter);
