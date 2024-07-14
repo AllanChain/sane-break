@@ -20,7 +20,7 @@ jobs:
     runs-on: ${{matrix.os}}
     steps:
     - uses: actions/checkout@v4
-    - uses: AllanChain/install-qt-static@main
+    - uses: AllanChain/install-qt-static@v6.7
     - uses: ilammy/msvc-dev-cmd@v1
       if: contains(matrix.os, 'windows')
 
