@@ -24,23 +24,12 @@ jobs:
     - uses: ilammy/msvc-dev-cmd@v1
       if: contains(matrix.os, 'windows')
 
-    - name: Make Project
+    - name: Build Project
       run: |
         mkdir build
         cd build
         qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" ..
-
-    - name: Build Project (Windows)
-      if: contains(matrix.os, 'windows')
-      working-directory: build
-      env:
-        CL: /MP # Build with multiple processes
-      run: msbuild sane-break.sln /property:Configuration=Release -maxcpucount
-
-    - name: Build Project (macOS)
-      if: contains(matrix.os, 'macos')
-      working-directory: build
-      run: make -j3
+        cmake --build . --parallel
 
     - name: Packing (Windows)
       if: contains(matrix.os, 'windows')
