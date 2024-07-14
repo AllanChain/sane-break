@@ -20,24 +20,15 @@ jobs:
     runs-on: ${{matrix.os}}
     steps:
     - uses: actions/checkout@v4
-
-    - name: Install Qt
-      run: |
-        cd ..
-        curl -LO https://github.com/AllanChain/static-qt6/releases/download/v6.7.2-2/qt-6.7.2-static-${{matrix.os-caption}}.zip
-        7z x qt-6.7.2-static-${{matrix.os-caption}}.zip
-
-    - name: Configure MSVC (Windows)
+    - uses: AllanChain/install-qt-static@main
+    - uses: ilammy/msvc-dev-cmd@v1
       if: contains(matrix.os, 'windows')
-      uses: ilammy/msvc-dev-cmd@v1
 
     - name: Make Project
-      env:
-        CMAKE_TOOLCHAIN_FILE: ../../qt6_static_64/lib/cmake/Qt6/qt.toolchain.cmake
       run: |
         mkdir build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" ..
+        qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" ..
 
     - name: Build Project (Windows)
       if: contains(matrix.os, 'windows')
