@@ -39,10 +39,24 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   imageLabel->setMargin(20);
   titleLayout->addWidget(imageLabel);
 
+  QVBoxLayout *titleTextLayout = new QVBoxLayout();
+  titleTextLayout->setAlignment(Qt::AlignCenter);
+
   QLabel *title = new QLabel("Sane Break");
   title->setProperty("title", "h1");
-  titleLayout->addWidget(title);
+  titleTextLayout->addWidget(title);
 
+  QLabel *copyrightLabel = new QLabel(
+      "<p>A polite break reminder to keep you sane.</p>"
+      "<p>Copyright (C) 2024 Allan Chain<br>Licensed under "
+      "<a href=https://spdx.org/licenses/GPL-3.0-or-later.html>"
+      "GPL-3.0-or-later</a><br>Source available at "
+      "<a href=https://github.com/AllanChain/sane-break>GitHub</a></p>");
+  copyrightLabel->setTextFormat(Qt::RichText);
+  copyrightLabel->setOpenExternalLinks(true);
+  titleTextLayout->addWidget(copyrightLabel);
+
+  titleLayout->addLayout(titleTextLayout);
   layout->addLayout(titleLayout);
 
   QLabel *titleSmall = new QLabel("Small Break");
