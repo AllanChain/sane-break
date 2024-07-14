@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./resources/images/icon.svg" width="200">
+  <img src="./resources/images/icon.svg" width="150" height="150">
 </p>
 <h1 align="center">Sane Break</h1>
 
