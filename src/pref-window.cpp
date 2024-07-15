@@ -4,6 +4,7 @@
 
 #include "pref-window.h"
 
+#include <QDesktopServices>
 #include <QGridLayout>
 #include <QIcon>
 #include <QLabel>
@@ -14,6 +15,7 @@
 #include <QVBoxLayout>
 
 #include "default-pref.h"
+#include "notice-window.h"
 
 PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   setWindowFlag(Qt::Dialog);
@@ -51,9 +53,15 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
       "<p>Copyright (C) 2024 Allan Chain<br>Licensed under "
       "<a href=https://spdx.org/licenses/GPL-3.0-or-later.html>"
       "GPL-3.0-or-later</a><br>Source available at "
-      "<a href=https://github.com/AllanChain/sane-break>GitHub</a></p>");
+      "<a href=https://github.com/AllanChain/sane-break>GitHub</a></p>"
+      "<p><a href=notice-window>Third party libraries notices</a></p>");
   copyrightLabel->setTextFormat(Qt::RichText);
-  copyrightLabel->setOpenExternalLinks(true);
+  connect(copyrightLabel, &QLabel::linkActivated, this, [=](QString url) {
+    if (url == QString("notice-window"))
+      (new NoticeWindow(this))->show();
+    else
+      QDesktopServices::openUrl(url);
+  });
   titleTextLayout->addWidget(copyrightLabel);
 
   titleLayout->addLayout(titleTextLayout);

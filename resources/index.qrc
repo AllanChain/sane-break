@@ -5,5 +5,6 @@
     <file>images/icon-lime.png</file>
     <file>images/icon-yellow.png</file>
     <file>style.css</file>
+    <file>NOTICE.md</file>
   </qresource>
 </RCC>
