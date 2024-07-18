@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(sane-break VERSION 0.1 LANGUAGES CXX)
+project(sane-break VERSION 0.0.2 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -12,6 +12,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
+configure_file(src/config.h.in config.h)
 file(GLOB PROJECT_SOURCES "src/*.cpp" "src/*.h" "resources/index.qrc")
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
@@ -34,7 +35,7 @@ qt_add_executable(sane-break
     ${PROJECT_SOURCES}
 )
 
-target_include_directories(sane-break PRIVATE "src")
+target_include_directories(sane-break PRIVATE "src" ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(sane-break PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
