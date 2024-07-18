@@ -41,22 +41,24 @@ jobs:
       if: contains(matrix.os, 'windows')
       run: |
         mkdir release
-        move build\Release\sane-break.exe release
+        7z a release/sane-break-windows.zip build\Release\sane-break.exe LICENSE
 
     - name: Packing (macOs)
       if: contains(matrix.os, 'macos')
       run: |
+        mv build/sane-break.app "build/Sane Break.app"
         mkdir release
         brew install create-dmg
         create-dmg \
           --volname "Sane Break" \
-          --hide-extension "sane-break.app" \
+          --hide-extension "Sane Break.app" \
           --window-size 600 450 \
           --icon-size 94 \
-          --icon "sane-break" 141 249 \
+          --icon "Sane Break" 141 249 \
           --app-drop-link 458 249 \
-          "release/sane-break.dmg" \
-          "build/sane-break.app"
+          --eula LICENSE \
+          "release/sane-break-macos.dmg" \
+          "build/Sane Break.app"
 
     - name: Create Artifact
       uses: actions/upload-artifact@v4
