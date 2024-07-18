@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Categories=Qt;Utility;
+Exec=sane-break
+Icon=sane-break
+Name=Sane Break
+Comment=A polite break reminder to keep you sane
