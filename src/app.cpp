@@ -47,8 +47,10 @@ void SaneBreakApp::tick() {
     icon->setIcon(secondsToNextBreak % 2 == 0
                       ? QIcon(":/images/icon-yellow.png")
                       : QIcon(":/images/icon-lime.png"));
-  } else if (secondsToNextBreak == 60) {
+  } else if (secondsToNextBreak <= 60) {
     icon->setIcon(QIcon(":/images/icon-lime.png"));
+  } else {
+    icon->setIcon(QIcon(":/images/icon.png"));
   }
   updateMenu();
 }
