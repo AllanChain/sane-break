@@ -12,11 +12,15 @@
 #include <QTimer>
 
 #include "default-pref.h"
+#include "idle-time.h"
 #include "pref-window.h"
 
 SaneBreakApp::SaneBreakApp() : QObject() {
   prefWindow = new PreferenceWindow();
   breakManager = new BreakWindowManager();
+  idleTimer = SystemIdleTime::createIdleTimer();
+  idleTimer->watchAccuracy = 5000;
+  idleTimer->minIdleTime = 5 * 60 * 1000;
   createMenu();
   icon = new QSystemTrayIcon(this);
   icon->setIcon(QIcon(":/images/icon.png"));
@@ -26,14 +30,20 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   countDownTimer = new QTimer();
   countDownTimer->setInterval(1000);
   connect(countDownTimer, &QTimer::timeout, this, &SaneBreakApp::tick);
-  connect(breakManager, &BreakWindowManager::timeout, this,
-          [this]() { countDownTimer->start(); });
+  connect(breakManager, &BreakWindowManager::timeout, this, [this]() {
+    if (!inPause) countDownTimer->start();
+  });
+  connect(idleTimer, &SystemIdleTime::idleStart, this,
+          &SaneBreakApp::pauseBreak);
+  connect(idleTimer, &SystemIdleTime::idleEnd, this,
+          &SaneBreakApp::resumeBreak);
 }
 SaneBreakApp::~SaneBreakApp() {}
 
 void SaneBreakApp::start() {
   icon->show();
   countDownTimer->start();
+  idleTimer->startWatching(NOTIFY_FIRST_IDLE);
 }
 
 void SaneBreakApp::tick() {
@@ -120,6 +130,25 @@ void SaneBreakApp::postpone(int secs) {
   } else {
     icon->setIcon(QIcon(":/images/icon.png"));
   }
+}
+
+void SaneBreakApp::pauseBreak() {
+  // Break after pause and resume is a small break
+  breakCycleCount = 1;
+  if (countDownTimer->isActive())
+    countDownTimer->stop();
+  else  // Stop current break if necessary
+    breakManager->close();
+  // But the timer will resume after current break end
+  // Therefore we set a flag and tell the event handler to pause
+  inPause = true;
+  // Reset remaining time
+  secondsToNextBreak = scheduleInterval();
+}
+
+void SaneBreakApp::resumeBreak() {
+  inPause = false;
+  countDownTimer->start();
 }
 
 int SaneBreakApp::smallBreaksBeforeBig() {

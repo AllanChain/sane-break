@@ -11,6 +11,7 @@
 #include <QSystemTrayIcon>
 #include <QTimer>
 
+#include "idle-time.h"
 #include "pref-window.h"
 #include "window-manager.h"
 
@@ -20,19 +21,23 @@ class SaneBreakApp : public QObject {
   SaneBreakApp();
   ~SaneBreakApp();
   void start();
+  void breakNow();
+  void postpone(int secs);
+  void pauseBreak();
+  void resumeBreak();
+  // Settings getters
   int scheduleInterval();
   int breakTime();
   int smallBreaksBeforeBig();
-  void breakNow();
-  void postpone(int secs);
 
  signals:
   void quit();
 
  private:
   PreferenceWindow *prefWindow;
-  QSystemTrayIcon *icon;
   BreakWindowManager *breakManager;
+  SystemIdleTime *idleTimer;
+  QSystemTrayIcon *icon;
   QTimer *countDownTimer;
   QMenu *menu;
   QAction *nextBreakAction;
@@ -42,6 +47,7 @@ class SaneBreakApp : public QObject {
   void tick();
   void updateMenu();
   int secondsToNextBreak;
+  bool inPause = false;
 };
 
 #endif  // SANE_TRAY_H
