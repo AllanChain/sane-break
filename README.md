@@ -27,7 +27,7 @@ Therefore, I created Sane Break to poilitely remind myself to have a break and a
 
 - Polite: First a blinking small window, you can finish the current task, and it grows fullscreen when you are AFK, forcing you to look away.
 - Small: No fancy stuff, just a small app.
-- Cross-platform: Supporting KDE Wayland, macOS, and Windows.
+- Cross-platform: Supporting KDE (Wayland and X11), macOS (Intel and ARM chips), and Windows.
 
 ## 🎬 Demo video
 
@@ -50,6 +50,5 @@ sudo make install
 ## To do list
 
 - Create AUR package
-- Support non-KDE and X11 environments
-- Auto postpone breaks when system idle for a long time
+- Support non-KDE environments
 - Stop breaks while in screen sharing?
