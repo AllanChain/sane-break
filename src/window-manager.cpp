@@ -36,7 +36,8 @@ BreakWindowManager::BreakWindowManager() : QObject() {
   connect(idleTimer, &SystemIdleTime::idleEnd, this,
           &BreakWindowManager::onIdleEnd);
 #ifdef LayerShellQt_FOUND
-  LayerShellQt::Shell::useLayerShell();
+  if (QGuiApplication::platformName() == "wayland")
+    LayerShellQt::Shell::useLayerShell();
 #endif
 }
 BreakWindowManager::~BreakWindowManager() {};
@@ -51,13 +52,14 @@ void BreakWindowManager::createWindows() {
     w->show();
     w->hide();
 #ifdef LayerShellQt_FOUND
-    if (auto window = LayerShellQt::Window::get(w->windowHandle())) {
-      using namespace LayerShellQt;
-      window->setCloseOnDismissed(true);
-      window->setLayer(Window::LayerOverlay);
-      window->setKeyboardInteractivity(Window::KeyboardInteractivityNone);
-      window->setAnchors(Window::AnchorTop);
-    }
+    if (QGuiApplication::platformName() == "wayland")
+      if (auto window = LayerShellQt::Window::get(w->windowHandle())) {
+        using namespace LayerShellQt;
+        window->setCloseOnDismissed(true);
+        window->setLayer(Window::LayerOverlay);
+        window->setKeyboardInteractivity(Window::KeyboardInteractivityNone);
+        window->setAnchors(Window::AnchorTop);
+      }
 #elif defined Q_OS_MACOS
     macSetAllWorkspaces(w->windowHandle());
 #endif
