@@ -18,7 +18,7 @@ class IdleTimeKDE : public SystemIdleTime {
   Q_OBJECT
  public:
   IdleTimeKDE();
-  void startWatching();
+  void startWatching(WatchOption option);
   void stopWatching();
 
  private:

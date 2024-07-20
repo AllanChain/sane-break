@@ -19,12 +19,19 @@
 
 IdleTimeWindows::IdleTimeWindows() : SystemIdleTime() {
   timer = new QTimer();
-  timer->setInterval(500);
-  isIdle = true;
   connect(timer, &QTimer::timeout, this, &IdleTimeWindows::tick);
 }
 
-void IdleTimeWindows::startWatching() {
+void IdleTimeWindows::startWatching(WatchOption option) {
+  switch (option) {
+    case NOTIFY_FIRST_IDLE:
+      isIdle = false;
+      break;
+    case NOTIFY_FIRST_RESUME:
+      isIdle = true;
+      break;
+  }
+  timer->setInterval(watchAccuracy);
   timer->start();
   tick();
 }
@@ -33,10 +40,10 @@ void IdleTimeWindows::stopWatching() { timer->stop(); }
 
 void IdleTimeWindows::tick() {
   int idleTime = systemIdleTime();
-  if (idleTime < timer->interval() && isIdle) {
+  if (idleTime < minIdleTime && isIdle) {
     isIdle = false;
     emit idleEnd();
-  } else if (idleTime > timer->interval() && !isIdle) {
+  } else if (idleTime > minIdleTime && !isIdle) {
     isIdle = true;
     emit idleStart();
   }

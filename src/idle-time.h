@@ -8,11 +8,15 @@
 #include <QObject>
 #include <QTimer>
 
+enum WatchOption { NOTIFY_FIRST_IDLE, NOTIFY_FIRST_RESUME };
+
 class SystemIdleTime : public QObject {
   Q_OBJECT
  public:
-  virtual void startWatching() {};
+  virtual void startWatching(WatchOption option) {};
   virtual void stopWatching() {};
+  int watchAccuracy = 500;  // How often we watch idle time (ms)
+  int minIdleTime = 2000;   // How long will we consider idle (ms)
   static SystemIdleTime* createIdleTimer();
  signals:
   void idleStart();

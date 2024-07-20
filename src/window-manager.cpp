@@ -83,7 +83,7 @@ void BreakWindowManager::show(int breakTime) {
 
   for (auto w : std::as_const(windows)) w->start(breakTime);
   countdownTimer->start();
-  idleTimer->startWatching();
+  idleTimer->startWatching(NOTIFY_FIRST_RESUME);
 }
 
 void BreakWindowManager::close() {

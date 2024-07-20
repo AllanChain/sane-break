@@ -16,13 +16,20 @@ IdleTimeKDE::IdleTimeKDE() : SystemIdleTime() {
   });
   connect(KIdleTime::instance(), &KIdleTime::resumingFromIdle, this, [this]() {
     emit idleEnd();
-    if (isWatching) KIdleTime::instance()->addIdleTimeout(2000);
+    if (isWatching) KIdleTime::instance()->addIdleTimeout(minIdleTime);
   });
 }
 
-void IdleTimeKDE::startWatching() {
+void IdleTimeKDE::startWatching(WatchOption option) {
   isWatching = true;
-  KIdleTime::instance()->catchNextResumeEvent();
+  switch (option) {
+    case NOTIFY_FIRST_IDLE:
+      KIdleTime::instance()->addIdleTimeout(minIdleTime);
+      break;
+    case NOTIFY_FIRST_RESUME:
+      KIdleTime::instance()->catchNextResumeEvent();
+      break;
+  }
 }
 
 void IdleTimeKDE::stopWatching() { isWatching = false; }

@@ -23,7 +23,7 @@ class IdleTimeWindows : public SystemIdleTime {
   Q_OBJECT
  public:
   IdleTimeWindows();
-  void startWatching();
+  void startWatching(WatchOption option);
   void stopWatching();
 
  private:

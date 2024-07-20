@@ -23,7 +23,7 @@ class IdleTimeDarwin : public SystemIdleTime {
   Q_OBJECT
  public:
   IdleTimeDarwin();
-  void startWatching();
+  void startWatching(WatchOption option);
   void stopWatching();
 
  private:

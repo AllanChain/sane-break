@@ -19,12 +19,19 @@
 
 IdleTimeDarwin::IdleTimeDarwin() : SystemIdleTime() {
   timer = new QTimer();
-  timer->setInterval(500);
-  isIdle = true;
   connect(timer, &QTimer::timeout, this, &IdleTimeDarwin::tick);
 }
 
-void IdleTimeDarwin::startWatching() {
+void IdleTimeDarwin::startWatching(WatchOption option) {
+  switch (option) {
+    case NOTIFY_FIRST_IDLE:
+      isIdle = false;
+      break;
+    case NOTIFY_FIRST_RESUME:
+      isIdle = true;
+      break;
+  }
+  timer->setInterval(watchAccuracy);
   timer->start();
   tick();
 }
@@ -33,10 +40,10 @@ void IdleTimeDarwin::stopWatching() { timer->stop(); }
 
 void IdleTimeDarwin::tick() {
   int idleTime = systemIdleTime();
-  if (idleTime == 0 && isIdle) {
+  if (idleTime < minIdleTime && isIdle) {
     isIdle = false;
     emit idleEnd();
-  } else if (idleTime > 0 && !isIdle) {
+  } else if (idleTime > minIdleTime && !isIdle) {
     isIdle = true;
     emit idleStart();
   }
@@ -58,8 +65,8 @@ int systemIdleTime() {
         if (obj) {
           int64_t nanoseconds = 0;
           if (CFNumberGetValue(obj, kCFNumberSInt64Type, &nanoseconds)) {
-            // Divide by 10^9 to convert from nanoseconds to seconds.
-            idlesecs = (nanoseconds >> 30);
+            // Divide by 10^9 to convert from nanoseconds to ms
+            idlesecs = (nanoseconds >> 20);
           }
         }
         CFRelease(dict);
