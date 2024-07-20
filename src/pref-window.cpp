@@ -140,6 +140,28 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
             bigBreakForLabel->setText(QString("%1 sec").arg(value));
           });
 
+  QLabel *titleGeneral = new QLabel("General");
+  titleGeneral->setProperty("title", "h2");
+  layout->addWidget(titleGeneral);
+
+  pauseOnIdleSlider = new QSlider(Qt::Horizontal);
+  pauseOnIdleSlider->setMaximum(60);
+  pauseOnIdleSlider->setMinimum(1);
+  pauseOnIdleSlider->setTickPosition(QSlider::TicksBelow);
+
+  QGridLayout *generalForm = new QGridLayout();
+
+  generalForm->addWidget(new QLabel("Pause break after idle for"));
+  generalForm->addWidget(pauseOnIdleSlider, 0, 1);
+  QLabel *pauseOnIdleLabel = new QLabel();
+  generalForm->addWidget(pauseOnIdleLabel, 0, 2);
+  connect(pauseOnIdleSlider, &QSlider::valueChanged, this,
+          [pauseOnIdleLabel](int value) {
+            pauseOnIdleLabel->setText(QString("%1 min").arg(value));
+          });
+
+  layout->addLayout(generalForm);
+
   QHBoxLayout *bottomButtonLayout = new QHBoxLayout();
   QPushButton *resetButton = new QPushButton("Reset");
   connect(resetButton, &QPushButton::pressed, this,
@@ -147,8 +169,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   bottomButtonLayout->addWidget(resetButton);
   bottomButtonLayout->addStretch();
   QPushButton *saveButton = new QPushButton("Save");
-  connect(saveButton, &QPushButton::pressed, this,
-          &PreferenceWindow::saveSettings);
+  connect(saveButton, &QPushButton::pressed, this, &PreferenceWindow::close);
   bottomButtonLayout->addWidget(saveButton);
   layout->addLayout(bottomButtonLayout);
 }
@@ -163,6 +184,10 @@ void PreferenceWindow::loadSettings() {
       settings.value("break/big-after", SANE_BREAK_BIG_AFTER).toInt());
   bigBreakForSlider->setValue(
       settings.value("break/big-for", SANE_BREAK_BIG_FOR).toInt());
+  pauseOnIdleSlider->setValue(
+      settings.value("break/pause-on-idle", SANE_BREAK_PAUSE_ON_IDLE_FOR)
+          .toInt() /
+      60);
 }
 
 void PreferenceWindow::saveSettings() {
@@ -171,6 +196,7 @@ void PreferenceWindow::saveSettings() {
   settings.setValue("break/small-for", smallBreakForSlider->value());
   settings.setValue("break/big-after", bigBreakAfterSlider->value());
   settings.setValue("break/big-for", bigBreakForSlider->value());
+  settings.setValue("break/pause-on-idle", pauseOnIdleSlider->value() * 60);
 }
 
 void PreferenceWindow::closeEvent(QCloseEvent *event) {

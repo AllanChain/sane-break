@@ -20,7 +20,7 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   breakManager = new BreakWindowManager();
   idleTimer = SystemIdleTime::createIdleTimer();
   idleTimer->watchAccuracy = 5000;
-  idleTimer->minIdleTime = 5 * 60 * 1000;
+  idleTimer->minIdleTime = pauseOnIdleFor() * 1000;
   createMenu();
   icon = new QSystemTrayIcon(this);
   icon->setIcon(QIcon(":/images/icon.png"));
@@ -170,4 +170,10 @@ int SaneBreakApp::breakTime() {
 int SaneBreakApp::scheduleInterval() {
   QSettings settings;
   return settings.value("break/small-every", SANE_BREAK_SMALL_EVERY).toInt();
+}
+
+int SaneBreakApp::pauseOnIdleFor() {
+  QSettings settings;
+  return settings.value("break/pause-on-idle", SANE_BREAK_PAUSE_ON_IDLE_FOR)
+      .toInt();
 }

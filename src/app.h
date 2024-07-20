@@ -29,6 +29,7 @@ class SaneBreakApp : public QObject {
   int scheduleInterval();
   int breakTime();
   int smallBreaksBeforeBig();
+  int pauseOnIdleFor();
 
  signals:
   void quit();
