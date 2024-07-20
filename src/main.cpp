@@ -2,9 +2,6 @@
 // Copyright (C) 2024 Allan Chain
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifdef __linux
-#include <LayerShellQt/Shell>
-#endif
 #include <QApplication>
 #include <QFile>
 #include <QSettings>

@@ -12,7 +12,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
-configure_file(src/config.h.in config.h)
 file(GLOB PROJECT_SOURCES "src/*.cpp" "src/*.h" "resources/index.qrc")
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
@@ -42,10 +41,12 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
     list(APPEND CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
     find_package(KF6 REQUIRED COMPONENTS IdleTime)
-    find_package(LayerShellQt REQUIRED)
     target_link_libraries(sane-break PRIVATE KF6::IdleTime)
-    target_link_libraries(sane-break PUBLIC LayerShellQt::Interface)
     add_subdirectory(packaging/linux/kde)
+    find_package(LayerShellQt REQUIRED)
+    if(LayerShellQt_FOUND)
+        target_link_libraries(sane-break PUBLIC LayerShellQt::Interface)
+    endif()
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     find_library(IOKit NAMES IOKit)
     find_library(CoreFoundation NAMES CoreFoundation)
@@ -64,6 +65,7 @@ set_target_properties(sane-break PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
+configure_file(src/config.h.in config.h)
 include(GNUInstallDirs)
 install(TARGETS sane-break
     BUNDLE DESTINATION .

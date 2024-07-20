@@ -1,1 +1,2 @@
 #cmakedefine PROJECT_VERSION "@CMAKE_PROJECT_VERSION@"
+#cmakedefine LayerShellQt_FOUND

@@ -8,7 +8,9 @@
 
 #include <utility>
 
-#ifdef Q_OS_LINUX
+#include "config.h"
+
+#ifdef LayerShellQt_FOUND
 #include <LayerShellQt/Shell>
 #include <LayerShellQt/Window>
 #elif defined Q_OS_MACOS
@@ -33,7 +35,7 @@ BreakWindowManager::BreakWindowManager() : QObject() {
           &BreakWindowManager::onIdleStart);
   connect(idleTimer, &SystemIdleTime::idleEnd, this,
           &BreakWindowManager::onIdleEnd);
-#ifdef Q_OS_LINUX
+#ifdef LayerShellQt_FOUND
   LayerShellQt::Shell::useLayerShell();
 #endif
 }
@@ -48,7 +50,7 @@ void BreakWindowManager::createWindows() {
     w->initSize(screen);
     w->show();
     w->hide();
-#ifdef Q_OS_LINUX
+#ifdef LayerShellQt_FOUND
     if (auto window = LayerShellQt::Window::get(w->windowHandle())) {
       using namespace LayerShellQt;
       window->setCloseOnDismissed(true);
