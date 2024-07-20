@@ -40,17 +40,14 @@ void SaneBreakApp::tick() {
   secondsToNextBreak--;
   if (secondsToNextBreak <= 0) {
     breakNow();
-    icon->setIcon(QIcon(":/images/icon.png"));
     return;
   }
   if (secondsToNextBreak <= 10) {
     icon->setIcon(secondsToNextBreak % 2 == 0
                       ? QIcon(":/images/icon-yellow.png")
                       : QIcon(":/images/icon-lime.png"));
-  } else if (secondsToNextBreak <= 60) {
+  } else if (secondsToNextBreak == 60) {
     icon->setIcon(QIcon(":/images/icon-lime.png"));
-  } else {
-    icon->setIcon(QIcon(":/images/icon.png"));
   }
   updateMenu();
 }
@@ -107,12 +104,22 @@ void SaneBreakApp::breakNow() {
   countDownTimer->stop();
   breakManager->show(breakTime());
   breakCycleCount++;
+  // Reset icon
+  icon->setIcon(QIcon(":/images/icon.png"));
 }
 
 void SaneBreakApp::postpone(int secs) {
   secondsToNextBreak += secs;
-  breakCycleCount = 0;  // Break after postpone is a big break
+  // Break after postpone is a big break
+  breakCycleCount = 0;
+  // Stop current break if necessary
   if (!countDownTimer->isActive()) breakManager->close();
+  // Reset icon
+  if (secondsToNextBreak <= 60) {
+    icon->setIcon(QIcon(":/images/icon-lime.png"));
+  } else {
+    icon->setIcon(QIcon(":/images/icon.png"));
+  }
 }
 
 int SaneBreakApp::smallBreaksBeforeBig() {
