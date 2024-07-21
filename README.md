@@ -25,9 +25,14 @@ Therefore, I created Sane Break to poilitely remind myself to have a break and a
 
 ## 🔮 Features
 
-- Polite: First a blinking small window, you can finish the current task, and it grows fullscreen when you are AFK, forcing you to look away.
+- No mindless skips, just a polite reminder
+  - Just a small flashing window reminding you to have a break, and you can choose to finish the current task.
+  - When you are away from keyboard, it will grow full screen and you are encouraged to look away.
+  - If you continue working for too long, it will force fullscreen until break ends.
+- Flexible: Automatic pause when idle, and postpone as you want.
 - Small: No fancy stuff, just a small app.
 - Cross-platform: Supporting KDE (Wayland and X11), macOS (Intel and ARM chips), and Windows.
+- Easy to develope: Written in C++, it is easy to integrate with system API.
 
 ## 🎬 Demo video
 
@@ -35,7 +40,7 @@ https://github.com/user-attachments/assets/b6a15675-8122-4848-ba4e-44a687179394
 
 ## Compiling from source
 
-This app only supports KDE on Linux.
+Right now, this app only supports KDE on Linux.
 For Linux users, you are strongly encouraged to install Sane Break by comping from source.
 Make sure you have `kidletime` and `layer-shell-qt` (required for Wayland support) for Qt6 installed.
 ```bash
