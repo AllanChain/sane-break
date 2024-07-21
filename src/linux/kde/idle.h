@@ -23,6 +23,7 @@ class IdleTimeKDE : public SystemIdleTime {
 
  private:
   bool isWatching = false;
+  int currentId = -1;
 };
 
 #endif  // SANE_IDLE_KDE_H

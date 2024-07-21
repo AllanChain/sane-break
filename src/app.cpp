@@ -148,6 +148,7 @@ void SaneBreakApp::pauseBreak() {
 }
 
 void SaneBreakApp::resumeBreak() {
+  if (!inPause) return;
   inPause = false;
   countDownTimer->start();
   icon->setIcon(QIcon(":/images/icon.png"));
