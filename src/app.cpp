@@ -144,11 +144,13 @@ void SaneBreakApp::pauseBreak() {
   inPause = true;
   // Reset remaining time
   secondsToNextBreak = scheduleInterval();
+  icon->setIcon(QIcon(":/images/icon-gray.png"));
 }
 
 void SaneBreakApp::resumeBreak() {
   inPause = false;
   countDownTimer->start();
+  icon->setIcon(QIcon(":/images/icon.png"));
 }
 
 int SaneBreakApp::smallBreaksBeforeBig() {
