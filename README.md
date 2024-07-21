@@ -2,6 +2,13 @@
   <img src="./resources/images/icon.svg" width="150" height="150">
 </p>
 <h1 align="center">Sane Break</h1>
+<p align=center>
+  <a href="https://github.com/AllanChain/sane-break/releases">
+    <img src="https://img.shields.io/github/v/release/AllanChain/sane-break" alt="GitHub release">
+  </a>
+  <img src="https://img.shields.io/badge/built_with-Qt_6-Qt" alt="Built with Qt 6">
+  <img src="https://img.shields.io/github/downloads/AllanChain/sane-break/total" alt="Total downloads">
+</p>
 
 Sane break is a polite break reminder to keep you sane.
 
