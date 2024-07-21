@@ -60,6 +60,16 @@ make
 sudo make install
 ```
 
+## FAQ
+
+### What if I really want to skip break?
+
+Generally, you can quit the app via tray icon right away after the break starts.
+However, if you really want to quit when Sane Break is in fullscreen, you can kill the app via system command line. For example:
+- KDE: Enable KRunner with <kbd>Alt</kbd> + <kbd>Space</kbd> and run `killall sane-break`
+- macOS: Enable Spotlight with <kbd>Cmd</kbd> + <kbd>Space</kbd> and run `killall sane-break`
+- Windows: Press <kbd>Win</kbd> + <kbd>R</kbd> and run `taskkill /IM sane-break /F`
+
 ## To do list
 
 - Create AUR package
