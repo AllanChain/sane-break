@@ -13,13 +13,3 @@ BreakWindow QProgressBar {
 BreakWindow QProgressBar::chunk {
   background: #eceff4;
 }
-
-PreferenceWindow QLabel[title="h1"] {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-PreferenceWindow QLabel[title="h2"] {
-  font-size: 18px;
-  font-weight: bold;
-}

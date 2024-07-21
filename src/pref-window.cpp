@@ -45,9 +45,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   QVBoxLayout *titleTextLayout = new QVBoxLayout();
   titleTextLayout->setAlignment(Qt::AlignCenter);
 
-  QLabel *title = new QLabel("Sane Break");
-  title->setProperty("title", "h1");
-  titleTextLayout->addWidget(title);
+  titleTextLayout->addWidget(new QLabel("<h1>Sane Break</h1>"));
 
   QLabel *copyrightLabel = new QLabel(
       QString("<p>A polite break reminder to keep you sane.</p>"
@@ -69,9 +67,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   titleLayout->addLayout(titleTextLayout);
   layout->addLayout(titleLayout);
 
-  QLabel *titleSmall = new QLabel("Small Break");
-  titleSmall->setProperty("title", "h2");
-  layout->addWidget(titleSmall);
+  layout->addWidget(new QLabel("<h3>Small Break</h3>"));
 
   QGridLayout *smallBreakForm = new QGridLayout();
   layout->addLayout(smallBreakForm);
@@ -103,9 +99,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
             smallBreakForLabel->setText(QString("%1 sec").arg(value));
           });
 
-  QLabel *titleBig = new QLabel("Big Break");
-  titleBig->setProperty("title", "h2");
-  layout->addWidget(titleBig);
+  layout->addWidget(new QLabel("<h3>Big Break</h3>"));
 
   QGridLayout *bigBreakForm = new QGridLayout();
   layout->addLayout(bigBreakForm);
@@ -140,9 +134,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
             bigBreakForLabel->setText(QString("%1 sec").arg(value));
           });
 
-  QLabel *titleGeneral = new QLabel("General");
-  titleGeneral->setProperty("title", "h2");
-  layout->addWidget(titleGeneral);
+  layout->addWidget(new QLabel("<h3>General</h3>"));
 
   pauseOnIdleSlider = new QSlider(Qt::Horizontal);
   pauseOnIdleSlider->setMaximum(60);
