@@ -30,9 +30,11 @@ class BreakWindowManager : public QObject {
   int totalTime;
   QList<BreakWindow *> windows;
   QTimer *countdownTimer;
+  QTimer *forceBreakTimer;
   SystemIdleTime *idleTimer;
   void createWindows();
   void tick();
+  void forceBreak();
   void onIdleStart();
   void onIdleEnd();
 };

@@ -29,8 +29,15 @@
 BreakWindowManager::BreakWindowManager() : QObject() {
   countdownTimer = new QTimer(this);
   countdownTimer->setInterval(1000);
-  idleTimer = SystemIdleTime::createIdleTimer();
   connect(countdownTimer, &QTimer::timeout, this, &BreakWindowManager::tick);
+
+  forceBreakTimer = new QTimer(this);
+  forceBreakTimer->setInterval(30000);
+  forceBreakTimer->setSingleShot(true);
+  connect(forceBreakTimer, &QTimer::timeout, this,
+          &BreakWindowManager::forceBreak);
+
+  idleTimer = SystemIdleTime::createIdleTimer();
   connect(idleTimer, &SystemIdleTime::idleStart, this,
           &BreakWindowManager::onIdleStart);
   connect(idleTimer, &SystemIdleTime::idleEnd, this,
@@ -40,6 +47,7 @@ BreakWindowManager::BreakWindowManager() : QObject() {
     LayerShellQt::Shell::useLayerShell();
 #endif
 }
+
 BreakWindowManager::~BreakWindowManager() {};
 
 void BreakWindowManager::createWindows() {
@@ -80,18 +88,16 @@ void BreakWindowManager::show(int breakTime) {
                          for (auto w : std::as_const(windows))
                            w->setFullScreen();
                      });
-  QTimer::singleShot(30 * 1000, this, [=]() {  // Force break
-    isForceBreak = true;
-    for (auto w : std::as_const(windows)) w->setFullScreen();
-  });
 
   for (auto w : std::as_const(windows)) w->start(breakTime);
   countdownTimer->start();
+  forceBreakTimer->start();
   idleTimer->startWatching(NOTIFY_FIRST_RESUME);
 }
 
 void BreakWindowManager::close() {
   countdownTimer->stop();
+  forceBreakTimer->stop();
   for (auto w : std::as_const(windows)) {
     w->close();
     w->deleteLater();
@@ -110,6 +116,11 @@ void BreakWindowManager::tick() {
     for (auto w : std::as_const(windows)) w->setTime(remainingTime);
   }
   if (remainingTime <= 0) return close();
+}
+
+void BreakWindowManager::forceBreak() {
+  isForceBreak = true;
+  for (auto w : std::as_const(windows)) w->setFullScreen();
 }
 
 void BreakWindowManager::onIdleStart() {
