@@ -135,21 +135,34 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
           });
 
   layout->addWidget(new QLabel("<h3>General</h3>"));
+  QGridLayout *generalForm = new QGridLayout();
 
   pauseOnIdleSlider = new QSlider(Qt::Horizontal);
   pauseOnIdleSlider->setMaximum(60);
   pauseOnIdleSlider->setMinimum(1);
   pauseOnIdleSlider->setTickPosition(QSlider::TicksBelow);
 
-  QGridLayout *generalForm = new QGridLayout();
-
-  generalForm->addWidget(new QLabel("Pause break after idle for"));
+  generalForm->addWidget(new QLabel("Pause on idle for"), 0, 0);
   generalForm->addWidget(pauseOnIdleSlider, 0, 1);
   QLabel *pauseOnIdleLabel = new QLabel();
   generalForm->addWidget(pauseOnIdleLabel, 0, 2);
   connect(pauseOnIdleSlider, &QSlider::valueChanged, this,
           [pauseOnIdleLabel](int value) {
             pauseOnIdleLabel->setText(QString("%1 min").arg(value));
+          });
+
+  resetOnIdleSlider = new QSlider(Qt::Horizontal);
+  resetOnIdleSlider->setMaximum(60);
+  resetOnIdleSlider->setMinimum(1);
+  resetOnIdleSlider->setTickPosition(QSlider::TicksBelow);
+
+  generalForm->addWidget(new QLabel("Reset on idle for"), 1, 0);
+  generalForm->addWidget(resetOnIdleSlider, 1, 1);
+  QLabel *resetOnIdleLabel = new QLabel();
+  generalForm->addWidget(resetOnIdleLabel, 1, 2);
+  connect(resetOnIdleSlider, &QSlider::valueChanged, this,
+          [resetOnIdleLabel](int value) {
+            resetOnIdleLabel->setText(QString("%1 min").arg(value));
           });
 
   layout->addLayout(generalForm);
@@ -180,6 +193,10 @@ void PreferenceWindow::loadSettings() {
       settings.value("break/pause-on-idle", SANE_BREAK_PAUSE_ON_IDLE_FOR)
           .toInt() /
       60);
+  resetOnIdleSlider->setValue(
+      settings.value("break/reset-on-idle", SANE_BREAK_RESET_ON_IDLE_FOR)
+          .toInt() /
+      60);
 }
 
 void PreferenceWindow::saveSettings() {
@@ -189,6 +206,7 @@ void PreferenceWindow::saveSettings() {
   settings.setValue("break/big-after", bigBreakAfterSlider->value());
   settings.setValue("break/big-for", bigBreakForSlider->value());
   settings.setValue("break/pause-on-idle", pauseOnIdleSlider->value() * 60);
+  settings.setValue("break/reset-on-idle", resetOnIdleSlider->value() * 60);
 }
 
 void PreferenceWindow::closeEvent(QCloseEvent *event) {

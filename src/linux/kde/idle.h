@@ -8,6 +8,7 @@
 #ifndef SANE_IDLE_KDE_H
 #define SANE_IDLE_KDE_H
 
+#include <QElapsedTimer>
 #include <QTimer>
 
 #include "idle-time.h"
@@ -22,6 +23,7 @@ class IdleTimeKDE : public SystemIdleTime {
   void stopWatching();
 
  private:
+  QElapsedTimer *elapseTimer;
   bool isWatching = false;
   int currentId = -1;
 };

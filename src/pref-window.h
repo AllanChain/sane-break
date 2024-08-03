@@ -24,5 +24,6 @@ class PreferenceWindow : public QMainWindow {
   QSlider *bigBreakAfterSlider;
   QSlider *bigBreakForSlider;
   QSlider *pauseOnIdleSlider;
+  QSlider *resetOnIdleSlider;
 };
 #endif  // SANE_PREFERENCES_H

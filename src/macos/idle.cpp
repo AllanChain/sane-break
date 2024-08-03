@@ -39,14 +39,15 @@ void IdleTimeDarwin::startWatching(WatchOption option) {
 void IdleTimeDarwin::stopWatching() { timer->stop(); }
 
 void IdleTimeDarwin::tick() {
-  int idleTime = systemIdleTime();
-  if (idleTime < minIdleTime && isIdle) {
+  int currentIdleTime = systemIdleTime();
+  if (currentIdleTime < minIdleTime && isIdle) {
     isIdle = false;
-    emit idleEnd();
-  } else if (idleTime > minIdleTime && !isIdle) {
+    emit idleEnd(idleTime);
+  } else if (currentIdleTime > minIdleTime && !isIdle) {
     isIdle = true;
     emit idleStart();
   }
+  idleTime = currentIdleTime;
 }
 
 int systemIdleTime() {

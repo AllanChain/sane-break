@@ -25,11 +25,13 @@ class SaneBreakApp : public QObject {
   void postpone(int secs);
   void pauseBreak();
   void resumeBreak();
+  void resetBreak();
   // Settings getters
   int scheduleInterval();
   int breakTime();
   int smallBreaksBeforeBig();
   int pauseOnIdleFor();
+  int resetOnIdleFor();
 
  signals:
   void quit();
@@ -38,6 +40,7 @@ class SaneBreakApp : public QObject {
   PreferenceWindow *prefWindow;
   BreakWindowManager *breakManager;
   SystemIdleTime *idleTimer;
+  SleepMonitor *sleepMonitor;
   QSystemTrayIcon *icon;
   QTimer *countDownTimer;
   QMenu *menu;

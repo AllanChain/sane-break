@@ -30,6 +30,7 @@ class IdleTimeWindows : public SystemIdleTime {
   QTimer* timer;
   void tick();
   bool isIdle;
+  int idleTime;
 };
 
 #endif  // SANE_IDLE_WINDOWS_H

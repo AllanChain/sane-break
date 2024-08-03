@@ -10,22 +10,28 @@
 #include "idle.h"
 
 IdleTimeKDE::IdleTimeKDE() : SystemIdleTime() {
+  elapseTimer = new QElapsedTimer();
   connect(KIdleTime::instance(),
           qOverload<int, int>(&KIdleTime::timeoutReached), this,
           [this](int id, int ms) {
             if (!isWatching || id != currentId) return;
             emit idleStart();
             KIdleTime::instance()->catchNextResumeEvent();
+            elapseTimer->start();
           });
   connect(KIdleTime::instance(), &KIdleTime::resumingFromIdle, this, [this]() {
     if (!isWatching) return;
-    emit idleEnd();
+    int elapsedTime = elapseTimer->elapsed();
+    // If this is not the first resume event
+    if (currentId != -1) elapsedTime += minIdleTime;
+    emit idleEnd(elapsedTime);
     currentId = KIdleTime::instance()->addIdleTimeout(minIdleTime);
   });
 }
 
 void IdleTimeKDE::startWatching(WatchOption option) {
   isWatching = true;
+  elapseTimer->start();
   switch (option) {
     case NOTIFY_FIRST_IDLE:
       currentId = KIdleTime::instance()->addIdleTimeout(minIdleTime);

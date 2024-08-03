@@ -39,14 +39,15 @@ void IdleTimeWindows::startWatching(WatchOption option) {
 void IdleTimeWindows::stopWatching() { timer->stop(); }
 
 void IdleTimeWindows::tick() {
-  int idleTime = systemIdleTime();
-  if (idleTime < minIdleTime && isIdle) {
+  int currentIdleTime = systemIdleTime();
+  if (currentIdleTime < minIdleTime && isIdle) {
     isIdle = false;
-    emit idleEnd();
-  } else if (idleTime > minIdleTime && !isIdle) {
+    emit idleEnd(idleTime);
+  } else if (currentIdleTime > minIdleTime && !isIdle) {
     isIdle = true;
     emit idleStart();
   }
+  idleTime = currentIdleTime;
 }
 
 int systemIdleTime() {

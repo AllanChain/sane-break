@@ -23,3 +23,19 @@ SystemIdleTime* SystemIdleTime::createIdleTimer() {
   return new IdleTimeWindows();
 #endif
 }
+
+SleepMonitor::SleepMonitor() {
+  timer = new QTimer(this);
+  timer->setInterval(watchAccuracy);
+  connect(timer, &QTimer::timeout, this, &SleepMonitor::tick);
+  elapsedTimer = new QElapsedTimer();
+  elapsedTimer->start();
+}
+
+void SleepMonitor::tick() {
+  int elapsedTime = elapsedTimer->elapsed();
+  if (elapsedTime > 2 * watchAccuracy) {
+    emit sleepEnd(elapsedTime);
+  }
+  elapsedTimer->restart();
+}
