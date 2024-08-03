@@ -11,23 +11,23 @@
 #include <QSystemTrayIcon>
 #include <QTimer>
 
-#include "default-pref.h"
 #include "idle-time.h"
 #include "pref-window.h"
+#include "preferences.h"
 
 SaneBreakApp::SaneBreakApp() : QObject() {
   prefWindow = new PreferenceWindow();
   breakManager = new BreakWindowManager();
   idleTimer = SystemIdleTime::createIdleTimer();
   idleTimer->watchAccuracy = 5000;
-  idleTimer->minIdleTime = pauseOnIdleFor() * 1000;
+  idleTimer->minIdleTime = SanePreferences::pauseOnIdleFor() * 1000;
   sleepMonitor = new SleepMonitor();
   createMenu();
   icon = new QSystemTrayIcon(this);
   icon->setIcon(QIcon(":/images/icon.png"));
   icon->setContextMenu(menu);
 
-  secondsToNextBreak = scheduleInterval();
+  secondsToNextBreak = SanePreferences::smallEvery();
   countDownTimer = new QTimer();
   countDownTimer->setInterval(1000);
   connect(countDownTimer, &QTimer::timeout, this, &SaneBreakApp::tick);
@@ -38,10 +38,10 @@ SaneBreakApp::SaneBreakApp() : QObject() {
           &SaneBreakApp::pauseBreak);
   connect(idleTimer, &SystemIdleTime::idleEnd, this, [this](int ms) {
     resumeBreak();
-    if (ms > resetOnIdleFor() * 1000) resetBreak();
+    if (ms > SanePreferences::resetOnIdleFor() * 1000) resetBreak();
   });
   connect(sleepMonitor, &SleepMonitor::sleepEnd, this, [this](int ms) {
-    if (ms > resetOnIdleFor() * 1000) resetBreak();
+    if (ms > SanePreferences::resetOnIdleFor() * 1000) resetBreak();
   });
 }
 SaneBreakApp::~SaneBreakApp() {}
@@ -115,7 +115,7 @@ void SaneBreakApp::createMenu() {
 }
 
 void SaneBreakApp::breakNow() {
-  secondsToNextBreak = scheduleInterval();
+  secondsToNextBreak = SanePreferences::smallEvery();
   updateMenu();
   countDownTimer->stop();
   breakManager->show(breakTime());
@@ -149,7 +149,7 @@ void SaneBreakApp::pauseBreak() {
   // Therefore we set a flag and tell the event handler to pause
   inPause = true;
   // Reset remaining time
-  secondsToNextBreak = scheduleInterval();
+  secondsToNextBreak = SanePreferences::smallEvery();
   icon->setIcon(QIcon(":/images/icon-gray.png"));
 }
 
@@ -166,40 +166,20 @@ void SaneBreakApp::resetBreak() {
   else if (!countDownTimer->isActive())
     breakManager->close();  // Stop current break if necessary
   breakCycleCount = 1;
-  secondsToNextBreak = scheduleInterval();
+  secondsToNextBreak = SanePreferences::smallEvery();
   updateMenu();
   icon->setIcon(QIcon(":/images/icon.png"));
 }
 
 int SaneBreakApp::smallBreaksBeforeBig() {
   QSettings settings;
-  int breakEvery =
-      settings.value("break/big-after", SANE_BREAK_BIG_AFTER).toInt();
+  int breakEvery = SanePreferences::bigAfter();
   breakCycleCount %= breakEvery;
   return (breakEvery - breakCycleCount) % breakEvery;
 }
 
 int SaneBreakApp::breakTime() {
   QSettings settings;
-  if (smallBreaksBeforeBig() == 0)
-    return settings.value("break/big-for", SANE_BREAK_BIG_FOR).toInt();
-  else
-    return settings.value("break/small-for", SANE_BREAK_SMALL_FOR).toInt();
-}
-
-int SaneBreakApp::scheduleInterval() {
-  QSettings settings;
-  return settings.value("break/small-every", SANE_BREAK_SMALL_EVERY).toInt();
-}
-
-int SaneBreakApp::pauseOnIdleFor() {
-  QSettings settings;
-  return settings.value("break/pause-on-idle", SANE_BREAK_PAUSE_ON_IDLE_FOR)
-      .toInt();
-}
-
-int SaneBreakApp::resetOnIdleFor() {
-  QSettings settings;
-  return settings.value("break/reset-on-idle", SANE_BREAK_RESET_ON_IDLE_FOR)
-      .toInt();
+  return (smallBreaksBeforeBig() == 0) ? SanePreferences::bigFor()
+                                       : SanePreferences::smallFor();
 }

@@ -2,8 +2,8 @@
 // Copyright (C) 2024 Allan Chain
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SANE_PREFERENCES_H
-#define SANE_PREFERENCES_H
+#ifndef SANE_PREFERENCES_WINDOW_H
+#define SANE_PREFERENCES_WINDOW_H
 
 #include <QLabel>
 #include <QMainWindow>
@@ -26,4 +26,4 @@ class PreferenceWindow : public QMainWindow {
   QSlider *pauseOnIdleSlider;
   QSlider *resetOnIdleSlider;
 };
-#endif  // SANE_PREFERENCES_H
+#endif  // SANE_PREFERENCES_WINDOW_H
