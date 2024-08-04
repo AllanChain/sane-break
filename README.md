@@ -56,8 +56,8 @@ cd sane-break
 mkdir build
 cd build
 cmake ..
-make
-sudo make install
+cmake --build . --parallel
+sudo cmake --install .
 ```
 
 ## FAQ
