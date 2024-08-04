@@ -7,7 +7,22 @@
 
 #include <QLabel>
 #include <QMainWindow>
+#include <QMouseEvent>
 #include <QSlider>
+
+class SteppedSlider : public QSlider {
+  Q_OBJECT
+
+ public:
+  SteppedSlider(Qt::Orientation orientation, QWidget *parent = nullptr);
+
+ protected:
+  void mousePressEvent(QMouseEvent *event) override;
+  void mouseMoveEvent(QMouseEvent *event) override;
+
+ private:
+  int calculateValueFromPosition(const QPoint &pos) const;
+};
 
 class PreferenceWindow : public QMainWindow {
   Q_OBJECT
@@ -19,11 +34,11 @@ class PreferenceWindow : public QMainWindow {
 
  private:
   void closeEvent(QCloseEvent *event);
-  QSlider *smallBreakEverySlider;
-  QSlider *smallBreakForSlider;
-  QSlider *bigBreakAfterSlider;
-  QSlider *bigBreakForSlider;
-  QSlider *pauseOnIdleSlider;
-  QSlider *resetOnIdleSlider;
+  SteppedSlider *smallBreakEverySlider;
+  SteppedSlider *smallBreakForSlider;
+  SteppedSlider *bigBreakAfterSlider;
+  SteppedSlider *bigBreakForSlider;
+  SteppedSlider *pauseOnIdleSlider;
+  SteppedSlider *resetOnIdleSlider;
 };
 #endif  // SANE_PREFERENCES_WINDOW_H

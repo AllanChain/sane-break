@@ -12,11 +12,63 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QSlider>
+#include <QStyleOptionSlider>
 #include <QVBoxLayout>
 
 #include "config.h"
 #include "notice-window.h"
 #include "preferences.h"
+
+SteppedSlider::SteppedSlider(Qt::Orientation orientation, QWidget *parent)
+    : QSlider(orientation, parent) {
+  setTickPosition(QSlider::TicksBelow);
+}
+
+void SteppedSlider::mousePressEvent(QMouseEvent *event) {
+  if (event->button() == Qt::LeftButton) {
+    int value = calculateValueFromPosition(event->pos());
+    setValue(value);
+    event->accept();
+  } else {
+    QSlider::mousePressEvent(event);
+  }
+}
+
+void SteppedSlider::mouseMoveEvent(QMouseEvent *event) {
+  if (event->buttons() & Qt::LeftButton) {
+    int value = calculateValueFromPosition(event->pos());
+    setValue(value);
+    event->accept();
+  } else {
+    QSlider::mouseMoveEvent(event);
+  }
+}
+
+int SteppedSlider::calculateValueFromPosition(const QPoint &pos) const {
+  int min = minimum();
+  int max = maximum();
+  int step = singleStep();
+  int range = max - min;
+
+  QStyleOptionSlider opt;
+  initStyleOption(&opt);
+  QRect sliderRect = style()->subControlRect(QStyle::CC_Slider, &opt,
+                                             QStyle::SC_SliderHandle, this);
+
+  if (orientation() == Qt::Horizontal) {
+    int sliderLength = width() - sliderRect.width();
+    int posX = pos.x() - sliderRect.width() / 2;
+    int value = min + (posX * range) / sliderLength;
+    value = ((qBound(min, value, max) - min) / step) * step + min;
+    return value;
+  } else {
+    int sliderLength = height() - sliderRect.height();
+    int posY = pos.y() - sliderRect.height() / 2;
+    int value = min + ((sliderLength - posY) * range) / sliderLength;
+    value = ((qBound(min, value, max) - min) / step) * step + min;
+    return value;
+  }
+}
 
 PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   setWindowFlag(Qt::Dialog);
@@ -75,30 +127,30 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   breakForm->addWidget(new QLabel("Small break every"), 0, 0);
   breakForm->addWidget(new QLabel("Small break for"), 1, 0);
 
-  smallBreakEverySlider = new QSlider(Qt::Horizontal);
+  smallBreakEverySlider = new SteppedSlider(Qt::Horizontal);
   smallBreakEverySlider->setMaximum(60);
-  smallBreakEverySlider->setTickPosition(QSlider::TicksBelow);
+  smallBreakEverySlider->setSingleStep(5);
   breakForm->addWidget(smallBreakEverySlider, 0, 1);
 
   QLabel *smallBreakEveryLabel = new QLabel();
   breakForm->addWidget(smallBreakEveryLabel, 0, 2);
   smallBreakEveryLabel->setText(
       QString("%1 min").arg(smallBreakEverySlider->value()));
-  connect(smallBreakEverySlider, &QSlider::valueChanged, this,
+  connect(smallBreakEverySlider, &SteppedSlider::valueChanged, this,
           [smallBreakEveryLabel](int value) {
             smallBreakEveryLabel->setText(QString("%1 min").arg(value));
           });
 
-  smallBreakForSlider = new QSlider(Qt::Horizontal);
+  smallBreakForSlider = new SteppedSlider(Qt::Horizontal);
   smallBreakForSlider->setMaximum(60);
-  smallBreakForSlider->setTickPosition(QSlider::TicksBelow);
+  smallBreakForSlider->setSingleStep(5);
   breakForm->addWidget(smallBreakForSlider, 1, 1);
 
   QLabel *smallBreakForLabel = new QLabel();
   breakForm->addWidget(smallBreakForLabel, 1, 2);
   smallBreakForLabel->setText(
       QString("%1 sec").arg(smallBreakForSlider->value()));
-  connect(smallBreakForSlider, &QSlider::valueChanged, this,
+  connect(smallBreakForSlider, &SteppedSlider::valueChanged, this,
           [smallBreakForLabel](int value) {
             smallBreakForLabel->setText(QString("%1 sec").arg(value));
           });
@@ -106,62 +158,63 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   breakForm->addWidget(new QLabel("Big break after"), 2, 0);
   breakForm->addWidget(new QLabel("Big break for"), 3, 0);
 
-  bigBreakAfterSlider = new QSlider(Qt::Horizontal);
+  bigBreakAfterSlider = new SteppedSlider(Qt::Horizontal);
+  bigBreakAfterSlider->setMinimum(1);
   bigBreakAfterSlider->setMaximum(20);
-  bigBreakAfterSlider->setTickPosition(QSlider::TicksBelow);
   breakForm->addWidget(bigBreakAfterSlider, 2, 1);
 
   QLabel *bigBreakAfterLabel = new QLabel();
   breakForm->addWidget(bigBreakAfterLabel, 2, 2);
   bigBreakAfterLabel->setText(
       QString("%1 small breaks").arg(bigBreakAfterSlider->value()));
-  connect(bigBreakAfterSlider, &QSlider::valueChanged, this,
-          [bigBreakAfterLabel](int value) {
-            bigBreakAfterLabel->setText(QString("%1 small breaks").arg(value));
+  connect(bigBreakAfterSlider, &SteppedSlider::valueChanged, this,
+          [bigBreakAfterLabel, this](int value) {
+            bigBreakAfterLabel->setText(
+                QString("%1 min").arg(value * smallBreakEverySlider->value()));
           });
 
-  bigBreakForSlider = new QSlider(Qt::Horizontal);
+  bigBreakForSlider = new SteppedSlider(Qt::Horizontal);
   bigBreakForSlider->setMaximum(300);
   bigBreakForSlider->setSingleStep(10);
   bigBreakForSlider->setTickInterval(60);
   bigBreakForSlider->setPageStep(60);
-  bigBreakForSlider->setTickPosition(QSlider::TicksBelow);
   breakForm->addWidget(bigBreakForSlider, 3, 1);
 
   QLabel *bigBreakForLabel = new QLabel();
   breakForm->addWidget(bigBreakForLabel, 3, 2);
   bigBreakForLabel->setText(QString("%1 sec").arg(bigBreakForSlider->value()));
-  connect(bigBreakForSlider, &QSlider::valueChanged, this,
+  connect(bigBreakForSlider, &SteppedSlider::valueChanged, this,
           [bigBreakForLabel](int value) {
             bigBreakForLabel->setText(QString("%1 sec").arg(value));
           });
 
-  pauseOnIdleSlider = new QSlider(Qt::Horizontal);
-  pauseOnIdleSlider->setMaximum(60);
+  pauseOnIdleSlider = new SteppedSlider(Qt::Horizontal);
+  pauseOnIdleSlider->setMaximum(20);
   pauseOnIdleSlider->setMinimum(1);
-  pauseOnIdleSlider->setTickPosition(QSlider::TicksBelow);
+  pauseOnIdleSlider->setTickPosition(SteppedSlider::TicksBelow);
 
   breakForm->addWidget(new QLabel("Pause on idle for"), 4, 0);
   breakForm->addWidget(pauseOnIdleSlider, 4, 1);
   QLabel *pauseOnIdleLabel = new QLabel();
   breakForm->addWidget(pauseOnIdleLabel, 4, 2);
   pauseOnIdleLabel->setText(QString("%1 min").arg(pauseOnIdleSlider->value()));
-  connect(pauseOnIdleSlider, &QSlider::valueChanged, this,
+  connect(pauseOnIdleSlider, &SteppedSlider::valueChanged, this,
           [pauseOnIdleLabel](int value) {
             pauseOnIdleLabel->setText(QString("%1 min").arg(value));
           });
 
-  resetOnIdleSlider = new QSlider(Qt::Horizontal);
+  resetOnIdleSlider = new SteppedSlider(Qt::Horizontal);
   resetOnIdleSlider->setMaximum(60);
-  resetOnIdleSlider->setMinimum(1);
-  resetOnIdleSlider->setTickPosition(QSlider::TicksBelow);
+  resetOnIdleSlider->setMinimum(5);
+  resetOnIdleSlider->setSingleStep(5);
+  resetOnIdleSlider->setTickPosition(SteppedSlider::TicksBelow);
 
   breakForm->addWidget(new QLabel("Reset on idle for"), 5, 0);
   breakForm->addWidget(resetOnIdleSlider, 5, 1);
   QLabel *resetOnIdleLabel = new QLabel();
   breakForm->addWidget(resetOnIdleLabel, 5, 2);
   resetOnIdleLabel->setText(QString("%1 min").arg(resetOnIdleSlider->value()));
-  connect(resetOnIdleSlider, &QSlider::valueChanged, this,
+  connect(resetOnIdleSlider, &SteppedSlider::valueChanged, this,
           [resetOnIdleLabel](int value) {
             resetOnIdleLabel->setText(QString("%1 min").arg(value));
           });
