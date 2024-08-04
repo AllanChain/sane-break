@@ -24,6 +24,7 @@ class IdleTimeKDE : public SystemIdleTime {
 
  private:
   QElapsedTimer *elapseTimer;
+  bool isIdle;
   bool isWatching = false;
   int currentId = -1;
 };

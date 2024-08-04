@@ -14,17 +14,19 @@ IdleTimeKDE::IdleTimeKDE() : SystemIdleTime() {
   connect(KIdleTime::instance(),
           qOverload<int, int>(&KIdleTime::timeoutReached), this,
           [this](int id, int ms) {
-            if (!isWatching || id != currentId) return;
+            if (!isWatching || id != currentId || isIdle) return;
             emit idleStart();
+            isIdle = true;
             KIdleTime::instance()->catchNextResumeEvent();
             elapseTimer->start();
           });
   connect(KIdleTime::instance(), &KIdleTime::resumingFromIdle, this, [this]() {
-    if (!isWatching) return;
+    if (!isWatching || !isIdle) return;
     int elapsedTime = elapseTimer->elapsed();
     // If this is not the first resume event
     if (currentId != -1) elapsedTime += minIdleTime;
     emit idleEnd(elapsedTime);
+    isIdle = false;
     currentId = KIdleTime::instance()->addIdleTimeout(minIdleTime);
   });
 }
@@ -34,9 +36,11 @@ void IdleTimeKDE::startWatching(WatchOption option) {
   elapseTimer->start();
   switch (option) {
     case NOTIFY_FIRST_IDLE:
+      isIdle = false;
       currentId = KIdleTime::instance()->addIdleTimeout(minIdleTime);
       break;
     case NOTIFY_FIRST_RESUME:
+      isIdle = true;
       KIdleTime::instance()->catchNextResumeEvent();
       break;
   }
