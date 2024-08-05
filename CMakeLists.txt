@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(sane-break VERSION 0.1.0 LANGUAGES CXX)
+project(sane-break VERSION 0.1.0 LANGUAGES C CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -8,6 +8,10 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if(POLICY CMP0071)
+    cmake_policy(SET CMP0071 NEW)
+endif()
 
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
@@ -38,6 +42,14 @@ target_include_directories(sane-break PRIVATE "src" ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(sane-break PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    find_package(Qt6 REQUIRED COMPONENTS WaylandClient)
+    find_package(Wayland REQUIRED COMPONENTS Client)
+    # Files will generate after running build
+    qt6_generate_wayland_protocol_client_sources(sane-break FILES
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/linux/wayland/ext-idle-notify-v1.xml"
+    )
+    target_link_libraries(sane-break PRIVATE Qt::WaylandClient Wayland::Client)
+
     find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
     list(APPEND CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
     find_package(KF6 REQUIRED COMPONENTS IdleTime)

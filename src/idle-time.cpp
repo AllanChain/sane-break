@@ -7,7 +7,7 @@
 #include <qglobal.h>
 
 #ifdef Q_OS_LINUX
-#include "linux/kde/idle.h"
+#include "linux/wayland/idle.h"
 #elif defined Q_OS_MACOS
 #include "macos/idle.h"
 #elif defined Q_OS_WIN
@@ -16,7 +16,7 @@
 
 SystemIdleTime* SystemIdleTime::createIdleTimer() {
 #ifdef Q_OS_LINUX
-  return new IdleTimeKDE();
+  return new IdleTimeWayland();
 #elif defined Q_OS_MACOS
   return new IdleTimeDarwin();
 #elif defined Q_OS_WIN

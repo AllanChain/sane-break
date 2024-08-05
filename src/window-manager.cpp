@@ -81,18 +81,10 @@ void BreakWindowManager::show(int breakTime) {
   isIdle = true;
   isForceBreak = false;
   createWindows();
-
-  QTimer::singleShot(2 * 1000, this,
-                     [=]() {  // Go fullscreen when idle for 2 sec
-                       if (isIdle)
-                         for (auto w : std::as_const(windows))
-                           w->setFullScreen();
-                     });
-
   for (auto w : std::as_const(windows)) w->start(breakTime);
   countdownTimer->start();
   forceBreakTimer->start();
-  idleTimer->startWatching(NOTIFY_FIRST_RESUME);
+  idleTimer->startWatching(NOTIFY_FIRST_IDLE);
 }
 
 void BreakWindowManager::close() {

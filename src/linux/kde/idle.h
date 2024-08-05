@@ -13,8 +13,6 @@
 
 #include "idle-time.h"
 
-int systemIdleTime();
-
 class IdleTimeKDE : public SystemIdleTime {
   Q_OBJECT
  public:
