@@ -78,7 +78,7 @@ void BreakWindowManager::createWindows() {
 void BreakWindowManager::show(int breakTime) {
   remainingTime = breakTime;
   totalTime = breakTime;
-  isIdle = true;
+  isIdle = false;
   isForceBreak = false;
   createWindows();
   for (auto w : std::as_const(windows)) w->start(breakTime);

@@ -24,6 +24,21 @@ class SystemIdleTime : public QObject {
   void idleEnd(int ms);
 };
 
+class ReadBasedIdleTime : public SystemIdleTime {
+  Q_OBJECT
+ public:
+  ReadBasedIdleTime();
+  void startWatching(WatchOption option);
+  void stopWatching();
+  virtual int systemIdleTime() { return 0; };
+
+ private:
+  QTimer *timer;
+  void tick();
+  bool isIdle;
+  int idleTime;
+};
+
 class SleepMonitor : public QObject {
   Q_OBJECT
  public:

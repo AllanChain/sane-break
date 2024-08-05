@@ -7,22 +7,17 @@
 // Copyright (c) 2014 Atlassian Pty Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
-#include <qglobal.h>
-
-#ifdef Q_OS_WIN
-
-#include <windows.h>
-
-#include <QTimer>
-
 #include "idle.h"
 
-int IdleTimeWindow::systemIdleTime() {
-  LASTINPUTINFO lif;
-  lif.cbSize = sizeof(lif);
-  if (!GetLastInputInfo(&lif)) return -1;
-  uint64_t tickCount = GetTickCount64();
-  int idleTime = (tickCount - (uint64_t)lif.dwTime);
+#include <X11/Xlib.h>
+#include <X11/extensions/scrnsaver.h>
+
+int IdleTimeX11::systemIdleTime() {
+  Display *dpy = XOpenDisplay(NULL);
+  XScreenSaverInfo *ssi = XScreenSaverAllocInfo();
+  XScreenSaverQueryInfo(dpy, DefaultRootWindow(dpy), ssi);
+  int idleTime = ssi->idle;
+  XFree(ssi);
+  XCloseDisplay(dpy);
   return idleTime;
 }
-#endif  // Q_OS_WIN

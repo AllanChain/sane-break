@@ -17,40 +17,7 @@
 
 #include "idle.h"
 
-IdleTimeDarwin::IdleTimeDarwin() : SystemIdleTime() {
-  timer = new QTimer();
-  connect(timer, &QTimer::timeout, this, &IdleTimeDarwin::tick);
-}
-
-void IdleTimeDarwin::startWatching(WatchOption option) {
-  switch (option) {
-    case NOTIFY_FIRST_IDLE:
-      isIdle = false;
-      break;
-    case NOTIFY_FIRST_RESUME:
-      isIdle = true;
-      break;
-  }
-  timer->setInterval(watchAccuracy);
-  timer->start();
-  tick();
-}
-
-void IdleTimeDarwin::stopWatching() { timer->stop(); }
-
-void IdleTimeDarwin::tick() {
-  int currentIdleTime = systemIdleTime();
-  if (currentIdleTime < minIdleTime && isIdle) {
-    isIdle = false;
-    emit idleEnd(idleTime);
-  } else if (currentIdleTime > minIdleTime && !isIdle) {
-    isIdle = true;
-    emit idleStart();
-  }
-  idleTime = currentIdleTime;
-}
-
-int systemIdleTime() {
+int IdleTimeDarwin::systemIdleTime() {
   int idlesecs = -1;
   io_iterator_t iter = 0;
   if (IOServiceGetMatchingServices(kIOMainPortDefault,

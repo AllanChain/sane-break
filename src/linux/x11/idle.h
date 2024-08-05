@@ -9,19 +9,21 @@
 
 #include <qglobal.h>
 
-#ifdef Q_OS_WIN
-#ifndef SANE_IDLE_WINDOWS_H
-#define SANE_IDLE_WINDOWS_H
+#ifdef Q_OS_LINUX
+#ifndef SANE_IDLE_X11_H
+#define SANE_IDLE_X11_H
 
 #include <QTimer>
 
 #include "idle-time.h"
 
-class IdleTimeWindows : public ReadBasedIdleTime {
+int systemIdleTime();
+
+class IdleTimeX11 : public ReadBasedIdleTime {
   Q_OBJECT
  public:
   int systemIdleTime();
 };
 
-#endif  // SANE_IDLE_WINDOWS_H
-#endif  // Q_OS_WIN
+#endif  // SANE_IDLE_X11_H
+#endif  // Q_OS_LINUX

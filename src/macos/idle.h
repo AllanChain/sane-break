@@ -19,18 +19,10 @@
 
 int systemIdleTime();
 
-class IdleTimeDarwin : public SystemIdleTime {
+class IdleTimeDarwin : public ReadBasedIdleTime {
   Q_OBJECT
  public:
-  IdleTimeDarwin();
-  void startWatching(WatchOption option);
-  void stopWatching();
-
- private:
-  QTimer* timer;
-  void tick();
-  bool isIdle;
-  int idleTime;
+  int systemIdleTime();
 };
 
 #endif  // SANE_IDLE_DARWIN_H

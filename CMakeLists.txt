@@ -50,6 +50,12 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     )
     target_link_libraries(sane-break PRIVATE Qt::WaylandClient Wayland::Client)
 
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(X11 REQUIRED x11)
+    pkg_check_modules(XSCRNSAVER REQUIRED xscrnsaver)
+    target_link_libraries(sane-break PRIVATE ${X11_LIBRARIES})
+    target_link_libraries(sane-break PRIVATE ${XSCRNSAVER_LIBRARIES})
+
     find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
     list(APPEND CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
     find_package(KF6 REQUIRED COMPONENTS IdleTime)
