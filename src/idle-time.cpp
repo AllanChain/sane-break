@@ -6,11 +6,16 @@
 
 #include <qglobal.h>
 
+#include "config.h"
+
 #ifdef Q_OS_LINUX
 #include <QGuiApplication>
 
-#include "linux/wayland/idle.h"
+#ifdef ENABLE_X11
 #include "linux/x11/idle.h"
+#elif defined ENABLE_WAYLAND
+#include "linux/wayland/idle.h"
+#endif
 #elif defined Q_OS_MACOS
 #include "macos/idle.h"
 #elif defined Q_OS_WIN
@@ -19,10 +24,21 @@
 
 SystemIdleTime* SystemIdleTime::createIdleTimer() {
 #ifdef Q_OS_LINUX
-  if (QGuiApplication::platformName() == "wayland")
+  if (QGuiApplication::platformName() == "wayland") {
+#ifdef ENABLE_WAYLAND
     return new IdleTimeWayland();
-  else
+#else
+    qFatal() << "Please compile with Wayland support.";
+    return nullptr;
+#endif
+  } else {
+#ifdef ENABLE_X11
     return new IdleTimeX11();
+#else
+    qFatal() << "Please compile with X11 support.";
+    return nullptr;
+#endif
+  }
 #elif defined Q_OS_MACOS
   return new IdleTimeDarwin();
 #elif defined Q_OS_WIN

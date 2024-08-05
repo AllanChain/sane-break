@@ -18,10 +18,7 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 file(GLOB PROJECT_SOURCES "src/*.cpp" "src/*.h" "resources/index.qrc")
 
-if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    file(GLOB_RECURSE PROJECT_SOURCES_LINUX "src/linux/*")
-    list(APPEND PROJECT_SOURCES ${PROJECT_SOURCES_LINUX})
-elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     file(GLOB_RECURSE PROJECT_SOURCES_MACOS "src/macos/*")
     set(MACOSX_BUNDLE_ICON_FILE icon.icns)
     set(SANE_BREAK_ICON ${CMAKE_CURRENT_SOURCE_DIR}/packaging/macos/icon.icns)
@@ -42,29 +39,43 @@ target_include_directories(sane-break PRIVATE "src" ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(sane-break PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    find_package(Qt6 REQUIRED COMPONENTS WaylandClient)
-    find_package(Wayland REQUIRED COMPONENTS Client)
-    # Files will generate after running build
-    qt6_generate_wayland_protocol_client_sources(sane-break FILES
-        "${CMAKE_CURRENT_SOURCE_DIR}/src/linux/wayland/ext-idle-notify-v1.xml"
-    )
-    target_link_libraries(sane-break PRIVATE Qt::WaylandClient Wayland::Client)
 
-    find_package(PkgConfig REQUIRED)
-    pkg_check_modules(X11 REQUIRED x11)
-    pkg_check_modules(XSCRNSAVER REQUIRED xscrnsaver)
-    target_link_libraries(sane-break PRIVATE ${X11_LIBRARIES})
-    target_link_libraries(sane-break PRIVATE ${XSCRNSAVER_LIBRARIES})
+    option(ENABLE_X11 "Build with X11 support" ON)
+    option(ENABLE_WAYLAND "Build with Wayland support" ON)
 
-    find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
-    list(APPEND CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
-    find_package(KF6 REQUIRED COMPONENTS IdleTime)
-    target_link_libraries(sane-break PRIVATE KF6::IdleTime)
-    add_subdirectory(packaging/linux/kde)
-    find_package(LayerShellQt REQUIRED)
-    if(LayerShellQt_FOUND)
+    if(NOT ENABLE_X11 AND NOT ENABLE_WAYLAND)
+        message(FATAL_ERROR "Must enable X11 or Wayland support")
+    endif()
+
+    if(ENABLE_X11)
+        message(STATUS "Enable X11 support")
+        file(GLOB PROJECT_SOURCES_LINUX "src/linux/x11/*")
+        target_sources(sane-break PRIVATE ${PROJECT_SOURCES_LINUX})
+        find_package(PkgConfig REQUIRED)
+        pkg_check_modules(X11 REQUIRED x11)
+        pkg_check_modules(XSCRNSAVER REQUIRED xscrnsaver)
+        target_link_libraries(sane-break PRIVATE ${X11_LIBRARIES})
+        target_link_libraries(sane-break PRIVATE ${XSCRNSAVER_LIBRARIES})
+    endif()
+    if(ENABLE_WAYLAND)
+        message(STATUS "Enable Wayland support")
+        file(GLOB PROJECT_SOURCES_LINUX "src/linux/wayland/*")
+        target_sources(sane-break PRIVATE ${PROJECT_SOURCES_LINUX})
+        find_package(Qt6 REQUIRED COMPONENTS WaylandClient)
+        find_package(Wayland REQUIRED COMPONENTS Client)
+        find_package(LayerShellQt REQUIRED)
+        # Files will generate after running build
+        qt6_generate_wayland_protocol_client_sources(sane-break FILES
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/linux/wayland/ext-idle-notify-v1.xml"
+        )
+        target_link_libraries(sane-break PRIVATE Qt::WaylandClient Wayland::Client)
         target_link_libraries(sane-break PUBLIC LayerShellQt::Interface)
     endif()
+
+    # TODO: make this optinal
+    find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
+    list(APPEND CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+    add_subdirectory(packaging/linux/kde)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     find_library(IOKit NAMES IOKit)
     find_library(CoreFoundation NAMES CoreFoundation)
@@ -83,7 +94,7 @@ set_target_properties(sane-break PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-configure_file(src/config.h.in config.h)
+configure_file(src/config.h.cmake config.h)
 include(GNUInstallDirs)
 install(TARGETS sane-break
     BUNDLE DESTINATION .
