@@ -38,7 +38,12 @@ Therefore, I created Sane Break to poilitely remind myself to have a break and a
   - If you continue working for too long, it will force fullscreen until break ends.
 - Flexible: Automatic pause when idle, and postpone as you want.
 - Small: No fancy stuff, just a small app.
-- Cross-platform: Supporting KDE (Wayland and X11), macOS (Intel and ARM chips), and Windows.
+- Cross-platform
+  - Linux
+    - X11 (Almost all)
+    - Wayland (Compositors supporting [ext-idle-notify-v1](https://wayland.app/protocols/ext-idle-notify-v1))
+  - macOS (Intel and ARM chips)
+  - Windows
 - Easy to develope: Written in C++, it is easy to integrate with system API.
 
 ## 🎬 Demo video
@@ -47,9 +52,8 @@ https://github.com/user-attachments/assets/b6a15675-8122-4848-ba4e-44a687179394
 
 ## Compiling from source
 
-Right now, this app only supports KDE on Linux.
 For Linux users, you are strongly encouraged to install Sane Break by comping from source.
-Make sure you have `layer-shell-qt` (required for Wayland support) for Qt6 installed.
+For Wayland support, make sure you have `layer-shell-qt` for Qt6 installed.
 ```bash
 git clone https://github.com/AllanChain/sane-break
 cd sane-break
@@ -73,5 +77,4 @@ However, if you really want to quit when Sane Break is in fullscreen, you can ki
 ## To do list
 
 - Create AUR package
-- Support non-KDE environments
 - Stop breaks while in screen sharing?
