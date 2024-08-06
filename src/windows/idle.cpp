@@ -17,7 +17,7 @@
 
 #include "idle.h"
 
-int IdleTimeWindow::systemIdleTime() {
+int IdleTimeWindows::systemIdleTime() {
   LASTINPUTINFO lif;
   lif.cbSize = sizeof(lif);
   if (!GetLastInputInfo(&lif)) return -1;
