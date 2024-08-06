@@ -13,6 +13,8 @@ if(POLICY CMP0071)
     cmake_policy(SET CMP0071 NEW)
 endif()
 
+include(GNUInstallDirs)
+
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
@@ -72,10 +74,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
         target_link_libraries(sane-break PUBLIC LayerShellQt::Interface)
     endif()
 
-    # TODO: make this optinal
-    find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
-    list(APPEND CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
-    add_subdirectory(packaging/linux/kde)
+    add_subdirectory(packaging/linux)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     find_library(IOKit NAMES IOKit)
     find_library(CoreFoundation NAMES CoreFoundation)
@@ -95,7 +94,6 @@ set_target_properties(sane-break PROPERTIES
 )
 
 configure_file(src/config.h.cmake config.h)
-include(GNUInstallDirs)
 install(TARGETS sane-break
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
