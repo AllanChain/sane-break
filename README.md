@@ -7,7 +7,6 @@
     <img src="https://img.shields.io/github/v/release/AllanChain/sane-break" alt="GitHub release">
   </a>
   <img src="https://img.shields.io/badge/built_with-Qt_6-Qt" alt="Built with Qt 6">
-  <img src="https://img.shields.io/github/downloads/AllanChain/sane-break/total" alt="Total downloads">
 </p>
 
 Sane break is a polite break reminder to keep you sane.
@@ -77,4 +76,5 @@ However, if you really want to quit when Sane Break is in fullscreen, you can ki
 ## To do list
 
 - Create AUR package
+- Auto start settings
 - Stop breaks while in screen sharing?
