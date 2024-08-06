@@ -13,7 +13,8 @@
 
 #ifdef ENABLE_X11
 #include "linux/x11/idle.h"
-#elif defined ENABLE_WAYLAND
+#endif
+#ifdef ENABLE_WAYLAND
 #include "linux/wayland/idle.h"
 #endif
 #elif defined Q_OS_MACOS

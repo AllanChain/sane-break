@@ -49,13 +49,13 @@ https://github.com/user-attachments/assets/b6a15675-8122-4848-ba4e-44a687179394
 
 Right now, this app only supports KDE on Linux.
 For Linux users, you are strongly encouraged to install Sane Break by comping from source.
-Make sure you have `kidletime` and `layer-shell-qt` (required for Wayland support) for Qt6 installed.
+Make sure you have `layer-shell-qt` (required for Wayland support) for Qt6 installed.
 ```bash
 git clone https://github.com/AllanChain/sane-break
 cd sane-break
 mkdir build
 cd build
-cmake -DENABLE_X11=ON -DENABLE_WAYLAND=ON -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang ..
+cmake -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang ..
 cmake --build . --parallel
 sudo cmake --install .
 ```
