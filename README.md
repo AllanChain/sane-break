@@ -55,7 +55,7 @@ git clone https://github.com/AllanChain/sane-break
 cd sane-break
 mkdir build
 cd build
-cmake -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang ..
+cmake ..
 cmake --build . --parallel
 sudo cmake --install .
 ```
