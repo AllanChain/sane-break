@@ -1,4 +1,4 @@
-// Sane Break is a polite break reminder to keep you sane.
+// Sane Break is a polite and sane break reminder preventing mindless skips.
 // Copyright (C) 2024 Allan Chain
 // SPDX-License-Identifier: GPL-3.0-or-later
 

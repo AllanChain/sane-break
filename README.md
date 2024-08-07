@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/built_with-Qt_6-Qt" alt="Built with Qt 6">
 </p>
 
-Sane break is a polite break reminder to keep you sane.
+Sane break is a polite and sane break reminder preventing mindless skips.
 
 > Whether it's the health of your wrist or your eyes that concerns you, you need to take short breaks and it's all too easy to forget when you are busy.
 >
