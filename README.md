@@ -9,41 +9,28 @@
   <img src="https://img.shields.io/badge/built_with-Qt_6-Qt" alt="Built with Qt 6">
 </p>
 
-Sane break is a polite and sane break reminder preventing mindless skips.
-
-> Whether it's the health of your wrist or your eyes that concerns you, you need to take short breaks and it's all too easy to forget when you are busy.
->
-> https://userbase.kde.org/RSIBreak
+Sane Break is a cross-platform break reminder designed to help you take meaningful breaks without disrupting your workflow.
 
 ## 🤔 Why another break reminder?
 
-So many break reminders just say that you should take a break at regular intervals.
-However, You may be in the middle of writing down your idea, or you may be halfway through a line of code, and you don't want to be interrupted.
-Thus you mindlessly click the "Postpone" or "Skip" button and continue working on the task at hand.
-This way, the break reminder does no have any effect.
-Even though a notification before break can be enabled, you just ignore those notifications for the most of the time.
+All too often, I'm deeply focused on a task when the break reminder appears. Almost instinctively, I click "skip" or "postpone" without a second thought. Before I know it, hours have passed without a single break.
 
-I love the idea of [RSIBreak](https://userbase.kde.org/RSIBreak), which shows a small blinking window reminding you to have a break,
-giving me some time to finish the current line and then take a break.
-But RSIBreak only works for Linux with X11, not Wayland, nor Windows and macOS.
-Besides, there are some other small inconveniences that I want to fix.
-Therefore, I created Sane Break to poilitely remind myself to have a break and avoid mindless postponing or skipping.
+Many existing solutions demand immediate action, often leading to mindless skips or postpones. This defeats the purpose of taking regular, meaningful breaks. Instead, Sane Break provides a gentle initial nudge, allowing you to wrap up your current task before enforcing a break if necessary.
 
-## 🔮 Features
+Inspired by the design of RSIBreak, Sane Break employs a two-phase system:
 
-- No mindless skips, just a polite reminder
-  - Just a small flashing window reminding you to have a break, and you can choose to finish the current task.
-  - When you are away from keyboard, it will grow full screen and you are encouraged to look away.
-  - If you continue working for too long, it will force fullscreen until break ends.
-- Flexible: Automatic pause when idle, and postpone as you want.
-- Small: No fancy stuff, just a small app.
-- Cross-platform
-  - Linux
-    - X11 (Almost all)
-    - Wayland (Compositors supporting [ext-idle-notify-v1](https://wayland.app/protocols/ext-idle-notify-v1))
-  - macOS (Intel and ARM chips)
-  - Windows
-- Easy to develope: Written in C++, it is easy to integrate with system API.
+- Phase 1: A small, unobtrusive reminder that you can acknowledge or ignore.
+- Phase 2: If you continue working for too long, the reminder grows fullscreen, ensuring you take a break.
+
+Key improvemnets compared with RSIBreak:
+
+- Automatic transition to the fullscreen phase when you stop working.
+- No skip or postpone buttons to avoid mindless dismissals.
+- Cross-platform support for Linux (X11 and Wayland), macOS (Intel and ARM), and Windows
+
+Sane Break aims to strike a balance between respecting your workflow and ensuring you take the breaks you need.
+
+For more details about the motivation behind Sane Break, you can refer to [No break reminder works (for me)](https://allanchain.github.io/blog/post/sane-break-intro/).
 
 ## 🎬 Demo video
 
