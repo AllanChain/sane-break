@@ -5,6 +5,7 @@
 #include "idle-time.h"
 
 #include <qglobal.h>
+#include <qguiapplication.h>
 
 #include <QDateTime>
 #include <QTimer>
@@ -13,11 +14,15 @@
 
 #ifdef Q_OS_LINUX
 #include <QGuiApplication>
+#include <QProcessEnvironment>
 
 #ifdef ENABLE_X11
 #include "linux/x11/idle.h"
 #endif
 #ifdef ENABLE_WAYLAND
+#include <QDBusConnection>
+#include <QDBusInterface>
+
 #include "linux/wayland/idle.h"
 #endif
 #elif defined Q_OS_MACOS
@@ -30,7 +35,14 @@ SystemIdleTime* SystemIdleTime::createIdleTimer() {
 #ifdef Q_OS_LINUX
   if (QGuiApplication::platformName() == "wayland") {
 #ifdef ENABLE_WAYLAND
-    return new IdleTimeWayland();
+    QDBusInterface iface("org.gnome.Mutter.IdleMonitor",
+                         "/org/gnome/Mutter/IdleMonitor/Core",
+                         "org.gnome.Mutter.IdleMonitor", QDBusConnection::sessionBus());
+    if (iface.isValid()) return new IdleTimeGNOME();
+    IdleTimeWayland* waylandIdleTimer = new IdleTimeWayland();
+    if (!waylandIdleTimer->isSupported())
+      qFatal("Idle time detection is not supported");
+    return waylandIdleTimer;
 #else
     qFatal("Please compile with Wayland support.");
     return nullptr;

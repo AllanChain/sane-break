@@ -8,11 +8,17 @@
 #ifndef SANE_IDLE_WAYLAND_H
 #define SANE_IDLE_WAYLAND_H
 
+#include <wayland-client-core.h>
+#include <wayland-client-protocol.h>
 #include <wayland-client.h>
 
+#include <QDBusConnection>
+#include <QDBusInterface>
+#include <QElapsedTimer>
 #include <QTimer>
+#include <cstdint>
 
-#include "idle-time.h"
+#include "idle-time.h"  // IWYU pragma: export
 #include "wayland-ext-idle-notify-v1-client-protocol.h"
 
 class IdleTimeWayland : public SystemIdleTime {
@@ -20,6 +26,7 @@ class IdleTimeWayland : public SystemIdleTime {
  public:
   IdleTimeWayland();
   ~IdleTimeWayland();
+  bool isSupported() { return idleNotifier != nullptr; };
   void startWatching();
   void stopWatching();
   void setWatchAccuracy(int accuracy) {};
@@ -41,6 +48,16 @@ class IdleTimeWayland : public SystemIdleTime {
   ext_idle_notifier_v1 *idleNotifier = nullptr;
   ext_idle_notification_v1 *idleNotification = nullptr;
   bool isWatching = false;
+};
+
+class IdleTimeGNOME : public ReadBasedIdleTime {
+  Q_OBJECT
+ public:
+  IdleTimeGNOME();
+  int systemIdleTime();
+
+ private:
+  QDBusInterface *iface;
 };
 
 #endif  // SANE_IDLE_WAYLAND_H

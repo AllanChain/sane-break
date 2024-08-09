@@ -5,9 +5,17 @@
 #include <qglobal.h>
 
 #ifdef Q_OS_LINUX
+#include <wayland-client-core.h>
+#include <wayland-client-protocol.h>
 #include <wayland-client.h>
 
+#include <QDBusConnection>
+#include <QDBusInterface>
+#include <QDBusReply>
+#include <QElapsedTimer>
 #include <QGuiApplication>
+#include <cstdint>
+#include <cstring>
 
 #include "idle.h"
 #include "wayland-ext-idle-notify-v1-client-protocol.h"
@@ -51,6 +59,7 @@ void IdleTimeWayland::resumed(void *data, ext_idle_notification_v1 *object) {
 };
 
 void IdleTimeWayland::startWatching() {
+  if (idleNotifier == nullptr) return;
   isWatching = true;
   idleNotification =
       ext_idle_notifier_v1_get_idle_notification(idleNotifier, m_minIdleTime, seat);
@@ -75,6 +84,17 @@ void IdleTimeWayland::setMinIdleTime(int idleTime) {
 IdleTimeWayland::~IdleTimeWayland() {
   if (idleNotifier != nullptr) ext_idle_notifier_v1_destroy(idleNotifier);
   if (idleNotification != nullptr) ext_idle_notification_v1_destroy(idleNotification);
+}
+
+IdleTimeGNOME::IdleTimeGNOME() : ReadBasedIdleTime() {
+  iface = new QDBusInterface(
+      "org.gnome.Mutter.IdleMonitor", "/org/gnome/Mutter/IdleMonitor/Core",
+      "org.gnome.Mutter.IdleMonitor", QDBusConnection::sessionBus());
+}
+
+int IdleTimeGNOME::systemIdleTime() {
+  QDBusReply<qulonglong> reply = iface->call("GetIdletime");
+  return reply.value();
 }
 
 #endif  // Q_OS_LINUX
