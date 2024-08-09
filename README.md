@@ -27,6 +27,7 @@ Key improvemnets compared with RSIBreak:
 - Automatic transition to the fullscreen phase when you stop working.
 - No skip or postpone buttons to avoid mindless dismissals.
 - Cross-platform support for Linux (X11 and Wayland), macOS (Intel and ARM), and Windows
+  - Wayland support is limited to compositors supporting [wlr layer shell](https://wayland.app/protocols/wlr-layer-shell-unstable-v1) and [idle notify](https://wayland.app/protocols/ext-idle-notify-v1).
 
 Sane Break aims to strike a balance between respecting your workflow and ensuring you take the breaks you need.
 
@@ -40,6 +41,7 @@ https://github.com/user-attachments/assets/b6a15675-8122-4848-ba4e-44a687179394
 
 For Linux users, you are strongly encouraged to install Sane Break by comping from source.
 For Wayland support, make sure you have `layer-shell-qt` for Qt6 installed.
+
 ```bash
 git clone https://github.com/AllanChain/sane-break
 cd sane-break
