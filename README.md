@@ -39,7 +39,12 @@ https://github.com/user-attachments/assets/b6a15675-8122-4848-ba4e-44a687179394
 
 ## Compiling from source
 
-For Linux users, you are strongly encouraged to install Sane Break by comping from source.
+For Linux users with Arch-based distros, it's recommended to install the AUR package:
+```bash
+yay -S sane-break
+```
+
+I didn't test other distros, and you are strongly encouraged to install Sane Break by comping from source.
 For Wayland support, make sure you have `layer-shell-qt` for Qt6 installed.
 
 ```bash
@@ -64,6 +69,5 @@ However, if you really want to quit when Sane Break is in fullscreen, you can ki
 
 ## To do list
 
-- Create AUR package
 - Auto start settings
 - Stop breaks while in screen sharing?
