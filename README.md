@@ -44,7 +44,8 @@ For Linux users with Arch-based distros, it's recommended to install the AUR pac
 yay -S sane-break
 ```
 
-I didn't test other distros, and you are strongly encouraged to install Sane Break by comping from source.
+If you want to enable just X11 or Wayland support, or you are using other distros (which I didn't test), you are strongly encouraged to install Sane Break by comping from source.
+It will automatically enable X11 or Wayland support based on libraries found.
 For Wayland support, make sure you have `layer-shell-qt` for Qt6 installed.
 
 ```bash
