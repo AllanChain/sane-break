@@ -79,6 +79,12 @@ sudo cmake --install .
 
 ## FAQ
 
+### How to start Sane Break on startup?
+
+- Linux: Whatever way you like
+- macOS: Open "System Preferences" and search for "Login Items". Click "+" and add Sane Break to login items
+- Windows: Use <kbd>Win</kbd> + <kbd>R</kbd> and type `shell:startup`. Put `sane-break.exe` or its shortcut there
+
 ### What if I really want to skip break?
 
 Generally, you can quit the app via tray icon right away after the break starts.
