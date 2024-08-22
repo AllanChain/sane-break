@@ -41,7 +41,8 @@ jobs:
       if: contains(matrix.os, 'windows')
       run: |
         mkdir release
-        7z a release/sane-break-windows.zip build\Release\sane-break.exe LICENSE
+        mv build\Release\sane-break.exe .
+        7z a release/sane-break-windows.zip sane-break.exe LICENSE
 
     - name: Packing (macOs)
       if: contains(matrix.os, 'macos')
