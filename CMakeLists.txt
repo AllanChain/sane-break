@@ -88,8 +88,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
         qt6_generate_wayland_protocol_client_sources(sane-break FILES
             "${CMAKE_CURRENT_SOURCE_DIR}/src/linux/wayland/ext-idle-notify-v1.xml"
         )
-        target_link_libraries(sane-break PRIVATE Qt::WaylandClient Wayland::Client)
-        target_link_libraries(sane-break PUBLIC LayerShellQt::Interface)
+        target_link_libraries(sane-break PRIVATE Qt::WaylandClient Wayland::Client LayerShellQt::Interface)
     endif()
 
     if(NOT ENABLE_X11 AND NOT ENABLE_WAYLAND)
