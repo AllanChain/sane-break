@@ -38,7 +38,7 @@ void IdleTimeWayland::globalAdded(void *data, wl_registry *registry,
 void IdleTimeWayland::globalRemoved(void *data, wl_registry *registry,
                                     uint32_t name) {
   IdleTimeWayland *self = static_cast<IdleTimeWayland *>(data);
-  ext_idle_notifier_v1_destroy(self->idleNotifier);
+  if (self->idleNotifier) ext_idle_notifier_v1_destroy(self->idleNotifier);
 };
 
 void IdleTimeWayland::idled(void *data, ext_idle_notification_v1 *object) {
