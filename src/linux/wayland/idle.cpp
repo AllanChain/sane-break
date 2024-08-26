@@ -29,6 +29,8 @@ void IdleTimeWayland::globalAdded(void *data, wl_registry *registry,
                                   uint32_t version) {
   IdleTimeWayland *self = static_cast<IdleTimeWayland *>(data);
   if (strcmp(interface, ext_idle_notifier_v1_interface.name) == 0) {
+    if (self->idleNotifier != nullptr)  // Clear old notifier
+      ext_idle_notifier_v1_destroy(self->idleNotifier);
     self->idleNotifier =
         static_cast<struct ext_idle_notifier_v1 *>(wl_registry_bind(
             registry, name, &ext_idle_notifier_v1_interface, version));
@@ -36,10 +38,7 @@ void IdleTimeWayland::globalAdded(void *data, wl_registry *registry,
 }
 
 void IdleTimeWayland::globalRemoved(void *data, wl_registry *registry,
-                                    uint32_t name) {
-  IdleTimeWayland *self = static_cast<IdleTimeWayland *>(data);
-  if (self->idleNotifier) ext_idle_notifier_v1_destroy(self->idleNotifier);
-};
+                                    uint32_t name) {};
 
 void IdleTimeWayland::idled(void *data, ext_idle_notification_v1 *object) {
   IdleTimeWayland *self = static_cast<IdleTimeWayland *>(data);
@@ -61,7 +60,14 @@ void IdleTimeWayland::startWatching(WatchOption option) {
 
 void IdleTimeWayland::stopWatching() {
   isWatching = false;
-  ext_idle_notification_v1_destroy(idleNotification);
+  if (idleNotification != nullptr)
+    ext_idle_notification_v1_destroy(idleNotification);
+}
+
+IdleTimeWayland::~IdleTimeWayland() {
+  if (idleNotifier != nullptr) ext_idle_notifier_v1_destroy(idleNotifier);
+  if (idleNotification != nullptr)
+    ext_idle_notification_v1_destroy(idleNotification);
 }
 
 #endif  // Q_OS_LINUX

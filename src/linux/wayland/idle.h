@@ -20,6 +20,7 @@ class IdleTimeWayland : public SystemIdleTime {
   Q_OBJECT
  public:
   IdleTimeWayland();
+  ~IdleTimeWayland();
   void startWatching(WatchOption option);
   void stopWatching();
 
@@ -36,8 +37,8 @@ class IdleTimeWayland : public SystemIdleTime {
     idled, resumed
   };
   wl_seat *seat;
-  ext_idle_notifier_v1 *idleNotifier;
-  ext_idle_notification_v1 *idleNotification;
+  ext_idle_notifier_v1 *idleNotifier = nullptr;
+  ext_idle_notification_v1 *idleNotification = nullptr;
   QElapsedTimer *elapseTimer;
   bool isIdle;
   bool isWatching = false;
