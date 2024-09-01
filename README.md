@@ -34,7 +34,7 @@ For more details about the motivation behind Sane Break, you can refer to [No br
 
 ## 🎬 Demo video
 
-https://github.com/user-attachments/assets/b6a15675-8122-4848-ba4e-44a687179394
+https://github.com/user-attachments/assets/00512521-73ce-4e76-a4e0-522492a6a7ed
 
 ## Platform support
 
