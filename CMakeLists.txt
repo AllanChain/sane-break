@@ -41,6 +41,9 @@ target_include_directories(sane-break PRIVATE "src" ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(sane-break PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    file(GLOB PROJECT_SOURCES_LINUX "src/linux/*")
+    target_sources(sane-break PRIVATE ${PROJECT_SOURCES_LINUX})
+
     include(FindPkgConfig)
     pkg_check_modules(X11 x11)
     pkg_check_modules(XSCRNSAVER xscrnsaver)
@@ -94,6 +97,9 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     if(NOT ENABLE_X11 AND NOT ENABLE_WAYLAND)
         message(FATAL_ERROR "Please install X11 or Wayland libraries")
     endif()
+
+    find_package(Qt6 COMPONENTS DBus REQUIRED)
+    target_link_libraries(sane-break PRIVATE Qt::DBus)
 
     add_subdirectory(packaging/linux)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")

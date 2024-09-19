@@ -17,6 +17,7 @@ class SanePreferences : public QObject {
   static int bigFor();
   static int pauseOnIdleFor();
   static int resetOnIdleFor();
+  static bool pauseOnBattery();
 };
 
 #endif  // SANE_PREFERENCES_H

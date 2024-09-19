@@ -28,3 +28,7 @@ int SanePreferences::resetOnIdleFor() {
   QSettings settings;
   return settings.value("break/reset-on-idle-for", 300).toInt();
 }
+bool SanePreferences::pauseOnBattery() {
+  QSettings settings;
+  return settings.value("break/pause-on-battery", true).toBool();
+}

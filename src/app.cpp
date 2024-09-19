@@ -11,6 +11,7 @@
 #include <QSystemTrayIcon>
 #include <QTimer>
 
+#include "battery-status.h"
 #include "idle-time.h"
 #include "pref-window.h"
 #include "preferences.h"
@@ -22,6 +23,7 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   idleTimer->watchAccuracy = 5000;
   idleTimer->minIdleTime = SanePreferences::pauseOnIdleFor() * 1000;
   sleepMonitor = new SleepMonitor();
+  batteryWatcher = BatteryStatus::createWatcher();
   createMenu();
   icon = new QSystemTrayIcon(this);
   icon->setIcon(QIcon(":/images/icon.png"));
@@ -42,6 +44,13 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   });
   connect(sleepMonitor, &SleepMonitor::sleepEnd, this,
           [this](int ms) { resetBreak(); });
+  connect(batteryWatcher, &BatteryStatus::onBattery, this, [this]() {
+    if (SanePreferences::pauseOnBattery()) pauseBreak(PauseReason::ON_BATTERY);
+  });
+  connect(batteryWatcher, &BatteryStatus::onPower, this, [this]() {
+    // No need to check setitngs because it does nothing if not paused with this
+    resumeBreak(PauseReason::ON_BATTERY);
+  });
 }
 SaneBreakApp::~SaneBreakApp() {}
 
@@ -49,6 +58,7 @@ void SaneBreakApp::start() {
   icon->show();
   countDownTimer->start();
   idleTimer->startWatching(NOTIFY_FIRST_IDLE);
+  batteryWatcher->startWatching();
 }
 
 void SaneBreakApp::tick() {
