@@ -40,9 +40,8 @@ SaneBreakApp::SaneBreakApp() : QObject() {
     resumeBreak();
     if (ms > SanePreferences::resetOnIdleFor() * 1000) resetBreak();
   });
-  connect(sleepMonitor, &SleepMonitor::sleepEnd, this, [this](int ms) {
-    if (ms > SanePreferences::resetOnIdleFor() * 1000) resetBreak();
-  });
+  connect(sleepMonitor, &SleepMonitor::sleepEnd, this,
+          [this](int ms) { resetBreak(); });
 }
 SaneBreakApp::~SaneBreakApp() {}
 
