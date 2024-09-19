@@ -6,7 +6,15 @@
 
 #include <qglobal.h>
 
+#include <windows.h>
+
 #ifdef Q_OS_WIN
 
-bool WindowsBatteryStatus::systemOnBattery() { return false; }
+bool WindowsBatteryStatus::systemOnBattery() {
+  SYSTEM_POWER_STATUS powerStatus;
+  if (GetSystemPowerStatus(&powerStatus)) {
+    return (powerStatus.ACLineStatus != 1);
+  }
+  return false;
+}
 #endif
