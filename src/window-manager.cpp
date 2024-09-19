@@ -88,6 +88,8 @@ void BreakWindowManager::show(int breakTime) {
 }
 
 void BreakWindowManager::close() {
+  // Do nothing if window is already closed
+  if (windows.size() == 0) return;
   countdownTimer->stop();
   forceBreakTimer->stop();
   for (auto w : std::as_const(windows)) {
