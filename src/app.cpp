@@ -32,13 +32,13 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   countDownTimer->setInterval(1000);
   connect(countDownTimer, &QTimer::timeout, this, &SaneBreakApp::tick);
   connect(breakManager, &BreakWindowManager::timeout, this, [this]() {
-    if (!inPause) countDownTimer->start();
+    if (pauseReasons == 0) countDownTimer->start();
   });
   connect(idleTimer, &SystemIdleTime::idleStart, this,
-          &SaneBreakApp::pauseBreak);
+          [this]() { pauseBreak(PauseReason::IDLE); });
   connect(idleTimer, &SystemIdleTime::idleEnd, this, [this](int ms) {
-    resumeBreak();
-    if (ms > SanePreferences::resetOnIdleFor() * 1000) resetBreak();
+    bool resumed = resumeBreak(PauseReason::IDLE);
+    if (ms > SanePreferences::resetOnIdleFor() * 1000 && resumed) resetBreak();
   });
   connect(sleepMonitor, &SleepMonitor::sleepEnd, this,
           [this](int ms) { resetBreak(); });
@@ -125,10 +125,8 @@ void SaneBreakApp::breakNow() {
 
 void SaneBreakApp::postpone(int secs) {
   secondsToNextBreak += secs;
-  // Break after postpone is a big break
-  breakCycleCount = 0;
-  // Stop current break if necessary
-  if (!countDownTimer->isActive()) breakManager->close();
+  breakCycleCount = 0;    // break after postpone is a big break
+  breakManager->close();  // stop current break if necessary
   // Reset icon
   if (secondsToNextBreak <= 60) {
     icon->setIcon(QIcon(":/images/icon-lime.png"));
@@ -137,34 +135,32 @@ void SaneBreakApp::postpone(int secs) {
   }
 }
 
-void SaneBreakApp::pauseBreak() {
-  // Break after pause and resume is a small break
-  breakCycleCount = 1;
-  if (countDownTimer->isActive())
-    countDownTimer->stop();
-  else  // Stop current break if necessary
-    breakManager->close();
+void SaneBreakApp::pauseBreak(PauseReason reason) {
+  countDownTimer->stop();
+  breakManager->close();  // stop current break if necessary
   // But the timer will resume after current break end
   // Therefore we set a flag and tell the event handler to pause
-  inPause = true;
-  // Reset remaining time
-  secondsToNextBreak = SanePreferences::smallEvery();
+  pauseReasons |= reason;
   icon->setIcon(QIcon(":/images/icon-gray.png"));
 }
 
-void SaneBreakApp::resumeBreak() {
-  if (!inPause) return;
-  inPause = false;
+// Return true if the time is running
+bool SaneBreakApp::resumeBreak(PauseReason reason) {
+  // Do nothing if not paused
+  if (pauseReasons == 0) return true;
+  // Remove specific reason for pausing
+  pauseReasons &= ~reason;
+  // If there are other reasons for pausing, do nothing
+  if (pauseReasons != 0) return false;
   countDownTimer->start();
   icon->setIcon(QIcon(":/images/icon.png"));
+  return true;
 }
 
 void SaneBreakApp::resetBreak() {
-  if (inPause)
-    resumeBreak();  // Clear pause
-  else if (!countDownTimer->isActive())
-    breakManager->close();  // Stop current break if necessary
   breakCycleCount = 1;
+  pauseReasons = 0;
+  if (!countDownTimer->isActive()) countDownTimer->start();
   secondsToNextBreak = SanePreferences::smallEvery();
   updateMenu();
   icon->setIcon(QIcon(":/images/icon.png"));

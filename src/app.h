@@ -15,6 +15,12 @@
 #include "pref-window.h"
 #include "window-manager.h"
 
+enum PauseReason {
+  IDLE = 1 << 0,
+  ON_BATTERY = 1 << 1,
+  APP_OPEN = 1 << 2,
+};
+
 class SaneBreakApp : public QObject {
   Q_OBJECT
  public:
@@ -23,8 +29,8 @@ class SaneBreakApp : public QObject {
   void start();
   void breakNow();
   void postpone(int secs);
-  void pauseBreak();
-  void resumeBreak();
+  void pauseBreak(PauseReason reason);
+  bool resumeBreak(PauseReason reason);
   void resetBreak();
   int breakTime();
   int smallBreaksBeforeBig();
@@ -47,7 +53,7 @@ class SaneBreakApp : public QObject {
   void tick();
   void updateMenu();
   int secondsToNextBreak;
-  bool inPause = false;
+  uint pauseReasons;
 };
 
 #endif  // SANE_TRAY_H
