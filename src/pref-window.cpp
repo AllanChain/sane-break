@@ -4,6 +4,7 @@
 
 #include "pref-window.h"
 
+#include <QCheckBox>
 #include <QDesktopServices>
 #include <QGridLayout>
 #include <QIcon>
@@ -188,15 +189,20 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
             bigBreakForLabel->setText(QString("%1 sec").arg(value));
           });
 
+  layout->addWidget(new QLabel("<h3>Pausing</h3>"));
+
+  QGridLayout *pauseForm = new QGridLayout();
+  layout->addLayout(pauseForm);
+
   pauseOnIdleSlider = new SteppedSlider(Qt::Horizontal);
   pauseOnIdleSlider->setMaximum(20);
   pauseOnIdleSlider->setMinimum(1);
   pauseOnIdleSlider->setTickPosition(SteppedSlider::TicksBelow);
 
-  breakForm->addWidget(new QLabel("Pause on idle for"), 4, 0);
-  breakForm->addWidget(pauseOnIdleSlider, 4, 1);
+  pauseForm->addWidget(new QLabel("Pause on idle for"), 4, 0);
+  pauseForm->addWidget(pauseOnIdleSlider, 4, 1);
   QLabel *pauseOnIdleLabel = new QLabel();
-  breakForm->addWidget(pauseOnIdleLabel, 4, 2);
+  pauseForm->addWidget(pauseOnIdleLabel, 4, 2);
   pauseOnIdleLabel->setText(QString("%1 min").arg(pauseOnIdleSlider->value()));
   connect(pauseOnIdleSlider, &SteppedSlider::valueChanged, this,
           [pauseOnIdleLabel](int value) {
@@ -209,15 +215,18 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   resetOnIdleSlider->setSingleStep(5);
   resetOnIdleSlider->setTickPosition(SteppedSlider::TicksBelow);
 
-  breakForm->addWidget(new QLabel("Reset on idle for"), 5, 0);
-  breakForm->addWidget(resetOnIdleSlider, 5, 1);
+  pauseForm->addWidget(new QLabel("Reset on idle for"), 5, 0);
+  pauseForm->addWidget(resetOnIdleSlider, 5, 1);
   QLabel *resetOnIdleLabel = new QLabel();
-  breakForm->addWidget(resetOnIdleLabel, 5, 2);
+  pauseForm->addWidget(resetOnIdleLabel, 5, 2);
   resetOnIdleLabel->setText(QString("%1 min").arg(resetOnIdleSlider->value()));
   connect(resetOnIdleSlider, &SteppedSlider::valueChanged, this,
           [resetOnIdleLabel](int value) {
             resetOnIdleLabel->setText(QString("%1 min").arg(value));
           });
+
+  pauseOnBatteryCheck = new QCheckBox("Pause on battery");
+  layout->addWidget(pauseOnBatteryCheck);
 
   QHBoxLayout *bottomButtonLayout = new QHBoxLayout();
   QPushButton *resetButton = new QPushButton("Reset");
@@ -239,6 +248,7 @@ void PreferenceWindow::loadSettings() {
   bigBreakForSlider->setValue(SanePreferences::bigFor());
   pauseOnIdleSlider->setValue(SanePreferences::pauseOnIdleFor() / 60);
   resetOnIdleSlider->setValue(SanePreferences::resetOnIdleFor() / 60);
+  pauseOnBatteryCheck->setChecked(SanePreferences::pauseOnBattery());
 }
 
 void PreferenceWindow::saveSettings() {
@@ -249,6 +259,7 @@ void PreferenceWindow::saveSettings() {
   settings.setValue("break/big-for", bigBreakForSlider->value());
   settings.setValue("break/pause-on-idle-for", pauseOnIdleSlider->value() * 60);
   settings.setValue("break/reset-on-idle-for", resetOnIdleSlider->value() * 60);
+  settings.setValue("break/pause-on-battery", pauseOnBatteryCheck->isChecked());
 }
 
 void PreferenceWindow::closeEvent(QCloseEvent *event) {

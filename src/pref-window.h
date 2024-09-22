@@ -5,6 +5,7 @@
 #ifndef SANE_PREFERENCES_WINDOW_H
 #define SANE_PREFERENCES_WINDOW_H
 
+#include <QCheckBox>
 #include <QLabel>
 #include <QMainWindow>
 #include <QMouseEvent>
@@ -40,5 +41,6 @@ class PreferenceWindow : public QMainWindow {
   SteppedSlider *bigBreakForSlider;
   SteppedSlider *pauseOnIdleSlider;
   SteppedSlider *resetOnIdleSlider;
+  QCheckBox *pauseOnBatteryCheck;
 };
 #endif  // SANE_PREFERENCES_WINDOW_H
