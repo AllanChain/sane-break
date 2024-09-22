@@ -17,11 +17,11 @@ class BatteryStatus : public QObject {
   virtual bool systemOnBattery() { return true; };
   int watchAccuracy = 5000;  // How often we watch idle time (ms)
   static BatteryStatus *createWatcher();
+  bool isOnBattery = false;
 
  private:
   QTimer *timer;
   void tick();
-  bool isOnBattery = false;
 
  signals:
   void onBattery();

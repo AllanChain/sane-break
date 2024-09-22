@@ -21,7 +21,7 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   breakManager = new BreakWindowManager();
   idleTimer = SystemIdleTime::createIdleTimer();
   idleTimer->watchAccuracy = 5000;
-  idleTimer->minIdleTime = SanePreferences::pauseOnIdleFor() * 1000;
+  idleTimer->minIdleTime = SanePreferences::pauseOnIdleFor->get() * 1000;
   sleepMonitor = new SleepMonitor();
   batteryWatcher = BatteryStatus::createWatcher();
   createMenu();
@@ -29,7 +29,7 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   icon->setIcon(QIcon(":/images/icon.png"));
   icon->setContextMenu(menu);
 
-  secondsToNextBreak = SanePreferences::smallEvery();
+  secondsToNextBreak = SanePreferences::smallEvery->get();
   countDownTimer = new QTimer();
   countDownTimer->setInterval(1000);
   connect(countDownTimer, &QTimer::timeout, this, &SaneBreakApp::tick);
@@ -40,17 +40,27 @@ SaneBreakApp::SaneBreakApp() : QObject() {
           [this]() { pauseBreak(PauseReason::IDLE); });
   connect(idleTimer, &SystemIdleTime::idleEnd, this, [this](int ms) {
     bool resumed = resumeBreak(PauseReason::IDLE);
-    if (ms > SanePreferences::resetOnIdleFor() * 1000 && resumed) resetBreak();
+    if (ms > SanePreferences::resetOnIdleFor->get() * 1000 && resumed)
+      resetBreak();
   });
   connect(sleepMonitor, &SleepMonitor::sleepEnd, this,
           [this](int ms) { resetBreak(); });
   connect(batteryWatcher, &BatteryStatus::onBattery, this, [this]() {
-    if (SanePreferences::pauseOnBattery()) pauseBreak(PauseReason::ON_BATTERY);
+    if (SanePreferences::pauseOnBattery->get())
+      pauseBreak(PauseReason::ON_BATTERY);
   });
   connect(batteryWatcher, &BatteryStatus::onPower, this, [this]() {
     // No need to check setitngs because it does nothing if not paused with this
     resumeBreak(PauseReason::ON_BATTERY);
   });
+  connect(SanePreferences::pauseOnBattery, &Setting<bool>::changed, this,
+          [this]() {
+            bool doPause = SanePreferences::pauseOnBattery->get();
+            if (!doPause)
+              resumeBreak(PauseReason::ON_BATTERY);
+            else if (batteryWatcher->isOnBattery)
+              pauseBreak(PauseReason::ON_BATTERY);
+          });
 }
 SaneBreakApp::~SaneBreakApp() {}
 
@@ -124,7 +134,7 @@ void SaneBreakApp::createMenu() {
 }
 
 void SaneBreakApp::breakNow() {
-  secondsToNextBreak = SanePreferences::smallEvery();
+  secondsToNextBreak = SanePreferences::smallEvery->get();
   updateMenu();
   countDownTimer->stop();
   breakManager->show(breakTime());
@@ -171,20 +181,20 @@ void SaneBreakApp::resetBreak() {
   breakCycleCount = 1;
   pauseReasons = 0;
   if (!countDownTimer->isActive()) countDownTimer->start();
-  secondsToNextBreak = SanePreferences::smallEvery();
+  secondsToNextBreak = SanePreferences::smallEvery->get();
   updateMenu();
   icon->setIcon(QIcon(":/images/icon.png"));
 }
 
 int SaneBreakApp::smallBreaksBeforeBig() {
   QSettings settings;
-  int breakEvery = SanePreferences::bigAfter();
+  int breakEvery = SanePreferences::bigAfter->get();
   breakCycleCount %= breakEvery;
   return (breakEvery - breakCycleCount) % breakEvery;
 }
 
 int SaneBreakApp::breakTime() {
   QSettings settings;
-  return (smallBreaksBeforeBig() == 0) ? SanePreferences::bigFor()
-                                       : SanePreferences::smallFor();
+  return (smallBreaksBeforeBig() == 0) ? SanePreferences::bigFor->get()
+                                       : SanePreferences::smallFor->get();
 }

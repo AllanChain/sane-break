@@ -4,31 +4,18 @@
 
 #include "preferences.h"
 
-int SanePreferences::smallEvery() {
-  QSettings settings;
-  return settings.value("break/small-every", 1200).toInt();
-}
-int SanePreferences::smallFor() {
-  QSettings settings;
-  return settings.value("break/small-for", 20).toInt();
-}
-int SanePreferences::bigAfter() {
-  QSettings settings;
-  return settings.value("break/big-after", 3).toInt();
-}
-int SanePreferences::bigFor() {
-  QSettings settings;
-  return settings.value("break/big-for", 60).toInt();
-}
-int SanePreferences::pauseOnIdleFor() {
-  QSettings settings;
-  return settings.value("break/pause-on-idle-for", 60).toInt();
-}
-int SanePreferences::resetOnIdleFor() {
-  QSettings settings;
-  return settings.value("break/reset-on-idle-for", 300).toInt();
-}
-bool SanePreferences::pauseOnBattery() {
-  QSettings settings;
-  return settings.value("break/pause-on-battery", true).toBool();
-}
+#include <QObject>
+
+Setting<int>* SanePreferences::smallEvery =
+    new Setting<int>("break/small-every", 1200);
+Setting<int>* SanePreferences::smallFor =
+    new Setting<int>("break/small-for", 20);
+Setting<int>* SanePreferences::bigAfter =
+    new Setting<int>("break/big-after", 3);
+Setting<int>* SanePreferences::bigFor = new Setting<int>("break/big-for", 60);
+Setting<int>* SanePreferences::pauseOnIdleFor =
+    new Setting<int>("break/pause-on-idle-for", 60);
+Setting<int>* SanePreferences::resetOnIdleFor =
+    new Setting<int>("break/reset-on-idle-for", 300);
+Setting<bool>* SanePreferences::pauseOnBattery =
+    new Setting<bool>("break/pause-on-battery", true);

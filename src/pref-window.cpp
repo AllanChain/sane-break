@@ -241,25 +241,23 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
 }
 
 void PreferenceWindow::loadSettings() {
-  QSettings settings;
-  smallBreakEverySlider->setValue(SanePreferences::smallEvery() / 60);
-  smallBreakForSlider->setValue(SanePreferences::smallFor());
-  bigBreakAfterSlider->setValue(SanePreferences::bigAfter());
-  bigBreakForSlider->setValue(SanePreferences::bigFor());
-  pauseOnIdleSlider->setValue(SanePreferences::pauseOnIdleFor() / 60);
-  resetOnIdleSlider->setValue(SanePreferences::resetOnIdleFor() / 60);
-  pauseOnBatteryCheck->setChecked(SanePreferences::pauseOnBattery());
+  smallBreakEverySlider->setValue(SanePreferences::smallEvery->get() / 60);
+  smallBreakForSlider->setValue(SanePreferences::smallFor->get());
+  bigBreakAfterSlider->setValue(SanePreferences::bigAfter->get());
+  bigBreakForSlider->setValue(SanePreferences::bigFor->get());
+  pauseOnIdleSlider->setValue(SanePreferences::pauseOnIdleFor->get() / 60);
+  resetOnIdleSlider->setValue(SanePreferences::resetOnIdleFor->get() / 60);
+  pauseOnBatteryCheck->setChecked(SanePreferences::pauseOnBattery->get());
 }
 
 void PreferenceWindow::saveSettings() {
-  QSettings settings;
-  settings.setValue("break/small-every", smallBreakEverySlider->value() * 60);
-  settings.setValue("break/small-for", smallBreakForSlider->value());
-  settings.setValue("break/big-after", bigBreakAfterSlider->value());
-  settings.setValue("break/big-for", bigBreakForSlider->value());
-  settings.setValue("break/pause-on-idle-for", pauseOnIdleSlider->value() * 60);
-  settings.setValue("break/reset-on-idle-for", resetOnIdleSlider->value() * 60);
-  settings.setValue("break/pause-on-battery", pauseOnBatteryCheck->isChecked());
+  SanePreferences::smallEvery->set(smallBreakEverySlider->value() * 60);
+  SanePreferences::smallFor->set(smallBreakForSlider->value());
+  SanePreferences::bigAfter->set(bigBreakAfterSlider->value());
+  SanePreferences::bigFor->set(bigBreakForSlider->value());
+  SanePreferences::pauseOnIdleFor->set(pauseOnIdleSlider->value() * 60);
+  SanePreferences::resetOnIdleFor->set(resetOnIdleSlider->value() * 60);
+  SanePreferences::pauseOnBattery->set(pauseOnBatteryCheck->isChecked());
 }
 
 void PreferenceWindow::closeEvent(QCloseEvent *event) {
