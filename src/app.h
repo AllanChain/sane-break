@@ -30,8 +30,8 @@ class SaneBreakApp : public QObject {
   void start();
   void breakNow();
   void postpone(int secs);
-  void pauseBreak(PauseReason reason);
-  bool resumeBreak(PauseReason reason);
+  void pauseBreak(uint reason);
+  bool resumeBreak(uint reason);
   void resetBreak();
   int breakTime();
   int smallBreaksBeforeBig();
@@ -50,6 +50,7 @@ class SaneBreakApp : public QObject {
   QMenu *menu;
   QAction *nextBreakAction;
   QAction *bigBreakAction;
+  QAction *enableBreak;
   int breakCycleCount = 1;
   void createMenu();
   void tick();

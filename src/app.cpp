@@ -124,6 +124,11 @@ void SaneBreakApp::createMenu() {
           [this]() { postpone(60 * 60); });
   connect(postponeMenu->addAction("Quit"), &QAction::triggered, this,
           &SaneBreakApp::quit);
+  enableBreak = menu->addAction("Enable Break");
+  enableBreak->setVisible(false);
+  connect(enableBreak, &QAction::triggered, this,
+          // enable all flags
+          [this]() { resumeBreak((1 << 8) - 1); });
 
   menu->addSeparator();
 
@@ -155,17 +160,18 @@ void SaneBreakApp::postpone(int secs) {
   }
 }
 
-void SaneBreakApp::pauseBreak(PauseReason reason) {
+void SaneBreakApp::pauseBreak(uint reason) {
   countDownTimer->stop();
   breakManager->close();  // stop current break if necessary
   // But the timer will resume after current break end
   // Therefore we set a flag and tell the event handler to pause
   pauseReasons |= reason;
+  enableBreak->setVisible(true);
   icon->setIcon(QIcon(":/images/icon-gray.png"));
 }
 
 // Return true if the time is running
-bool SaneBreakApp::resumeBreak(PauseReason reason) {
+bool SaneBreakApp::resumeBreak(uint reason) {
   // Do nothing if not paused
   if (pauseReasons == 0) return true;
   // Remove specific reason for pausing
@@ -173,6 +179,7 @@ bool SaneBreakApp::resumeBreak(PauseReason reason) {
   // If there are other reasons for pausing, do nothing
   if (pauseReasons != 0) return false;
   countDownTimer->start();
+  enableBreak->setVisible(false);
   icon->setIcon(QIcon(":/images/icon.png"));
   return true;
 }
