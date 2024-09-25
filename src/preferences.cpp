@@ -18,4 +18,4 @@ Setting<int>* SanePreferences::pauseOnIdleFor =
 Setting<int>* SanePreferences::resetOnIdleFor =
     new Setting<int>("break/reset-on-idle-for", 300);
 Setting<bool>* SanePreferences::pauseOnBattery =
-    new Setting<bool>("break/pause-on-battery", true);
+    new Setting<bool>("break/pause-on-battery", false);
