@@ -166,6 +166,13 @@ void SaneBreakApp::pauseBreak(uint reason) {
   // But the timer will resume after current break end
   // Therefore we set a flag and tell the event handler to pause
   pauseReasons |= reason;
+  if (reason & PauseReason::ON_BATTERY) {
+    icon->setToolTip("Sane Break\nPaused on battery");
+  } else if (reason & PauseReason::APP_OPEN) {
+    icon->setToolTip("Sane Break\nPaused on app running");
+  } else if (reason & PauseReason::IDLE) {
+    icon->setToolTip("Sane Break\nPaused on idle");
+  }
   enableBreak->setVisible(true);
   icon->setIcon(QIcon(":/images/icon-gray.png"));
 }
