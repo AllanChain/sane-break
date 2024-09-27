@@ -53,7 +53,7 @@ SaneBreakApp::SaneBreakApp() : QObject() {
     // No need to check setitngs because it does nothing if not paused with this
     resumeBreak(PauseReason::ON_BATTERY);
   });
-  connect(SanePreferences::pauseOnBattery, &Setting<bool>::changed, this,
+  connect(SanePreferences::pauseOnBattery, &SettingWithSignal::changed, this,
           [this]() {
             bool doPause = SanePreferences::pauseOnBattery->get();
             if (!doPause)
