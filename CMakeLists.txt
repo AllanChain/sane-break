@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(sane-break VERSION 0.2.3 LANGUAGES C CXX)
+project(sane-break VERSION 0.2.4 LANGUAGES C CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
