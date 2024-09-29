@@ -174,6 +174,8 @@ void SaneBreakApp::pauseBreak(uint reason) {
     icon->setToolTip("Sane Break\nPaused on idle");
   }
   enableBreak->setVisible(true);
+  nextBreakAction->setVisible(false);
+  bigBreakAction->setVisible(false);
   icon->setIcon(QIcon(":/images/icon-gray.png"));
 }
 
@@ -187,6 +189,8 @@ bool SaneBreakApp::resumeBreak(uint reason) {
   if (pauseReasons != 0) return false;
   countDownTimer->start();
   enableBreak->setVisible(false);
+  nextBreakAction->setVisible(true);
+  bigBreakAction->setVisible(true);
   icon->setIcon(QIcon(":/images/icon.png"));
   return true;
 }
