@@ -23,19 +23,28 @@ BreakWindow::BreakWindow(QWidget *parent) : QMainWindow(parent) {
 
   QWidget *centralWidget = new QWidget(this);
   setCentralWidget(centralWidget);
-  centralWidget->setContentsMargins(10, 10, 10, 10);
+  centralWidget->setContentsMargins(0, 0, 0, 0);
 
   QVBoxLayout *layout = new QVBoxLayout(centralWidget);
-  layout->setAlignment(Qt::AlignCenter);
-  layout->setSpacing(20);
-
-  countdownLabel = new QLabel(this);
-  countdownLabel->setAlignment(Qt::AlignCenter);
-  layout->addWidget(countdownLabel);
+  layout->setContentsMargins(0, 0, 0, 0);
 
   QProgressBar *progressBar = new QProgressBar();
   progressBar->setTextVisible(false);
   layout->addWidget(progressBar);
+
+  QVBoxLayout *textLayout = new QVBoxLayout();
+  textLayout->setAlignment(Qt::AlignCenter);
+  layout->addLayout(textLayout);
+
+  QLabel *breakLabel = new QLabel("Time to break");
+  breakLabel->setObjectName("breakLabel");
+  textLayout->addWidget(breakLabel);
+
+  countdownLabel = new QLabel(this);
+  countdownLabel->setObjectName("countdownLabel");
+  countdownLabel->setAlignment(Qt::AlignCenter);
+  countdownLabel->setVisible(false);
+  textLayout->addWidget(countdownLabel);
 
   progressAnim = new QPropertyAnimation(progressBar, "value");
   progressAnim->setStartValue(100);
@@ -71,14 +80,14 @@ void BreakWindow::setTime(int remainingTime) {
     progressAnim->stop();
     progressAnim->start();
   }
-  countdownLabel->setText(
-      QString("Time remaining: %1 seconds").arg(round(float(remainingTime))));
+  countdownLabel->setText(QString("%1").arg(round(float(remainingTime))));
 }
 
 void BreakWindow::setFullScreen() {
   setProperty("isFullScreen", true);
   bgAnim->stop();
   setProperty("color", bgAnim->endValue());
+  countdownLabel->setVisible(true);
   QPropertyAnimation *resizeAnim = new QPropertyAnimation(this, "geometry");
   resizeAnim->setStartValue(geometry());
   resizeAnim->setEndValue(screen()->geometry());
@@ -89,6 +98,7 @@ void BreakWindow::setFullScreen() {
 void BreakWindow::resizeToNormal() {
   setProperty("isFullScreen", false);
   bgAnim->start();
+  countdownLabel->setVisible(false);
   QPropertyAnimation *resizeAnim = new QPropertyAnimation(this, "geometry");
   QRect rect = screen()->geometry();
   QRect targetGeometry =

@@ -1,15 +1,28 @@
-BreakWindow QLabel {
+BreakWindow QLabel#breakLabel {
+  background: transparent;
+  color: #eceff4;
+  font-size: 20px;
+}
+BreakWindow[isFullScreen="true"] QLabel#breakLabel {
+  font-size: 40px;
+}
+BreakWindow QLabel#countdownLabel {
   background: transparent;
   color: #eceff4;
 }
-BreakWindow[isFullScreen="true"] QLabel {
-  font-size: 20px;
+BreakWindow[isFullScreen="true"] QLabel#countdownLabel {
+  font-size: 100px;
 }
+
 BreakWindow QProgressBar {
   border-radius: 5px;
-  height: 5px;
+  max-height: 5px;
   background: transparent;
 }
 BreakWindow QProgressBar::chunk {
   background: #eceff4;
+  width: 1px;
+}
+BreakWindow[isFullScreen="true"] QProgressBar {
+  max-height: 10px;
 }
