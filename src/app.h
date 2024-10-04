@@ -6,6 +6,7 @@
 #define SANE_TRAY_H
 
 #include <QAction>
+#include <QElapsedTimer>
 #include <QMenu>
 #include <QObject>
 #include <QSystemTrayIcon>
@@ -46,6 +47,7 @@ class SaneBreakApp : public QObject {
   BatteryStatus *batteryWatcher;
   QSystemTrayIcon *icon;
   QTimer *countDownTimer;
+  QElapsedTimer *lastPause;
   QMenu *menu;
   QAction *nextBreakAction;
   QAction *bigBreakAction;
