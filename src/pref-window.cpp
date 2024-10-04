@@ -209,22 +209,6 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
             pauseOnIdleLabel->setText(QString("%1 min").arg(value));
           });
 
-  resetOnIdleSlider = new SteppedSlider(Qt::Horizontal);
-  resetOnIdleSlider->setMaximum(60);
-  resetOnIdleSlider->setMinimum(5);
-  resetOnIdleSlider->setSingleStep(5);
-  resetOnIdleSlider->setTickPosition(SteppedSlider::TicksBelow);
-
-  pauseForm->addWidget(new QLabel("Reset on idle for"), 5, 0);
-  pauseForm->addWidget(resetOnIdleSlider, 5, 1);
-  QLabel *resetOnIdleLabel = new QLabel();
-  pauseForm->addWidget(resetOnIdleLabel, 5, 2);
-  resetOnIdleLabel->setText(QString("%1 min").arg(resetOnIdleSlider->value()));
-  connect(resetOnIdleSlider, &SteppedSlider::valueChanged, this,
-          [resetOnIdleLabel](int value) {
-            resetOnIdleLabel->setText(QString("%1 min").arg(value));
-          });
-
   pauseOnBatteryCheck = new QCheckBox("Pause on battery");
   layout->addWidget(pauseOnBatteryCheck);
 
@@ -246,7 +230,6 @@ void PreferenceWindow::loadSettings() {
   bigBreakAfterSlider->setValue(SanePreferences::bigAfter->get());
   bigBreakForSlider->setValue(SanePreferences::bigFor->get());
   pauseOnIdleSlider->setValue(SanePreferences::pauseOnIdleFor->get() / 60);
-  resetOnIdleSlider->setValue(SanePreferences::resetOnIdleFor->get() / 60);
   pauseOnBatteryCheck->setChecked(SanePreferences::pauseOnBattery->get());
 }
 
@@ -256,7 +239,6 @@ void PreferenceWindow::saveSettings() {
   SanePreferences::bigAfter->set(bigBreakAfterSlider->value());
   SanePreferences::bigFor->set(bigBreakForSlider->value());
   SanePreferences::pauseOnIdleFor->set(pauseOnIdleSlider->value() * 60);
-  SanePreferences::resetOnIdleFor->set(resetOnIdleSlider->value() * 60);
   SanePreferences::pauseOnBattery->set(pauseOnBatteryCheck->isChecked());
 }
 

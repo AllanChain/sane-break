@@ -40,7 +40,6 @@ class PreferenceWindow : public QMainWindow {
   SteppedSlider *bigBreakAfterSlider;
   SteppedSlider *bigBreakForSlider;
   SteppedSlider *pauseOnIdleSlider;
-  SteppedSlider *resetOnIdleSlider;
   QCheckBox *pauseOnBatteryCheck;
 };
 #endif  // SANE_PREFERENCES_WINDOW_H

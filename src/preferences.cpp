@@ -15,7 +15,5 @@ Setting<int>* SanePreferences::bigAfter =
 Setting<int>* SanePreferences::bigFor = new Setting<int>("break/big-for", 60);
 Setting<int>* SanePreferences::pauseOnIdleFor =
     new Setting<int>("break/pause-on-idle-for", 60);
-Setting<int>* SanePreferences::resetOnIdleFor =
-    new Setting<int>("break/reset-on-idle-for", 300);
 Setting<bool>* SanePreferences::pauseOnBattery =
     new Setting<bool>("break/pause-on-battery", false);
