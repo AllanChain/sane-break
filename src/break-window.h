@@ -12,12 +12,17 @@
 #include <QPropertyAnimation>
 #include <QTimer>
 
+enum BreakType {
+  SMALL = 0,
+  BIG = 1,
+};
+
 class BreakWindow : public QMainWindow {
   Q_OBJECT
   Q_PROPERTY(QColor color MEMBER backgroundColor NOTIFY colorChanged)
 
  public:
-  BreakWindow(QWidget *parent = nullptr);
+  BreakWindow(BreakType type, QWidget *parent = nullptr);
   ~BreakWindow();
   void start(int totalTime);
   void setTime(int remainingTime);

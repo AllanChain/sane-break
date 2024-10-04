@@ -33,7 +33,6 @@ class SaneBreakApp : public QObject {
   void pauseBreak(uint reason);
   bool resumeBreak(uint reason);
   void resetBreak();
-  int breakTime();
   int smallBreaksBeforeBig();
 
  signals:

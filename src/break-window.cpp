@@ -14,7 +14,8 @@
 #include <QVBoxLayout>
 #include <QWindow>
 
-BreakWindow::BreakWindow(QWidget *parent) : QMainWindow(parent) {
+BreakWindow::BreakWindow(BreakType type, QWidget *parent)
+    : QMainWindow(parent) {
   setAttribute(Qt::WA_TranslucentBackground);
   setAttribute(Qt::WA_ShowWithoutActivating);
   setWindowFlags(Qt::ToolTip | Qt::WindowDoesNotAcceptFocus |
@@ -36,7 +37,9 @@ BreakWindow::BreakWindow(QWidget *parent) : QMainWindow(parent) {
   textLayout->setAlignment(Qt::AlignCenter);
   layout->addLayout(textLayout);
 
-  QLabel *breakLabel = new QLabel("Time to break");
+  QLabel *breakLabel =
+      new QLabel(QString("Time for a %1 break")
+                     .arg(type == BreakType::BIG ? "big" : "small"));
   breakLabel->setObjectName("breakLabel");
   textLayout->addWidget(breakLabel);
 
@@ -51,7 +54,10 @@ BreakWindow::BreakWindow(QWidget *parent) : QMainWindow(parent) {
   progressAnim->setEndValue(0);
 
   bgAnim = new QPropertyAnimation(this, "color");
-  bgAnim->setStartValue(QColor(235, 203, 139, 100));
+  if (type == BreakType::BIG)
+    bgAnim->setStartValue(QColor(180, 142, 173, 100));
+  else
+    bgAnim->setStartValue(QColor(235, 203, 139, 100));
   bgAnim->setEndValue(QColor(46, 52, 64, 255));
   bgAnim->setDuration(500);
   bgAnim->setLoopCount(-1);

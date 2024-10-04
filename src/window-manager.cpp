@@ -9,6 +9,7 @@
 #include <utility>
 
 #include "config.h"
+#include "preferences.h"
 
 #ifdef LayerShellQt_FOUND
 #include <LayerShellQt/Shell>
@@ -50,11 +51,11 @@ BreakWindowManager::BreakWindowManager() : QObject() {
 
 BreakWindowManager::~BreakWindowManager() {};
 
-void BreakWindowManager::createWindows() {
+void BreakWindowManager::createWindows(BreakType type) {
   QList<QScreen *> screens = QApplication::screens();
 
   for (QScreen *screen : std::as_const(screens)) {
-    BreakWindow *w = new BreakWindow();
+    BreakWindow *w = new BreakWindow(type);
     windows.append(w);
     w->initSize(screen);
     w->show();
@@ -75,13 +76,14 @@ void BreakWindowManager::createWindows() {
   }
 }
 
-void BreakWindowManager::show(int breakTime) {
-  remainingTime = breakTime;
-  totalTime = breakTime;
+void BreakWindowManager::show(BreakType type) {
+  totalTime = type == BreakType::BIG ? SanePreferences::bigFor->get()
+                                     : SanePreferences::smallFor->get();
+  remainingTime = totalTime;
   isIdle = false;
   isForceBreak = false;
-  createWindows();
-  for (auto w : std::as_const(windows)) w->start(breakTime);
+  createWindows(type);
+  for (auto w : std::as_const(windows)) w->start(totalTime);
   countdownTimer->start();
   forceBreakTimer->start();
   idleTimer->startWatching(NOTIFY_FIRST_IDLE);

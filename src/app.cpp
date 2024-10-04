@@ -142,7 +142,8 @@ void SaneBreakApp::breakNow() {
   secondsToNextBreak = SanePreferences::smallEvery->get();
   updateMenu();
   countDownTimer->stop();
-  breakManager->show(breakTime());
+  breakManager->show(smallBreaksBeforeBig() == 0 ? BreakType::BIG
+                                                 : BreakType::SMALL);
   breakCycleCount++;
   // Reset icon
   icon->setIcon(QIcon(":/images/icon.png"));
@@ -209,10 +210,4 @@ int SaneBreakApp::smallBreaksBeforeBig() {
   int breakEvery = SanePreferences::bigAfter->get();
   breakCycleCount %= breakEvery;
   return (breakEvery - breakCycleCount) % breakEvery;
-}
-
-int SaneBreakApp::breakTime() {
-  QSettings settings;
-  return (smallBreaksBeforeBig() == 0) ? SanePreferences::bigFor->get()
-                                       : SanePreferences::smallFor->get();
 }
