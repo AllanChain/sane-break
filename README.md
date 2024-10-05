@@ -51,11 +51,11 @@ See [Compiling from source](#compiling-from-source) for details.
 
 ### macOS
 
-Both Intel and ARM version of macOS 14 are supported. Older versions may work too.
+Both x86 and ARM version of macOS 12 or newer are supported. Older versions may work too.
 
 ### Windows
 
-Intel version of Windows 11 is supported. Older versions may work too.
+x86 version of Windows 10 or newer is supported. Older versions may work too.
 
 ## Compiling from source
 
