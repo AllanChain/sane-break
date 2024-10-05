@@ -201,8 +201,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
           });
 
   label = new QLabel("Flash for");
-  label->setToolTip(
-      "How long should the window keep flashing before forcing breaks.");
+  label->setToolTip("How long you can work before forced breaks.");
   breakForm->addWidget(label, 4, 0);
   flashForSlider = new SteppedSlider(Qt::Horizontal);
   flashForSlider->setMaximum(300);
