@@ -39,6 +39,7 @@ class PreferenceWindow : public QMainWindow {
   SteppedSlider *smallBreakForSlider;
   SteppedSlider *bigBreakAfterSlider;
   SteppedSlider *bigBreakForSlider;
+  SteppedSlider *flashForSlider;
   SteppedSlider *pauseOnIdleSlider;
   QCheckBox *pauseOnBatteryCheck;
 };

@@ -33,7 +33,6 @@ BreakWindowManager::BreakWindowManager() : QObject() {
   connect(countdownTimer, &QTimer::timeout, this, &BreakWindowManager::tick);
 
   forceBreakTimer = new QTimer(this);
-  forceBreakTimer->setInterval(30000);
   forceBreakTimer->setSingleShot(true);
   connect(forceBreakTimer, &QTimer::timeout, this,
           &BreakWindowManager::forceBreak);
@@ -85,6 +84,7 @@ void BreakWindowManager::show(BreakType type) {
   createWindows(type);
   for (auto w : std::as_const(windows)) w->start(totalTime);
   countdownTimer->start();
+  forceBreakTimer->setInterval(SanePreferences::flashFor->get() * 1000);
   forceBreakTimer->start();
   idleTimer->startWatching(NOTIFY_FIRST_IDLE);
 }

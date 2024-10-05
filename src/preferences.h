@@ -49,6 +49,7 @@ class SanePreferences : public QObject {
   static Setting<int> *smallFor;
   static Setting<int> *bigAfter;
   static Setting<int> *bigFor;
+  static Setting<int> *flashFor;
   static Setting<int> *pauseOnIdleFor;
   static Setting<bool> *pauseOnBattery;
 };

@@ -189,6 +189,22 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
             bigBreakForLabel->setText(QString("%1 sec").arg(value));
           });
 
+  breakForm->addWidget(new QLabel("Flash for"), 4, 0);
+  flashForSlider = new SteppedSlider(Qt::Horizontal);
+  flashForSlider->setMaximum(300);
+  flashForSlider->setSingleStep(10);
+  flashForSlider->setTickInterval(30);
+  flashForSlider->setPageStep(30);
+  breakForm->addWidget(flashForSlider, 4, 1);
+
+  QLabel *flashForLabel = new QLabel();
+  breakForm->addWidget(flashForLabel, 4, 2);
+  flashForLabel->setText(QString("%1 sec").arg(flashForSlider->value()));
+  connect(flashForSlider, &SteppedSlider::valueChanged, this,
+          [flashForLabel](int value) {
+            flashForLabel->setText(QString("%1 sec").arg(value));
+          });
+
   layout->addWidget(new QLabel("<h3>Pausing</h3>"));
 
   QGridLayout *pauseForm = new QGridLayout();
@@ -229,6 +245,7 @@ void PreferenceWindow::loadSettings() {
   smallBreakForSlider->setValue(SanePreferences::smallFor->get());
   bigBreakAfterSlider->setValue(SanePreferences::bigAfter->get());
   bigBreakForSlider->setValue(SanePreferences::bigFor->get());
+  flashForSlider->setValue(SanePreferences::flashFor->get());
   pauseOnIdleSlider->setValue(SanePreferences::pauseOnIdleFor->get() / 60);
   pauseOnBatteryCheck->setChecked(SanePreferences::pauseOnBattery->get());
 }
@@ -238,6 +255,7 @@ void PreferenceWindow::saveSettings() {
   SanePreferences::smallFor->set(smallBreakForSlider->value());
   SanePreferences::bigAfter->set(bigBreakAfterSlider->value());
   SanePreferences::bigFor->set(bigBreakForSlider->value());
+  SanePreferences::flashFor->set(flashForSlider->value());
   SanePreferences::pauseOnIdleFor->set(pauseOnIdleSlider->value() * 60);
   SanePreferences::pauseOnBattery->set(pauseOnBatteryCheck->isChecked());
 }
