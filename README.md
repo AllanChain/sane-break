@@ -51,7 +51,7 @@ See [Compiling from source](#compiling-from-source) for details.
 
 ### macOS
 
-Both x86 and ARM version of macOS 12 or newer are supported. Older versions may work too.
+Both x86 and ARM version of macOS 12 or newer are supported.
 
 ### Windows
 

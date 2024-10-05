@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 
+# Should be set before project call
+set(CMAKE_OSX_DEPLOYMENT_TARGET "12")
+
 project(sane-break VERSION 0.2.4 LANGUAGES C CXX)
 
 set(CMAKE_AUTOUIC ON)
