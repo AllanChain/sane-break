@@ -17,15 +17,16 @@ All too often, I'm deeply focused on a task when the break reminder appears. Alm
 
 Many existing solutions demand immediate action, often leading to mindless skips or postpones. This defeats the purpose of taking regular, meaningful breaks. Instead, Sane Break provides a gentle initial nudge, allowing you to wrap up your current task before enforcing a break if necessary.
 
-Inspired by the design of RSIBreak, Sane Break employs a two-phase system:
+Sane Break employs a two-phase system:
 
 - Phase 1: A small, unobtrusive reminder that you can acknowledge or ignore.
-- Phase 2: If you continue working for too long, the reminder grows fullscreen, ensuring you take a break.
+- Phase 2: The reminder grows to full screen, ensuring you take a break.
 
-Key improvemnets compared with RSIBreak:
+Transition to phase 2 happens when you stop working on your computer, or ignore the reminder and keep working for too long.
 
-- Automatic transition to the fullscreen phase when you stop working.
-- No skip or postpone buttons to avoid mindless dismissals.
+This design is an enhanced version of the [RSIBreak](https://apps.kde.org/rsibreak/) design, but Sane Break has some other improvements:
+
+- No big skip or postpone buttons to avoid mindless dismissals.
 - [Cross-platform support](#platform-support)
 
 Sane Break aims to strike a balance between respecting your workflow and ensuring you take the breaks you need.
