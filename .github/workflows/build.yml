@@ -44,7 +44,7 @@ jobs:
         mv build\Release\sane-break.exe .
         7z a release/sane-break-windows.zip sane-break.exe LICENSE
 
-    - name: Packing (macOs)
+    - name: Packing (macOS)
       if: contains(matrix.os, 'macos')
       run: |
         mv build/sane-break.app "build/Sane Break.app"
