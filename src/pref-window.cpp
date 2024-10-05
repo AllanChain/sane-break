@@ -125,8 +125,13 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   QGridLayout *breakForm = new QGridLayout();
   layout->addLayout(breakForm);
 
-  breakForm->addWidget(new QLabel("Small break every"), 0, 0);
-  breakForm->addWidget(new QLabel("Small break for"), 1, 0);
+  QLabel *label;
+  label = new QLabel("Small break every");
+  label->setToolTip("Schedule each break in this duration.");
+  breakForm->addWidget(label, 0, 0);
+  label = new QLabel("Small break for");
+  label->setToolTip("How long should you break for each small break.");
+  breakForm->addWidget(label, 1, 0);
 
   smallBreakEverySlider = new SteppedSlider(Qt::Horizontal);
   smallBreakEverySlider->setMaximum(60);
@@ -156,8 +161,14 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
             smallBreakForLabel->setText(QString("%1 sec").arg(value));
           });
 
-  breakForm->addWidget(new QLabel("Big break after"), 2, 0);
-  breakForm->addWidget(new QLabel("Big break for"), 3, 0);
+  label = new QLabel("Big break every");
+  label->setToolTip(
+      "Schedule big breaks in this duration. Must be an integral multiple of "
+      "the small break schedules.");
+  breakForm->addWidget(label, 2, 0);
+  label = new QLabel("Big break for");
+  label->setToolTip("How long should you break for each big break.");
+  breakForm->addWidget(label, 3, 0);
 
   bigBreakAfterSlider = new SteppedSlider(Qt::Horizontal);
   bigBreakAfterSlider->setMinimum(1);
@@ -189,7 +200,10 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
             bigBreakForLabel->setText(QString("%1 sec").arg(value));
           });
 
-  breakForm->addWidget(new QLabel("Flash for"), 4, 0);
+  label = new QLabel("Flash for");
+  label->setToolTip(
+      "How long should the window keep flashing before forcing breaks.");
+  breakForm->addWidget(label, 4, 0);
   flashForSlider = new SteppedSlider(Qt::Horizontal);
   flashForSlider->setMaximum(300);
   flashForSlider->setSingleStep(10);
@@ -215,7 +229,9 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   pauseOnIdleSlider->setMinimum(1);
   pauseOnIdleSlider->setTickPosition(SteppedSlider::TicksBelow);
 
-  pauseForm->addWidget(new QLabel("Pause on idle for"), 4, 0);
+  label = new QLabel("Pause on idle for");
+  label->setToolTip("Sane Break will pause when you are idle for this long.");
+  pauseForm->addWidget(label, 4, 0);
   pauseForm->addWidget(pauseOnIdleSlider, 4, 1);
   QLabel *pauseOnIdleLabel = new QLabel();
   pauseForm->addWidget(pauseOnIdleLabel, 4, 2);
