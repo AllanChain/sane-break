@@ -123,6 +123,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   layout->addWidget(new QLabel("<h3>Breaks</h3>"));
 
   QGridLayout *breakForm = new QGridLayout();
+  breakForm->setVerticalSpacing(15);
   layout->addLayout(breakForm);
 
   QLabel *label;
