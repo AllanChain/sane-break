@@ -48,7 +48,7 @@ class SleepMonitor : public QObject {
   void sleepEnd(int sleepTime);  // in ms
  private:
   QTimer *timer;
-  QElapsedTimer *elapsedTimer;
+  int lastAwake;
   void tick();
 };
 

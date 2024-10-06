@@ -6,6 +6,8 @@
 
 #include <qglobal.h>
 
+#include <QDateTime>
+
 #include "config.h"
 
 #ifdef Q_OS_LINUX
@@ -84,14 +86,15 @@ SleepMonitor::SleepMonitor() {
   timer = new QTimer(this);
   timer->setInterval(watchAccuracy);
   connect(timer, &QTimer::timeout, this, &SleepMonitor::tick);
-  elapsedTimer = new QElapsedTimer();
-  elapsedTimer->start();
+  timer->start();
+  lastAwake = QDateTime::currentMSecsSinceEpoch();
 }
 
 void SleepMonitor::tick() {
-  int elapsedTime = elapsedTimer->elapsed();
+  int currentTime = QDateTime::currentMSecsSinceEpoch();
+  int elapsedTime = currentTime - lastAwake;
+  lastAwake = currentTime;
   if (elapsedTime > 2 * watchAccuracy) {
     emit sleepEnd(elapsedTime);
   }
-  elapsedTimer->restart();
 }
