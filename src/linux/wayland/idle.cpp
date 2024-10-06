@@ -7,7 +7,6 @@
 #ifdef Q_OS_LINUX
 #include <wayland-client.h>
 
-#include <QElapsedTimer>
 #include <QGuiApplication>
 
 #include "idle.h"
@@ -18,7 +17,6 @@ IdleTimeWayland::IdleTimeWayland() : SystemIdleTime() {
       qGuiApp->nativeInterface<QNativeInterface::QWaylandApplication>();
   wl_display *display = waylandApp->display();
   wl_registry *registry = wl_display_get_registry(display);
-  elapseTimer = new QElapsedTimer();
   seat = waylandApp->seat();
   wl_registry_add_listener(registry, &globalListener, this);
   wl_display_roundtrip(display);
@@ -42,13 +40,12 @@ void IdleTimeWayland::globalRemoved(void *data, wl_registry *registry,
 
 void IdleTimeWayland::idled(void *data, ext_idle_notification_v1 *object) {
   IdleTimeWayland *self = static_cast<IdleTimeWayland *>(data);
-  self->elapseTimer->start();
   emit self->idleStart();
 };
 
 void IdleTimeWayland::resumed(void *data, ext_idle_notification_v1 *object) {
   IdleTimeWayland *self = static_cast<IdleTimeWayland *>(data);
-  emit self->idleEnd(self->elapseTimer->restart());
+  emit self->idleEnd();
 };
 
 void IdleTimeWayland::startWatching(WatchOption option) {

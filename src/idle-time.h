@@ -5,7 +5,6 @@
 #ifndef SANE_BREAK_IDLE_H
 #define SANE_BREAK_IDLE_H
 
-#include <QElapsedTimer>
 #include <QObject>
 #include <QTimer>
 
@@ -21,7 +20,7 @@ class SystemIdleTime : public QObject {
   static SystemIdleTime *createIdleTimer();
  signals:
   void idleStart();
-  void idleEnd(int ms);
+  void idleEnd();
 };
 
 class ReadBasedIdleTime : public SystemIdleTime {
@@ -36,7 +35,6 @@ class ReadBasedIdleTime : public SystemIdleTime {
   QTimer *timer;
   void tick();
   bool isIdle;
-  int idleTime;
 };
 
 class SleepMonitor : public QObject {
@@ -45,7 +43,7 @@ class SleepMonitor : public QObject {
   SleepMonitor();
   int watchAccuracy = 5000;  // in ms
  signals:
-  void sleepEnd(int sleepTime);  // in ms
+  void sleepEnd();  // in ms
  private:
   QTimer *timer;
   int lastAwake;

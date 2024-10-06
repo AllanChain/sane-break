@@ -10,7 +10,6 @@
 
 #include <wayland-client.h>
 
-#include <QElapsedTimer>
 #include <QTimer>
 
 #include "idle-time.h"
@@ -39,7 +38,6 @@ class IdleTimeWayland : public SystemIdleTime {
   wl_seat *seat;
   ext_idle_notifier_v1 *idleNotifier = nullptr;
   ext_idle_notification_v1 *idleNotification = nullptr;
-  QElapsedTimer *elapseTimer;
   bool isIdle;
   bool isWatching = false;
 };

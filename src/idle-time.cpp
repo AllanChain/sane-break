@@ -74,12 +74,11 @@ void ReadBasedIdleTime::tick() {
   int currentIdleTime = systemIdleTime();
   if (currentIdleTime < minIdleTime && isIdle) {
     isIdle = false;
-    emit idleEnd(idleTime);
+    emit idleEnd();
   } else if (currentIdleTime > minIdleTime && !isIdle) {
     isIdle = true;
     emit idleStart();
   }
-  idleTime = currentIdleTime;
 }
 
 SleepMonitor::SleepMonitor() {
@@ -92,9 +91,8 @@ SleepMonitor::SleepMonitor() {
 
 void SleepMonitor::tick() {
   int currentTime = QDateTime::currentMSecsSinceEpoch();
-  int elapsedTime = currentTime - lastAwake;
-  lastAwake = currentTime;
-  if (elapsedTime > 2 * watchAccuracy) {
-    emit sleepEnd(elapsedTime);
+  if (currentTime - lastAwake > 2 * watchAccuracy) {
+    emit sleepEnd();
   }
+  lastAwake = currentTime;
 }

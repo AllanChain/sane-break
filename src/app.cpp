@@ -40,9 +40,9 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   connect(idleTimer, &SystemIdleTime::idleStart, this,
           [this]() { pauseBreak(PauseReason::IDLE); });
   connect(idleTimer, &SystemIdleTime::idleEnd, this,
-          [this](int ms) { bool resumed = resumeBreak(PauseReason::IDLE); });
+          [this]() { bool resumed = resumeBreak(PauseReason::IDLE); });
   connect(sleepMonitor, &SleepMonitor::sleepEnd, this,
-          [this](int ms) { resetBreak(); });
+          [this]() { resetBreak(); });
   connect(batteryWatcher, &BatteryStatus::onBattery, this, [this]() {
     if (SanePreferences::pauseOnBattery->get())
       pauseBreak(PauseReason::ON_BATTERY);
