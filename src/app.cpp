@@ -5,6 +5,7 @@
 #include "app.h"
 
 #include <QAction>
+#include <QDateTime>
 #include <QIcon>
 #include <QMenu>
 #include <QSettings>
@@ -29,7 +30,6 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   icon->setIcon(QIcon(":/images/icon.png"));
   icon->setContextMenu(menu);
 
-  lastPause = new QElapsedTimer();
   secondsToNextBreak = SanePreferences::smallEvery->get();
   countDownTimer = new QTimer();
   countDownTimer->setInterval(1000);
@@ -161,7 +161,7 @@ void SaneBreakApp::postpone(int secs) {
 
 void SaneBreakApp::pauseBreak(uint reason) {
   // Should not record last pause if already paused
-  if (pauseReasons == 0) lastPause->start();
+  if (pauseReasons == 0) lastPause = QDateTime::currentSecsSinceEpoch();
   countDownTimer->stop();
   breakManager->close();  // stop current break if necessary
   // But the timer will resume after current break end
@@ -189,14 +189,16 @@ bool SaneBreakApp::resumeBreak(uint reason) {
   // If there are other reasons for pausing, do nothing
   if (pauseReasons != 0) return false;
 
-  int msecPaused = lastPause->elapsed();
-  lastPause->invalidate();
-  // "self healing" algorithm for break time
-  // We don't want to have a break soon after breaks resumed.
-  // Thus we add a little bit time according to the time paused.
-  secondsToNextBreak = secondsToNextBreak + msecPaused / 1000;
-  if (secondsToNextBreak > SanePreferences::smallEvery->get())
-    secondsToNextBreak = SanePreferences::smallEvery->get();
+  if (lastPause > 0) {  // We have correctly recorded last pause time
+    int secPaused = QDateTime::currentSecsSinceEpoch() - lastPause;
+    lastPause = 0;
+    // "self healing" algorithm for break time
+    // We don't want to have a break soon after breaks resumed.
+    // Thus we add a little bit time according to the time paused.
+    secondsToNextBreak = secondsToNextBreak + secPaused;
+    if (secondsToNextBreak > SanePreferences::smallEvery->get())
+      secondsToNextBreak = SanePreferences::smallEvery->get();
+  }
   countDownTimer->start();
 
   enableBreak->setVisible(false);
