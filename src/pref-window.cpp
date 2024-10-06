@@ -142,10 +142,8 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   breakForm->addWidget(smallBreakEveryLabel, 0, 2);
   smallBreakEveryLabel->setText(
       QString("%1 min").arg(smallBreakEverySlider->value()));
-  connect(smallBreakEverySlider, &SteppedSlider::valueChanged, this,
-          [smallBreakEveryLabel](int value) {
-            smallBreakEveryLabel->setText(QString("%1 min").arg(value));
-          });
+  // bigBreakAfterLabel should react acoording to smallBreakEverySlider.
+  // Therefore the event listener is added afterwards.
 
   smallBreakForSlider = new SteppedSlider(Qt::Horizontal);
   smallBreakForSlider->setMaximum(60);
@@ -183,6 +181,12 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
           [bigBreakAfterLabel, this](int value) {
             bigBreakAfterLabel->setText(
                 QString("%1 min").arg(value * smallBreakEverySlider->value()));
+          });
+  connect(smallBreakEverySlider, &SteppedSlider::valueChanged, this,
+          [smallBreakEveryLabel, bigBreakAfterLabel, this](int value) {
+            smallBreakEveryLabel->setText(QString("%1 min").arg(value));
+            bigBreakAfterLabel->setText(
+                QString("%1 min").arg(value * bigBreakAfterSlider->value()));
           });
 
   bigBreakForSlider = new SteppedSlider(Qt::Horizontal);
