@@ -39,6 +39,12 @@ For more details about the motivation behind Sane Break, you can refer to [No br
 
 https://github.com/user-attachments/assets/35002673-ce83-4848-bd5e-6cc6dbbd4c8c
 
+## 📷 Screenshots
+
+|Menu (running and paused)|Preference|
+|:--:|:--------:|
+|![Menu screenshot](https://github.com/user-attachments/assets/9203a4fa-1159-4243-8799-2739fbb12f3a)![paused](https://github.com/user-attachments/assets/df9aca8c-e995-4f52-993c-b8e152725126)|![Preference screenshot](https://github.com/user-attachments/assets/e7af0e60-eeb8-436e-bdbf-80ad52e00f25)|
+
 ## Platform support
 
 ### Linux
