@@ -13,20 +13,22 @@ Sane Break is a cross-platform break reminder designed to help you take meaningf
 
 ## 🤔 Why another break reminder?
 
-All too often, I'm deeply focused on a task when the break reminder appears. Almost instinctively, I click "skip" or "postpone" without a second thought. Before I know it, hours have passed without a single break.
+All too often, I'm deeply focused on a task when the break reminder pops up. Almost instinctively, I click "skip" or "postpone", and before I know it, hours have passed without a single break.
 
-Many existing solutions demand immediate action, often leading to mindless skips or postpones. This defeats the purpose of taking regular, meaningful breaks. Instead, Sane Break provides a gentle initial nudge, allowing you to wrap up your current task before enforcing a break if necessary.
+Many break reminder apps demand immediate action, which often leads to mindlessly skipping or delaying the break. While some of them send notifications before the break is scheduled, they merely inform me that a break is _going to happen_, rather than telling me it's _happening right now_. As a result, I end up ignoring these notifications and continue working.
 
-Sane Break employs a two-phase system:
+In contrast, Sane Break allows me to take ownership of _when_ to stop and break. It starts by providing a gentle, non-intrusive reminder through a flashing window. The break officially begins as soon as I naturally pause after finishing my current task. This way, Sane Break offers the flexibility to wrap up my work and take a break on my terms, rather than forcing an abrupt interruption.
+
+Specifically, Sane Break employs a two-phase system:
 
 - Phase 1: A small, unobtrusive reminder that you can acknowledge or ignore.
 - Phase 2: The reminder grows to full screen, ensuring you take a break.
 
-Transition to phase 2 happens when you stop working on your computer, or ignore the reminder and keep working for too long.
+Transition to phase 2 happens when you stop working on your computer, or ignore the reminder and keep working for too long (configurable).
 
 This design is an enhanced version of the [RSIBreak](https://apps.kde.org/rsibreak/) design, but Sane Break has some other improvements:
 
-- No big skip or postpone buttons to avoid mindless dismissals.
+- No big buttons for skipping or postponing to avoid mindless dismissals.
 - [Cross-platform support](#platform-support)
 
 Sane Break aims to strike a balance between respecting your workflow and ensuring you take the breaks you need.
