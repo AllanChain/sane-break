@@ -41,7 +41,7 @@ https://github.com/user-attachments/assets/35002673-ce83-4848-bd5e-6cc6dbbd4c8c
 
 <details>
   <summary>📷 <b>Screenshots</b></summary>
-  
+
 ![flashing](https://github.com/user-attachments/assets/d046c46d-3de9-4935-b16d-fbd2124c1d49)
 ![fullscreen](https://github.com/user-attachments/assets/59164505-3446-4ef7-b0e0-5ffe0a607c44)
 ![macos](https://github.com/user-attachments/assets/e0368152-8e0e-4850-b0c1-9f8df742a931)
@@ -89,6 +89,10 @@ sudo cmake --install .
 ```
 
 ## FAQ
+
+### How to exit?
+
+Right-click the menu icon and hover over the "Postpone" menu. The "Quit" menu is there. This design is intended to make users think twice about whether they want to postpone breaks or really quit the software.
 
 ### How to start Sane Break on startup?
 
