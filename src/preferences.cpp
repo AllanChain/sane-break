@@ -16,6 +16,6 @@ Setting<int>* SanePreferences::bigFor = new Setting<int>("break/big-for", 60);
 Setting<int>* SanePreferences::flashFor =
     new Setting<int>("break/flash-for", 30);
 Setting<int>* SanePreferences::pauseOnIdleFor =
-    new Setting<int>("pause/on-idle-for", 60);
+    new Setting<int>("pause/on-idle-for", 180);
 Setting<bool>* SanePreferences::pauseOnBattery =
     new Setting<bool>("pause/on-battery", false);
