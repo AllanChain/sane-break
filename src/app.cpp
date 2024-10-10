@@ -211,9 +211,11 @@ void SaneBreakApp::onSleepEnd() {
   breakCycleCount = 1;
   breakManager->close();  // stop current break if necessary
   secondsToNextBreak = SanePreferences::smallEvery->get();
-  updateMenu();
-  // Bue we update icon (in case <1min) only if not paused
-  if (pauseReasons == 0) icon->setIcon(QIcon(":/images/icon.png"));
+  // Bue we update menu and icon (in case <1min) only if not paused
+  if (pauseReasons == 0) {
+    updateMenu();
+    icon->setIcon(QIcon(":/images/icon.png"));
+  }
 }
 
 int SaneBreakApp::smallBreaksBeforeBig() {
