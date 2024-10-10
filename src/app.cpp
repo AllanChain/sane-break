@@ -42,7 +42,7 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   connect(idleTimer, &SystemIdleTime::idleEnd, this,
           [this]() { bool resumed = resumeBreak(PauseReason::IDLE); });
   connect(sleepMonitor, &SleepMonitor::sleepEnd, this,
-          [this]() { resetBreak(); });
+          &SaneBreakApp::onSleepEnd);
   connect(batteryWatcher, &BatteryStatus::onBattery, this, [this]() {
     if (SanePreferences::pauseOnBattery->get())
       pauseBreak(PauseReason::ON_BATTERY);
@@ -206,13 +206,14 @@ bool SaneBreakApp::resumeBreak(uint reason) {
   return true;
 }
 
-void SaneBreakApp::resetBreak() {
+void SaneBreakApp::onSleepEnd() {
+  // We reset these regardless of paused or not
   breakCycleCount = 1;
-  pauseReasons = 0;
-  if (!countDownTimer->isActive()) countDownTimer->start();
+  breakManager->close();  // stop current break if necessary
   secondsToNextBreak = SanePreferences::smallEvery->get();
   updateMenu();
-  icon->setIcon(QIcon(":/images/icon.png"));
+  // Bue we update icon (in case <1min) only if not paused
+  if (pauseReasons == 0) icon->setIcon(QIcon(":/images/icon.png"));
 }
 
 int SaneBreakApp::smallBreaksBeforeBig() {
