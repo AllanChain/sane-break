@@ -34,36 +34,19 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   countDownTimer = new QTimer();
   countDownTimer->setInterval(1000);
   connect(countDownTimer, &QTimer::timeout, this, &SaneBreakApp::tick);
-  connect(breakManager, &BreakWindowManager::timeout, this, [this]() {
-    // Pause immediately (in 1s) after break end if idle
-    if (pauseReasons == 0) idleTimer->setMinIdleTime(1000);
-  });
+  connect(breakManager, &BreakWindowManager::timeout, this,
+          &SaneBreakApp::onBreakEnd);
   connect(idleTimer, &SystemIdleTime::idleStart, this,
-          [this]() { pauseBreak(PauseReason::IDLE); });
-  connect(idleTimer, &SystemIdleTime::idleEnd, this, [this]() {
-    if (idleTimer->minIdleTime() ==
-        1000)  // Reset min idle time set by break end
-      idleTimer->setMinIdleTime(SanePreferences::pauseOnIdleFor->get() * 1000);
-    bool resumed = resumeBreak(PauseReason::IDLE);
-  });
+          &SaneBreakApp::onIdleStart);
+  connect(idleTimer, &SystemIdleTime::idleEnd, this, &SaneBreakApp::onIdleEnd);
   connect(sleepMonitor, &SleepMonitor::sleepEnd, this,
           &SaneBreakApp::onSleepEnd);
-  connect(batteryWatcher, &BatteryStatus::onBattery, this, [this]() {
-    if (SanePreferences::pauseOnBattery->get())
-      pauseBreak(PauseReason::ON_BATTERY);
-  });
-  connect(batteryWatcher, &BatteryStatus::onPower, this, [this]() {
-    // No need to check setitngs because it does nothing if not paused with this
-    resumeBreak(PauseReason::ON_BATTERY);
-  });
+  connect(batteryWatcher, &BatteryStatus::onBattery, this,
+          &SaneBreakApp::onBattery);
+  connect(batteryWatcher, &BatteryStatus::onPower, this,
+          &SaneBreakApp::onPower);
   connect(SanePreferences::pauseOnBattery, &SettingWithSignal::changed, this,
-          [this]() {
-            bool doPause = SanePreferences::pauseOnBattery->get();
-            if (!doPause)
-              resumeBreak(PauseReason::ON_BATTERY);
-            else if (batteryWatcher->isOnBattery)
-              pauseBreak(PauseReason::ON_BATTERY);
-          });
+          &SaneBreakApp::onSettingChange);
 }
 SaneBreakApp::~SaneBreakApp() {}
 
@@ -211,6 +194,13 @@ bool SaneBreakApp::resumeBreak(uint reason) {
   return true;
 }
 
+int SaneBreakApp::smallBreaksBeforeBig() {
+  QSettings settings;
+  int breakEvery = SanePreferences::bigAfter->get();
+  breakCycleCount %= breakEvery;
+  return (breakEvery - breakCycleCount) % breakEvery;
+}
+
 void SaneBreakApp::onSleepEnd() {
   // We reset these regardless of paused or not
   breakCycleCount = 1;
@@ -223,9 +213,35 @@ void SaneBreakApp::onSleepEnd() {
   }
 }
 
-int SaneBreakApp::smallBreaksBeforeBig() {
-  QSettings settings;
-  int breakEvery = SanePreferences::bigAfter->get();
-  breakCycleCount %= breakEvery;
-  return (breakEvery - breakCycleCount) % breakEvery;
+void SaneBreakApp::onBreakEnd() {
+  // Pause immediately (in 1s) after break end if idle
+  if (pauseReasons == 0) idleTimer->setMinIdleTime(1000);
+}
+
+void SaneBreakApp::onIdleStart() { pauseBreak(PauseReason::IDLE); }
+
+void SaneBreakApp::onIdleEnd() {
+  if (idleTimer->minIdleTime() == 1000) {
+    // Reset min idle time set by break end
+    idleTimer->setMinIdleTime(SanePreferences::pauseOnIdleFor->get() * 1000);
+  }
+  bool resumed = resumeBreak(PauseReason::IDLE);
+}
+
+void SaneBreakApp::onBattery() {
+  if (SanePreferences::pauseOnBattery->get())
+    pauseBreak(PauseReason::ON_BATTERY);
+}
+
+void SaneBreakApp::onPower() {
+  // No need to check setitngs because it does nothing if not paused with this
+  resumeBreak(PauseReason::ON_BATTERY);
+}
+
+void SaneBreakApp::onSettingChange() {
+  bool doPause = SanePreferences::pauseOnBattery->get();
+  if (!doPause)
+    resumeBreak(PauseReason::ON_BATTERY);
+  else if (batteryWatcher->isOnBattery)
+    pauseBreak(PauseReason::ON_BATTERY);
 }

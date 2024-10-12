@@ -32,8 +32,14 @@ class SaneBreakApp : public QObject {
   void postpone(int secs);
   void pauseBreak(uint reason);
   bool resumeBreak(uint reason);
-  void onSleepEnd();
   int smallBreaksBeforeBig();
+  void onSleepEnd();
+  void onBreakEnd();
+  void onIdleStart();
+  void onIdleEnd();
+  void onBattery();
+  void onPower();
+  void onSettingChange();
 
  signals:
   void quit();
