@@ -34,14 +34,12 @@ BreakWindowManager::BreakWindowManager() : QObject() {
 
   forceBreakTimer = new QTimer(this);
   forceBreakTimer->setSingleShot(true);
-  connect(forceBreakTimer, &QTimer::timeout, this,
-          &BreakWindowManager::forceBreak);
+  connect(forceBreakTimer, &QTimer::timeout, this, &BreakWindowManager::forceBreak);
 
   idleTimer = SystemIdleTime::createIdleTimer();
   connect(idleTimer, &SystemIdleTime::idleStart, this,
           &BreakWindowManager::onIdleStart);
-  connect(idleTimer, &SystemIdleTime::idleEnd, this,
-          &BreakWindowManager::onIdleEnd);
+  connect(idleTimer, &SystemIdleTime::idleEnd, this, &BreakWindowManager::onIdleEnd);
 #ifdef LayerShellQt_FOUND
   if (QGuiApplication::platformName() == "wayland")
     LayerShellQt::Shell::useLayerShell();

@@ -34,17 +34,12 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   countDownTimer = new QTimer();
   countDownTimer->setInterval(1000);
   connect(countDownTimer, &QTimer::timeout, this, &SaneBreakApp::tick);
-  connect(breakManager, &BreakWindowManager::timeout, this,
-          &SaneBreakApp::onBreakEnd);
-  connect(idleTimer, &SystemIdleTime::idleStart, this,
-          &SaneBreakApp::onIdleStart);
+  connect(breakManager, &BreakWindowManager::timeout, this, &SaneBreakApp::onBreakEnd);
+  connect(idleTimer, &SystemIdleTime::idleStart, this, &SaneBreakApp::onIdleStart);
   connect(idleTimer, &SystemIdleTime::idleEnd, this, &SaneBreakApp::onIdleEnd);
-  connect(sleepMonitor, &SleepMonitor::sleepEnd, this,
-          &SaneBreakApp::onSleepEnd);
-  connect(batteryWatcher, &BatteryStatus::onBattery, this,
-          &SaneBreakApp::onBattery);
-  connect(batteryWatcher, &BatteryStatus::onPower, this,
-          &SaneBreakApp::onPower);
+  connect(sleepMonitor, &SleepMonitor::sleepEnd, this, &SaneBreakApp::onSleepEnd);
+  connect(batteryWatcher, &BatteryStatus::onBattery, this, &SaneBreakApp::onBattery);
+  connect(batteryWatcher, &BatteryStatus::onPower, this, &SaneBreakApp::onPower);
   connect(SanePreferences::pauseOnBattery, &SettingWithSignal::changed, this,
           &SaneBreakApp::onSettingChange);
 }
@@ -64,9 +59,8 @@ void SaneBreakApp::tick() {
     return;
   }
   if (secondsToNextBreak <= 10) {
-    icon->setIcon(secondsToNextBreak % 2 == 0
-                      ? QIcon(":/images/icon-yellow.png")
-                      : QIcon(":/images/icon-lime.png"));
+    icon->setIcon(secondsToNextBreak % 2 == 0 ? QIcon(":/images/icon-yellow.png")
+                                              : QIcon(":/images/icon-lime.png"));
   } else if (secondsToNextBreak == 60) {
     icon->setIcon(QIcon(":/images/icon-lime.png"));
   }
@@ -81,9 +75,8 @@ void SaneBreakApp::updateMenu() {
                        .arg(smallBreaksBeforeBig() == 0 ? "big" : "small")
                        .arg(minutes)
                        .arg(seconds, 2, 10, QChar('0')));  // Pad zero
-  nextBreakAction->setText(QString("Next break after %1:%2")
-                               .arg(minutes)
-                               .arg(seconds, 2, 10, QChar('0')));
+  nextBreakAction->setText(
+      QString("Next break after %1:%2").arg(minutes).arg(seconds, 2, 10, QChar('0')));
   bigBreakAction->setText(
       QString("Big break after %1 breaks").arg(smallBreaksBeforeBig()));
 }
@@ -128,8 +121,7 @@ void SaneBreakApp::breakNow() {
   secondsToNextBreak = SanePreferences::smallEvery->get();
   updateMenu();
   countDownTimer->stop();
-  breakManager->show(smallBreaksBeforeBig() == 0 ? BreakType::BIG
-                                                 : BreakType::SMALL);
+  breakManager->show(smallBreaksBeforeBig() == 0 ? BreakType::BIG : BreakType::SMALL);
   breakCycleCount++;
   // Reset icon
   icon->setIcon(QIcon(":/images/icon.png"));
@@ -229,8 +221,7 @@ void SaneBreakApp::onIdleEnd() {
 }
 
 void SaneBreakApp::onBattery() {
-  if (SanePreferences::pauseOnBattery->get())
-    pauseBreak(PauseReason::ON_BATTERY);
+  if (SanePreferences::pauseOnBattery->get()) pauseBreak(PauseReason::ON_BATTERY);
 }
 
 void SaneBreakApp::onPower() {

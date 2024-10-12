@@ -31,8 +31,7 @@ class Setting : public SettingWithSignal {
   }
   T get() {
     QSettings settings;
-    value = settings.value(key, QVariant::fromValue(defaultValue))
-                .template value<T>();
+    value = settings.value(key, QVariant::fromValue(defaultValue)).template value<T>();
     return value;
   };
 

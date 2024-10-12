@@ -53,8 +53,8 @@ int SteppedSlider::calculateValueFromPosition(const QPoint &pos) const {
 
   QStyleOptionSlider opt;
   initStyleOption(&opt);
-  QRect sliderRect = style()->subControlRect(QStyle::CC_Slider, &opt,
-                                             QStyle::SC_SliderHandle, this);
+  QRect sliderRect =
+      style()->subControlRect(QStyle::CC_Slider, &opt, QStyle::SC_SliderHandle, this);
 
   if (orientation() == Qt::Horizontal) {
     int sliderLength = width() - sliderRect.width();
@@ -141,8 +141,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
 
   QLabel *smallBreakEveryLabel = new QLabel();
   breakForm->addWidget(smallBreakEveryLabel, 0, 2);
-  smallBreakEveryLabel->setText(
-      QString("%1 min").arg(smallBreakEverySlider->value()));
+  smallBreakEveryLabel->setText(QString("%1 min").arg(smallBreakEverySlider->value()));
   // bigBreakAfterLabel should react acoording to smallBreakEverySlider.
   // Therefore the event listener is added afterwards.
 
@@ -153,8 +152,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
 
   QLabel *smallBreakForLabel = new QLabel();
   breakForm->addWidget(smallBreakForLabel, 1, 2);
-  smallBreakForLabel->setText(
-      QString("%1 sec").arg(smallBreakForSlider->value()));
+  smallBreakForLabel->setText(QString("%1 sec").arg(smallBreakForSlider->value()));
   connect(smallBreakForSlider, &SteppedSlider::valueChanged, this,
           [smallBreakForLabel](int value) {
             smallBreakForLabel->setText(QString("%1 sec").arg(value));
@@ -250,8 +248,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
 
   QHBoxLayout *bottomButtonLayout = new QHBoxLayout();
   QPushButton *resetButton = new QPushButton("Reset");
-  connect(resetButton, &QPushButton::pressed, this,
-          &PreferenceWindow::loadSettings);
+  connect(resetButton, &QPushButton::pressed, this, &PreferenceWindow::loadSettings);
   bottomButtonLayout->addWidget(resetButton);
   bottomButtonLayout->addStretch();
   QPushButton *saveButton = new QPushButton("Save");

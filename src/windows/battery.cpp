@@ -5,7 +5,6 @@
 #include "battery.h"
 
 #include <qglobal.h>
-
 #include <windows.h>
 
 #ifdef Q_OS_WIN

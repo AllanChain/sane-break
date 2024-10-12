@@ -14,12 +14,11 @@
 #include <QVBoxLayout>
 #include <QWindow>
 
-BreakWindow::BreakWindow(BreakType type, QWidget *parent)
-    : QMainWindow(parent) {
+BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) {
   setAttribute(Qt::WA_TranslucentBackground);
   setAttribute(Qt::WA_ShowWithoutActivating);
-  setWindowFlags(Qt::ToolTip | Qt::WindowDoesNotAcceptFocus |
-                 Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+  setWindowFlags(Qt::ToolTip | Qt::WindowDoesNotAcceptFocus | Qt::FramelessWindowHint |
+                 Qt::WindowStaysOnTopHint);
   setProperty("isFullScreen", false);
 
   QWidget *centralWidget = new QWidget(this);
@@ -37,9 +36,8 @@ BreakWindow::BreakWindow(BreakType type, QWidget *parent)
   textLayout->setAlignment(Qt::AlignCenter);
   layout->addLayout(textLayout);
 
-  QLabel *breakLabel =
-      new QLabel(QString("Time for a %1 break")
-                     .arg(type == BreakType::BIG ? "big" : "small"));
+  QLabel *breakLabel = new QLabel(
+      QString("Time for a %1 break").arg(type == BreakType::BIG ? "big" : "small"));
   breakLabel->setObjectName("breakLabel");
   textLayout->addWidget(breakLabel);
 
@@ -107,8 +105,7 @@ void BreakWindow::resizeToNormal() {
   countdownLabel->setVisible(false);
   QPropertyAnimation *resizeAnim = new QPropertyAnimation(this, "geometry");
   QRect rect = screen()->geometry();
-  QRect targetGeometry =
-      QRect(rect.x() + rect.width() / 2 - 200, rect.y(), 300, 100);
+  QRect targetGeometry = QRect(rect.x() + rect.width() / 2 - 200, rect.y(), 300, 100);
   resizeAnim->setStartValue(geometry());
   resizeAnim->setEndValue(targetGeometry);
   resizeAnim->setDuration(100);

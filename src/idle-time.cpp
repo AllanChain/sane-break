@@ -81,9 +81,7 @@ void ReadBasedIdleTime::tick() {
   }
 }
 
-void ReadBasedIdleTime::setMinIdleTime(int idleTime) {
-  m_minIdleTime = idleTime;
-}
+void ReadBasedIdleTime::setMinIdleTime(int idleTime) { m_minIdleTime = idleTime; }
 
 void ReadBasedIdleTime::setWatchAccuracy(int accuracy) {
   m_watchAccuracy = accuracy;
