@@ -40,18 +40,20 @@ void IdleTimeWayland::globalRemoved(void *data, wl_registry *registry,
 
 void IdleTimeWayland::idled(void *data, ext_idle_notification_v1 *object) {
   IdleTimeWayland *self = static_cast<IdleTimeWayland *>(data);
+  if (!self->isWatching) return;
   emit self->idleStart();
 };
 
 void IdleTimeWayland::resumed(void *data, ext_idle_notification_v1 *object) {
   IdleTimeWayland *self = static_cast<IdleTimeWayland *>(data);
+  if (!self->isWatching) return;
   emit self->idleEnd();
 };
 
 void IdleTimeWayland::startWatching(WatchOption option) {
   isWatching = true;
   idleNotification = ext_idle_notifier_v1_get_idle_notification(
-      idleNotifier, minIdleTime, seat);
+      idleNotifier, m_minIdleTime, seat);
   ext_idle_notification_v1_add_listener(idleNotification, &idleListener, this);
 }
 
@@ -59,6 +61,17 @@ void IdleTimeWayland::stopWatching() {
   isWatching = false;
   if (idleNotification != nullptr)
     ext_idle_notification_v1_destroy(idleNotification);
+}
+
+void IdleTimeWayland::setMinIdleTime(int idleTime) {
+  if (idleTime == m_minIdleTime) return;
+  m_minIdleTime = idleTime;
+  if (!isWatching) return;
+  if (idleNotification != nullptr)
+    ext_idle_notification_v1_destroy(idleNotification);
+  idleNotification = ext_idle_notifier_v1_get_idle_notification(
+      idleNotifier, m_minIdleTime, seat);
+  ext_idle_notification_v1_add_listener(idleNotification, &idleListener, this);
 }
 
 IdleTimeWayland::~IdleTimeWayland() {

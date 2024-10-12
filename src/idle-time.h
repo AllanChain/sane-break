@@ -15,12 +15,18 @@ class SystemIdleTime : public QObject {
  public:
   virtual void startWatching(WatchOption option) {};
   virtual void stopWatching() {};
-  int watchAccuracy = 500;  // How often we watch idle time (ms)
-  int minIdleTime = 2000;   // How long will we consider idle (ms)
   static SystemIdleTime *createIdleTimer();
+  int watchAccuracy() { return m_watchAccuracy; };
+  int minIdleTime() { return m_minIdleTime; };
+  virtual void setWatchAccuracy(int accuracy) {};
+  virtual void setMinIdleTime(int idleTime) {};
  signals:
   void idleStart();
   void idleEnd();
+
+ protected:
+  int m_watchAccuracy = 500;  // How often we watch idle time (ms)
+  int m_minIdleTime = 2000;   // How long will we consider idle (ms)
 };
 
 class ReadBasedIdleTime : public SystemIdleTime {
@@ -30,6 +36,8 @@ class ReadBasedIdleTime : public SystemIdleTime {
   void startWatching(WatchOption option);
   void stopWatching();
   virtual int systemIdleTime() { return 0; };
+  void setWatchAccuracy(int accuracy);
+  void setMinIdleTime(int idleTime);
 
  private:
   QTimer *timer;

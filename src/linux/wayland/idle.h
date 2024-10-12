@@ -22,6 +22,8 @@ class IdleTimeWayland : public SystemIdleTime {
   ~IdleTimeWayland();
   void startWatching(WatchOption option);
   void stopWatching();
+  void setWatchAccuracy(int accuracy) {};
+  void setMinIdleTime(int idleTime);
 
  private:
   static void globalAdded(void *data, wl_registry *registry, uint32_t name,

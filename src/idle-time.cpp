@@ -63,7 +63,7 @@ void ReadBasedIdleTime::startWatching(WatchOption option) {
       isIdle = true;
       break;
   }
-  timer->setInterval(watchAccuracy);
+  timer->setInterval(m_watchAccuracy);
   timer->start();
   tick();
 }
@@ -72,13 +72,24 @@ void ReadBasedIdleTime::stopWatching() { timer->stop(); }
 
 void ReadBasedIdleTime::tick() {
   int currentIdleTime = systemIdleTime();
-  if (currentIdleTime < minIdleTime && isIdle) {
+  if (currentIdleTime < m_minIdleTime && isIdle) {
     isIdle = false;
     emit idleEnd();
-  } else if (currentIdleTime > minIdleTime && !isIdle) {
+  } else if (currentIdleTime > m_minIdleTime && !isIdle) {
     isIdle = true;
     emit idleStart();
   }
+}
+
+void ReadBasedIdleTime::setMinIdleTime(int idleTime) {
+  m_minIdleTime = idleTime;
+}
+
+void ReadBasedIdleTime::setWatchAccuracy(int accuracy) {
+  m_watchAccuracy = accuracy;
+  timer->setInterval(accuracy);
+  if (timer->isActive()) timer->stop();
+  timer->start();
 }
 
 SleepMonitor::SleepMonitor() {

@@ -21,8 +21,8 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   prefWindow = new PreferenceWindow();
   breakManager = new BreakWindowManager();
   idleTimer = SystemIdleTime::createIdleTimer();
-  idleTimer->watchAccuracy = 5000;
-  idleTimer->minIdleTime = SanePreferences::pauseOnIdleFor->get() * 1000;
+  idleTimer->setWatchAccuracy(1000);
+  idleTimer->setMinIdleTime(SanePreferences::pauseOnIdleFor->get() * 1000);
   sleepMonitor = new SleepMonitor();
   batteryWatcher = BatteryStatus::createWatcher();
   createMenu();
@@ -35,12 +35,17 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   countDownTimer->setInterval(1000);
   connect(countDownTimer, &QTimer::timeout, this, &SaneBreakApp::tick);
   connect(breakManager, &BreakWindowManager::timeout, this, [this]() {
-    if (pauseReasons == 0) countDownTimer->start();
+    // Pause immediately (in 1s) after break end if idle
+    if (pauseReasons == 0) idleTimer->setMinIdleTime(1000);
   });
   connect(idleTimer, &SystemIdleTime::idleStart, this,
           [this]() { pauseBreak(PauseReason::IDLE); });
-  connect(idleTimer, &SystemIdleTime::idleEnd, this,
-          [this]() { bool resumed = resumeBreak(PauseReason::IDLE); });
+  connect(idleTimer, &SystemIdleTime::idleEnd, this, [this]() {
+    if (idleTimer->minIdleTime() ==
+        1000)  // Reset min idle time set by break end
+      idleTimer->setMinIdleTime(SanePreferences::pauseOnIdleFor->get() * 1000);
+    bool resumed = resumeBreak(PauseReason::IDLE);
+  });
   connect(sleepMonitor, &SleepMonitor::sleepEnd, this,
           &SaneBreakApp::onSleepEnd);
   connect(batteryWatcher, &BatteryStatus::onBattery, this, [this]() {
