@@ -38,8 +38,10 @@ class Setting : public SettingWithSignal {
     }
   }
   T get() {
+    if (cached) return value;
     QSettings settings = getSettings();
     value = settings.value(key, QVariant::fromValue(defaultValue)).template value<T>();
+    cached = true;
     return value;
   };
 
@@ -47,6 +49,7 @@ class Setting : public SettingWithSignal {
   QString key;
   T defaultValue;
   T value;
+  bool cached = false;
 };
 
 class SanePreferences : public QObject {
