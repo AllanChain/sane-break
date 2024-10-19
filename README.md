@@ -100,6 +100,16 @@ Right-click the menu icon and hover over the "Postpone" menu. The "Quit" menu is
 - macOS: Open "System Preferences" and search for "Login Items". Click "+" and add Sane Break to login items
 - Windows: Use <kbd>Win</kbd> + <kbd>R</kbd> and type `shell:startup`. Put `sane-break.exe` or its shortcut there
 
+### Where are settings stored?
+
+The default locations for settings are:
+- On Linux and macOS: ` ~/.config/SaneBreak/SaneBreak.ini`
+- On Windows: `%APPDATA%\SaneBreak\SaneBreak.ini`
+
+Beside default locations, Qt also supports reading settings from [other locations](https://doc.qt.io/qt-6/qsettings.html#locations-where-application-settings-are-stored).
+
+If you want to make Sane Break portable, especially on Windows, you can put an empty file named `SaneBreak.ini` next to the `.exe` file and Sane Break will automatically pick that file for settings.
+
 ### What if I really want to skip break?
 
 Generally, you can quit the app via tray icon right away after the break starts.

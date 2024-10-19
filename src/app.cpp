@@ -187,7 +187,6 @@ bool SaneBreakApp::resumeBreak(uint reason) {
 }
 
 int SaneBreakApp::smallBreaksBeforeBig() {
-  QSettings settings;
   int breakEvery = SanePreferences::bigAfter->get();
   breakCycleCount %= breakEvery;
   return (breakEvery - breakCycleCount) % breakEvery;
