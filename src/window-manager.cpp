@@ -126,7 +126,11 @@ void BreakWindowManager::onIdleStart() {
 }
 
 void BreakWindowManager::onIdleEnd() {
-  if (isForceBreak || remainingTime <= 0) return;
+  // Here we ignore idleEnd when remainingTime is smaller than 3 seconds.
+  // Because in most cases, user can wait for 3 seconds, but they don't want to
+  // have the whole break again just because they accidentally touch the mouse
+  // when the break almost finishes.
+  if (isForceBreak || remainingTime <= 3) return;
   for (auto w : std::as_const(windows)) {
     w->resizeToNormal();
   }
