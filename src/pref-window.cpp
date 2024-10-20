@@ -104,8 +104,8 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
       QString("<p>A polite break reminder to keep you sane.</p>"
               "<p>Copyright (C) 2024 Allan Chain, "
               "<a href=https://www.gnu.org/licenses/gpl-3.0.en.html>GPL 3.0</a>"
-              "<br>Version v%1. Source available at "
-              "<a href=https://github.com/AllanChain/sane-break>GitHub</a></p>"
+              "<br>Version v%1. Open and release at "
+              "<a href=https://github.com/AllanChain/sane-break/releases>GitHub</a></p>"
               "<p><a href=notice-window>Third party libraries notices</a></p>")
           .arg(PROJECT_VERSION));
   copyrightLabel->setTextFormat(Qt::RichText);
