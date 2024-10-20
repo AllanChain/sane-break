@@ -73,7 +73,7 @@ int SteppedSlider::calculateValueFromPosition(const QPoint &pos) const {
 
 PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   setWindowFlag(Qt::Dialog);
-  setWindowIcon(QIcon(":/images/icon.png"));
+  setWindowIcon(QIcon(":/images/icon_tray-color.png"));
   resize(400, 500);
 
   QWidget *centralWidget = new QWidget(this);

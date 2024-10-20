@@ -12,7 +12,7 @@
 
 NoticeWindow::NoticeWindow(QWidget *parent) : QMainWindow(parent) {
   setWindowFlag(Qt::Dialog);
-  setWindowIcon(QIcon(":/images/icon.png"));
+  setWindowIcon(QIcon(":/images/icon_tray-color.png"));
   setAttribute(Qt::WA_DeleteOnClose);
   resize(620, 600);
 
