@@ -150,7 +150,7 @@ void SaneBreakApp::postpone(int secs) {
 void SaneBreakApp::pauseBreak(uint reason) {
   // Should not record last pause if already paused
   if (pauseReasons == 0) lastPause = QDateTime::currentSecsSinceEpoch();
-  pauseReasons |= reason;  // Flag should be set before closing windows
+  pauseReasons |= reason;  // flag should be set before closing windows
   countDownTimer->stop();
   breakManager->close();  // stop current break if necessary
   if (reason & PauseReason::ON_BATTERY) {
@@ -205,7 +205,7 @@ void SaneBreakApp::onSleepEnd() {
   breakCycleCount = 1;
   breakManager->close();  // stop current break if necessary
   secondsToNextBreak = SanePreferences::smallEvery->get();
-  // Bue we update menu and icon (in case <1min) only if not paused
+  // But we update menu and icon (in case <1min) only if not paused
   if (pauseReasons == 0) {
     updateMenu();
     icon->setIcon(QIcon(":/images/icon.png"));
