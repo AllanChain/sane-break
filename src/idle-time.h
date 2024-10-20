@@ -20,6 +20,7 @@ class SystemIdleTime : public QObject {
   int minIdleTime() { return m_minIdleTime; };
   virtual void setWatchAccuracy(int accuracy) {};
   virtual void setMinIdleTime(int idleTime) {};
+  bool isIdle = false;
  signals:
   void idleStart();
   void idleEnd();
@@ -42,7 +43,6 @@ class ReadBasedIdleTime : public SystemIdleTime {
  private:
   QTimer *timer;
   void tick();
-  bool isIdle;
 };
 
 class SleepMonitor : public QObject {

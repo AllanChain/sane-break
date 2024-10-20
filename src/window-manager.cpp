@@ -87,9 +87,11 @@ void BreakWindowManager::show(BreakType type) {
   idleTimer->startWatching(NOTIFY_FIRST_IDLE);
 }
 
+bool BreakWindowManager::isShowing() { return windows.size() != 0; }
+
 void BreakWindowManager::close() {
   // Do nothing if window is already closed
-  if (windows.size() == 0) return;
+  if (!isShowing()) return;
   countdownTimer->stop();
   forceBreakTimer->stop();
   for (auto w : std::as_const(windows)) {

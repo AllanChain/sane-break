@@ -19,6 +19,7 @@ class BreakWindowManager : public QObject {
   ~BreakWindowManager();
   int remainingTime;
   void show(BreakType type);
+  bool isShowing();
   void close();
 
  signals:

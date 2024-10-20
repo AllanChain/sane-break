@@ -39,12 +39,14 @@ void IdleTimeWayland::globalRemoved(void *data, wl_registry *registry, uint32_t 
 void IdleTimeWayland::idled(void *data, ext_idle_notification_v1 *object) {
   IdleTimeWayland *self = static_cast<IdleTimeWayland *>(data);
   if (!self->isWatching) return;
+  self->isIdle = true;
   emit self->idleStart();
 };
 
 void IdleTimeWayland::resumed(void *data, ext_idle_notification_v1 *object) {
   IdleTimeWayland *self = static_cast<IdleTimeWayland *>(data);
   if (!self->isWatching) return;
+  self->isIdle = false;
   emit self->idleEnd();
 };
 
