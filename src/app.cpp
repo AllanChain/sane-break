@@ -82,7 +82,8 @@ void SaneBreakApp::updateIcon() {
   strokeColor = darkScheme ? QColor(255, 255, 255, 255) : QColor(0, 0, 0, 255);
 #endif  // Q_OS_MACOS
 
-  if (pauseReasons != 0 || breakManager->isShowing())
+  if (pauseReasons != 0 || breakManager->isShowing() ||
+      secondsToNextBreak > SanePreferences::smallEvery->get())
     return icon->setIcon(QIcon(":/images/icon_tray-pause-" + colorScheme + ".png"));
 
   QPixmap pixmap(":/images/icon_tray-" + colorScheme + ".png");
