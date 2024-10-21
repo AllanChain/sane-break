@@ -215,10 +215,14 @@ bool SaneBreakApp::resumeBreak(uint reason) {
     // "self healing" algorithm for break time
     // We don't want to have a break soon after breaks resumed.
     // Thus we add a little bit time according to the time paused.
-    if (secondsToNextBreak + secPaused > SanePreferences::smallEvery->get())
+    if (secondsToNextBreak + secPaused > SanePreferences::smallEvery->get()) {
       resetSecondsToNextBreak();
-    else
+      if (secPaused > SanePreferences::smallEvery->get()) {
+        breakCycleCount = 1;  // reset cycle of idle for a long time
+      }
+    } else {
       addSecondsToNextBreak(secPaused);
+    }
   }
   countDownTimer->start();
 
@@ -253,9 +257,7 @@ void SaneBreakApp::onBreakEnd() {
     oneshotIdleTimer->stopWatching();
     countDownTimer->start();
   } else {
-    // Set to paused and wait idle end
-    pauseReasons |= PauseReason::IDLE;
-    updateIcon();
+    pauseBreak(PauseReason::IDLE);
   }
 }
 
@@ -265,10 +267,8 @@ void SaneBreakApp::onIdleEnd() { bool resumed = resumeBreak(PauseReason::IDLE); 
 
 void SaneBreakApp::onOneshotIdleEnd() {
   if (breakManager->isShowing()) return;
-  pauseReasons &= ~PauseReason::IDLE;
   oneshotIdleTimer->stopWatching();
-  countDownTimer->start();
-  updateIcon();
+  resumeBreak(PauseReason::IDLE);
 }
 
 void SaneBreakApp::onBattery() {
