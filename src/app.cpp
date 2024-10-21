@@ -27,13 +27,16 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   prefWindow = new PreferenceWindow();
   breakManager = new BreakWindowManager();
   idleTimer = SystemIdleTime::createIdleTimer();
-  idleTimer->setWatchAccuracy(1000);
+  idleTimer->setWatchAccuracy(5000);
   idleTimer->setMinIdleTime(SanePreferences::pauseOnIdleFor->get() * 1000);
+  // One-shot idle detection right after break end
+  oneshotIdleTimer = SystemIdleTime::createIdleTimer();
+  oneshotIdleTimer->setWatchAccuracy(1000);
+  oneshotIdleTimer->setMinIdleTime(1000);
   sleepMonitor = new SleepMonitor();
   batteryWatcher = BatteryStatus::createWatcher();
   createMenu();
   icon = new QSystemTrayIcon(this);
-  /*icon->setIcon(QIcon(":/images/tray-dark.png"));*/
   icon->setContextMenu(menu);
 
   countDownTimer = new QTimer();
@@ -42,6 +45,8 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   connect(breakManager, &BreakWindowManager::timeout, this, &SaneBreakApp::onBreakEnd);
   connect(idleTimer, &SystemIdleTime::idleStart, this, &SaneBreakApp::onIdleStart);
   connect(idleTimer, &SystemIdleTime::idleEnd, this, &SaneBreakApp::onIdleEnd);
+  connect(oneshotIdleTimer, &SystemIdleTime::idleEnd, this,
+          &SaneBreakApp::onOneshotIdleEnd);
   connect(sleepMonitor, &SleepMonitor::sleepEnd, this, &SaneBreakApp::onSleepEnd);
   connect(batteryWatcher, &BatteryStatus::onBattery, this, &SaneBreakApp::onBattery);
   connect(batteryWatcher, &BatteryStatus::onPower, this, &SaneBreakApp::onPower);
@@ -77,7 +82,7 @@ void SaneBreakApp::updateIcon() {
   strokeColor = darkScheme ? QColor(255, 255, 255, 255) : QColor(0, 0, 0, 255);
 #endif  // Q_OS_MACOS
 
-  if (pauseReasons != 0)
+  if (pauseReasons != 0 || breakManager->isShowing())
     return icon->setIcon(QIcon(":/images/icon_tray-pause-" + colorScheme + ".png"));
 
   QPixmap pixmap(":/images/icon_tray-" + colorScheme + ".png");
@@ -163,6 +168,10 @@ void SaneBreakApp::breakNow() {
   countDownTimer->stop();
   breakManager->show(smallBreaksBeforeBig() == 0 ? BreakType::BIG : BreakType::SMALL);
   breakCycleCount++;
+  // For testing user is idle after break end
+  oneshotIdleTimer->startWatching(NOTIFY_FIRST_IDLE);
+  // Reset icon
+  updateIcon();
 }
 
 void SaneBreakApp::postpone(int secs) {
@@ -238,18 +247,27 @@ void SaneBreakApp::onSleepEnd() {
 }
 
 void SaneBreakApp::onBreakEnd() {
-  // Pause immediately (in 1s) after break end if idle
-  if (pauseReasons == 0) idleTimer->setMinIdleTime(1000);
+  if (!oneshotIdleTimer->isIdle) {
+    // Continue countdown as normal
+    oneshotIdleTimer->stopWatching();
+    countDownTimer->start();
+  } else {
+    // Set to paused and wait idle end
+    pauseReasons |= PauseReason::IDLE;
+    updateIcon();
+  }
 }
 
 void SaneBreakApp::onIdleStart() { pauseBreak(PauseReason::IDLE); }
 
-void SaneBreakApp::onIdleEnd() {
-  if (idleTimer->minIdleTime() == 1000) {
-    // Reset min idle time set by break end
-    idleTimer->setMinIdleTime(SanePreferences::pauseOnIdleFor->get() * 1000);
-  }
-  bool resumed = resumeBreak(PauseReason::IDLE);
+void SaneBreakApp::onIdleEnd() { bool resumed = resumeBreak(PauseReason::IDLE); }
+
+void SaneBreakApp::onOneshotIdleEnd() {
+  if (breakManager->isShowing()) return;
+  pauseReasons &= ~PauseReason::IDLE;
+  oneshotIdleTimer->stopWatching();
+  countDownTimer->start();
+  updateIcon();
 }
 
 void SaneBreakApp::onBattery() {

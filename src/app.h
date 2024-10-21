@@ -37,6 +37,7 @@ class SaneBreakApp : public QObject {
   void onBreakEnd();
   void onIdleStart();
   void onIdleEnd();
+  void onOneshotIdleEnd();
   void onBattery();
   void onPower();
   void onSettingChange();
@@ -48,6 +49,7 @@ class SaneBreakApp : public QObject {
   PreferenceWindow *prefWindow;
   BreakWindowManager *breakManager;
   SystemIdleTime *idleTimer;
+  SystemIdleTime *oneshotIdleTimer;
   SleepMonitor *sleepMonitor;
   BatteryStatus *batteryWatcher;
   QSystemTrayIcon *icon;
