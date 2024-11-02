@@ -1,11 +1,7 @@
 <RCC>
   <qresource prefix="/">
-    <file>images/icon_tray-color.png</file>
-    <file>images/icon_tray-monodark.png</file>
-    <file>images/icon_tray-monolight.png</file>
-    <file>images/icon_tray-pause-color.png</file>
-    <file>images/icon_tray-pause-monodark.png</file>
-    <file>images/icon_tray-pause-monolight.png</file>
+    <file>images/icon_tray.png</file>
+    <file>images/icon_tray-pause.png</file>
     <file>images/icon-256.png</file>
     <file>style.css</file>
     <file>NOTICE.md</file>

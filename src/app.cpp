@@ -73,21 +73,12 @@ void SaneBreakApp::tick() {
 }
 
 void SaneBreakApp::updateIcon() {
-  QString colorScheme = "color";
-  QColor strokeColor = QColor(220, 252, 231, 255);
-#ifdef Q_OS_MACOS
-  bool darkScheme =
-      QGuiApplication::styleHints()->colorScheme() == Qt::ColorScheme::Dark;
-  colorScheme = darkScheme ? "monodark" : "monolight";
-  strokeColor = darkScheme ? QColor(255, 255, 255, 255) : QColor(0, 0, 0, 255);
-#endif  // Q_OS_MACOS
-
   if (pauseReasons != 0 || breakManager->isShowing() ||
       secondsToNextBreak > SanePreferences::smallEvery->get())
-    return icon->setIcon(QIcon(":/images/icon_tray-pause-" + colorScheme + ".png"));
+    return icon->setIcon(QIcon(":/images/icon_tray-pause.png"));
 
-  QPixmap pixmap(":/images/icon_tray-" + colorScheme + ".png");
-  QPen pen(strokeColor);
+  QPixmap pixmap(":/images/icon_tray.png");
+  QPen pen(QColor(220, 252, 231, 255));
   QPainter painter(&pixmap);
 
   painter.setRenderHint(QPainter::Antialiasing, true);
