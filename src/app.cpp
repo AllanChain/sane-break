@@ -78,7 +78,7 @@ void SaneBreakApp::updateIcon() {
     return icon->setIcon(QIcon(":/images/icon_tray-pause.png"));
 
   QPixmap pixmap(":/images/icon_tray.png");
-  QPen pen(QColor(220, 252, 231, 255));
+  QPen pen(QColor(5, 46, 22, 255));
   QPainter painter(&pixmap);
 
   painter.setRenderHint(QPainter::Antialiasing, true);
@@ -87,7 +87,12 @@ void SaneBreakApp::updateIcon() {
   QRect rect = pixmap.rect();
   rect.setSize(QSize(rect.width() - 2, rect.height() - 2));
   rect.setTopLeft(QPoint(2, 2));
-  // Angles are in 1/16th of a degree
+  // Draw dark circle background
+  painter.drawArc(rect, 0, 360 * 16);  // angles are in 1/16th of a degree
+
+  // Draw light tracks
+  pen.setColor(QColor(220, 252, 231, 255));
+  painter.setPen(pen);
   int spanAngle = 360 * 16 * secondsToNextBreak / SanePreferences::smallEvery->get();
   painter.drawArc(rect, 90 * 16, spanAngle);
 

@@ -30,7 +30,7 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="4.3471418"
-     inkscape:cx="39.681245"
+     inkscape:cx="39.566227"
      inkscape:cy="51.413092"
      inkscape:window-width="1536"
      inkscape:window-height="896"
@@ -186,11 +186,5 @@
          id="path17-3"
          sodipodi:nodetypes="ccc" />
     </g>
-    <circle
-       style="fill:none;stroke:#052e16;stroke-width:0.79375;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
-       id="path1"
-       cx="6.3500004"
-       cy="5.0109963"
-       r="5.953125" />
   </g>
 </svg>
