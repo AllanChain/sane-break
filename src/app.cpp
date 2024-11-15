@@ -51,7 +51,9 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   connect(batteryWatcher, &BatteryStatus::onBattery, this, &SaneBreakApp::onBattery);
   connect(batteryWatcher, &BatteryStatus::onPower, this, &SaneBreakApp::onPower);
   connect(SanePreferences::pauseOnBattery, &SettingWithSignal::changed, this,
-          &SaneBreakApp::onSettingChange);
+          &SaneBreakApp::onBatterySettingChange);
+  connect(SanePreferences::smallEvery, &SettingWithSignal::changed, this,
+          &SaneBreakApp::resetSecondsToNextBreak);
 }
 SaneBreakApp::~SaneBreakApp() {}
 
@@ -282,7 +284,7 @@ void SaneBreakApp::onPower() {
   resumeBreak(PauseReason::ON_BATTERY);
 }
 
-void SaneBreakApp::onSettingChange() {
+void SaneBreakApp::onBatterySettingChange() {
   bool doPause = SanePreferences::pauseOnBattery->get();
   if (!doPause)
     resumeBreak(PauseReason::ON_BATTERY);

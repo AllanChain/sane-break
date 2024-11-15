@@ -40,7 +40,7 @@ class SaneBreakApp : public QObject {
   void onOneshotIdleEnd();
   void onBattery();
   void onPower();
-  void onSettingChange();
+  void onBatterySettingChange();
 
  signals:
   void quit();
