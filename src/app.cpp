@@ -139,6 +139,10 @@ void SaneBreakApp::createMenu() {
   menu->addSeparator();
 
   QMenu *postponeMenu = menu->addMenu("Postpone");
+  connect(postponeMenu->addAction("5 min"), &QAction::triggered, this,
+          [this]() { postpone(5 * 60); });
+  connect(postponeMenu->addAction("10 min"), &QAction::triggered, this,
+          [this]() { postpone(10 * 60); });
   connect(postponeMenu->addAction("30 min"), &QAction::triggered, this,
           [this]() { postpone(30 * 60); });
   connect(postponeMenu->addAction("1 h"), &QAction::triggered, this,
