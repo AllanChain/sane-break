@@ -18,7 +18,7 @@ class SettingWithSignal : public QObject {
     // We prefer settings file next to the app executable to make app more portable
     QFile portableSettings(QCoreApplication::applicationDirPath() + "/SaneBreak.ini");
     if (!portableSettings.exists()) return QSettings();
-    return QSettings(portableSettings.fileName());
+    return QSettings(portableSettings.fileName(), QSettings::IniFormat);
   };
  signals:
   void changed();
