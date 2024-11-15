@@ -7,6 +7,7 @@
 #include <qglobal.h>
 
 #include <QAction>
+#include <QBrush>
 #include <QDateTime>
 #include <QGuiApplication>
 #include <QIcon>
@@ -97,6 +98,16 @@ void SaneBreakApp::updateIcon() {
   painter.setPen(pen);
   int spanAngle = 360 * 16 * secondsToNextBreak / SanePreferences::smallEvery->get();
   painter.drawArc(rect, 90 * 16, spanAngle);
+
+  if (smallBreaksBeforeBig() == 0) {
+    int dotSize = 14;
+    QRect smallRect(pixmap.width() - 1 - dotSize, 1, dotSize, dotSize);
+    QBrush brush(QColor(147, 51, 234, 255));
+    painter.setBrush(brush);
+    pen.setWidth(0);
+    painter.setPen(pen);
+    painter.drawEllipse(smallRect);
+  }
 
   icon->setIcon(pixmap);
 }
