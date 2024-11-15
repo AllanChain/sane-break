@@ -231,8 +231,8 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   pauseOnIdleSlider->setMinimum(1);
   pauseOnIdleSlider->setTickPosition(SteppedSlider::TicksBelow);
 
-  label = new QLabel("Pause on idle for");
-  label->setToolTip("Sane Break will pause when you are idle for this long.");
+  label = new QLabel("Pause after idle for");
+  label->setToolTip("Sane Break will pause after you are idle for this long.");
   pauseForm->addWidget(label, 4, 0);
   pauseForm->addWidget(pauseOnIdleSlider, 4, 1);
   QLabel *pauseOnIdleLabel = new QLabel();
