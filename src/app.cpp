@@ -172,6 +172,8 @@ void SaneBreakApp::breakNow() {
 }
 
 void SaneBreakApp::postpone(int secs) {
+  // Postpone adds time from 0 instead of break interval
+  if (breakManager->isShowing()) secondsToNextBreak = 0;
   addSecondsToNextBreak(secs);
   breakCycleCount = 0;    // break after postpone is a big break
   breakManager->close();  // stop current break if necessary
