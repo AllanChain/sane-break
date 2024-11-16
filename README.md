@@ -79,6 +79,20 @@ If you want to enable just X11 or Wayland support, or you are using other distro
 It will automatically enable X11 or Wayland support based on libraries found.
 For Wayland support, make sure you have `layer-shell-qt` for Qt6 installed.
 
+For example, the required packages for Arch Linux are:
+```bash
+yay -S libxss # X support
+yay -S qt6-base layer-shell-qt # Wayland support
+```
+
+The required packages for KDE Neon (based on Ubuntu 24.04) are:
+```bash
+apt install libxss-dev # X support
+apt install qt6-wayland-dev liblayershellqtinterface-dev # Wayland support
+```
+
+Then, use CMake to compile from source:
+
 ```bash
 git clone https://github.com/AllanChain/sane-break
 cd sane-break
