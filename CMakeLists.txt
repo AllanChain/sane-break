@@ -18,8 +18,8 @@ endif()
 
 include(GNUInstallDirs)
 
-find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets Multimedia)
+find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia)
 
 file(GLOB PROJECT_SOURCES "src/*.cpp" "src/*.h" "resources/index.qrc")
 
@@ -41,7 +41,7 @@ qt_add_executable(sane-break
 )
 
 target_include_directories(sane-break PRIVATE "src" ${CMAKE_CURRENT_BINARY_DIR})
-target_link_libraries(sane-break PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(sane-break PRIVATE Qt6::Widgets Qt6::Multimedia)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     file(GLOB PROJECT_SOURCES_LINUX "src/linux/*")

@@ -6,6 +6,7 @@
 #define SANE_PREFERENCES_WINDOW_H
 
 #include <QCheckBox>
+#include <QComboBox>
 #include <QLabel>
 #include <QMainWindow>
 #include <QMouseEvent>
@@ -42,5 +43,6 @@ class PreferenceWindow : public QMainWindow {
   SteppedSlider *flashForSlider;
   SteppedSlider *pauseOnIdleSlider;
   QCheckBox *pauseOnBatteryCheck;
+  QComboBox *bellSoundSelect;
 };
 #endif  // SANE_PREFERENCES_WINDOW_H

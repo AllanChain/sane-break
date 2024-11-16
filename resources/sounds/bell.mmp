@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!DOCTYPE lmms-project>
+<lmms-project creatorversion="1.2.2" type="song" version="1.0" creator="LMMS">
+  <head mastervol="100" masterpitch="0" bpm="140" timesig_numerator="4" timesig_denominator="4"/>
+  <song>
+    <trackcontainer maximized="0" height="300" type="song" visible="1" minimized="0" x="5" width="600" y="5">
+      <track type="0" muted="0" solo="0" name="Mallets">
+        <instrumenttrack fxch="0" usemasterpitch="1" basenote="57" pan="0" pitch="0" pitchrange="1" vol="100">
+          <instrument name="malletsstk">
+            <malletsstk lfo_speed="64" adsr="64" oldversion="0" vib_freq="0" preset="9" strike="1" crossfade="64" vib_gain="0" version="1" position="64" velocity="64" pressure="64" spread="0" hardness="64" stick_mix="0" modulator="64" lfo_depth="64"/>
+          </instrument>
+          <eldata fcut="14000" fwet="0" ftype="0" fres="0.5">
+            <elvol dec="0.5" sustain="0.5" ctlenvamt="0" lshp="0" lspd="0.1" lpdel="0" lspd_numerator="4" lamt="0" latt="0" pdel="0" rel="0.1" hold="0.5" amt="0" lspd_syncmode="0" userwavefile="" lspd_denominator="4" x100="0" att="0"/>
+            <elcut dec="0.5" sustain="0.5" ctlenvamt="0" lshp="0" lspd="0.1" lpdel="0" lspd_numerator="4" lamt="0" latt="0" pdel="0" rel="0.1" hold="0.5" amt="0" lspd_syncmode="0" userwavefile="" lspd_denominator="4" x100="0" att="0"/>
+            <elres dec="0.5" sustain="0.5" ctlenvamt="0" lshp="0" lspd="0.1" lpdel="0" lspd_numerator="4" lamt="0" latt="0" pdel="0" rel="0.1" hold="0.5" amt="0" lspd_syncmode="0" userwavefile="" lspd_denominator="4" x100="0" att="0"/>
+          </eldata>
+          <chordcreator chordrange="1" chord-enabled="0" chord="0"/>
+          <arpeggiator arprange="1" arp="0" arptime_denominator="4" arptime_numerator="4" arptime="200" arp-enabled="0" arpskip="0" arptime_syncmode="0" arpmode="0" arpmiss="0" arpgate="100" arpdir="0" arpcycle="0"/>
+          <midiport writable="0" fixedinputvelocity="-1" fixedoutputvelocity="-1" outputchannel="1" inputchannel="0" outputprogram="1" basevelocity="63" inputcontroller="0" outputcontroller="0" fixedoutputnote="-1" readable="0"/>
+          <fxchain numofeffects="0" enabled="0"/>
+        </instrumenttrack>
+        <pattern type="1" muted="0" pos="0" steps="16" name="Mallets">
+          <note pan="0" len="480" pos="48" key="60" vol="100"/>
+        </pattern>
+      </track>
+      <track type="0" muted="0" solo="0" name="Mallets">
+        <instrumenttrack fxch="1" usemasterpitch="1" basenote="57" pan="0" pitch="0" pitchrange="1" vol="13.6">
+          <instrument name="malletsstk">
+            <malletsstk lfo_speed="64" adsr="64" oldversion="0" vib_freq="0" preset="8" strike="1" crossfade="64" vib_gain="0" version="1" position="64" velocity="64" pressure="64" spread="0" hardness="64" stick_mix="0" modulator="64" lfo_depth="64"/>
+          </instrument>
+          <eldata fcut="14000" fwet="0" ftype="0" fres="0.5">
+            <elvol dec="0.5" sustain="0.5" ctlenvamt="0" lshp="0" lspd="0.1" lpdel="0" lspd_numerator="4" lamt="0" latt="0" pdel="0" rel="0.1" hold="0.5" amt="0" lspd_syncmode="0" userwavefile="" lspd_denominator="4" x100="0" att="0"/>
+            <elcut dec="0.5" sustain="0.5" ctlenvamt="0" lshp="0" lspd="0.1" lpdel="0" lspd_numerator="4" lamt="0" latt="0" pdel="0" rel="0.1" hold="0.5" amt="0" lspd_syncmode="0" userwavefile="" lspd_denominator="4" x100="0" att="0"/>
+            <elres dec="0.5" sustain="0.5" ctlenvamt="0" lshp="0" lspd="0.1" lpdel="0" lspd_numerator="4" lamt="0" latt="0" pdel="0" rel="0.1" hold="0.5" amt="0" lspd_syncmode="0" userwavefile="" lspd_denominator="4" x100="0" att="0"/>
+          </eldata>
+          <chordcreator chordrange="1" chord-enabled="0" chord="0"/>
+          <arpeggiator arprange="1" arp="0" arptime_denominator="4" arptime_numerator="4" arptime="200" arp-enabled="0" arpskip="0" arptime_syncmode="0" arpmode="0" arpmiss="0" arpgate="100" arpdir="0" arpcycle="0"/>
+          <midiport writable="0" fixedinputvelocity="-1" fixedoutputvelocity="-1" outputchannel="1" inputchannel="0" outputprogram="1" basevelocity="63" inputcontroller="0" outputcontroller="0" fixedoutputnote="-1" readable="0"/>
+          <fxchain numofeffects="0" enabled="0"/>
+        </instrumenttrack>
+        <pattern type="1" muted="0" pos="0" steps="16" name="Mallets">
+          <note pan="0" len="72" pos="0" key="52" vol="100"/>
+          <note pan="0" len="24" pos="72" key="52" vol="100"/>
+          <note pan="0" len="48" pos="96" key="52" vol="100"/>
+          <note pan="0" len="48" pos="144" key="53" vol="100"/>
+          <note pan="0" len="72" pos="192" key="50" vol="100"/>
+          <note pan="0" len="24" pos="264" key="50" vol="100"/>
+          <note pan="0" len="48" pos="288" key="48" vol="100"/>
+          <note pan="0" len="48" pos="336" key="50" vol="100"/>
+          <note pan="0" len="48" pos="384" key="52" vol="100"/>
+          <note pan="0" len="48" pos="432" key="48" vol="100"/>
+          <note pan="0" len="48" pos="480" key="50" vol="100"/>
+        </pattern>
+      </track>
+    </trackcontainer>
+    <track type="6" muted="0" solo="0" name="Automation track">
+      <automationtrack/>
+      <automationpattern prog="0" mute="0" len="192" pos="0" tens="1" name="Numerator"/>
+      <automationpattern prog="0" mute="0" len="192" pos="0" tens="1" name="Denominator"/>
+      <automationpattern prog="0" mute="0" len="192" pos="0" tens="1" name="Tempo"/>
+      <automationpattern prog="0" mute="0" len="192" pos="0" tens="1" name="Master volume"/>
+      <automationpattern prog="0" mute="0" len="192" pos="0" tens="1" name="Master pitch"/>
+    </track>
+    <fxmixer maximized="0" height="333" visible="0" minimized="0" x="5" width="543" y="310">
+      <fxchannel muted="0" volume="1" soloed="0" num="0" name="Master">
+        <fxchain numofeffects="0" enabled="0"/>
+      </fxchannel>
+      <fxchannel muted="0" volume="1" soloed="0" num="1" name="Mallets">
+        <fxchain numofeffects="0" enabled="0"/>
+        <send channel="0" amount="1"/>
+      </fxchannel>
+      <fxchannel muted="0" volume="1" soloed="0" num="2" name="FX 2">
+        <fxchain numofeffects="0" enabled="0"/>
+        <send channel="0" amount="1"/>
+      </fxchannel>
+    </fxmixer>
+    <ControllerRackView maximized="0" height="200" visible="1" minimized="0" x="680" width="350" y="310"/>
+    <pianoroll maximized="0" height="480" visible="1" minimized="0" x="301" width="860" y="239"/>
+    <automationeditor maximized="0" height="400" visible="0" minimized="0" x="1" width="860" y="1"/>
+    <projectnotes maximized="0" height="400" visible="0" minimized="0" x="700" width="800" y="10"><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Noto Sans CJK SC'; font-size:11pt; font-weight:400; font-style:normal;">
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p></body></html>]]></projectnotes>
+    <timeline lp1pos="576" lpstate="0" lp0pos="0"/>
+    <controllers/>
+  </song>
+</lmms-project>

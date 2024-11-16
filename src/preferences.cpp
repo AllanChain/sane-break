@@ -15,3 +15,4 @@ Setting<int>* SanePreferences::pauseOnIdleFor =
     new Setting<int>("pause/on-idle-for", 180);
 Setting<bool>* SanePreferences::pauseOnBattery =
     new Setting<bool>("pause/on-battery", false);
+Setting<QString>* SanePreferences::bellSound = new Setting<QString>("bell/sound", "");

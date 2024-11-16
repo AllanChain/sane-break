@@ -3,6 +3,8 @@
     <file>images/icon_tray.png</file>
     <file>images/icon_tray-pause.png</file>
     <file>images/icon-256.png</file>
+    <file>sounds/bell.mp3</file>
+    <file>sounds/wood.mp3</file>
     <file>style.css</file>
     <file>NOTICE.md</file>
   </qresource>

@@ -18,7 +18,9 @@
 #include "macos/workspace.h"
 #endif
 #include <QApplication>
+#include <QAudioOutput>
 #include <QList>
+#include <QMediaPlayer>
 #include <QObject>
 #include <QScreen>
 #include <QSettings>
@@ -40,6 +42,14 @@ BreakWindowManager::BreakWindowManager() : QObject() {
   connect(idleTimer, &SystemIdleTime::idleStart, this,
           &BreakWindowManager::onIdleStart);
   connect(idleTimer, &SystemIdleTime::idleEnd, this, &BreakWindowManager::onIdleEnd);
+
+  soundPlayer = new QMediaPlayer(this);
+  audioOutput = new QAudioOutput();
+  soundPlayer->setAudioOutput(audioOutput);
+  audioOutput->setVolume(100);
+  setSound();
+  connect(SanePreferences::bellSound, &SettingWithSignal::changed, this,
+          &BreakWindowManager::setSound);
 #ifdef LayerShellQt_FOUND
   if (QGuiApplication::platformName() == "wayland")
     LayerShellQt::Shell::useLayerShell();
@@ -111,12 +121,19 @@ void BreakWindowManager::tick() {
     remainingTime--;
     for (auto w : std::as_const(windows)) w->setTime(remainingTime);
   }
-  if (remainingTime <= 0) return close();
+  if (remainingTime <= 0) {
+    soundPlayer->play();
+    close();
+  }
 }
 
 void BreakWindowManager::forceBreak() {
   isForceBreak = true;
   for (auto w : std::as_const(windows)) w->setFullScreen();
+}
+
+void BreakWindowManager::setSound() {
+  soundPlayer->setSource(QUrl(SanePreferences::bellSound->get()));
 }
 
 void BreakWindowManager::onIdleStart() {
