@@ -159,9 +159,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
           });
 
   label = new QLabel("Big break every");
-  label->setToolTip(
-      "Length of time between big breaks, as an integral multiple of the base break"
-      "schedule. So, every so many breaks will be a big break.");
+  label->setToolTip("Every so many breaks will be a big break");
   breakForm->addWidget(label, 2, 0);
   label = new QLabel("Big break length");
   label->setToolTip("How many seconds for each big break");
@@ -178,8 +176,9 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
       QString("%1 small breaks").arg(bigBreakAfterSlider->value()));
   connect(bigBreakAfterSlider, &SteppedSlider::valueChanged, this,
           [bigBreakAfterLabel, this](int value) {
-            bigBreakAfterLabel->setText(
-                QString("%1 min").arg(value * smallBreakEverySlider->value()));
+            bigBreakAfterLabel->setText(QString("%1 breaks").arg(value));
+            bigBreakAfterLabel->setToolTip(
+                QString("Every %1 min").arg(value * smallBreakEverySlider->value()));
           });
   connect(smallBreakEverySlider, &SteppedSlider::valueChanged, this,
           [smallBreakEveryLabel, bigBreakAfterLabel, this](int value) {
@@ -232,7 +231,8 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   pauseOnIdleSlider->setTickPosition(SteppedSlider::TicksBelow);
 
   label = new QLabel("Pause if idle for");
-  label->setToolTip("Sane Break will pause if it detects no activity for this many minutes.");
+  label->setToolTip(
+      "Sane Break will pause if it detects no activity for this many minutes.");
   pauseForm->addWidget(label, 4, 0);
   pauseForm->addWidget(pauseOnIdleSlider, 4, 1);
   QLabel *pauseOnIdleLabel = new QLabel();
