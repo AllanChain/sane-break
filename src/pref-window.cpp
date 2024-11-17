@@ -128,11 +128,11 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   layout->addLayout(breakForm);
 
   QLabel *label;
-  label = new QLabel("Small break every");
-  label->setToolTip("Schedule each break in this duration.");
+  label = new QLabel("Break every");
+  label->setToolTip("Length of work time between breaks");
   breakForm->addWidget(label, 0, 0);
-  label = new QLabel("Small break for");
-  label->setToolTip("How long should you break for each small break.");
+  label = new QLabel("Small break length");
+  label->setToolTip("How many seconds for each small break");
   breakForm->addWidget(label, 1, 0);
 
   smallBreakEverySlider = new SteppedSlider(Qt::Horizontal);
@@ -160,12 +160,10 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
           });
 
   label = new QLabel("Big break every");
-  label->setToolTip(
-      "Schedule big breaks in this duration. Must be an integral multiple of "
-      "the small break schedules.");
+  label->setToolTip("Every so many breaks will be a big break");
   breakForm->addWidget(label, 2, 0);
-  label = new QLabel("Big break for");
-  label->setToolTip("How long should you break for each big break.");
+  label = new QLabel("Big break length");
+  label->setToolTip("How many seconds for each big break");
   breakForm->addWidget(label, 3, 0);
 
   bigBreakAfterSlider = new SteppedSlider(Qt::Horizontal);
@@ -179,8 +177,9 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
       QString("%1 small breaks").arg(bigBreakAfterSlider->value()));
   connect(bigBreakAfterSlider, &SteppedSlider::valueChanged, this,
           [bigBreakAfterLabel, this](int value) {
-            bigBreakAfterLabel->setText(
-                QString("%1 min").arg(value * smallBreakEverySlider->value()));
+            bigBreakAfterLabel->setText(QString("%1 breaks").arg(value));
+            bigBreakAfterLabel->setToolTip(
+                QString("Every %1 min").arg(value * smallBreakEverySlider->value()));
           });
   connect(smallBreakEverySlider, &SteppedSlider::valueChanged, this,
           [smallBreakEveryLabel, bigBreakAfterLabel, this](int value) {
@@ -204,8 +203,8 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
             bigBreakForLabel->setText(QString("%1 sec").arg(value));
           });
 
-  label = new QLabel("Flash for");
-  label->setToolTip("How long you can work before forced breaks.");
+  label = new QLabel("Flash break prompts for");
+  label->setToolTip("How many seconds to allow continued work before forcing breaks.");
   breakForm->addWidget(label, 4, 0);
   flashForSlider = new SteppedSlider(Qt::Horizontal);
   flashForSlider->setMaximum(300);
@@ -267,8 +266,9 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
   pauseOnIdleSlider->setMinimum(1);
   pauseOnIdleSlider->setTickPosition(SteppedSlider::TicksBelow);
 
-  label = new QLabel("Pause after idle for");
-  label->setToolTip("Sane Break will pause after you are idle for this long.");
+  label = new QLabel("Pause if idle for");
+  label->setToolTip(
+      "Sane Break will pause if it detects no activity for this many minutes.");
   pauseForm->addWidget(label, 4, 0);
   pauseForm->addWidget(pauseOnIdleSlider, 4, 1);
   QLabel *pauseOnIdleLabel = new QLabel();
