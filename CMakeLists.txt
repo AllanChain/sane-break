@@ -39,6 +39,7 @@ qt_add_executable(sane-break
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
 )
+qt_add_ui(sane-break SOURCES src/pref-window.ui)
 
 target_include_directories(sane-break PRIVATE "src" ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(sane-break PRIVATE Qt6::Widgets Qt6::Multimedia)

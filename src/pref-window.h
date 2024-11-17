@@ -10,44 +10,27 @@
 #include <QLabel>
 #include <QMainWindow>
 #include <QMediaPlayer>
-#include <QMouseEvent>
 #include <QSlider>
 
-class SteppedSlider : public QSlider {
-  Q_OBJECT
-
- public:
-  SteppedSlider(Qt::Orientation orientation, QWidget *parent = nullptr);
-
- protected:
-  void mousePressEvent(QMouseEvent *event) override;
-  void mouseMoveEvent(QMouseEvent *event) override;
-
- private:
-  int calculateValueFromPosition(const QPoint &pos) const;
-};
+namespace Ui {
+class PrefWindow;
+}
 
 class PreferenceWindow : public QMainWindow {
   Q_OBJECT
 
  public:
   PreferenceWindow(QWidget *parent = nullptr);
+  ~PreferenceWindow();
   void loadSettings();
   void saveSettings();
 
  private:
+  Ui::PrefWindow *ui;
   void closeEvent(QCloseEvent *event);
-  SteppedSlider *smallBreakEverySlider;
-  SteppedSlider *smallBreakForSlider;
-  SteppedSlider *bigBreakAfterSlider;
-  SteppedSlider *bigBreakForSlider;
-  SteppedSlider *flashForSlider;
-  SteppedSlider *pauseOnIdleSlider;
-  QCheckBox *pauseOnBatteryCheck;
-  QComboBox *startSoundSelect;
-  QComboBox *endSoundSelect;
   QMediaPlayer *soundPlayer;
   QAudioOutput *audioOutput;
+  void setTab(int tabNum);
   void playStartSound();
   void playEndSound();
 };
