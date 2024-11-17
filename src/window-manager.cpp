@@ -47,9 +47,6 @@ BreakWindowManager::BreakWindowManager() : QObject() {
   audioOutput = new QAudioOutput();
   soundPlayer->setAudioOutput(audioOutput);
   audioOutput->setVolume(100);
-  setSound();
-  connect(SanePreferences::bellSound, &SettingWithSignal::changed, this,
-          &BreakWindowManager::setSound);
 #ifdef LayerShellQt_FOUND
   if (QGuiApplication::platformName() == "wayland")
     LayerShellQt::Shell::useLayerShell();
@@ -95,6 +92,8 @@ void BreakWindowManager::show(BreakType type) {
   forceBreakTimer->setInterval(SanePreferences::flashFor->get() * 1000);
   forceBreakTimer->start();
   idleTimer->startWatching(NOTIFY_FIRST_IDLE);
+  soundPlayer->setSource(QUrl(SanePreferences::bellStart->get()));
+  soundPlayer->play();
 }
 
 bool BreakWindowManager::isShowing() { return windows.size() != 0; }
@@ -122,6 +121,7 @@ void BreakWindowManager::tick() {
     for (auto w : std::as_const(windows)) w->setTime(remainingTime);
   }
   if (remainingTime <= 0) {
+    soundPlayer->setSource(QUrl(SanePreferences::bellEnd->get()));
     soundPlayer->play();
     close();
   }
@@ -130,10 +130,6 @@ void BreakWindowManager::tick() {
 void BreakWindowManager::forceBreak() {
   isForceBreak = true;
   for (auto w : std::as_const(windows)) w->setFullScreen();
-}
-
-void BreakWindowManager::setSound() {
-  soundPlayer->setSource(QUrl(SanePreferences::bellSound->get()));
 }
 
 void BreakWindowManager::onIdleStart() {

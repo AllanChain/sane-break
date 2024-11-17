@@ -62,7 +62,8 @@ class SanePreferences : public QObject {
   static Setting<int> *flashFor;
   static Setting<int> *pauseOnIdleFor;
   static Setting<bool> *pauseOnBattery;
-  static Setting<QString> *bellSound;
+  static Setting<QString> *bellStart;
+  static Setting<QString> *bellEnd;
 };
 
 #endif  // SANE_PREFERENCES_H

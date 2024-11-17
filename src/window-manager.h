@@ -40,7 +40,6 @@ class BreakWindowManager : public QObject {
   void createWindows(BreakType type);
   void tick();
   void forceBreak();
-  void setSound();
   void onIdleStart();
   void onIdleEnd();
 };

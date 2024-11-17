@@ -3,6 +3,8 @@
     <file>images/icon_tray.png</file>
     <file>images/icon_tray-pause.png</file>
     <file>images/icon-256.png</file>
+    <file>sounds/chime.mp3</file>
+    <file>sounds/ding.mp3</file>
     <file>sounds/bell.mp3</file>
     <file>sounds/wood.mp3</file>
     <file>style.css</file>

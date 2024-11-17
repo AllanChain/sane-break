@@ -13,6 +13,7 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QSlider>
+#include <QStringList>
 #include <QStyleOptionSlider>
 #include <QVBoxLayout>
 
@@ -221,15 +222,39 @@ PreferenceWindow::PreferenceWindow(QWidget *parent) : QMainWindow(parent) {
             flashForLabel->setText(QString("%1 sec").arg(value));
           });
 
-  QLabel *bellLabel = new QLabel("Sound Effect after break");
-  QHBoxLayout *bellLayout = new QHBoxLayout();
-  bellLayout->addWidget(bellLabel);
-  bellSoundSelect = new QComboBox();
-  bellSoundSelect->setEditable(true);
-  bellSoundSelect->addItem("");
-  bellSoundSelect->addItem("qrc:/sounds/wood.mp3");
-  bellSoundSelect->addItem("qrc:/sounds/bell.mp3");
-  bellLayout->addWidget(bellSoundSelect);
+  soundPlayer = new QMediaPlayer(this);
+  audioOutput = new QAudioOutput();
+  soundPlayer->setAudioOutput(audioOutput);
+  audioOutput->setVolume(100);
+  QGridLayout *bellLayout = new QGridLayout();
+
+  QStringList soundFiles = {"", "qrc:/sounds/chime.mp3", "qrc:/sounds/ding.mp3",
+                            "qrc:/sounds/wood.mp3", "qrc:/sounds/bell.mp3"};
+
+  QLabel *startBellLabel = new QLabel("Sound Effect before break");
+  startSoundSelect = new QComboBox();
+  startSoundSelect->setEditable(true);
+  startSoundSelect->addItems(soundFiles);
+  QPushButton *playStartSoundButton = new QPushButton("Play");
+  connect(playStartSoundButton, &QPushButton::pressed, this,
+          &PreferenceWindow::playStartSound);
+
+  bellLayout->addWidget(startBellLabel, 0, 0);
+  bellLayout->addWidget(startSoundSelect, 0, 1);
+  bellLayout->addWidget(playStartSoundButton, 0, 2);
+
+  QLabel *endBellLabel = new QLabel("Sound Effect after break");
+  endSoundSelect = new QComboBox();
+  endSoundSelect->setEditable(true);
+  endSoundSelect->addItems(soundFiles);
+  QPushButton *playEndSoundButton = new QPushButton("Play");
+  connect(playEndSoundButton, &QPushButton::pressed, this,
+          &PreferenceWindow::playEndSound);
+
+  bellLayout->addWidget(endBellLabel, 1, 0);
+  bellLayout->addWidget(endSoundSelect, 1, 1);
+  bellLayout->addWidget(playEndSoundButton, 1, 2);
+
   layout->addLayout(bellLayout);
 
   layout->addWidget(new QLabel("<h3>Pausing</h3>"));
@@ -276,7 +301,8 @@ void PreferenceWindow::loadSettings() {
   flashForSlider->setValue(SanePreferences::flashFor->get());
   pauseOnIdleSlider->setValue(SanePreferences::pauseOnIdleFor->get() / 60);
   pauseOnBatteryCheck->setChecked(SanePreferences::pauseOnBattery->get());
-  bellSoundSelect->setEditText(SanePreferences::bellSound->get());
+  startSoundSelect->setEditText(SanePreferences::bellStart->get());
+  endSoundSelect->setEditText(SanePreferences::bellEnd->get());
 }
 
 void PreferenceWindow::saveSettings() {
@@ -287,10 +313,29 @@ void PreferenceWindow::saveSettings() {
   SanePreferences::flashFor->set(flashForSlider->value());
   SanePreferences::pauseOnIdleFor->set(pauseOnIdleSlider->value() * 60);
   SanePreferences::pauseOnBattery->set(pauseOnBatteryCheck->isChecked());
-  SanePreferences::bellSound->set(bellSoundSelect->currentText());
+  SanePreferences::bellStart->set(startSoundSelect->currentText());
+  SanePreferences::bellEnd->set(endSoundSelect->currentText());
 }
 
 void PreferenceWindow::closeEvent(QCloseEvent *event) {
   saveSettings();
   QMainWindow::closeEvent(event);
+}
+
+void PreferenceWindow::playStartSound() {
+  QString soundFile = startSoundSelect->currentText();
+  qDebug() << soundFile;
+  if (!soundFile.isEmpty()) {
+    QUrl soundUrl(soundFile);
+    soundPlayer->setSource(soundUrl);
+    soundPlayer->play();
+  }
+}
+void PreferenceWindow::playEndSound() {
+  QString soundFile = endSoundSelect->currentText();
+  if (!soundFile.isEmpty()) {
+    QUrl soundUrl(soundFile);
+    soundPlayer->setSource(soundUrl);
+    soundPlayer->play();
+  }
 }

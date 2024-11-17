@@ -4,11 +4,12 @@
 
 #ifndef SANE_PREFERENCES_WINDOW_H
 #define SANE_PREFERENCES_WINDOW_H
-
+#include <QAudioOutput>
 #include <QCheckBox>
 #include <QComboBox>
 #include <QLabel>
 #include <QMainWindow>
+#include <QMediaPlayer>
 #include <QMouseEvent>
 #include <QSlider>
 
@@ -43,6 +44,11 @@ class PreferenceWindow : public QMainWindow {
   SteppedSlider *flashForSlider;
   SteppedSlider *pauseOnIdleSlider;
   QCheckBox *pauseOnBatteryCheck;
-  QComboBox *bellSoundSelect;
+  QComboBox *startSoundSelect;
+  QComboBox *endSoundSelect;
+  QMediaPlayer *soundPlayer;
+  QAudioOutput *audioOutput;
+  void playStartSound();
+  void playEndSound();
 };
 #endif  // SANE_PREFERENCES_WINDOW_H
