@@ -134,8 +134,3 @@ However, if you really want to quit when Sane Break is in fullscreen, you can ki
 - KDE: Enable KRunner with <kbd>Alt</kbd> + <kbd>Space</kbd> and run `killall sane-break`
 - macOS: Enable Spotlight with <kbd>Cmd</kbd> + <kbd>Space</kbd> and run `killall sane-break`
 - Windows: Press <kbd>Win</kbd> + <kbd>R</kbd> and run `taskkill /IM sane-break /F`
-
-## To do list
-
-- Auto start settings
-- Stop breaks while in screen sharing?
