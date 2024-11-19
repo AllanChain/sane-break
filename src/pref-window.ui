@@ -289,8 +289,11 @@
          </item>
          <item row="6" column="0">
           <widget class="QLabel" name="label_14">
+           <property name="toolTip">
+            <string>Try restart Sane Break if no sound</string>
+           </property>
            <property name="text">
-            <string>Bell after break</string>
+            <string>Bell after break&lt;br/&gt;e.g. &lt;span style=&quot; font-style:italic;&quot;&gt;file:/home/a.mp3&lt;/span&gt;</string>
            </property>
           </widget>
          </item>
@@ -348,8 +351,11 @@
          </item>
          <item row="5" column="0">
           <widget class="QLabel" name="label_13">
+           <property name="toolTip">
+            <string>Try restart Sane Break if no sound</string>
+           </property>
            <property name="text">
-            <string>Bell before break</string>
+            <string>Bell before break&lt;br&gt;e.g. &lt;span style=&quot; font-style:italic;&quot;&gt;file:D:\sound.wav&lt;/span&gt;</string>
            </property>
           </widget>
          </item>
