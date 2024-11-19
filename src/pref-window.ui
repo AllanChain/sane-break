@@ -93,8 +93,8 @@
         </property>
        </spacer>
       </item>
-      <item alignment="Qt::AlignHCenter">
-       <widget class="QLabel" name="label">
+      <item>
+       <widget class="QLabel" name="sidebarImage">
         <property name="maximumSize">
          <size>
           <width>64</width>

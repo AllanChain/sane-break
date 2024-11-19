@@ -4,8 +4,6 @@
 
 #include "pref-window.h"
 
-#include <ui_pref-window.h>
-
 #include <QCheckBox>
 #include <QDesktopServices>
 #include <QGridLayout>
@@ -32,21 +30,24 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
 
   QWidget *centralWidget = new QWidget(this);
   setCentralWidget(centralWidget);
-
   ui->setupUi(centralWidget);
 
-  ui->copyrightLabel->setText(ui->copyrightLabel->text().arg(PROJECT_VERSION));
-  connect(ui->copyrightLabel, &QLabel::linkActivated, this, [=](QString url) {
-    if (url == QString("notice-window"))
-      (new NoticeWindow(this))->show();
-    else
-      QDesktopServices::openUrl(url);
-  });
-
+  /***************************************************************************
+   *                                                                         *
+   *                               Tab switch                                *
+   *                                                                         *
+   ****************************************************************************/
   connect(ui->tabBreakButton, &QPushButton::released, this, [this]() { setTab(0); });
   connect(ui->tabPauseButton, &QPushButton::released, this, [this]() { setTab(1); });
   connect(ui->tabAboutButton, &QPushButton::released, this, [this]() { setTab(2); });
+  // Qt Designer is having problem setting align center
+  ui->sideBar->layout()->setAlignment(ui->sidebarImage, Qt::AlignHCenter);
 
+  /***************************************************************************
+   *                                                                         *
+   *                                Break tab                                *
+   *                                                                         *
+   ****************************************************************************/
   connect(ui->smallBreakEverySlider, &SteppedSlider::valueChanged, this,
           [this](int value) {
             ui->smallBreakEveryLabel->setText(QString("%1 min").arg(value));
@@ -83,6 +84,11 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
   connect(ui->playEndSoundButton, &QPushButton::pressed, this,
           &PreferenceWindow::playEndSound);
 
+  /***************************************************************************
+   *                                                                         *
+   *                                Pause tab                                *
+   *                                                                         *
+   ****************************************************************************/
   connect(ui->pauseOnIdleSlider, &SteppedSlider::valueChanged, this, [this](int value) {
     ui->pauseOnIdleLabel->setText(QString("%1 min").arg(value));
   });
@@ -92,6 +98,19 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
   });
   connect(ui->resetCycleSlider, &SteppedSlider::valueChanged, this, [this](int value) {
     ui->resetCycleLabel->setText(QString("%1 min").arg(value));
+  });
+
+  /***************************************************************************
+   *                                                                         *
+   *                                About tab                                *
+   *                                                                         *
+   ****************************************************************************/
+  ui->copyrightLabel->setText(ui->copyrightLabel->text().arg(PROJECT_VERSION));
+  connect(ui->copyrightLabel, &QLabel::linkActivated, this, [=](QString url) {
+    if (url == QString("notice-window"))
+      (new NoticeWindow(this))->show();
+    else
+      QDesktopServices::openUrl(url);
   });
 
   connect(ui->resetButton, &QPushButton::pressed, this,
