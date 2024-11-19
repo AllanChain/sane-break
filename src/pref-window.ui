@@ -438,7 +438,7 @@
             </widget>
            </item>
            <item row="1" column="2">
-            <widget class="QLabel" name="resetAfterPauseLabel">
+            <widget class="QLabel" name="resetBreakLabel">
              <property name="text">
               <string>5 min</string>
              </property>
@@ -477,14 +477,14 @@
             </widget>
            </item>
            <item row="2" column="2">
-            <widget class="QLabel" name="resetCycleAfterPauseLabel">
+            <widget class="QLabel" name="resetCycleLabel">
              <property name="text">
               <string>10 min</string>
              </property>
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="SteppedSlider" name="resetAfterPauseSlider">
+            <widget class="SteppedSlider" name="resetBreakSlider">
              <property name="minimum">
               <number>1</number>
              </property>
@@ -492,7 +492,7 @@
               <number>30</number>
              </property>
              <property name="value">
-              <number>5</number>
+              <number>2</number>
              </property>
              <property name="orientation">
               <enum>Qt::Orientation::Horizontal</enum>
@@ -506,15 +506,15 @@
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="SteppedSlider" name="resetCycleAfterPauseSlider">
+            <widget class="SteppedSlider" name="resetCycleSlider">
              <property name="minimum">
-              <number>1</number>
+              <number>2</number>
              </property>
              <property name="maximum">
               <number>60</number>
              </property>
              <property name="value">
-              <number>10</number>
+              <number>5</number>
              </property>
              <property name="orientation">
               <enum>Qt::Orientation::Horizontal</enum>

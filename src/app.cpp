@@ -227,17 +227,8 @@ bool SaneBreakApp::resumeBreak(uint reason) {
   if (lastPause > 0) {  // We have correctly recorded last pause time
     int secPaused = QDateTime::currentSecsSinceEpoch() - lastPause;
     lastPause = 0;
-    // "self healing" algorithm for break time
-    // We don't want to have a break soon after breaks resumed.
-    // Thus we add a little bit time according to the time paused.
-    if (secondsToNextBreak + secPaused > SanePreferences::smallEvery->get()) {
-      resetSecondsToNextBreak();
-      if (secPaused > SanePreferences::smallEvery->get()) {
-        breakCycleCount = 1;  // reset cycle of idle for a long time
-      }
-    } else {
-      addSecondsToNextBreak(secPaused);
-    }
+    if (secPaused > SanePreferences::resetAfterPause->get()) resetSecondsToNextBreak();
+    if (secPaused > SanePreferences::resetCycleAfterPause->get()) breakCycleCount = 1;
   }
   countDownTimer->start();
 

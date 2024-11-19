@@ -86,6 +86,13 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
   connect(ui->pauseOnIdleSlider, &SteppedSlider::valueChanged, this, [this](int value) {
     ui->pauseOnIdleLabel->setText(QString("%1 min").arg(value));
   });
+  connect(ui->resetBreakSlider, &SteppedSlider::valueChanged, this, [this](int value) {
+    ui->resetBreakLabel->setText(QString("%1 min").arg(value));
+    ui->resetCycleSlider->setMinimum(value);
+  });
+  connect(ui->resetCycleSlider, &SteppedSlider::valueChanged, this, [this](int value) {
+    ui->resetCycleLabel->setText(QString("%1 min").arg(value));
+  });
 
   connect(ui->resetButton, &QPushButton::pressed, this,
           &PreferenceWindow::loadSettings);
@@ -100,10 +107,12 @@ void PreferenceWindow::loadSettings() {
   ui->bigBreakAfterSlider->setValue(SanePreferences::bigAfter->get());
   ui->bigBreakForSlider->setValue(SanePreferences::bigFor->get());
   ui->flashForSlider->setValue(SanePreferences::flashFor->get());
-  ui->pauseOnIdleSlider->setValue(SanePreferences::pauseOnIdleFor->get() / 60);
-  ui->pauseOnBatteryCheck->setChecked(SanePreferences::pauseOnBattery->get());
   ui->startSoundSelect->setEditText(SanePreferences::bellStart->get());
   ui->endSoundSelect->setEditText(SanePreferences::bellEnd->get());
+  ui->pauseOnIdleSlider->setValue(SanePreferences::pauseOnIdleFor->get() / 60);
+  ui->resetBreakSlider->setValue(SanePreferences::resetAfterPause->get() / 60);
+  ui->resetCycleSlider->setValue(SanePreferences::resetCycleAfterPause->get() / 60);
+  ui->pauseOnBatteryCheck->setChecked(SanePreferences::pauseOnBattery->get());
 }
 
 void PreferenceWindow::saveSettings() {
@@ -112,10 +121,12 @@ void PreferenceWindow::saveSettings() {
   SanePreferences::bigAfter->set(ui->bigBreakAfterSlider->value());
   SanePreferences::bigFor->set(ui->bigBreakForSlider->value());
   SanePreferences::flashFor->set(ui->flashForSlider->value());
-  SanePreferences::pauseOnIdleFor->set(ui->pauseOnIdleSlider->value() * 60);
-  SanePreferences::pauseOnBattery->set(ui->pauseOnBatteryCheck->isChecked());
   SanePreferences::bellStart->set(ui->startSoundSelect->currentText());
   SanePreferences::bellEnd->set(ui->endSoundSelect->currentText());
+  SanePreferences::pauseOnIdleFor->set(ui->pauseOnIdleSlider->value() * 60);
+  SanePreferences::resetAfterPause->set(ui->resetBreakSlider->value() * 60);
+  SanePreferences::resetCycleAfterPause->set(ui->resetCycleSlider->value() * 60);
+  SanePreferences::pauseOnBattery->set(ui->pauseOnBatteryCheck->isChecked());
 }
 
 void PreferenceWindow::closeEvent(QCloseEvent *event) {
