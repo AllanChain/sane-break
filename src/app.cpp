@@ -102,7 +102,7 @@ void SaneBreakApp::updateIcon() {
   if (smallBreaksBeforeBig() == 0) {
     int dotSize = 14;
     QRect smallRect(pixmap.width() - 1 - dotSize, 1, dotSize, dotSize);
-    QBrush brush(QColor(147, 51, 234, 255));
+    QBrush brush(QColor(202, 138, 4, 255));
     painter.setBrush(brush);
     pen.setWidth(0);
     painter.setPen(pen);
