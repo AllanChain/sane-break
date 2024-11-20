@@ -13,27 +13,28 @@ Sane Break is a cross-platform break reminder designed to help you take meaningf
 
 ## 🤔 Why another break reminder?
 
-All too often, I'm deeply focused on a task when the break reminder pops up. Almost instinctively, I click "skip" or "postpone", and before I know it, hours have passed without a single break.
-
-Many break reminder apps demand immediate action, which often leads to mindlessly skipping or delaying the break. While some of them send notifications before the break is scheduled, they merely inform me that a break is _going to happen_, rather than telling me it's _happening right now_. As a result, I end up ignoring these notifications and continue working.
+Most break reminder apps send notifications before the break is scheduled, but that merely informs me that a break is _going to happen_, rather than telling me it's _happening right now_. Even with a warning, when the break actually happens I'm too often deeply focused on a task. Then, the program either forces the break, interrupting my work, or I can use a "skip" or "postpone" button. Accepting abrupt interruption is too harsh, so I tend to click "skip" or "postpone". Then, that becomes an almost instinctive habit, and before I know it, hours have passed without a single break.
 
 In contrast, Sane Break allows me to take ownership of _when_ to stop and break. It starts by providing a gentle, non-intrusive reminder through a flashing window. The break officially begins as soon as I naturally pause after finishing my current task. This way, Sane Break offers the flexibility to wrap up my work and take a break on my terms, rather than forcing an abrupt interruption.
-
-Specifically, Sane Break employs a two-phase system:
-
-- Phase 1: A small, unobtrusive reminder that you can acknowledge or ignore.
-- Phase 2: The reminder grows to full screen, ensuring you take a break.
-
-Transition to phase 2 happens when you stop working on your computer, or ignore the reminder and keep working for too long (configurable).
-
-This design is an enhanced version of the [RSIBreak](https://apps.kde.org/rsibreak/) design, but Sane Break has some other improvements:
-
-- No big buttons for skipping or postponing to avoid mindless dismissals.
-- [Cross-platform support](#platform-support)
 
 Sane Break aims to strike a balance between respecting your workflow and ensuring you take the breaks you need.
 
 For more details about the motivation behind Sane Break, you can refer to [No break reminder works (for me)](https://allanchain.github.io/blog/post/sane-break-intro/).
+
+## Two phase system
+
+Sane Break uses a two-phase system:
+
+- Phase 1: A small, unobtrusive reminder that encourages you to find a good stopping point.
+- Phase 2: The reminder grows to full screen during the actual break.
+
+Transition to phase 2 happens when you stop working on your computer, or when you ignore the reminder and keep working for too long (configurable).
+
+This design was inspired by [RSIBreak](https://apps.kde.org/rsibreak/) and has similarities to [WorkRave](https://workrave.org/). Sane Break has some other improvements:
+
+- No big buttons for skipping or postponing to avoid mindless dismissals.
+- [Cross-platform support](#platform-support)
+- modern framework and UI style built with Qt6
 
 ## 🎬 Demo video
 
@@ -54,7 +55,7 @@ https://github.com/user-attachments/assets/35002673-ce83-4848-bd5e-6cc6dbbd4c8c
 
 KDE 6 (on Arch-based distros) support is prioritized. Others may work too.
 
-Since this program only supports Qt6 and uses [wlr layer shell](https://wayland.app/protocols/wlr-layer-shell-unstable-v1) and [idle notify](https://wayland.app/protocols/ext-idle-notify-v1) protocols, in theory it supports:
+Sane break uses Qt6, [wlr layer shell](https://wayland.app/protocols/wlr-layer-shell-unstable-v1), and [idle notify](https://wayland.app/protocols/ext-idle-notify-v1) protocols. In theory it supports:
 - **X11**: all.
 - **Wayland**: compositors supporting wlr layer shell and idle notify protocols, and distros with layer-shell-qt version 6.
 
@@ -75,20 +76,20 @@ For Linux users with Arch-based distros, it's recommended to install the AUR pac
 yay -S sane-break
 ```
 
-If you want to enable just X11 or Wayland support, or you are using other distros (which I didn't test), you are strongly encouraged to install Sane Break by comping from source.
+If you want to enable just X11 or Wayland support, or you are using other distros (which I didn't test), you are strongly encouraged to install Sane Break by compiling from source.
 It will automatically enable X11 or Wayland support based on libraries found.
 For Wayland support, make sure you have `layer-shell-qt` for Qt6 installed.
 
-For example, the required packages for Arch Linux are:
+Required packages for Arch Linux:
 ```bash
-yay -S qt6-base
+yay -S qt6-base qt6-multimedia
 yay -S libxss # X support
 yay -S layer-shell-qt # Wayland support
 ```
 
-The required packages for KDE Neon (based on Ubuntu 24.04) are:
+Required packages for KDE Neon (based on Ubuntu 24.04, so probably the same for other Debian-based distros):
 ```bash
-apt install qt6-base-dev
+apt install qt6-base-dev qt6-multimedia-dev
 apt install libxss-dev # X support
 apt install qt6-wayland-dev liblayershellqtinterface-dev # Wayland support
 ```
@@ -127,10 +128,11 @@ Beside default locations, Qt also supports reading settings from [other location
 
 If you want to make Sane Break portable, especially on Windows, you can put an empty file named `SaneBreak.ini` next to the `.exe` file and Sane Break will automatically pick that file for settings.
 
-### What if I really want to skip break?
+### What if I really want to skip a break?
 
-Generally, you can quit the app via tray icon right away after the break starts.
-However, if you really want to quit when Sane Break is in fullscreen, you can kill the app via system command line. For example:
+You can postpone or quit via tray icon within a short time even after the break starts.
+
+However, if you really want to quit when Sane Break is set to fullscreen, you can kill the app via system command line. For example:
 - KDE: Enable KRunner with <kbd>Alt</kbd> + <kbd>Space</kbd> and run `killall sane-break`
 - macOS: Enable Spotlight with <kbd>Cmd</kbd> + <kbd>Space</kbd> and run `killall sane-break`
 - Windows: Press <kbd>Win</kbd> + <kbd>R</kbd> and run `taskkill /IM sane-break /F`
