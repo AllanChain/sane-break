@@ -72,6 +72,8 @@ void BreakWindowManager::createWindows(BreakType type) {
         window->setLayer(Window::LayerOverlay);
         window->setKeyboardInteractivity(Window::KeyboardInteractivityNone);
         window->setAnchors(Window::AnchorTop);
+        // We do not want to reserve space for widgets like taskbar (#19)
+        window->setExclusiveZone(-1);
       }
 #elif defined Q_OS_MACOS
     macSetAllWorkspaces(w->windowHandle());
