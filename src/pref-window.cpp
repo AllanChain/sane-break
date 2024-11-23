@@ -126,6 +126,7 @@ void PreferenceWindow::loadSettings() {
   ui->flashForSlider->setValue(SanePreferences::flashFor->get());
   ui->startSoundSelect->setEditText(SanePreferences::bellStart->get());
   ui->endSoundSelect->setEditText(SanePreferences::bellEnd->get());
+  ui->soundInSmallBreak->setChecked(SanePreferences::bellInSmall->get());
   ui->pauseOnIdleSlider->setValue(SanePreferences::pauseOnIdleFor->get() / 60);
   ui->resetBreakSlider->setValue(SanePreferences::resetAfterPause->get() / 60);
   ui->resetCycleSlider->setValue(SanePreferences::resetCycleAfterPause->get() / 60);
@@ -140,6 +141,7 @@ void PreferenceWindow::saveSettings() {
   SanePreferences::flashFor->set(ui->flashForSlider->value());
   SanePreferences::bellStart->set(ui->startSoundSelect->currentText());
   SanePreferences::bellEnd->set(ui->endSoundSelect->currentText());
+  SanePreferences::bellInSmall->set(ui->soundInSmallBreak->isChecked());
   SanePreferences::pauseOnIdleFor->set(ui->pauseOnIdleSlider->value() * 60);
   SanePreferences::resetAfterPause->set(ui->resetBreakSlider->value() * 60);
   SanePreferences::resetCycleAfterPause->set(ui->resetCycleSlider->value() * 60);

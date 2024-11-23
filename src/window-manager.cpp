@@ -51,11 +51,11 @@ BreakWindowManager::BreakWindowManager() : QObject() {
 
 BreakWindowManager::~BreakWindowManager() {};
 
-void BreakWindowManager::createWindows(BreakType type) {
+void BreakWindowManager::createWindows() {
   QList<QScreen *> screens = QApplication::screens();
 
   for (QScreen *screen : std::as_const(screens)) {
-    BreakWindow *w = new BreakWindow(type);
+    BreakWindow *w = new BreakWindow(currentType);
     windows.append(w);
     w->initSize(screen);
     w->show();
@@ -79,18 +79,19 @@ void BreakWindowManager::createWindows(BreakType type) {
 }
 
 void BreakWindowManager::show(BreakType type) {
+  currentType = type;
   totalTime = type == BreakType::BIG ? SanePreferences::bigFor->get()
                                      : SanePreferences::smallFor->get();
   remainingTime = totalTime;
   isIdle = false;
   isForceBreak = false;
-  createWindows(type);
+  createWindows();
   for (auto w : std::as_const(windows)) w->start(totalTime);
   countdownTimer->start();
   forceBreakTimer->setInterval(SanePreferences::flashFor->get() * 1000);
   forceBreakTimer->start();
   idleTimer->startWatching(NOTIFY_FIRST_IDLE);
-  playSound(QUrl(SanePreferences::bellStart->get()));
+  playSound(SanePreferences::bellStart->get());
 }
 
 bool BreakWindowManager::isShowing() { return windows.size() != 0; }
@@ -118,7 +119,7 @@ void BreakWindowManager::tick() {
     for (auto w : std::as_const(windows)) w->setTime(remainingTime);
   }
   if (remainingTime <= 0) {
-    playSound(QUrl(SanePreferences::bellEnd->get()));
+    playSound(SanePreferences::bellEnd->get());
     close();
   }
 }
@@ -149,12 +150,14 @@ void BreakWindowManager::onIdleEnd() {
   remainingTime = totalTime;
 }
 
-void BreakWindowManager::playSound(QUrl url) {
+void BreakWindowManager::playSound(QString soundFile) {
+  if (soundFile.isEmpty()) return;
+  if (currentType == BreakType::SMALL && !SanePreferences::bellInSmall->get()) return;
   QMediaPlayer *soundPlayer = new QMediaPlayer(this);
   QAudioOutput *audioOutput = new QAudioOutput();
   soundPlayer->setAudioOutput(audioOutput);
   audioOutput->setVolume(100);
-  soundPlayer->setSource(url);
+  soundPlayer->setSource(QUrl(soundFile));
   soundPlayer->play();
   connect(soundPlayer, &QMediaPlayer::playbackStateChanged, this,
           [=](QMediaPlayer::PlaybackState state) {

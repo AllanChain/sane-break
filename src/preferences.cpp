@@ -13,6 +13,7 @@ Setting<int>* SanePreferences::bigFor = new Setting<int>("break/big-for", 60);
 Setting<int>* SanePreferences::flashFor = new Setting<int>("break/flash-for", 30);
 Setting<QString>* SanePreferences::bellStart = new Setting<QString>("bell/start", "");
 Setting<QString>* SanePreferences::bellEnd = new Setting<QString>("bell/end", "");
+Setting<bool>* SanePreferences::bellInSmall = new Setting<bool>("bell/in-small", false);
 Setting<int>* SanePreferences::pauseOnIdleFor =
     new Setting<int>("pause/on-idle-for", 180);
 Setting<int>* SanePreferences::resetAfterPause =

@@ -18,6 +18,7 @@ class BreakWindowManager : public QObject {
   BreakWindowManager();
   ~BreakWindowManager();
   int remainingTime;
+  BreakType currentType;
   void show(BreakType type);
   bool isShowing();
   void close();
@@ -33,12 +34,12 @@ class BreakWindowManager : public QObject {
   QTimer *countdownTimer;
   QTimer *forceBreakTimer;
   SystemIdleTime *idleTimer;
-  void createWindows(BreakType type);
+  void createWindows();
   void tick();
   void forceBreak();
   void onIdleStart();
   void onIdleEnd();
-  void playSound(QUrl url);
+  void playSound(QString soundFile);
 };
 
 #endif  // SANE_BREAK_WINDOW_MANAGER_H
