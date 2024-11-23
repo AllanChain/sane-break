@@ -4,12 +4,10 @@
 
 #ifndef SANE_PREFERENCES_WINDOW_H
 #define SANE_PREFERENCES_WINDOW_H
-#include <QAudioOutput>
 #include <QCheckBox>
 #include <QComboBox>
 #include <QLabel>
 #include <QMainWindow>
-#include <QMediaPlayer>
 #include <QSlider>
 
 namespace Ui {
@@ -28,10 +26,7 @@ class PreferenceWindow : public QMainWindow {
  private:
   Ui::PrefWindow *ui;
   void closeEvent(QCloseEvent *event);
-  QMediaPlayer *soundPlayer;
-  QAudioOutput *audioOutput;
   void setTab(int tabNum);
-  void playStartSound();
-  void playEndSound();
+  void playSound(QString soundFile);
 };
 #endif  // SANE_PREFERENCES_WINDOW_H

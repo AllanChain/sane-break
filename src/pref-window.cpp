@@ -4,12 +4,14 @@
 
 #include "pref-window.h"
 
+#include <QAudioOutput>
 #include <QCheckBox>
 #include <QDesktopServices>
 #include <QGridLayout>
 #include <QIcon>
 #include <QLabel>
 #include <QMainWindow>
+#include <QMediaPlayer>
 #include <QPushButton>
 #include <QSettings>
 #include <QSlider>
@@ -71,18 +73,14 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
     ui->flashForLabel->setText(QString("%1 sec").arg(value));
   });
 
-  soundPlayer = new QMediaPlayer(this);
-  audioOutput = new QAudioOutput();
-  soundPlayer->setAudioOutput(audioOutput);
-  audioOutput->setVolume(100);
   QStringList soundFiles = {"", "qrc:/sounds/chime.mp3", "qrc:/sounds/ding.mp3",
                             "qrc:/sounds/wood.mp3", "qrc:/sounds/bell.mp3"};
   ui->startSoundSelect->addItems(soundFiles);
   connect(ui->playStartSoundButton, &QPushButton::pressed, this,
-          &PreferenceWindow::playStartSound);
+          [this]() { playSound(ui->startSoundSelect->currentText()); });
   ui->endSoundSelect->addItems(soundFiles);
   connect(ui->playEndSoundButton, &QPushButton::pressed, this,
-          &PreferenceWindow::playEndSound);
+          [this]() { playSound(ui->endSoundSelect->currentText()); });
 
   /***************************************************************************
    *                                                                         *
@@ -160,19 +158,18 @@ void PreferenceWindow::setTab(int tabNum) {
   ui->tabAboutButton->setChecked(tabNum == 2);
 }
 
-void PreferenceWindow::playStartSound() {
-  QString soundFile = ui->startSoundSelect->currentText();
-  if (!soundFile.isEmpty()) {
-    QUrl soundUrl(soundFile);
-    soundPlayer->setSource(soundUrl);
-    soundPlayer->play();
-  }
-}
-void PreferenceWindow::playEndSound() {
-  QString soundFile = ui->endSoundSelect->currentText();
-  if (!soundFile.isEmpty()) {
-    QUrl soundUrl(soundFile);
-    soundPlayer->setSource(soundUrl);
-    soundPlayer->play();
-  }
+void PreferenceWindow::playSound(QString soundFile) {
+  if (soundFile.isEmpty()) return;
+  QMediaPlayer *soundPlayer = new QMediaPlayer(this);
+  QAudioOutput *audioOutput = new QAudioOutput();
+  soundPlayer->setAudioOutput(audioOutput);
+  audioOutput->setVolume(100);
+  soundPlayer->setSource(QUrl(soundFile));
+  soundPlayer->play();
+  connect(soundPlayer, &QMediaPlayer::playbackStateChanged, this,
+          [=](QMediaPlayer::PlaybackState state) {
+            if (state != QMediaPlayer::PlaybackState::StoppedState) return;
+            soundPlayer->deleteLater();
+            audioOutput->deleteLater();
+          });
 }

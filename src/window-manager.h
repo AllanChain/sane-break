@@ -5,9 +5,7 @@
 #ifndef SANE_BREAK_WINDOW_MANAGER_H
 #define SANE_BREAK_WINDOW_MANAGER_H
 
-#include <QAudioOutput>
 #include <QList>
-#include <QMediaPlayer>
 #include <QObject>
 
 #include "break-window.h"
@@ -34,14 +32,13 @@ class BreakWindowManager : public QObject {
   QList<BreakWindow *> windows;
   QTimer *countdownTimer;
   QTimer *forceBreakTimer;
-  QMediaPlayer *soundPlayer;
-  QAudioOutput *audioOutput;
   SystemIdleTime *idleTimer;
   void createWindows(BreakType type);
   void tick();
   void forceBreak();
   void onIdleStart();
   void onIdleEnd();
+  void playSound(QUrl url);
 };
 
 #endif  // SANE_BREAK_WINDOW_MANAGER_H

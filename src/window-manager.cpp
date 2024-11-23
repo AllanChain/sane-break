@@ -43,10 +43,6 @@ BreakWindowManager::BreakWindowManager() : QObject() {
           &BreakWindowManager::onIdleStart);
   connect(idleTimer, &SystemIdleTime::idleEnd, this, &BreakWindowManager::onIdleEnd);
 
-  soundPlayer = new QMediaPlayer(this);
-  audioOutput = new QAudioOutput();
-  soundPlayer->setAudioOutput(audioOutput);
-  audioOutput->setVolume(100);
 #ifdef LayerShellQt_FOUND
   if (QGuiApplication::platformName() == "wayland")
     LayerShellQt::Shell::useLayerShell();
@@ -94,8 +90,7 @@ void BreakWindowManager::show(BreakType type) {
   forceBreakTimer->setInterval(SanePreferences::flashFor->get() * 1000);
   forceBreakTimer->start();
   idleTimer->startWatching(NOTIFY_FIRST_IDLE);
-  soundPlayer->setSource(QUrl(SanePreferences::bellStart->get()));
-  soundPlayer->play();
+  playSound(QUrl(SanePreferences::bellStart->get()));
 }
 
 bool BreakWindowManager::isShowing() { return windows.size() != 0; }
@@ -123,8 +118,7 @@ void BreakWindowManager::tick() {
     for (auto w : std::as_const(windows)) w->setTime(remainingTime);
   }
   if (remainingTime <= 0) {
-    soundPlayer->setSource(QUrl(SanePreferences::bellEnd->get()));
-    soundPlayer->play();
+    playSound(QUrl(SanePreferences::bellEnd->get()));
     close();
   }
 }
@@ -153,4 +147,19 @@ void BreakWindowManager::onIdleEnd() {
   }
   isIdle = false;
   remainingTime = totalTime;
+}
+
+void BreakWindowManager::playSound(QUrl url) {
+  QMediaPlayer *soundPlayer = new QMediaPlayer(this);
+  QAudioOutput *audioOutput = new QAudioOutput();
+  soundPlayer->setAudioOutput(audioOutput);
+  audioOutput->setVolume(100);
+  soundPlayer->setSource(url);
+  soundPlayer->play();
+  connect(soundPlayer, &QMediaPlayer::playbackStateChanged, this,
+          [=](QMediaPlayer::PlaybackState state) {
+            if (state != QMediaPlayer::PlaybackState::StoppedState) return;
+            soundPlayer->deleteLater();
+            audioOutput->deleteLater();
+          });
 }
