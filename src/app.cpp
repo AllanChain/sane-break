@@ -201,7 +201,8 @@ void SaneBreakApp::pauseBreak(uint reason) {
   if (pauseReasons == 0) lastPause = QDateTime::currentSecsSinceEpoch();
   pauseReasons |= reason;  // Flag should be set before closing windows
   countDownTimer->stop();
-  breakManager->close();  // stop current break if necessary
+  // Stop current break if necessary
+  if (reason != PauseReason::IDLE) breakManager->close();
   if (reason & PauseReason::ON_BATTERY) {
     icon->setToolTip("Sane Break\nPaused on battery");
   } else if (reason & PauseReason::APP_OPEN) {
