@@ -40,6 +40,7 @@ class ReadBasedIdleTime : public SystemIdleTime {
 
  private:
   QTimer *timer;
+  QTimer *delay;
   void tick();
 };
 

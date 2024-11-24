@@ -51,18 +51,27 @@ SystemIdleTime* SystemIdleTime::createIdleTimer() {
 
 ReadBasedIdleTime::ReadBasedIdleTime() : SystemIdleTime() {
   timer = new QTimer();
+  delay = new QTimer();
+  delay->setSingleShot(true);
   connect(timer, &QTimer::timeout, this, &ReadBasedIdleTime::tick);
+  connect(delay, &QTimer::timeout, this, [this]() { timer->start(); });
 }
 
 void ReadBasedIdleTime::startWatching() {
   // Assume currently not idle and nofity first idle event
   isIdle = false;
   timer->setInterval(m_watchAccuracy);
-  timer->start();
-  tick();
+  // We emit idleStart after at least m_minIdleTime msec.
+  // In other words, we don't count idle times before watch starts.
+  // This will be consistent with Wayland approaches.
+  delay->setInterval(m_minIdleTime);
+  delay->start();
 }
 
-void ReadBasedIdleTime::stopWatching() { timer->stop(); }
+void ReadBasedIdleTime::stopWatching() {
+  delay->stop();
+  timer->stop();
+}
 
 void ReadBasedIdleTime::tick() {
   int currentIdleTime = systemIdleTime();
