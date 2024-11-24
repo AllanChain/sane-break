@@ -9,6 +9,8 @@ on:
       - '*'
     tags:
       - '*'
+    paths-ignore:
+      - '**.md'
 
 permissions:
   contents: write
