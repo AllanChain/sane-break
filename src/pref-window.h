@@ -8,6 +8,7 @@
 #include <QComboBox>
 #include <QLabel>
 #include <QMainWindow>
+#include <QPushButton>
 #include <QSlider>
 
 namespace Ui {
@@ -25,6 +26,7 @@ class PreferenceWindow : public QMainWindow {
 
  private:
   Ui::PrefWindow *ui;
+  QList<QPushButton *> tabButtons;
   void closeEvent(QCloseEvent *event);
   void setTab(int tabNum);
   void playSound(QString soundFile);

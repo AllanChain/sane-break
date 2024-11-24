@@ -39,9 +39,10 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
    *                               Tab switch                                *
    *                                                                         *
    ****************************************************************************/
-  connect(ui->tabBreakButton, &QPushButton::released, this, [this]() { setTab(0); });
-  connect(ui->tabPauseButton, &QPushButton::released, this, [this]() { setTab(1); });
-  connect(ui->tabAboutButton, &QPushButton::released, this, [this]() { setTab(2); });
+  tabButtons = {ui->tabBreakButton, ui->tabPauseButton, ui->tabAboutButton};
+  for (int i = 0; i < tabButtons.size(); ++i) {
+    connect(tabButtons[i], &QPushButton::released, this, [this, i]() { setTab(i); });
+  }
   // Qt Designer is having problem setting align center
   ui->sideBar->layout()->setAlignment(ui->sidebarImage, Qt::AlignHCenter);
 
@@ -155,9 +156,9 @@ void PreferenceWindow::closeEvent(QCloseEvent *event) {
 
 void PreferenceWindow::setTab(int tabNum) {
   ui->stackedWidget->setCurrentIndex(tabNum);
-  ui->tabBreakButton->setChecked(tabNum == 0);
-  ui->tabPauseButton->setChecked(tabNum == 1);
-  ui->tabAboutButton->setChecked(tabNum == 2);
+  for (int i = 0; i < tabButtons.size(); ++i) {
+    tabButtons[i]->setChecked(i == tabNum);
+  }
 }
 
 void PreferenceWindow::playSound(QString soundFile) {
