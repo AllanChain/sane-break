@@ -20,7 +20,6 @@
 #include <QVBoxLayout>
 
 #include "config.h"
-#include "notice-window.h"
 #include "preferences.h"
 #include "ui_pref-window.h"
 #include "widgets.h"
@@ -113,12 +112,9 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
    *                                                                         *
    ****************************************************************************/
   ui->copyrightLabel->setText(ui->copyrightLabel->text().arg(PROJECT_VERSION));
-  connect(ui->copyrightLabel, &QLabel::linkActivated, this, [=](QString url) {
-    if (url == QString("notice-window"))
-      (new NoticeWindow(this))->show();
-    else
-      QDesktopServices::openUrl(url);
-  });
+  QFile noticeFile(":/NOTICE.md");
+  noticeFile.open(QIODevice::ReadOnly | QIODevice::Text);
+  ui->noticeLabel->setText(noticeFile.readAll());
 
   connect(ui->resetButton, &QPushButton::pressed, this,
           &PreferenceWindow::loadSettings);
@@ -171,6 +167,7 @@ void PreferenceWindow::setTab(int tabNum) {
   for (int i = 0; i < tabButtons.size(); ++i) {
     tabButtons[i]->setChecked(i == tabNum);
   }
+  ui->controlBar->setHidden(tabNum == 3);
 }
 
 void PreferenceWindow::playSound(QString soundFile) {
