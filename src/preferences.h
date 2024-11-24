@@ -60,9 +60,10 @@ class SanePreferences : public QObject {
   static Setting<int> *bigAfter;
   static Setting<int> *bigFor;
   static Setting<int> *flashFor;
-  static Setting<QString> *bellStart;
-  static Setting<QString> *bellEnd;
-  static Setting<bool> *bellInSmall;
+  static Setting<QString> *smallStartBell;
+  static Setting<QString> *smallEndBell;
+  static Setting<QString> *bigStartBell;
+  static Setting<QString> *bigEndBell;
   static Setting<int> *pauseOnIdleFor;
   static Setting<int> *resetAfterPause;
   static Setting<int> *resetCycleAfterPause;

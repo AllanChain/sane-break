@@ -91,7 +91,8 @@ void BreakWindowManager::show(BreakType type) {
   forceBreakTimer->setInterval(SanePreferences::flashFor->get() * 1000);
   forceBreakTimer->start();
   idleTimer->startWatching(NOTIFY_FIRST_IDLE);
-  playSound(SanePreferences::bellStart->get());
+  playSound(type == BreakType::SMALL ? SanePreferences::smallStartBell->get()
+                                     : SanePreferences::bigStartBell->get());
 }
 
 bool BreakWindowManager::isShowing() { return windows.size() != 0; }
@@ -119,7 +120,8 @@ void BreakWindowManager::tick() {
     for (auto w : std::as_const(windows)) w->setTime(remainingTime);
   }
   if (remainingTime <= 0) {
-    playSound(SanePreferences::bellEnd->get());
+    playSound(currentType == BreakType::SMALL ? SanePreferences::smallEndBell->get()
+                                              : SanePreferences::bigEndBell->get());
     close();
   }
 }
@@ -152,7 +154,6 @@ void BreakWindowManager::onIdleEnd() {
 
 void BreakWindowManager::playSound(QString soundFile) {
   if (soundFile.isEmpty()) return;
-  if (currentType == BreakType::SMALL && !SanePreferences::bellInSmall->get()) return;
   QMediaPlayer *soundPlayer = new QMediaPlayer(this);
   QAudioOutput *audioOutput = new QAudioOutput();
   soundPlayer->setAudioOutput(audioOutput);

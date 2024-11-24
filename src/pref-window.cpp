@@ -39,7 +39,8 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
    *                               Tab switch                                *
    *                                                                         *
    ****************************************************************************/
-  tabButtons = {ui->tabBreakButton, ui->tabPauseButton, ui->tabAboutButton};
+  tabButtons = {ui->tabBreakButton, ui->tabNotificationButton, ui->tabPauseButton,
+                ui->tabAboutButton};
   for (int i = 0; i < tabButtons.size(); ++i) {
     connect(tabButtons[i], &QPushButton::released, this, [this, i]() { setTab(i); });
   }
@@ -76,13 +77,15 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
 
   QStringList soundFiles = {"", "qrc:/sounds/chime.mp3", "qrc:/sounds/ding.mp3",
                             "qrc:/sounds/wood.mp3", "qrc:/sounds/bell.mp3"};
-  ui->startSoundSelect->addItems(soundFiles);
-  connect(ui->playStartSoundButton, &QPushButton::pressed, this,
-          [this]() { playSound(ui->startSoundSelect->currentText()); });
-  ui->endSoundSelect->addItems(soundFiles);
-  connect(ui->playEndSoundButton, &QPushButton::pressed, this,
-          [this]() { playSound(ui->endSoundSelect->currentText()); });
-
+  QList<QComboBox *> soundSelects = {ui->smallStartBellSelect, ui->smallEndBellSelect,
+                                     ui->bigStartBellSelect, ui->bigEndBellSelect};
+  QList<QPushButton *> soundPlayButtons = {ui->playSmallStart, ui->playSmallEnd,
+                                           ui->playBigStart, ui->playBigEnd};
+  for (int i = 0; i < soundSelects.length(); i++) {
+    soundSelects[i]->addItems(soundFiles);
+    connect(soundPlayButtons[i], &QPushButton::pressed, this,
+            [this, soundSelects, i]() { playSound(soundSelects[i]->currentText()); });
+  }
   /***************************************************************************
    *                                                                         *
    *                                Pause tab                                *
@@ -125,9 +128,10 @@ void PreferenceWindow::loadSettings() {
   ui->bigBreakAfterSlider->setValue(SanePreferences::bigAfter->get());
   ui->bigBreakForSlider->setValue(SanePreferences::bigFor->get());
   ui->flashForSlider->setValue(SanePreferences::flashFor->get());
-  ui->startSoundSelect->setEditText(SanePreferences::bellStart->get());
-  ui->endSoundSelect->setEditText(SanePreferences::bellEnd->get());
-  ui->soundInSmallBreak->setChecked(SanePreferences::bellInSmall->get());
+  ui->smallStartBellSelect->setEditText(SanePreferences::smallStartBell->get());
+  ui->smallEndBellSelect->setEditText(SanePreferences::smallEndBell->get());
+  ui->bigStartBellSelect->setEditText(SanePreferences::bigStartBell->get());
+  ui->bigEndBellSelect->setEditText(SanePreferences::bigEndBell->get());
   ui->pauseOnIdleSlider->setValue(SanePreferences::pauseOnIdleFor->get() / 60);
   ui->resetBreakSlider->setValue(SanePreferences::resetAfterPause->get() / 60);
   ui->resetCycleSlider->setValue(SanePreferences::resetCycleAfterPause->get() / 60);
@@ -140,9 +144,10 @@ void PreferenceWindow::saveSettings() {
   SanePreferences::bigAfter->set(ui->bigBreakAfterSlider->value());
   SanePreferences::bigFor->set(ui->bigBreakForSlider->value());
   SanePreferences::flashFor->set(ui->flashForSlider->value());
-  SanePreferences::bellStart->set(ui->startSoundSelect->currentText());
-  SanePreferences::bellEnd->set(ui->endSoundSelect->currentText());
-  SanePreferences::bellInSmall->set(ui->soundInSmallBreak->isChecked());
+  SanePreferences::smallStartBell->set(ui->smallStartBellSelect->currentText());
+  SanePreferences::smallEndBell->set(ui->smallEndBellSelect->currentText());
+  SanePreferences::bigStartBell->set(ui->bigStartBellSelect->currentText());
+  SanePreferences::bigEndBell->set(ui->bigEndBellSelect->currentText());
   SanePreferences::pauseOnIdleFor->set(ui->pauseOnIdleSlider->value() * 60);
   SanePreferences::resetAfterPause->set(ui->resetBreakSlider->value() * 60);
   SanePreferences::resetCycleAfterPause->set(ui->resetCycleSlider->value() * 60);

@@ -49,6 +49,19 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="tabNotificationButton">
+        <property name="text">
+         <string>Notification</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="tabPauseButton">
         <property name="text">
          <string>Pause</string>
@@ -135,6 +148,16 @@
            <property name="verticalSpacing">
             <number>12</number>
            </property>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_11">
+             <property name="toolTip">
+              <string>How many seconds to allow continued work before forcing breaks</string>
+             </property>
+             <property name="text">
+              <string>Flash break prompt for</string>
+             </property>
+            </widget>
+           </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_4">
              <property name="toolTip">
@@ -145,47 +168,29 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="2">
-            <widget class="QLabel" name="bigBreakAfterLabel">
+           <item row="3" column="2">
+            <widget class="QLabel" name="bigBreakForLabel">
              <property name="text">
-              <string>3 breaks</string>
+              <string>60 sec</string>
              </property>
             </widget>
            </item>
-           <item row="5" column="1">
-            <widget class="QComboBox" name="startSoundSelect">
-             <property name="editable">
-              <bool>true</bool>
+           <item row="0" column="1">
+            <widget class="SteppedSlider" name="smallBreakEverySlider">
+             <property name="minimum">
+              <number>5</number>
              </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="QLabel" name="smallBreakForLabel">
-             <property name="text">
-              <string>20 sec</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="2">
-            <widget class="QPushButton" name="playStartSoundButton">
-             <property name="text">
-              <string>Play</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="SteppedSlider" name="flashForSlider">
              <property name="maximum">
-              <number>300</number>
+              <number>60</number>
              </property>
              <property name="singleStep">
-              <number>10</number>
+              <number>5</number>
              </property>
              <property name="pageStep">
-              <number>30</number>
+              <number>5</number>
              </property>
              <property name="value">
-              <number>30</number>
+              <number>20</number>
              </property>
              <property name="orientation">
               <enum>Qt::Orientation::Horizontal</enum>
@@ -194,7 +199,17 @@
               <enum>QSlider::TickPosition::TicksBelow</enum>
              </property>
              <property name="tickInterval">
-              <number>30</number>
+              <number>0</number>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_6">
+             <property name="toolTip">
+              <string>How many seconds for each big break</string>
+             </property>
+             <property name="text">
+              <string>Big break length</string>
              </property>
             </widget>
            </item>
@@ -255,73 +270,19 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_6">
-             <property name="toolTip">
-              <string>How many seconds for each big break</string>
-             </property>
-             <property name="text">
-              <string>Big break length</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0">
-            <widget class="QLabel" name="label_11">
-             <property name="toolTip">
-              <string>How many seconds to allow continued work before forcing breaks</string>
-             </property>
-             <property name="text">
-              <string>Flash break prompt for</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QLabel" name="smallBreakEveryLabel">
-             <property name="text">
-              <string>20 min</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="1">
-            <widget class="QComboBox" name="endSoundSelect">
-             <property name="editable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0">
-            <widget class="QLabel" name="label_14">
-             <property name="toolTip">
-              <string>Try restart Sane Break if no sound</string>
-             </property>
-             <property name="text">
-              <string>Bell after break&lt;br/&gt;e.g. &lt;span style=&quot; font-style:italic;&quot;&gt;file:/home/a.mp3&lt;/span&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="2">
-            <widget class="QPushButton" name="playEndSoundButton">
-             <property name="text">
-              <string>Play</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="SteppedSlider" name="smallBreakEverySlider">
-             <property name="minimum">
-              <number>5</number>
-             </property>
+           <item row="4" column="1">
+            <widget class="SteppedSlider" name="flashForSlider">
              <property name="maximum">
-              <number>60</number>
+              <number>300</number>
              </property>
              <property name="singleStep">
-              <number>5</number>
+              <number>10</number>
              </property>
              <property name="pageStep">
-              <number>5</number>
+              <number>30</number>
              </property>
              <property name="value">
-              <number>20</number>
+              <number>30</number>
              </property>
              <property name="orientation">
               <enum>Qt::Orientation::Horizontal</enum>
@@ -330,14 +291,21 @@
               <enum>QSlider::TickPosition::TicksBelow</enum>
              </property>
              <property name="tickInterval">
-              <number>0</number>
+              <number>30</number>
              </property>
             </widget>
            </item>
-           <item row="3" column="2">
-            <widget class="QLabel" name="bigBreakForLabel">
+           <item row="1" column="2">
+            <widget class="QLabel" name="smallBreakForLabel">
              <property name="text">
-              <string>60 sec</string>
+              <string>20 sec</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLabel" name="bigBreakAfterLabel">
+             <property name="text">
+              <string>3 breaks</string>
              </property>
             </widget>
            </item>
@@ -351,13 +319,10 @@
              </property>
             </widget>
            </item>
-           <item row="5" column="0">
-            <widget class="QLabel" name="label_13">
-             <property name="toolTip">
-              <string>Try restart Sane Break if no sound</string>
-             </property>
+           <item row="0" column="2">
+            <widget class="QLabel" name="smallBreakEveryLabel">
              <property name="text">
-              <string>Bell before break&lt;br&gt;e.g. &lt;span style=&quot; font-style:italic;&quot;&gt;file:D:\sound.wav&lt;/span&gt;</string>
+              <string>20 min</string>
              </property>
             </widget>
            </item>
@@ -399,14 +364,131 @@
           </layout>
          </item>
          <item>
-          <widget class="QCheckBox" name="soundInSmallBreak">
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="notificationPage">
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,1,0">
+           <property name="verticalSpacing">
+            <number>12</number>
+           </property>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_14">
+             <property name="toolTip">
+              <string>Try restart Sane Break if no sound</string>
+             </property>
+             <property name="text">
+              <string>Bell after small break</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QPushButton" name="playSmallStart">
+             <property name="text">
+              <string>Play</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QComboBox" name="smallEndBellSelect">
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_13">
+             <property name="toolTip">
+              <string>Try restart Sane Break if no sound</string>
+             </property>
+             <property name="text">
+              <string>Bell before small break</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Bell before big break</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QPushButton" name="playSmallEnd">
+             <property name="text">
+              <string>Play</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="smallStartBellSelect">
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>Bell after big break</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QComboBox" name="bigStartBellSelect">
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QComboBox" name="bigEndBellSelect">
+             <property name="editable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QPushButton" name="playBigStart">
+             <property name="text">
+              <string>Play</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="2">
+            <widget class="QPushButton" name="playBigEnd">
+             <property name="text">
+              <string>Play</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_8">
            <property name="text">
-            <string>Also play bell in small breaks</string>
+            <string>&lt;strong&gt;Tip&lt;/strong&gt;: You can use local sound files with URLs like &lt;code&gt;file:/D:\sound.mp3&lt;/code&gt;  (Windows) or &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
          <item>
-          <spacer name="verticalSpacer_2">
+          <spacer name="verticalSpacer_4">
            <property name="orientation">
             <enum>Qt::Orientation::Vertical</enum>
            </property>
