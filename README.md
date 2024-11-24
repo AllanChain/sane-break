@@ -134,5 +134,5 @@ You can postpone or quit via tray icon within a short time even after the break 
 
 However, if you really want to quit when Sane Break is set to fullscreen, you can kill the app via system command line. For example:
 - KDE: Enable KRunner with <kbd>Alt</kbd> + <kbd>Space</kbd> and run `killall sane-break`
-- macOS: Enable Spotlight with <kbd>Cmd</kbd> + <kbd>Space</kbd> and run `killall sane-break`
+- macOS: Enable Spotlight with <kbd>Cmd</kbd> + <kbd>Space</kbd>, open Terminal, and run `killall sane-break`
 - Windows: Press <kbd>Win</kbd> + <kbd>R</kbd> and run `taskkill /IM sane-break /F`
