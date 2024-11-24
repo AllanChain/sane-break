@@ -45,7 +45,7 @@ https://github.com/user-attachments/assets/35002673-ce83-4848-bd5e-6cc6dbbd4c8c
 
 ![flashing](https://github.com/user-attachments/assets/d046c46d-3de9-4935-b16d-fbd2124c1d49)
 ![fullscreen](https://github.com/user-attachments/assets/59164505-3446-4ef7-b0e0-5ffe0a607c44)
-![macos](https://github.com/user-attachments/assets/941e20bf-46ed-434b-802b-541a34f10f0b)
+![macos](https://github.com/user-attachments/assets/2f28406e-0601-4786-ab5d-194a7cfae050)
 
 </details>
 
