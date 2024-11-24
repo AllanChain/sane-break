@@ -20,7 +20,7 @@ class IdleTimeWayland : public SystemIdleTime {
  public:
   IdleTimeWayland();
   ~IdleTimeWayland();
-  void startWatching(WatchOption option);
+  void startWatching();
   void stopWatching();
   void setWatchAccuracy(int accuracy) {};
   void setMinIdleTime(int idleTime);

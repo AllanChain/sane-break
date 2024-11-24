@@ -90,7 +90,7 @@ void BreakWindowManager::show(BreakType type) {
   countdownTimer->start();
   forceBreakTimer->setInterval(SanePreferences::flashFor->get() * 1000);
   forceBreakTimer->start();
-  idleTimer->startWatching(NOTIFY_FIRST_IDLE);
+  idleTimer->startWatching();
   playSound(type == BreakType::SMALL ? SanePreferences::smallStartBell->get()
                                      : SanePreferences::bigStartBell->get());
 }

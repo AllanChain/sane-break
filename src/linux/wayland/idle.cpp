@@ -50,7 +50,7 @@ void IdleTimeWayland::resumed(void *data, ext_idle_notification_v1 *object) {
   emit self->idleEnd();
 };
 
-void IdleTimeWayland::startWatching(WatchOption option) {
+void IdleTimeWayland::startWatching() {
   isWatching = true;
   idleNotification =
       ext_idle_notifier_v1_get_idle_notification(idleNotifier, m_minIdleTime, seat);

@@ -8,12 +8,10 @@
 #include <QObject>
 #include <QTimer>
 
-enum WatchOption { NOTIFY_FIRST_IDLE, NOTIFY_FIRST_RESUME };
-
 class SystemIdleTime : public QObject {
   Q_OBJECT
  public:
-  virtual void startWatching(WatchOption option) {};
+  virtual void startWatching() {};
   virtual void stopWatching() {};
   static SystemIdleTime *createIdleTimer();
   int watchAccuracy() { return m_watchAccuracy; };
@@ -34,7 +32,7 @@ class ReadBasedIdleTime : public SystemIdleTime {
   Q_OBJECT
  public:
   ReadBasedIdleTime();
-  void startWatching(WatchOption option);
+  void startWatching();
   void stopWatching();
   virtual int systemIdleTime() { return 0; };
   void setWatchAccuracy(int accuracy);

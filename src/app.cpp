@@ -62,7 +62,7 @@ void SaneBreakApp::start() {
   resetSecondsToNextBreak();
   icon->show();
   countDownTimer->start();
-  idleTimer->startWatching(NOTIFY_FIRST_IDLE);
+  idleTimer->startWatching();
   batteryWatcher->startWatching();
 }
 
@@ -183,7 +183,7 @@ void SaneBreakApp::breakNow() {
   breakManager->show(smallBreaksBeforeBig() == 0 ? BreakType::BIG : BreakType::SMALL);
   breakCycleCount++;
   // For testing user is idle after break end
-  oneshotIdleTimer->startWatching(NOTIFY_FIRST_IDLE);
+  oneshotIdleTimer->startWatching();
   // Reset icon
   updateIcon();
 }

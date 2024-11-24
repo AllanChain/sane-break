@@ -54,15 +54,9 @@ ReadBasedIdleTime::ReadBasedIdleTime() : SystemIdleTime() {
   connect(timer, &QTimer::timeout, this, &ReadBasedIdleTime::tick);
 }
 
-void ReadBasedIdleTime::startWatching(WatchOption option) {
-  switch (option) {
-    case NOTIFY_FIRST_IDLE:
-      isIdle = false;
-      break;
-    case NOTIFY_FIRST_RESUME:
-      isIdle = true;
-      break;
-  }
+void ReadBasedIdleTime::startWatching() {
+  // Assume currently not idle and nofity first idle event
+  isIdle = false;
   timer->setInterval(m_watchAccuracy);
   timer->start();
   tick();
