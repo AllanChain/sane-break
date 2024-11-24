@@ -113,12 +113,10 @@ void BreakWindowManager::close() {
 
 void BreakWindowManager::tick() {
   bool shouldCountDown = isForceBreak || isIdle;
-  if (!shouldCountDown) {
-    for (auto w : std::as_const(windows)) w->setTime(remainingTime);
-  } else {
-    remainingTime--;
-    for (auto w : std::as_const(windows)) w->setTime(remainingTime);
-  }
+  if (shouldCountDown) remainingTime--;
+  for (auto w : std::as_const(windows)) w->setTime(remainingTime);
+  if (totalTime - remainingTime >= SanePreferences::confirmAfter->get())
+    isForceBreak = true;
   if (remainingTime <= 0) {
     playSound(currentType == BreakType::SMALL ? SanePreferences::smallEndBell->get()
                                               : SanePreferences::bigEndBell->get());

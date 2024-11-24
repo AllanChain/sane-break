@@ -73,7 +73,12 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
   });
   connect(ui->flashForSlider, &SteppedSlider::valueChanged, this, [this](int value) {
     ui->flashForLabel->setText(QString("%1 sec").arg(value));
+    ui->confirmAfterSlider->setMaximum(value);
   });
+  connect(ui->confirmAfterSlider, &SteppedSlider::valueChanged, this,
+          [this](int value) {
+            ui->confirmAfterLabel->setText(QString("%1 sec").arg(value));
+          });
 
   QStringList soundFiles = {"", "qrc:/sounds/chime.mp3", "qrc:/sounds/ding.mp3",
                             "qrc:/sounds/wood.mp3", "qrc:/sounds/bell.mp3"};
@@ -128,6 +133,7 @@ void PreferenceWindow::loadSettings() {
   ui->bigBreakAfterSlider->setValue(SanePreferences::bigAfter->get());
   ui->bigBreakForSlider->setValue(SanePreferences::bigFor->get());
   ui->flashForSlider->setValue(SanePreferences::flashFor->get());
+  ui->confirmAfterSlider->setValue(SanePreferences::confirmAfter->get());
   ui->smallStartBellSelect->setEditText(SanePreferences::smallStartBell->get());
   ui->smallEndBellSelect->setEditText(SanePreferences::smallEndBell->get());
   ui->bigStartBellSelect->setEditText(SanePreferences::bigStartBell->get());
@@ -144,6 +150,7 @@ void PreferenceWindow::saveSettings() {
   SanePreferences::bigAfter->set(ui->bigBreakAfterSlider->value());
   SanePreferences::bigFor->set(ui->bigBreakForSlider->value());
   SanePreferences::flashFor->set(ui->flashForSlider->value());
+  SanePreferences::confirmAfter->set(ui->confirmAfterSlider->value());
   SanePreferences::smallStartBell->set(ui->smallStartBellSelect->currentText());
   SanePreferences::smallEndBell->set(ui->smallEndBellSelect->currentText());
   SanePreferences::bigStartBell->set(ui->bigStartBellSelect->currentText());

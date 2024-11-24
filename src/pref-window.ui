@@ -168,121 +168,6 @@ QPushButton[flat=&quot;true&quot;]:checked {
            <property name="verticalSpacing">
             <number>12</number>
            </property>
-           <item row="4" column="0">
-            <widget class="QLabel" name="label_11">
-             <property name="toolTip">
-              <string>How many seconds to allow continued work before forcing breaks</string>
-             </property>
-             <property name="text">
-              <string>Flash break prompt for</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_4">
-             <property name="toolTip">
-              <string>How many seconds for each small break</string>
-             </property>
-             <property name="text">
-              <string>Small break length</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="2">
-            <widget class="QLabel" name="bigBreakForLabel">
-             <property name="text">
-              <string>60 sec</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="SteppedSlider" name="smallBreakEverySlider">
-             <property name="minimum">
-              <number>5</number>
-             </property>
-             <property name="maximum">
-              <number>60</number>
-             </property>
-             <property name="singleStep">
-              <number>5</number>
-             </property>
-             <property name="pageStep">
-              <number>5</number>
-             </property>
-             <property name="value">
-              <number>20</number>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Orientation::Horizontal</enum>
-             </property>
-             <property name="tickPosition">
-              <enum>QSlider::TickPosition::TicksBelow</enum>
-             </property>
-             <property name="tickInterval">
-              <number>0</number>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_6">
-             <property name="toolTip">
-              <string>How many seconds for each big break</string>
-             </property>
-             <property name="text">
-              <string>Big break length</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="SteppedSlider" name="bigBreakForSlider">
-             <property name="minimum">
-              <number>10</number>
-             </property>
-             <property name="maximum">
-              <number>600</number>
-             </property>
-             <property name="singleStep">
-              <number>10</number>
-             </property>
-             <property name="pageStep">
-              <number>60</number>
-             </property>
-             <property name="value">
-              <number>60</number>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Orientation::Horizontal</enum>
-             </property>
-             <property name="tickPosition">
-              <enum>QSlider::TickPosition::TicksBelow</enum>
-             </property>
-             <property name="tickInterval">
-              <number>60</number>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="SteppedSlider" name="bigBreakAfterSlider">
-             <property name="minimum">
-              <number>1</number>
-             </property>
-             <property name="maximum">
-              <number>20</number>
-             </property>
-             <property name="pageStep">
-              <number>1</number>
-             </property>
-             <property name="value">
-              <number>3</number>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Orientation::Horizontal</enum>
-             </property>
-             <property name="tickPosition">
-              <enum>QSlider::TickPosition::TicksBelow</enum>
-             </property>
-            </widget>
-           </item>
            <item row="4" column="2">
             <widget class="QLabel" name="flashForLabel">
              <property name="text">
@@ -315,17 +200,62 @@ QPushButton[flat=&quot;true&quot;]:checked {
              </property>
             </widget>
            </item>
-           <item row="1" column="2">
-            <widget class="QLabel" name="smallBreakForLabel">
+           <item row="0" column="2">
+            <widget class="QLabel" name="smallBreakEveryLabel">
              <property name="text">
-              <string>20 sec</string>
+              <string>20 min</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="2">
-            <widget class="QLabel" name="bigBreakAfterLabel">
+           <item row="2" column="1">
+            <widget class="SteppedSlider" name="bigBreakAfterSlider">
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>20</number>
+             </property>
+             <property name="pageStep">
+              <number>1</number>
+             </property>
+             <property name="value">
+              <number>3</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+             <property name="tickPosition">
+              <enum>QSlider::TickPosition::TicksBelow</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_3">
+             <property name="toolTip">
+              <string>Length of work time between breaks</string>
+             </property>
              <property name="text">
-              <string>3 breaks</string>
+              <string>Break every</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="toolTip">
+              <string>How many seconds for each small break</string>
+             </property>
+             <property name="text">
+              <string>Small break length</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_6">
+             <property name="toolTip">
+              <string>How many seconds for each big break</string>
+             </property>
+             <property name="text">
+              <string>Big break length</string>
              </property>
             </widget>
            </item>
@@ -339,10 +269,66 @@ QPushButton[flat=&quot;true&quot;]:checked {
              </property>
             </widget>
            </item>
-           <item row="0" column="2">
-            <widget class="QLabel" name="smallBreakEveryLabel">
+           <item row="0" column="1">
+            <widget class="SteppedSlider" name="smallBreakEverySlider">
+             <property name="minimum">
+              <number>5</number>
+             </property>
+             <property name="maximum">
+              <number>60</number>
+             </property>
+             <property name="singleStep">
+              <number>5</number>
+             </property>
+             <property name="pageStep">
+              <number>5</number>
+             </property>
+             <property name="value">
+              <number>20</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+             <property name="tickPosition">
+              <enum>QSlider::TickPosition::TicksBelow</enum>
+             </property>
+             <property name="tickInterval">
+              <number>0</number>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="SteppedSlider" name="bigBreakForSlider">
+             <property name="minimum">
+              <number>10</number>
+             </property>
+             <property name="maximum">
+              <number>600</number>
+             </property>
+             <property name="singleStep">
+              <number>10</number>
+             </property>
+             <property name="pageStep">
+              <number>60</number>
+             </property>
+             <property name="value">
+              <number>60</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+             <property name="tickPosition">
+              <enum>QSlider::TickPosition::TicksBelow</enum>
+             </property>
+             <property name="tickInterval">
+              <number>60</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLabel" name="smallBreakForLabel">
              <property name="text">
-              <string>20 min</string>
+              <string>20 sec</string>
              </property>
             </widget>
            </item>
@@ -371,13 +357,60 @@ QPushButton[flat=&quot;true&quot;]:checked {
              </property>
             </widget>
            </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_3">
+           <item row="2" column="2">
+            <widget class="QLabel" name="bigBreakAfterLabel">
+             <property name="text">
+              <string>3 breaks</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QLabel" name="bigBreakForLabel">
+             <property name="text">
+              <string>60 sec</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_11">
              <property name="toolTip">
-              <string>Length of work time between breaks</string>
+              <string>How many seconds to allow continued work before forcing breaks</string>
              </property>
              <property name="text">
-              <string>Break every</string>
+              <string>Flash break prompt for</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QSlider" name="confirmAfterSlider">
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>30</number>
+             </property>
+             <property name="value">
+              <number>30</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_9">
+             <property name="toolTip">
+              <string>After idle for that long during break, Sane Break will keep full screen and there's no way back.</string>
+             </property>
+             <property name="text">
+              <string>Confirm break after</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="2">
+            <widget class="QLabel" name="confirmAfterLabel">
+             <property name="text">
+              <string>30 sec</string>
              </property>
             </widget>
            </item>
