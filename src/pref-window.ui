@@ -28,6 +28,12 @@
    </property>
    <item>
     <widget class="QWidget" name="sideBar" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>100</width>
+       <height>0</height>
+      </size>
+     </property>
      <property name="styleSheet">
       <string notr="true">QWidget#sideBar {
   background-color: rgba(100, 100, 100, 30);
@@ -37,9 +43,13 @@ QPushButton[flat=&quot;true&quot;] {
   border-right: 4px solid rgba(0, 0, 0, 0);
   padding: 10px;
 }
+QPushButton[flat=&quot;true&quot;]:hover {
+  background-color: rgba(22, 163, 74, 10);
+}
 QPushButton[flat=&quot;true&quot;]:checked {
   background-color: rgba(22, 163, 74, 30);
   border-right: 4px solid rgb(22, 163, 74);
+  font-weight: bold;
 }</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -54,6 +64,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
       </property>
       <item>
        <widget class="QPushButton" name="tabBreakButton">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
         <property name="text">
          <string>Break</string>
         </property>
@@ -69,9 +82,12 @@ QPushButton[flat=&quot;true&quot;]:checked {
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="tabNotificationButton">
+       <widget class="QPushButton" name="tabSoundButton">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
         <property name="text">
-         <string>Notification</string>
+         <string>Sound</string>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -83,6 +99,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
       </item>
       <item>
        <widget class="QPushButton" name="tabPauseButton">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
         <property name="text">
          <string>Pause</string>
         </property>
@@ -96,6 +115,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
       </item>
       <item>
        <widget class="QPushButton" name="tabAboutButton">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
         <property name="text">
          <string>About</string>
         </property>
@@ -394,6 +416,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
              </property>
              <property name="orientation">
               <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+             <property name="tickPosition">
+              <enum>QSlider::TickPosition::TicksBelow</enum>
              </property>
             </widget>
            </item>
@@ -778,8 +803,8 @@ QPushButton[flat=&quot;true&quot;]:checked {
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>456</width>
-              <height>154</height>
+              <width>66</width>
+              <height>41</height>
              </rect>
             </property>
             <property name="sizePolicy">

@@ -38,7 +38,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
    *                               Tab switch                                *
    *                                                                         *
    ****************************************************************************/
-  tabButtons = {ui->tabBreakButton, ui->tabNotificationButton, ui->tabPauseButton,
+  tabButtons = {ui->tabBreakButton, ui->tabSoundButton, ui->tabPauseButton,
                 ui->tabAboutButton};
   for (int i = 0; i < tabButtons.size(); ++i) {
     connect(tabButtons[i], &QPushButton::released, this, [this, i]() { setTab(i); });
