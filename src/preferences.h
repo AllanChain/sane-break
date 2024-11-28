@@ -69,6 +69,7 @@ class SanePreferences : public QObject {
   static Setting<int> *resetAfterPause;
   static Setting<int> *resetCycleAfterPause;
   static Setting<bool> *pauseOnBattery;
+  static Setting<QStringList> *programsToMonitor;
 };
 
 #endif  // SANE_PREFERENCES_H

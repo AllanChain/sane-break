@@ -138,6 +138,7 @@ void PreferenceWindow::loadSettings() {
   ui->resetBreakSlider->setValue(SanePreferences::resetAfterPause->get() / 60);
   ui->resetCycleSlider->setValue(SanePreferences::resetCycleAfterPause->get() / 60);
   ui->pauseOnBatteryCheck->setChecked(SanePreferences::pauseOnBattery->get());
+  ui->programList->setPlainText(SanePreferences::programsToMonitor->get().join("\n"));
 }
 
 void PreferenceWindow::saveSettings() {
@@ -155,6 +156,7 @@ void PreferenceWindow::saveSettings() {
   SanePreferences::resetAfterPause->set(ui->resetBreakSlider->value() * 60);
   SanePreferences::resetCycleAfterPause->set(ui->resetCycleSlider->value() * 60);
   SanePreferences::pauseOnBattery->set(ui->pauseOnBatteryCheck->isChecked());
+  SanePreferences::programsToMonitor->set(ui->programList->toPlainText().split("\n"));
 }
 
 void PreferenceWindow::closeEvent(QCloseEvent *event) {

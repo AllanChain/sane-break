@@ -23,6 +23,7 @@
 #include "idle-time.h"
 #include "pref-window.h"
 #include "preferences.h"
+#include "program-monitor.h"
 
 SaneBreakApp::SaneBreakApp() : QObject() {
   prefWindow = new PreferenceWindow();
@@ -36,6 +37,7 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   oneshotIdleTimer->setMinIdleTime(1000);
   sleepMonitor = new SleepMonitor();
   batteryWatcher = BatteryStatus::createWatcher();
+  runningProgramsMonitor = new RunningProgramsMonitor();
   createMenu();
   icon = new QSystemTrayIcon(this);
   icon->setContextMenu(menu);
@@ -51,11 +53,20 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   connect(sleepMonitor, &SleepMonitor::sleepEnd, this, &SaneBreakApp::onSleepEnd);
   connect(batteryWatcher, &BatteryStatus::onBattery, this, &SaneBreakApp::onBattery);
   connect(batteryWatcher, &BatteryStatus::onPower, this, &SaneBreakApp::onPower);
+  connect(runningProgramsMonitor, &RunningProgramsMonitor::programStarted, this,
+          [this]() { pauseBreak(PauseReason::APP_OPEN); });
+  connect(runningProgramsMonitor, &RunningProgramsMonitor::programStopped, this,
+          [this]() { resumeBreak(PauseReason::APP_OPEN); });
   connect(SanePreferences::pauseOnBattery, &SettingWithSignal::changed, this,
           &SaneBreakApp::onBatterySettingChange);
   connect(SanePreferences::smallEvery, &SettingWithSignal::changed, this,
           &SaneBreakApp::resetSecondsToNextBreak);
+  connect(
+      SanePreferences::programsToMonitor, &SettingWithSignal::changed, this, [this]() {
+        runningProgramsMonitor->setPrograms(SanePreferences::programsToMonitor->get());
+      });
 }
+
 SaneBreakApp::~SaneBreakApp() {}
 
 void SaneBreakApp::start() {
@@ -64,6 +75,8 @@ void SaneBreakApp::start() {
   countDownTimer->start();
   idleTimer->startWatching();
   batteryWatcher->startWatching();
+  runningProgramsMonitor->setPrograms(SanePreferences::programsToMonitor->get());
+  runningProgramsMonitor->startMonitoring();
 }
 
 void SaneBreakApp::tick() {
@@ -251,7 +264,7 @@ void SaneBreakApp::onSleepEnd() {
   breakCycleCount = 1;
   breakManager->close();  // stop current break if necessary
   resetSecondsToNextBreak();
-  // Bue we update menu and icon (in case <1min) only if not paused
+  // But we update menu and icon (in case <1min) only if not paused
   if (pauseReasons == 0) {
     updateMenu();
     updateIcon();

@@ -28,3 +28,5 @@ Setting<int>* SanePreferences::resetCycleAfterPause =
     new Setting<int>("pause/reset-cycle-after", 300);
 Setting<bool>* SanePreferences::pauseOnBattery =
     new Setting<bool>("pause/on-battery", false);
+Setting<QStringList>* SanePreferences::programsToMonitor =
+    new Setting<QStringList>("pause/programs-to-monitor", QStringList());

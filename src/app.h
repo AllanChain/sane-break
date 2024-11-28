@@ -14,6 +14,7 @@
 #include "battery-status.h"
 #include "idle-time.h"
 #include "pref-window.h"
+#include "program-monitor.h"
 #include "window-manager.h"
 
 enum PauseReason {
@@ -68,6 +69,7 @@ class SaneBreakApp : public QObject {
   void resetSecondsToNextBreak();
   void updateIcon();
   uint pauseReasons = 0;
+  RunningProgramsMonitor *runningProgramsMonitor;
 };
 
 #endif  // SANE_TRAY_H
