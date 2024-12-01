@@ -18,6 +18,7 @@
 #include <QStyleHints>
 #include <QSystemTrayIcon>
 #include <QTimer>
+#include <QWindow>
 
 #include "battery-status.h"
 #include "idle-time.h"
@@ -186,6 +187,7 @@ void SaneBreakApp::createMenu() {
   connect(menu->addAction("Preferences"), &QAction::triggered, this, [this]() {
     prefWindow->loadSettings();
     prefWindow->show();
+    prefWindow->windowHandle()->requestActivate();
   });
 }
 
