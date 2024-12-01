@@ -43,7 +43,7 @@ https://github.com/user-attachments/assets/35002673-ce83-4848-bd5e-6cc6dbbd4c8c
 <details>
   <summary>📷 <b>Screenshots</b></summary>
 
-![flashing](https://github.com/user-attachments/assets/d046c46d-3de9-4935-b16d-fbd2124c1d49)
+![flashing](https://github.com/user-attachments/assets/1ec11caf-3b3d-4429-881d-4d909ec4c3c7)
 ![fullscreen](https://github.com/user-attachments/assets/59164505-3446-4ef7-b0e0-5ffe0a607c44)
 ![macos](https://github.com/user-attachments/assets/2f28406e-0601-4786-ab5d-194a7cfae050)
 
@@ -117,6 +117,12 @@ Right-click the menu icon and hover over the "Postpone" menu. The "Quit" menu is
 - Linux: Whatever way you like
 - macOS: Open "System Preferences" and search for "Login Items". Click "+" and add Sane Break to login items
 - Windows: Use <kbd>Win</kbd> + <kbd>R</kbd> and type `shell:startup`. Put `sane-break.exe` or its shortcut there
+
+### Will Sane Break pause when I'm away?
+
+Yes, Sane Break will automatically pause and stop prompting breaks if there is no user input for a configurable amount of time, determined by the "Pause if idle for" setting. Additionally, if the idle time extends beyond a certain threshold, Sane Break will reset the break timer and break cycle, starting from a small break. These thresholds can be configured using the "Reset break after paused for" and "Reset cycle after paused for" settings.
+
+**Note for Wayland** (and possibly other platforms): Some applications, such as mpv, simulate user inputs to prevent the computer from sleeping automatically. Sane Break cannot distinguish between simulated and real inputs, so it will treat these simulations as active use. This means breaks can still occur while watching videos.
 
 ### Where are settings stored?
 
