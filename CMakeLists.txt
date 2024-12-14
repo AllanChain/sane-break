@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 # Should be set before project call and be a cache variable
 set(CMAKE_OSX_DEPLOYMENT_TARGET "12" CACHE STRING "Minimum OS X deployment version")
 
-project(sane-break VERSION 0.5.1 LANGUAGES C CXX)
+project(sane-break VERSION 0.5.2 LANGUAGES C CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
