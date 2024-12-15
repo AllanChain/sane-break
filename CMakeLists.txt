@@ -21,7 +21,7 @@ include(GNUInstallDirs)
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets Multimedia)
 find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia)
 
-file(GLOB PROJECT_SOURCES "src/*.cpp" "src/*.h" "resources/index.qrc")
+file(GLOB PROJECT_SOURCES "src/*.cpp" "src/*.h" "src/*.ui" "resources/index.qrc")
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     file(GLOB_RECURSE PROJECT_SOURCES_MACOS "src/macos/*")
@@ -39,7 +39,6 @@ qt_add_executable(sane-break
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
 )
-qt_add_ui(sane-break SOURCES src/pref-window.ui)
 
 target_include_directories(sane-break PRIVATE "src" ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(sane-break PRIVATE Qt6::Widgets Qt6::Multimedia)
