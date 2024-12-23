@@ -94,6 +94,14 @@ apt install libxss-dev # X support
 apt install qt6-wayland-dev liblayershellqtinterface-dev # Wayland support
 ```
 
+Required packages for Guix (see also [#23](https://github.com/AllanChain/sane-break/issues/23)):
+```bash
+guix shell --container make cmake gcc-toolchain pkg-config vulkan-headers \
+  qtbase@6 qtmultimedia \
+  libxkbcommon libxscrnsaver libx11 \  # X support
+  layer-shell-qt qtwayland@6 wayland   # Wayland support
+```
+
 Then, use CMake to compile from source:
 
 ```bash
