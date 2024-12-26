@@ -6,6 +6,7 @@
 
 #include <QAudioOutput>
 #include <QCheckBox>
+#include <QComboBox>
 #include <QDesktopServices>
 #include <QGridLayout>
 #include <QIcon>
@@ -15,9 +16,13 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QSlider>
+#include <QString>
 #include <QStringList>
 #include <QStyleOptionSlider>
 #include <QVBoxLayout>
+#include <QWidget>
+#include <Qt>
+#include <QtContainerFwd>
 
 #include "config.h"
 #include "preferences.h"

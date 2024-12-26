@@ -7,8 +7,9 @@
 
 #include <QList>
 #include <QObject>
+#include <QTimer>
 
-#include "break-window.h"
+#include "break-window.h"  // IWYU pragma: export
 #include "idle-time.h"
 
 class BreakWindowManager : public QObject {

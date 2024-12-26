@@ -5,7 +5,13 @@
 #include "widgets.h"
 
 #include <QMouseEvent>
+#include <QPoint>
+#include <QRect>
+#include <QSlider>
 #include <QStyleOptionSlider>
+#include <QWidget>
+#include <Qt>
+#include <QtMinMax>
 
 SteppedSlider::SteppedSlider(QWidget *parent) : QSlider(parent) {
   setTickPosition(QSlider::TicksBelow);

@@ -7,6 +7,8 @@
 #include <qglobal.h>
 
 #include <QDateTime>
+#include <QTimer>
+#include <QtLogging>
 
 #include "config.h"
 

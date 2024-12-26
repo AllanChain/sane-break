@@ -4,8 +4,11 @@
 
 #ifndef SANE_WIDGETS_H
 #define SANE_WIDGETS_H
+
 #include <QMouseEvent>
+#include <QPoint>
 #include <QSlider>
+#include <QWidget>
 
 class SteppedSlider : public QSlider {
   Q_OBJECT

@@ -3,8 +3,10 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <QApplication>
+#include <QCoreApplication>
 #include <QFile>
 #include <QSettings>
+#include <Qt>
 
 #include "app.h"
 

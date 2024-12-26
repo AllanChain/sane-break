@@ -10,7 +10,7 @@
 #ifndef SANE_BATTERY_LINUX_H
 #define SANE_BATTERY_LINUX_H
 
-#include "battery-status.h"
+#include "battery-status.h"  // IWYU pragma: export
 
 class LinuxBatteryStatus : public BatteryStatus {
   Q_OBJECT

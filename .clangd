@@ -1,3 +1,9 @@
 CompileFlags:
   Remove: [-mno-direct-extern-access]
-
+Diagnostics:
+  UnusedIncludes: Strict
+  MissingIncludes: Strict
+  Includes:
+    IgnoreHeader:
+    - qtmetamacros\.h
+    - wayland-client\.h

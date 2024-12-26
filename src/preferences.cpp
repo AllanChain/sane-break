@@ -5,6 +5,8 @@
 #include "preferences.h"
 
 #include <QObject>
+#include <QString>
+#include <QtContainerFwd>
 
 Setting<int>* SanePreferences::smallEvery = new Setting<int>("break/small-every", 1200);
 Setting<int>* SanePreferences::smallFor = new Setting<int>("break/small-for", 20);

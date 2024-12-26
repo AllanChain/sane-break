@@ -9,6 +9,7 @@
 #include <QFile>
 #include <QObject>
 #include <QSettings>
+#include <QtContainerFwd>
 
 class SettingWithSignal : public QObject {
   Q_OBJECT

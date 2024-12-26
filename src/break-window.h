@@ -5,12 +5,14 @@
 #ifndef SANE_BREAK_WINDOW_H
 #define SANE_BREAK_WINDOW_H
 
+#include <QColor>
 #include <QLabel>
 #include <QList>
 #include <QMainWindow>
 #include <QProgressBar>
 #include <QPropertyAnimation>
 #include <QTimer>
+#include <QWidget>
 
 enum BreakType {
   SMALL = 0,

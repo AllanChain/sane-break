@@ -6,7 +6,11 @@
 
 #include <qglobal.h>
 
+#include <QObject>
 #include <QProcess>
+#include <QTimer>
+#include <Qt>
+#include <QtContainerFwd>
 #include <utility>
 
 RunningProgramsMonitor::RunningProgramsMonitor(QObject *parent)

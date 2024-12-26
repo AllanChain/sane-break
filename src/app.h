@@ -31,8 +31,8 @@ class SaneBreakApp : public QObject {
   void start();
   void breakNow();
   void postpone(int secs);
-  void pauseBreak(uint reason);
-  bool resumeBreak(uint reason);
+  void pauseBreak(unsigned int reason);
+  bool resumeBreak(unsigned int reason);
   int smallBreaksBeforeBig();
   void onSleepEnd();
   void onBreakEnd();
@@ -68,7 +68,7 @@ class SaneBreakApp : public QObject {
   void addSecondsToNextBreak(int seconds);
   void resetSecondsToNextBreak();
   void updateIcon();
-  uint pauseReasons = 0;
+  unsigned int pauseReasons = 0;
   RunningProgramsMonitor *runningProgramsMonitor;
 };
 

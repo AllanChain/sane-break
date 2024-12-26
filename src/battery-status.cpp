@@ -6,6 +6,9 @@
 
 #include <qglobal.h>
 
+#include <QObject>
+#include <QTimer>
+
 #ifdef Q_OS_LINUX
 #include "linux/battery.h"
 #elif defined Q_OS_WIN

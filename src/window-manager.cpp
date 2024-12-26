@@ -12,13 +12,14 @@
 #include "preferences.h"
 
 #ifdef LayerShellQt_FOUND
-#include <LayerShellQt/Shell>
-#include <LayerShellQt/Window>
+#include <LayerShellQt/shell.h>
+#include <LayerShellQt/window.h>
 #elif defined Q_OS_MACOS
 #include "macos/workspace.h"
 #endif
 #include <QApplication>
 #include <QAudioOutput>
+#include <QGuiApplication>
 #include <QList>
 #include <QMediaPlayer>
 #include <QObject>

@@ -12,9 +12,13 @@
 #include <QGuiApplication>
 #include <QIcon>
 #include <QMenu>
+#include <QObject>
 #include <QPainter>
 #include <QPixmap>
+#include <QRect>
 #include <QSettings>
+#include <QSize>
+#include <QString>
 #include <QStyleHints>
 #include <QSystemTrayIcon>
 #include <QTimer>
@@ -25,6 +29,7 @@
 #include "pref-window.h"
 #include "preferences.h"
 #include "program-monitor.h"
+#include "window-manager.h"
 
 SaneBreakApp::SaneBreakApp() : QObject() {
   prefWindow = new PreferenceWindow();
@@ -212,7 +217,7 @@ void SaneBreakApp::postpone(int secs) {
   breakManager->close();  // stop current break if necessary
 }
 
-void SaneBreakApp::pauseBreak(uint reason) {
+void SaneBreakApp::pauseBreak(unsigned int reason) {
   // Should not record last pause if already paused
   if (pauseReasons == 0) lastPause = QDateTime::currentSecsSinceEpoch();
   pauseReasons |= reason;  // Flag should be set before closing windows
@@ -233,7 +238,7 @@ void SaneBreakApp::pauseBreak(uint reason) {
 }
 
 // Return true if the time is running
-bool SaneBreakApp::resumeBreak(uint reason) {
+bool SaneBreakApp::resumeBreak(unsigned int reason) {
   // Do nothing if not paused
   if (pauseReasons == 0) return true;
   // Remove specific reason for pausing

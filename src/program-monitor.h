@@ -9,6 +9,7 @@
 #include <QRegularExpression>
 #include <QStringList>
 #include <QTimer>
+#include <QtContainerFwd>
 
 class RunningProgramsMonitor : public QObject {
   Q_OBJECT

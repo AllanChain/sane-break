@@ -5,11 +5,15 @@
 #ifndef SANE_PREFERENCES_WINDOW_H
 #define SANE_PREFERENCES_WINDOW_H
 #include <QCheckBox>
+#include <QCloseEvent>
 #include <QComboBox>
 #include <QLabel>
+#include <QList>
 #include <QMainWindow>
 #include <QPushButton>
 #include <QSlider>
+#include <QString>
+#include <QWidget>
 
 namespace Ui {
 class PrefWindow;

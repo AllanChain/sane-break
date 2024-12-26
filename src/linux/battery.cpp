@@ -10,6 +10,7 @@
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QDBusReply>
+#include <QVariant>
 
 LinuxBatteryStatus::LinuxBatteryStatus() : BatteryStatus() {
   iface = new QDBusInterface(

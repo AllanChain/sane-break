@@ -5,14 +5,20 @@
 #include "break-window.h"
 
 #include <QApplication>
+#include <QColor>
 #include <QLabel>
+#include <QMainWindow>
 #include <QProgressBar>
 #include <QPropertyAnimation>
 #include <QRect>
 #include <QScreen>
+#include <QString>
 #include <QTimer>
 #include <QVBoxLayout>
+#include <QWidget>
 #include <QWindow>
+#include <Qt>
+#include <cmath>
 
 BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) {
   setAttribute(Qt::WA_TranslucentBackground);
