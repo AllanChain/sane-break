@@ -6,7 +6,7 @@ name: Build app
 on:
   push:
     branches:
-      - '*'
+      - '**'
     tags:
       - '*'
     paths-ignore:
