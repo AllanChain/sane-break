@@ -21,14 +21,16 @@
 #include <cmath>
 
 BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) {
-  setAttribute(Qt::WA_TranslucentBackground);
-  setAttribute(Qt::WA_ShowWithoutActivating);
+  setAttribute(Qt::WA_TranslucentBackground);  // transparent window
+  setAttribute(Qt::WA_ShowWithoutActivating);  // avoid gaining keyboard focus
+  setAttribute(Qt::WA_LayoutOnEntireRect);     // ignore safe zone on macOS
   setWindowFlags(Qt::ToolTip | Qt::WindowDoesNotAcceptFocus | Qt::FramelessWindowHint |
                  Qt::WindowStaysOnTopHint);
   setProperty("isFullScreen", false);
 
   QWidget *centralWidget = new QWidget(this);
   setCentralWidget(centralWidget);
+  centralWidget->setAttribute(Qt::WA_LayoutOnEntireRect);
   centralWidget->setContentsMargins(0, 0, 0, 0);
 
   QVBoxLayout *layout = new QVBoxLayout(centralWidget);
