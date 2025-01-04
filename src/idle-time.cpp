@@ -8,7 +8,6 @@
 
 #include <QDateTime>
 #include <QTimer>
-#include <QtLogging>
 
 #include "config.h"
 
@@ -33,7 +32,7 @@ SystemIdleTime* SystemIdleTime::createIdleTimer() {
 #ifdef ENABLE_WAYLAND
     return new IdleTimeWayland();
 #else
-    qFatal() << "Please compile with Wayland support.";
+    qFatal("Please compile with Wayland support.");
     return nullptr;
 #endif
   } else {

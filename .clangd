@@ -7,3 +7,5 @@ Diagnostics:
     IgnoreHeader:
     - qtmetamacros\.h
     - wayland-client\.h
+    - qlogging\.h
+    - qminmax\.h

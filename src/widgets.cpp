@@ -11,7 +11,6 @@
 #include <QStyleOptionSlider>
 #include <QWidget>
 #include <Qt>
-#include <QtMinMax>
 
 SteppedSlider::SteppedSlider(QWidget *parent) : QSlider(parent) {
   setTickPosition(QSlider::TicksBelow);
