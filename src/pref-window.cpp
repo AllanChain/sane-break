@@ -135,6 +135,7 @@ void PreferenceWindow::loadSettings() {
   ui->bigBreakForSlider->setValue(SanePreferences::bigFor->get());
   ui->flashForSlider->setValue(SanePreferences::flashFor->get());
   ui->confirmAfterSlider->setValue(SanePreferences::confirmAfter->get());
+  ui->breakOnMidClick->setChecked(SanePreferences::breakOnMidClick->get());
   ui->smallStartBellSelect->setEditText(SanePreferences::smallStartBell->get());
   ui->smallEndBellSelect->setEditText(SanePreferences::smallEndBell->get());
   ui->bigStartBellSelect->setEditText(SanePreferences::bigStartBell->get());
@@ -153,6 +154,7 @@ void PreferenceWindow::saveSettings() {
   SanePreferences::bigFor->set(ui->bigBreakForSlider->value());
   SanePreferences::flashFor->set(ui->flashForSlider->value());
   SanePreferences::confirmAfter->set(ui->confirmAfterSlider->value());
+  SanePreferences::breakOnMidClick->set(ui->breakOnMidClick->isChecked());
   SanePreferences::smallStartBell->set(ui->smallStartBellSelect->currentText());
   SanePreferences::smallEndBell->set(ui->smallEndBellSelect->currentText());
   SanePreferences::bigStartBell->set(ui->bigStartBellSelect->currentText());

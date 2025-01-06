@@ -52,6 +52,7 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   countDownTimer->setInterval(1000);
   connect(countDownTimer, &QTimer::timeout, this, &SaneBreakApp::tick);
   connect(breakManager, &BreakWindowManager::timeout, this, &SaneBreakApp::onBreakEnd);
+  connect(icon, &QSystemTrayIcon::activated, this, &SaneBreakApp::onIconTrigger);
   connect(idleTimer, &SystemIdleTime::idleStart, this, &SaneBreakApp::onIdleStart);
   connect(idleTimer, &SystemIdleTime::idleEnd, this, &SaneBreakApp::onIdleEnd);
   connect(oneshotIdleTimer, &SystemIdleTime::idleEnd, this,
@@ -129,6 +130,11 @@ void SaneBreakApp::updateIcon() {
   }
 
   icon->setIcon(pixmap);
+}
+
+void SaneBreakApp::onIconTrigger(QSystemTrayIcon::ActivationReason reason) {
+  if (SanePreferences::breakOnMidClick->get() && reason == QSystemTrayIcon::MiddleClick)
+    breakNow();
 }
 
 void SaneBreakApp::addSecondsToNextBreak(int seconds) {

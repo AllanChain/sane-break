@@ -442,6 +442,13 @@ QPushButton[flat=&quot;true&quot;]:checked {
           </layout>
          </item>
          <item>
+          <widget class="QCheckBox" name="breakOnMidClick">
+           <property name="text">
+            <string>Start next break after middle clicking on tray icon</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="verticalSpacer_2">
            <property name="orientation">
             <enum>Qt::Orientation::Vertical</enum>

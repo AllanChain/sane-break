@@ -34,6 +34,7 @@ class SaneBreakApp : public QObject {
   void pauseBreak(unsigned int reason);
   bool resumeBreak(unsigned int reason);
   int smallBreaksBeforeBig();
+  void onIconTrigger(QSystemTrayIcon::ActivationReason reason);
   void onSleepEnd();
   void onBreakEnd();
   void onIdleStart();
