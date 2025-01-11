@@ -62,6 +62,7 @@ class SanePreferences : public QObject {
   static Setting<int> *bigFor;
   static Setting<int> *flashFor;
   static Setting<int> *confirmAfter;
+  static Setting<int> *autoScreenLock;
   static Setting<bool> *breakOnMidClick;
   static Setting<QString> *smallStartBell;
   static Setting<QString> *smallEndBell;

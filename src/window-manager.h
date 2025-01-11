@@ -25,6 +25,7 @@ class BreakWindowManager : public QObject {
   void close();
 
  signals:
+  void resume();
   void timeout();
 
  private:

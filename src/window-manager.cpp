@@ -126,16 +126,16 @@ void BreakWindowManager::tick() {
 }
 
 void BreakWindowManager::forceBreak() {
+  emit resume();
   isForceBreak = true;
   for (auto w : std::as_const(windows)) w->setFullScreen();
 }
 
 void BreakWindowManager::onIdleStart() {
   if (isForceBreak || remainingTime <= 0) return;
-  for (auto w : std::as_const(windows)) {
-    w->setFullScreen();
-  }
+  emit resume();
   isIdle = true;
+  for (auto w : std::as_const(windows)) w->setFullScreen();
 }
 
 void BreakWindowManager::onIdleEnd() {

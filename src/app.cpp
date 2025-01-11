@@ -5,6 +5,7 @@
 #include "app.h"
 
 #include <qglobal.h>
+#include <qlogging.h>
 
 #include <QAction>
 #include <QBrush>
@@ -29,6 +30,7 @@
 #include "pref-window.h"
 #include "preferences.h"
 #include "program-monitor.h"
+#include "screen-lock.h"
 #include "window-manager.h"
 
 SaneBreakApp::SaneBreakApp() : QObject() {
@@ -37,10 +39,16 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   idleTimer = SystemIdleTime::createIdleTimer();
   idleTimer->setWatchAccuracy(5000);
   idleTimer->setMinIdleTime(SanePreferences::pauseOnIdleFor->get() * 1000);
-  // One-shot idle detection right after break end
+  // One-shot idle detection right after break end is achieved by making
+  // the idle criteria as short as 1 sec, and start the idle timer right
+  // after the break starts. We will know if the user is idle after breaks
+  // by checking the idle status right after the break.
+  // This timer will be deactivated at the first activity after the break.
   oneshotIdleTimer = SystemIdleTime::createIdleTimer();
   oneshotIdleTimer->setWatchAccuracy(1000);
   oneshotIdleTimer->setMinIdleTime(1000);
+  screenLockTimer = new QTimer();
+  screenLockTimer->setSingleShot(true);
   sleepMonitor = new SleepMonitor();
   batteryWatcher = BatteryStatus::createWatcher();
   runningProgramsMonitor = new RunningProgramsMonitor();
@@ -51,12 +59,15 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   countDownTimer = new QTimer();
   countDownTimer->setInterval(1000);
   connect(countDownTimer, &QTimer::timeout, this, &SaneBreakApp::tick);
+  connect(breakManager, &BreakWindowManager::resume, this,
+          &SaneBreakApp::onBreakResume);
   connect(breakManager, &BreakWindowManager::timeout, this, &SaneBreakApp::onBreakEnd);
   connect(icon, &QSystemTrayIcon::activated, this, &SaneBreakApp::onIconTrigger);
   connect(idleTimer, &SystemIdleTime::idleStart, this, &SaneBreakApp::onIdleStart);
   connect(idleTimer, &SystemIdleTime::idleEnd, this, &SaneBreakApp::onIdleEnd);
   connect(oneshotIdleTimer, &SystemIdleTime::idleEnd, this,
           &SaneBreakApp::onOneshotIdleEnd);
+  connect(screenLockTimer, &QTimer::timeout, this, &SaneBreakApp::mayLockScreen);
   connect(sleepMonitor, &SleepMonitor::sleepEnd, this, &SaneBreakApp::onSleepEnd);
   connect(batteryWatcher, &BatteryStatus::onBattery, this, &SaneBreakApp::onBattery);
   connect(batteryWatcher, &BatteryStatus::onPower, this, &SaneBreakApp::onPower);
@@ -285,10 +296,20 @@ void SaneBreakApp::onSleepEnd() {
   }
 }
 
+void SaneBreakApp::onBreakResume() {
+  int msec = SanePreferences::autoScreenLock->get() * 1000;
+  if (msec == 0 && screenLockTimer->isActive())
+    screenLockTimer->stop();
+  else
+    screenLockTimer->start(msec);
+}
+
+// Resume countdown if user is idle after breaks
 void SaneBreakApp::onBreakEnd() {
   if (!oneshotIdleTimer->isIdle) {
-    // Continue countdown as normal
     oneshotIdleTimer->stopWatching();
+    screenLockTimer->stop();
+    // Continue countdown as normal
     countDownTimer->start();
   } else {
     pauseBreak(PauseReason::IDLE);
@@ -303,6 +324,15 @@ void SaneBreakApp::onOneshotIdleEnd() {
   if (breakManager->isShowing()) return;
   oneshotIdleTimer->stopWatching();
   resumeBreak(PauseReason::IDLE);
+}
+
+void SaneBreakApp::mayLockScreen() {
+  if (SanePreferences::autoScreenLock->get()) {
+    if (lockScreen())
+      qDebug("Screen locked");
+    else
+      qWarning("Failed to lock screen");
+  }
 }
 
 void SaneBreakApp::onBattery() {

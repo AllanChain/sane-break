@@ -15,6 +15,8 @@ Setting<int>* SanePreferences::bigFor = new Setting<int>("break/big-for", 60);
 Setting<int>* SanePreferences::flashFor = new Setting<int>("break/flash-for", 30);
 Setting<int>* SanePreferences::confirmAfter =
     new Setting<int>("break/confirm-after", 30);
+Setting<int>* SanePreferences::autoScreenLock =
+    new Setting<int>("break/auto-screen-lock", 0);
 Setting<bool>* SanePreferences::breakOnMidClick =
     new Setting<bool>("break/on-middle-click", false);
 Setting<QString>* SanePreferences::smallStartBell =

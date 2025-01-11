@@ -84,6 +84,17 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
             ui->confirmAfterLabel->setText(QString("%1 sec").arg(value));
           });
 
+  ui->autoScreenLock->addItem("Disabled", 0);
+  ui->autoScreenLock->addItem("30 sec", 30);
+  ui->autoScreenLock->addItem("1 min", 60);
+  ui->autoScreenLock->addItem("2 min", 120);
+  ui->autoScreenLock->addItem("5 min", 300);
+
+  /***************************************************************************
+   *                                                                         *
+   *                                Sound tab                                *
+   *                                                                         *
+   ****************************************************************************/
   QStringList soundFiles = {"", "qrc:/sounds/chime.mp3", "qrc:/sounds/ding.mp3",
                             "qrc:/sounds/wood.mp3", "qrc:/sounds/bell.mp3"};
   QList<QComboBox *> soundSelects = {ui->smallStartBellSelect, ui->smallEndBellSelect,
@@ -136,6 +147,8 @@ void PreferenceWindow::loadSettings() {
   ui->flashForSlider->setValue(SanePreferences::flashFor->get());
   ui->confirmAfterSlider->setValue(SanePreferences::confirmAfter->get());
   ui->breakOnMidClick->setChecked(SanePreferences::breakOnMidClick->get());
+  ui->autoScreenLock->setCurrentIndex(
+      ui->autoScreenLock->findData(SanePreferences::autoScreenLock->get()));
   ui->smallStartBellSelect->setEditText(SanePreferences::smallStartBell->get());
   ui->smallEndBellSelect->setEditText(SanePreferences::smallEndBell->get());
   ui->bigStartBellSelect->setEditText(SanePreferences::bigStartBell->get());
@@ -155,6 +168,7 @@ void PreferenceWindow::saveSettings() {
   SanePreferences::flashFor->set(ui->flashForSlider->value());
   SanePreferences::confirmAfter->set(ui->confirmAfterSlider->value());
   SanePreferences::breakOnMidClick->set(ui->breakOnMidClick->isChecked());
+  SanePreferences::autoScreenLock->set(ui->autoScreenLock->currentData().toInt());
   SanePreferences::smallStartBell->set(ui->smallStartBellSelect->currentText());
   SanePreferences::smallEndBell->set(ui->smallEndBellSelect->currentText());
   SanePreferences::bigStartBell->set(ui->bigStartBellSelect->currentText());

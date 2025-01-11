@@ -442,6 +442,23 @@ QPushButton[flat=&quot;true&quot;]:checked {
           </layout>
          </item>
          <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <property name="spacing">
+            <number>20</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_16">
+             <property name="text">
+              <string>Automatic screen lock after break start</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="autoScreenLock"/>
+           </item>
+          </layout>
+         </item>
+         <item>
           <widget class="QCheckBox" name="breakOnMidClick">
            <property name="text">
             <string>Start next break after middle clicking on tray icon</string>
@@ -811,8 +828,8 @@ QPushButton[flat=&quot;true&quot;]:checked {
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>456</width>
-              <height>154</height>
+              <width>66</width>
+              <height>41</height>
              </rect>
             </property>
             <property name="sizePolicy">
