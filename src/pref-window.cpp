@@ -15,6 +15,8 @@
 #include <QLabel>
 #include <QMainWindow>
 #include <QMediaPlayer>
+#include <QMessageBox>
+#include <QProcess>
 #include <QPushButton>
 #include <QSettings>
 #include <QSlider>
@@ -91,6 +93,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
   ui->autoScreenLock->addItem("1 min", 60);
   ui->autoScreenLock->addItem("2 min", 120);
   ui->autoScreenLock->addItem("5 min", 300);
+  ui->macPermissionHint->setHidden(true);
 
 #ifdef Q_OS_LINUX
   ui->quickBreak->setText(ui->quickBreak->text().arg("middle"));
@@ -98,7 +101,19 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
   ui->quickBreak->setText(ui->quickBreak->text().arg("double"));
 #elif defined Q_OS_MAC
   ui->quickBreak->setHidden(true);
-#endif  // Q_OS_LINUX
+  osaProcess = new QProcess(this);
+  // Set up permission
+  connect(ui->autoScreenLock, &QComboBox::currentIndexChanged, this, [=](int index) {
+    if (ui->autoScreenLock->itemData(index).toInt() == 0) return;
+    if (osaProcess->isOpen()) return;
+    osaProcess->start("osascript",
+                      {"-e", "tell application \"System Events\" to keystroke \"q\""});
+  });
+  connect(osaProcess, &QProcess::finished, this,
+          [=](int retcode, QProcess::ExitStatus status) {
+            ui->macPermissionHint->setHidden(retcode == 0);
+          });
+#endif
 
   /***************************************************************************
    *                                                                         *

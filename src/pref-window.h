@@ -10,6 +10,7 @@
 #include <QLabel>
 #include <QList>
 #include <QMainWindow>
+#include <QProcess>
 #include <QPushButton>
 #include <QSlider>
 #include <QString>
@@ -31,6 +32,7 @@ class PreferenceWindow : public QMainWindow {
  private:
   Ui::PrefWindow *ui;
   QList<QPushButton *> tabButtons;
+  QProcess *osaProcess;
   void closeEvent(QCloseEvent *event);
   void setTab(int tabNum);
   void playSound(QString soundFile);

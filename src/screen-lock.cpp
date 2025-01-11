@@ -17,9 +17,9 @@ bool lockScreen() {
   QProcess process;
 
 #ifdef Q_OS_MAC
-  QProcess::execute(
-      "/System/Library/CoreServices/Menu Extras/User.menu/Contents/Resources/CGSession",
-      {"-suspend"});
+  process.start("osascript", {"-e",
+                              "tell application \"System Events\" to keystroke "
+                              "\"q\" using {control down, command down}"});
 #elif defined Q_OS_LINUX
   process.start("xdg-screensaver", {"lock"});
 #endif

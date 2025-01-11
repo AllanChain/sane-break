@@ -442,19 +442,44 @@ QPushButton[flat=&quot;true&quot;]:checked {
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <layout class="QVBoxLayout" name="verticalLayout_4">
            <property name="spacing">
-            <number>20</number>
+            <number>0</number>
            </property>
            <item>
-            <widget class="QLabel" name="label_16">
-             <property name="text">
-              <string>Automatic screen lock after break start</string>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <property name="spacing">
+              <number>20</number>
              </property>
-            </widget>
+             <item>
+              <widget class="QLabel" name="label_16">
+               <property name="text">
+                <string>Automatic screen lock after break start</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="autoScreenLock"/>
+             </item>
+            </layout>
            </item>
            <item>
-            <widget class="QComboBox" name="autoScreenLock"/>
+            <widget class="QLabel" name="macPermissionHint">
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(216, 0, 3)</string>
+             </property>
+             <property name="text">
+              <string>Please grant accessibility permission and restart app to use auto lock screen. </string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
@@ -828,8 +853,8 @@ QPushButton[flat=&quot;true&quot;]:checked {
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>456</width>
-              <height>154</height>
+              <width>74</width>
+              <height>36</height>
              </rect>
             </property>
             <property name="sizePolicy">
