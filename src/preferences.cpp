@@ -17,8 +17,8 @@ Setting<int>* SanePreferences::confirmAfter =
     new Setting<int>("break/confirm-after", 30);
 Setting<int>* SanePreferences::autoScreenLock =
     new Setting<int>("break/auto-screen-lock", 0);
-Setting<bool>* SanePreferences::breakOnMidClick =
-    new Setting<bool>("break/on-middle-click", false);
+Setting<bool>* SanePreferences::quickBreak =
+    new Setting<bool>("break/quick-break", false);
 Setting<QString>* SanePreferences::smallStartBell =
     new Setting<QString>("bell/small-start", "");
 Setting<QString>* SanePreferences::smallEndBell =

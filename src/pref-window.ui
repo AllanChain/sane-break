@@ -459,9 +459,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
           </layout>
          </item>
          <item>
-          <widget class="QCheckBox" name="breakOnMidClick">
+          <widget class="QCheckBox" name="quickBreak">
            <property name="text">
-            <string>Start next break after middle clicking on tray icon</string>
+            <string>Start next break after %1 clicking on tray icon</string>
            </property>
           </widget>
          </item>
@@ -828,8 +828,8 @@ QPushButton[flat=&quot;true&quot;]:checked {
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>66</width>
-              <height>41</height>
+              <width>456</width>
+              <height>154</height>
              </rect>
             </property>
             <property name="sizePolicy">

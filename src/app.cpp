@@ -144,8 +144,10 @@ void SaneBreakApp::updateIcon() {
 }
 
 void SaneBreakApp::onIconTrigger(QSystemTrayIcon::ActivationReason reason) {
-  if (SanePreferences::breakOnMidClick->get() && reason == QSystemTrayIcon::MiddleClick)
+  if (SanePreferences::quickBreak->get() && (reason == QSystemTrayIcon::DoubleClick ||
+                                             reason == QSystemTrayIcon::MiddleClick)) {
     breakNow();
+  }
 }
 
 void SaneBreakApp::addSecondsToNextBreak(int seconds) {

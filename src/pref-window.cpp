@@ -4,6 +4,8 @@
 
 #include "pref-window.h"
 
+#include <qglobal.h>
+
 #include <QAudioOutput>
 #include <QCheckBox>
 #include <QComboBox>
@@ -90,6 +92,14 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
   ui->autoScreenLock->addItem("2 min", 120);
   ui->autoScreenLock->addItem("5 min", 300);
 
+#ifdef Q_OS_LINUX
+  ui->quickBreak->setText(ui->quickBreak->text().arg("middle"));
+#elif defined Q_OS_WIN
+  ui->quickBreak->setText(ui->quickBreak->text().arg("double"));
+#elif defined Q_OS_MAC
+  ui->quickBreak->setHidden(true);
+#endif  // Q_OS_LINUX
+
   /***************************************************************************
    *                                                                         *
    *                                Sound tab                                *
@@ -146,7 +156,7 @@ void PreferenceWindow::loadSettings() {
   ui->bigBreakForSlider->setValue(SanePreferences::bigFor->get());
   ui->flashForSlider->setValue(SanePreferences::flashFor->get());
   ui->confirmAfterSlider->setValue(SanePreferences::confirmAfter->get());
-  ui->breakOnMidClick->setChecked(SanePreferences::breakOnMidClick->get());
+  ui->quickBreak->setChecked(SanePreferences::quickBreak->get());
   ui->autoScreenLock->setCurrentIndex(
       ui->autoScreenLock->findData(SanePreferences::autoScreenLock->get()));
   ui->smallStartBellSelect->setEditText(SanePreferences::smallStartBell->get());
@@ -167,7 +177,7 @@ void PreferenceWindow::saveSettings() {
   SanePreferences::bigFor->set(ui->bigBreakForSlider->value());
   SanePreferences::flashFor->set(ui->flashForSlider->value());
   SanePreferences::confirmAfter->set(ui->confirmAfterSlider->value());
-  SanePreferences::breakOnMidClick->set(ui->breakOnMidClick->isChecked());
+  SanePreferences::quickBreak->set(ui->quickBreak->isChecked());
   SanePreferences::autoScreenLock->set(ui->autoScreenLock->currentData().toInt());
   SanePreferences::smallStartBell->set(ui->smallStartBellSelect->currentText());
   SanePreferences::smallEndBell->set(ui->smallEndBellSelect->currentText());
