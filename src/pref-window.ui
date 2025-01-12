@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>610</width>
+    <width>679</width>
     <height>380</height>
    </rect>
   </property>
@@ -453,6 +453,11 @@ QPushButton[flat=&quot;true&quot;]:checked {
              </property>
              <item>
               <widget class="QLabel" name="label_16">
+               <property name="toolTip">
+                <string>Let's say you've configured it to 2 minutes. If the break is shorter than 2 minutes, the
+screen will lock 2 minutes after the break starts, provided there is no activity after the
+break. If the break is longer than 2 minutes, the screen will be locked regardless.</string>
+               </property>
                <property name="text">
                 <string>Automatic screen lock after break start</string>
                </property>
@@ -853,8 +858,8 @@ QPushButton[flat=&quot;true&quot;]:checked {
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>74</width>
-              <height>36</height>
+              <width>66</width>
+              <height>41</height>
              </rect>
             </property>
             <property name="sizePolicy">
