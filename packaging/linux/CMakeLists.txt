@@ -8,4 +8,9 @@ install(
   DESTINATION ${CMAKE_INSTALL_DATADIR}/applications
   RENAME io.github.AllanChain.sane-break.desktop
 )
+install(
+  FILES metainfo.xml
+  DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo
+  RENAME io.github.AllanChain.sane-break.metainfo.xml
+)
 

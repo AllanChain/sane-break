@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright [2025] [Allan Chain] -->
+<component type="desktop-application">
+  <id>io.github.AllanChain.sane-break</id>
+
+  <name>Sane Break</name>
+  <summary>A gentle break reminder that helps you avoid mindlessly skipping breaks</summary>
+
+  <metadata_license>CC-BY-SA-4.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+
+  <developer id="io.github.allanchain">
+    <name>Allan Chain</name>
+  </developer>
+
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </supports>
+  <branding>
+    <color type="primary" scheme_preference="light">#bbf7d0</color>
+    <color type="primary" scheme_preference="dark">#14532d</color>
+  </branding>
+  <content_rating type="oars-1.1" />
+  <url type="bugtracker">https://github.com/AllanChain/sane-break/issues</url>
+  <url type="homepage">https://github.com/AllanChain/sane-break/</url>
+
+
+  <description>
+    <p>
+      Sane Break is a cross-platform break reminder designed to help you take meaningful breaks without disrupting your workflow. It allows you to take ownership of when to stop and break, and aims to strike a balance between respecting your workflow and ensuring you take the breaks you need. Specifically, Sane Break uses a two-phase system:
+    </p>
+    <ul>
+      <li>Phase 1: A small, unobtrusive reminder that encourages you to find a good stopping point.</li>
+      <li>Phase 2: The reminder grows to full screen during the actual break.</li>
+    </ul>
+    <p>
+      Transition to phase 2 happens when you stop working on your computer, or when you ignore the reminder and keep working for too long.
+    </p>
+  </description>
+
+  <launchable type="desktop-id">io.github.AllanChain.sane-break.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://github.com/user-attachments/assets/1ec11caf-3b3d-4429-881d-4d909ec4c3c7</image>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/user-attachments/assets/59164505-3446-4ef7-b0e0-5ffe0a607c44</image>
+    </screenshot>
+    <screenshot>
+      <image>https://github.com/user-attachments/assets/2f28406e-0601-4786-ab5d-194a7cfae050</image>
+    </screenshot>
+  </screenshots>
+
+  <releases>
+    <release version="0.5.3" date="2025-01-12">
+      <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.5.3</url>
+      <description>
+        <p>Features</p>
+        <ul>
+          <li>Automatically lock screen after a specific time</li>
+          <li>Quickly start next break after middle click (Linux) or double click (Windows)</li>
+        </ul>
+        <p>Bug fixes</p>
+        <ul>
+          <li>Fix UI display with notch on macOS</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+</component>
