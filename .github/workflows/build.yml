@@ -53,6 +53,43 @@ jobs:
         mv build\Release\sane-break.exe .
         7z a release/sane-break-windows.zip sane-break.exe LICENSE
 
+    # https://federicoterzi.com/blog/automatic-code-signing-and-notarization-for-macos-apps-using-github-actions/
+    - name: Codesign app (macOS)
+      if: contains(matrix.os, 'macos')
+      env:
+        MACOS_CERTIFICATE: ${{ secrets.PROD_MACOS_CERTIFICATE }}
+        MACOS_CERTIFICATE_PWD: ${{ secrets.PROD_MACOS_CERTIFICATE_PWD }}
+        MACOS_CERTIFICATE_NAME: ${{ secrets.PROD_MACOS_CERTIFICATE_NAME }}
+        MACOS_CI_KEYCHAIN_PWD: ${{ secrets.PROD_MACOS_CI_KEYCHAIN_PWD }}
+      run: |
+        echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
+        security create-keychain -p "$MACOS_CI_KEYCHAIN_PWD" build.keychain
+        security default-keychain -s build.keychain
+        security unlock-keychain -p "$MACOS_CI_KEYCHAIN_PWD" build.keychain
+        security import certificate.p12 -k build.keychain -P "$MACOS_CERTIFICATE_PWD" -T /usr/bin/codesign
+        security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$MACOS_CI_KEYCHAIN_PWD" build.keychain
+
+        /usr/bin/codesign --force -s "$MACOS_CERTIFICATE_NAME" --options runtime "build/sane-break.app" -v
+
+    - name: Notarize app (macOS)
+      if: contains(matrix.os, 'macos')
+      env:
+        PROD_MACOS_NOTARIZATION_APPLE_ID: ${{ secrets.PROD_MACOS_NOTARIZATION_APPLE_ID }}
+        PROD_MACOS_NOTARIZATION_TEAM_ID: ${{ secrets.PROD_MACOS_NOTARIZATION_TEAM_ID }}
+        PROD_MACOS_NOTARIZATION_PWD: ${{ secrets.PROD_MACOS_NOTARIZATION_PWD }}
+      run: |
+        echo "Create keychain profile"
+        xcrun notarytool store-credentials "notarytool-profile" --apple-id "$PROD_MACOS_NOTARIZATION_APPLE_ID" --team-id "$PROD_MACOS_NOTARIZATION_TEAM_ID" --password "$PROD_MACOS_NOTARIZATION_PWD"
+
+        echo "Creating temp notarization archive"
+        ditto -c -k --keepParent "build/sane-break.app" "notarization.zip"
+
+        echo "Notarize app"
+        xcrun notarytool submit "notarization.zip" --keychain-profile "notarytool-profile" --wait
+
+        echo "Attach staple"
+        xcrun stapler staple "build/sane-break.app"
+
     - name: Packing (macOS)
       if: contains(matrix.os, 'macos')
       run: |
