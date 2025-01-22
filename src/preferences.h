@@ -56,6 +56,7 @@ class Setting : public SettingWithSignal {
 class SanePreferences : public QObject {
   Q_OBJECT
  public:
+  static Setting<bool> *shownWelcome;
   static Setting<int> *smallEvery;
   static Setting<int> *smallFor;
   static Setting<int> *bigAfter;

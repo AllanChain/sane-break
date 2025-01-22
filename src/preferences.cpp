@@ -8,6 +8,8 @@
 #include <QString>
 #include <QtContainerFwd>
 
+Setting<bool>* SanePreferences::shownWelcome =
+    new Setting<bool>("shown-welcome", false);
 Setting<int>* SanePreferences::smallEvery = new Setting<int>("break/small-every", 1200);
 Setting<int>* SanePreferences::smallFor = new Setting<int>("break/small-for", 20);
 Setting<int>* SanePreferences::bigAfter = new Setting<int>("break/big-after", 3);
