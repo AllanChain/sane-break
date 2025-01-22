@@ -21,9 +21,10 @@
 #include <cmath>
 
 BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) {
-  setAttribute(Qt::WA_TranslucentBackground);  // transparent window
-  setAttribute(Qt::WA_ShowWithoutActivating);  // avoid gaining keyboard focus
-  setAttribute(Qt::WA_LayoutOnEntireRect);     // ignore safe zone on macOS
+  setAttribute(Qt::WA_TranslucentBackground);      // transparent window
+  setAttribute(Qt::WA_ShowWithoutActivating);      // avoid gaining keyboard focus
+  setAttribute(Qt::WA_LayoutOnEntireRect);         // ignore safe zone on macOS
+  setAttribute(Qt::WA_TransparentForMouseEvents);  // mouse can click through
   setWindowFlags(Qt::ToolTip | Qt::WindowDoesNotAcceptFocus | Qt::FramelessWindowHint |
                  Qt::WindowStaysOnTopHint);
   setProperty("isFullScreen", false);
@@ -97,6 +98,7 @@ void BreakWindow::setTime(int remainingTime) {
 
 void BreakWindow::setFullScreen() {
   setProperty("isFullScreen", true);
+  setAttribute(Qt::WA_TransparentForMouseEvents, false);
   bgAnim->stop();
   setProperty("color", bgAnim->endValue());
   countdownLabel->setVisible(true);
@@ -109,6 +111,7 @@ void BreakWindow::setFullScreen() {
 
 void BreakWindow::resizeToNormal() {
   setProperty("isFullScreen", false);
+  setAttribute(Qt::WA_TransparentForMouseEvents);
   bgAnim->start();
   countdownLabel->setVisible(false);
   QPropertyAnimation *resizeAnim = new QPropertyAnimation(this, "geometry");
