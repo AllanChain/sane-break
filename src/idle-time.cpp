@@ -39,7 +39,7 @@ SystemIdleTime* SystemIdleTime::createIdleTimer() {
 #ifdef ENABLE_X11
     return new IdleTimeX11();
 #else
-    qFatal() << "Please compile with X11 support.";
+    qFatal("Please compile with X11 support.");
     return nullptr;
 #endif
   }
