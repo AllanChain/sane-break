@@ -11,6 +11,15 @@
 
 Sane Break is a cross-platform break reminder designed to help you take meaningful breaks without disrupting your workflow.
 
+<a href='https://github.com/AllanChain/sane-break/releases'>
+  <img src="https://github.com/user-attachments/assets/16c6c35f-e657-4040-8b08-34282ea4ad43">
+</a>
+&nbsp;
+<a href='https://flathub.org/apps/io.github.AllanChain.sane-break'>
+    <img width='240' alt='Get it on Flathub' src='https://flathub.org/api/badge?locale=en'>
+</a>
+
+
 ## 🤔 Why another break reminder?
 
 Most break reminder apps send notifications before the break is scheduled, but that merely informs me that a break is _going to happen_, rather than telling me it's _happening right now_. Even with a warning, when the break actually happens I'm too often deeply focused on a task. Then, the program either forces the break, interrupting my work, or I can use a "skip" or "postpone" button. Accepting abrupt interruption is too harsh, so I tend to click "skip" or "postpone". Then, that becomes an almost instinctive habit, and before I know it, hours have passed without a single break.
