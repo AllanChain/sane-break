@@ -7,6 +7,7 @@
 #include <QDialog>
 #include <QFile>
 #include <QSettings>
+#include <QSystemTrayIcon>
 #include <Qt>
 
 #include "app.h"
@@ -25,7 +26,7 @@ int main(int argc, char *argv[]) {
     a.setStyleSheet(styleSheet.readAll());
 
   a.setApplicationDisplayName("Sane Break");
-  a.setQuitOnLastWindowClosed(false);
+  if (QSystemTrayIcon::isSystemTrayAvailable()) a.setQuitOnLastWindowClosed(false);
 
   if (SanePreferences::shownWelcome->get() == false) {
     WelcomeWindow *welcome = new WelcomeWindow();

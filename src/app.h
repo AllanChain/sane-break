@@ -2,19 +2,19 @@
 // Copyright (C) 2024 Allan Chain
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SANE_TRAY_H
-#define SANE_TRAY_H
+#ifndef SANE_APP_H
+#define SANE_APP_H
 
 #include <QAction>
 #include <QMenu>
 #include <QObject>
-#include <QSystemTrayIcon>
 #include <QTimer>
 
 #include "battery-status.h"
 #include "idle-time.h"
 #include "pref-window.h"
 #include "program-monitor.h"
+#include "tray.h"
 #include "window-manager.h"
 
 enum PauseReason {
@@ -34,7 +34,7 @@ class SaneBreakApp : public QObject {
   void pauseBreak(unsigned int reason);
   bool resumeBreak(unsigned int reason);
   int smallBreaksBeforeBig();
-  void onIconTrigger(QSystemTrayIcon::ActivationReason reason);
+  void onIconTrigger();
   void onSleepEnd();
   void onBreakResume();
   void onBreakEnd();
@@ -57,7 +57,7 @@ class SaneBreakApp : public QObject {
   SystemIdleTime *oneshotIdleTimer;
   SleepMonitor *sleepMonitor;
   BatteryStatus *batteryWatcher;
-  QSystemTrayIcon *icon;
+  StatusTrayWindow *tray;
   QTimer *countDownTimer;
   int lastPause = 0;
   QMenu *menu;
@@ -76,4 +76,4 @@ class SaneBreakApp : public QObject {
   RunningProgramsMonitor *runningProgramsMonitor;
 };
 
-#endif  // SANE_TRAY_H
+#endif  // SANE_APP_H

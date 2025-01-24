@@ -8,20 +8,16 @@
 #include <qlogging.h>
 
 #include <QAction>
-#include <QBrush>
 #include <QDateTime>
 #include <QGuiApplication>
 #include <QIcon>
 #include <QMenu>
 #include <QObject>
-#include <QPainter>
-#include <QPixmap>
 #include <QRect>
 #include <QSettings>
 #include <QSize>
 #include <QString>
 #include <QStyleHints>
-#include <QSystemTrayIcon>
 #include <QTimer>
 #include <QWindow>
 
@@ -31,6 +27,7 @@
 #include "preferences.h"
 #include "program-monitor.h"
 #include "screen-lock.h"
+#include "tray.h"
 #include "window-manager.h"
 
 SaneBreakApp::SaneBreakApp() : QObject() {
@@ -53,8 +50,7 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   batteryWatcher = BatteryStatus::createWatcher();
   runningProgramsMonitor = new RunningProgramsMonitor();
   createMenu();
-  icon = new QSystemTrayIcon(this);
-  icon->setContextMenu(menu);
+  tray = StatusTrayWindow::createTrayOrWindow(menu, this);
 
   countDownTimer = new QTimer();
   countDownTimer->setInterval(1000);
@@ -62,7 +58,7 @@ SaneBreakApp::SaneBreakApp() : QObject() {
   connect(breakManager, &BreakWindowManager::resume, this,
           &SaneBreakApp::onBreakResume);
   connect(breakManager, &BreakWindowManager::timeout, this, &SaneBreakApp::onBreakEnd);
-  connect(icon, &QSystemTrayIcon::activated, this, &SaneBreakApp::onIconTrigger);
+  connect(tray, &StatusTrayWindow::breakTriggered, this, &SaneBreakApp::onIconTrigger);
   connect(idleTimer, &SystemIdleTime::idleStart, this, &SaneBreakApp::onIdleStart);
   connect(idleTimer, &SystemIdleTime::idleEnd, this, &SaneBreakApp::onIdleEnd);
   connect(oneshotIdleTimer, &SystemIdleTime::idleEnd, this,
@@ -89,7 +85,7 @@ SaneBreakApp::~SaneBreakApp() {}
 
 void SaneBreakApp::start() {
   resetSecondsToNextBreak();
-  icon->show();
+  tray->show();
   countDownTimer->start();
   idleTimer->startWatching();
   batteryWatcher->startWatching();
@@ -107,47 +103,20 @@ void SaneBreakApp::tick() {
 }
 
 void SaneBreakApp::updateIcon() {
+  StatusTrayWindow::IconVariants flags;
   if (pauseReasons != 0 || breakManager->isShowing() ||
-      secondsToNextBreak > SanePreferences::smallEvery->get())
-    return icon->setIcon(QIcon(":/images/icon_tray-pause.png"));
-
-  QPixmap pixmap(":/images/icon_tray.png");
-  QPen pen(QColor(5, 46, 22, 255));
-  QPainter painter(&pixmap);
-
-  painter.setRenderHint(QPainter::Antialiasing, true);
-  pen.setWidth(3);
-  painter.setPen(pen);
-  QRect rect = pixmap.rect();
-  rect.setSize(QSize(rect.width() - 2, rect.height() - 2));
-  rect.setTopLeft(QPoint(2, 2));
-  // Draw dark circle background
-  painter.drawArc(rect, 0, 360 * 16);  // angles are in 1/16th of a degree
-
-  // Draw light tracks
-  pen.setColor(QColor(220, 252, 231, 255));
-  painter.setPen(pen);
-  int spanAngle = 360 * 16 * secondsToNextBreak / SanePreferences::smallEvery->get();
-  painter.drawArc(rect, 90 * 16, spanAngle);
-
-  if (smallBreaksBeforeBig() == 0) {
-    int dotSize = 14;
-    QRect smallRect(pixmap.width() - 1 - dotSize, 1, dotSize, dotSize);
-    QBrush brush(QColor(202, 138, 4, 255));
-    painter.setBrush(brush);
-    pen.setWidth(0);
-    painter.setPen(pen);
-    painter.drawEllipse(smallRect);
+      secondsToNextBreak > SanePreferences::smallEvery->get()) {
+    flags |= StatusTrayWindow::IconVariant::PAUSED;
   }
-
-  icon->setIcon(pixmap);
+  if (smallBreaksBeforeBig() == 0) {
+    flags |= StatusTrayWindow::IconVariant::WILL_BIG;
+  }
+  float arcRatio = float(secondsToNextBreak) / SanePreferences::smallEvery->get();
+  tray->updateIcon(arcRatio, flags);
 }
 
-void SaneBreakApp::onIconTrigger(QSystemTrayIcon::ActivationReason reason) {
-  if (SanePreferences::quickBreak->get() && (reason == QSystemTrayIcon::DoubleClick ||
-                                             reason == QSystemTrayIcon::MiddleClick)) {
-    breakNow();
-  }
+void SaneBreakApp::onIconTrigger() {
+  if (SanePreferences::quickBreak->get()) breakNow();
 }
 
 void SaneBreakApp::addSecondsToNextBreak(int seconds) {
@@ -164,10 +133,10 @@ void SaneBreakApp::updateMenu() {
   int seconds = secondsToNextBreak;
   int minutes = seconds / 60;
   seconds %= 60;
-  icon->setToolTip(QString("Sane Break\n%1 break %2:%3")
-                       .arg(smallBreaksBeforeBig() == 0 ? "big" : "small")
-                       .arg(minutes)
-                       .arg(seconds, 2, 10, QChar('0')));  // Pad zero
+  tray->setTitle(QString("%1 break %2:%3")
+                     .arg(smallBreaksBeforeBig() == 0 ? "big" : "small")
+                     .arg(minutes)
+                     .arg(seconds, 2, 10, QChar('0')));  // Pad zero
   nextBreakAction->setText(
       QString("Next break after %1:%2").arg(minutes).arg(seconds, 2, 10, QChar('0')));
   bigBreakAction->setText(
@@ -244,11 +213,11 @@ void SaneBreakApp::pauseBreak(unsigned int reason) {
   // Stop current break if necessary
   if (reason != PauseReason::IDLE) breakManager->close();
   if (reason & PauseReason::ON_BATTERY) {
-    icon->setToolTip("Sane Break\nPaused on battery");
+    tray->setTitle("Paused on battery");
   } else if (reason & PauseReason::APP_OPEN) {
-    icon->setToolTip("Sane Break\nPaused on app running");
+    tray->setTitle("Paused on app running");
   } else if (reason & PauseReason::IDLE) {
-    icon->setToolTip("Sane Break\nPaused on idle");
+    tray->setTitle("Paused on idle");
   }
   enableBreak->setVisible(true);
   nextBreakAction->setVisible(false);
