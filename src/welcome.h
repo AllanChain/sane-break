@@ -7,18 +7,11 @@
 #include <QDialog>
 #include <QWidget>
 
-namespace Ui {
-class WelcomeDialog;
-}
-
 class WelcomeWindow : public QDialog {
   Q_OBJECT
 
  public:
   WelcomeWindow(QWidget *parent = nullptr);
   ~WelcomeWindow();
-
- private:
-  Ui::WelcomeDialog *ui;
 };
 #endif  // SANE_WELCOME_H

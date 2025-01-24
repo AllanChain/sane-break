@@ -14,11 +14,14 @@
 #include "preferences.h"
 #include "welcome.h"
 
+#ifdef Q_OS_LINUX
+#include "linux/system-check.h"
+#endif
+
 int main(int argc, char *argv[]) {
   QCoreApplication::setOrganizationName("SaneBreak");
   QCoreApplication::setApplicationName("SaneBreak");
   QSettings::setDefaultFormat(QSettings::IniFormat);
-
   QApplication a(argc, argv);
 
   QFile styleSheet(":/style.css");
@@ -27,6 +30,10 @@ int main(int argc, char *argv[]) {
 
   a.setApplicationDisplayName("Sane Break");
   if (QSystemTrayIcon::isSystemTrayAvailable()) a.setQuitOnLastWindowClosed(false);
+
+#ifdef Q_OS_LINUX
+  LinuxSystemSupport::check();
+#endif  // Q_OS_LINUX
 
   if (SanePreferences::shownWelcome->get() == false) {
     WelcomeWindow *welcome = new WelcomeWindow();
