@@ -83,8 +83,12 @@ const QList<QString> LinuxSystemSupport::warnings() {
   if (!LinuxSystemSupport::trayIcon)
     list.append("Tray icon is not available, falling back to a normal window");
 #ifdef ENABLE_WAYLAND
-  if (!LinuxSystemSupport::layerShell)
+  if (!LinuxSystemSupport::layerShell) {
     list.append("Window positioning is bugged without layer shell support");
+    list.append(
+        "To keep window always on top, you need to install the shell extension if you "
+        "are using GNOME. Otherwise, Sane break is almost unusable");
+  }
 #endif
   return list;
 }

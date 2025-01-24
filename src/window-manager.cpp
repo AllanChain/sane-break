@@ -13,9 +13,6 @@
 
 #ifdef LayerShellQt_FOUND
 #include <LayerShellQt/shell.h>
-#include <LayerShellQt/window.h>
-#elif defined Q_OS_MACOS
-#include "macos/workspace.h"
 #endif
 #include <QApplication>
 #include <QAudioOutput>
@@ -59,23 +56,6 @@ void BreakWindowManager::createWindows() {
     BreakWindow *w = new BreakWindow(currentType);
     windows.append(w);
     w->initSize(screen);
-    w->show();
-    w->hide();
-#ifdef LayerShellQt_FOUND
-    if (QGuiApplication::platformName() == "wayland")
-      if (auto window = LayerShellQt::Window::get(w->windowHandle())) {
-        using namespace LayerShellQt;
-        window->setCloseOnDismissed(true);
-        window->setLayer(Window::LayerOverlay);
-        window->setKeyboardInteractivity(Window::KeyboardInteractivityNone);
-        window->setAnchors(Window::AnchorTop);
-        // We do not want to reserve space for widgets like taskbar (#19)
-        window->setExclusiveZone(-1);
-      }
-#elif defined Q_OS_MACOS
-    macSetAllWorkspaces(w->windowHandle());
-#endif
-    w->show();
   }
 }
 

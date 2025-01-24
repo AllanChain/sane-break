@@ -36,9 +36,11 @@ class BreakWindow : public QMainWindow {
 
  private:
   int totalTime;
+  QWidget *mainWidget;
   QLabel *countdownLabel;
   QColor backgroundColor;
   QPropertyAnimation *progressAnim;
   QPropertyAnimation *bgAnim;
+  bool waylandWorkaround = false;
 };
 #endif  // SANE_BREAK_WINDOW_H
