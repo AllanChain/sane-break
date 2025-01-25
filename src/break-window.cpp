@@ -115,7 +115,14 @@ void BreakWindow::setTime(int remainingTime) {
     progressAnim->stop();
     progressAnim->start();
   }
-  countdownLabel->setText(QString("%1").arg(round(float(remainingTime))));
+  if (totalTime <= 60) {
+    countdownLabel->setText(QString("%1").arg(remainingTime));
+  } else {
+    countdownLabel->setText(
+        QString("%2:%3")
+            .arg(remainingTime / 60)
+            .arg(remainingTime % 60, 2, 10, QChar('0')));  // Pad zero
+  }
 }
 
 void BreakWindow::setFullScreen() {
