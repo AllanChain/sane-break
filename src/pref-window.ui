@@ -235,7 +235,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
               <number>1</number>
              </property>
              <property name="maximum">
-              <number>20</number>
+              <number>6</number>
              </property>
              <property name="pageStep">
               <number>1</number>
