@@ -133,4 +133,21 @@ install(TARGETS sane-break
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
+option(SANE_BUILD_DEB "Build Debian package" OFF)
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND SANE_MAKE_DEB)
+    MESSAGE(STATUS "Making .deb packages")
+    SET(CPACK_GENERATOR "DEB")
+    SET(CPACK_DEBIAN_PACKAGE_NAME "sane-break")
+    SET(CPACK_DEBIAN_PACKAGE_SECTION "utils")
+    SET(CPACK_DEBIAN_FILE_NAME "sane-break.deb")
+    SET(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/AllanChain/sane-break/")
+    SET(CPACK_DEBIAN_PACKAGE_DESCRIPTION "A gentle break reminder that helps you avoid mindlessly skipping breaks")
+    SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Allan Chain")
+    SET(CPACK_DEBIAN_PACKAGE_DEPENDS "qt6-wayland(>=6.6)")
+    if(LayerShellQt_FOUND)
+        string(APPEND CPACK_DEBIAN_PACKAGE_DEPENDS ", liblayershellqtinterface (>=6.2)")
+    endif()
+    INCLUDE(CPack)
+endif()
+
 qt_finalize_executable(sane-break)

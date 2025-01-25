@@ -68,7 +68,7 @@ jobs:
         mkdir build
         cd build
         qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" ..
-        cmake --build . --parallel --config Release
+        cmake --build . --parallel
 
     # https://federicoterzi.com/blog/automatic-code-signing-and-notarization-for-macos-apps-using-github-actions/
     - name: Codesign app
@@ -134,9 +134,64 @@ jobs:
          name: "sane-break (macOS)"
          path: ./release/*
 
+  build-deb:
+    name: Build (${{ matrix.distro }})
+    if: |
+      startsWith(github.ref, 'refs/tags/') ||
+      !startsWith(github.event.head_commit.message, 'release')
+    strategy:
+      fail-fast: false # continue other jobs if one failed
+      matrix:
+        distro: [ubuntu, debian]
+        include:
+          - distro: debian
+            tag: trixie
+          - distro: ubuntu
+            tag: oracular
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ matrix.distro }}:${{ matrix.tag }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        apt-get update
+        apt-get install -y nodejs g++ cmake qt6-base-dev qt6-multimedia-dev qt6-wayland-dev
+
+    - name: Install additional dependencies
+      if: matrix.tag == 'trixie'
+      run: apt-get install -y layer-shell-qt
+
+    - name: Build Project
+      run: |
+        mkdir build
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DSANE_MAKE_DEB=1 ..
+        cmake --build . --parallel
+
+    - name: Packing
+      run: |
+        mkdir release
+        cd build
+        cpack
+        mv sane-break.deb ../release/sane-break-${{ matrix.distro }}.deb
+
+    - name: Attestation
+      uses: actions/attest-build-provenance@v2
+      with:
+        subject-path: ./release/*
+
+    - name: Create Artifact
+      uses: actions/upload-artifact@v4
+      with:
+         name: "sane-break (${{ matrix.distro }})"
+         path: ./release/*
+
   release:
     runs-on: ubuntu-latest
-    needs: [build-macos, build-windows]
+    needs: [build-macos, build-windows, build-deb]
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - uses: actions/checkout@v4
