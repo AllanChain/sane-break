@@ -68,7 +68,13 @@ Sane break uses Qt6, [wlr layer shell](https://wayland.app/protocols/wlr-layer-s
 - **X11**: all.
 - **Wayland**: compositors supporting wlr layer shell and idle notify protocols, and distros with layer-shell-qt version 6.
 
-See [Compiling from source](#compiling-from-source) for details.
+Although GNOME does not support these protocols, some special workaround are made so that Sane Break will work with GNOME.
+If you are using Ubuntu 24.10 (and above) or Debian Trixie (and above), you can install the `.deb` package directly from the [release page](https://github.com/AllanChain/sane-break/releases) since `v0.6.0`. And make sure to enable the GNOME shell extension with:
+```bash
+gnome-extensions show sane-break@allanchain.github.io
+```
+
+See [Compiling from source](#compiling-from-source) for more details about Linux support.
 
 ### macOS
 
@@ -80,14 +86,18 @@ x86 version of Windows 10 or newer is supported. Older versions may work too.
 
 ## Compiling from source
 
+Sane Break requires Qt>=6.4 for X11 support and Qt>=6.6 for Wayland support. If you are having problems compiling on Linux, please open an issue and attach the version of Qt and other relevant packages used.
+
+### Requirements on Arch-based distros
+
 For Linux users with Arch-based distros, it's recommended to install the AUR package:
 ```bash
 yay -S sane-break
 ```
 
-If you want to enable just X11 or Wayland support, or you are using other distros (which I didn't test), you are strongly encouraged to install Sane Break by compiling from source.
+If you want to enable just X11 or Wayland support, you are strongly encouraged to install Sane Break by compiling from source.
 It will automatically enable X11 or Wayland support based on libraries found.
-For Wayland support, make sure you have `layer-shell-qt` for Qt6 installed.
+For Wayland support, make sure you have `layer-shell-qt` for Qt6 installed and a compositor supporting `wlr layer shell` protocol is running.
 
 Required packages for Arch Linux:
 ```bash
@@ -96,14 +106,20 @@ yay -S libxss # X support
 yay -S layer-shell-qt # Wayland support
 ```
 
-Required packages for KDE Neon (based on Ubuntu 24.04, so probably the same for other Debian-based distros):
+### Requirements on Debian-based distros
+
+Since Sane Break works bes on KDE, it is easy to compile and use it on KDE Neon. Just install
 ```bash
 apt install qt6-base-dev qt6-multimedia-dev
 apt install libxss-dev # X support
 apt install qt6-wayland-dev liblayershellqtinterface-dev # Wayland support
 ```
 
-Required packages for Guix (see also [#23](https://github.com/AllanChain/sane-break/issues/23)):
+For GNOME users, `liblayershellqtinterface-dev` is optional, and please make sure to enable the GNOME shell extension `sane-break@allanchain.github.io` after installing.
+
+### Others
+
+For Guix (see also [#23](https://github.com/AllanChain/sane-break/issues/23)):
 ```bash
 guix shell --container make cmake gcc-toolchain pkg-config vulkan-headers \
   qtbase@6 qtmultimedia \
@@ -111,7 +127,7 @@ guix shell --container make cmake gcc-toolchain pkg-config vulkan-headers \
   layer-shell-qt qtwayland@6 wayland   # Wayland support
 ```
 
-Then, use CMake to compile from source:
+### Use CMake to compile
 
 ```bash
 git clone https://github.com/AllanChain/sane-break
