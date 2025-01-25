@@ -29,7 +29,7 @@
 
   <description>
     <p>
-      NOTE: Currently, Sane Break only supports X11, KDE Wayland, and other Wayland compositors with tray icon, wlr layer shell, and idle notify protocols support.
+      NOTE: Sane Break works best with X11 and KDE Wayland. It works on GNOME but less optimal. It also works on other Wayland compositors with wlr layer shell and idle notify protocols support.
     </p>
     <p>
       Sane Break is a cross-platform break reminder designed to help you take meaningful breaks without disrupting your workflow. It allows you to take ownership of when to stop and break, and aims to strike a balance between respecting your workflow and ensuring you take the breaks you need. Specifically, Sane Break uses a two-phase system:
