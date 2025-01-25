@@ -13,4 +13,8 @@ install(
   DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo
   RENAME io.github.AllanChain.sane-break.metainfo.xml
 )
+install(
+  DIRECTORY gnome/sane-break@allanchain.github.io
+  DESTINATION ${CMAKE_INSTALL_DATADIR}/gnome-shell/extensions
+)
 

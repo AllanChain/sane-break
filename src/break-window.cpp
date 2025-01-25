@@ -48,6 +48,7 @@ BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) 
   setAttribute(Qt::WA_TransparentForMouseEvents);  // mouse can click through
   setWindowFlags(Qt::ToolTip | Qt::WindowDoesNotAcceptFocus | Qt::FramelessWindowHint |
                  Qt::WindowStaysOnTopHint);
+  setWindowTitle("Break reminder - Sane Break");
   setProperty("isFullScreen", false);
 
   mainWidget = new QWidget(this);
