@@ -69,7 +69,7 @@ Sane break uses Qt6, [wlr layer shell](https://wayland.app/protocols/wlr-layer-s
 - **Wayland**: compositors supporting wlr layer shell and idle notify protocols, and distros with layer-shell-qt version 6.
 
 Although GNOME does not support these protocols, some special workaround are made so that Sane Break will work with GNOME.
-If you are using Ubuntu 24.10 (and above) or Debian Trixie (and above), you can install the `.deb` package directly from the [release page](https://github.com/AllanChain/sane-break/releases) since `v0.6.0`. And make sure to enable the GNOME shell extension with:
+If you are using Ubuntu 24.10 (and above) or Debian Trixie (and above), you can install the `.deb` package directly from the [release page](https://github.com/AllanChain/sane-break/releases) since `v0.6.0`. And make sure to enable the GNOME shell extension (download from the release page if installed from Flathub) with:
 ```bash
 gnome-extensions show sane-break@allanchain.github.io
 ```

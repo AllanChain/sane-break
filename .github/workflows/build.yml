@@ -50,7 +50,7 @@ jobs:
     - name: Create Artifact
       uses: actions/upload-artifact@v4
       with:
-         name: "sane-break (windows)"
+         name: "sane-break-windows"
          path: ./release/*
 
   build-macos:
@@ -131,7 +131,7 @@ jobs:
     - name: Create Artifact
       uses: actions/upload-artifact@v4
       with:
-         name: "sane-break (macOS)"
+         name: "sane-break-macos"
          path: ./release/*
 
   build-deb:
@@ -176,7 +176,7 @@ jobs:
         mkdir release
         cd build
         cpack
-        mv sane-break.deb ../release/sane-break-${{ matrix.distro }}.deb
+        mv sane-break.deb ../release/sane-break-${{ matrix.distro }}-${{ matrix.tag }}.deb
 
     - name: Attestation
       uses: actions/attest-build-provenance@v2
@@ -186,8 +186,27 @@ jobs:
     - name: Create Artifact
       uses: actions/upload-artifact@v4
       with:
-         name: "sane-break (${{ matrix.distro }})"
+         name: "sane-break-${{ matrix.distro }}-${{ matrix.tag }}"
          path: ./release/*
+
+  build-gnome:
+    name: Build GNOME shell extension
+    if: |
+      startsWith(github.ref, 'refs/tags/') ||
+      !startsWith(github.event.head_commit.message, 'release')
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Packing
+      run: zip -j -r sane-break-gnome-extension packaging/linux/gnome/sane-break@allanchain.github.io
+
+    - name: Create Artifact
+      uses: actions/upload-artifact@v4
+      with:
+         name: "sane-break-gnome-extension"
+         path: ./sane-break-gnome-extension.zip
 
   release:
     runs-on: ubuntu-latest
