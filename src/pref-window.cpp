@@ -60,12 +60,12 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
    *                                Break tab                                *
    *                                                                         *
    ****************************************************************************/
-  connect(ui->smallBreakEverySlider, &SteppedSlider::valueChanged, this,
-          [this](int value) {
-            ui->smallBreakEveryLabel->setText(QString("%1 min").arg(value));
-            ui->bigBreakAfterLabel->setText(
-                QString("%1 min").arg(value * ui->bigBreakAfterSlider->value()));
-          });
+  connect(
+      ui->smallBreakEverySlider, &SteppedSlider::valueChanged, this, [this](int value) {
+        ui->smallBreakEveryLabel->setText(QString("%1 min").arg(value));
+        ui->bigBreakAfterLabel->setToolTip(
+            QString("Every %1 min").arg(value * ui->smallBreakEverySlider->value()));
+      });
   connect(ui->smallBreakForSlider, &SteppedSlider::valueChanged, this,
           [this](int value) {
             ui->smallBreakForLabel->setText(QString("%1 sec").arg(value));
