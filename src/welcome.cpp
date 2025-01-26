@@ -52,14 +52,14 @@ WelcomeWindow::WelcomeWindow(QWidget *parent) : QDialog(parent) {
   welcome->setAlignment(Qt::AlignTop | Qt::AlignJustify);
   layout->addWidget(welcome);
 
-  bool hasWarningOrError = false;
+  bool hasError = false;
 #ifdef Q_OS_LINUX
   QString errorText = "";
   for (auto &error : LinuxSystemSupport::errors()) {
     errorText += QString("<li>%1</li>").arg(error);
   }
   if (errorText.length() > 0) {
-    hasWarningOrError = true;
+    hasError = true;
     QLabel *errorLabel = new QLabel();
     errorLabel->setWordWrap(true);
     errorLabel->setStyleSheet("color: #ef4444");
@@ -71,7 +71,6 @@ WelcomeWindow::WelcomeWindow(QWidget *parent) : QDialog(parent) {
     warningText += QString("<li>%1</li>").arg(warning);
   }
   if (warningText.length() > 0) {
-    hasWarningOrError = true;
     QLabel *warningLabel = new QLabel();
     warningLabel->setWordWrap(true);
     warningLabel->setStyleSheet("color: #eab308");
@@ -81,7 +80,7 @@ WelcomeWindow::WelcomeWindow(QWidget *parent) : QDialog(parent) {
 #endif
   layout->addSpacing(20);
   QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
-  if (hasWarningOrError) {
+  if (hasError) {
     buttonBox->addButton("Ignore", QDialogButtonBox::AcceptRole);
     buttonBox->addButton("Cancel", QDialogButtonBox::RejectRole)->setDefault(true);
   } else {
