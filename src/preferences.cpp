@@ -4,12 +4,21 @@
 
 #include "preferences.h"
 
+#include <QCoreApplication>
 #include <QObject>
+#include <QSettings>
 #include <QString>
 #include <QtContainerFwd>
 
 Setting<bool>* SanePreferences::shownWelcome =
     new Setting<bool>("shown-welcome", false);
+QSettings getSettings() {
+  // We prefer settings file next to the app executable to make app more portable
+  QFile portableSettings(QCoreApplication::applicationDirPath() + "/SaneBreak.ini");
+  if (!portableSettings.exists()) return QSettings();
+  return QSettings(portableSettings.fileName(), QSettings::IniFormat);
+};
+
 Setting<int>* SanePreferences::smallEvery = new Setting<int>("break/small-every", 1200);
 Setting<int>* SanePreferences::smallFor = new Setting<int>("break/small-for", 20);
 Setting<int>* SanePreferences::bigAfter = new Setting<int>("break/big-after", 3);

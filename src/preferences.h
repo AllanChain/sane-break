@@ -5,22 +5,17 @@
 #ifndef SANE_PREFERENCES_H
 #define SANE_PREFERENCES_H
 
-#include <QCoreApplication>
 #include <QFile>
 #include <QObject>
 #include <QSettings>
 #include <QtContainerFwd>
 
+QSettings getSettings();
+
 class SettingWithSignal : public QObject {
   Q_OBJECT
  public:
   SettingWithSignal(QObject *parent = 0) : QObject(parent) {}
-  QSettings getSettings() {
-    // We prefer settings file next to the app executable to make app more portable
-    QFile portableSettings(QCoreApplication::applicationDirPath() + "/SaneBreak.ini");
-    if (!portableSettings.exists()) return QSettings();
-    return QSettings(portableSettings.fileName(), QSettings::IniFormat);
-  };
  signals:
   void changed();
 };

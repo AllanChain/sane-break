@@ -35,14 +35,14 @@ int main(int argc, char *argv[]) {
   LinuxSystemSupport::check();
 #endif  // Q_OS_LINUX
 
-  if (SanePreferences::shownWelcome->get() == false) {
+  if (!QFile::exists(getSettings().fileName())) {
     WelcomeWindow *welcome = new WelcomeWindow();
-    welcome->show();
     if (welcome->exec() == QDialog::Rejected) {
       return 0;
     } else {
       SanePreferences::shownWelcome->set(true);
     }
+    welcome->deleteLater();
   }
 
   SaneBreakApp *app = new SaneBreakApp();
