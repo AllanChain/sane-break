@@ -21,7 +21,7 @@
 #endif
 
 WelcomeWindow::WelcomeWindow(QWidget *parent) : QDialog(parent) {
-  setWindowIcon(QIcon(":/images/icon_tray-color.png"));
+  setWindowIcon(QIcon(":/images/icon.png"));
   setWindowTitle("Welcome to Sane Break");
   setFixedWidth(400);
   setContentsMargins(10, 20, 10, 10);
@@ -31,7 +31,7 @@ WelcomeWindow::WelcomeWindow(QWidget *parent) : QDialog(parent) {
   layout->setContentsMargins(12, 0, 12, 0);
 
   QLabel *icon = new QLabel(this);
-  icon->setPixmap(QPixmap(":/images/icon-256.png"));
+  icon->setPixmap(QPixmap(":/images/icon.png"));
   icon->setMargin(12);
   icon->setScaledContents(true);
   icon->setMaximumWidth(140);

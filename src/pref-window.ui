@@ -160,7 +160,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="../resources/index.qrc">:/images/icon-256.png</pixmap>
+         <pixmap resource="../resources/index.qrc">:/images/icon.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -808,7 +808,7 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap resource="../resources/index.qrc">:/images/icon-256.png</pixmap>
+              <pixmap resource="../resources/index.qrc">:/images/icon.png</pixmap>
              </property>
              <property name="scaledContents">
               <bool>true</bool>

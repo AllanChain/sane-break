@@ -22,19 +22,18 @@ StatusTrayWindow *StatusTrayWindow::createTrayOrWindow(QMenu *menu, QObject *par
 }
 
 QPixmap StatusTrayWindow::drawIcon(float arcRatio, IconVariants flags) {
-  if (flags.testFlag(IconVariant::PAUSED))
-    return QPixmap(":/images/icon_tray-pause.png");
+  if (flags.testFlag(IconVariant::PAUSED)) return QPixmap(":/images/icon-pause.png");
 
-  QPixmap pixmap(":/images/icon_tray.png");
+  QPixmap pixmap(":/images/icon.png");
   QPen pen(QColor(5, 46, 22, 255));
   QPainter painter(&pixmap);
 
   painter.setRenderHint(QPainter::Antialiasing, true);
-  pen.setWidth(8);
+  pen.setWidth(16);
   painter.setPen(pen);
   QRect rect = pixmap.rect();
-  rect.setSize(QSize(rect.width() - 4, rect.height() - 4));
-  rect.setTopLeft(QPoint(4, 4));
+  rect.setSize(QSize(rect.width() - 8, rect.height() - 8));
+  rect.setTopLeft(QPoint(8, 8));
   // Draw dark circle background
   painter.drawArc(rect, 0, 360 * 16);  // angles are in 1/16th of a degree
 
@@ -45,8 +44,8 @@ QPixmap StatusTrayWindow::drawIcon(float arcRatio, IconVariants flags) {
   painter.drawArc(rect, 90 * 16, spanAngle);
 
   if (flags.testFlag(IconVariant::WILL_BIG)) {
-    int dotSize = 40;
-    QRect smallRect(pixmap.width() - 8 - dotSize, 8, dotSize, dotSize);
+    int dotSize = 64;
+    QRect smallRect(pixmap.width() - 12 - dotSize, 12, dotSize, dotSize);
     QBrush brush(QColor(202, 138, 4, 255));
     painter.setBrush(brush);
     pen.setWidth(0);
@@ -75,7 +74,7 @@ void StatusTray::updateIcon(float arcRatio, IconVariants flags) {
 void StatusTray::setTitle(QString str) { icon->setToolTip("Sane Break\n" + str); }
 
 StatusWindowWidget::StatusWindowWidget(QMenu *menu) : menu(menu) {
-  setWindowIcon(QIcon(":/images/icon_tray-color.png"));
+  setWindowIcon(QIcon(":/images/icon.png"));
   setWindowTitle("Sane Break");
   setWindowFlag(Qt::Dialog);
   QVBoxLayout *layout = new QVBoxLayout();
