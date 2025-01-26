@@ -46,8 +46,8 @@
   <launchable type="desktop-id">io.github.AllanChain.sane-break.desktop</launchable>
   <screenshots>
     <screenshot type="default">
-      <caption>The configuration UI and flashing window during phase 1</caption>
-      <image>https://github.com/user-attachments/assets/1ec11caf-3b3d-4429-881d-4d909ec4c3c7</image>
+      <caption>The configuration UI</caption>
+      <image>https://github.com/user-attachments/assets/cdcfbcab-80e3-48f9-874b-715b947cc1e4</image>
     </screenshot>
     <screenshot>
       <caption>The full screen window during phase 2</caption>
