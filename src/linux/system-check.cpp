@@ -84,10 +84,18 @@ const QList<QString> LinuxSystemSupport::warnings() {
     list.append("Tray icon is not available, falling back to a normal window");
 #ifdef ENABLE_WAYLAND
   if (!LinuxSystemSupport::layerShell) {
-    list.append("Window positioning is bugged without layer shell support");
+#ifdef LayerShellQt_FOUND
     list.append(
-        "To keep window always on top, you need to install the shell extension if you "
-        "are using GNOME. Otherwise, Sane break is almost unusable");
+        "The compositor does not support layer shell, and window positioning will be "
+        "bugged");
+#else
+    list.append(
+        "Sane Break is not compiled with layer shell support, and window positioning "
+        "will be bugged");
+#endif
+    list.append(
+        "You need to install the shell extension if you are using GNOME. Otherwise, "
+        "Sane break is almost unusable");
   }
 #endif
   return list;
