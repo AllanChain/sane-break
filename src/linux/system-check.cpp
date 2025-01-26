@@ -73,8 +73,10 @@ void LinuxSystemSupport::check() {
 const QList<QString> LinuxSystemSupport::errors() {
   QList<QString> list{};
 #ifdef ENABLE_WAYLAND
-  if (!LinuxSystemSupport::idleGNOME && !LinuxSystemSupport::idleNotify)
-    list.append("Idle detection is not available");
+  if (QGuiApplication::platformName() == "wayland") {
+    if (!LinuxSystemSupport::idleGNOME && !LinuxSystemSupport::idleNotify)
+      list.append("Idle detection is not available");
+  }
 #endif
   return list;
 }
@@ -83,19 +85,21 @@ const QList<QString> LinuxSystemSupport::warnings() {
   if (!LinuxSystemSupport::trayIcon)
     list.append("Tray icon is not available, falling back to a normal window");
 #ifdef ENABLE_WAYLAND
-  if (!LinuxSystemSupport::layerShell) {
+  if (QGuiApplication::platformName() == "wayland") {
+    if (!LinuxSystemSupport::layerShell) {
 #ifdef LayerShellQt_FOUND
-    list.append(
-        "The compositor does not support layer shell, and window positioning will be "
-        "bugged");
+      list.append(
+          "The compositor does not support layer shell, and window positioning will be "
+          "bugged");
 #else
-    list.append(
-        "Sane Break is not compiled with layer shell support, and window positioning "
-        "will be bugged");
+      list.append(
+          "Sane Break is not compiled with layer shell support, and window positioning "
+          "will be bugged");
 #endif
-    list.append(
-        "You need to install the shell extension if you are using GNOME. Otherwise, "
-        "Sane break is almost unusable");
+      list.append(
+          "You need to install the shell extension if you are using GNOME. Otherwise, "
+          "Sane break is almost unusable");
+    }
   }
 #endif
   return list;
