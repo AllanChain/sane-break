@@ -56,6 +56,23 @@
   </screenshots>
 
   <releases>
+    <release version="0.6.0" date="2025-01-26">
+      <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.6.0</url>
+      <description>
+        <p>Features</p>
+        <ul>
+          <li>Sane Break will work on systems without trays</li>
+          <li>partial support for GNOME</li>
+          <li>a welcome window to guide new users and show Linux compatibility warnings</li>
+          <li>the flashing window is now transparent to mouse, making it less annoying</li>
+          <li>use minute and second style count down</li>
+        </ul>
+        <p>Bug fixes</p>
+        <ul>
+          <li>fix settings UI about "big break after"</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.5.3" date="2025-01-12">
       <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.5.3</url>
       <description>
