@@ -26,13 +26,6 @@
 #include <cstdint>
 #include <cstring>
 
-namespace LinuxSystemSupport {
-bool layerShell = false;
-bool idleNotify = false;
-bool idleGNOME = false;
-bool trayIcon = false;
-}  // namespace LinuxSystemSupport
-
 void registryHandler(void *data, wl_registry *registry, uint32_t id,
                      const char *interface, uint32_t version) {
   // Layer shell shoud be supported both compile and run time
@@ -48,6 +41,13 @@ void registryRemover(void *data, wl_registry *registry, uint32_t id) {}
 
 const wl_registry_listener registryListener = {registryHandler, registryRemover};
 #endif  // ENABLE_WAYLAND
+
+namespace LinuxSystemSupport {
+bool layerShell = false;
+bool idleNotify = false;
+bool idleGNOME = false;
+bool trayIcon = false;
+}  // namespace LinuxSystemSupport
 
 void LinuxSystemSupport::check() {
   LinuxSystemSupport::trayIcon = QSystemTrayIcon::isSystemTrayAvailable();
