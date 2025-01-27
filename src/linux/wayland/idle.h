@@ -47,6 +47,12 @@ class IdleTimeWayland : public SystemIdleTime {
   wl_seat *seat;
   ext_idle_notifier_v1 *idleNotifier = nullptr;
   ext_idle_notification_v1 *idleNotification = nullptr;
+
+  struct ext_idle_notification_v1 *
+  (*get_idle_notification)(struct ext_idle_notifier_v1 *ext_idle_notifier_v1,
+			   uint32_t timeout,
+			   struct wl_seat *seat);
+  
   bool isWatching = false;
 };
 

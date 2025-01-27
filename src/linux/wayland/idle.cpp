@@ -28,6 +28,17 @@ IdleTimeWayland::IdleTimeWayland() : SystemIdleTime() {
   seat = waylandApp->seat();
   wl_registry_add_listener(registry, &globalListener, this);
   wl_display_roundtrip(display);
+
+  const auto wl_ntfr_ver = ext_idle_notifier_v1_get_version(idleNotifier);
+  const auto wl_ntfr_ver_w_input_idle = decltype(wl_ntfr_ver){2};
+
+  if (wl_ntfr_ver < wl_ntfr_ver_w_input_idle) {
+    get_idle_notification = ext_idle_notifier_v1_get_idle_notification;
+  }
+  else {
+    get_idle_notification = ext_idle_notifier_v1_get_input_idle_notification;
+  }
+  
 }
 
 void IdleTimeWayland::globalAdded(void *data, wl_registry *registry, uint32_t name,
@@ -62,7 +73,7 @@ void IdleTimeWayland::startWatching() {
   if (idleNotifier == nullptr) return;
   isWatching = true;
   idleNotification =
-      ext_idle_notifier_v1_get_idle_notification(idleNotifier, m_minIdleTime, seat);
+      get_idle_notification(idleNotifier, m_minIdleTime, seat);
   ext_idle_notification_v1_add_listener(idleNotification, &idleListener, this);
 }
 
@@ -77,7 +88,7 @@ void IdleTimeWayland::setMinIdleTime(int idleTime) {
   if (!isWatching) return;
   if (idleNotification != nullptr) ext_idle_notification_v1_destroy(idleNotification);
   idleNotification =
-      ext_idle_notifier_v1_get_idle_notification(idleNotifier, m_minIdleTime, seat);
+      get_idle_notification(idleNotifier, m_minIdleTime, seat);
   ext_idle_notification_v1_add_listener(idleNotification, &idleListener, this);
 }
 
