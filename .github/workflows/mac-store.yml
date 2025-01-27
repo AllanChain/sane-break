@@ -1,6 +1,7 @@
 name: Build and upload to macOS store
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - '*'
