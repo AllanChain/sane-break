@@ -1,0 +1,56 @@
+name: Build and upload to macOS store
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+    - uses: actions/checkout@v4
+    - uses: AllanChain/install-qt-static-custom@v6.8
+
+    - name: Build Project
+      env:
+        GITHUB_RUN_ID: ${{ github.run_id }}
+      run: |
+        mkdir build
+        cd build
+        qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" ..
+        cmake --build . --parallel
+
+    - uses: apple-actions/import-codesign-certs@v3
+      id: certificate
+      with:
+        p12-file-base64: ${{ secrets.PROD_MACOS_CERTIFICATE }}
+        p12-password: ${{ secrets.PROD_MACOS_CERTIFICATE_PWD }}
+
+    # https://federicoterzi.com/blog/automatic-code-signing-and-notarization-for-macos-apps-using-github-actions/
+    - name: Codesign app
+      env:
+        STORE_CERTIFICATE_NAME: ${{ secrets.MACOS_STORE_CERTIFICATE_NAME }}
+        INSTALLER_CERTIFICATE_NAME: ${{ secrets.MACOS_INSTALLER_CERTIFICATE_NAME }}
+        PROVISION_PROFILE: ${{ secrets.MACOS_STORE_PROVISION_PROFILE }}
+      run: |
+        set -xe
+        echo "$PROVISION_PROFILE"| base64 --decode > build/sane-break.app/Contents/embedded.provisionprofile
+        codesign --force -s "$STORE_CERTIFICATE_NAME" --deep build/sane-break.app --entitlements packaging/macos/entitlement.plist
+        mkdir release
+        productbuild --sign "$INSTALLER_CERTIFICATE_NAME" --component build/sane-break.app /Applications release/sane-break.pkg
+
+    - name: Upload to store connect
+      env:
+        APPLE_ID: ${{ secrets.PROD_MACOS_NOTARIZATION_APPLE_ID }}
+        APPLE_PWD: ${{ secrets.PROD_MACOS_NOTARIZATION_PWD }}
+      run: |
+        set -xe
+        xcrun altool --validate-app --f release/sane-break.pkg -t macOS -u $APPLE_ID -p $APPLE_PWD --show-progress
+        xcrun altool --upload-app --f release/sane-break.pkg -t macOS -u $APPLE_ID -p $APPLE_PWD --show-progress
+
