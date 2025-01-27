@@ -42,10 +42,10 @@ WelcomeWindow::WelcomeWindow(QWidget *parent) : QDialog(parent) {
   QLabel *welcome = new QLabel(this);
   welcome->setText(
       "<h3 align=center>Welcome to Sane Break!</h3>"
-      "<p>Sane Break is a cross-platform break reminder designed to help "
-      "you take meaningful breaks without disrupting your workflow. "
-      "Sane Break will stay in the system tray and remind you to take "
-      "breaks at regular intervals. More details are available at <a "
+      "<p>Sane Break is a cross-platform break reminder designed to help you take "
+      "meaningful breaks without disrupting your workflow. Sane Break will stay in the "
+      "system tray and remind you to take breaks at regular intervals. To quit, go to "
+      "\"Postpone\" in the tray menu. More details are available at <a "
       "href=\"https://github.com/AllanChain/sane-break/\">GitHub</a>.</p>");
   welcome->setOpenExternalLinks(true);
   welcome->setWordWrap(true);
