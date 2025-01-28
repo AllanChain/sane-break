@@ -134,7 +134,8 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
 endif()
 
 set(MACOSX_BUNDLE_VERSION $ENV{GITHUB_RUN_NUMBER})
-if(${MACOSX_BUNDLE_VERSION} STREQUAL "")
+if(NOT DEFINED MACOSX_BUNDLE_VERSION)
+    message(STATUS "Using fallback bundle version")
     set(MACOSX_BUNDLE_VERSION ${PROJECT_VERSION})
 endif()
 set_target_properties(sane-break PROPERTIES
