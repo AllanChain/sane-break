@@ -818,10 +818,13 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
            <item>
             <widget class="QLabel" name="copyrightLabel">
              <property name="text">
-              <string>&lt;h1&gt;Sane Break&lt;/h1&gt;
- &lt;p&gt;A polite break reminder to keep you sane.&lt;/p&gt;
- &lt;p&gt;Copyright (C) 2024 Allan Chain,  &lt;a href=https://www.gnu.org/licenses/gpl-3.0.en.html&gt;GPL 3.0&lt;/a&gt;
- &lt;br&gt;Version v%1. Open and release at  &lt;a href=https://github.com/AllanChain/sane-break/releases&gt;GitHub&lt;/a&gt;&lt;/p&gt;</string>
+              <string>&lt;div&gt;
+&lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
+v%1
+&lt;/div&gt;
+&lt;p&gt;Remind breaks without mindless skips. &lt;/p&gt;
+&lt;p&gt;2024-2025, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break developers&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#8ab4f8;&quot;&gt;GPL 3.0&lt;/span&gt;&lt;/a&gt;)
+&lt;/p&gt;</string>
              </property>
              <property name="textFormat">
               <enum>Qt::TextFormat::RichText</enum>
@@ -844,7 +847,7 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
            <property name="maximumSize">
             <size>
              <width>462</width>
-             <height>200</height>
+             <height>300</height>
             </size>
            </property>
            <property name="horizontalScrollBarPolicy">
