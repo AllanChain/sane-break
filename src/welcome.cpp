@@ -6,6 +6,7 @@
 
 #include <qglobal.h>
 
+#include <QDesktopServices>
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QLabel>
@@ -45,9 +46,7 @@ WelcomeWindow::WelcomeWindow(QWidget *parent) : QDialog(parent) {
       "<p>Sane Break is a cross-platform break reminder designed to help you take "
       "meaningful breaks without disrupting your workflow. Sane Break will stay in the "
       "system tray and remind you to take breaks at regular intervals. To quit, go to "
-      "\"Postpone\" in the tray menu. More details are available at <a "
-      "href=\"https://github.com/AllanChain/sane-break/\">GitHub</a>.</p>");
-  welcome->setOpenExternalLinks(true);
+      "\"Postpone\" in the tray menu.</p>");
   welcome->setWordWrap(true);
   welcome->setAlignment(Qt::AlignTop | Qt::AlignJustify);
   layout->addWidget(welcome);
@@ -80,6 +79,8 @@ WelcomeWindow::WelcomeWindow(QWidget *parent) : QDialog(parent) {
 #endif
   layout->addSpacing(20);
   QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
+  QPushButton *docButton =
+      buttonBox->addButton("Read More", QDialogButtonBox::HelpRole);
   if (hasError) {
     buttonBox->addButton("Ignore", QDialogButtonBox::AcceptRole);
     buttonBox->addButton("Cancel", QDialogButtonBox::RejectRole)->setDefault(true);
@@ -87,6 +88,9 @@ WelcomeWindow::WelcomeWindow(QWidget *parent) : QDialog(parent) {
     buttonBox->addButton(QDialogButtonBox::Ok);
   }
   layout->addWidget(buttonBox);
+  connect(docButton, &QPushButton::clicked, this, [=]() {
+    QDesktopServices::openUrl(QUrl("https://github.com/AllanChain/sane-break/#readme"));
+  });
   connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
   connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 }
