@@ -479,7 +479,7 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
               <string notr="true">color: rgb(216, 0, 3)</string>
              </property>
              <property name="text">
-              <string>Please grant accessibility permission and restart app to use auto lock screen. </string>
+              <string>Please grant accessibility permission and restart app to use auto lock screen</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -491,7 +491,7 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
          <item>
           <widget class="QCheckBox" name="quickBreak">
            <property name="text">
-            <string>Start next break after %1 clicking on tray icon</string>
+            <string>Start next break after %1 on tray icon</string>
            </property>
           </widget>
          </item>
@@ -823,7 +823,7 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
 v%1
 &lt;/div&gt;
 &lt;p&gt;Remind breaks without mindless skips. &lt;/p&gt;
-&lt;p&gt;2024-2025, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break developers&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#8ab4f8;&quot;&gt;GPL 3.0&lt;/span&gt;&lt;/a&gt;)
+&lt;p&gt;2024-2025, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break developers&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
 &lt;/p&gt;</string>
              </property>
              <property name="textFormat">

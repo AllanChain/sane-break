@@ -133,23 +133,23 @@ void SaneBreakApp::updateMenu() {
   int seconds = secondsToNextBreak;
   int minutes = seconds / 60;
   seconds %= 60;
-  tray->setTitle(QString("%1 break %2:%3")
-                     .arg(smallBreaksBeforeBig() == 0 ? "big" : "small")
-                     .arg(minutes)
-                     .arg(seconds, 2, 10, QChar('0')));  // Pad zero
+  tray->setTitle(
+      QString("%1 %2:%3")
+          .arg(smallBreaksBeforeBig() == 0 ? tr("big break") : tr("small break"))
+          .arg(minutes)
+          .arg(seconds, 2, 10, QChar('0')));  // Pad zero
   nextBreakAction->setText(
-      QString("Next break after %1:%2").arg(minutes).arg(seconds, 2, 10, QChar('0')));
-  bigBreakAction->setText(
-      QString("Big break after %1 breaks").arg(smallBreaksBeforeBig()));
+      tr("Next break after %1:%2").arg(minutes).arg(seconds, 2, 10, QChar('0')));
+  bigBreakAction->setText(tr("Big break after %1 breaks").arg(smallBreaksBeforeBig()));
 }
 
 void SaneBreakApp::createMenu() {
   menu = new QMenu();
-  nextBreakAction = new QAction("Next Break", this);
+  nextBreakAction = new QAction(tr("Next Break"), this);
   menu->addAction(nextBreakAction);
   connect(nextBreakAction, &QAction::triggered, this, [=]() { breakNow(); });
 
-  bigBreakAction = new QAction("Big Break", this);
+  bigBreakAction = new QAction(tr("Big Break"), this);
   menu->addAction(bigBreakAction);
   connect(bigBreakAction, &QAction::triggered, this, [=]() {
     breakCycleCount = 0;
@@ -158,18 +158,18 @@ void SaneBreakApp::createMenu() {
 
   menu->addSeparator();
 
-  QMenu *postponeMenu = menu->addMenu("Postpone");
-  connect(postponeMenu->addAction("5 min"), &QAction::triggered, this,
+  QMenu *postponeMenu = menu->addMenu(tr("Postpone"));
+  connect(postponeMenu->addAction(tr("%n min", "", 5)), &QAction::triggered, this,
           [this]() { postpone(5 * 60); });
-  connect(postponeMenu->addAction("10 min"), &QAction::triggered, this,
+  connect(postponeMenu->addAction(tr("%n min", "", 10)), &QAction::triggered, this,
           [this]() { postpone(10 * 60); });
-  connect(postponeMenu->addAction("30 min"), &QAction::triggered, this,
+  connect(postponeMenu->addAction(tr("%n min", "", 30)), &QAction::triggered, this,
           [this]() { postpone(30 * 60); });
-  connect(postponeMenu->addAction("1 h"), &QAction::triggered, this,
+  connect(postponeMenu->addAction(tr("%n h", "", 1)), &QAction::triggered, this,
           [this]() { postpone(60 * 60); });
-  connect(postponeMenu->addAction("Quit"), &QAction::triggered, this,
+  connect(postponeMenu->addAction(tr("Quit")), &QAction::triggered, this,
           &SaneBreakApp::quit);
-  enableBreak = menu->addAction("Enable Break");
+  enableBreak = menu->addAction(tr("Enable Break"));
   enableBreak->setVisible(false);
   connect(enableBreak, &QAction::triggered, this,
           // enable all flags
@@ -177,7 +177,7 @@ void SaneBreakApp::createMenu() {
 
   menu->addSeparator();
 
-  connect(menu->addAction("Preferences"), &QAction::triggered, this, [this]() {
+  connect(menu->addAction(tr("Preferences")), &QAction::triggered, this, [this]() {
     prefWindow->loadSettings();
     prefWindow->show();
     prefWindow->windowHandle()->raise();
@@ -213,11 +213,11 @@ void SaneBreakApp::pauseBreak(unsigned int reason) {
   // Stop current break if necessary
   if (reason != PauseReason::IDLE) breakManager->close();
   if (reason & PauseReason::ON_BATTERY) {
-    tray->setTitle("Paused on battery");
+    tray->setTitle(tr("Paused on battery"));
   } else if (reason & PauseReason::APP_OPEN) {
-    tray->setTitle("Paused on app running");
+    tray->setTitle(tr("Paused on app running"));
   } else if (reason & PauseReason::IDLE) {
-    tray->setTitle("Paused on idle");
+    tray->setTitle(tr("Paused on idle"));
   }
   enableBreak->setVisible(true);
   nextBreakAction->setVisible(false);

@@ -8,6 +8,7 @@
 #include <QFile>
 #include <QSettings>
 #include <QSystemTrayIcon>
+#include <QTranslator>
 #include <Qt>
 
 #include "app.h"
@@ -30,6 +31,15 @@ int main(int argc, char *argv[]) {
 
   a.setApplicationDisplayName("Sane Break");
   if (QSystemTrayIcon::isSystemTrayAvailable()) a.setQuitOnLastWindowClosed(false);
+
+  QTranslator translator;
+  if (SanePreferences::language->get().length() > 0) {
+    if (translator.load("sane-break_" + SanePreferences::language->get(), ":/i18n"))
+      a.installTranslator(&translator);
+  } else {
+    if (translator.load(QLocale::system(), "sane-break", "_", ":/i18n"))
+      a.installTranslator(&translator);
+  }
 
 #ifdef Q_OS_LINUX
   LinuxSystemSupport::check();

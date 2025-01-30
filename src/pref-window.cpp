@@ -62,43 +62,41 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
    ****************************************************************************/
   connect(
       ui->smallBreakEverySlider, &SteppedSlider::valueChanged, this, [this](int value) {
-        ui->smallBreakEveryLabel->setText(QString("%1 min").arg(value));
+        ui->smallBreakEveryLabel->setText(tr("%n min", "", value));
         ui->bigBreakAfterLabel->setToolTip(
             QString("Every %1 min").arg(value * ui->smallBreakEverySlider->value()));
       });
-  connect(ui->smallBreakForSlider, &SteppedSlider::valueChanged, this,
-          [this](int value) {
-            ui->smallBreakForLabel->setText(QString("%1 sec").arg(value));
-          });
+  connect(
+      ui->smallBreakForSlider, &SteppedSlider::valueChanged, this,
+      [this](int value) { ui->smallBreakForLabel->setText(tr("%n sec", "", value)); });
   connect(
       ui->bigBreakAfterSlider, &SteppedSlider::valueChanged, this, [this](int value) {
-        ui->bigBreakAfterLabel->setText(QString("%1 breaks").arg(value));
+        ui->bigBreakAfterLabel->setText(tr("%n break(s)", "", value));
         ui->bigBreakAfterLabel->setToolTip(
             QString("Every %1 min").arg(value * ui->smallBreakEverySlider->value()));
       });
   connect(ui->bigBreakForSlider, &SteppedSlider::valueChanged, this, [this](int value) {
-    ui->bigBreakForLabel->setText(QString("%1 sec").arg(value));
+    ui->bigBreakForLabel->setText(tr("%n sec", "", value));
   });
   connect(ui->flashForSlider, &SteppedSlider::valueChanged, this, [this](int value) {
-    ui->flashForLabel->setText(QString("%1 sec").arg(value));
+    ui->flashForLabel->setText(tr("%n sec", "", value));
     ui->confirmAfterSlider->setMaximum(value);
   });
-  connect(ui->confirmAfterSlider, &SteppedSlider::valueChanged, this,
-          [this](int value) {
-            ui->confirmAfterLabel->setText(QString("%1 sec").arg(value));
-          });
+  connect(
+      ui->confirmAfterSlider, &SteppedSlider::valueChanged, this,
+      [this](int value) { ui->confirmAfterLabel->setText(tr("%n sec", "", value)); });
 
-  ui->autoScreenLock->addItem("Disabled", 0);
-  ui->autoScreenLock->addItem("30 sec", 30);
-  ui->autoScreenLock->addItem("1 min", 60);
-  ui->autoScreenLock->addItem("2 min", 120);
-  ui->autoScreenLock->addItem("5 min", 300);
+  ui->autoScreenLock->addItem(tr("Disabled"), 0);
+  ui->autoScreenLock->addItem(tr("30 sec"), 30);
+  ui->autoScreenLock->addItem(tr("1 min"), 60);
+  ui->autoScreenLock->addItem(tr("2 min"), 120);
+  ui->autoScreenLock->addItem(tr("5 min"), 300);
   ui->macPermissionHint->setHidden(true);
 
 #ifdef Q_OS_LINUX
-  ui->quickBreak->setText(ui->quickBreak->text().arg("middle"));
+  ui->quickBreak->setText(ui->quickBreak->text().arg(tr("middle clicking")));
 #elif defined Q_OS_WIN
-  ui->quickBreak->setText(ui->quickBreak->text().arg("double"));
+  ui->quickBreak->setText(ui->quickBreak->text().arg(tr("double clicking")));
 #elif defined Q_OS_MAC
   ui->quickBreak->setHidden(true);
   osaProcess = new QProcess(this);
@@ -137,15 +135,14 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
    *                                                                         *
    ****************************************************************************/
   connect(ui->pauseOnIdleSlider, &SteppedSlider::valueChanged, this, [this](int value) {
-    ui->pauseOnIdleLabel->setText(QString("%1 min").arg(value));
+    ui->pauseOnIdleLabel->setText(tr("%n min", "", value));
   });
   connect(ui->resetBreakSlider, &SteppedSlider::valueChanged, this, [this](int value) {
-    ui->resetBreakLabel->setText(QString("%1 min").arg(value));
+    ui->resetBreakLabel->setText(tr("%n min", "", value));
     ui->resetCycleSlider->setMinimum(value);
   });
-  connect(ui->resetCycleSlider, &SteppedSlider::valueChanged, this, [this](int value) {
-    ui->resetCycleLabel->setText(QString("%1 min").arg(value));
-  });
+  connect(ui->resetCycleSlider, &SteppedSlider::valueChanged, this,
+          [this](int value) { ui->resetCycleLabel->setText(tr("%n min", "", value)); });
 
   /***************************************************************************
    *                                                                         *

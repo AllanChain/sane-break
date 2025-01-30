@@ -18,8 +18,7 @@ endif()
 
 include(GNUInstallDirs)
 
-find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets Multimedia)
-find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia)
+find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia LinguistTools)
 
 file(GLOB PROJECT_SOURCES "src/*.cpp" "src/*.h" "src/*.ui" "resources/index.qrc")
 
@@ -35,6 +34,8 @@ elseif (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     list(APPEND PROJECT_SOURCES ${PROJECT_SOURCES_WINDOWS} ${RESOURCE_WINDOWS})
 endif()
 
+qt_standard_project_setup(I18N_TRANSLATED_LANGUAGES en zh)
+qt_add_translations(sane-break TS_FILE_DIR resources/translations)
 qt_add_executable(sane-break
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}

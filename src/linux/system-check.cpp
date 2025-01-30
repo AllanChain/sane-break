@@ -3,11 +3,11 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <qglobal.h>
-#include <qlist.h>
 
 #include "config.h"
 
 #ifdef Q_OS_LINUX
+#include <QCoreApplication>
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QGuiApplication>
@@ -83,22 +83,23 @@ const QList<QString> LinuxSystemSupport::errors() {
 const QList<QString> LinuxSystemSupport::warnings() {
   QList<QString> list{};
   if (!LinuxSystemSupport::trayIcon)
-    list.append("Tray icon is not available, falling back to a normal window");
+    list.append(QCoreApplication::tr(
+        "Tray icon is not available, falling back to a normal window"));
 #ifdef ENABLE_WAYLAND
   if (QGuiApplication::platformName() == "wayland") {
     if (!LinuxSystemSupport::layerShell) {
 #ifdef LayerShellQt_FOUND
-      list.append(
+      list.append(QCoreApplication::tr(
           "The compositor does not support layer shell, and window positioning will be "
-          "bugged");
+          "bugged"));
 #else
-      list.append(
+      list.append(QCoreApplication::tr(
           "Sane Break is not compiled with layer shell support, and window positioning "
-          "will be bugged");
+          "will be bugged"));
 #endif
-      list.append(
+      list.append(QCoreApplication::tr(
           "You need to install the shell extension if you are using GNOME. Otherwise, "
-          "Sane break is almost unusable");
+          "Sane break is almost unusable"));
     }
   }
 #endif
