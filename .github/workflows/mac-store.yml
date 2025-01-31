@@ -41,10 +41,11 @@ jobs:
         PROVISION_PROFILE: ${{ secrets.MACOS_STORE_PROVISION_PROFILE }}
       run: |
         set -xe
-        echo "$PROVISION_PROFILE"| base64 --decode > build/sane-break.app/Contents/embedded.provisionprofile
-        codesign --force -s "$STORE_CERTIFICATE_NAME" --deep build/sane-break.app --entitlements packaging/macos/entitlement.plist
+        mv build/sane-break.app "build/Sane Break.app"
+        echo "$PROVISION_PROFILE"| base64 --decode > "build/Sane Break.app/Contents/embedded.provisionprofile"
+        codesign --force -s "$STORE_CERTIFICATE_NAME" --deep "build/Sane Break.app" --entitlements packaging/macos/entitlement.plist
         mkdir release
-        productbuild --sign "$INSTALLER_CERTIFICATE_NAME" --component build/sane-break.app /Applications release/sane-break.pkg
+        productbuild --sign "$INSTALLER_CERTIFICATE_NAME" --component "build/Sane Break.app" /Applications release/sane-break.pkg
 
     - name: Upload to store connect
       env:
