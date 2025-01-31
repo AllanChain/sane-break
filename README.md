@@ -11,14 +11,17 @@
 
 Sane Break is a cross-platform break reminder designed to help you take meaningful breaks without disrupting your workflow.
 
-<a href='https://github.com/AllanChain/sane-break/releases'>
-  <img src="https://github.com/user-attachments/assets/16c6c35f-e657-4040-8b08-34282ea4ad43">
+<a href="https://apps.apple.com/us/app/sane-break/id6740942634">
+  <img height="80" alt="Download on the Mac App Store" src="https://github.com/user-attachments/assets/2b6f067b-d275-4a2f-ba13-4fb9c6bd63fe">
 </a>
 &nbsp;
-<a href='https://flathub.org/apps/io.github.AllanChain.sane-break'>
-    <img width='240' alt='Get it on Flathub' src='https://flathub.org/api/badge?locale=en'>
+<a href="https://flathub.org/apps/io.github.AllanChain.sane-break">
+    <img height="80" alt="Get it on Flathub" src="https://flathub.org/api/badge?locale=en">
 </a>
-
+&nbsp;
+<a href="https://github.com/AllanChain/sane-break/releases">
+  <img height="80" alt="Get it on GitHub" src="https://github.com/user-attachments/assets/16c6c35f-e657-4040-8b08-34282ea4ad43">
+</a>
 
 ## 🤔 Why another break reminder?
 
