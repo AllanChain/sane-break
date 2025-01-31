@@ -33,7 +33,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
+        qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DWITH_TRANSLATIONS=1 ..
         cmake --build . --parallel --config Release
 
     - name: Packing
@@ -67,7 +67,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" ..
+        qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DWITH_TRANSLATIONS=1 -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" ..
         cmake --build . --parallel
 
     - uses: apple-actions/import-codesign-certs@v3
@@ -142,13 +142,13 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y cmake qt6-base-dev qt6-multimedia-dev libxss-dev
+        sudo apt-get install -y cmake qt6-base-dev qt6-multimedia-dev qt6-tools-dev libxss-dev
 
     - name: Build Project
       run: |
         mkdir build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DSANE_MAKE_DEB=1 ..
+        cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DWITH_TRANSLATIONS=1 -DSANE_MAKE_DEB=1 ..
         cmake --build . --parallel
 
     - name: Packing
@@ -193,7 +193,7 @@ jobs:
     - name: Install dependencies
       run: |
         apt-get update
-        apt-get install -y nodejs g++ cmake qt6-base-dev qt6-multimedia-dev qt6-wayland-dev
+        apt-get install -y nodejs g++ cmake qt6-base-dev qt6-multimedia-dev qt6-tools-dev qt6-wayland-dev
 
     - name: Install additional dependencies
       if: matrix.tag == 'trixie'
@@ -203,7 +203,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DSANE_MAKE_DEB=1 ..
+        cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DWITH_TRANSLATIONS=1 -DSANE_MAKE_DEB=1 ..
         cmake --build . --parallel
 
     - name: Packing

@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
 
   QTranslator translator;
   if (SanePreferences::language->get().length() > 0) {
-    if (translator.load("sane-break_" + SanePreferences::language->get(), ":/i18n"))
+    if (translator.load(SanePreferences::language->get(), ":/i18n"))
       a.installTranslator(&translator);
   } else {
     if (translator.load(QLocale::system(), "sane-break", "_", ":/i18n"))

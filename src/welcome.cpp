@@ -154,7 +154,7 @@ void WelcomeWindow::onLanguageSelect() {
     if (translator->load(QLocale::system(), "sane-break", "_", ":/i18n"))
       qApp->installTranslator(translator);
   } else {
-    if (translator->load("sane-break_" + language, ":/i18n")) {
+    if (translator->load(language, ":/i18n")) {
       qApp->installTranslator(translator);
     }
   }
