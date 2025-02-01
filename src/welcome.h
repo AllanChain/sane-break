@@ -11,6 +11,8 @@
 #include <QLabel>
 #include <QWidget>
 
+#include "config.h"
+
 class WelcomeWindow : public QDialog {
   Q_OBJECT
 
@@ -18,21 +20,23 @@ class WelcomeWindow : public QDialog {
   WelcomeWindow(QWidget *parent = nullptr);
   ~WelcomeWindow();
 
- protected:
-  void changeEvent(QEvent *event);
-
  private:
   void updateText();
-  void onLanguageSelect();
   QLabel *welcome;
   QLabel *warningLabel;
   QLabel *errorLabel;
-  QLabel *languageLabel;
-  QComboBox *languageSelect;
   QDialogButtonBox *buttonBox;
   QPushButton *docButton;
   QPushButton *ignoreButton = nullptr;
   QPushButton *cancelButton = nullptr;
   QPushButton *okButton = nullptr;
+#ifdef WITH_TRANSLATIONS
+  QLabel *languageLabel;
+  QComboBox *languageSelect;
+  void onLanguageSelect();
+
+ protected:
+  void changeEvent(QEvent *event);
+#endif
 };
 #endif  // SANE_WELCOME_H

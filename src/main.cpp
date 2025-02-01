@@ -12,6 +12,7 @@
 #include <Qt>
 
 #include "app.h"
+#include "config.h"
 #include "preferences.h"
 #include "welcome.h"
 
@@ -32,6 +33,7 @@ int main(int argc, char *argv[]) {
   a.setApplicationDisplayName("Sane Break");
   if (QSystemTrayIcon::isSystemTrayAvailable()) a.setQuitOnLastWindowClosed(false);
 
+#ifdef WITH_TRANSLATIONS
   QTranslator translator;
   if (SanePreferences::language->get().length() > 0) {
     if (translator.load(SanePreferences::language->get(), ":/i18n"))
@@ -40,6 +42,7 @@ int main(int argc, char *argv[]) {
     if (translator.load(QLocale::system(), "sane-break", "_", ":/i18n"))
       a.installTranslator(&translator);
   }
+#endif
 
 #ifdef Q_OS_LINUX
   LinuxSystemSupport::check();

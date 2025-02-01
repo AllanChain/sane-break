@@ -26,6 +26,7 @@
 #include <Qt>
 #include <QtContainerFwd>
 
+#include "config.h"
 #include "preferences.h"
 
 #ifdef Q_OS_LINUX
@@ -55,6 +56,7 @@ WelcomeWindow::WelcomeWindow(QWidget *parent) : QDialog(parent) {
   welcome->setAlignment(Qt::AlignTop | Qt::AlignJustify);
   layout->addWidget(welcome);
 
+#ifdef WITH_TRANSLATIONS
   QHBoxLayout *hlayout = new QHBoxLayout(this);
   languageLabel = new QLabel(this);
   hlayout->addWidget(languageLabel);
@@ -73,6 +75,9 @@ WelcomeWindow::WelcomeWindow(QWidget *parent) : QDialog(parent) {
   }
   hlayout->addWidget(languageSelect);
   layout->addItem(hlayout);
+  connect(languageSelect, &QComboBox::currentIndexChanged, this,
+          &WelcomeWindow::onLanguageSelect);
+#endif
 
   bool hasError = false;
   errorLabel = new QLabel(this);
@@ -103,8 +108,6 @@ WelcomeWindow::WelcomeWindow(QWidget *parent) : QDialog(parent) {
   }
   layout->addWidget(buttonBox);
   updateText();
-  connect(languageSelect, &QComboBox::currentIndexChanged, this,
-          &WelcomeWindow::onLanguageSelect);
   connect(docButton, &QPushButton::clicked, this, [=]() {
     QDesktopServices::openUrl(QUrl("https://github.com/AllanChain/sane-break/#readme"));
   });
@@ -122,7 +125,9 @@ void WelcomeWindow::updateText() {
       "meaningful breaks without disrupting your workflow. Sane Break will stay in the "
       "system tray and remind you to take breaks at regular intervals. To quit, go to "
       "\"Postpone\" in the tray menu.</p>"));
+#ifdef WITH_TRANSLATIONS
   languageLabel->setText(tr("Language"));
+#endif
   docButton->setText(tr("Read More"));
   if (ignoreButton) ignoreButton->setText(tr("Ignore"));
   if (cancelButton) cancelButton->setText(tr("Cancel"));
@@ -146,6 +151,7 @@ void WelcomeWindow::updateText() {
   adjustSize();
 }
 
+#ifdef WITH_TRANSLATIONS
 void WelcomeWindow::onLanguageSelect() {
   QString language = languageSelect->currentData().toString();
   SanePreferences::language->set(language);
@@ -166,3 +172,4 @@ void WelcomeWindow::changeEvent(QEvent *event) {
   }
   QWidget::changeEvent(event);
 }
+#endif
