@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>679</width>
-    <height>380</height>
+    <height>386</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -322,19 +322,19 @@ QPushButton[flat=&quot;true&quot;]:checked {
            <item row="3" column="1">
             <widget class="SteppedSlider" name="bigBreakForSlider">
              <property name="minimum">
-              <number>10</number>
+              <number>1</number>
              </property>
              <property name="maximum">
-              <number>600</number>
+              <number>30</number>
              </property>
              <property name="singleStep">
-              <number>10</number>
+              <number>1</number>
              </property>
              <property name="pageStep">
-              <number>60</number>
+              <number>1</number>
              </property>
              <property name="value">
-              <number>60</number>
+              <number>1</number>
              </property>
              <property name="orientation">
               <enum>Qt::Orientation::Horizontal</enum>
@@ -343,7 +343,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
               <enum>QSlider::TickPosition::TicksBelow</enum>
              </property>
              <property name="tickInterval">
-              <number>60</number>
+              <number>5</number>
              </property>
             </widget>
            </item>
@@ -389,7 +389,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
            <item row="3" column="2">
             <widget class="QLabel" name="bigBreakForLabel">
              <property name="text">
-              <string>60 sec</string>
+              <string>1 min</string>
              </property>
             </widget>
            </item>
@@ -861,7 +861,7 @@ v%1
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>66</width>
+              <width>63</width>
               <height>41</height>
              </rect>
             </property>

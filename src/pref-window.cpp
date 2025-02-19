@@ -76,7 +76,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
             QString("Every %1 min").arg(value * ui->smallBreakEverySlider->value()));
       });
   connect(ui->bigBreakForSlider, &SteppedSlider::valueChanged, this, [this](int value) {
-    ui->bigBreakForLabel->setText(tr("%n sec", "", value));
+    ui->bigBreakForLabel->setText(tr("%n min", "", value));
   });
   connect(ui->flashForSlider, &SteppedSlider::valueChanged, this, [this](int value) {
     ui->flashForLabel->setText(tr("%n sec", "", value));
@@ -165,7 +165,7 @@ void PreferenceWindow::loadSettings() {
   ui->smallBreakEverySlider->setValue(SanePreferences::smallEvery->get() / 60);
   ui->smallBreakForSlider->setValue(SanePreferences::smallFor->get());
   ui->bigBreakAfterSlider->setValue(SanePreferences::bigAfter->get());
-  ui->bigBreakForSlider->setValue(SanePreferences::bigFor->get());
+  ui->bigBreakForSlider->setValue(SanePreferences::bigFor->get() / 60);
   ui->flashForSlider->setValue(SanePreferences::flashFor->get());
   ui->confirmAfterSlider->setValue(SanePreferences::confirmAfter->get());
   ui->quickBreak->setChecked(SanePreferences::quickBreak->get());
@@ -186,7 +186,7 @@ void PreferenceWindow::saveSettings() {
   SanePreferences::smallEvery->set(ui->smallBreakEverySlider->value() * 60);
   SanePreferences::smallFor->set(ui->smallBreakForSlider->value());
   SanePreferences::bigAfter->set(ui->bigBreakAfterSlider->value());
-  SanePreferences::bigFor->set(ui->bigBreakForSlider->value());
+  SanePreferences::bigFor->set(ui->bigBreakForSlider->value() * 60);
   SanePreferences::flashFor->set(ui->flashForSlider->value());
   SanePreferences::confirmAfter->set(ui->confirmAfterSlider->value());
   SanePreferences::quickBreak->set(ui->quickBreak->isChecked());
