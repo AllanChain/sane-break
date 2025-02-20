@@ -48,7 +48,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
    *                                                                         *
    ****************************************************************************/
   tabButtons = {ui->tabBreakButton, ui->tabSoundButton, ui->tabPauseButton,
-                ui->tabAboutButton};
+                ui->tabGeneralButton, ui->tabAboutButton};
   for (int i = 0; i < tabButtons.size(); ++i) {
     connect(tabButtons[i], &QPushButton::released, this, [this, i]() { setTab(i); });
   }
@@ -146,6 +146,13 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
 
   /***************************************************************************
    *                                                                         *
+   *                               General tab                               *
+   *                                                                         *
+   ****************************************************************************/
+  ui->configFile->setText(getSettings().fileName());
+
+  /***************************************************************************
+   *                                                                         *
    *                                About tab                                *
    *                                                                         *
    ****************************************************************************/
@@ -212,7 +219,7 @@ void PreferenceWindow::setTab(int tabNum) {
   for (int i = 0; i < tabButtons.size(); ++i) {
     tabButtons[i]->setChecked(i == tabNum);
   }
-  ui->controlBar->setHidden(tabNum == 3);
+  ui->controlBar->setHidden(tabNum == 4);
 }
 
 void PreferenceWindow::playSound(QString soundFile) {
