@@ -12,6 +12,7 @@
 #include <QWidget>
 
 #include "config.h"
+#include "widgets.h"
 
 class WelcomeWindow : public QDialog {
   Q_OBJECT
@@ -32,8 +33,7 @@ class WelcomeWindow : public QDialog {
   QPushButton *okButton = nullptr;
 #ifdef WITH_TRANSLATIONS
   QLabel *languageLabel;
-  QComboBox *languageSelect;
-  void onLanguageSelect();
+  LanguageSelect *languageSelect;
 
  protected:
   void changeEvent(QEvent *event);

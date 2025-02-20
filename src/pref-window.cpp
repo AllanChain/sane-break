@@ -150,7 +150,11 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
    *                                                                         *
    ****************************************************************************/
   ui->configFile->setText(getSettings().fileName());
-
+#ifndef WITH_TRANSLATIONS
+  ui->languageLabel->setHidden(true);
+  ui->languageSelect->setHidden(true);
+  ui->languageHint->setHidden(true);
+#endif
   /***************************************************************************
    *                                                                         *
    *                                About tab                                *

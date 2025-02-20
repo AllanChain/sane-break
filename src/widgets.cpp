@@ -4,13 +4,23 @@
 
 #include "widgets.h"
 
+#include <QApplication>
+#include <QComboBox>
+#include <QDir>
+#include <QFileInfo>
+#include <QListIterator>
 #include <QMouseEvent>
 #include <QPoint>
 #include <QRect>
 #include <QSlider>
+#include <QString>
 #include <QStyleOptionSlider>
+#include <QTranslator>
 #include <QWidget>
 #include <Qt>
+#include <QtContainerFwd>
+
+#include "preferences.h"
 
 SteppedSlider::SteppedSlider(QWidget *parent) : QSlider(parent) {
   setTickPosition(QSlider::TicksBelow);
@@ -59,5 +69,36 @@ int SteppedSlider::calculateValueFromPosition(const QPoint &pos) const {
     int value = min + ((sliderLength - posY) * range) / sliderLength;
     value = ((qBound(min, value, max) - min) / step) * step + min;
     return value;
+  }
+}
+
+LanguageSelect::LanguageSelect(QWidget *parent) : QComboBox(parent) {
+  addItem(tr("System Language"), "");
+  QDir dir(":/i18n");
+  QStringList fileNames = dir.entryList(QStringList("*.qm"), QDir::Files, QDir::Name);
+  QListIterator<QString> i(fileNames);
+  QTranslator translator;
+  while (i.hasNext()) {
+    QString fileName = i.next();
+    QFileInfo fileInfo(fileName);
+    if (translator.load(fileName))
+      addItem(translator.translate("English", "current language"),
+              fileInfo.baseName().split("_").last());
+  }
+  connect(this, &QComboBox::currentIndexChanged, this,
+          &LanguageSelect::onLanguageSelect);
+}
+
+void LanguageSelect::onLanguageSelect() {
+  QString language = currentData().toString();
+  SanePreferences::language->set(language);
+  QTranslator *translator = new QTranslator();
+  if (language == "") {
+    if (translator->load(QLocale::system(), "sane-break", "_", ":/i18n"))
+      qApp->installTranslator(translator);
+  } else {
+    if (translator->load(language, ":/i18n")) {
+      qApp->installTranslator(translator);
+    }
   }
 }

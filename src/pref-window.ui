@@ -808,22 +808,42 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
        <widget class="QWidget" name="generalPage">
         <layout class="QVBoxLayout" name="verticalLayout_7">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_4">
-           <item>
-            <widget class="QLabel" name="label_18">
-             <property name="text">
-              <string>Configuration file</string>
-             </property>
-            </widget>
-           </item>
-           <item>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="1">
             <widget class="QLineEdit" name="configFile">
              <property name="readOnly">
               <bool>true</bool>
              </property>
             </widget>
            </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_18">
+             <property name="text">
+              <string>Configuration file</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="languageLabel">
+             <property name="text">
+              <string>Language</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="LanguageSelect" name="languageSelect"/>
+           </item>
           </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="languageHint">
+           <property name="text">
+            <string>Change of language will take effect after app restart.</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+           </property>
+          </widget>
          </item>
          <item>
           <spacer name="verticalSpacer_3">
@@ -998,6 +1018,11 @@ v%1
    <class>SteppedSlider</class>
    <extends>QSlider</extends>
    <header>widgets.h</header>
+  </customwidget>
+  <customwidget>
+   <class>LanguageSelect</class>
+   <extends>QComboBox</extends>
+   <header location="global">widgets.h</header>
   </customwidget>
  </customwidgets>
  <resources>

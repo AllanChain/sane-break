@@ -28,6 +28,7 @@
 
 #include "config.h"
 #include "preferences.h"
+#include "widgets.h"
 
 #ifdef Q_OS_LINUX
 #include "linux/system-check.h"
@@ -60,23 +61,9 @@ WelcomeWindow::WelcomeWindow(QWidget *parent) : QDialog(parent) {
   QHBoxLayout *hlayout = new QHBoxLayout(this);
   languageLabel = new QLabel(this);
   hlayout->addWidget(languageLabel);
-  languageSelect = new QComboBox(this);
-  languageSelect->addItem(tr("System Language"), "");
-  QDir dir(":/i18n");
-  QStringList fileNames = dir.entryList(QStringList("*.qm"), QDir::Files, QDir::Name);
-  QListIterator<QString> i(fileNames);
-  QTranslator translator;
-  while (i.hasNext()) {
-    QString fileName = i.next();
-    QFileInfo fileInfo(fileName);
-    if (translator.load(fileName))
-      languageSelect->addItem(translator.translate("English", "current language"),
-                              fileInfo.baseName().split("_").last());
-  }
+  languageSelect = new LanguageSelect(this);
   hlayout->addWidget(languageSelect);
   layout->addItem(hlayout);
-  connect(languageSelect, &QComboBox::currentIndexChanged, this,
-          &WelcomeWindow::onLanguageSelect);
 #endif
 
   bool hasError = false;
@@ -152,20 +139,6 @@ void WelcomeWindow::updateText() {
 }
 
 #ifdef WITH_TRANSLATIONS
-void WelcomeWindow::onLanguageSelect() {
-  QString language = languageSelect->currentData().toString();
-  SanePreferences::language->set(language);
-  QTranslator *translator = new QTranslator();
-  if (language == "") {
-    if (translator->load(QLocale::system(), "sane-break", "_", ":/i18n"))
-      qApp->installTranslator(translator);
-  } else {
-    if (translator->load(language, ":/i18n")) {
-      qApp->installTranslator(translator);
-    }
-  }
-}
-
 void WelcomeWindow::changeEvent(QEvent *event) {
   if (event->type() == QEvent::LanguageChange) {
     updateText();

@@ -5,6 +5,7 @@
 #ifndef SANE_WIDGETS_H
 #define SANE_WIDGETS_H
 
+#include <QComboBox>
 #include <QMouseEvent>
 #include <QPoint>
 #include <QSlider>
@@ -23,4 +24,14 @@ class SteppedSlider : public QSlider {
  private:
   int calculateValueFromPosition(const QPoint &pos) const;
 };
+
+class LanguageSelect : public QComboBox {
+  Q_OBJECT
+ public:
+  LanguageSelect(QWidget *parent = nullptr);
+
+ private:
+  void onLanguageSelect();
+};
+
 #endif  // SANE_WIDGETS_H
