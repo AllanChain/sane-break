@@ -4,9 +4,17 @@
 <context>
     <name>English</name>
     <message>
-        <location filename="../../src/welcome.cpp" line="70"/>
+        <location filename="../../src/widgets.cpp" line="85"/>
         <source>current language</source>
         <translation>简体中文</translation>
+    </message>
+</context>
+<context>
+    <name>LanguageSelect</name>
+    <message>
+        <location filename="../../src/widgets.cpp" line="76"/>
+        <source>System Language</source>
+        <translation>系统语言</translation>
     </message>
 </context>
 <context>
@@ -33,119 +41,123 @@
     </message>
     <message>
         <location filename="../../src/pref-window.ui" line="122"/>
+        <source>General</source>
+        <translation>通用</translation>
+    </message>
+    <message>
+        <location filename="../../src/pref-window.ui" line="144"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="196"/>
-        <location filename="../../src/pref-window.ui" line="438"/>
+        <location filename="../../src/pref-window.ui" line="218"/>
+        <location filename="../../src/pref-window.ui" line="460"/>
         <source>30 sec</source>
         <translation>30 秒</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="228"/>
+        <location filename="../../src/pref-window.ui" line="250"/>
         <source>20 min</source>
         <translation>20 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="257"/>
+        <location filename="../../src/pref-window.ui" line="279"/>
         <source>Length of work time between breaks</source>
         <translation>两次休息之间的工作时间</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="260"/>
+        <location filename="../../src/pref-window.ui" line="282"/>
         <source>Break every</source>
         <translation>休息提示间隔</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="267"/>
+        <location filename="../../src/pref-window.ui" line="289"/>
         <source>How many seconds for each small break</source>
         <translation>小休息持续多少秒</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="270"/>
+        <location filename="../../src/pref-window.ui" line="292"/>
         <source>Small break length</source>
         <translation>小休息时长</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="277"/>
+        <location filename="../../src/pref-window.ui" line="299"/>
         <source>How many seconds for each big break</source>
         <translation>大休息持续秒数</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="280"/>
+        <location filename="../../src/pref-window.ui" line="302"/>
         <source>Big break length</source>
         <translation>大休息时长</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="287"/>
+        <location filename="../../src/pref-window.ui" line="309"/>
         <source>Every so many breaks will be a big break</source>
         <translation>每这么多次休息开始大休息</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="290"/>
+        <location filename="../../src/pref-window.ui" line="312"/>
         <source>Big break every</source>
         <translation>每几次为大休息</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="353"/>
+        <location filename="../../src/pref-window.ui" line="375"/>
         <source>20 sec</source>
         <translation>20 秒</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="385"/>
+        <location filename="../../src/pref-window.ui" line="407"/>
         <source>3 breaks</source>
         <translation>3 次</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="392"/>
         <source>60 sec</source>
-        <translation>60 秒</translation>
+        <translation type="vanished">60 秒</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="399"/>
+        <location filename="../../src/pref-window.ui" line="421"/>
         <source>How many seconds to allow continued work before forcing breaks</source>
         <translation>在窗口出现后，允许工作多少时间。超过这个时间将自动进入强制休息阶段</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="402"/>
+        <location filename="../../src/pref-window.ui" line="424"/>
         <source>Flash break prompt for</source>
         <translation>窗口最长闪烁时间</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="428"/>
+        <location filename="../../src/pref-window.ui" line="450"/>
         <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
         <translation>休息提示开始后，在给定时间内持续处于空闲状态，则将自动进入强制休息状态，不会因为用户输入而重新计时。</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="431"/>
+        <location filename="../../src/pref-window.ui" line="453"/>
         <source>Confirm break after</source>
         <translation>确认休息时间</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="457"/>
+        <location filename="../../src/pref-window.ui" line="479"/>
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
         <translation>假设设置为 2 分钟，则如果休息持续时间短于 2 分钟，只要休息结束后用户没有活动，屏幕会在休息提示开始后的 2 分钟自动锁定。如果休息持续超过 2 分钟，则屏幕必然会自动锁定。</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="462"/>
+        <location filename="../../src/pref-window.ui" line="484"/>
         <source>Automatic screen lock after break start</source>
         <translation>休息开始一段时间后自动锁屏</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="482"/>
+        <location filename="../../src/pref-window.ui" line="504"/>
         <source>Please grant accessibility permission and restart app to use auto lock screen</source>
         <translation>请授予辅助功能权限并重启应用以使用自动锁屏功能</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="494"/>
+        <location filename="../../src/pref-window.ui" line="516"/>
         <source>Start next break after %1 on tray icon</source>
         <translation>在 %1 托盘图标后，立刻开始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="821"/>
+        <location filename="../../src/pref-window.ui" line="898"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -166,101 +178,121 @@ v%1
         <translation type="vanished">在 %1 托盘图标后，立刻开始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="523"/>
-        <location filename="../../src/pref-window.ui" line="547"/>
+        <location filename="../../src/pref-window.ui" line="414"/>
+        <source>1 min</source>
+        <translation>1 分钟</translation>
+    </message>
+    <message>
+        <location filename="../../src/pref-window.ui" line="545"/>
+        <location filename="../../src/pref-window.ui" line="569"/>
         <source>Try restart Sane Break if no sound</source>
         <translation>如果没有声音，请尝试重启 Sane Break</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="526"/>
+        <location filename="../../src/pref-window.ui" line="548"/>
         <source>Bell after small break</source>
         <translation>小休息后提示音</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="533"/>
-        <location filename="../../src/pref-window.ui" line="564"/>
-        <location filename="../../src/pref-window.ui" line="599"/>
-        <location filename="../../src/pref-window.ui" line="606"/>
+        <location filename="../../src/pref-window.ui" line="555"/>
+        <location filename="../../src/pref-window.ui" line="586"/>
+        <location filename="../../src/pref-window.ui" line="621"/>
+        <location filename="../../src/pref-window.ui" line="628"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="550"/>
+        <location filename="../../src/pref-window.ui" line="572"/>
         <source>Bell before small break</source>
         <translation>小休息前提示音</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="557"/>
+        <location filename="../../src/pref-window.ui" line="579"/>
         <source>Bell before big break</source>
         <translation>大休息前提示音</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="578"/>
+        <location filename="../../src/pref-window.ui" line="600"/>
         <source>Bell after big break</source>
         <translation>大休息后提示音</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="615"/>
+        <location filename="../../src/pref-window.ui" line="637"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: You can use local sound files with URLs like &lt;code&gt;file:/D:\sound.mp3&lt;/code&gt;  (Windows) or &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</source>
         <translation>&lt;strong&gt;提示&lt;/strong&gt;：你可以这样使用本地文件 &lt;code&gt;file:/D:\sound.mp3&lt;/code&gt;  (Windows) 或 &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux)。</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="650"/>
+        <location filename="../../src/pref-window.ui" line="672"/>
         <source>3 min</source>
         <translation>3 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="657"/>
+        <location filename="../../src/pref-window.ui" line="679"/>
         <source>Reset break after paused for</source>
         <translation>暂停一段时间后重置计时</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="664"/>
+        <location filename="../../src/pref-window.ui" line="686"/>
         <source>Sane Break will pause if it detects no activity for this many minutes</source>
         <translation>在这么多时间内没有活动，Sane Break 将暂停计时</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="667"/>
+        <location filename="../../src/pref-window.ui" line="689"/>
         <source>Pause if idle for</source>
         <translation>空闲一段时间后暂停</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="674"/>
+        <location filename="../../src/pref-window.ui" line="696"/>
         <source>2 min</source>
         <translation>2 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="706"/>
+        <location filename="../../src/pref-window.ui" line="728"/>
         <source>Reset cycle after paused for</source>
         <translation>暂停一段时间后重置循环</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="713"/>
+        <location filename="../../src/pref-window.ui" line="735"/>
         <source>5 min</source>
         <translation>5 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="766"/>
+        <location filename="../../src/pref-window.ui" line="788"/>
         <source>Pause on battery</source>
         <translation>电池供电时暂停</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="773"/>
+        <location filename="../../src/pref-window.ui" line="795"/>
         <source>Pause breaks when any of the following program is running:</source>
         <translation>当以下程序运行时暂停休息提示：</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="780"/>
+        <location filename="../../src/pref-window.ui" line="802"/>
         <source>(Write one program name per line)</source>
         <translation>（每一行写一个程序名）</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="908"/>
+        <location filename="../../src/pref-window.ui" line="822"/>
+        <source>Configuration file</source>
+        <translation>配置文件</translation>
+    </message>
+    <message>
+        <location filename="../../src/pref-window.ui" line="829"/>
+        <source>Language</source>
+        <translation>语言</translation>
+    </message>
+    <message>
+        <location filename="../../src/pref-window.ui" line="841"/>
+        <source>Change of language will take effect after app restart.</source>
+        <translation>改变语言将在重启应用后生效。</translation>
+    </message>
+    <message>
+        <location filename="../../src/pref-window.ui" line="985"/>
         <source>Reset</source>
         <translation>重置</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="928"/>
+        <location filename="../../src/pref-window.ui" line="1005"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
@@ -269,9 +301,10 @@ v%1
     <name>PreferenceWindow</name>
     <message numerus="yes">
         <location filename="../../src/pref-window.cpp" line="65"/>
-        <location filename="../../src/pref-window.cpp" line="140"/>
-        <location filename="../../src/pref-window.cpp" line="143"/>
-        <location filename="../../src/pref-window.cpp" line="147"/>
+        <location filename="../../src/pref-window.cpp" line="79"/>
+        <location filename="../../src/pref-window.cpp" line="138"/>
+        <location filename="../../src/pref-window.cpp" line="141"/>
+        <location filename="../../src/pref-window.cpp" line="145"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n 分钟</numerusform>
@@ -279,53 +312,52 @@ v%1
     </message>
     <message numerus="yes">
         <location filename="../../src/pref-window.cpp" line="71"/>
-        <location filename="../../src/pref-window.cpp" line="80"/>
-        <location filename="../../src/pref-window.cpp" line="83"/>
-        <location filename="../../src/pref-window.cpp" line="88"/>
+        <location filename="../../src/pref-window.cpp" line="82"/>
+        <location filename="../../src/pref-window.cpp" line="87"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n 秒</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/pref-window.cpp" line="75"/>
+        <location filename="../../src/pref-window.cpp" line="74"/>
         <source>%n break(s)</source>
         <translation>
             <numerusform>%n 次</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.cpp" line="91"/>
+        <location filename="../../src/pref-window.cpp" line="89"/>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.cpp" line="92"/>
+        <location filename="../../src/pref-window.cpp" line="90"/>
         <source>30 sec</source>
         <translation>30 秒</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.cpp" line="93"/>
+        <location filename="../../src/pref-window.cpp" line="91"/>
         <source>1 min</source>
         <translation>1 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.cpp" line="94"/>
+        <location filename="../../src/pref-window.cpp" line="92"/>
         <source>2 min</source>
         <translation>2 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.cpp" line="95"/>
+        <location filename="../../src/pref-window.cpp" line="93"/>
         <source>5 min</source>
         <translation>5 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.cpp" line="99"/>
+        <location filename="../../src/pref-window.cpp" line="97"/>
         <source>middle clicking</source>
         <translation>中键</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.cpp" line="101"/>
+        <location filename="../../src/pref-window.cpp" line="99"/>
         <source>double clicking</source>
         <translation>双击</translation>
     </message>
@@ -460,46 +492,45 @@ v%1
 <context>
     <name>WelcomeWindow</name>
     <message>
-        <location filename="../../src/welcome.cpp" line="113"/>
+        <location filename="../../src/welcome.cpp" line="108"/>
         <source>Welcome to Sane Break</source>
         <translation>欢迎使用 Sane Break</translation>
     </message>
     <message>
-        <location filename="../../src/welcome.cpp" line="114"/>
+        <location filename="../../src/welcome.cpp" line="109"/>
         <source>&lt;h3 align=center&gt;Welcome to Sane Break!&lt;/h3&gt;&lt;p&gt;Sane Break is a cross-platform break reminder designed to help you take meaningful breaks without disrupting your workflow. Sane Break will stay in the system tray and remind you to take breaks at regular intervals. To quit, go to &quot;Postpone&quot; in the tray menu.&lt;/p&gt;</source>
         <translation>&lt;h3 align=center&gt;欢迎使用 Sane Break!&lt;/h3&gt;&lt;p&gt;Sane Break 是一款跨平台的休息提醒器，旨在帮助你在不影响工作流程的情况下进行有意义的休息。Sane Break 会停留在系统托盘中，提醒你按时休息。若要退出，请进入托盘菜单中的 “推迟”。&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/welcome.cpp" line="91"/>
-        <location filename="../../src/welcome.cpp" line="121"/>
+        <location filename="../../src/welcome.cpp" line="88"/>
+        <location filename="../../src/welcome.cpp" line="118"/>
         <source>Read More</source>
         <translation>了解更多</translation>
     </message>
     <message>
-        <location filename="../../src/welcome.cpp" line="61"/>
         <source>System Language</source>
-        <translation>系统语言</translation>
+        <translation type="vanished">系统语言</translation>
     </message>
     <message>
-        <location filename="../../src/welcome.cpp" line="93"/>
-        <location filename="../../src/welcome.cpp" line="122"/>
+        <location filename="../../src/welcome.cpp" line="90"/>
+        <location filename="../../src/welcome.cpp" line="119"/>
         <source>Ignore</source>
         <translation>忽略</translation>
     </message>
     <message>
-        <location filename="../../src/welcome.cpp" line="94"/>
-        <location filename="../../src/welcome.cpp" line="123"/>
+        <location filename="../../src/welcome.cpp" line="91"/>
+        <location filename="../../src/welcome.cpp" line="120"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/welcome.cpp" line="97"/>
-        <location filename="../../src/welcome.cpp" line="124"/>
+        <location filename="../../src/welcome.cpp" line="94"/>
+        <location filename="../../src/welcome.cpp" line="121"/>
         <source>OK</source>
         <translation>好的</translation>
     </message>
     <message>
-        <location filename="../../src/welcome.cpp" line="120"/>
+        <location filename="../../src/welcome.cpp" line="116"/>
         <source>Language</source>
         <translation>语言</translation>
     </message>
