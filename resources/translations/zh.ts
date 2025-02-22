@@ -157,7 +157,12 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
         <translation>在 %1 托盘图标后，立刻开始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="898"/>
+        <location filename="../../src/pref-window.ui" line="852"/>
+        <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/pref-window.ui" line="911"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -272,27 +277,27 @@ v%1
         <translation>（每一行写一个程序名）</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="822"/>
+        <location filename="../../src/pref-window.ui" line="825"/>
         <source>Configuration file</source>
         <translation>配置文件</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="829"/>
+        <location filename="../../src/pref-window.ui" line="815"/>
         <source>Language</source>
         <translation>语言</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="841"/>
+        <location filename="../../src/pref-window.ui" line="842"/>
         <source>Change of language will take effect after app restart.</source>
         <translation>改变语言将在重启应用后生效。</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="985"/>
+        <location filename="../../src/pref-window.ui" line="998"/>
         <source>Reset</source>
         <translation>重置</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.ui" line="1005"/>
+        <location filename="../../src/pref-window.ui" line="1018"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
@@ -492,18 +497,18 @@ v%1
 <context>
     <name>WelcomeWindow</name>
     <message>
-        <location filename="../../src/welcome.cpp" line="108"/>
+        <location filename="../../src/welcome.cpp" line="107"/>
         <source>Welcome to Sane Break</source>
         <translation>欢迎使用 Sane Break</translation>
     </message>
     <message>
-        <location filename="../../src/welcome.cpp" line="109"/>
+        <location filename="../../src/welcome.cpp" line="108"/>
         <source>&lt;h3 align=center&gt;Welcome to Sane Break!&lt;/h3&gt;&lt;p&gt;Sane Break is a cross-platform break reminder designed to help you take meaningful breaks without disrupting your workflow. Sane Break will stay in the system tray and remind you to take breaks at regular intervals. To quit, go to &quot;Postpone&quot; in the tray menu.&lt;/p&gt;</source>
         <translation>&lt;h3 align=center&gt;欢迎使用 Sane Break!&lt;/h3&gt;&lt;p&gt;Sane Break 是一款跨平台的休息提醒器，旨在帮助你在不影响工作流程的情况下进行有意义的休息。Sane Break 会停留在系统托盘中，提醒你按时休息。若要退出，请进入托盘菜单中的 “推迟”。&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/welcome.cpp" line="88"/>
-        <location filename="../../src/welcome.cpp" line="118"/>
+        <location filename="../../src/welcome.cpp" line="87"/>
+        <location filename="../../src/welcome.cpp" line="117"/>
         <source>Read More</source>
         <translation>了解更多</translation>
     </message>
@@ -512,25 +517,25 @@ v%1
         <translation type="vanished">系统语言</translation>
     </message>
     <message>
-        <location filename="../../src/welcome.cpp" line="90"/>
-        <location filename="../../src/welcome.cpp" line="119"/>
+        <location filename="../../src/welcome.cpp" line="89"/>
+        <location filename="../../src/welcome.cpp" line="118"/>
         <source>Ignore</source>
         <translation>忽略</translation>
     </message>
     <message>
-        <location filename="../../src/welcome.cpp" line="91"/>
-        <location filename="../../src/welcome.cpp" line="120"/>
+        <location filename="../../src/welcome.cpp" line="90"/>
+        <location filename="../../src/welcome.cpp" line="119"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/welcome.cpp" line="94"/>
-        <location filename="../../src/welcome.cpp" line="121"/>
+        <location filename="../../src/welcome.cpp" line="93"/>
+        <location filename="../../src/welcome.cpp" line="120"/>
         <source>OK</source>
         <translation>好的</translation>
     </message>
     <message>
-        <location filename="../../src/welcome.cpp" line="116"/>
+        <location filename="../../src/welcome.cpp" line="115"/>
         <source>Language</source>
         <translation>语言</translation>
     </message>
