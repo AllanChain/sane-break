@@ -7,6 +7,9 @@
     <img src="https://img.shields.io/github/v/release/AllanChain/sane-break" alt="GitHub release">
   </a>
   <img src="https://img.shields.io/badge/built_with-Qt_6-Qt" alt="Built with Qt 6">
+  <a href="https://hosted.weblate.org/engage/sane-break/">
+    <img src="https://hosted.weblate.org/widget/sane-break/sane-break/svg-badge.svg" alt="Translation status" />
+  </a>
 </p>
 
 Sane Break is a cross-platform break reminder designed to help you take meaningful breaks without disrupting your workflow.
@@ -196,3 +199,11 @@ However, if you really want to quit when Sane Break is set to fullscreen, you ca
 - KDE: Enable KRunner with <kbd>Alt</kbd> + <kbd>Space</kbd> and run `killall sane-break`
 - macOS: Enable Spotlight with <kbd>Cmd</kbd> + <kbd>Space</kbd>, open Terminal, and run `killall sane-break`
 - Windows: Press <kbd>Win</kbd> + <kbd>R</kbd> and run `taskkill /IM sane-break /F`
+
+## Contributing
+
+### Translations
+
+<a href="https://hosted.weblate.org/engage/sane-break/">
+<img src="https://hosted.weblate.org/widget/sane-break/sane-break/open-graph.png" alt="Translation status" />
+</a>
