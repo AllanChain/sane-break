@@ -34,11 +34,9 @@ IdleTimeWayland::IdleTimeWayland() : SystemIdleTime() {
 
   if (wl_ntfr_ver < wl_ntfr_ver_w_input_idle) {
     get_idle_notification = ext_idle_notifier_v1_get_idle_notification;
-  }
-  else {
+  } else {
     get_idle_notification = ext_idle_notifier_v1_get_input_idle_notification;
   }
-  
 }
 
 void IdleTimeWayland::globalAdded(void *data, wl_registry *registry, uint32_t name,
@@ -72,8 +70,7 @@ void IdleTimeWayland::resumed(void *data, ext_idle_notification_v1 *object) {
 void IdleTimeWayland::startWatching() {
   if (idleNotifier == nullptr) return;
   isWatching = true;
-  idleNotification =
-      get_idle_notification(idleNotifier, m_minIdleTime, seat);
+  idleNotification = get_idle_notification(idleNotifier, m_minIdleTime, seat);
   ext_idle_notification_v1_add_listener(idleNotification, &idleListener, this);
 }
 
@@ -87,8 +84,7 @@ void IdleTimeWayland::setMinIdleTime(int idleTime) {
   m_minIdleTime = idleTime;
   if (!isWatching) return;
   if (idleNotification != nullptr) ext_idle_notification_v1_destroy(idleNotification);
-  idleNotification =
-      get_idle_notification(idleNotifier, m_minIdleTime, seat);
+  idleNotification = get_idle_notification(idleNotifier, m_minIdleTime, seat);
   ext_idle_notification_v1_add_listener(idleNotification, &idleListener, this);
 }
 

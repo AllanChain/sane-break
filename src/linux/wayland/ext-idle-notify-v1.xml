@@ -74,7 +74,7 @@
       <arg name="timeout" type="uint" summary="minimum idle timeout in msec"/>
       <arg name="seat" type="object" interface="wl_seat"/>
     </request>
-    
+
   </interface>
 
   <interface name="ext_idle_notification_v1" version="2">
