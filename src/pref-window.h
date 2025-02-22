@@ -16,6 +16,8 @@
 #include <QString>
 #include <QWidget>
 
+#include "sound-player.h"
+
 namespace Ui {
 class PrefWindow;
 }
@@ -33,8 +35,8 @@ class PreferenceWindow : public QMainWindow {
   Ui::PrefWindow *ui;
   QList<QPushButton *> tabButtons;
   QProcess *osaProcess;
+  SoundPlayer *soundPlayer;
   void closeEvent(QCloseEvent *event);
   void setTab(int tabNum);
-  void playSound(QString soundFile);
 };
 #endif  // SANE_PREFERENCES_WINDOW_H

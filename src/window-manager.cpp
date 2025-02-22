@@ -10,6 +10,7 @@
 
 #include "config.h"
 #include "preferences.h"
+#include "sound-player.h"
 
 #ifdef LayerShellQt_FOUND
 #include <LayerShellQt/shell.h>
@@ -40,6 +41,7 @@ BreakWindowManager::BreakWindowManager() : QObject() {
   connect(idleTimer, &SystemIdleTime::idleStart, this,
           &BreakWindowManager::onIdleStart);
   connect(idleTimer, &SystemIdleTime::idleEnd, this, &BreakWindowManager::onIdleEnd);
+  soundPlayer = new SoundPlayer(this);
 
 #ifdef LayerShellQt_FOUND
   if (QGuiApplication::platformName() == "wayland")
@@ -47,7 +49,7 @@ BreakWindowManager::BreakWindowManager() : QObject() {
 #endif
 }
 
-BreakWindowManager::~BreakWindowManager() {};
+BreakWindowManager::~BreakWindowManager() {}
 
 void BreakWindowManager::createWindows() {
   QList<QScreen *> screens = QApplication::screens();
@@ -72,8 +74,8 @@ void BreakWindowManager::show(BreakType type) {
   forceBreakTimer->setInterval(SanePreferences::flashFor->get() * 1000);
   forceBreakTimer->start();
   idleTimer->startWatching();
-  playSound(type == BreakType::SMALL ? SanePreferences::smallStartBell->get()
-                                     : SanePreferences::bigStartBell->get());
+  soundPlayer->play(type == BreakType::SMALL ? SanePreferences::smallStartBell->get()
+                                             : SanePreferences::bigStartBell->get());
 }
 
 bool BreakWindowManager::isShowing() { return windows.size() != 0; }
@@ -99,8 +101,9 @@ void BreakWindowManager::tick() {
   if (totalTime - remainingTime >= SanePreferences::confirmAfter->get())
     isForceBreak = true;
   if (remainingTime <= 0) {
-    playSound(currentType == BreakType::SMALL ? SanePreferences::smallEndBell->get()
-                                              : SanePreferences::bigEndBell->get());
+    soundPlayer->play(currentType == BreakType::SMALL
+                          ? SanePreferences::smallEndBell->get()
+                          : SanePreferences::bigEndBell->get());
     close();
   }
 }
@@ -129,20 +132,4 @@ void BreakWindowManager::onIdleEnd() {
   }
   isIdle = false;
   remainingTime = totalTime;
-}
-
-void BreakWindowManager::playSound(QString soundFile) {
-  if (soundFile.isEmpty()) return;
-  QMediaPlayer *soundPlayer = new QMediaPlayer(this);
-  QAudioOutput *audioOutput = new QAudioOutput();
-  soundPlayer->setAudioOutput(audioOutput);
-  audioOutput->setVolume(100);
-  soundPlayer->setSource(QUrl(soundFile));
-  soundPlayer->play();
-  connect(soundPlayer, &QMediaPlayer::playbackStateChanged, this,
-          [=](QMediaPlayer::PlaybackState state) {
-            if (state != QMediaPlayer::PlaybackState::StoppedState) return;
-            soundPlayer->deleteLater();
-            audioOutput->deleteLater();
-          });
 }

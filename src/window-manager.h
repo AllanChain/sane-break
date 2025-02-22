@@ -11,6 +11,7 @@
 
 #include "break-window.h"  // IWYU pragma: export
 #include "idle-time.h"
+#include "sound-player.h"
 
 class BreakWindowManager : public QObject {
   Q_OBJECT
@@ -36,12 +37,12 @@ class BreakWindowManager : public QObject {
   QTimer *countdownTimer;
   QTimer *forceBreakTimer;
   SystemIdleTime *idleTimer;
+  SoundPlayer *soundPlayer;
   void createWindows();
   void tick();
   void forceBreak();
   void onIdleStart();
   void onIdleEnd();
-  void playSound(QString soundFile);
 };
 
 #endif  // SANE_BREAK_WINDOW_MANAGER_H

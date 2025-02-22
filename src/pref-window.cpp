@@ -30,6 +30,7 @@
 
 #include "config.h"
 #include "preferences.h"
+#include "sound-player.h"
 #include "ui_pref-window.h"
 #include "widgets.h"
 
@@ -41,6 +42,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
   QWidget *centralWidget = new QWidget(this);
   setCentralWidget(centralWidget);
   ui->setupUi(centralWidget);
+  soundPlayer = new SoundPlayer(this);
 
   /***************************************************************************
    *                                                                         *
@@ -126,8 +128,10 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
                                            ui->playBigStart, ui->playBigEnd};
   for (int i = 0; i < soundSelects.length(); i++) {
     soundSelects[i]->addItems(soundFiles);
-    connect(soundPlayButtons[i], &QPushButton::pressed, this,
-            [this, soundSelects, i]() { playSound(soundSelects[i]->currentText()); });
+    connect(soundPlayButtons[i], &QPushButton::pressed, soundPlayer,
+            [this, soundSelects, i]() {
+              soundPlayer->play(soundSelects[i]->currentText());
+            });
   }
   /***************************************************************************
    *                                                                         *
@@ -231,20 +235,4 @@ void PreferenceWindow::setTab(int tabNum) {
     tabButtons[i]->setChecked(i == tabNum);
   }
   ui->controlBar->setHidden(tabNum == 4);
-}
-
-void PreferenceWindow::playSound(QString soundFile) {
-  if (soundFile.isEmpty()) return;
-  QMediaPlayer *soundPlayer = new QMediaPlayer(this);
-  QAudioOutput *audioOutput = new QAudioOutput();
-  soundPlayer->setAudioOutput(audioOutput);
-  audioOutput->setVolume(100);
-  soundPlayer->setSource(QUrl(soundFile));
-  soundPlayer->play();
-  connect(soundPlayer, &QMediaPlayer::playbackStateChanged, this,
-          [=](QMediaPlayer::PlaybackState state) {
-            if (state != QMediaPlayer::PlaybackState::StoppedState) return;
-            soundPlayer->deleteLater();
-            audioOutput->deleteLater();
-          });
 }
