@@ -70,9 +70,13 @@ https://github.com/user-attachments/assets/35002673-ce83-4848-bd5e-6cc6dbbd4c8c
 
 Download macOS `.dmg` file from the [release page](https://github.com/AllanChain/sane-break/releases). It is a universal bundle and both x86 and ARM version of macOS 12 or newer are supported.
 
+To run Sane Break at start up, open "System Preferences" and search for "Login Items". Click "+" and add Sane Break to login items.
+
 ### Windows
 
-Download Windows `.exe` executable from the [release page](https://github.com/AllanChain/sane-break/releases). x86 version of Windows 10 or newer is supported. Older versions may work too.
+Download the Windows package (`sane-break-windows.zip`) from the [release page](https://github.com/AllanChain/sane-break/releases) and extract it. Put the `.exe` executable anywhere you like. x86 version of Windows 10 or newer is supported. Older versions may be supported too.
+
+To run Sane Break at startup, use <kbd>Win</kbd> + <kbd>R</kbd> and type `shell:startup`. Put `sane-break.exe` or its shortcut there.
 
 ### Linux
 
@@ -168,12 +172,6 @@ guix shell --container make cmake gcc-toolchain pkg-config vulkan-headers \
 ### How to exit?
 
 Right-click the menu icon and hover over the "Postpone" menu. The "Quit" menu is there. This design is intended to make users think twice about whether they want to postpone breaks or really quit the software.
-
-### How to start Sane Break on startup?
-
-- Linux: Whatever way you like
-- macOS: Open "System Preferences" and search for "Login Items". Click "+" and add Sane Break to login items
-- Windows: Use <kbd>Win</kbd> + <kbd>R</kbd> and type `shell:startup`. Put `sane-break.exe` or its shortcut there
 
 ### Will Sane Break pause when I'm away?
 
