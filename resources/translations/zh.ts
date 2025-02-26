@@ -12,9 +12,13 @@
 <context>
     <name>LanguageSelect</name>
     <message>
-        <location filename="../../src/widgets.cpp" line="76"/>
         <source>System Language</source>
-        <translation>系统语言</translation>
+        <translation type="vanished">系统语言</translation>
+    </message>
+    <message>
+        <location filename="../../src/widgets.cpp" line="76"/>
+        <source>Default</source>
+        <translation>默认语言</translation>
     </message>
 </context>
 <context>
@@ -159,7 +163,7 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
     <message>
         <location filename="../../src/pref-window.ui" line="852"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;帮我们翻译！&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../src/pref-window.ui" line="911"/>
@@ -305,64 +309,64 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/pref-window.cpp" line="65"/>
-        <location filename="../../src/pref-window.cpp" line="79"/>
-        <location filename="../../src/pref-window.cpp" line="138"/>
-        <location filename="../../src/pref-window.cpp" line="141"/>
+        <location filename="../../src/pref-window.cpp" line="67"/>
+        <location filename="../../src/pref-window.cpp" line="81"/>
+        <location filename="../../src/pref-window.cpp" line="142"/>
         <location filename="../../src/pref-window.cpp" line="145"/>
+        <location filename="../../src/pref-window.cpp" line="149"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n 分钟</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/pref-window.cpp" line="71"/>
-        <location filename="../../src/pref-window.cpp" line="82"/>
-        <location filename="../../src/pref-window.cpp" line="87"/>
+        <location filename="../../src/pref-window.cpp" line="73"/>
+        <location filename="../../src/pref-window.cpp" line="84"/>
+        <location filename="../../src/pref-window.cpp" line="89"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n 秒</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/pref-window.cpp" line="74"/>
+        <location filename="../../src/pref-window.cpp" line="76"/>
         <source>%n break(s)</source>
         <translation>
             <numerusform>%n 次</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.cpp" line="89"/>
+        <location filename="../../src/pref-window.cpp" line="91"/>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.cpp" line="90"/>
+        <location filename="../../src/pref-window.cpp" line="92"/>
         <source>30 sec</source>
         <translation>30 秒</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.cpp" line="91"/>
+        <location filename="../../src/pref-window.cpp" line="93"/>
         <source>1 min</source>
         <translation>1 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.cpp" line="92"/>
+        <location filename="../../src/pref-window.cpp" line="94"/>
         <source>2 min</source>
         <translation>2 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.cpp" line="93"/>
+        <location filename="../../src/pref-window.cpp" line="95"/>
         <source>5 min</source>
         <translation>5 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.cpp" line="97"/>
+        <location filename="../../src/pref-window.cpp" line="99"/>
         <source>middle clicking</source>
         <translation>中键</translation>
     </message>
     <message>
-        <location filename="../../src/pref-window.cpp" line="99"/>
+        <location filename="../../src/pref-window.cpp" line="101"/>
         <source>double clicking</source>
         <translation>双击</translation>
     </message>

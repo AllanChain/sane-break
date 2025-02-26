@@ -73,7 +73,7 @@ int SteppedSlider::calculateValueFromPosition(const QPoint &pos) const {
 }
 
 LanguageSelect::LanguageSelect(QWidget *parent) : QComboBox(parent) {
-  addItem(tr("System Language"), "");
+  addItem(tr("Default"), "");
   QDir dir(":/i18n");
   QStringList fileNames = dir.entryList(QStringList("*.qm"), QDir::Files, QDir::Name);
   QListIterator<QString> i(fileNames);
