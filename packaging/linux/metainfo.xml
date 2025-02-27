@@ -56,6 +56,22 @@
   </screenshots>
 
   <releases>
+    <release version="0.6.1" date="2025-02-27">
+      <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.6.1</url>
+      <description>
+        <p>Features</p>
+        <ul>
+          <li>add zh translations</li>
+          <li>crowdsourced translations via Weblate</li>
+          <li>use v2 idle-notify protocol when possible (#27)</li>
+          <li>display config file location</li>
+        </ul>
+        <p>Bug fixes</p>
+        <ul>
+          <li>use minute for bigBreakFor slider</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.0" date="2025-01-26">
       <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.6.0</url>
       <description>
