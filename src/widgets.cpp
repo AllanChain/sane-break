@@ -79,11 +79,10 @@ LanguageSelect::LanguageSelect(QWidget *parent) : QComboBox(parent) {
   QListIterator<QString> i(fileNames);
   QTranslator translator;
   while (i.hasNext()) {
-    QString fileName = i.next();
-    QFileInfo fileInfo(fileName);
-    if (translator.load(fileName))
-      addItem(translator.translate("English", "current language"),
-              fileInfo.baseName().split("_").last());
+    QFileInfo fileInfo(i.next());
+    QString language = fileInfo.baseName();
+    if (translator.load(language, ":/i18n"))
+      addItem(translator.translate("English", "current language"), language);
   }
   connect(this, &QComboBox::currentIndexChanged, this,
           &LanguageSelect::onLanguageSelect);
