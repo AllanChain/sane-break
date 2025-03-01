@@ -38,11 +38,15 @@ qt_add_executable(sane-break
     MANUAL_FINALIZATION
     ${PROJECT_SOURCES}
 )
-option(WITH_TRANSLATIONS "Enable translations" OFF)
-if(WITH_TRANSLATIONS)
-    find_package(Qt6 REQUIRED COMPONENTS LinguistTools)
+
+find_package(Qt6 COMPONENTS LinguistTools)
+if(Qt6_FOUND AND Qt6LinguistTools_FOUND)
+    set(WITH_TRANSLATIONS ON)
+    message(STATUS "Enable translations")
     file(GLOB TS_FILES "resources/translations/*.ts")
     qt_add_translations(sane-break TS_FILES ${TS_FILES})
+else()
+    message(STATUS "Disable translations because LinguistTools is not found")
 endif()
 
 target_include_directories(sane-break PRIVATE "src" ${CMAKE_CURRENT_BINARY_DIR})

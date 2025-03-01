@@ -33,7 +33,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DWITH_TRANSLATIONS=1 ..
+        qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
         cmake --build . --parallel --config Release
 
     - name: Packing
@@ -67,7 +67,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DWITH_TRANSLATIONS=1 -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" ..
+        qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" ..
         cmake --build . --parallel
 
     - uses: apple-actions/import-codesign-certs@v3
@@ -148,7 +148,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DWITH_TRANSLATIONS=1 -DSANE_MAKE_DEB=1 ..
+        cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DSANE_MAKE_DEB=1 ..
         cmake --build . --parallel
 
     - name: Packing
@@ -203,7 +203,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DWITH_TRANSLATIONS=1 -DSANE_MAKE_DEB=1 ..
+        cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DSANE_MAKE_DEB=1 ..
         cmake --build . --parallel
 
     - name: Packing
