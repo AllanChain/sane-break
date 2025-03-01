@@ -56,6 +56,15 @@
   </screenshots>
 
   <releases>
+    <release version="0.6.2" date="2025-03-01">
+      <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.6.2</url>
+      <description>
+        <p>Bug fixes</p>
+        <ul>
+          <li>translations can not be configured</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.1" date="2025-02-27">
       <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.6.1</url>
       <description>
