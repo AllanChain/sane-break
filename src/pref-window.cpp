@@ -220,7 +220,7 @@ void PreferenceWindow::saveSettings() {
   SanePreferences::pauseOnBattery->set(ui->pauseOnBatteryCheck->isChecked());
   SanePreferences::programsToMonitor->set(ui->programList->toPlainText().split("\n"));
 #ifdef WITH_TRANSLATIONS
-  SanePreferences::language->set(ui->languageSelect->currentText());
+  SanePreferences::language->set(ui->languageSelect->currentData().toString());
 #endif
 }
 
