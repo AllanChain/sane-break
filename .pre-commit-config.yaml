@@ -15,6 +15,11 @@ repos:
         additional_dependencies: ["@biomejs/biome@1.9.4"]
         types_or: ["javascript", "css"]
         args: ["--line-width", "88", "--indent-style", "space"]
+  - repo: https://github.com/cheshirekow/cmake-format-precommit
+    rev: v0.6.13
+    hooks:
+    - id: cmake-format
+      files: CMakeLists\.txt
   - repo: https://github.com/Lucas-C/pre-commit-hooks
     rev: v1.5.5
     hooks:
