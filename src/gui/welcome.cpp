@@ -27,7 +27,7 @@
 #include <QtContainerFwd>
 
 #include "config.h"
-#include "widgets.h"
+#include "widgets/language-select.h"
 
 #ifdef Q_OS_LINUX
 #include "linux/system-check.h"

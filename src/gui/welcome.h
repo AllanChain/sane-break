@@ -12,7 +12,7 @@
 #include <QWidget>
 
 #include "config.h"
-#include "widgets.h"
+#include "widgets/language-select.h"
 
 class WelcomeWindow : public QDialog {
   Q_OBJECT

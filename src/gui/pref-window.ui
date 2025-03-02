@@ -1030,12 +1030,12 @@ v%1
   <customwidget>
    <class>SteppedSlider</class>
    <extends>QSlider</extends>
-   <header>widgets.h</header>
+   <header>widgets/stepped-slider.h</header>
   </customwidget>
   <customwidget>
    <class>LanguageSelect</class>
    <extends>QComboBox</extends>
-   <header location="global">widgets.h</header>
+   <header location="global">widgets/language-select.h</header>
   </customwidget>
  </customwidgets>
  <resources>

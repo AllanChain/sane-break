@@ -32,7 +32,7 @@
 #include "preferences.h"
 #include "sound-player.h"
 #include "ui_pref-window.h"
-#include "widgets.h"
+#include "widgets/stepped-slider.h"
 
 PreferenceWindow::PreferenceWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::PrefWindow) {

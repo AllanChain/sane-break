@@ -2,10 +2,9 @@
 // Copyright (C) 2024 Allan Chain
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SANE_WIDGETS_H
-#define SANE_WIDGETS_H
+#ifndef SANE_WIDGETS_SLIDER_H
+#define SANE_WIDGETS_SLIDER_H
 
-#include <QComboBox>
 #include <QMouseEvent>
 #include <QPoint>
 #include <QSlider>
@@ -25,13 +24,4 @@ class SteppedSlider : public QSlider {
   int calculateValueFromPosition(const QPoint &pos) const;
 };
 
-class LanguageSelect : public QComboBox {
-  Q_OBJECT
- public:
-  LanguageSelect(QWidget *parent = nullptr);
-
- private:
-  void onLanguageSelect();
-};
-
-#endif  // SANE_WIDGETS_H
+#endif  // SANE_WIDGETS_SLIDER_H
