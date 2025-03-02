@@ -18,6 +18,7 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QPushButton>
+#include <QRegularExpressionValidator>
 #include <QSettings>
 #include <QSlider>
 #include <QString>
@@ -87,6 +88,9 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
   connect(
       ui->confirmAfterSlider, &SteppedSlider::valueChanged, this,
       [this](int value) { ui->confirmAfterLabel->setText(tr("%n sec", "", value)); });
+
+  QRegularExpression re("^\\d+(,\\d+)*$");
+  ui->postponeMinutes->setValidator(new QRegularExpressionValidator(re, this));
 
   ui->autoScreenLock->addItem(tr("Disabled"), 0);
   ui->autoScreenLock->addItem(tr("30 sec"), 30);
@@ -183,6 +187,10 @@ void PreferenceWindow::loadSettings() {
   ui->bigBreakForSlider->setValue(SanePreferences::bigFor->get() / 60);
   ui->flashForSlider->setValue(SanePreferences::flashFor->get());
   ui->confirmAfterSlider->setValue(SanePreferences::confirmAfter->get());
+  QStringList tempList;
+  for (int num : SanePreferences::postponeMinutes->get())
+    tempList << QString::number(num);
+  ui->postponeMinutes->setText(tempList.join(","));
   ui->quickBreak->setChecked(SanePreferences::quickBreak->get());
   ui->autoScreenLock->setCurrentIndex(
       ui->autoScreenLock->findData(SanePreferences::autoScreenLock->get()));
@@ -208,6 +216,10 @@ void PreferenceWindow::saveSettings() {
   SanePreferences::bigFor->set(ui->bigBreakForSlider->value() * 60);
   SanePreferences::flashFor->set(ui->flashForSlider->value());
   SanePreferences::confirmAfter->set(ui->confirmAfterSlider->value());
+  QList<int> postponeMinutes;
+  for (QString num : ui->postponeMinutes->text().split(","))
+    postponeMinutes << num.toInt();
+  SanePreferences::postponeMinutes->set(postponeMinutes);
   SanePreferences::quickBreak->set(ui->quickBreak->isChecked());
   SanePreferences::autoScreenLock->set(ui->autoScreenLock->currentData().toInt());
   SanePreferences::smallStartBell->set(ui->smallStartBellSelect->currentText());

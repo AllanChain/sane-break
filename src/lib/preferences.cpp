@@ -26,6 +26,8 @@ Setting<int>* SanePreferences::bigFor = new Setting<int>("break/big-for", 60);
 Setting<int>* SanePreferences::flashFor = new Setting<int>("break/flash-for", 30);
 Setting<int>* SanePreferences::confirmAfter =
     new Setting<int>("break/confirm-after", 30);
+Setting<QList<int>>* SanePreferences::postponeMinutes =
+    new Setting<QList<int>>("break/postpone-minutes", QList<int>({5, 10, 30, 60}));
 Setting<int>* SanePreferences::autoScreenLock =
     new Setting<int>("break/auto-screen-lock", 0);
 Setting<bool>* SanePreferences::quickBreak =

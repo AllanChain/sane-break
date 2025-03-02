@@ -33,7 +33,7 @@ class Setting : public SettingWithSignal {
       emit changed();
     }
   }
-  T get() {
+  const T get() {
     if (cached) return value;
     QSettings settings = getSettings();
     value = settings.value(key, QVariant::fromValue(defaultValue)).template value<T>();
@@ -58,6 +58,7 @@ class SanePreferences : public QObject {
   static Setting<int> *bigFor;
   static Setting<int> *flashFor;
   static Setting<int> *confirmAfter;
+  static Setting<QList<int>> *postponeMinutes;
   static Setting<int> *autoScreenLock;
   static Setting<bool> *quickBreak;
   static Setting<QString> *language;
