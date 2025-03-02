@@ -1,2 +1,8 @@
+# format CMakeLists.txt with hooks
+cff843cfc87e302ae05395524b189e222079a143
+# add hook to insert and update license headers
+0a5c438addce1a681d8a547cb695c65980eb1d1e
+# format code
+ea9f246b55d1f6c922f3c26bdad18315909665c0
 # code style change by changing max line width to 88
 14eff5edad64abc135568e5968f814d80ee56c7d
