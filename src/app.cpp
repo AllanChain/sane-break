@@ -163,8 +163,6 @@ void SaneBreakApp::createMenu() {
     connect(postponeMenu->addAction(tr("%n min", "", minute)), &QAction::triggered,
             this, [this, minute]() { postpone(minute * 60); });
   }
-  connect(postponeMenu->addAction(tr("Quit")), &QAction::triggered, this,
-          &SaneBreakApp::quit);
   enableBreak = menu->addAction(tr("Enable Break"));
   enableBreak->setVisible(false);
   connect(enableBreak, &QAction::triggered, this,
@@ -179,6 +177,14 @@ void SaneBreakApp::createMenu() {
     prefWindow->windowHandle()->raise();
     prefWindow->windowHandle()->requestActivate();
   });
+
+  QMenu *quitMenu = menu->addMenu(tr("Quit"));
+  for (int minute : SanePreferences::postponeMinutes->get()) {
+    connect(quitMenu->addAction(tr("Postpone %n min", "", minute)), &QAction::triggered,
+            this, [this, minute]() { postpone(minute * 60); });
+  }
+  connect(quitMenu->addAction(tr("Quit")), &QAction::triggered, this,
+          &SaneBreakApp::quit);
 }
 
 void SaneBreakApp::breakNow() {

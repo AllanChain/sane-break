@@ -445,32 +445,41 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="166"/>
+        <location filename="../../src/app.cpp" line="181"/>
+        <location filename="../../src/app.cpp" line="186"/>
         <source>Quit</source>
         <translation>Quit</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="168"/>
+        <location filename="../../src/app.cpp" line="166"/>
         <source>Enable Break</source>
         <translation>Enable Break</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="176"/>
+        <location filename="../../src/app.cpp" line="174"/>
         <source>Preferences</source>
         <translation>Preferences</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../../src/app.cpp" line="183"/>
+        <source>Postpone %n min</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../../src/app.cpp" line="212"/>
+        <location filename="../../src/app.cpp" line="218"/>
         <source>Paused on battery</source>
         <translation>Paused on battery</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="214"/>
+        <location filename="../../src/app.cpp" line="220"/>
         <source>Paused on app running</source>
         <translation>Paused on app running</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="216"/>
+        <location filename="../../src/app.cpp" line="222"/>
         <source>Paused on idle</source>
         <translation>Paused on idle</translation>
     </message>
