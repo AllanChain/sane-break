@@ -47,14 +47,15 @@ target_link_libraries(sane-break PRIVATE Qt6::Widgets Qt6::Multimedia sane-lib
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   add_subdirectory(packaging/linux)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-  target_sources(sane-break
-                 "${CMAKE_CURRENT_SOURCE_DIR}/packaging/windows/resources.rc")
+  target_sources(
+    sane-break
+    PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/packaging/windows/resources.rc")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
   set(MACOSX_BUNDLE_ICON_FILE icon.icns)
   set(SANE_BREAK_ICON ${CMAKE_CURRENT_SOURCE_DIR}/packaging/macos/icon.icns)
   set_source_files_properties(${SANE_BREAK_ICON}
                               PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
-  target_sources(${SANE_BREAK_ICON})
+  target_sources(sane-break PRIVATE ${SANE_BREAK_ICON})
 
   find_library(IOKit NAMES IOKit)
   find_library(CoreFoundation NAMES CoreFoundation)

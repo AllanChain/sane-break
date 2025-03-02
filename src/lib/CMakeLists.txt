@@ -16,6 +16,12 @@ target_include_directories(
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
   PRIVATE ${CMAKE_BINARY_DIR})
 
+find_package(
+  Qt6
+  COMPONENTS Widgets
+  REQUIRED)
+target_link_libraries(sane-lib PRIVATE Qt6::Widgets)
+
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
   target_sources(
     sane-lib PRIVATE macos/battery.cpp macos/battery.h macos/idle.cpp
@@ -26,9 +32,9 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   find_package(
     Qt6
-    COMPONENTS Widgets DBus
+    COMPONENTS DBus
     REQUIRED)
-  target_link_libraries(sane-lib PRIVATE Qt6::Widgets Qt6::DBus)
+  target_link_libraries(sane-lib PRIVATE Qt6::DBus)
 
   option(AUTO_ENABLE_X11 "Build with X11 support" ON)
   option(AUTO_ENABLE_WAYLAND "Build with Wayland support" ON)
