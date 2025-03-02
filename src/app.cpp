@@ -111,6 +111,9 @@ void SaneBreakApp::updateIcon() {
   if (smallBreaksBeforeBig() == 0) {
     flags |= StatusTrayWindow::IconVariant::WILL_BIG;
   }
+  if (readingMode) {
+    flags |= StatusTrayWindow::IconVariant::READING;
+  }
   float arcRatio = float(secondsToNextBreak) / SanePreferences::smallEvery->get();
   tray->updateIcon(arcRatio, flags);
 }
@@ -169,6 +172,9 @@ void SaneBreakApp::createMenu() {
           // enable all flags
           [this]() { resumeBreak((1 << 8) - 1); });
 
+  readingAction = menu->addAction(tr("Start Reading Mode"));
+  connect(readingAction, &QAction::triggered, this, &SaneBreakApp::toggleReading);
+
   menu->addSeparator();
 
   connect(menu->addAction(tr("Preferences")), &QAction::triggered, this, [this]() {
@@ -208,6 +214,8 @@ void SaneBreakApp::postpone(int secs) {
 }
 
 void SaneBreakApp::pauseBreak(unsigned int reason) {
+  // Disable pauding in reading mode
+  if (readingMode) return;
   // Should not record last pause if already paused
   if (pauseReasons == 0) lastPause = QDateTime::currentSecsSinceEpoch();
   pauseReasons |= reason;  // Flag should be set before closing windows
@@ -249,6 +257,17 @@ bool SaneBreakApp::resumeBreak(unsigned int reason) {
   bigBreakAction->setVisible(true);
   updateIcon();
   return true;
+}
+
+void SaneBreakApp::toggleReading() {
+  if (readingMode) {
+    readingMode = false;
+    readingAction->setText("Enable Reading Mode");
+  } else {
+    readingMode = true;
+    readingAction->setText("Disable Reading Mode");
+    resumeBreak((1 << 8) - 1);
+  }
 }
 
 int SaneBreakApp::smallBreaksBeforeBig() {
