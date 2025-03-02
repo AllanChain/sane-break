@@ -1,7 +1,3 @@
-// Sane Break is a polite and sane break reminder preventing mindless skips.
-// Copyright (C) 2024 Allan Chain
-// SPDX-License-Identifier: GPL-3.0-or-later
-
 // This file contains code adapted from
 // Private Internet Access - Desktop (https://github.com/pia-foss/desktop)
 // Copyright (c) 2024 Private Internet Access, Inc.

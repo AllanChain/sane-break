@@ -15,3 +15,14 @@ repos:
         additional_dependencies: ["@biomejs/biome@1.9.4"]
         types_or: ["javascript", "css"]
         args: ["--line-width", "88", "--indent-style", "space"]
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.5.5
+    hooks:
+      - id: insert-license
+        files: \.(cpp|h)$
+        args:
+          - --license-filepath
+          - .github/license_header.txt
+          - --comment-style
+          - //
+          - --use-current-year
