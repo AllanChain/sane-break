@@ -146,7 +146,7 @@
     <message>
         <location filename="../../src/gui/pref-window.ui" line="467"/>
         <source>Postpone minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>Postpone minutes</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="499"/>
@@ -463,8 +463,8 @@ v%1
     <message numerus="yes">
         <location filename="../../src/app.cpp" line="183"/>
         <source>Postpone %n min</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Postpone %n min</numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
