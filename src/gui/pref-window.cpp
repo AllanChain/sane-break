@@ -10,6 +10,7 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDesktopServices>
+#include <QEvent>
 #include <QGridLayout>
 #include <QIcon>
 #include <QLabel>
@@ -247,4 +248,11 @@ void PreferenceWindow::setTab(int tabNum) {
     tabButtons[i]->setChecked(i == tabNum);
   }
   ui->controlBar->setHidden(tabNum == 4);
+}
+
+void PreferenceWindow::changeEvent(QEvent *event) {
+  if (event->type() == QEvent::LanguageChange) {
+    ui->retranslateUi(this);
+  }
+  QWidget::changeEvent(event);
 }

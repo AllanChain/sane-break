@@ -7,6 +7,7 @@
 #include <QCheckBox>
 #include <QCloseEvent>
 #include <QComboBox>
+#include <QEvent>
 #include <QLabel>
 #include <QList>
 #include <QMainWindow>
@@ -30,6 +31,9 @@ class PreferenceWindow : public QMainWindow {
   ~PreferenceWindow();
   void loadSettings();
   void saveSettings();
+
+ protected:
+  void changeEvent(QEvent *event);
 
  private:
   Ui::PrefWindow *ui;
