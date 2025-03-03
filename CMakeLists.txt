@@ -33,10 +33,23 @@ add_subdirectory(src/gui)
 find_package(Qt6 COMPONENTS LinguistTools)
 if(Qt6_FOUND AND Qt6LinguistTools_FOUND)
   set(WITH_TRANSLATIONS ON)
-  message(STATUS "Enable translations")
   file(GLOB TS_FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/translations/*.ts")
-  qt_add_translations(sane-break TS_FILES ${TS_FILES} LUPDATE_OPTIONS
-                      -no-obsolete)
+  if(${Qt6_VERSION} VERSION_GREATER_EQUAL "6.7")
+    message(STATUS "Enable modern translations")
+    list(FILTER TS_FILES EXCLUDE REGEX ".*/en\\.ts$")
+    qt_add_translations(
+      sane-break
+      TS_FILES
+      ${TS_FILES}
+      PLURALS_TS_FILE
+      "${CMAKE_CURRENT_SOURCE_DIR}/resources/translations/en.ts"
+      LUPDATE_OPTIONS
+      -no-obsolete)
+  else()
+    message(STATUS "Enable legacy translations")
+    qt_add_translations(sane-break TS_FILES ${TS_FILES} LUPDATE_OPTIONS
+                        -no-obsolete)
+  endif()
 else()
   message(STATUS "Disable translations because LinguistTools is not found")
 endif()
