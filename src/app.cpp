@@ -73,6 +73,8 @@ SaneBreakApp::SaneBreakApp() : QObject() {
           [this]() { resumeBreak(PauseReason::APP_OPEN); });
   connect(SanePreferences::pauseOnBattery, &SettingWithSignal::changed, this,
           &SaneBreakApp::onBatterySettingChange);
+  connect(SanePreferences::postponeMinutes, &SettingWithSignal::changed, this,
+          &SaneBreakApp::onPostponeMinutesChange);
   connect(SanePreferences::smallEvery, &SettingWithSignal::changed, this,
           &SaneBreakApp::resetSecondsToNextBreak);
   connect(
@@ -161,7 +163,7 @@ void SaneBreakApp::createMenu() {
 
   menu->addSeparator();
 
-  QMenu *postponeMenu = menu->addMenu(tr("Postpone"));
+  postponeMenu = menu->addMenu(tr("Postpone"));
   for (int minute : SanePreferences::postponeMinutes->get()) {
     connect(postponeMenu->addAction(tr("%n min", "", minute)), &QAction::triggered,
             this, [this, minute]() { postpone(minute * 60); });
@@ -184,7 +186,7 @@ void SaneBreakApp::createMenu() {
     prefWindow->windowHandle()->requestActivate();
   });
 
-  QMenu *quitMenu = menu->addMenu(tr("Quit"));
+  quitMenu = menu->addMenu(tr("Quit"));
   for (int minute : SanePreferences::postponeMinutes->get()) {
     connect(quitMenu->addAction(tr("Postpone %n min", "", minute)), &QAction::triggered,
             this, [this, minute]() { postpone(minute * 60); });
@@ -342,4 +344,19 @@ void SaneBreakApp::onBatterySettingChange() {
     resumeBreak(PauseReason::ON_BATTERY);
   else if (batteryWatcher->isOnBattery)
     pauseBreak(PauseReason::ON_BATTERY);
+}
+
+void SaneBreakApp::onPostponeMinutesChange() {
+  postponeMenu->clear();
+  for (int minute : SanePreferences::postponeMinutes->get()) {
+    connect(postponeMenu->addAction(tr("%n min", "", minute)), &QAction::triggered,
+            this, [this, minute]() { postpone(minute * 60); });
+  }
+  quitMenu->clear();
+  for (int minute : SanePreferences::postponeMinutes->get()) {
+    connect(quitMenu->addAction(tr("Postpone %n min", "", minute)), &QAction::triggered,
+            this, [this, minute]() { postpone(minute * 60); });
+  }
+  connect(quitMenu->addAction(tr("Quit")), &QAction::triggered, this,
+          &SaneBreakApp::quit);
 }
