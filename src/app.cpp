@@ -163,7 +163,8 @@ void SaneBreakApp::createMenu() {
   menu->addSeparator();
 
   postponeMenu = menu->addMenu(tr("Postpone"));
-  for (int minute : SanePreferences::postponeMinutes->get()) {
+  for (QString minuteString : SanePreferences::postponeMinutes->get()) {
+    int minute = minuteString.toInt();
     connect(postponeMenu->addAction(tr("%n min", "", minute)), &QAction::triggered,
             this, [this, minute]() { postpone(minute * 60); });
   }
@@ -186,7 +187,8 @@ void SaneBreakApp::createMenu() {
   });
 
   quitMenu = menu->addMenu(tr("Quit"));
-  for (int minute : SanePreferences::postponeMinutes->get()) {
+  for (QString minuteString : SanePreferences::postponeMinutes->get()) {
+    int minute = minuteString.toInt();
     connect(quitMenu->addAction(tr("Postpone %n min", "", minute)), &QAction::triggered,
             this, [this, minute]() { postpone(minute * 60); });
   }
@@ -347,12 +349,14 @@ void SaneBreakApp::onBatterySettingChange() {
 
 void SaneBreakApp::onPostponeMinutesChange() {
   postponeMenu->clear();
-  for (int minute : SanePreferences::postponeMinutes->get()) {
+  for (QString minuteString : SanePreferences::postponeMinutes->get()) {
+    int minute = minuteString.toInt();
     connect(postponeMenu->addAction(tr("%n min", "", minute)), &QAction::triggered,
             this, [this, minute]() { postpone(minute * 60); });
   }
   quitMenu->clear();
-  for (int minute : SanePreferences::postponeMinutes->get()) {
+  for (QString minuteString : SanePreferences::postponeMinutes->get()) {
+    int minute = minuteString.toInt();
     connect(quitMenu->addAction(tr("Postpone %n min", "", minute)), &QAction::triggered,
             this, [this, minute]() { postpone(minute * 60); });
   }

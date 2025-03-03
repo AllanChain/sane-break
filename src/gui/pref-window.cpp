@@ -188,10 +188,7 @@ void PreferenceWindow::loadSettings() {
   ui->bigBreakForSlider->setValue(SanePreferences::bigFor->get() / 60);
   ui->flashForSlider->setValue(SanePreferences::flashFor->get());
   ui->confirmAfterSlider->setValue(SanePreferences::confirmAfter->get());
-  QStringList tempList;
-  for (int num : SanePreferences::postponeMinutes->get())
-    tempList << QString::number(num);
-  ui->postponeMinutes->setText(tempList.join(","));
+  ui->postponeMinutes->setText(SanePreferences::postponeMinutes->get().join(","));
   ui->quickBreak->setChecked(SanePreferences::quickBreak->get());
   ui->autoScreenLock->setCurrentIndex(
       ui->autoScreenLock->findData(SanePreferences::autoScreenLock->get()));
@@ -217,10 +214,8 @@ void PreferenceWindow::saveSettings() {
   SanePreferences::bigFor->set(ui->bigBreakForSlider->value() * 60);
   SanePreferences::flashFor->set(ui->flashForSlider->value());
   SanePreferences::confirmAfter->set(ui->confirmAfterSlider->value());
-  QList<int> postponeMinutes;
-  for (QString num : ui->postponeMinutes->text().split(","))
-    postponeMinutes << num.toInt();
-  SanePreferences::postponeMinutes->set(postponeMinutes);
+  SanePreferences::postponeMinutes->set(
+      ui->postponeMinutes->text().split(",", Qt::SkipEmptyParts));
   SanePreferences::quickBreak->set(ui->quickBreak->isChecked());
   SanePreferences::autoScreenLock->set(ui->autoScreenLock->currentData().toInt());
   SanePreferences::smallStartBell->set(ui->smallStartBellSelect->currentText());
@@ -231,7 +226,8 @@ void PreferenceWindow::saveSettings() {
   SanePreferences::resetAfterPause->set(ui->resetBreakSlider->value() * 60);
   SanePreferences::resetCycleAfterPause->set(ui->resetCycleSlider->value() * 60);
   SanePreferences::pauseOnBattery->set(ui->pauseOnBatteryCheck->isChecked());
-  SanePreferences::programsToMonitor->set(ui->programList->toPlainText().split("\n"));
+  SanePreferences::programsToMonitor->set(
+      ui->programList->toPlainText().split("\n", Qt::SkipEmptyParts));
 #ifdef WITH_TRANSLATIONS
   SanePreferences::language->set(ui->languageSelect->currentData().toString());
 #endif
