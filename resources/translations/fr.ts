@@ -6,7 +6,7 @@
     <message>
         <location filename="../../src/widgets.cpp" line="85"/>
         <source>current language</source>
-        <translation type="unfinished"></translation>
+        <translation>Français</translation>
     </message>
 </context>
 <context>
