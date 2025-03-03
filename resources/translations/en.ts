@@ -12,10 +12,6 @@
 <context>
     <name>LanguageSelect</name>
     <message>
-        <source>System Language</source>
-        <translation type="vanished">System Language</translation>
-    </message>
-    <message>
         <location filename="../../src/gui/widgets/language-select.cpp" line="21"/>
         <source>Default</source>
         <translation>Default</translation>
@@ -113,10 +109,6 @@
         <location filename="../../src/gui/pref-window.ui" line="270"/>
         <source>3 breaks</source>
         <translation>3 breaks</translation>
-    </message>
-    <message>
-        <source>60 sec</source>
-        <translation type="vanished">60 sec</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="263"/>
@@ -304,11 +296,11 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="68"/>
-        <location filename="../../src/gui/pref-window.cpp" line="82"/>
-        <location filename="../../src/gui/pref-window.cpp" line="146"/>
-        <location filename="../../src/gui/pref-window.cpp" line="149"/>
-        <location filename="../../src/gui/pref-window.cpp" line="153"/>
+        <location filename="../../src/gui/pref-window.cpp" line="69"/>
+        <location filename="../../src/gui/pref-window.cpp" line="83"/>
+        <location filename="../../src/gui/pref-window.cpp" line="147"/>
+        <location filename="../../src/gui/pref-window.cpp" line="150"/>
+        <location filename="../../src/gui/pref-window.cpp" line="154"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -316,9 +308,9 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="74"/>
-        <location filename="../../src/gui/pref-window.cpp" line="85"/>
-        <location filename="../../src/gui/pref-window.cpp" line="90"/>
+        <location filename="../../src/gui/pref-window.cpp" line="75"/>
+        <location filename="../../src/gui/pref-window.cpp" line="86"/>
+        <location filename="../../src/gui/pref-window.cpp" line="91"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec</numerusform>
@@ -326,7 +318,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="77"/>
+        <location filename="../../src/gui/pref-window.cpp" line="78"/>
         <source>%n break(s)</source>
         <translation>
             <numerusform>%n break</numerusform>
@@ -334,37 +326,37 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="95"/>
+        <location filename="../../src/gui/pref-window.cpp" line="96"/>
         <source>Disabled</source>
         <translation>Disabled</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="96"/>
+        <location filename="../../src/gui/pref-window.cpp" line="97"/>
         <source>30 sec</source>
         <translation>30 sec</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="97"/>
+        <location filename="../../src/gui/pref-window.cpp" line="98"/>
         <source>1 min</source>
         <translation>1 min</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="98"/>
+        <location filename="../../src/gui/pref-window.cpp" line="99"/>
         <source>2 min</source>
         <translation>2 min</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="99"/>
+        <location filename="../../src/gui/pref-window.cpp" line="100"/>
         <source>5 min</source>
         <translation>5 min</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="103"/>
+        <location filename="../../src/gui/pref-window.cpp" line="104"/>
         <source>middle clicking</source>
         <translation>middle clicking</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="105"/>
+        <location filename="../../src/gui/pref-window.cpp" line="106"/>
         <source>double clicking</source>
         <translation>double clicking</translation>
     </message>
@@ -405,14 +397,6 @@ v%1
         <translation>small break</translation>
     </message>
     <message>
-        <source>Next break after %1:%2</source>
-        <translation type="vanished">Next break after %1:%2</translation>
-    </message>
-    <message>
-        <source>Big break after %1 breaks</source>
-        <translation type="vanished">Big break after %1 breaks</translation>
-    </message>
-    <message>
         <location filename="../../src/app.cpp" line="152"/>
         <source>Next Break</source>
         <translation>Next Break</translation>
@@ -428,30 +412,23 @@ v%1
         <translation>Postpone</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app.cpp" line="167"/>
-        <location filename="../../src/app.cpp" line="351"/>
+        <location filename="../../src/app.cpp" line="168"/>
+        <location filename="../../src/app.cpp" line="354"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
             <numerusform>%n min</numerusform>
         </translation>
     </message>
-    <message numerus="yes">
-        <source>%n h</source>
-        <translation type="vanished">
-            <numerusform>%n h</numerusform>
-            <numerusform>%n h</numerusform>
-        </translation>
-    </message>
     <message>
-        <location filename="../../src/app.cpp" line="188"/>
-        <location filename="../../src/app.cpp" line="193"/>
-        <location filename="../../src/app.cpp" line="359"/>
+        <location filename="../../src/app.cpp" line="189"/>
+        <location filename="../../src/app.cpp" line="195"/>
+        <location filename="../../src/app.cpp" line="363"/>
         <source>Quit</source>
         <translation>Quit</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="170"/>
+        <location filename="../../src/app.cpp" line="171"/>
         <source>Enable Break</source>
         <translation>Enable Break</translation>
     </message>
@@ -466,19 +443,19 @@ v%1
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="176"/>
-        <location filename="../../src/app.cpp" line="266"/>
+        <location filename="../../src/app.cpp" line="177"/>
+        <location filename="../../src/app.cpp" line="268"/>
         <source>Enter Reading Mode</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="181"/>
+        <location filename="../../src/app.cpp" line="182"/>
         <source>Preferences</source>
         <translation>Preferences</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app.cpp" line="190"/>
-        <location filename="../../src/app.cpp" line="356"/>
+        <location filename="../../src/app.cpp" line="192"/>
+        <location filename="../../src/app.cpp" line="360"/>
         <source>Postpone %n min</source>
         <translation>
             <numerusform>Postpone %n min</numerusform>
@@ -486,32 +463,28 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="227"/>
+        <location filename="../../src/app.cpp" line="229"/>
         <source>Paused on battery</source>
         <translation>Paused on battery</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="229"/>
+        <location filename="../../src/app.cpp" line="231"/>
         <source>Paused on app running</source>
         <translation>Paused on app running</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="231"/>
+        <location filename="../../src/app.cpp" line="233"/>
         <source>Paused on idle</source>
         <translation>Paused on idle</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="269"/>
+        <location filename="../../src/app.cpp" line="271"/>
         <source>Exit Reading Mode</source>
         <translation></translation>
     </message>
 </context>
 <context>
     <name>WelcomeWindow</name>
-    <message>
-        <source>System Language</source>
-        <translation type="vanished">System Language</translation>
-    </message>
     <message>
         <location filename="../../src/gui/welcome.cpp" line="87"/>
         <location filename="../../src/gui/welcome.cpp" line="117"/>

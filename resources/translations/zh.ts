@@ -12,10 +12,6 @@
 <context>
     <name>LanguageSelect</name>
     <message>
-        <source>System Language</source>
-        <translation type="vanished">系统语言</translation>
-    </message>
-    <message>
         <location filename="../../src/gui/widgets/language-select.cpp" line="21"/>
         <source>Default</source>
         <translation>默认语言</translation>
@@ -115,10 +111,6 @@
         <translation>3 次</translation>
     </message>
     <message>
-        <source>60 sec</source>
-        <translation type="vanished">60 秒</translation>
-    </message>
-    <message>
         <location filename="../../src/gui/pref-window.ui" line="334"/>
         <source>How many seconds to allow continued work before forcing breaks</source>
         <translation>在窗口出现后，允许工作多少时间。超过这个时间将自动进入强制休息阶段</translation>
@@ -181,10 +173,6 @@ v%1
 &lt;p&gt;拒绝无意识跳过的休息提示器 &lt;/p&gt;
 &lt;p&gt;2024-2025, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break developers&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
 &lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>Start next break after %1 clicking on tray icon</source>
-        <translation type="vanished">在 %1 托盘图标后，立刻开始下一次休息</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="263"/>
@@ -314,74 +302,66 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="68"/>
-        <location filename="../../src/gui/pref-window.cpp" line="82"/>
-        <location filename="../../src/gui/pref-window.cpp" line="146"/>
-        <location filename="../../src/gui/pref-window.cpp" line="149"/>
-        <location filename="../../src/gui/pref-window.cpp" line="153"/>
+        <location filename="../../src/gui/pref-window.cpp" line="69"/>
+        <location filename="../../src/gui/pref-window.cpp" line="83"/>
+        <location filename="../../src/gui/pref-window.cpp" line="147"/>
+        <location filename="../../src/gui/pref-window.cpp" line="150"/>
+        <location filename="../../src/gui/pref-window.cpp" line="154"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n 分钟</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="74"/>
-        <location filename="../../src/gui/pref-window.cpp" line="85"/>
-        <location filename="../../src/gui/pref-window.cpp" line="90"/>
+        <location filename="../../src/gui/pref-window.cpp" line="75"/>
+        <location filename="../../src/gui/pref-window.cpp" line="86"/>
+        <location filename="../../src/gui/pref-window.cpp" line="91"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n 秒</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="77"/>
+        <location filename="../../src/gui/pref-window.cpp" line="78"/>
         <source>%n break(s)</source>
         <translation>
             <numerusform>%n 次</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="95"/>
+        <location filename="../../src/gui/pref-window.cpp" line="96"/>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="96"/>
+        <location filename="../../src/gui/pref-window.cpp" line="97"/>
         <source>30 sec</source>
         <translation>30 秒</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="97"/>
+        <location filename="../../src/gui/pref-window.cpp" line="98"/>
         <source>1 min</source>
         <translation>1 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="98"/>
+        <location filename="../../src/gui/pref-window.cpp" line="99"/>
         <source>2 min</source>
         <translation>2 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="99"/>
+        <location filename="../../src/gui/pref-window.cpp" line="100"/>
         <source>5 min</source>
         <translation>5 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="103"/>
+        <location filename="../../src/gui/pref-window.cpp" line="104"/>
         <source>middle clicking</source>
         <translation>中键</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="105"/>
+        <location filename="../../src/gui/pref-window.cpp" line="106"/>
         <source>double clicking</source>
         <translation>双击</translation>
-    </message>
-    <message>
-        <source>middle</source>
-        <translation type="obsolete">中键</translation>
-    </message>
-    <message>
-        <source>double</source>
-        <translation type="obsolete">双击</translation>
     </message>
 </context>
 <context>
@@ -420,14 +400,6 @@ v%1
         <translation>小休息</translation>
     </message>
     <message>
-        <source>Next break after %1:%2</source>
-        <translation type="vanished">%1:%2 后开始下次休息</translation>
-    </message>
-    <message>
-        <source>Big break after %1 breaks</source>
-        <translation type="vanished">%1 次休息后为大休息</translation>
-    </message>
-    <message>
         <location filename="../../src/app.cpp" line="152"/>
         <source>Next Break</source>
         <translation>下次休息</translation>
@@ -443,40 +415,22 @@ v%1
         <translation>推迟</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app.cpp" line="167"/>
-        <location filename="../../src/app.cpp" line="351"/>
+        <location filename="../../src/app.cpp" line="168"/>
+        <location filename="../../src/app.cpp" line="354"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n 分钟</numerusform>
         </translation>
     </message>
-    <message numerus="yes">
-        <source>%n h</source>
-        <translation type="vanished">
-            <numerusform>%n 小时</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>%1 min</source>
-        <translation type="vanished">
-            <numerusform>%1 分钟</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>%1 h</source>
-        <translation type="vanished">
-            <numerusform>%1 小时</numerusform>
-        </translation>
-    </message>
     <message>
-        <location filename="../../src/app.cpp" line="188"/>
-        <location filename="../../src/app.cpp" line="193"/>
-        <location filename="../../src/app.cpp" line="359"/>
+        <location filename="../../src/app.cpp" line="189"/>
+        <location filename="../../src/app.cpp" line="195"/>
+        <location filename="../../src/app.cpp" line="363"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="170"/>
+        <location filename="../../src/app.cpp" line="171"/>
         <source>Enable Break</source>
         <translation>启用休息</translation>
     </message>
@@ -491,45 +445,41 @@ v%1
         <translation>%1 后大休息</translation>
     </message>
     <message>
-        <source>Start Reading Mode</source>
-        <translation type="vanished">开始阅读模式</translation>
-    </message>
-    <message>
-        <location filename="../../src/app.cpp" line="176"/>
-        <location filename="../../src/app.cpp" line="266"/>
+        <location filename="../../src/app.cpp" line="177"/>
+        <location filename="../../src/app.cpp" line="268"/>
         <source>Enter Reading Mode</source>
         <translation>进入阅读模式</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="181"/>
+        <location filename="../../src/app.cpp" line="182"/>
         <source>Preferences</source>
         <translation>偏好设置</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app.cpp" line="190"/>
-        <location filename="../../src/app.cpp" line="356"/>
+        <location filename="../../src/app.cpp" line="192"/>
+        <location filename="../../src/app.cpp" line="360"/>
         <source>Postpone %n min</source>
         <translation>
             <numerusform>推迟 %n 分钟</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="227"/>
+        <location filename="../../src/app.cpp" line="229"/>
         <source>Paused on battery</source>
         <translation>因电池供电而暂停</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="229"/>
+        <location filename="../../src/app.cpp" line="231"/>
         <source>Paused on app running</source>
         <translation>因特定应用运行而暂停</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="231"/>
+        <location filename="../../src/app.cpp" line="233"/>
         <source>Paused on idle</source>
         <translation>因用户空闲而暂停</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="269"/>
+        <location filename="../../src/app.cpp" line="271"/>
         <source>Exit Reading Mode</source>
         <translation>退出阅读模式</translation>
     </message>
@@ -551,10 +501,6 @@ v%1
         <location filename="../../src/gui/welcome.cpp" line="117"/>
         <source>Read More</source>
         <translation>了解更多</translation>
-    </message>
-    <message>
-        <source>System Language</source>
-        <translation type="vanished">系统语言</translation>
     </message>
     <message>
         <location filename="../../src/gui/welcome.cpp" line="89"/>
