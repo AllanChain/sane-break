@@ -23,6 +23,7 @@
 #include <cmath>
 
 #include "config.h"
+#include "utils.h"
 
 #ifdef Q_OS_LINUX
 #include "linux/system-check.h"
@@ -118,10 +119,7 @@ void BreakWindow::setTime(int remainingTime) {
   if (totalTime <= 60) {
     countdownLabel->setText(QString("%1").arg(remainingTime));
   } else {
-    countdownLabel->setText(
-        QString("%2:%3")
-            .arg(remainingTime / 60)
-            .arg(remainingTime % 60, 2, 10, QChar('0')));  // Pad zero
+    countdownLabel->setText(formatTime(remainingTime));
   }
 }
 

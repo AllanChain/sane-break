@@ -28,6 +28,7 @@
 #include "program-monitor.h"
 #include "screen-lock.h"
 #include "tray.h"
+#include "utils.h"
 #include "window-manager.h"
 
 SaneBreakApp::SaneBreakApp() : QObject() {
@@ -135,17 +136,15 @@ void SaneBreakApp::resetSecondsToNextBreak() {
 }
 
 void SaneBreakApp::updateMenu() {
-  int seconds = secondsToNextBreak;
-  int minutes = seconds / 60;
-  seconds %= 60;
-  tray->setTitle(
-      QString("%1 %2:%3")
-          .arg(smallBreaksBeforeBig() == 0 ? tr("big break") : tr("small break"))
-          .arg(minutes)
-          .arg(seconds, 2, 10, QChar('0')));  // Pad zero
+  tray->setTitle(QString("%1 %2").arg(
+      smallBreaksBeforeBig() == 0 ? tr("big break") : tr("small break"),
+      formatTime(secondsToNextBreak)));
   nextBreakAction->setText(
-      tr("Next break after %1:%2").arg(minutes).arg(seconds, 2, 10, QChar('0')));
-  bigBreakAction->setText(tr("Big break after %1 breaks").arg(smallBreaksBeforeBig()));
+      tr("Next break after %1").arg(formatTime(secondsToNextBreak)));
+  int secondsToNextbigBreak =
+      secondsToNextBreak + smallBreaksBeforeBig() * SanePreferences::smallEvery->get();
+  bigBreakAction->setText(
+      tr("Next big break after %1").arg(formatTime(secondsToNextbigBreak)));
 }
 
 void SaneBreakApp::createMenu() {

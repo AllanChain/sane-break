@@ -10,7 +10,9 @@ add_library(
   program-monitor.cpp
   program-monitor.h
   screen-lock.cpp
-  screen-lock.h)
+  screen-lock.h
+  utils.cpp
+  utils.h)
 target_include_directories(
   sane-lib
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}

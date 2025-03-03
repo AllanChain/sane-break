@@ -410,42 +410,41 @@ v%1
 <context>
     <name>SaneBreakApp</name>
     <message>
-        <location filename="../../src/app.cpp" line="138"/>
+        <location filename="../../src/app.cpp" line="140"/>
         <source>big break</source>
         <translation>大休息</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="138"/>
+        <location filename="../../src/app.cpp" line="140"/>
         <source>small break</source>
         <translation>小休息</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="142"/>
         <source>Next break after %1:%2</source>
-        <translation>%1:%2 后开始下次休息</translation>
+        <translation type="vanished">%1:%2 后开始下次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="143"/>
         <source>Big break after %1 breaks</source>
-        <translation>%1 次休息后为大休息</translation>
+        <translation type="vanished">%1 次休息后为大休息</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="148"/>
+        <location filename="../../src/app.cpp" line="152"/>
         <source>Next Break</source>
         <translation>下次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="152"/>
+        <location filename="../../src/app.cpp" line="156"/>
         <source>Big Break</source>
         <translation>大休息</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="161"/>
+        <location filename="../../src/app.cpp" line="165"/>
         <source>Postpone</source>
         <translation>推迟</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app.cpp" line="163"/>
+        <location filename="../../src/app.cpp" line="167"/>
+        <location filename="../../src/app.cpp" line="351"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n 分钟</numerusform>
@@ -470,40 +469,57 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="181"/>
-        <location filename="../../src/app.cpp" line="186"/>
+        <location filename="../../src/app.cpp" line="188"/>
+        <location filename="../../src/app.cpp" line="193"/>
+        <location filename="../../src/app.cpp" line="359"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="166"/>
+        <location filename="../../src/app.cpp" line="170"/>
         <source>Enable Break</source>
         <translation>启用休息</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="174"/>
+        <location filename="../../src/app.cpp" line="143"/>
+        <source>Next break after %1</source>
+        <translation>%1 后休息</translation>
+    </message>
+    <message>
+        <location filename="../../src/app.cpp" line="147"/>
+        <source>Next big break after %1</source>
+        <translation>%1 后大休息</translation>
+    </message>
+    <message>
+        <location filename="../../src/app.cpp" line="176"/>
+        <source>Start Reading Mode</source>
+        <translation>开始阅读模式</translation>
+    </message>
+    <message>
+        <location filename="../../src/app.cpp" line="181"/>
         <source>Preferences</source>
         <translation>偏好设置</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app.cpp" line="183"/>
+        <location filename="../../src/app.cpp" line="190"/>
+        <location filename="../../src/app.cpp" line="356"/>
         <source>Postpone %n min</source>
         <translation>
             <numerusform>推迟 %n 分钟</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="218"/>
+        <location filename="../../src/app.cpp" line="227"/>
         <source>Paused on battery</source>
         <translation>因电池供电而暂停</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="220"/>
+        <location filename="../../src/app.cpp" line="229"/>
         <source>Paused on app running</source>
         <translation>因特定应用运行而暂停</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="222"/>
+        <location filename="../../src/app.cpp" line="231"/>
         <source>Paused on idle</source>
         <translation>因用户空闲而暂停</translation>
     </message>
