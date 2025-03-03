@@ -467,7 +467,8 @@ v%1
     </message>
     <message>
         <location filename="../../src/app.cpp" line="176"/>
-        <source>Start Reading Mode</source>
+        <location filename="../../src/app.cpp" line="266"/>
+        <source>Enter Reading Mode</source>
         <translation></translation>
     </message>
     <message>
@@ -498,6 +499,11 @@ v%1
         <location filename="../../src/app.cpp" line="231"/>
         <source>Paused on idle</source>
         <translation>Paused on idle</translation>
+    </message>
+    <message>
+        <location filename="../../src/app.cpp" line="269"/>
+        <source>Exit Reading Mode</source>
+        <translation></translation>
     </message>
 </context>
 <context>

@@ -491,9 +491,14 @@ v%1
         <translation>%1 后大休息</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="176"/>
         <source>Start Reading Mode</source>
-        <translation>开始阅读模式</translation>
+        <translation type="vanished">开始阅读模式</translation>
+    </message>
+    <message>
+        <location filename="../../src/app.cpp" line="176"/>
+        <location filename="../../src/app.cpp" line="266"/>
+        <source>Enter Reading Mode</source>
+        <translation>进入阅读模式</translation>
     </message>
     <message>
         <location filename="../../src/app.cpp" line="181"/>
@@ -522,6 +527,11 @@ v%1
         <location filename="../../src/app.cpp" line="231"/>
         <source>Paused on idle</source>
         <translation>因用户空闲而暂停</translation>
+    </message>
+    <message>
+        <location filename="../../src/app.cpp" line="269"/>
+        <source>Exit Reading Mode</source>
+        <translation>退出阅读模式</translation>
     </message>
 </context>
 <context>

@@ -173,7 +173,7 @@ void SaneBreakApp::createMenu() {
           // enable all flags
           [this]() { resumeBreak((1 << 8) - 1); });
 
-  readingAction = menu->addAction(tr("Start Reading Mode"));
+  readingAction = menu->addAction(tr("Enter Reading Mode"));
   connect(readingAction, &QAction::triggered, this, &SaneBreakApp::toggleReading);
 
   menu->addSeparator();
@@ -263,10 +263,10 @@ bool SaneBreakApp::resumeBreak(unsigned int reason) {
 void SaneBreakApp::toggleReading() {
   if (readingMode) {
     readingMode = false;
-    readingAction->setText("Enable Reading Mode");
+    readingAction->setText(tr("Enter Reading Mode"));
   } else {
     readingMode = true;
-    readingAction->setText("Disable Reading Mode");
+    readingAction->setText(tr("Exit Reading Mode"));
     resumeBreak((1 << 8) - 1);
   }
 }
