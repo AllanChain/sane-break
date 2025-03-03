@@ -12,37 +12,46 @@ add_library(
   screen-lock.cpp
   screen-lock.h
   utils.cpp
-  utils.h)
+  utils.h
+)
 target_include_directories(
   sane-lib
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
-  PRIVATE ${CMAKE_BINARY_DIR})
+  PRIVATE ${CMAKE_BINARY_DIR}
+)
 
 find_package(
   Qt6
   COMPONENTS Widgets
-  REQUIRED)
+  REQUIRED
+)
 target_link_libraries(sane-lib PRIVATE Qt6::Widgets)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
   target_sources(
-    sane-lib PRIVATE macos/battery.cpp macos/battery.h macos/idle.cpp
-                     macos/idle.h macos/workspace.h macos/workspace.mm)
+    sane-lib PRIVATE macos/battery.cpp macos/battery.h macos/idle.cpp macos/idle.h
+                     macos/workspace.h macos/workspace.mm
+  )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-  target_sources(sane-lib PRIVATE windows/battery.cpp windows/battery.h
-                                  windows/idle.cpp windows/idle.h)
+  target_sources(
+    sane-lib PRIVATE windows/battery.cpp windows/battery.h windows/idle.cpp
+                     windows/idle.h
+  )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   find_package(
     Qt6
     COMPONENTS DBus
-    REQUIRED)
+    REQUIRED
+  )
   target_link_libraries(sane-lib PRIVATE Qt6::DBus)
 
   option(AUTO_ENABLE_X11 "Build with X11 support" ON)
   option(AUTO_ENABLE_WAYLAND "Build with Wayland support" ON)
 
-  target_sources(sane-lib PRIVATE linux/battery.cpp linux/battery.h
-                                  linux/system-check.cpp linux/system-check.h)
+  target_sources(
+    sane-lib PRIVATE linux/battery.cpp linux/battery.h linux/system-check.cpp
+                     linux/system-check.h
+  )
 
   if(AUTO_ENABLE_X11)
     include(FindPkgConfig)
@@ -51,7 +60,8 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     if(X11_FOUND AND XSCRNSAVER_FOUND)
       set(ENABLE_X11
           ON
-          CACHE BOOL "Enable X11")
+          CACHE BOOL "Enable X11"
+      )
       message(STATUS "Enable X11 support")
       target_sources(sane-lib PRIVATE linux/x11/idle.cpp linux/x11/idle.h)
       target_link_libraries(sane-lib PRIVATE ${X11_LIBRARIES})
@@ -59,7 +69,8 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     else()
       set(ENABLE_X11
           OFF
-          CACHE BOOL "Enable X11")
+          CACHE BOOL "Enable X11"
+      )
       message(STATUS "X11 support not enabled due to missing dependencies:")
       if(NOT X11_FOUND)
         message(STATUS "  X11 (missing)")
@@ -71,7 +82,8 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   else()
     set(ENABLE_X11
         OFF
-        CACHE BOOL "Enable X11")
+        CACHE BOOL "Enable X11"
+    )
     message(STATUS "X11 support is disabled")
   endif()
   if(ENABLE_X11)
@@ -85,25 +97,28 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     if(Qt6WaylandClient_FOUND AND WAYLAND_FOUND)
       set(ENABLE_WAYLAND
           ON
-          CACHE BOOL "Enable Wayland")
+          CACHE BOOL "Enable Wayland"
+      )
       message(STATUS "Enable Wayland support")
-      target_sources(sane-lib PRIVATE linux/wayland/idle.cpp
-                                      linux/wayland/idle.h)
+      target_sources(sane-lib PRIVATE linux/wayland/idle.cpp linux/wayland/idle.h)
       # Files will generate after running build
       qt6_generate_wayland_protocol_client_sources(
         sane-lib FILES
-        "${CMAKE_CURRENT_SOURCE_DIR}/linux/wayland/ext-idle-notify-v1.xml")
+        "${CMAKE_CURRENT_SOURCE_DIR}/linux/wayland/ext-idle-notify-v1.xml"
+      )
       target_link_libraries(sane-lib PRIVATE Wayland::Client)
       if(LayerShellQt_FOUND)
         set(LayerShellQt_FOUND
             ON
-            PARENT_SCOPE)
+            PARENT_SCOPE
+        )
         target_link_libraries(sane-lib PRIVATE LayerShellQt::Interface)
       endif()
     else()
       set(ENABLE_WAYLAND
           OFF
-          CACHE BOOL "Enable Wayland")
+          CACHE BOOL "Enable Wayland"
+      )
       message(STATUS "Wayland support not enabled due to missing dependencies:")
       if(NOT WAYLAND_FOUND)
         message(STATUS "  Wayland Client (missing)")
@@ -118,7 +133,8 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   else()
     set(ENABLE_WAYLAND
         OFF
-        CACHE BOOL "Enable Wayland")
+        CACHE BOOL "Enable Wayland"
+    )
     message(STATUS "Wayland support is disabled")
   endif()
 

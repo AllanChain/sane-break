@@ -16,9 +16,11 @@ add_library(
   widgets/language-select.cpp
   widgets/language-select.h
   window-manager.cpp
-  window-manager.h)
+  window-manager.h
+)
 target_include_directories(
   sane-gui
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
-  PRIVATE ${CMAKE_BINARY_DIR})
+  PRIVATE ${CMAKE_BINARY_DIR}
+)
 target_link_libraries(sane-gui PRIVATE Qt6::Widgets Qt6::Multimedia sane-lib)
