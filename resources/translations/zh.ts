@@ -2,6 +2,19 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN" sourcelanguage="en_US">
 <context>
+    <name>BreakWindow</name>
+    <message>
+        <location filename="../../src/gui/break-window.cpp" line="72"/>
+        <source>Time for a big break</source>
+        <translation>大休息时间</translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/break-window.cpp" line="73"/>
+        <source>Time for a small break</source>
+        <translation>小休息时间</translation>
+    </message>
+</context>
+<context>
     <name>English</name>
     <message>
         <location filename="../../src/gui/widgets/language-select.cpp" line="30"/>

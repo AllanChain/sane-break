@@ -68,8 +68,9 @@ BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) 
   textLayout->setAlignment(Qt::AlignCenter);
   layout->addLayout(textLayout);
 
-  QLabel *breakLabel = new QLabel(
-      QString("Time for a %1 break").arg(type == BreakType::BIG ? "big" : "small"));
+  QLabel *breakLabel =
+      new QLabel(type == BreakType::BIG ? tr("Time for a big break")
+                                        : tr("Time for a small break"));
   breakLabel->setObjectName("breakLabel");
   textLayout->addWidget(breakLabel);
 
