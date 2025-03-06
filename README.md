@@ -48,7 +48,7 @@ Transition to phase 2 happens when you stop working on your computer, or when yo
 This design was inspired by [RSIBreak](https://apps.kde.org/rsibreak/) and has similarities to [WorkRave](https://workrave.org/). Sane Break has some other improvements:
 
 - No big buttons for skipping or postponing to avoid mindless dismissals.
-- [Cross-platform support](#platform-support)
+- [Cross-platform support](#installation)
 - modern framework and UI style built with Qt6
 
 ## 🎬 Demo video
