@@ -7,6 +7,6 @@
     <file>sounds/bell.mp3</file>
     <file>sounds/wood.mp3</file>
     <file>style.css</file>
-    <file>NOTICE.md</file>
+    <file>../NOTICE.md</file>
   </qresource>
 </RCC>
