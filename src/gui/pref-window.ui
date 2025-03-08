@@ -321,7 +321,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
            <item row="1" column="0">
             <widget class="QLabel" name="label_4">
              <property name="toolTip">
-              <string>How many seconds for each small break</string>
+              <string>Duration of small breaks (in seconds)</string>
              </property>
              <property name="text">
               <string>Small break length</string>
@@ -331,7 +331,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
            <item row="4" column="0">
             <widget class="QLabel" name="label_11">
              <property name="toolTip">
-              <string>How many seconds to allow continued work before forcing breaks</string>
+              <string>Time in seconds before forcing break after work reminder appears.</string>
              </property>
              <property name="text">
               <string>Flash break prompt for</string>
@@ -426,7 +426,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
            <item row="3" column="0">
             <widget class="QLabel" name="label_6">
              <property name="toolTip">
-              <string>How many seconds for each big break</string>
+              <string>Duration of big breaks (in seconds)</string>
              </property>
              <property name="text">
               <string>Big break length</string>
@@ -533,7 +533,7 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
          <item>
           <widget class="QCheckBox" name="quickBreak">
            <property name="text">
-            <string>Start next break after %1 on tray icon</string>
+            <string notr="true">Start next break after %1 on tray icon</string>
            </property>
           </widget>
          </item>
@@ -971,8 +971,8 @@ v%1
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>456</width>
-              <height>231</height>
+              <width>100</width>
+              <height>41</height>
              </rect>
             </property>
             <property name="sizePolicy">
@@ -1015,7 +1015,7 @@ v%1
         <item>
          <widget class="QPushButton" name="resetButton">
           <property name="text">
-           <string>Reset</string>
+           <string>Revert to Last Saved</string>
           </property>
          </widget>
         </item>

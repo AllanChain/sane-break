@@ -63,6 +63,11 @@
         <translation>关于</translation>
     </message>
     <message>
+        <location filename="../../src/gui/pref-window.ui" line="334"/>
+        <source>Time in seconds before forcing break after work reminder appears.</source>
+        <translation>休息提醒弹出后允许继续工作的时长（秒），超时则强制休息。</translation>
+    </message>
+    <message>
         <location filename="../../src/gui/pref-window.ui" line="390"/>
         <location filename="../../src/gui/pref-window.ui" line="397"/>
         <source>30 sec</source>
@@ -84,19 +89,9 @@
         <translation>休息提示间隔</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="324"/>
-        <source>How many seconds for each small break</source>
-        <translation>小休息持续多少秒</translation>
-    </message>
-    <message>
         <location filename="../../src/gui/pref-window.ui" line="327"/>
         <source>Small break length</source>
         <translation>小休息时长</translation>
-    </message>
-    <message>
-        <location filename="../../src/gui/pref-window.ui" line="429"/>
-        <source>How many seconds for each big break</source>
-        <translation>大休息持续秒数</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="432"/>
@@ -122,11 +117,6 @@
         <location filename="../../src/gui/pref-window.ui" line="270"/>
         <source>3 breaks</source>
         <translation>3 次</translation>
-    </message>
-    <message>
-        <location filename="../../src/gui/pref-window.ui" line="334"/>
-        <source>How many seconds to allow continued work before forcing breaks</source>
-        <translation>在窗口出现后，允许工作多少时间。超过这个时间将自动进入强制休息阶段</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="337"/>
@@ -161,11 +151,6 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
         <translation>请授予辅助功能权限并重启应用以使用自动锁屏功能</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="536"/>
-        <source>Start next break after %1 on tray icon</source>
-        <translation>在 %1 托盘图标后，立刻开始下一次休息</translation>
-    </message>
-    <message>
         <location filename="../../src/gui/pref-window.ui" line="872"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;帮我们翻译！&lt;/a&gt;</translation>
@@ -191,6 +176,16 @@ v%1
         <location filename="../../src/gui/pref-window.ui" line="263"/>
         <source>1 min</source>
         <translation>1 分钟</translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="324"/>
+        <source>Duration of small breaks (in seconds)</source>
+        <translation>小休息持续多少秒</translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="429"/>
+        <source>Duration of big breaks (in seconds)</source>
+        <translation>大休息持续多少秒</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="467"/>
@@ -292,6 +287,11 @@ v%1
         <translation>配置文件</translation>
     </message>
     <message>
+        <location filename="../../src/gui/pref-window.ui" line="1018"/>
+        <source>Revert to Last Saved</source>
+        <translation>恢复上次设置</translation>
+    </message>
+    <message>
         <location filename="../../src/gui/pref-window.ui" line="835"/>
         <source>Language</source>
         <translation>语言</translation>
@@ -300,11 +300,6 @@ v%1
         <location filename="../../src/gui/pref-window.ui" line="862"/>
         <source>Change of language will take effect after app restart.</source>
         <translation>改变语言将在重启应用后生效。</translation>
-    </message>
-    <message>
-        <location filename="../../src/gui/pref-window.ui" line="1018"/>
-        <source>Reset</source>
-        <translation>重置</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1038"/>
@@ -317,6 +312,9 @@ v%1
     <message numerus="yes">
         <location filename="../../src/gui/pref-window.cpp" line="69"/>
         <location filename="../../src/gui/pref-window.cpp" line="83"/>
+        <location filename="../../src/gui/pref-window.cpp" line="98"/>
+        <location filename="../../src/gui/pref-window.cpp" line="99"/>
+        <location filename="../../src/gui/pref-window.cpp" line="100"/>
         <location filename="../../src/gui/pref-window.cpp" line="147"/>
         <location filename="../../src/gui/pref-window.cpp" line="150"/>
         <location filename="../../src/gui/pref-window.cpp" line="154"/>
@@ -329,6 +327,7 @@ v%1
         <location filename="../../src/gui/pref-window.cpp" line="75"/>
         <location filename="../../src/gui/pref-window.cpp" line="86"/>
         <location filename="../../src/gui/pref-window.cpp" line="91"/>
+        <location filename="../../src/gui/pref-window.cpp" line="97"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n 秒</numerusform>
@@ -347,34 +346,14 @@ v%1
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="97"/>
-        <source>30 sec</source>
-        <translation>30 秒</translation>
-    </message>
-    <message>
-        <location filename="../../src/gui/pref-window.cpp" line="98"/>
-        <source>1 min</source>
-        <translation>1 分钟</translation>
-    </message>
-    <message>
-        <location filename="../../src/gui/pref-window.cpp" line="99"/>
-        <source>2 min</source>
-        <translation>2 分钟</translation>
-    </message>
-    <message>
-        <location filename="../../src/gui/pref-window.cpp" line="100"/>
-        <source>5 min</source>
-        <translation>5 分钟</translation>
-    </message>
-    <message>
         <location filename="../../src/gui/pref-window.cpp" line="104"/>
-        <source>middle clicking</source>
-        <translation>中键</translation>
+        <source>Start next break after middle clicking on tray icon</source>
+        <translation>在中键托盘图标后，立刻开始下一次休息</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.cpp" line="106"/>
-        <source>double clicking</source>
-        <translation>双击</translation>
+        <source>Start next break after double clicking on tray icon</source>
+        <translation>在双击托盘图标后，立刻开始下一次休息</translation>
     </message>
 </context>
 <context>

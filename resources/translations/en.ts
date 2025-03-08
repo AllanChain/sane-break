@@ -6,6 +6,9 @@
     <message numerus="yes">
         <location filename="../../src/gui/pref-window.cpp" line="69"/>
         <location filename="../../src/gui/pref-window.cpp" line="83"/>
+        <location filename="../../src/gui/pref-window.cpp" line="98"/>
+        <location filename="../../src/gui/pref-window.cpp" line="99"/>
+        <location filename="../../src/gui/pref-window.cpp" line="100"/>
         <location filename="../../src/gui/pref-window.cpp" line="147"/>
         <location filename="../../src/gui/pref-window.cpp" line="150"/>
         <location filename="../../src/gui/pref-window.cpp" line="154"/>
@@ -19,6 +22,7 @@
         <location filename="../../src/gui/pref-window.cpp" line="75"/>
         <location filename="../../src/gui/pref-window.cpp" line="86"/>
         <location filename="../../src/gui/pref-window.cpp" line="91"/>
+        <location filename="../../src/gui/pref-window.cpp" line="97"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec</numerusform>

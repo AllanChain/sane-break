@@ -94,16 +94,16 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
   ui->postponeMinutes->setValidator(new QRegularExpressionValidator(re, this));
 
   ui->autoScreenLock->addItem(tr("Disabled"), 0);
-  ui->autoScreenLock->addItem(tr("30 sec"), 30);
-  ui->autoScreenLock->addItem(tr("1 min"), 60);
-  ui->autoScreenLock->addItem(tr("2 min"), 120);
-  ui->autoScreenLock->addItem(tr("5 min"), 300);
+  ui->autoScreenLock->addItem(tr("%n sec", "", 30), 30);
+  ui->autoScreenLock->addItem(tr("%n min", "", 1), 60);
+  ui->autoScreenLock->addItem(tr("%n min", "", 2), 120);
+  ui->autoScreenLock->addItem(tr("%n min", "", 5), 300);
   ui->macPermissionHint->setHidden(true);
 
 #ifdef Q_OS_LINUX
-  ui->quickBreak->setText(ui->quickBreak->text().arg(tr("middle clicking")));
+  ui->quickBreak->setText(tr("Start next break after middle clicking on tray icon"));
 #elif defined Q_OS_WIN
-  ui->quickBreak->setText(ui->quickBreak->text().arg(tr("double clicking")));
+  ui->quickBreak->setText(tr("Start next break after double clicking on tray icon"));
 #elif defined Q_OS_MAC
   ui->quickBreak->setHidden(true);
   osaProcess = new QProcess(this);
