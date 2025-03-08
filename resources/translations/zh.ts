@@ -138,7 +138,9 @@
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
-        <translation>假设设置为 2 分钟，则如果休息持续时间短于 2 分钟，只要休息结束后用户没有活动，屏幕会在休息提示开始后的 2 分钟自动锁定。如果休息持续超过 2 分钟，则屏幕必然会自动锁定。</translation>
+        <translation>假设设置为 2 分钟，则如果休息持续时间短于 2 分钟，只要休息
+结束后用户没有活动，屏幕会在休息提示开始后的 2 分钟自动锁
+定。如果休息持续超过 2 分钟，则屏幕必然会自动锁定。</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="504"/>
