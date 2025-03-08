@@ -7,6 +7,7 @@
 #include <QApplication>
 #include <QComboBox>
 #include <QDir>
+#include <QEvent>
 #include <QFileInfo>
 #include <QListIterator>
 #include <QString>
@@ -17,6 +18,8 @@
 
 #include "preferences.h"
 
+QTranslator *LanguageSelect::currentTranslator = nullptr;
+
 LanguageSelect::LanguageSelect(QWidget *parent) : QComboBox(parent) {
   addItem(tr("Default"), "");
   QDir dir(":/i18n");
@@ -26,8 +29,12 @@ LanguageSelect::LanguageSelect(QWidget *parent) : QComboBox(parent) {
   while (i.hasNext()) {
     QFileInfo fileInfo(i.next());
     QString language = fileInfo.baseName();
-    if (translator.load(language, ":/i18n"))
-      addItem(translator.translate("English", "current language"), language);
+    if (language == "en")
+      addItem("English", language);
+    else if (translator.load(language, ":/i18n")) {
+      addItem(translator.translate("LanguageSelect", "English", "current language"),
+              language);
+    }
   }
   connect(this, &QComboBox::currentIndexChanged, this,
           &LanguageSelect::onLanguageSelect);
@@ -37,12 +44,19 @@ void LanguageSelect::onLanguageSelect() {
   QString language = currentData().toString();
   SanePreferences::language->set(language);
   QTranslator *translator = new QTranslator();
-  if (language == "") {
-    if (translator->load(QLocale::system(), "sane-break", "_", ":/i18n"))
-      qApp->installTranslator(translator);
-  } else {
-    if (translator->load(language, ":/i18n")) {
-      qApp->installTranslator(translator);
-    }
+  if (language == "" &&
+          translator->load(QLocale::system(), "sane-break", "_", ":/i18n") ||
+      translator->load(language, ":/i18n")) {
+    if (LanguageSelect::currentTranslator)
+      qApp->removeTranslator(LanguageSelect::currentTranslator);
+    qApp->installTranslator(translator);
+    LanguageSelect::currentTranslator = translator;
   }
+}
+
+void LanguageSelect::changeEvent(QEvent *event) {
+  if (event->type() == QEvent::LanguageChange) {
+    setItemText(0, tr("Default"));
+  }
+  QWidget::changeEvent(event);
 }

@@ -15,6 +15,7 @@
 #include "config.h"
 #include "preferences.h"
 #include "welcome.h"
+#include "widgets/language-select.h"
 
 #ifdef Q_OS_LINUX
 #include "linux/system-check.h"
@@ -35,12 +36,13 @@ int main(int argc, char *argv[]) {
 
 #ifdef WITH_TRANSLATIONS
   QTranslator translator;
-  if (SanePreferences::language->get().length() > 0) {
-    if (translator.load(SanePreferences::language->get(), ":/i18n"))
-      a.installTranslator(&translator);
-  } else {
-    if (translator.load(QLocale::system(), "sane-break", "_", ":/i18n"))
-      a.installTranslator(&translator);
+  if (SanePreferences::language->get().length() > 0 &&
+      translator.load(SanePreferences::language->get(), ":/i18n")) {
+    a.installTranslator(&translator);
+    LanguageSelect::currentTranslator = &translator;
+  } else if (translator.load(QLocale::system(), "sane-break", "_", ":/i18n")) {
+    a.installTranslator(&translator);
+    LanguageSelect::currentTranslator = &translator;
   }
 #endif
 

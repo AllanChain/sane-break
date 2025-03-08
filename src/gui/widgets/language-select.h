@@ -6,15 +6,19 @@
 #define SANE_WIDGETS_LANGUAGE_H
 
 #include <QComboBox>
+#include <QEvent>
+#include <QTranslator>
 #include <QWidget>
 
 class LanguageSelect : public QComboBox {
   Q_OBJECT
  public:
+  static QTranslator *currentTranslator;
   LanguageSelect(QWidget *parent = nullptr);
 
  private:
   void onLanguageSelect();
+  void changeEvent(QEvent *event);
 };
 
 #endif  // SANE_WIDGETS_LANGUAGE_H

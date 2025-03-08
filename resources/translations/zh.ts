@@ -15,19 +15,18 @@
     </message>
 </context>
 <context>
-    <name>English</name>
-    <message>
-        <location filename="../../src/gui/widgets/language-select.cpp" line="30"/>
-        <source>current language</source>
-        <translation>简体中文</translation>
-    </message>
-</context>
-<context>
     <name>LanguageSelect</name>
     <message>
-        <location filename="../../src/gui/widgets/language-select.cpp" line="21"/>
+        <location filename="../../src/gui/widgets/language-select.cpp" line="24"/>
+        <location filename="../../src/gui/widgets/language-select.cpp" line="59"/>
         <source>Default</source>
         <translation>默认语言</translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/widgets/language-select.cpp" line="35"/>
+        <source>English</source>
+        <comment>current language</comment>
+        <translation>简体中文</translation>
     </message>
 </context>
 <context>
