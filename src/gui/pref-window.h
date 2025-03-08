@@ -32,9 +32,6 @@ class PreferenceWindow : public QMainWindow {
   void loadSettings();
   void saveSettings();
 
- protected:
-  void changeEvent(QEvent *event);
-
  private:
   Ui::PrefWindow *ui;
   QList<QPushButton *> tabButtons;
