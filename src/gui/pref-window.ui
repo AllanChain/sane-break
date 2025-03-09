@@ -885,6 +885,13 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
           </layout>
          </item>
          <item>
+          <widget class="QCheckBox" name="autoStart">
+           <property name="text">
+            <string>Enabled autostart</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="verticalSpacer_3">
            <property name="orientation">
             <enum>Qt::Orientation::Vertical</enum>
@@ -977,8 +984,8 @@ v%1
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>100</width>
-              <height>41</height>
+              <width>456</width>
+              <height>231</height>
              </rect>
             </property>
             <property name="sizePolicy">

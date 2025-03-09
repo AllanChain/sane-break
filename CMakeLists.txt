@@ -62,6 +62,17 @@ target_link_libraries(sane-break PRIVATE Qt6::Widgets Qt6::Multimedia sane-lib s
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   add_subdirectory(packaging/linux)
+  set(LINUX_DIST
+      "Default"
+      CACHE STRING "Linux distribution type"
+  )
+  set_property(CACHE LINUX_DIST PROPERTY STRINGS Flatpak Default)
+  if(LINUX_DIST STREQUAL "Flatpak")
+    message(STATUS "Building for Flatpak")
+    set(LINUX_DIST_FLATPAK ON)
+  elseif(LINUX_DIST STREQUAL "Default")
+    unset(LINUX_DIST)
+  endif()
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   target_sources(
     sane-break PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/packaging/windows/resources.rc"

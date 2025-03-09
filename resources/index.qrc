@@ -8,5 +8,6 @@
     <file>sounds/wood.mp3</file>
     <file>style.css</file>
     <file>../NOTICE.md</file>
+    <file alias="sane-break.desktop">../packaging/linux/sane-break.desktop</file>
   </qresource>
 </RCC>

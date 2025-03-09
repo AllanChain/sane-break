@@ -34,6 +34,7 @@
 #include <algorithm>
 #include <utility>
 
+#include "auto-start.h"
 #include "config.h"
 #include "preferences.h"
 #include "sound-player.h"
@@ -262,6 +263,21 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
    *                                                                         *
    ****************************************************************************/
   ui->configFile->setText(getSettings().fileName());
+  ui->autoStart->setChecked(autoStartEnabled());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  connect(ui->autoStart, &QCheckBox::checkStateChanged, this, [this]() {
+#else
+  connect(ui->autoStart, &QCheckBox::stateChanged, this, [this]() {
+#endif
+    bool checked = ui->autoStart->isChecked();
+    ui->autoStart->setDisabled(true);
+    ui->autoStart->blockSignals(true);
+    if (!setAutoStartEnabled(checked)) {
+      ui->autoStart->setChecked(!checked);
+    };
+    ui->autoStart->blockSignals(false);
+    ui->autoStart->setDisabled(false);
+  });
   // TODO: make languageSelect under control
 #ifndef WITH_TRANSLATIONS
   ui->languageLabel->setHidden(true);

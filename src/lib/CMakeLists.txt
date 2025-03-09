@@ -1,5 +1,6 @@
 add_library(
   sane-lib STATIC
+  auto-start.h
   battery-status.cpp
   battery-status.h
   CMakeLists.txt
@@ -28,14 +29,22 @@ find_package(
 target_link_libraries(sane-lib PRIVATE Qt6::Widgets)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+  find_library(ServiceManagement NAMES ServiceManagement)
+  target_link_libraries(sane-lib PRIVATE "-framework ServiceManagement")
   target_sources(
-    sane-lib PRIVATE macos/battery.cpp macos/battery.h macos/idle.cpp macos/idle.h
-                     macos/workspace.h macos/workspace.mm
+    sane-lib
+    PRIVATE macos/auto-start.mm
+            macos/battery.cpp
+            macos/battery.h
+            macos/idle.cpp
+            macos/idle.h
+            macos/workspace.h
+            macos/workspace.mm
   )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   target_sources(
-    sane-lib PRIVATE windows/battery.cpp windows/battery.h windows/idle.cpp
-                     windows/idle.h
+    sane-lib PRIVATE windows/auto-start.cpp windows/battery.cpp windows/battery.h
+                     windows/idle.cpp windows/idle.h
   )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   find_package(
@@ -49,8 +58,8 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   option(AUTO_ENABLE_WAYLAND "Build with Wayland support" ON)
 
   target_sources(
-    sane-lib PRIVATE linux/battery.cpp linux/battery.h linux/system-check.cpp
-                     linux/system-check.h
+    sane-lib PRIVATE linux/auto-start.cpp linux/battery.cpp linux/battery.h
+                     linux/system-check.cpp linux/system-check.h
   )
 
   if(AUTO_ENABLE_X11)
