@@ -9,3 +9,5 @@ Diagnostics:
     - wayland-client\.h
     - qlogging\.h
     - qminmax\.h
+    - qtversionchecks\.h
+    - qcontainerfwd\.h

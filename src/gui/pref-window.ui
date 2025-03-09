@@ -260,24 +260,27 @@ QPushButton[flat=&quot;true&quot;]:checked {
            <item row="3" column="2">
             <widget class="QLabel" name="bigBreakForLabel">
              <property name="text">
-              <string>1 min</string>
+              <string notr="true">%n min</string>
              </property>
             </widget>
            </item>
            <item row="2" column="2">
             <widget class="QLabel" name="bigBreakAfterLabel">
              <property name="text">
-              <string>3 breaks</string>
+              <string notr="true">%n breaks</string>
              </property>
             </widget>
            </item>
            <item row="5" column="1">
-            <widget class="QSlider" name="confirmAfterSlider">
+            <widget class="SteppedSlider" name="confirmAfterSlider">
              <property name="minimum">
-              <number>1</number>
+              <number>0</number>
              </property>
              <property name="maximum">
               <number>30</number>
+             </property>
+             <property name="singleStep">
+              <number>5</number>
              </property>
              <property name="value">
               <number>30</number>
@@ -287,6 +290,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
              </property>
              <property name="tickPosition">
               <enum>QSlider::TickPosition::TicksBelow</enum>
+             </property>
+             <property name="tickInterval">
+              <number>20</number>
              </property>
             </widget>
            </item>
@@ -351,7 +357,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
            <item row="1" column="2">
             <widget class="QLabel" name="smallBreakForLabel">
              <property name="text">
-              <string>20 sec</string>
+              <string notr="true">%n sec</string>
              </property>
             </widget>
            </item>
@@ -380,21 +386,21 @@ QPushButton[flat=&quot;true&quot;]:checked {
            <item row="0" column="2">
             <widget class="QLabel" name="smallBreakEveryLabel">
              <property name="text">
-              <string>20 min</string>
+              <string notr="true">%n min</string>
              </property>
             </widget>
            </item>
            <item row="4" column="2">
             <widget class="QLabel" name="flashForLabel">
              <property name="text">
-              <string>30 sec</string>
+              <string notr="true">%n sec</string>
              </property>
             </widget>
            </item>
            <item row="5" column="2">
             <widget class="QLabel" name="confirmAfterLabel">
              <property name="text">
-              <string>30 sec</string>
+              <string notr="true">%n sec</string>
              </property>
             </widget>
            </item>
@@ -689,7 +695,7 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
            <item row="0" column="2">
             <widget class="QLabel" name="pauseOnIdleLabel">
              <property name="text">
-              <string>3 min</string>
+              <string notr="true">%n min</string>
              </property>
             </widget>
            </item>
@@ -713,7 +719,7 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
            <item row="1" column="2">
             <widget class="QLabel" name="resetBreakLabel">
              <property name="text">
-              <string>2 min</string>
+              <string notr="true">%n min</string>
              </property>
             </widget>
            </item>
@@ -752,7 +758,7 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
            <item row="2" column="2">
             <widget class="QLabel" name="resetCycleLabel">
              <property name="text">
-              <string>5 min</string>
+              <string notr="true">%n min</string>
              </property>
             </widget>
            </item>
@@ -1034,6 +1040,9 @@ v%1
         </item>
         <item>
          <widget class="QPushButton" name="saveButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>Save</string>
           </property>

@@ -180,7 +180,6 @@ void SaneBreakApp::createMenu() {
   menu->addSeparator();
 
   connect(menu->addAction(tr("Preferences")), &QAction::triggered, this, [this]() {
-    prefWindow->loadSettings();
     prefWindow->show();
     prefWindow->windowHandle()->raise();
     prefWindow->windowHandle()->requestActivate();

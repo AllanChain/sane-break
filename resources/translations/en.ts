@@ -4,14 +4,14 @@
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="69"/>
-        <location filename="../../src/gui/pref-window.cpp" line="83"/>
-        <location filename="../../src/gui/pref-window.cpp" line="98"/>
-        <location filename="../../src/gui/pref-window.cpp" line="99"/>
-        <location filename="../../src/gui/pref-window.cpp" line="100"/>
-        <location filename="../../src/gui/pref-window.cpp" line="147"/>
-        <location filename="../../src/gui/pref-window.cpp" line="150"/>
-        <location filename="../../src/gui/pref-window.cpp" line="154"/>
+        <location filename="../../src/gui/pref-window.cpp" line="131"/>
+        <location filename="../../src/gui/pref-window.cpp" line="153"/>
+        <location filename="../../src/gui/pref-window.cpp" line="175"/>
+        <location filename="../../src/gui/pref-window.cpp" line="176"/>
+        <location filename="../../src/gui/pref-window.cpp" line="177"/>
+        <location filename="../../src/gui/pref-window.cpp" line="238"/>
+        <location filename="../../src/gui/pref-window.cpp" line="244"/>
+        <location filename="../../src/gui/pref-window.cpp" line="251"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -19,10 +19,19 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="75"/>
-        <location filename="../../src/gui/pref-window.cpp" line="86"/>
-        <location filename="../../src/gui/pref-window.cpp" line="91"/>
-        <location filename="../../src/gui/pref-window.cpp" line="97"/>
+        <location filename="../../src/gui/pref-window.cpp" line="133"/>
+        <location filename="../../src/gui/pref-window.cpp" line="147"/>
+        <source>Every %n min</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/gui/pref-window.cpp" line="139"/>
+        <location filename="../../src/gui/pref-window.cpp" line="158"/>
+        <location filename="../../src/gui/pref-window.cpp" line="165"/>
+        <location filename="../../src/gui/pref-window.cpp" line="174"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec</numerusform>
@@ -30,7 +39,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="78"/>
+        <location filename="../../src/gui/pref-window.cpp" line="145"/>
         <source>%n break(s)</source>
         <translation>
             <numerusform>%n break</numerusform>
@@ -42,7 +51,7 @@
     <name>SaneBreakApp</name>
     <message numerus="yes">
         <location filename="../../src/app.cpp" line="168"/>
-        <location filename="../../src/app.cpp" line="354"/>
+        <location filename="../../src/app.cpp" line="353"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -50,8 +59,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app.cpp" line="192"/>
-        <location filename="../../src/app.cpp" line="360"/>
+        <location filename="../../src/app.cpp" line="191"/>
+        <location filename="../../src/app.cpp" line="359"/>
         <source>Postpone %n min</source>
         <translation>
             <numerusform>Postpone %n min</numerusform>

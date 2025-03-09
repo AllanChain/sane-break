@@ -14,9 +14,11 @@
 #include <QGridLayout>
 #include <QIcon>
 #include <QLabel>
+#include <QLineEdit>
 #include <QMainWindow>
 #include <QMediaPlayer>
 #include <QMessageBox>
+#include <QPlainTextEdit>
 #include <QProcess>
 #include <QPushButton>
 #include <QRegularExpressionValidator>
@@ -29,12 +31,69 @@
 #include <QWidget>
 #include <Qt>
 #include <QtContainerFwd>
+#include <algorithm>
+#include <utility>
 
 #include "config.h"
 #include "preferences.h"
 #include "sound-player.h"
 #include "ui_pref-window.h"
 #include "widgets/stepped-slider.h"
+
+void PrefControllerBase::saveIfDirty() {
+  if (isDirty) {
+    saveValue();
+    isDirty = false;
+    emit dirtyChanged();
+  }
+}
+
+void PrefControllerBase::load() {
+  changeMeansDirty = false;
+  loadValue();
+  emit explictSync();
+  changeMeansDirty = true;
+  isDirty = false;
+  emit dirtyChanged();
+}
+
+void PrefControllerBase::onChange() {
+  if (changeMeansDirty) {
+    isDirty = true;
+    emit dirtyChanged();
+    emit explictSync();
+  }
+}
+
+PrefControllerBase *ControllerHolder::add(PrefControllerBase *controller) {
+  m_controllers.append(controller);
+  connect(controller, &PrefControllerBase::dirtyChanged, this,
+          &ControllerHolder::onDirtyChange);
+  return controller;
+}
+
+void ControllerHolder::onDirtyChange() {
+  bool currentIsDirty =
+      std::any_of(m_controllers.begin(), m_controllers.end(),
+                  [](PrefControllerBase *controller) { return controller->isDirty; });
+  if (isDirty != currentIsDirty) {
+    isDirty = currentIsDirty;
+    emit dirtyChanged(currentIsDirty);
+  }
+}
+
+void ControllerHolder::load() {
+  for (auto controller : std::as_const(m_controllers)) controller->load();
+}
+
+void ControllerHolder::reloadDirty() {
+  for (auto controller : std::as_const(m_controllers))
+    if (controller->isDirty) controller->load();
+}
+
+void ControllerHolder::save() {
+  for (auto controller : std::as_const(m_controllers)) controller->saveIfDirty();
+}
 
 PreferenceWindow::PreferenceWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::PrefWindow) {
@@ -45,6 +104,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
   setCentralWidget(centralWidget);
   ui->setupUi(centralWidget);
   soundPlayer = new SoundPlayer(this);
+  controllers = new ControllerHolder(this);
 
   /***************************************************************************
    *                                                                         *
@@ -64,34 +124,51 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
    *                                Break tab                                *
    *                                                                         *
    ****************************************************************************/
+  connect(controllers->add(new PrefController<QSlider, Setting<int>>(
+              ui->smallBreakEverySlider, SanePreferences::smallEvery, 60)),
+          &PrefControllerBase::explictSync, this, [this]() {
+            int value = ui->smallBreakEverySlider->value();
+            ui->smallBreakEveryLabel->setText(tr("%n min", "", value));
+            ui->bigBreakAfterLabel->setToolTip(
+                tr("Every %n min", "", value * ui->bigBreakAfterSlider->value()));
+          });
+  connect(controllers->add(new PrefController<QSlider, Setting<int>>(
+              ui->smallBreakForSlider, SanePreferences::smallFor)),
+          &PrefControllerBase::explictSync, this, [this]() {
+            ui->smallBreakForLabel->setText(
+                tr("%n sec", "", ui->smallBreakEverySlider->value()));
+          });
+  connect(controllers->add(new PrefController<QSlider, Setting<int>>(
+              ui->bigBreakAfterSlider, SanePreferences::bigAfter)),
+          &PrefControllerBase::explictSync, this, [this]() {
+            int value = ui->bigBreakAfterSlider->value();
+            ui->bigBreakAfterLabel->setText(tr("%n break(s)", "", value));
+            ui->bigBreakAfterLabel->setToolTip(
+                tr("Every %n min", "", value * ui->smallBreakEverySlider->value()));
+          });
   connect(
-      ui->smallBreakEverySlider, &SteppedSlider::valueChanged, this, [this](int value) {
-        ui->smallBreakEveryLabel->setText(tr("%n min", "", value));
-        ui->bigBreakAfterLabel->setToolTip(
-            QString("Every %1 min").arg(value * ui->smallBreakEverySlider->value()));
+      controllers->add(new PrefController<QSlider, Setting<int>>(
+          ui->bigBreakForSlider, SanePreferences::bigFor, 60)),
+      &PrefControllerBase::explictSync, this, [this]() {
+        ui->bigBreakForLabel->setText(tr("%n min", "", ui->bigBreakForSlider->value()));
       });
-  connect(
-      ui->smallBreakForSlider, &SteppedSlider::valueChanged, this,
-      [this](int value) { ui->smallBreakForLabel->setText(tr("%n sec", "", value)); });
-  connect(
-      ui->bigBreakAfterSlider, &SteppedSlider::valueChanged, this, [this](int value) {
-        ui->bigBreakAfterLabel->setText(tr("%n break(s)", "", value));
-        ui->bigBreakAfterLabel->setToolTip(
-            QString("Every %1 min").arg(value * ui->smallBreakEverySlider->value()));
-      });
-  connect(ui->bigBreakForSlider, &SteppedSlider::valueChanged, this, [this](int value) {
-    ui->bigBreakForLabel->setText(tr("%n min", "", value));
-  });
-  connect(ui->flashForSlider, &SteppedSlider::valueChanged, this, [this](int value) {
-    ui->flashForLabel->setText(tr("%n sec", "", value));
-    ui->confirmAfterSlider->setMaximum(value);
-  });
-  connect(
-      ui->confirmAfterSlider, &SteppedSlider::valueChanged, this,
-      [this](int value) { ui->confirmAfterLabel->setText(tr("%n sec", "", value)); });
+  connect(controllers->add(new PrefController<QSlider, Setting<int>>(
+              ui->flashForSlider, SanePreferences::flashFor)),
+          &PrefControllerBase::explictSync, this, [this]() {
+            ui->flashForLabel->setText(tr("%n sec", "", ui->flashForSlider->value()));
+            ui->confirmAfterSlider->setMaximum(ui->flashForSlider->value());
+          });
+  connect(controllers->add(new PrefController<QSlider, Setting<int>>(
+              ui->confirmAfterSlider, SanePreferences::confirmAfter)),
+          &PrefControllerBase::explictSync, this, [this]() {
+            ui->confirmAfterLabel->setText(
+                tr("%n sec", "", ui->confirmAfterSlider->value()));
+          });
 
   QRegularExpression re("^\\d+(,\\d+)*$");
   ui->postponeMinutes->setValidator(new QRegularExpressionValidator(re, this));
+  controllers->add(new PrefController<QLineEdit, Setting<QStringList>>(
+      ui->postponeMinutes, SanePreferences::postponeMinutes));
 
   ui->autoScreenLock->addItem(tr("Disabled"), 0);
   ui->autoScreenLock->addItem(tr("%n sec", "", 30), 30);
@@ -99,11 +176,17 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
   ui->autoScreenLock->addItem(tr("%n min", "", 2), 120);
   ui->autoScreenLock->addItem(tr("%n min", "", 5), 300);
   ui->macPermissionHint->setHidden(true);
+  controllers->add(new PrefController<QComboBox, Setting<int>>(
+      ui->autoScreenLock, SanePreferences::autoScreenLock));
 
 #ifdef Q_OS_LINUX
   ui->quickBreak->setText(tr("Start next break after middle clicking on tray icon"));
+  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
+      ui->quickBreak, SanePreferences::quickBreak));
 #elif defined Q_OS_WIN
   ui->quickBreak->setText(tr("Start next break after double clicking on tray icon"));
+  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
+      ui->quickBreak, SanePreferences::quickBreak));
 #elif defined Q_OS_MAC
   ui->quickBreak->setHidden(true);
   osaProcess = new QProcess(this);
@@ -131,27 +214,47 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
                                      ui->bigStartBellSelect, ui->bigEndBellSelect};
   QList<QPushButton *> soundPlayButtons = {ui->playSmallStart, ui->playSmallEnd,
                                            ui->playBigStart, ui->playBigEnd};
+  QList<Setting<QString> *> soundSettings = {
+      SanePreferences::smallStartBell, SanePreferences::smallEndBell,
+      SanePreferences::bigStartBell, SanePreferences::bigEndBell};
   for (int i = 0; i < soundSelects.length(); i++) {
     soundSelects[i]->addItems(soundFiles);
     connect(soundPlayButtons[i], &QPushButton::pressed, soundPlayer,
             [this, soundSelects, i]() {
               soundPlayer->play(soundSelects[i]->currentText());
             });
+    controllers->add(new PrefController<QComboBox, Setting<QString>>(soundSelects[i],
+                                                                     soundSettings[i]));
   }
   /***************************************************************************
    *                                                                         *
    *                                Pause tab                                *
    *                                                                         *
    ****************************************************************************/
-  connect(ui->pauseOnIdleSlider, &SteppedSlider::valueChanged, this, [this](int value) {
-    ui->pauseOnIdleLabel->setText(tr("%n min", "", value));
-  });
-  connect(ui->resetBreakSlider, &SteppedSlider::valueChanged, this, [this](int value) {
-    ui->resetBreakLabel->setText(tr("%n min", "", value));
-    ui->resetCycleSlider->setMinimum(value);
-  });
-  connect(ui->resetCycleSlider, &SteppedSlider::valueChanged, this,
-          [this](int value) { ui->resetCycleLabel->setText(tr("%n min", "", value)); });
+  connect(
+      controllers->add(new PrefController<QSlider, Setting<int>>(
+          ui->pauseOnIdleSlider, SanePreferences::pauseOnIdleFor, 60)),
+      &PrefControllerBase::explictSync, this, [this]() {
+        ui->pauseOnIdleLabel->setText(tr("%n min", "", ui->pauseOnIdleSlider->value()));
+      });
+  connect(
+      controllers->add(new PrefController<QSlider, Setting<int>>(
+          ui->resetBreakSlider, SanePreferences::resetAfterPause, 60)),
+      &PrefControllerBase::explictSync, this, [this]() {
+        ui->resetBreakLabel->setText(tr("%n min", "", ui->resetBreakSlider->value()));
+        ui->resetCycleSlider->setMinimum(ui->resetBreakSlider->value());
+      });
+  connect(
+      controllers->add(new PrefController<QSlider, Setting<int>>(
+          ui->resetCycleSlider, SanePreferences::resetCycleAfterPause, 60)),
+      &PrefControllerBase::explictSync, this, [this]() {
+        ui->resetCycleLabel->setText(tr("%n min", "", ui->resetCycleSlider->value()));
+        ui->resetBreakSlider->setMaximum(ui->resetCycleSlider->value());
+      });
+  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
+      ui->pauseOnBatteryCheck, SanePreferences::pauseOnBattery));
+  controllers->add(new PrefController<QPlainTextEdit, Setting<QStringList>>(
+      ui->programList, SanePreferences::programsToMonitor));
 
   /***************************************************************************
    *                                                                         *
@@ -159,6 +262,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
    *                                                                         *
    ****************************************************************************/
   ui->configFile->setText(getSettings().fileName());
+  // TODO: make languageSelect under control
 #ifndef WITH_TRANSLATIONS
   ui->languageLabel->setHidden(true);
   ui->languageSelect->setHidden(true);
@@ -174,74 +278,53 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
   noticeFile.open(QIODevice::ReadOnly | QIODevice::Text);
   ui->noticeLabel->setText(noticeFile.readAll());
 
-  connect(ui->resetButton, &QPushButton::pressed, this,
-          &PreferenceWindow::loadSettings);
-  connect(ui->saveButton, &QPushButton::pressed, this, &PreferenceWindow::close);
+  connect(ui->resetButton, &QPushButton::pressed, controllers, &ControllerHolder::load);
+  connect(ui->saveButton, &QPushButton::pressed, controllers, &ControllerHolder::save);
+  connect(controllers, &ControllerHolder::dirtyChanged, ui->saveButton,
+          &QPushButton::setEnabled);
 }
 
 PreferenceWindow::~PreferenceWindow() { delete ui; }
 
-void PreferenceWindow::loadSettings() {
-  ui->smallBreakEverySlider->setValue(SanePreferences::smallEvery->get() / 60);
-  ui->smallBreakForSlider->setValue(SanePreferences::smallFor->get());
-  ui->bigBreakAfterSlider->setValue(SanePreferences::bigAfter->get());
-  ui->bigBreakForSlider->setValue(SanePreferences::bigFor->get() / 60);
-  ui->flashForSlider->setValue(SanePreferences::flashFor->get());
-  ui->confirmAfterSlider->setValue(SanePreferences::confirmAfter->get());
-  ui->postponeMinutes->setText(SanePreferences::postponeMinutes->get().join(","));
-  ui->quickBreak->setChecked(SanePreferences::quickBreak->get());
-  ui->autoScreenLock->setCurrentIndex(
-      ui->autoScreenLock->findData(SanePreferences::autoScreenLock->get()));
-  ui->smallStartBellSelect->setEditText(SanePreferences::smallStartBell->get());
-  ui->smallEndBellSelect->setEditText(SanePreferences::smallEndBell->get());
-  ui->bigStartBellSelect->setEditText(SanePreferences::bigStartBell->get());
-  ui->bigEndBellSelect->setEditText(SanePreferences::bigEndBell->get());
-  ui->pauseOnIdleSlider->setValue(SanePreferences::pauseOnIdleFor->get() / 60);
-  ui->resetBreakSlider->setValue(SanePreferences::resetAfterPause->get() / 60);
-  ui->resetCycleSlider->setValue(SanePreferences::resetCycleAfterPause->get() / 60);
-  ui->pauseOnBatteryCheck->setChecked(SanePreferences::pauseOnBattery->get());
-  ui->programList->setPlainText(SanePreferences::programsToMonitor->get().join("\n"));
-#ifdef WITH_TRANSLATIONS
-  ui->languageSelect->setCurrentIndex(
-      ui->languageSelect->findData(SanePreferences::language->get()));
-#endif
-}
-
-void PreferenceWindow::saveSettings() {
-  SanePreferences::smallEvery->set(ui->smallBreakEverySlider->value() * 60);
-  SanePreferences::smallFor->set(ui->smallBreakForSlider->value());
-  SanePreferences::bigAfter->set(ui->bigBreakAfterSlider->value());
-  SanePreferences::bigFor->set(ui->bigBreakForSlider->value() * 60);
-  SanePreferences::flashFor->set(ui->flashForSlider->value());
-  SanePreferences::confirmAfter->set(ui->confirmAfterSlider->value());
-  SanePreferences::postponeMinutes->set(
-      ui->postponeMinutes->text().split(",", Qt::SkipEmptyParts));
-  SanePreferences::quickBreak->set(ui->quickBreak->isChecked());
-  SanePreferences::autoScreenLock->set(ui->autoScreenLock->currentData().toInt());
-  SanePreferences::smallStartBell->set(ui->smallStartBellSelect->currentText());
-  SanePreferences::smallEndBell->set(ui->smallEndBellSelect->currentText());
-  SanePreferences::bigStartBell->set(ui->bigStartBellSelect->currentText());
-  SanePreferences::bigEndBell->set(ui->bigEndBellSelect->currentText());
-  SanePreferences::pauseOnIdleFor->set(ui->pauseOnIdleSlider->value() * 60);
-  SanePreferences::resetAfterPause->set(ui->resetBreakSlider->value() * 60);
-  SanePreferences::resetCycleAfterPause->set(ui->resetCycleSlider->value() * 60);
-  SanePreferences::pauseOnBattery->set(ui->pauseOnBatteryCheck->isChecked());
-  SanePreferences::programsToMonitor->set(
-      ui->programList->toPlainText().split("\n", Qt::SkipEmptyParts));
-#ifdef WITH_TRANSLATIONS
-  SanePreferences::language->set(ui->languageSelect->currentData().toString());
-#endif
-}
-
 void PreferenceWindow::closeEvent(QCloseEvent *event) {
-  saveSettings();
+  if (!confirmLeave()) return event->ignore();
   QMainWindow::closeEvent(event);
 }
 
+void PreferenceWindow::showEvent(QShowEvent *event) { controllers->load(); }
+
 void PreferenceWindow::setTab(int tabNum) {
+  if (!confirmLeave()) {
+    tabButtons[tabNum]->setChecked(false);
+    return;
+  }
   ui->stackedWidget->setCurrentIndex(tabNum);
   for (int i = 0; i < tabButtons.size(); ++i) {
     tabButtons[i]->setChecked(i == tabNum);
   }
   ui->controlBar->setHidden(tabNum == 4);
+}
+
+bool PreferenceWindow::confirmLeave() {
+  if (!controllers->isDirty) return true;
+
+  QMessageBox msgBox;
+  msgBox.setText(tr("The preferences have been modified."));
+  msgBox.setInformativeText(tr("Do you want to save your changes?"));
+  msgBox.setIcon(QMessageBox::Icon::Information);
+  msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard |
+                            QMessageBox::Cancel);
+
+  msgBox.setDefaultButton(QMessageBox::Save);
+  switch (msgBox.exec()) {
+    case QMessageBox::Save:
+      controllers->save();
+      return true;
+    case QMessageBox::Discard:
+      controllers->reloadDirty();
+      return true;
+    case QMessageBox::Cancel:
+    default:
+      return false;
+  }
 }
