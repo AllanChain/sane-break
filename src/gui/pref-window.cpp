@@ -34,6 +34,7 @@
 #include <algorithm>
 #include <utility>
 
+#include "auto-start.h"
 #include "config.h"
 #include "preferences.h"
 #include "sound-player.h"
@@ -105,6 +106,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
   ui->setupUi(centralWidget);
   soundPlayer = new SoundPlayer(this);
   controllers = new ControllerHolder(this);
+  autoStart = new AutoStart(this);
 
   /***************************************************************************
    *                                                                         *
@@ -262,6 +264,25 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
    *                                                                         *
    ****************************************************************************/
   ui->configFile->setText(getSettings().fileName());
+  ui->autoStart->setChecked(autoStart->isEnabled());
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  connect(ui->autoStart, &QCheckBox::checkStateChanged, this, [this]() {
+#else
+  connect(ui->autoStart, &QCheckBox::stateChanged, this, [this]() {
+#endif
+    ui->autoStart->setDisabled(true);
+    autoStart->setEnabled(ui->autoStart->isChecked());
+  });
+  connect(autoStart, &AutoStart::operationResult, this,
+          [this](bool succeeded, QString error) {
+            ui->autoStart->blockSignals(true);
+            if (!succeeded) {
+              ui->autoStart->setChecked(!ui->autoStart->isChecked());
+              QMessageBox::warning(this, tr("Setting auto start failed"), error);
+            };
+            ui->autoStart->blockSignals(false);
+            ui->autoStart->setDisabled(false);
+          });
   // TODO: make languageSelect under control
 #ifndef WITH_TRANSLATIONS
   ui->languageLabel->setHidden(true);

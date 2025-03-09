@@ -3,3 +3,4 @@
 #cmakedefine ENABLE_X11
 #cmakedefine ENABLE_WAYLAND
 #cmakedefine WITH_TRANSLATIONS
+#cmakedefine LINUX_DIST_FLATPAK

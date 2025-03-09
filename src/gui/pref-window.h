@@ -23,6 +23,7 @@
 #include <Qt>
 #include <QtGlobal>
 
+#include "auto-start.h"
 #include "preferences.h"
 #include "sound-player.h"
 
@@ -180,6 +181,7 @@ class PreferenceWindow : public QMainWindow {
   QProcess *osaProcess;
   SoundPlayer *soundPlayer;
   ControllerHolder *controllers;
+  AutoStart *autoStart;
   bool confirmLeave();
   void setTab(int tabNum);
   void closeEvent(QCloseEvent *event);

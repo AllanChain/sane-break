@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 
 # Should be set before project call and be a cache variable
 set(CMAKE_OSX_DEPLOYMENT_TARGET
-    "12"
+    "13"
     CACHE STRING "Minimum OS X deployment version"
 )
 
@@ -40,12 +40,15 @@ if(Qt6_FOUND AND Qt6LinguistTools_FOUND)
   if(${Qt6_VERSION} VERSION_GREATER_EQUAL "6.7")
     message(STATUS "Enable modern translations")
     list(FILTER TS_FILES EXCLUDE REGEX ".*/en\\.ts$")
+    file(GLOB_RECURSE SOURCES_TO_TRANSLATE "src/*.cpp" "src/*.ui")
     qt_add_translations(
       sane-break
       TS_FILES
       ${TS_FILES}
       PLURALS_TS_FILE
       "${CMAKE_CURRENT_SOURCE_DIR}/resources/translations/en.ts"
+      SOURCES
+      ${SOURCES_TO_TRANSLATE}
       LUPDATE_OPTIONS
       -no-obsolete
     )
@@ -62,6 +65,17 @@ target_link_libraries(sane-break PRIVATE Qt6::Widgets Qt6::Multimedia sane-lib s
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   add_subdirectory(packaging/linux)
+  set(LINUX_DIST
+      "Default"
+      CACHE STRING "Linux distribution type"
+  )
+  set_property(CACHE LINUX_DIST PROPERTY STRINGS Flatpak Default)
+  if(LINUX_DIST STREQUAL "Flatpak")
+    message(STATUS "Building for Flatpak")
+    set(LINUX_DIST_FLATPAK ON)
+  elseif(LINUX_DIST STREQUAL "Default")
+    unset(LINUX_DIST)
+  endif()
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   target_sources(
     sane-break PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/packaging/windows/resources.rc"

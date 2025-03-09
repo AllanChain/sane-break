@@ -32,7 +32,6 @@ Setting<int>* SanePreferences::autoScreenLock =
     new Setting<int>("break/auto-screen-lock", 0);
 Setting<bool>* SanePreferences::quickBreak =
     new Setting<bool>("break/quick-break", false);
-Setting<QString>* SanePreferences::language = new Setting<QString>("language", "");
 Setting<QString>* SanePreferences::smallStartBell =
     new Setting<QString>("bell/small-start", "");
 Setting<QString>* SanePreferences::smallEndBell =
@@ -50,3 +49,4 @@ Setting<bool>* SanePreferences::pauseOnBattery =
     new Setting<bool>("pause/on-battery", false);
 Setting<QStringList>* SanePreferences::programsToMonitor =
     new Setting<QStringList>("pause/programs-to-monitor", QStringList());
+Setting<QString>* SanePreferences::language = new Setting<QString>("language", "");

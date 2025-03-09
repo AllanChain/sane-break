@@ -2,6 +2,30 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR" sourcelanguage="en_US">
 <context>
+    <name>AutoStart</name>
+    <message>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="23"/>
+        <source>Flatpak is not supported yet</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="43"/>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="49"/>
+        <source>File not writable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/lib/windows/auto-start.cpp" line="25"/>
+        <source>Permission denied</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/lib/windows/auto-start.cpp" line="28"/>
+        <source>Unknown error</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>BreakWindow</name>
     <message>
         <location filename="../../src/gui/break-window.cpp" line="72"/>
@@ -127,7 +151,7 @@ l&apos;écran sera quand même bloqué.</translation>
         <translation>Merci d&apos;octroyer les droits d&apos;accès et de redémarrer l&apos;appli pour utiliser le verrouillage d&apos;écran</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="937"/>
+        <location filename="../../src/gui/pref-window.ui" line="944"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -248,7 +272,12 @@ v%1
         <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Aidez-nous à faire la traduction&#x202f;!&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1024"/>
+        <location filename="../../src/gui/pref-window.ui" line="890"/>
+        <source>Enabled autostart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="1031"/>
         <source>Revert to Last Saved</source>
         <translation>Revenir aux anciens paramètres sauvegardés</translation>
     </message>
@@ -263,7 +292,7 @@ v%1
         <translation>Le changement de langue prendra effet après redémarrage de l&apos;appli.</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1047"/>
+        <location filename="../../src/gui/pref-window.ui" line="1054"/>
         <source>Save</source>
         <translation>Sauvegarder</translation>
     </message>
@@ -271,14 +300,14 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="131"/>
-        <location filename="../../src/gui/pref-window.cpp" line="153"/>
-        <location filename="../../src/gui/pref-window.cpp" line="175"/>
-        <location filename="../../src/gui/pref-window.cpp" line="176"/>
+        <location filename="../../src/gui/pref-window.cpp" line="133"/>
+        <location filename="../../src/gui/pref-window.cpp" line="155"/>
         <location filename="../../src/gui/pref-window.cpp" line="177"/>
-        <location filename="../../src/gui/pref-window.cpp" line="238"/>
-        <location filename="../../src/gui/pref-window.cpp" line="244"/>
-        <location filename="../../src/gui/pref-window.cpp" line="251"/>
+        <location filename="../../src/gui/pref-window.cpp" line="178"/>
+        <location filename="../../src/gui/pref-window.cpp" line="179"/>
+        <location filename="../../src/gui/pref-window.cpp" line="240"/>
+        <location filename="../../src/gui/pref-window.cpp" line="246"/>
+        <location filename="../../src/gui/pref-window.cpp" line="253"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -286,8 +315,8 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="133"/>
-        <location filename="../../src/gui/pref-window.cpp" line="147"/>
+        <location filename="../../src/gui/pref-window.cpp" line="135"/>
+        <location filename="../../src/gui/pref-window.cpp" line="149"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>Chaque minute</numerusform>
@@ -295,10 +324,10 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="139"/>
-        <location filename="../../src/gui/pref-window.cpp" line="158"/>
-        <location filename="../../src/gui/pref-window.cpp" line="165"/>
-        <location filename="../../src/gui/pref-window.cpp" line="174"/>
+        <location filename="../../src/gui/pref-window.cpp" line="141"/>
+        <location filename="../../src/gui/pref-window.cpp" line="160"/>
+        <location filename="../../src/gui/pref-window.cpp" line="167"/>
+        <location filename="../../src/gui/pref-window.cpp" line="176"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec</numerusform>
@@ -306,7 +335,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="145"/>
+        <location filename="../../src/gui/pref-window.cpp" line="147"/>
         <source>%n break(s)</source>
         <translation>
             <numerusform>%n pause</numerusform>
@@ -314,27 +343,32 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="173"/>
+        <location filename="../../src/gui/pref-window.cpp" line="175"/>
         <source>Disabled</source>
         <translation>Désactivé</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="183"/>
+        <location filename="../../src/gui/pref-window.cpp" line="185"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>Démarrer la pause suivante en faisant clic du milieu sur l&amp;apos;icône dans la barre des tâches</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="187"/>
+        <location filename="../../src/gui/pref-window.cpp" line="189"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>Démarrer la pause suivante en faisant double-clic sur l&amp;apos;icône dans la barre des tâches</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="312"/>
+        <location filename="../../src/gui/pref-window.cpp" line="281"/>
+        <source>Setting auto start failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.cpp" line="333"/>
         <source>The preferences have been modified.</source>
         <translation>Les préférences ont été modifiées.</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="313"/>
+        <location filename="../../src/gui/pref-window.cpp" line="334"/>
         <source>Do you want to save your changes?</source>
         <translation>Voulez-vous sauvegarder les changements&#x202f;?</translation>
     </message>
