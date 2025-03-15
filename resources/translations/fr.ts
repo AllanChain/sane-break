@@ -6,12 +6,12 @@
     <message>
         <location filename="../../src/gui/break-window.cpp" line="72"/>
         <source>Time for a big break</source>
-        <translation type="unfinished"></translation>
+        <translation>Il est temps de faire une grosse pause</translation>
     </message>
     <message>
         <location filename="../../src/gui/break-window.cpp" line="73"/>
         <source>Time for a small break</source>
-        <translation type="unfinished"></translation>
+        <translation>Il est temps de faire une petite pause</translation>
     </message>
 </context>
 <context>
@@ -161,7 +161,7 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="473"/>
         <source>Postpone minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>Minutes de retard</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="571"/>
@@ -245,12 +245,12 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="878"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Aidez-nous à faire la traduction&#x202f;!&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1024"/>
         <source>Revert to Last Saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Revenir aux anciens paramètres sauvegardés</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="841"/>
@@ -289,9 +289,9 @@ v%1
         <location filename="../../src/gui/pref-window.cpp" line="133"/>
         <location filename="../../src/gui/pref-window.cpp" line="147"/>
         <source>Every %n min</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Chaque minute</numerusform>
+            <numerusform>Toutes les %n minutes</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -331,12 +331,12 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.cpp" line="312"/>
         <source>The preferences have been modified.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les préférences ont été modifiées.</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.cpp" line="313"/>
         <source>Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous sauvegarder les changements&#x202f;?</translation>
     </message>
 </context>
 <context>
@@ -424,7 +424,7 @@ v%1
         <location filename="../../src/app.cpp" line="177"/>
         <location filename="../../src/app.cpp" line="267"/>
         <source>Enter Reading Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer le mode Lecture</translation>
     </message>
     <message>
         <location filename="../../src/app.cpp" line="182"/>
@@ -435,9 +435,9 @@ v%1
         <location filename="../../src/app.cpp" line="191"/>
         <location filename="../../src/app.cpp" line="359"/>
         <source>Postpone %n min</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Retarder de %n min</numerusform>
+            <numerusform>Retarder de %n min</numerusform>
         </translation>
     </message>
     <message>
@@ -458,7 +458,7 @@ v%1
     <message>
         <location filename="../../src/app.cpp" line="270"/>
         <source>Exit Reading Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Quitter le mode Lecture</translation>
     </message>
 </context>
 <context>
@@ -471,7 +471,7 @@ v%1
     <message>
         <location filename="../../src/gui/welcome.cpp" line="108"/>
         <source>&lt;h3 align=center&gt;Welcome to Sane Break!&lt;/h3&gt;&lt;p&gt;Sane Break is a cross-platform break reminder designed to help you take meaningful breaks without disrupting your workflow. Sane Break will stay in the system tray and remind you to take breaks at regular intervals. To quit, go to &quot;Postpone&quot; in the tray menu.&lt;/p&gt;</source>
-        <translation>&lt;h3 align=center&gt;Bienvenue dans Sane Break&#x202f;!&lt;/h3&gt;&lt;p&gt;Sane Break est un logiciel trans-plateformes de rappel de pauses qui vous aide à prendre des pauses utiles sans perturber vos habitudes de travail. Sane Break se logera dans votre barre des tâches et vous rappellera de prendre des pauses à intervalle régulier. Pour quitter l&apos;appli, ouvrez le menu de l&apos;icône dans la barre des tâches et allez dans &quot;Différer&quot;.&lt;/p&gt;</translation>
+        <translation>&lt;h3 align=center&gt;Bienvenue dans Sane Break&#x202f;!&lt;/h3&gt;&lt;p&gt;Sane Break est un logiciel trans-plateformes de rappel de pauses qui vous aide à prendre des pauses utiles sans perturber vos habitudes de travail. Sane Break se logera dans votre barre des tâches et vous rappellera de prendre des pauses à intervalle régulier. Pour quitter l&apos;appli, ouvrez le menu de l&apos;icône dans la barre des tâches et allez dans la section &quot;Retarder&quot;.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/gui/welcome.cpp" line="87"/>
