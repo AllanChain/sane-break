@@ -287,8 +287,8 @@ v%1
         <location filename="../../src/gui/pref-window.cpp" line="133"/>
         <location filename="../../src/gui/pref-window.cpp" line="147"/>
         <source>Every %n min</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>每 %n 分钟</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -326,12 +326,12 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.cpp" line="312"/>
         <source>The preferences have been modified.</source>
-        <translation type="unfinished"></translation>
+        <translation>偏好设置已被修改。</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.cpp" line="313"/>
         <source>Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>是否保存修改？</translation>
     </message>
 </context>
 <context>
