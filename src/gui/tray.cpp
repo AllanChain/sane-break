@@ -71,9 +71,18 @@ StatusTray::StatusTray(QMenu *menu, QObject *parent) : StatusTrayWindow(menu, pa
   icon->setContextMenu(menu);
   connect(icon, &QSystemTrayIcon::activated, this,
           [=](QSystemTrayIcon::ActivationReason reason) {
-            if (reason == QSystemTrayIcon::DoubleClick ||
-                reason == QSystemTrayIcon::MiddleClick) {
-              emit breakTriggered();
+            switch (reason) {
+              case QSystemTrayIcon::DoubleClick:
+              case QSystemTrayIcon::MiddleClick:
+                emit breakTriggered();
+                break;
+#ifdef Q_OS_WINDOWS
+              case QSystemTrayIcon::Trigger:
+                icon->contextMenu()->popup(QCursor::pos());
+                break;
+#endif
+              default:
+                break;
             }
           });
 }
