@@ -4,14 +4,14 @@
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="133"/>
-        <location filename="../../src/gui/pref-window.cpp" line="155"/>
-        <location filename="../../src/gui/pref-window.cpp" line="177"/>
-        <location filename="../../src/gui/pref-window.cpp" line="178"/>
-        <location filename="../../src/gui/pref-window.cpp" line="179"/>
-        <location filename="../../src/gui/pref-window.cpp" line="240"/>
-        <location filename="../../src/gui/pref-window.cpp" line="246"/>
-        <location filename="../../src/gui/pref-window.cpp" line="253"/>
+        <location filename="../../src/gui/pref-window.cpp" line="138"/>
+        <location filename="../../src/gui/pref-window.cpp" line="160"/>
+        <location filename="../../src/gui/pref-window.cpp" line="182"/>
+        <location filename="../../src/gui/pref-window.cpp" line="183"/>
+        <location filename="../../src/gui/pref-window.cpp" line="184"/>
+        <location filename="../../src/gui/pref-window.cpp" line="245"/>
+        <location filename="../../src/gui/pref-window.cpp" line="251"/>
+        <location filename="../../src/gui/pref-window.cpp" line="258"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -19,8 +19,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="135"/>
-        <location filename="../../src/gui/pref-window.cpp" line="149"/>
+        <location filename="../../src/gui/pref-window.cpp" line="140"/>
+        <location filename="../../src/gui/pref-window.cpp" line="154"/>
         <source>Every %n min</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -28,10 +28,10 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="141"/>
-        <location filename="../../src/gui/pref-window.cpp" line="160"/>
-        <location filename="../../src/gui/pref-window.cpp" line="167"/>
-        <location filename="../../src/gui/pref-window.cpp" line="176"/>
+        <location filename="../../src/gui/pref-window.cpp" line="146"/>
+        <location filename="../../src/gui/pref-window.cpp" line="165"/>
+        <location filename="../../src/gui/pref-window.cpp" line="172"/>
+        <location filename="../../src/gui/pref-window.cpp" line="181"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec</numerusform>
@@ -39,7 +39,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="147"/>
+        <location filename="../../src/gui/pref-window.cpp" line="152"/>
         <source>%n break(s)</source>
         <translation>
             <numerusform>%n break</numerusform>

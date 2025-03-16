@@ -17,10 +17,40 @@
 #include <QVariant>
 
 #include "config.h"
+#include "preferences.h"
 
 void AutoStart::setEnabled(bool enabled) {
 #ifdef LINUX_DIST_FLATPAK
-  emit operationResult(false, tr("Flatpak is not supported yet")) return;
+  QDBusConnection sessionBus = QDBusConnection::sessionBus();
+  QDBusMessage msg = QDBusMessage::createMethodCall(
+      "org.freedesktop.portal.Desktop", "/org/freedesktop/portal/desktop",
+      "org.freedesktop.portal.Background", "RequestBackground");
+  int token = QRandomGenerator::global()->bounded(1000, 9999);
+  QMap<QString, QVariant> options = {
+      {"autostart", enabled},
+      {"background", enabled},
+      {"commandline", QStringList({"sane-break"})},
+      {"reason", "Launch Sane Break at startup"},
+      {"handle_token", QString("io/github/AllanChain/SaneBreak/%1").arg(token)}};
+  msg << "" << options;
+  QDBusMessage response = sessionBus.call(msg);
+
+  if (response.type() == QDBusMessage::ErrorMessage) {
+    emit operationResult(false, response.errorMessage());
+    return;
+  } else if (response.type() != QDBusMessage::ReplyMessage) {
+    emit operationResult(false, tr("Unknown error"));
+    return;
+  }
+
+  QDBusObjectPath handle = response.arguments().at(0).value<QDBusObjectPath>();
+  bool connected = sessionBus.connect("org.freedesktop.portal.Desktop", handle.path(),
+                                      "org.freedesktop.portal.Request", "Response",
+                                      this, SLOT(flatpakCallback(uint, QVariantMap)));
+  if (!connected) {
+    emit operationResult(false, tr("Failed to connect to Flatpak response"));
+    return;
+  }
 #else
   QString desktopPath =
       QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) +
@@ -53,9 +83,18 @@ void AutoStart::setEnabled(bool enabled) {
 
 bool AutoStart::isEnabled() {
 #ifdef LINUX_DIST_FLATPAK
-  return false;
+  return SanePreferences::autoStart;
 #endif
   QFile file(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) +
              "/autostart/sane-break.desktop");
   return file.exists();
 }
+
+#ifdef LINUX_DIST_FLATPAK
+void AutoStart::flatpakCallback(uint response, const QVariantMap& results) {
+  if (response > 0)
+    emit operationResult(false, tr("The request to autostart was cancelled."));
+  else
+    emit operationResult(true);
+}
+#endif

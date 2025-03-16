@@ -50,3 +50,4 @@ Setting<bool>* SanePreferences::pauseOnBattery =
 Setting<QStringList>* SanePreferences::programsToMonitor =
     new Setting<QStringList>("pause/programs-to-monitor", QStringList());
 Setting<QString>* SanePreferences::language = new Setting<QString>("language", "");
+Setting<bool>* SanePreferences::autoStart = new Setting<bool>("auto-start", false);

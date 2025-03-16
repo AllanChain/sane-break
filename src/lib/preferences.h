@@ -71,6 +71,7 @@ class SanePreferences : public QObject {
   static Setting<bool> *pauseOnBattery;
   static Setting<QStringList> *programsToMonitor;
   static Setting<QString> *language;
+  static Setting<bool> *autoStart;
 };
 
 #endif  // SANE_PREFERENCES_H

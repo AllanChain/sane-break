@@ -7,13 +7,19 @@
 
 #include <QObject>
 
+#include "config.h"
+
 class AutoStart : public QObject {
   Q_OBJECT
 
  public:
-  AutoStart(QObject *parent = nullptr) : QObject(parent) {};
+  AutoStart(QObject* parent = nullptr) : QObject(parent) {};
   void setEnabled(bool enabled);
   bool isEnabled();
+#ifdef LINUX_DIST_FLATPAK
+ public slots:
+  void flatpakCallback(uint response, const QVariantMap& results);
+#endif
 
  signals:
   void operationResult(bool succeeded, QString error = QString());

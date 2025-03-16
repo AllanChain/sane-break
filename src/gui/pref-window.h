@@ -39,6 +39,7 @@ class PrefControllerBase : public QObject {
   virtual void loadValue() {};
   void onChange();
  signals:
+  void loaded();
   // This is like onChange for underlying widgets, but also emits when values are loaded
   // from settings (which does not necessarily change the value of the widget). This is
   // useful when we want to sync the labels with the value of the setting.

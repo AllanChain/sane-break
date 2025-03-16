@@ -4,14 +4,19 @@
 <context>
     <name>AutoStart</name>
     <message>
-        <location filename="../../src/lib/linux/auto-start.cpp" line="23"/>
-        <source>Flatpak is not supported yet</source>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="51"/>
+        <source>Failed to connect to Flatpak response</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/lib/linux/auto-start.cpp" line="43"/>
-        <location filename="../../src/lib/linux/auto-start.cpp" line="49"/>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="73"/>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="79"/>
         <source>File not writable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="96"/>
+        <source>The request to autostart was cancelled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -20,6 +25,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="42"/>
         <location filename="../../src/lib/windows/auto-start.cpp" line="28"/>
         <source>Unknown error</source>
         <translation type="unfinished"></translation>
@@ -300,14 +306,14 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="133"/>
-        <location filename="../../src/gui/pref-window.cpp" line="155"/>
-        <location filename="../../src/gui/pref-window.cpp" line="177"/>
-        <location filename="../../src/gui/pref-window.cpp" line="178"/>
-        <location filename="../../src/gui/pref-window.cpp" line="179"/>
-        <location filename="../../src/gui/pref-window.cpp" line="240"/>
-        <location filename="../../src/gui/pref-window.cpp" line="246"/>
-        <location filename="../../src/gui/pref-window.cpp" line="253"/>
+        <location filename="../../src/gui/pref-window.cpp" line="138"/>
+        <location filename="../../src/gui/pref-window.cpp" line="160"/>
+        <location filename="../../src/gui/pref-window.cpp" line="182"/>
+        <location filename="../../src/gui/pref-window.cpp" line="183"/>
+        <location filename="../../src/gui/pref-window.cpp" line="184"/>
+        <location filename="../../src/gui/pref-window.cpp" line="245"/>
+        <location filename="../../src/gui/pref-window.cpp" line="251"/>
+        <location filename="../../src/gui/pref-window.cpp" line="258"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -315,8 +321,8 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="135"/>
-        <location filename="../../src/gui/pref-window.cpp" line="149"/>
+        <location filename="../../src/gui/pref-window.cpp" line="140"/>
+        <location filename="../../src/gui/pref-window.cpp" line="154"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>Chaque minute</numerusform>
@@ -324,10 +330,10 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="141"/>
-        <location filename="../../src/gui/pref-window.cpp" line="160"/>
-        <location filename="../../src/gui/pref-window.cpp" line="167"/>
-        <location filename="../../src/gui/pref-window.cpp" line="176"/>
+        <location filename="../../src/gui/pref-window.cpp" line="146"/>
+        <location filename="../../src/gui/pref-window.cpp" line="165"/>
+        <location filename="../../src/gui/pref-window.cpp" line="172"/>
+        <location filename="../../src/gui/pref-window.cpp" line="181"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec</numerusform>
@@ -335,7 +341,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="147"/>
+        <location filename="../../src/gui/pref-window.cpp" line="152"/>
         <source>%n break(s)</source>
         <translation>
             <numerusform>%n pause</numerusform>
@@ -343,32 +349,32 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="175"/>
+        <location filename="../../src/gui/pref-window.cpp" line="180"/>
         <source>Disabled</source>
         <translation>Désactivé</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="185"/>
+        <location filename="../../src/gui/pref-window.cpp" line="190"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>Démarrer la pause suivante en faisant clic du milieu sur l&amp;apos;icône dans la barre des tâches</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="189"/>
+        <location filename="../../src/gui/pref-window.cpp" line="194"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>Démarrer la pause suivante en faisant double-clic sur l&amp;apos;icône dans la barre des tâches</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="281"/>
+        <location filename="../../src/gui/pref-window.cpp" line="290"/>
         <source>Setting auto start failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="333"/>
+        <location filename="../../src/gui/pref-window.cpp" line="342"/>
         <source>The preferences have been modified.</source>
         <translation>Les préférences ont été modifiées.</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="334"/>
+        <location filename="../../src/gui/pref-window.cpp" line="343"/>
         <source>Do you want to save your changes?</source>
         <translation>Voulez-vous sauvegarder les changements&#x202f;?</translation>
     </message>
