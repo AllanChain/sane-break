@@ -157,6 +157,11 @@ l&apos;écran sera quand même bloqué.</translation>
         <translation>Merci d&apos;octroyer les droits d&apos;accès et de redémarrer l&apos;appli pour utiliser le verrouillage d&apos;écran</translation>
     </message>
     <message>
+        <location filename="../../src/gui/pref-window.ui" line="890"/>
+        <source>Enable autostart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/gui/pref-window.ui" line="944"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
@@ -276,11 +281,6 @@ v%1
         <location filename="../../src/gui/pref-window.ui" line="878"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Aidez-nous à faire la traduction&#x202f;!&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <location filename="../../src/gui/pref-window.ui" line="890"/>
-        <source>Enabled autostart</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1031"/>

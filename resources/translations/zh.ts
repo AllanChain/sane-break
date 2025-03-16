@@ -166,6 +166,11 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
         <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;帮我们翻译！&lt;/a&gt;</translation>
     </message>
     <message>
+        <location filename="../../src/gui/pref-window.ui" line="890"/>
+        <source>Enable autostart</source>
+        <translation>开机自动启动</translation>
+    </message>
+    <message>
         <location filename="../../src/gui/pref-window.ui" line="944"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
@@ -275,11 +280,6 @@ v%1
         <location filename="../../src/gui/pref-window.ui" line="851"/>
         <source>Configuration file</source>
         <translation>配置文件</translation>
-    </message>
-    <message>
-        <location filename="../../src/gui/pref-window.ui" line="890"/>
-        <source>Enabled autostart</source>
-        <translation>开机自动启动</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1031"/>

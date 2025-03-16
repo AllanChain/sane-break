@@ -887,7 +887,7 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
          <item>
           <widget class="QCheckBox" name="autoStart">
            <property name="text">
-            <string>Enabled autostart</string>
+            <string>Enable autostart</string>
            </property>
           </widget>
          </item>
