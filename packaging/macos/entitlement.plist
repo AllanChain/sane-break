@@ -8,7 +8,5 @@
 	<string>93Y9CUWWD5.io.github.AllanChain.sane-break</string>
 	<key>com.apple.developer.team-identifier</key>
 	<string>93Y9CUWWD5</string>
-	<key>com.apple.security.login-item-management</key>
-	<true/>
 </dict>
 </plist>
