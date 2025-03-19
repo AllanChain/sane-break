@@ -61,6 +61,7 @@ BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) 
   layout->setContentsMargins(0, 0, 0, 0);
 
   QProgressBar *progressBar = new QProgressBar();
+  progressBar->setMaximum(10000);
   progressBar->setTextVisible(false);
   layout->addWidget(progressBar);
 
@@ -81,7 +82,7 @@ BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) 
   textLayout->addWidget(countdownLabel);
 
   progressAnim = new QPropertyAnimation(progressBar, "value");
-  progressAnim->setStartValue(100);
+  progressAnim->setStartValue(progressBar->maximum());
   progressAnim->setEndValue(0);
 
   bgAnim = new QPropertyAnimation(this, "color");
