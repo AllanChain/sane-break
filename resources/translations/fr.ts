@@ -6,29 +6,29 @@
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="51"/>
         <source>Failed to connect to Flatpak response</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec lors de la connexion à la réponse Flatpak</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="73"/>
         <location filename="../../src/lib/linux/auto-start.cpp" line="79"/>
         <source>File not writable</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier inaccessible à l&apos;écriture</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="96"/>
         <source>The request to autostart was cancelled.</source>
-        <translation type="unfinished"></translation>
+        <translation>La requête de démarrage automatique a été annulée.</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="25"/>
         <source>Permission denied</source>
-        <translation type="unfinished"></translation>
+        <translation>Permission refusée</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="42"/>
         <location filename="../../src/lib/windows/auto-start.cpp" line="28"/>
         <source>Unknown error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur inconnue</translation>
     </message>
 </context>
 <context>
@@ -159,7 +159,7 @@ l&apos;écran sera quand même bloqué.</translation>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="890"/>
         <source>Enable autostart</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer le démarrage automatique</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="944"/>
@@ -366,7 +366,7 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.cpp" line="290"/>
         <source>Setting auto start failed</source>
-        <translation type="unfinished"></translation>
+        <translation>La mise en place du démarrage automatique a échoué</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.cpp" line="342"/>
