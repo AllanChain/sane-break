@@ -2,6 +2,6 @@
 	"uuid": "sane-break@allanchain.github.io",
 	"name": "Sane Break GNOME",
 	"description": "Make Sane Break work on GNOME",
-	"shell-version": ["45", "46", "47"],
+	"shell-version": ["45", "46", "47", "48"],
 	"url": "https://github.com/AllanChain/sane-break"
 }
