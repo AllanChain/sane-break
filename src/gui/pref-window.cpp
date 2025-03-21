@@ -24,9 +24,9 @@
 #include <QRegularExpressionValidator>
 #include <QSettings>
 #include <QSlider>
+#include <QSpinBox>
 #include <QString>
 #include <QStringList>
-#include <QStyleOptionSlider>
 #include <QVBoxLayout>
 #include <QWidget>
 #include <Qt>
@@ -106,9 +106,9 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
   setWindowFlag(Qt::Dialog);
   setWindowIcon(QIcon(":/images/icon_tray-color.png"));
 
-  QWidget *centralWidget = new QWidget(this);
-  setCentralWidget(centralWidget);
-  ui->setupUi(centralWidget);
+  ui->setupUi(this);
+  ui->stackedWidget->setFixedHeight(
+      ui->stackedWidget->currentWidget()->sizeHint().height());
   soundPlayer = new SoundPlayer(this);
   controllers = new ControllerHolder(this);
   autoStart = new AutoStart(this);
@@ -118,8 +118,8 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
    *                               Tab switch                                *
    *                                                                         *
    ****************************************************************************/
-  tabButtons = {ui->tabBreakButton, ui->tabSoundButton, ui->tabPauseButton,
-                ui->tabGeneralButton, ui->tabAboutButton};
+  tabButtons = {ui->tabBreakButton, ui->tabPauseButton, ui->tabGeneralButton,
+                ui->tabAboutButton};
   for (int i = 0; i < tabButtons.size(); ++i) {
     connect(tabButtons[i], &QPushButton::released, this, [this, i]() { setTab(i); });
   }
@@ -131,46 +131,32 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
    *                                Break tab                                *
    *                                                                         *
    ****************************************************************************/
-  connect(controllers->add(new PrefController<QSlider, Setting<int>>(
-              ui->smallBreakEverySlider, SanePreferences::smallEvery, 60)),
+  connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
+              ui->smallBreakEveryBox, SanePreferences::smallEvery, 60)),
           &PrefControllerBase::explictSync, this, [this]() {
-            int value = ui->smallBreakEverySlider->value();
-            ui->smallBreakEveryLabel->setText(tr("%n min", "", value));
-            ui->bigBreakAfterLabel->setToolTip(
-                tr("Every %n min", "", value * ui->bigBreakAfterSlider->value()));
+            int value = ui->smallBreakEveryBox->value();
+            ui->bigBreakAfterBox->setToolTip(
+                tr("Every %n min", "", value * ui->bigBreakAfterBox->value()));
           });
-  connect(controllers->add(new PrefController<QSlider, Setting<int>>(
-              ui->smallBreakForSlider, SanePreferences::smallFor)),
+  controllers->add(new PrefController<QSpinBox, Setting<int>>(
+      ui->smallBreakForBox, SanePreferences::smallFor));
+  connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
+              ui->bigBreakAfterBox, SanePreferences::bigAfter)),
           &PrefControllerBase::explictSync, this, [this]() {
-            ui->smallBreakForLabel->setText(
-                tr("%n sec", "", ui->smallBreakEverySlider->value()));
+            int value = ui->bigBreakAfterBox->value();
+            ui->bigBreakAfterBox->setToolTip(
+                tr("Every %n min", "", value * ui->smallBreakEveryBox->value()));
           });
-  connect(controllers->add(new PrefController<QSlider, Setting<int>>(
-              ui->bigBreakAfterSlider, SanePreferences::bigAfter)),
+  controllers->add(new PrefController<QSpinBox, Setting<int>>(
+      ui->bigBreakForBox, SanePreferences::bigFor, 60));
+  connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
+              ui->flashForBox, SanePreferences::flashFor)),
           &PrefControllerBase::explictSync, this, [this]() {
-            int value = ui->bigBreakAfterSlider->value();
-            ui->bigBreakAfterLabel->setText(tr("%n break(s)", "", value));
-            ui->bigBreakAfterLabel->setToolTip(
-                tr("Every %n min", "", value * ui->smallBreakEverySlider->value()));
+            ui->confirmAfterBox->setMaximum(ui->flashForBox->value());
+            ui->confirmAfterSlider->setMaximum(ui->flashForBox->value());
           });
-  connect(
-      controllers->add(new PrefController<QSlider, Setting<int>>(
-          ui->bigBreakForSlider, SanePreferences::bigFor, 60)),
-      &PrefControllerBase::explictSync, this, [this]() {
-        ui->bigBreakForLabel->setText(tr("%n min", "", ui->bigBreakForSlider->value()));
-      });
-  connect(controllers->add(new PrefController<QSlider, Setting<int>>(
-              ui->flashForSlider, SanePreferences::flashFor)),
-          &PrefControllerBase::explictSync, this, [this]() {
-            ui->flashForLabel->setText(tr("%n sec", "", ui->flashForSlider->value()));
-            ui->confirmAfterSlider->setMaximum(ui->flashForSlider->value());
-          });
-  connect(controllers->add(new PrefController<QSlider, Setting<int>>(
-              ui->confirmAfterSlider, SanePreferences::confirmAfter)),
-          &PrefControllerBase::explictSync, this, [this]() {
-            ui->confirmAfterLabel->setText(
-                tr("%n sec", "", ui->confirmAfterSlider->value()));
-          });
+  controllers->add(new PrefController<QSpinBox, Setting<int>>(
+      ui->confirmAfterBox, SanePreferences::confirmAfter));
 
   QRegularExpression re("^\\d+(,\\d+)*$");
   ui->postponeMinutes->setValidator(new QRegularExpressionValidator(re, this));
@@ -238,26 +224,20 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
    *                                Pause tab                                *
    *                                                                         *
    ****************************************************************************/
-  connect(
-      controllers->add(new PrefController<QSlider, Setting<int>>(
-          ui->pauseOnIdleSlider, SanePreferences::pauseOnIdleFor, 60)),
-      &PrefControllerBase::explictSync, this, [this]() {
-        ui->pauseOnIdleLabel->setText(tr("%n min", "", ui->pauseOnIdleSlider->value()));
-      });
-  connect(
-      controllers->add(new PrefController<QSlider, Setting<int>>(
-          ui->resetBreakSlider, SanePreferences::resetAfterPause, 60)),
-      &PrefControllerBase::explictSync, this, [this]() {
-        ui->resetBreakLabel->setText(tr("%n min", "", ui->resetBreakSlider->value()));
-        ui->resetCycleSlider->setMinimum(ui->resetBreakSlider->value());
-      });
-  connect(
-      controllers->add(new PrefController<QSlider, Setting<int>>(
-          ui->resetCycleSlider, SanePreferences::resetCycleAfterPause, 60)),
-      &PrefControllerBase::explictSync, this, [this]() {
-        ui->resetCycleLabel->setText(tr("%n min", "", ui->resetCycleSlider->value()));
-        ui->resetBreakSlider->setMaximum(ui->resetCycleSlider->value());
-      });
+  controllers->add(new PrefController<QSpinBox, Setting<int>>(
+      ui->pauseOnIdleBox, SanePreferences::pauseOnIdleFor, 60));
+  connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
+              ui->resetBreakBox, SanePreferences::resetAfterPause, 60)),
+          &PrefControllerBase::explictSync, this, [this]() {
+            ui->resetCycleBox->setMinimum(ui->resetBreakBox->value());
+            ui->resetCycleSlider->setMinimum(ui->resetBreakBox->value());
+          });
+  connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
+              ui->resetCycleBox, SanePreferences::resetCycleAfterPause, 60)),
+          &PrefControllerBase::explictSync, this, [this]() {
+            ui->resetBreakBox->setMaximum(ui->resetCycleBox->value());
+            ui->resetBreakSlider->setMaximum(ui->resetCycleBox->value());
+          });
   controllers->add(new PrefController<QCheckBox, Setting<bool>>(
       ui->pauseOnBatteryCheck, SanePreferences::pauseOnBattery));
   controllers->add(new PrefController<QPlainTextEdit, Setting<QStringList>>(
@@ -332,7 +312,9 @@ void PreferenceWindow::setTab(int tabNum) {
   for (int i = 0; i < tabButtons.size(); ++i) {
     tabButtons[i]->setChecked(i == tabNum);
   }
-  ui->controlBar->setHidden(tabNum == 4);
+  ui->controlBar->setHidden(tabNum == 3);
+  ui->stackedWidget->setFixedHeight(
+      ui->stackedWidget->currentWidget()->sizeHint().height());
 }
 
 bool PreferenceWindow::confirmLeave() {

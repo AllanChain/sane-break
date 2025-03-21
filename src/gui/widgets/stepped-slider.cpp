@@ -18,6 +18,18 @@ SteppedSlider::SteppedSlider(QWidget *parent) : QSlider(parent) {
   setTickPosition(QSlider::TicksBelow);
 }
 
+void SteppedSlider::setValueForce(int value) {
+  if (value > maximum()) {
+    setMaximum(value);
+    setValue(value);
+  } else if (value < minimum()) {
+    setMinimum(value);
+    setValue(value);
+  } else {
+    setValue(value);
+  }
+}
+
 void SteppedSlider::mousePressEvent(QMouseEvent *event) {
   if (event->button() == Qt::LeftButton) {
     int value = calculateValueFromPosition(event->pos());

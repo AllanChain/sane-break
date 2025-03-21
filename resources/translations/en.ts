@@ -4,14 +4,9 @@
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="138"/>
-        <location filename="../../src/gui/pref-window.cpp" line="160"/>
-        <location filename="../../src/gui/pref-window.cpp" line="182"/>
-        <location filename="../../src/gui/pref-window.cpp" line="183"/>
-        <location filename="../../src/gui/pref-window.cpp" line="184"/>
-        <location filename="../../src/gui/pref-window.cpp" line="245"/>
-        <location filename="../../src/gui/pref-window.cpp" line="251"/>
-        <location filename="../../src/gui/pref-window.cpp" line="258"/>
+        <location filename="../../src/gui/pref-window.cpp" line="168"/>
+        <location filename="../../src/gui/pref-window.cpp" line="169"/>
+        <location filename="../../src/gui/pref-window.cpp" line="170"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -19,8 +14,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="140"/>
-        <location filename="../../src/gui/pref-window.cpp" line="154"/>
+        <location filename="../../src/gui/pref-window.cpp" line="139"/>
+        <location filename="../../src/gui/pref-window.cpp" line="148"/>
         <source>Every %n min</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -28,22 +23,11 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="146"/>
-        <location filename="../../src/gui/pref-window.cpp" line="165"/>
-        <location filename="../../src/gui/pref-window.cpp" line="172"/>
-        <location filename="../../src/gui/pref-window.cpp" line="181"/>
+        <location filename="../../src/gui/pref-window.cpp" line="167"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec</numerusform>
             <numerusform>%n sec</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="152"/>
-        <source>%n break(s)</source>
-        <translation>
-            <numerusform>%n break</numerusform>
-            <numerusform>%n breaks</numerusform>
         </translation>
     </message>
 </context>

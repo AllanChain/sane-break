@@ -16,6 +16,9 @@ class SteppedSlider : public QSlider {
  public:
   SteppedSlider(QWidget *parent = nullptr);
 
+ public slots:
+  void setValueForce(int value);
+
  protected:
   void mousePressEvent(QMouseEvent *event) override;
   void mouseMoveEvent(QMouseEvent *event) override;

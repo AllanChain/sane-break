@@ -8,6 +8,7 @@
 
 #include <QApplication>
 #include <QColor>
+#include <QFile>
 #include <QLabel>
 #include <QMainWindow>
 #include <QProgressBar>
@@ -51,6 +52,12 @@ BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) 
                  Qt::WindowStaysOnTopHint);
   setWindowTitle("Break reminder - Sane Break");
   setProperty("isFullScreen", false);
+
+  // HACK: Not setting this at main.cpp because of
+  // https://bugreports.qt.io/browse/QTBUG-133845
+  QFile styleSheet(":/style.css");
+  if (styleSheet.open(QIODevice::ReadOnly | QIODevice::Text))
+    setStyleSheet(styleSheet.readAll());
 
   mainWidget = new QWidget(this);
   if (!waylandWorkaround) setCentralWidget(mainWidget);

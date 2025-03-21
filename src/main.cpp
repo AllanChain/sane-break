@@ -27,10 +27,6 @@ int main(int argc, char *argv[]) {
   QSettings::setDefaultFormat(QSettings::IniFormat);
   QApplication a(argc, argv);
 
-  QFile styleSheet(":/style.css");
-  if (styleSheet.open(QIODevice::ReadOnly | QIODevice::Text))
-    a.setStyleSheet(styleSheet.readAll());
-
   a.setApplicationDisplayName("Sane Break");
   if (QSystemTrayIcon::isSystemTrayAvailable()) a.setQuitOnLastWindowClosed(false);
 

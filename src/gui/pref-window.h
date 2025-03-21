@@ -17,6 +17,7 @@
 #include <QProcess>
 #include <QPushButton>
 #include <QSlider>
+#include <QSpinBox>
 #include <QString>
 #include <QStringList>
 #include <QWidget>
@@ -85,6 +86,23 @@ class PrefController<QSlider, Setting<int>> : public PrefControllerBase {
         setting(setting),
         multiplier(multiplier) {
     connect(widget, &QSlider::valueChanged, this, &PrefControllerBase::onChange);
+  };
+  void loadValue() { widget->setValue(setting->get() / multiplier); }
+  void saveValue() { setting->set(widget->value() * multiplier); }
+};
+
+template <>
+class PrefController<QSpinBox, Setting<int>> : public PrefControllerBase {
+ public:
+  QSpinBox *widget;
+  Setting<int> *setting;
+  int multiplier;
+  PrefController(QSpinBox *parent, Setting<int> *setting, int multiplier = 1)
+      : PrefControllerBase(parent),
+        widget(parent),
+        setting(setting),
+        multiplier(multiplier) {
+    connect(widget, &QSpinBox::valueChanged, this, &PrefControllerBase::onChange);
   };
   void loadValue() { widget->setValue(setting->get() / multiplier); }
   void saveValue() { setting->set(widget->value() * multiplier); }
