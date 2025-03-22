@@ -1117,7 +1117,7 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
                 <item alignment="Qt::AlignmentFlag::AlignTop">
                  <widget class="QLabel" name="quickBreakLabel">
                   <property name="text">
-                   <string>Start next break after %1 on tray icon</string>
+                   <string notr="true">Start next break after %1 on tray icon</string>
                   </property>
                   <property name="wordWrap">
                    <bool>true</bool>

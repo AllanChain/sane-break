@@ -39,7 +39,7 @@ if(Qt6_FOUND AND Qt6LinguistTools_FOUND)
   file(GLOB TS_FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/translations/*.ts")
   if(${Qt6_VERSION} VERSION_GREATER_EQUAL "6.7")
     message(STATUS "Enable modern translations")
-    list(FILTER TS_FILES EXCLUDE REGEX ".*/en\\.ts$")
+    list(FILTER TS_FILES EXCLUDE REGEX ".*/(en|zh)\\.ts$")
     file(GLOB_RECURSE SOURCES_TO_TRANSLATE "src/*.cpp" "src/*.ui")
     qt_add_translations(
       sane-break
@@ -47,6 +47,15 @@ if(Qt6_FOUND AND Qt6LinguistTools_FOUND)
       ${TS_FILES}
       PLURALS_TS_FILE
       "${CMAKE_CURRENT_SOURCE_DIR}/resources/translations/en.ts"
+      SOURCES
+      ${SOURCES_TO_TRANSLATE}
+    )
+    # zh.ts is used as template for new languages on Weblate. Therefore, any obsolute
+    # strings should be removed
+    qt_add_translations(
+      sane-break
+      TS_FILES
+      "${CMAKE_CURRENT_SOURCE_DIR}/resources/translations/zh.ts"
       SOURCES
       ${SOURCES_TO_TRANSLATE}
       LUPDATE_OPTIONS
