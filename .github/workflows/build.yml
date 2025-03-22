@@ -5,8 +5,8 @@ name: Build app
 
 on:
   push:
-    branches:
-      - '**'
+    branches-ignore:
+      - 'weblate'
     tags:
       - '*'
     paths-ignore:
