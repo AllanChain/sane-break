@@ -270,11 +270,13 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
       ui->autoScreenLock, SanePreferences::autoScreenLock));
 
 #ifdef Q_OS_LINUX
-  ui->quickBreak->setText(tr("Start next break after middle clicking on tray icon"));
+  ui->quickBreakLabel->setText(
+      tr("Start next break after middle clicking on tray icon"));
   controllers->add(new PrefController<QCheckBox, Setting<bool>>(
       ui->quickBreak, SanePreferences::quickBreak));
 #elif defined Q_OS_WIN
-  ui->quickBreak->setText(tr("Start next break after double clicking on tray icon"));
+  ui->quickBreakLabel->setText(
+      tr("Start next break after double clicking on tray icon"));
   controllers->add(new PrefController<QCheckBox, Setting<bool>>(
       ui->quickBreak, SanePreferences::quickBreak));
 #elif defined Q_OS_MAC

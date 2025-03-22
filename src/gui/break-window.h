@@ -26,6 +26,8 @@ class BreakWindow : public QMainWindow {
  public:
   BreakWindow(BreakType type, QWidget *parent = nullptr);
   ~BreakWindow();
+  static const int SMALL_WINDOW_WIDTH;
+  static const int SMALL_WINDOW_HEIGHT;
   void start(int totalTime);
   void setTime(int remainingTime);
   void resetProgressbar();

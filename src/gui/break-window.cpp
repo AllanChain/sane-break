@@ -36,6 +36,9 @@
 #include "macos/workspace.h"
 #endif
 
+const int BreakWindow::SMALL_WINDOW_WIDTH = 400;
+const int BreakWindow::SMALL_WINDOW_HEIGHT = 120;
+
 BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) {
 #ifdef Q_OS_LINUX
   // Positioning windows on Wayland is nearly impossible without layer shell protol.
@@ -169,7 +172,8 @@ void BreakWindow::resizeToNormal() {
   QPropertyAnimation *resizeAnim =
       new QPropertyAnimation(waylandWorkaround ? mainWidget : this, "geometry");
   QRect rect = waylandWorkaround ? screen()->availableGeometry() : screen()->geometry();
-  QRect targetGeometry = QRect(rect.x() + rect.width() / 2 - 150, rect.y(), 300, 100);
+  QRect targetGeometry = QRect(rect.x() + rect.width() / 2 - SMALL_WINDOW_WIDTH / 2,
+                               rect.y(), SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
   resizeAnim->setStartValue(waylandWorkaround ? mainWidget->geometry() : geometry());
   resizeAnim->setEndValue(targetGeometry);
   resizeAnim->setDuration(100);
@@ -184,10 +188,12 @@ void BreakWindow::initSize(QScreen *screen) {
     // See https://askubuntu.com/questions/1122921.
     rect.setHeight(100);
     setGeometry(rect);
-    mainWidget->setGeometry(rect.x() + rect.width() / 2 - 150, rect.y(), 300, 100);
+    mainWidget->setGeometry(rect.x() + rect.width() / 2 - SMALL_WINDOW_WIDTH / 2,
+                            rect.y(), SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
   } else {
     QRect rect = screen->geometry();
-    setGeometry(rect.x() + rect.width() / 2 - 150, rect.y(), 300, 100);
+    setGeometry(rect.x() + rect.width() / 2 - SMALL_WINDOW_WIDTH / 2, rect.y(),
+                SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
   }
   show();
   hide();

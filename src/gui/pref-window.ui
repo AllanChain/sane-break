@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>700</width>
-    <height>500</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,7 +31,7 @@
      <widget class="QWidget" name="sideBar" native="true">
       <property name="minimumSize">
        <size>
-        <width>100</width>
+        <width>120</width>
         <height>0</height>
        </size>
       </property>
@@ -230,8 +230,8 @@ QPushButton[flat=&quot;true&quot;]:checked {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>580</width>
-           <height>488</height>
+           <width>660</width>
+           <height>588</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -993,15 +993,15 @@ QPushButton[flat=&quot;true&quot;]:checked {
              <layout class="QVBoxLayout" name="verticalLayout_7">
               <item>
                <layout class="QGridLayout" name="gridLayout_4">
+                <item row="1" column="1">
+                 <widget class="LanguageSelect" name="languageSelect"/>
+                </item>
                 <item row="1" column="0">
                  <widget class="QLabel" name="languageLabel">
                   <property name="text">
                    <string>Language</string>
                   </property>
                  </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="LanguageSelect" name="languageSelect"/>
                 </item>
                 <item row="0" column="0">
                  <widget class="QLabel" name="label_18">
@@ -1028,9 +1028,12 @@ QPushButton[flat=&quot;true&quot;]:checked {
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
                  </widget>
                 </item>
-                <item row="2" column="0">
+                <item row="2" column="0" alignment="Qt::AlignmentFlag::AlignTop">
                  <widget class="QLabel" name="label_19">
                   <property name="text">
                    <string>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</string>
@@ -1085,6 +1088,9 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
                   </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
                  </widget>
                 </item>
                </layout>
@@ -1097,11 +1103,28 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
                </widget>
               </item>
               <item>
-               <widget class="QCheckBox" name="quickBreak">
-                <property name="text">
-                 <string notr="true">Start next break after %1 on tray icon</string>
+               <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,1">
+                <property name="spacing">
+                 <number>3</number>
                 </property>
-               </widget>
+                <item alignment="Qt::AlignmentFlag::AlignTop">
+                 <widget class="QCheckBox" name="quickBreak">
+                  <property name="text">
+                   <string notr="true"/>
+                  </property>
+                 </widget>
+                </item>
+                <item alignment="Qt::AlignmentFlag::AlignTop">
+                 <widget class="QLabel" name="quickBreakLabel">
+                  <property name="text">
+                   <string>Start next break after %1 on tray icon</string>
+                  </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item>
                <spacer name="verticalSpacer_3">
