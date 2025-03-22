@@ -37,29 +37,34 @@ find_package(Qt6 COMPONENTS LinguistTools)
 if(Qt6_FOUND AND Qt6LinguistTools_FOUND)
   set(WITH_TRANSLATIONS ON)
   file(GLOB TS_FILES "${CMAKE_CURRENT_SOURCE_DIR}/resources/translations/*.ts")
+  set(OTHER_TS_FILES ${TS_FILES})
+  list(FILTER OTHER_TS_FILES EXCLUDE REGEX ".*/(en|zh)\\.ts$")
   if(${Qt6_VERSION} VERSION_GREATER_EQUAL "6.7")
     message(STATUS "Enable modern translations")
-    list(FILTER TS_FILES EXCLUDE REGEX ".*/en\\.ts$")
     file(GLOB_RECURSE SOURCES_TO_TRANSLATE "src/*.cpp" "src/*.ui")
     # zh.ts is used as template for new languages on Weblate. Therefore, any obsolute
     # strings should be removed
-    qt_add_translations(
-      sane-break
+    qt_add_lupdate(
       TS_FILES
       "${CMAKE_CURRENT_SOURCE_DIR}/resources/translations/zh.ts"
-      SOURCES
-      ${SOURCES_TO_TRANSLATE}
-      LUPDATE_OPTIONS
-      -no-obsolete
-    )
-    qt_add_translations(
-      sane-break
-      TS_FILES
-      ${TS_FILES}
       PLURALS_TS_FILE
       "${CMAKE_CURRENT_SOURCE_DIR}/resources/translations/en.ts"
       SOURCES
       ${SOURCES_TO_TRANSLATE}
+      OPTIONS
+      -no-obsolete
+    )
+    qt_add_lupdate(TS_FILES ${OTHER_TS_FILES} SOURCES ${SOURCES_TO_TRANSLATE})
+    qt_add_lrelease(TS_FILES ${TS_FILES} QM_FILES_OUTPUT_VARIABLE QM_FILES)
+    qt_add_resources(
+      sane-break
+      "translations"
+      PREFIX
+      "/i18n"
+      BASE
+      "${CMAKE_CURRENT_BINARY_DIR}"
+      FILES
+      "${QM_FILES}"
     )
   else()
     message(STATUS "Enable legacy translations")
