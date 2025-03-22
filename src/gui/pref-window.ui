@@ -1270,6 +1270,9 @@ v%1
             <layout class="QHBoxLayout" name="horizontalLayout_1">
              <item>
               <widget class="QPushButton" name="resetButton">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string>Revert to Last Saved</string>
                </property>

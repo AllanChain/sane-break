@@ -302,6 +302,8 @@ connect(osaProcess, &QProcess::finished, this,
   connect(ui->saveButton, &QPushButton::pressed, controllers, &ControllerHolder::save);
   connect(controllers, &ControllerHolder::dirtyChanged, ui->saveButton,
           &QPushButton::setEnabled);
+  connect(controllers, &ControllerHolder::dirtyChanged, ui->resetButton,
+          &QPushButton::setEnabled);
 }
 
 PreferenceWindow::~PreferenceWindow() { delete ui; }
