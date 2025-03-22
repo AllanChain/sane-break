@@ -210,7 +210,7 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="213"/>
         <source>&lt;h3&gt;Small Breaks&lt;/h3&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;Korte pauze&lt;/h3&gt;</translation>
+        <translation>&lt;h3&gt;Korte pauzes&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="229"/>
@@ -225,26 +225,26 @@ v%1
         <location filename="../../src/gui/pref-window.ui" line="242"/>
         <location filename="../../src/gui/pref-window.ui" line="421"/>
         <source>Bell before breaks</source>
-        <translation type="unfinished">Bel vóór pauze</translation>
+        <translation>Bel vóór pauzes</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="274"/>
         <location filename="../../src/gui/pref-window.ui" line="546"/>
         <location filename="../../src/gui/pref-window.ui" line="581"/>
         <source> sec</source>
-        <translation> sec</translation>
+        <translation> sec.</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="287"/>
         <location filename="../../src/gui/pref-window.ui" line="512"/>
         <source>Break length</source>
-        <translation type="unfinished"></translation>
+        <translation>Pauzeduur</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="356"/>
         <location filename="../../src/gui/pref-window.ui" line="502"/>
         <source>Bell after breaks</source>
-        <translation type="unfinished">Bel ná pauze</translation>
+        <translation>Bel ná pauzes</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="368"/>
@@ -254,7 +254,7 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="378"/>
         <source>&lt;h3&gt;Big Breaks&lt;/h3&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;Lange pauze&lt;/h3&gt;</translation>
+        <translation>&lt;h3&gt;Lange pauzes&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="411"/>
@@ -264,7 +264,7 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="521"/>
         <source>&lt;h3&gt;Shared Options&lt;/h3&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;Gedeelde opties&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="782"/>
@@ -289,7 +289,7 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="905"/>
         <source>Launch Sane Break at start up</source>
-        <translation type="unfinished"></translation>
+        <translation>Sane Break automatisch opstarten</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1084"/>
