@@ -29,6 +29,7 @@
 #include "screen-lock.h"
 #include "tray.h"
 #include "utils.h"
+#include "widgets/language-select.h"
 #include "window-manager.h"
 
 SaneBreakApp::SaneBreakApp() : QObject() {
@@ -82,6 +83,8 @@ SaneBreakApp::SaneBreakApp() : QObject() {
       SanePreferences::programsToMonitor, &SettingWithSignal::changed, this, [this]() {
         runningProgramsMonitor->setPrograms(SanePreferences::programsToMonitor->get());
       });
+  connect(SanePreferences::language, &SettingWithSignal::changed, this,
+          []() { LanguageSelect::setLanguage(SanePreferences::language->get()); });
 }
 
 SaneBreakApp::~SaneBreakApp() {}

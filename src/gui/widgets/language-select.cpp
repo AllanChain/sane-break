@@ -20,6 +20,18 @@
 
 QTranslator *LanguageSelect::currentTranslator = nullptr;
 
+void LanguageSelect::setLanguage(QString language) {
+  QTranslator *translator = new QTranslator();
+  if (language == "" &&
+          translator->load(QLocale::system(), "sane-break", "_", ":/i18n") ||
+      translator->load(language, ":/i18n")) {
+    if (LanguageSelect::currentTranslator)
+      qApp->removeTranslator(LanguageSelect::currentTranslator);
+    qApp->installTranslator(translator);
+    LanguageSelect::currentTranslator = translator;
+  }
+}
+
 LanguageSelect::LanguageSelect(QWidget *parent) : QComboBox(parent) {
   addItem(tr("Default"), "");
   QDir dir(":/i18n");
@@ -43,21 +55,6 @@ LanguageSelect::LanguageSelect(QWidget *parent) : QComboBox(parent) {
 
 void LanguageSelect::onLanguageSelect() {
   QString language = currentData().toString();
-  SanePreferences::language->set(language);
-  QTranslator *translator = new QTranslator();
-  if (language == "" &&
-          translator->load(QLocale::system(), "sane-break", "_", ":/i18n") ||
-      translator->load(language, ":/i18n")) {
-    if (LanguageSelect::currentTranslator)
-      qApp->removeTranslator(LanguageSelect::currentTranslator);
-    qApp->installTranslator(translator);
-    LanguageSelect::currentTranslator = translator;
-  }
-}
-
-void LanguageSelect::changeEvent(QEvent *event) {
-  if (event->type() == QEvent::LanguageChange) {
-    setItemText(0, tr("Default"));
-  }
-  QWidget::changeEvent(event);
+  emit languageChanged(language);
+  setItemText(0, tr("Default"));
 }

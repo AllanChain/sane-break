@@ -27,6 +27,7 @@
 #include "auto-start.h"
 #include "preferences.h"
 #include "sound-player.h"
+#include "widgets/language-select.h"
 
 class PrefControllerBase : public QObject {
   Q_OBJECT
@@ -148,6 +149,20 @@ class PrefController<QComboBox, Setting<int>> : public PrefControllerBase {
   };
   void loadValue() { widget->setCurrentIndex(widget->findData(setting->get())); }
   void saveValue() { setting->set(widget->currentData().toInt()); }
+};
+
+template <>
+class PrefController<LanguageSelect, Setting<QString>> : public PrefControllerBase {
+ public:
+  LanguageSelect *widget;
+  Setting<QString> *setting;
+  PrefController(LanguageSelect *parent, Setting<QString> *setting)
+      : PrefControllerBase(parent), widget(parent), setting(setting) {
+    connect(widget, &LanguageSelect::currentIndexChanged, this,
+            &PrefControllerBase::onChange);
+  };
+  void loadValue() { widget->setCurrentIndex(widget->findData(setting->get())); }
+  void saveValue() { setting->set(widget->currentData().toString()); }
 };
 
 template <>

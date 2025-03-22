@@ -7,6 +7,7 @@
 
 #include <QComboBox>
 #include <QEvent>
+#include <QString>
 #include <QTranslator>
 #include <QWidget>
 
@@ -15,10 +16,13 @@ class LanguageSelect : public QComboBox {
  public:
   static QTranslator *currentTranslator;
   LanguageSelect(QWidget *parent = nullptr);
+  static void setLanguage(QString language);
+
+ signals:
+  void languageChanged(QString language);
 
  private:
   void onLanguageSelect();
-  void changeEvent(QEvent *event);
 };
 
 #endif  // SANE_WIDGETS_LANGUAGE_H

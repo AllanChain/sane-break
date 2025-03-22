@@ -39,6 +39,7 @@
 #include "preferences.h"
 #include "sound-player.h"
 #include "ui_pref-window.h"
+#include "widgets/language-select.h"
 #include "widgets/stepped-slider.h"
 
 void PrefControllerBase::saveIfDirty() {
@@ -251,7 +252,10 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
             ui->autoStart->setDisabled(false);
           });
   // TODO: make languageSelect under control
-#ifndef WITH_TRANSLATIONS
+#ifdef WITH_TRANSLATIONS
+  controllers->add(new PrefController<LanguageSelect, Setting<QString>>(
+      ui->languageSelect, SanePreferences::language));
+#else
   ui->languageLabel->setHidden(true);
   ui->languageSelect->setHidden(true);
   ui->languageHint->setHidden(true);

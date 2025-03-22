@@ -27,6 +27,7 @@
 #include <QtContainerFwd>
 
 #include "config.h"
+#include "preferences.h"
 #include "widgets/language-select.h"
 
 #ifdef Q_OS_LINUX
@@ -63,6 +64,12 @@ WelcomeWindow::WelcomeWindow(QWidget *parent) : QDialog(parent) {
   languageSelect = new LanguageSelect(this);
   hlayout->addWidget(languageSelect);
   layout->addItem(hlayout);
+  connect(languageSelect, &LanguageSelect::languageChanged, this,
+          [this](QString language) {
+            LanguageSelect::setLanguage(language);
+            SanePreferences::language->set(language);
+            updateText();
+          });
 #endif
 
   bool hasError = false;
@@ -136,12 +143,3 @@ void WelcomeWindow::updateText() {
 #endif
   adjustSize();
 }
-
-#ifdef WITH_TRANSLATIONS
-void WelcomeWindow::changeEvent(QEvent *event) {
-  if (event->type() == QEvent::LanguageChange) {
-    updateText();
-  }
-  QWidget::changeEvent(event);
-}
-#endif

@@ -34,9 +34,6 @@ class WelcomeWindow : public QDialog {
 #ifdef WITH_TRANSLATIONS
   QLabel *languageLabel;
   LanguageSelect *languageSelect;
-
- protected:
-  void changeEvent(QEvent *event);
 #endif
 };
 #endif  // SANE_WELCOME_H
