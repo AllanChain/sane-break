@@ -118,8 +118,8 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
    *                               Tab switch                                *
    *                                                                         *
    ****************************************************************************/
-  tabButtons = {ui->tabBreakButton, ui->tabPauseButton, ui->tabGeneralButton,
-                ui->tabAboutButton};
+  tabButtons = {ui->tabScheduleButton, ui->tabReminderButton, ui->tabPauseButton,
+                ui->tabSoundButton,    ui->tabGeneralButton,  ui->tabAboutButton};
   for (int i = 0; i < tabButtons.size(); ++i) {
     connect(tabButtons[i], &QPushButton::released, this, [this, i]() { setTab(i); });
   }
@@ -128,7 +128,7 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
 
   /***************************************************************************
    *                                                                         *
-   *                                Break tab                                *
+   *                              Schedule tab                               *
    *                                                                         *
    ****************************************************************************/
   connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
@@ -149,6 +149,17 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
           });
   controllers->add(new PrefController<QSpinBox, Setting<int>>(
       ui->bigBreakForBox, SanePreferences::bigFor, 60));
+
+  QRegularExpression re("^\\d+(,\\d+)*$");
+  ui->postponeMinutes->setValidator(new QRegularExpressionValidator(re, this));
+  controllers->add(new PrefController<QLineEdit, Setting<QStringList>>(
+      ui->postponeMinutes, SanePreferences::postponeMinutes));
+
+  /***************************************************************************
+   *                                                                         *
+   *                              Reminder tab                               *
+   *                                                                         *
+   ****************************************************************************/
   connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
               ui->flashForBox, SanePreferences::flashFor)),
           &PrefControllerBase::explictSync, this, [this]() {
@@ -157,44 +168,34 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
           });
   controllers->add(new PrefController<QSpinBox, Setting<int>>(
       ui->confirmAfterBox, SanePreferences::confirmAfter));
+  controllers->add(new PrefController<QSpinBox, Setting<int>>(
+      ui->flashSpeedBox, SanePreferences::flashSpeed));
+  controllers->add(new PrefController<QSpinBox, Setting<int>>(
+      ui->textTransparencyBox, SanePreferences::textTransparency));
 
-  QRegularExpression re("^\\d+(,\\d+)*$");
-  ui->postponeMinutes->setValidator(new QRegularExpressionValidator(re, this));
-  controllers->add(new PrefController<QLineEdit, Setting<QStringList>>(
-      ui->postponeMinutes, SanePreferences::postponeMinutes));
-
-  ui->autoScreenLock->addItem(tr("Disabled"), 0);
-  ui->autoScreenLock->addItem(tr("%n sec", "", 30), 30);
-  ui->autoScreenLock->addItem(tr("%n min", "", 1), 60);
-  ui->autoScreenLock->addItem(tr("%n min", "", 2), 120);
-  ui->autoScreenLock->addItem(tr("%n min", "", 5), 300);
-  ui->macPermissionHint->setHidden(true);
-  controllers->add(new PrefController<QComboBox, Setting<int>>(
-      ui->autoScreenLock, SanePreferences::autoScreenLock));
-
-#ifdef Q_OS_LINUX
-  ui->quickBreak->setText(tr("Start next break after middle clicking on tray icon"));
-  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
-      ui->quickBreak, SanePreferences::quickBreak));
-#elif defined Q_OS_WIN
-  ui->quickBreak->setText(tr("Start next break after double clicking on tray icon"));
-  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
-      ui->quickBreak, SanePreferences::quickBreak));
-#elif defined Q_OS_MAC
-  ui->quickBreak->setHidden(true);
-  osaProcess = new QProcess(this);
-  // Set up permission
-  connect(ui->autoScreenLock, &QComboBox::currentIndexChanged, this, [=](int index) {
-    if (ui->autoScreenLock->itemData(index).toInt() == 0) return;
-    if (osaProcess->isOpen()) return;
-    osaProcess->start("osascript",
-                      {"-e", "tell application \"System Events\" to keystroke \"q\""});
-  });
-  connect(osaProcess, &QProcess::finished, this,
-          [=](int retcode, QProcess::ExitStatus status) {
-            ui->macPermissionHint->setHidden(retcode == 0);
+  /***************************************************************************
+   *                                                                         *
+   *                                Pause tab                                *
+   *                                                                         *
+   ****************************************************************************/
+  controllers->add(new PrefController<QSpinBox, Setting<int>>(
+      ui->pauseOnIdleBox, SanePreferences::pauseOnIdleFor, 60));
+  connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
+              ui->resetBreakBox, SanePreferences::resetAfterPause, 60)),
+          &PrefControllerBase::explictSync, this, [this]() {
+            ui->resetCycleBox->setMinimum(ui->resetBreakBox->value());
+            ui->resetCycleSlider->setMinimum(ui->resetBreakBox->value());
           });
-#endif
+  connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
+              ui->resetCycleBox, SanePreferences::resetCycleAfterPause, 60)),
+          &PrefControllerBase::explictSync, this, [this]() {
+            ui->resetBreakBox->setMaximum(ui->resetCycleBox->value());
+            ui->resetBreakSlider->setMaximum(ui->resetCycleBox->value());
+          });
+  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
+      ui->pauseOnBatteryCheck, SanePreferences::pauseOnBattery));
+  controllers->add(new PrefController<QPlainTextEdit, Setting<QStringList>>(
+      ui->programList, SanePreferences::programsToMonitor));
 
   /***************************************************************************
    *                                                                         *
@@ -219,29 +220,6 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
     controllers->add(new PrefController<QComboBox, Setting<QString>>(soundSelects[i],
                                                                      soundSettings[i]));
   }
-  /***************************************************************************
-   *                                                                         *
-   *                                Pause tab                                *
-   *                                                                         *
-   ****************************************************************************/
-  controllers->add(new PrefController<QSpinBox, Setting<int>>(
-      ui->pauseOnIdleBox, SanePreferences::pauseOnIdleFor, 60));
-  connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
-              ui->resetBreakBox, SanePreferences::resetAfterPause, 60)),
-          &PrefControllerBase::explictSync, this, [this]() {
-            ui->resetCycleBox->setMinimum(ui->resetBreakBox->value());
-            ui->resetCycleSlider->setMinimum(ui->resetBreakBox->value());
-          });
-  connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
-              ui->resetCycleBox, SanePreferences::resetCycleAfterPause, 60)),
-          &PrefControllerBase::explictSync, this, [this]() {
-            ui->resetBreakBox->setMaximum(ui->resetCycleBox->value());
-            ui->resetBreakSlider->setMaximum(ui->resetCycleBox->value());
-          });
-  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
-      ui->pauseOnBatteryCheck, SanePreferences::pauseOnBattery));
-  controllers->add(new PrefController<QPlainTextEdit, Setting<QStringList>>(
-      ui->programList, SanePreferences::programsToMonitor));
 
   /***************************************************************************
    *                                                                         *
@@ -278,6 +256,38 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
   ui->languageSelect->setHidden(true);
   ui->languageHint->setHidden(true);
 #endif
+  ui->autoScreenLock->addItem(tr("Disabled"), 0);
+  ui->autoScreenLock->addItem(tr("%n sec", "", 30), 30);
+  ui->autoScreenLock->addItem(tr("%n min", "", 1), 60);
+  ui->autoScreenLock->addItem(tr("%n min", "", 2), 120);
+  ui->autoScreenLock->addItem(tr("%n min", "", 5), 300);
+  ui->macPermissionHint->setHidden(true);
+  controllers->add(new PrefController<QComboBox, Setting<int>>(
+      ui->autoScreenLock, SanePreferences::autoScreenLock));
+
+#ifdef Q_OS_LINUX
+  ui->quickBreak->setText(tr("Start next break after middle clicking on tray icon"));
+  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
+      ui->quickBreak, SanePreferences::quickBreak));
+#elif defined Q_OS_WIN
+  ui->quickBreak->setText(tr("Start next break after double clicking on tray icon"));
+  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
+      ui->quickBreak, SanePreferences::quickBreak));
+#elif defined Q_OS_MAC
+ui->quickBreak->setHidden(true);
+osaProcess = new QProcess(this);
+// Set up permission
+connect(ui->autoScreenLock, &QComboBox::currentIndexChanged, this, [=](int index) {
+  if (ui->autoScreenLock->itemData(index).toInt() == 0) return;
+  if (osaProcess->isOpen()) return;
+  osaProcess->start("osascript",
+                    {"-e", "tell application \"System Events\" to keystroke \"q\""});
+});
+connect(osaProcess, &QProcess::finished, this,
+        [=](int retcode, QProcess::ExitStatus status) {
+          ui->macPermissionHint->setHidden(retcode == 0);
+        });
+#endif
   /***************************************************************************
    *                                                                         *
    *                                About tab                                *
@@ -312,7 +322,7 @@ void PreferenceWindow::setTab(int tabNum) {
   for (int i = 0; i < tabButtons.size(); ++i) {
     tabButtons[i]->setChecked(i == tabNum);
   }
-  ui->controlBar->setHidden(tabNum == 3);
+  ui->controlBar->setHidden(tabNum == 5);
   ui->stackedWidget->setFixedHeight(
       ui->stackedWidget->currentWidget()->sizeHint().height());
 }

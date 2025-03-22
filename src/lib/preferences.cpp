@@ -32,6 +32,9 @@ Setting<int>* SanePreferences::autoScreenLock =
     new Setting<int>("break/auto-screen-lock", 0);
 Setting<bool>* SanePreferences::quickBreak =
     new Setting<bool>("break/quick-break", false);
+Setting<int>* SanePreferences::flashSpeed = new Setting<int>("break/flash-speed", 100);
+Setting<int>* SanePreferences::textTransparency =
+    new Setting<int>("break/text-transparency", 0);
 Setting<QString>* SanePreferences::smallStartBell =
     new Setting<QString>("bell/small-start", "");
 Setting<QString>* SanePreferences::smallEndBell =

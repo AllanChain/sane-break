@@ -64,17 +64,33 @@ QPushButton[flat=&quot;true&quot;]:checked {
         <number>0</number>
        </property>
        <item>
-        <widget class="QPushButton" name="tabBreakButton">
+        <widget class="QPushButton" name="tabScheduleButton">
          <property name="cursor">
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="text">
-          <string>Break</string>
+          <string>Schedule</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
          </property>
          <property name="checked">
+          <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="tabReminderButton">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>Reminder</string>
+         </property>
+         <property name="checkable">
           <bool>true</bool>
          </property>
          <property name="flat">
@@ -92,6 +108,25 @@ QPushButton[flat=&quot;true&quot;]:checked {
          </property>
          <property name="checkable">
           <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="tabSoundButton">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>Sound</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -195,8 +230,8 @@ QPushButton[flat=&quot;true&quot;]:checked {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>559</width>
-           <height>752</height>
+           <width>580</width>
+           <height>488</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -216,30 +251,13 @@ QPushButton[flat=&quot;true&quot;]:checked {
               </item>
               <item>
                <layout class="QGridLayout" name="gridLayout_2">
-                <item row="2" column="2">
-                 <widget class="QPushButton" name="playSmallStart">
-                  <property name="text">
-                   <string>Play</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="2">
-                 <widget class="QSpinBox" name="smallBreakEveryBox">
+                <item row="1" column="2">
+                 <widget class="QSpinBox" name="smallBreakForBox">
                   <property name="suffix">
-                   <string> min</string>
+                   <string> sec</string>
                   </property>
                   <property name="maximum">
                    <number>65535</number>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="label_13">
-                  <property name="toolTip">
-                   <string>Try restart Sane Break if no sound</string>
-                  </property>
-                  <property name="text">
-                   <string>Bell before breaks</string>
                   </property>
                  </widget>
                 </item>
@@ -268,16 +286,6 @@ QPushButton[flat=&quot;true&quot;]:checked {
                   </property>
                  </widget>
                 </item>
-                <item row="1" column="2">
-                 <widget class="QSpinBox" name="smallBreakForBox">
-                  <property name="suffix">
-                   <string> sec</string>
-                  </property>
-                  <property name="maximum">
-                   <number>65535</number>
-                  </property>
-                 </widget>
-                </item>
                 <item row="1" column="0">
                  <widget class="QLabel" name="label_4">
                   <property name="toolTip">
@@ -285,6 +293,16 @@ QPushButton[flat=&quot;true&quot;]:checked {
                   </property>
                   <property name="text">
                    <string>Break length</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QSpinBox" name="smallBreakEveryBox">
+                  <property name="suffix">
+                   <string> min</string>
+                  </property>
+                  <property name="maximum">
+                   <number>65535</number>
                   </property>
                  </widget>
                 </item>
@@ -316,27 +334,6 @@ QPushButton[flat=&quot;true&quot;]:checked {
                   </property>
                  </widget>
                 </item>
-                <item row="2" column="1">
-                 <widget class="QComboBox" name="smallStartBellSelect">
-                  <property name="editable">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="1">
-                 <widget class="QComboBox" name="smallEndBellSelect">
-                  <property name="editable">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="2">
-                 <widget class="QPushButton" name="playSmallEnd">
-                  <property name="text">
-                   <string>Play</string>
-                  </property>
-                 </widget>
-                </item>
                 <item row="0" column="0">
                  <widget class="QLabel" name="label_3">
                   <property name="toolTip">
@@ -347,30 +344,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
                   </property>
                  </widget>
                 </item>
-                <item row="3" column="0">
-                 <widget class="QLabel" name="label_14">
-                  <property name="toolTip">
-                   <string>Try restart Sane Break if no sound</string>
-                  </property>
-                  <property name="text">
-                   <string>Bell after breaks</string>
-                  </property>
-                 </widget>
-                </item>
                </layout>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_24">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="text">
-                 <string>&lt;strong&gt;Tip&lt;/strong&gt;: You can use local sound files with URLs like &lt;code&gt;file:/D:sound.mp3&lt;/code&gt;  (Windows) or &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</string>
-                </property>
-                <property name="wordWrap">
-                 <bool>true</bool>
-                </property>
-               </widget>
               </item>
               <item>
                <widget class="QLabel" name="label_22">
@@ -381,30 +355,6 @@ QPushButton[flat=&quot;true&quot;]:checked {
               </item>
               <item>
                <layout class="QGridLayout" name="gridLayout_5">
-                <item row="3" column="1">
-                 <widget class="QComboBox" name="bigEndBellSelect">
-                  <property name="editable">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="2">
-                 <widget class="QSpinBox" name="bigBreakForBox">
-                  <property name="suffix">
-                   <string> min</string>
-                  </property>
-                  <property name="maximum">
-                   <number>65535</number>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="2">
-                 <widget class="QPushButton" name="playBigStart">
-                  <property name="text">
-                   <string>Play</string>
-                  </property>
-                 </widget>
-                </item>
                 <item row="0" column="2">
                  <widget class="QSpinBox" name="bigBreakAfterBox">
                   <property name="suffix">
@@ -415,10 +365,23 @@ QPushButton[flat=&quot;true&quot;]:checked {
                   </property>
                  </widget>
                 </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="label">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_5">
+                  <property name="toolTip">
+                   <string>Every so many breaks will be a big break</string>
+                  </property>
                   <property name="text">
-                   <string>Bell before breaks</string>
+                   <string>Break every</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QSpinBox" name="bigBreakForBox">
+                  <property name="suffix">
+                   <string> min</string>
+                  </property>
+                  <property name="maximum">
+                   <number>65535</number>
                   </property>
                  </widget>
                 </item>
@@ -441,23 +404,6 @@ QPushButton[flat=&quot;true&quot;]:checked {
                   </property>
                   <property name="tickPosition">
                    <enum>QSlider::TickPosition::TicksBelow</enum>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label_5">
-                  <property name="toolTip">
-                   <string>Every so many breaks will be a big break</string>
-                  </property>
-                  <property name="text">
-                   <string>Break every</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="2">
-                 <widget class="QPushButton" name="playBigEnd">
-                  <property name="text">
-                   <string>Play</string>
                   </property>
                  </widget>
                 </item>
@@ -489,20 +435,6 @@ QPushButton[flat=&quot;true&quot;]:checked {
                   </property>
                  </widget>
                 </item>
-                <item row="2" column="1">
-                 <widget class="QComboBox" name="bigStartBellSelect">
-                  <property name="editable">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="0">
-                 <widget class="QLabel" name="label_2">
-                  <property name="text">
-                   <string>Bell after breaks</string>
-                  </property>
-                 </widget>
-                </item>
                 <item row="1" column="0">
                  <widget class="QLabel" name="label_6">
                   <property name="toolTip">
@@ -518,7 +450,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
               <item>
                <widget class="QLabel" name="label_23">
                 <property name="text">
-                 <string>&lt;h3&gt;Shared Options&lt;/h3&gt;</string>
+                 <string>&lt;h3&gt;Postpone&lt;/h3&gt;</string>
                 </property>
                </widget>
               </item>
@@ -527,7 +459,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
                 <property name="verticalSpacing">
                  <number>12</number>
                 </property>
-                <item row="2" column="1" colspan="2">
+                <item row="0" column="1" colspan="2">
                  <widget class="QLineEdit" name="postponeMinutes">
                   <property name="inputMask">
                    <string notr="true"/>
@@ -540,41 +472,38 @@ QPushButton[flat=&quot;true&quot;]:checked {
                   </property>
                  </widget>
                 </item>
-                <item row="1" column="2">
-                 <widget class="QSpinBox" name="confirmAfterBox">
-                  <property name="suffix">
-                   <string> sec</string>
-                  </property>
-                  <property name="maximum">
-                   <number>65535</number>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_20">
+                  <property name="text">
+                   <string>Postpone minutes</string>
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="1">
-                 <widget class="SteppedSlider" name="flashForSlider">
-                  <property name="maximum">
-                   <number>300</number>
-                  </property>
-                  <property name="singleStep">
-                   <number>10</number>
-                  </property>
-                  <property name="pageStep">
-                   <number>30</number>
-                  </property>
-                  <property name="value">
-                   <number>30</number>
-                  </property>
-                  <property name="orientation">
-                   <enum>Qt::Orientation::Horizontal</enum>
-                  </property>
-                  <property name="tickPosition">
-                   <enum>QSlider::TickPosition::TicksBelow</enum>
-                  </property>
-                  <property name="tickInterval">
-                   <number>30</number>
-                  </property>
-                 </widget>
-                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="reminderPage">
+             <layout class="QVBoxLayout" name="verticalLayout_9">
+              <item>
+               <widget class="QLabel" name="label">
+                <property name="toolTip">
+                 <string/>
+                </property>
+                <property name="text">
+                 <string>&lt;h3&gt;Flashing reminder&lt;/h3&gt;
+&lt;p&gt;Sane Break shows a small reminder for &lt;b&gt;Flash break prompt for&lt;/b&gt; seconds. If you stop working or ignore it past this time, it transitions to full-screen. After &lt;b&gt;Confirm break after&lt;/b&gt; seconds of inactivity during the break, it locks until the timer ends.&lt;/p&gt;</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QGridLayout" name="gridLayout_7">
+                <property name="verticalSpacing">
+                 <number>12</number>
+                </property>
                 <item row="0" column="2">
                  <widget class="QSpinBox" name="flashForBox">
                   <property name="suffix">
@@ -582,13 +511,6 @@ QPushButton[flat=&quot;true&quot;]:checked {
                   </property>
                   <property name="maximum">
                    <number>65535</number>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="label_20">
-                  <property name="text">
-                   <string>Postpone minutes</string>
                   </property>
                  </widget>
                 </item>
@@ -618,7 +540,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
                  </widget>
                 </item>
                 <item row="0" column="0">
-                 <widget class="QLabel" name="label_11">
+                 <widget class="QLabel" name="label_13">
                   <property name="toolTip">
                    <string>Time in seconds before forcing break after work reminder appears.</string>
                   </property>
@@ -628,12 +550,145 @@ QPushButton[flat=&quot;true&quot;]:checked {
                  </widget>
                 </item>
                 <item row="1" column="0">
-                 <widget class="QLabel" name="label_9">
+                 <widget class="QLabel" name="label_14">
                   <property name="toolTip">
                    <string>After idle for that long during break, Sane Break will keep full screen and there's no way back.</string>
                   </property>
                   <property name="text">
                    <string>Confirm break after</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="SteppedSlider" name="flashForSlider">
+                  <property name="maximum">
+                   <number>300</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>10</number>
+                  </property>
+                  <property name="pageStep">
+                   <number>30</number>
+                  </property>
+                  <property name="value">
+                   <number>30</number>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Orientation::Horizontal</enum>
+                  </property>
+                  <property name="tickPosition">
+                   <enum>QSlider::TickPosition::TicksBelow</enum>
+                  </property>
+                  <property name="tickInterval">
+                   <number>30</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QSpinBox" name="confirmAfterBox">
+                  <property name="suffix">
+                   <string> sec</string>
+                  </property>
+                  <property name="maximum">
+                   <number>65535</number>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>&lt;h3&gt;Reminder Appearance&lt;/h3&gt;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QGridLayout" name="gridLayout_10">
+                <item row="0" column="1">
+                 <widget class="SteppedSlider" name="flashSpeedSlider">
+                  <property name="minimum">
+                   <number>0</number>
+                  </property>
+                  <property name="maximum">
+                   <number>200</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>5</number>
+                  </property>
+                  <property name="value">
+                   <number>100</number>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Orientation::Horizontal</enum>
+                  </property>
+                  <property name="tickPosition">
+                   <enum>QSlider::TickPosition::TicksBelow</enum>
+                  </property>
+                  <property name="tickInterval">
+                   <number>20</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QSpinBox" name="flashSpeedBox">
+                  <property name="suffix">
+                   <string notr="true"> %</string>
+                  </property>
+                  <property name="maximum">
+                   <number>65535</number>
+                  </property>
+                  <property name="value">
+                   <number>100</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_8">
+                  <property name="text">
+                   <string>Flash speed</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_9">
+                  <property name="text">
+                   <string>Text Transparency</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="SteppedSlider" name="textTransparencySlider">
+                  <property name="minimum">
+                   <number>0</number>
+                  </property>
+                  <property name="maximum">
+                   <number>100</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>5</number>
+                  </property>
+                  <property name="value">
+                   <number>0</number>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Orientation::Horizontal</enum>
+                  </property>
+                  <property name="tickPosition">
+                   <enum>QSlider::TickPosition::TicksBelow</enum>
+                  </property>
+                  <property name="tickInterval">
+                   <number>20</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QSpinBox" name="textTransparencyBox">
+                  <property name="suffix">
+                   <string notr="true"> %</string>
+                  </property>
+                  <property name="maximum">
+                   <number>65535</number>
                   </property>
                  </widget>
                 </item>
@@ -794,6 +849,141 @@ QPushButton[flat=&quot;true&quot;]:checked {
                <widget class="QPlainTextEdit" name="programList">
                 <property name="placeholderText">
                  <string>(Write one program name per line)</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="soundPage">
+             <layout class="QVBoxLayout" name="verticalLayout">
+              <item>
+               <widget class="QLabel" name="label_25">
+                <property name="text">
+                 <string>&lt;h3&gt;Small Breaks&lt;/h3&gt;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QGridLayout" name="gridLayout_8" columnstretch="0,1,0">
+                <item row="0" column="1">
+                 <widget class="QComboBox" name="bigStartBellSelect">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="editable">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_33">
+                  <property name="text">
+                   <string>Bell before breaks</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QPushButton" name="playBigStart">
+                  <property name="text">
+                   <string>Play</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QPushButton" name="playBigEnd">
+                  <property name="text">
+                   <string>Play</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QComboBox" name="bigEndBellSelect">
+                  <property name="editable">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_35">
+                  <property name="text">
+                   <string>Bell after breaks</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_38">
+                <property name="text">
+                 <string>&lt;h3&gt;Big Breaks&lt;/h3&gt;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QGridLayout" name="gridLayout_6" columnstretch="0,1,0">
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_28">
+                  <property name="toolTip">
+                   <string>Try restart Sane Break if no sound</string>
+                  </property>
+                  <property name="text">
+                   <string>Bell after breaks</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QComboBox" name="smallEndBellSelect">
+                  <property name="editable">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QPushButton" name="playSmallEnd">
+                  <property name="text">
+                   <string>Play</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QPushButton" name="playSmallStart">
+                  <property name="text">
+                   <string>Play</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_26">
+                  <property name="toolTip">
+                   <string>Try restart Sane Break if no sound</string>
+                  </property>
+                  <property name="text">
+                   <string>Bell before breaks</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QComboBox" name="smallStartBellSelect">
+                  <property name="editable">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_37">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="text">
+                 <string>&lt;strong&gt;Tip&lt;/strong&gt;: You can use local sound files with URLs like &lt;code&gt;file:/D:sound.mp3&lt;/code&gt;  (Windows) or &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -1138,5 +1328,358 @@ v%1
  <resources>
   <include location="../../resources/index.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>smallBreakEverySlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>smallBreakEveryBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>449</x>
+     <y>91</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>657</x>
+     <y>103</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>smallBreakForSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>smallBreakForBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>510</x>
+     <y>132</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>618</x>
+     <y>140</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bigBreakAfterSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>bigBreakAfterBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>480</x>
+     <y>233</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>581</x>
+     <y>234</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bigBreakForSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>bigBreakForBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>492</x>
+     <y>279</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>585</x>
+     <y>270</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>smallBreakEveryBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>smallBreakEverySlider</receiver>
+   <slot>setValueForce(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>597</x>
+     <y>87</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>541</x>
+     <y>94</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>smallBreakForBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>smallBreakForSlider</receiver>
+   <slot>setValueForce(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>614</x>
+     <y>136</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>501</x>
+     <y>143</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bigBreakAfterBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>bigBreakAfterSlider</receiver>
+   <slot>setValueForce(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>623</x>
+     <y>230</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>470</x>
+     <y>240</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bigBreakForBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>bigBreakForSlider</receiver>
+   <slot>setValueForce(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>624</x>
+     <y>265</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>515</x>
+     <y>275</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>flashForSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>flashForBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>474</x>
+     <y>166</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>614</x>
+     <y>176</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>confirmAfterSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>confirmAfterBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>511</x>
+     <y>220</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>589</x>
+     <y>216</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>flashSpeedSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>flashSpeedBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>523</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>628</x>
+     <y>295</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>textTransparencySlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>textTransparencyBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>535</x>
+     <y>331</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>609</x>
+     <y>336</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>flashForBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>flashForSlider</receiver>
+   <slot>setValueForce(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>608</x>
+     <y>171</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>538</x>
+     <y>175</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>confirmAfterBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>confirmAfterSlider</receiver>
+   <slot>setValueForce(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>631</x>
+     <y>208</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>544</x>
+     <y>227</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>flashSpeedBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>flashSpeedSlider</receiver>
+   <slot>setValueForce(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>651</x>
+     <y>296</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>293</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>textTransparencyBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>textTransparencySlider</receiver>
+   <slot>setValueForce(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>652</x>
+     <y>336</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>551</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pauseOnIdleSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>pauseOnIdleBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>488</x>
+     <y>44</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>579</x>
+     <y>44</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>resetBreakSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>resetBreakBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>543</x>
+     <y>84</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>594</x>
+     <y>95</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>resetCycleSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>resetCycleBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>534</x>
+     <y>128</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>587</x>
+     <y>135</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pauseOnIdleBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>pauseOnIdleSlider</receiver>
+   <slot>setValueForce(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>580</x>
+     <y>27</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>520</x>
+     <y>25</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>resetBreakBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>resetBreakSlider</receiver>
+   <slot>setValueForce(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>629</x>
+     <y>83</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>536</x>
+     <y>83</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>resetCycleBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>resetCycleSlider</receiver>
+   <slot>setValueForce(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>615</x>
+     <y>139</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>539</x>
+     <y>125</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

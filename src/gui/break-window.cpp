@@ -24,6 +24,7 @@
 #include <cmath>
 
 #include "config.h"
+#include "preferences.h"
 #include "utils.h"
 
 #ifdef Q_OS_LINUX
@@ -53,16 +54,16 @@ BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) 
   setWindowTitle("Break reminder - Sane Break");
   setProperty("isFullScreen", false);
 
-  // HACK: Not setting this at main.cpp because of
-  // https://bugreports.qt.io/browse/QTBUG-133845
-  QFile styleSheet(":/style.css");
-  if (styleSheet.open(QIODevice::ReadOnly | QIODevice::Text))
-    setStyleSheet(styleSheet.readAll());
-
   mainWidget = new QWidget(this);
   if (!waylandWorkaround) setCentralWidget(mainWidget);
   mainWidget->setAttribute(Qt::WA_LayoutOnEntireRect);
   mainWidget->setContentsMargins(0, 0, 0, 0);
+
+  // HACK: Not setting this at main.cpp because of
+  // https://bugreports.qt.io/browse/QTBUG-133845
+  QFile styleSheet(":/style.css");
+  if (styleSheet.open(QIODevice::ReadOnly | QIODevice::Text))
+    mainWidget->setStyleSheet(styleSheet.readAll());
 
   QVBoxLayout *layout = new QVBoxLayout(mainWidget);
   layout->setContentsMargins(0, 0, 0, 0);
@@ -88,6 +89,14 @@ BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) 
   countdownLabel->setVisible(false);
   textLayout->addWidget(countdownLabel);
 
+  if (SanePreferences::textTransparency->get() > 0) {
+    int opacity = 256 - SanePreferences::textTransparency->get() * 256 / 100;
+    countdownLabel->setStyleSheet(
+        QString("color: rgba(236, 239, 244, %1)").arg(opacity));
+    progressBar->setStyleSheet(
+        QString("::chunk {background: rgba(236, 239, 244, %1)}").arg(opacity));
+  }
+
   progressAnim = new QPropertyAnimation(progressBar, "value");
   progressAnim->setStartValue(progressBar->maximum());
   progressAnim->setEndValue(0);
@@ -98,7 +107,12 @@ BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) 
   else
     bgAnim->setStartValue(QColor(235, 203, 139, 100));
   bgAnim->setEndValue(QColor(46, 52, 64, 255));
-  bgAnim->setDuration(500);
+  if (SanePreferences::flashSpeed->get() <= 0) {
+    bgAnim->setStartValue(QColor(46, 52, 64, 255));
+    bgAnim->setDuration(100000);
+  } else {
+    bgAnim->setDuration(500 / SanePreferences::flashSpeed->get() * 100);
+  }
   bgAnim->setLoopCount(-1);
 }
 
