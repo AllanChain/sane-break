@@ -56,6 +56,30 @@
   </screenshots>
 
   <releases>
+    <release version="0.7.0" date="">
+      <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.7.0</url>
+      <description>
+        <p>Features</p>
+        <ul>
+          <li>allow setting app auto start from settings</li>
+          <li>configurable postpone minutes</li>
+          <li>configurable flash speed and text transparency</li>
+          <li>improved rework preference UI, adding spin boxes and scrolls</li>
+          <li>add French and Dutch translations</li>
+          <li>reading mode where breaks will happen even the user has been idle</li>
+          <li>quit is now in a separate menu entry</li>
+        </ul>
+        <p>Bug fixes</p>
+        <ul>
+          <li>make progress bar animation smooth</li>
+        </ul>
+        <p>Minor changes</p>
+        <ul>
+          <li>in menu, show time before big break instead of numbers</li>
+          <li>also show tray menu on left click on Windows</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.2" date="2025-03-01">
       <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.6.2</url>
       <description>
