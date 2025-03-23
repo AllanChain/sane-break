@@ -711,6 +711,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
                   <property name="text">
                    <string>Reset cycle after paused for</string>
                   </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
                  </widget>
                 </item>
                 <item row="2" column="2">
@@ -728,10 +731,19 @@ QPushButton[flat=&quot;true&quot;]:checked {
                   <property name="text">
                    <string>Reset break after paused for</string>
                   </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
                  </widget>
                 </item>
                 <item row="2" column="1">
                  <widget class="SteppedSlider" name="resetCycleSlider">
+                  <property name="minimumSize">
+                   <size>
+                    <width>200</width>
+                    <height>0</height>
+                   </size>
+                  </property>
                   <property name="minimum">
                    <number>2</number>
                   </property>
@@ -764,6 +776,12 @@ QPushButton[flat=&quot;true&quot;]:checked {
                 </item>
                 <item row="0" column="1">
                  <widget class="SteppedSlider" name="pauseOnIdleSlider">
+                  <property name="minimumSize">
+                   <size>
+                    <width>200</width>
+                    <height>0</height>
+                   </size>
+                  </property>
                   <property name="minimum">
                    <number>1</number>
                   </property>
@@ -795,10 +813,19 @@ QPushButton[flat=&quot;true&quot;]:checked {
                   <property name="text">
                    <string>Pause if idle for</string>
                   </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
                  </widget>
                 </item>
                 <item row="1" column="1">
                  <widget class="SteppedSlider" name="resetBreakSlider">
+                  <property name="minimumSize">
+                   <size>
+                    <width>200</width>
+                    <height>0</height>
+                   </size>
+                  </property>
                   <property name="minimum">
                    <number>1</number>
                   </property>
