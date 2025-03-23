@@ -47,6 +47,7 @@ class SaneBreakApp : public QObject {
   void onBatterySettingChange();
   void onPostponeMinutesChange();
   void mayLockScreen();
+  void confirmQuit();
 
  signals:
   void quit();
@@ -64,7 +65,7 @@ class SaneBreakApp : public QObject {
   int lastPause = 0;
   QMenu *menu;
   QMenu *postponeMenu;
-  QMenu *quitMenu;
+  QAction *quitAction;
   QAction *nextBreakAction;
   QAction *bigBreakAction;
   QAction *enableBreak;

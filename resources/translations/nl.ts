@@ -462,33 +462,33 @@ v%1
 <context>
     <name>SaneBreakApp</name>
     <message>
-        <location filename="../../src/app.cpp" line="143"/>
+        <location filename="../../src/app.cpp" line="144"/>
         <source>big break</source>
         <translation>lange pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="143"/>
+        <location filename="../../src/app.cpp" line="144"/>
         <source>small break</source>
         <translation>korte pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="155"/>
+        <location filename="../../src/app.cpp" line="156"/>
         <source>Next Break</source>
         <translation>Volgende pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="159"/>
+        <location filename="../../src/app.cpp" line="160"/>
         <source>Big Break</source>
         <translation>Lange pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="168"/>
+        <location filename="../../src/app.cpp" line="169"/>
         <source>Postpone</source>
         <translation>Uitstellen</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app.cpp" line="171"/>
-        <location filename="../../src/app.cpp" line="356"/>
+        <location filename="../../src/app.cpp" line="172"/>
+        <location filename="../../src/app.cpp" line="351"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min.</numerusform>
@@ -496,41 +496,48 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="191"/>
-        <location filename="../../src/app.cpp" line="197"/>
-        <location filename="../../src/app.cpp" line="365"/>
+        <location filename="../../src/app.cpp" line="192"/>
         <source>Quit</source>
         <translation>Afsluiten</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="174"/>
+        <location filename="../../src/app.cpp" line="175"/>
         <source>Enable Break</source>
         <translation>Pauze inschakelen</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="146"/>
+        <location filename="../../src/app.cpp" line="147"/>
         <source>Next break after %1</source>
         <translation>Volgende pauze over %1</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="150"/>
+        <location filename="../../src/app.cpp" line="151"/>
         <source>Next big break after %1</source>
         <translation>Volgende lange pauze over %1</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="180"/>
-        <location filename="../../src/app.cpp" line="270"/>
+        <location filename="../../src/app.cpp" line="181"/>
+        <location filename="../../src/app.cpp" line="265"/>
         <source>Enter Reading Mode</source>
         <translation>Leesmodus starten</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="185"/>
+        <location filename="../../src/app.cpp" line="186"/>
         <source>Preferences</source>
         <translation>Instellingen</translation>
     </message>
+    <message>
+        <location filename="../../src/app.cpp" line="363"/>
+        <source>Are you sure to quit Sane Break?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app.cpp" line="364"/>
+        <source>You can postpone the breaks instead.</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message numerus="yes">
-        <location filename="../../src/app.cpp" line="194"/>
-        <location filename="../../src/app.cpp" line="362"/>
+        <location filename="../../src/app.cpp" line="367"/>
         <source>Postpone %n min</source>
         <translation>
             <numerusform>%n minuut uitstellen</numerusform>
@@ -538,22 +545,22 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="231"/>
+        <location filename="../../src/app.cpp" line="226"/>
         <source>Paused on battery</source>
         <translation>Opgeschort tijdens werken op accu</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="233"/>
+        <location filename="../../src/app.cpp" line="228"/>
         <source>Paused on app running</source>
         <translation>Opgeschort tijdens actief programma</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="235"/>
+        <location filename="../../src/app.cpp" line="230"/>
         <source>Paused on idle</source>
         <translation>Opgeschort tijdens inactiviteit</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="273"/>
+        <location filename="../../src/app.cpp" line="268"/>
         <source>Exit Reading Mode</source>
         <translation>Leesmodus verlaten</translation>
     </message>

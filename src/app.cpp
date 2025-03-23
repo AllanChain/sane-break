@@ -12,6 +12,7 @@
 #include <QGuiApplication>
 #include <QIcon>
 #include <QMenu>
+#include <QMessageBox>
 #include <QObject>
 #include <QRect>
 #include <QSettings>
@@ -166,7 +167,7 @@ void SaneBreakApp::createMenu() {
   menu->addSeparator();
 
   postponeMenu = menu->addMenu(tr("Postpone"));
-  for (QString minuteString : SanePreferences::postponeMinutes->get()) {
+  for (const QString &minuteString : SanePreferences::postponeMinutes->get()) {
     int minute = minuteString.toInt();
     connect(postponeMenu->addAction(tr("%n min", "", minute)), &QAction::triggered,
             this, [this, minute]() { postpone(minute * 60); });
@@ -188,14 +189,8 @@ void SaneBreakApp::createMenu() {
     prefWindow->windowHandle()->requestActivate();
   });
 
-  quitMenu = menu->addMenu(tr("Quit"));
-  for (QString minuteString : SanePreferences::postponeMinutes->get()) {
-    int minute = minuteString.toInt();
-    connect(quitMenu->addAction(tr("Postpone %n min", "", minute)), &QAction::triggered,
-            this, [this, minute]() { postpone(minute * 60); });
-  }
-  connect(quitMenu->addAction(tr("Quit")), &QAction::triggered, this,
-          &SaneBreakApp::quit);
+  quitAction = menu->addAction(tr("Quit"));
+  connect(quitAction, &QAction::triggered, this, &SaneBreakApp::confirmQuit);
 }
 
 void SaneBreakApp::breakNow() {
@@ -351,17 +346,36 @@ void SaneBreakApp::onBatterySettingChange() {
 
 void SaneBreakApp::onPostponeMinutesChange() {
   postponeMenu->clear();
-  for (QString minuteString : SanePreferences::postponeMinutes->get()) {
+  for (const QString &minuteString : SanePreferences::postponeMinutes->get()) {
     int minute = minuteString.toInt();
     connect(postponeMenu->addAction(tr("%n min", "", minute)), &QAction::triggered,
             this, [this, minute]() { postpone(minute * 60); });
   }
-  quitMenu->clear();
-  for (QString minuteString : SanePreferences::postponeMinutes->get()) {
+}
+
+void SaneBreakApp::confirmQuit() {
+  int largestMinutes = 0;
+  for (const QString &minuteString : SanePreferences::postponeMinutes->get()) {
     int minute = minuteString.toInt();
-    connect(quitMenu->addAction(tr("Postpone %n min", "", minute)), &QAction::triggered,
-            this, [this, minute]() { postpone(minute * 60); });
+    largestMinutes = largestMinutes > minute ? largestMinutes : minute;
   }
-  connect(quitMenu->addAction(tr("Quit")), &QAction::triggered, this,
-          &SaneBreakApp::quit);
+  QMessageBox msgBox;
+  msgBox.setText(tr("Are you sure to quit Sane Break?"));
+  msgBox.setInformativeText(tr("You can postpone the breaks instead."));
+  msgBox.setIcon(QMessageBox::Icon::Question);
+  msgBox.addButton(QMessageBox::Cancel);
+  msgBox.addButton(tr("Postpone %n min", "", largestMinutes), QMessageBox::NoRole);
+  msgBox.addButton(QMessageBox::Yes);
+
+  msgBox.setDefaultButton(QMessageBox::Cancel);
+  switch (msgBox.exec()) {
+    case QMessageBox::Yes:
+      emit quit();
+      return;
+    case QMessageBox::Cancel:
+      return;
+    default:
+      postpone(largestMinutes * 60);
+      return;
+  }
 }
