@@ -491,7 +491,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
                  <string/>
                 </property>
                 <property name="text">
-                 <string>&lt;h3&gt;Flashing reminder&lt;/h3&gt;
+                 <string>&lt;h3&gt;Flashing Reminder&lt;/h3&gt;
 &lt;p&gt;Sane Break shows a small reminder for &lt;b&gt;Flash break prompt for&lt;/b&gt; seconds. If you stop working or ignore it past this time, it transitions to full-screen. After &lt;b&gt;Confirm break after&lt;/b&gt; seconds of inactivity during the break, it locks until the timer ends.&lt;/p&gt;</string>
                 </property>
                 <property name="wordWrap">
@@ -702,79 +702,28 @@ QPushButton[flat=&quot;true&quot;]:checked {
                <number>12</number>
               </property>
               <item>
-               <layout class="QGridLayout" name="gridLayout">
-                <property name="verticalSpacing">
-                 <number>12</number>
+               <widget class="QLabel" name="label_11">
+                <property name="text">
+                 <string>&lt;h3&gt;Pause Conditions&lt;/h3&gt;</string>
                 </property>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="label_15">
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_5">
+                <item>
+                 <widget class="QLabel" name="label_7">
+                  <property name="toolTip">
+                   <string>Sane Break will pause if it detects no activity for this many minutes</string>
+                  </property>
                   <property name="text">
-                   <string>Reset cycle after paused for</string>
+                   <string>Pause if idle for</string>
                   </property>
                   <property name="wordWrap">
                    <bool>true</bool>
                   </property>
                  </widget>
                 </item>
-                <item row="2" column="2">
-                 <widget class="QSpinBox" name="resetCycleBox">
-                  <property name="suffix">
-                   <string> min</string>
-                  </property>
-                  <property name="maximum">
-                   <number>65535</number>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QLabel" name="label_10">
-                  <property name="text">
-                   <string>Reset break after paused for</string>
-                  </property>
-                  <property name="wordWrap">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="1">
-                 <widget class="SteppedSlider" name="resetCycleSlider">
-                  <property name="minimumSize">
-                   <size>
-                    <width>200</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="minimum">
-                   <number>2</number>
-                  </property>
-                  <property name="maximum">
-                   <number>60</number>
-                  </property>
-                  <property name="value">
-                   <number>5</number>
-                  </property>
-                  <property name="orientation">
-                   <enum>Qt::Orientation::Horizontal</enum>
-                  </property>
-                  <property name="tickPosition">
-                   <enum>QSlider::TickPosition::TicksBelow</enum>
-                  </property>
-                  <property name="tickInterval">
-                   <number>5</number>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="2">
-                 <widget class="QSpinBox" name="resetBreakBox">
-                  <property name="suffix">
-                   <string> min</string>
-                  </property>
-                  <property name="maximum">
-                   <number>65535</number>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
+                <item>
                  <widget class="SteppedSlider" name="pauseOnIdleSlider">
                   <property name="minimumSize">
                    <size>
@@ -805,48 +754,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label_7">
-                  <property name="toolTip">
-                   <string>Sane Break will pause if it detects no activity for this many minutes</string>
-                  </property>
-                  <property name="text">
-                   <string>Pause if idle for</string>
-                  </property>
-                  <property name="wordWrap">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="SteppedSlider" name="resetBreakSlider">
-                  <property name="minimumSize">
-                   <size>
-                    <width>200</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="minimum">
-                   <number>1</number>
-                  </property>
-                  <property name="maximum">
-                   <number>30</number>
-                  </property>
-                  <property name="value">
-                   <number>2</number>
-                  </property>
-                  <property name="orientation">
-                   <enum>Qt::Orientation::Horizontal</enum>
-                  </property>
-                  <property name="tickPosition">
-                   <enum>QSlider::TickPosition::TicksBelow</enum>
-                  </property>
-                  <property name="tickInterval">
-                   <number>5</number>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="2">
+                <item>
                  <widget class="QSpinBox" name="pauseOnIdleBox">
                   <property name="suffix">
                    <string> min</string>
@@ -878,6 +786,121 @@ QPushButton[flat=&quot;true&quot;]:checked {
                  <string>(Write one program name per line)</string>
                 </property>
                </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_24">
+                <property name="text">
+                 <string>&lt;h3&gt;Reset Break Schedule After Pause&lt;/h3&gt;
+&lt;p&gt;Sane Break will adjust the break schedule after pausing:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;If the pause is short, Sane Break will reset the time to the next break.&lt;/li&gt;
+  &lt;li&gt;If it is longer, Sane Break will reset the entire break cycle, and the next break will be the first small break in the cycle.&lt;/li&gt;
+&lt;/ul&gt;</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QGridLayout" name="gridLayout_9">
+                <item row="0" column="1">
+                 <widget class="SteppedSlider" name="resetBreakSlider">
+                  <property name="minimumSize">
+                   <size>
+                    <width>200</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="minimum">
+                   <number>1</number>
+                  </property>
+                  <property name="maximum">
+                   <number>30</number>
+                  </property>
+                  <property name="value">
+                   <number>2</number>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Orientation::Horizontal</enum>
+                  </property>
+                  <property name="tickPosition">
+                   <enum>QSlider::TickPosition::TicksBelow</enum>
+                  </property>
+                  <property name="tickInterval">
+                   <number>5</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QSpinBox" name="resetBreakBox">
+                  <property name="suffix">
+                   <string> min</string>
+                  </property>
+                  <property name="maximum">
+                   <number>65535</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_15">
+                  <property name="text">
+                   <string>Long pause threshold</string>
+                  </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="SteppedSlider" name="resetCycleSlider">
+                  <property name="minimumSize">
+                   <size>
+                    <width>200</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="minimum">
+                   <number>2</number>
+                  </property>
+                  <property name="maximum">
+                   <number>60</number>
+                  </property>
+                  <property name="value">
+                   <number>5</number>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Orientation::Horizontal</enum>
+                  </property>
+                  <property name="tickPosition">
+                   <enum>QSlider::TickPosition::TicksBelow</enum>
+                  </property>
+                  <property name="tickInterval">
+                   <number>5</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QSpinBox" name="resetCycleBox">
+                  <property name="suffix">
+                   <string> min</string>
+                  </property>
+                  <property name="maximum">
+                   <number>65535</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_10">
+                  <property name="text">
+                   <string>Short pause threshold</string>
+                  </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </widget>
