@@ -84,7 +84,8 @@
         <location filename="../../src/gui/pref-window.ui" line="494"/>
         <source>&lt;h3&gt;Flashing Reminder&lt;/h3&gt;
 &lt;p&gt;Sane Break shows a small reminder for &lt;b&gt;Flash break prompt for&lt;/b&gt; seconds. If you stop working or ignore it past this time, it transitions to full-screen. After &lt;b&gt;Confirm break after&lt;/b&gt; seconds of inactivity during the break, it locks until the timer ends.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;Flitsherinnering&lt;/h3&gt;
+&lt;p&gt;Sane Break toont een kleine &lt;b&gt;flitsherinnering gedurende&lt;/b&gt; seconden. Als u stopt met werken of de herinnering bewust negeert, dan wordt de herinnering schermvullend getoond. Na het &lt;b&gt;bevestigen van de pauze na&lt;/b&gt; seconden of inactiviteit, wordt de boel vergrendeld totdat de tijdklok afloopt.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="545"/>
@@ -99,17 +100,17 @@
     <message>
         <location filename="../../src/gui/pref-window.ui" line="72"/>
         <source>Schedule</source>
-        <translation type="unfinished"></translation>
+        <translation>Schema</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="91"/>
         <source>Reminder</source>
-        <translation type="unfinished"></translation>
+        <translation>Herinnering</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="123"/>
         <source>Sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Geluid</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="343"/>
@@ -125,7 +126,7 @@
     <message>
         <location filename="../../src/gui/pref-window.ui" line="453"/>
         <source>&lt;h3&gt;Postpone&lt;/h3&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;Uitstellen&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="548"/>
@@ -145,22 +146,22 @@
     <message>
         <location filename="../../src/gui/pref-window.ui" line="602"/>
         <source>&lt;h3&gt;Reminder Appearance&lt;/h3&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;Vormgeving van herinnering&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="649"/>
         <source>Flash speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Flitssnelheid</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="656"/>
         <source>Text Transparency</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstdoorzichtigheid</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="707"/>
         <source>&lt;h3&gt;Pause Conditions&lt;/h3&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;Pauzevoorwaarden&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="793"/>
@@ -170,17 +171,22 @@
   &lt;li&gt;If the pause is short, Sane Break will reset the time to the next break.&lt;/li&gt;
   &lt;li&gt;If it is longer, Sane Break will reset the entire break cycle, and the next break will be the first small break in the cycle.&lt;/li&gt;
 &lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;Pauzeschema herstellen na pauze&lt;/h3&gt;
+&lt;p&gt;Sane Break zal het pauzeschema aanpassen na een pauze:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Als de pauze kort is, zal Sane Break de tijd instellen op de volgende pauze.&lt;/li&gt;
+  &lt;li&gt;Als de pauze langer is, zal Sane Break de gehele cyclus herstellen en de volgende lange pauze instellen als korte.&lt;/li&gt;
+&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="848"/>
         <source>Long pause threshold</source>
-        <translation type="unfinished"></translation>
+        <translation>Drempelwaarde van lange pauze</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="896"/>
         <source>Short pause threshold</source>
-        <translation type="unfinished"></translation>
+        <translation>Drempelwaarde van korte pauze</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1111"/>
@@ -529,12 +535,12 @@ v%1
     <message>
         <location filename="../../src/app.cpp" line="363"/>
         <source>Are you sure to quit Sane Break?</source>
-        <translation type="unfinished"></translation>
+        <translation>Weet u zeker dat u Sane Break wilt afsluiten?</translation>
     </message>
     <message>
         <location filename="../../src/app.cpp" line="364"/>
         <source>You can postpone the breaks instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>U kunt ook de pauzes uitstellen.</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app.cpp" line="367"/>
