@@ -5,6 +5,7 @@
 #include "auto-start.h"
 
 #include <QCoreApplication>
+#include <QDir>
 #include <QSettings>
 
 void AutoStart::setEnabled(bool enabled) {
@@ -12,8 +13,9 @@ void AutoStart::setEnabled(bool enabled) {
       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
       QSettings::NativeFormat);
   if (enabled) {
-    settings.setValue(QCoreApplication::applicationName(),
-                      QCoreApplication::applicationFilePath());
+    settings.setValue(
+        QCoreApplication::applicationName(),
+        QDir::toNativeSeparators(QCoreApplication::applicationFilePath()));
   } else {
     settings.remove(QCoreApplication::applicationName());
   }
