@@ -174,6 +174,8 @@ class PrefController<QComboBox, Setting<QString>> : public PrefControllerBase {
       : PrefControllerBase(parent), widget(parent), setting(setting) {
     connect(widget, &QComboBox::currentIndexChanged, this,
             &PrefControllerBase::onChange);
+    connect(widget, &QComboBox::currentTextChanged, this,
+            &PrefControllerBase::onChange);
   };
   void loadValue() { widget->setEditText(setting->get()); }
   void saveValue() { setting->set(widget->currentText()); }
