@@ -342,10 +342,11 @@ bool PreferenceWindow::confirmLeave() {
   msgBox.setText(tr("The preferences have been modified."));
   msgBox.setInformativeText(tr("Do you want to save your changes?"));
   msgBox.setIcon(QMessageBox::Icon::Information);
-  msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard |
-                            QMessageBox::Cancel);
-
+  msgBox.addButton(QMessageBox::Save)->setText(tr("Save"));
+  msgBox.addButton(QMessageBox::Discard)->setText(tr("Discard"));
+  msgBox.addButton(QMessageBox::Cancel)->setText(tr("Cancel"));
   msgBox.setDefaultButton(QMessageBox::Save);
+
   switch (msgBox.exec()) {
     case QMessageBox::Save:
       controllers->save();

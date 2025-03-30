@@ -363,9 +363,9 @@ void SaneBreakApp::confirmQuit() {
   msgBox.setText(tr("Are you sure to quit Sane Break?"));
   msgBox.setInformativeText(tr("You can postpone the breaks instead."));
   msgBox.setIcon(QMessageBox::Icon::Question);
-  msgBox.addButton(QMessageBox::Cancel);
+  msgBox.addButton(QMessageBox::Cancel)->setText(tr("Cancel"));
   msgBox.addButton(tr("Postpone %n min", "", largestMinutes), QMessageBox::NoRole);
-  msgBox.addButton(QMessageBox::Yes);
+  msgBox.addButton(QMessageBox::Yes)->setText(tr("Yes"));
 
   msgBox.setDefaultButton(QMessageBox::Cancel);
   switch (msgBox.exec()) {
