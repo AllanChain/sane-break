@@ -52,16 +52,6 @@ QPixmap StatusTrayWindow::drawIcon(float arcRatio, IconVariants flags) {
     painter.setPen(pen);
     painter.drawEllipse(smallRect);
   }
-  if (flags.testFlag(IconVariant::READING)) {
-    int dotSize = 64;
-    QRect smallRect(pixmap.width() - 12 - dotSize, pixmap.height() - 12 - dotSize,
-                    dotSize, dotSize);
-    QBrush brush(QColor(3, 105, 161, 255));
-    painter.setBrush(brush);
-    pen.setWidth(0);
-    painter.setPen(pen);
-    painter.drawRect(smallRect);
-  }
 
   return pixmap;
 }

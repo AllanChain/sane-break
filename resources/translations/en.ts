@@ -34,8 +34,8 @@
 <context>
     <name>SaneBreakApp</name>
     <message numerus="yes">
-        <location filename="../../src/app.cpp" line="172"/>
-        <location filename="../../src/app.cpp" line="351"/>
+        <location filename="../../src/app.cpp" line="169"/>
+        <location filename="../../src/app.cpp" line="332"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -43,7 +43,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app.cpp" line="367"/>
+        <location filename="../../src/app.cpp" line="348"/>
         <source>Postpone %n min</source>
         <translation>
             <numerusform>Postpone %n min</numerusform>

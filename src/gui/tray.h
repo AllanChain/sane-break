@@ -19,7 +19,6 @@ class StatusTrayWindow : public QObject {
   enum IconVariant {
     PAUSED = 1 << 0,
     WILL_BIG = 1 << 1,
-    READING = 1 << 2,
   };
   Q_DECLARE_FLAGS(IconVariants, IconVariant);
 
