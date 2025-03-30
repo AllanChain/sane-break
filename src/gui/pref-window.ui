@@ -293,7 +293,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
               <item row="1" column="0">
                <widget class="QLabel" name="label_4">
                 <property name="toolTip">
-                 <string>Duration of small breaks (in seconds)</string>
+                 <string extracomment="Tooltip for &quot;Break length&quot; config (small break)">Duration of small breaks (in seconds)</string>
                 </property>
                 <property name="text">
                  <string>Break length</string>
@@ -341,7 +341,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
               <item row="0" column="0">
                <widget class="QLabel" name="label_3">
                 <property name="toolTip">
-                 <string>Length of work time between breaks</string>
+                 <string extracomment="Tooltip for &quot;Break every&quot; config (small break)">Length of work time between breaks</string>
                 </property>
                 <property name="text">
                  <string>Break every</string>
@@ -372,7 +372,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
               <item row="0" column="0">
                <widget class="QLabel" name="label_5">
                 <property name="toolTip">
-                 <string>Every so many breaks will be a big break</string>
+                 <string extracomment="Tooltip for &quot;Break every&quot; config (big break)">Every so many breaks will be a big break</string>
                 </property>
                 <property name="text">
                  <string>Break every</string>
@@ -442,7 +442,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
               <item row="1" column="0">
                <widget class="QLabel" name="label_6">
                 <property name="toolTip">
-                 <string>Duration of big breaks (in seconds)</string>
+                 <string extracomment="Tooltip for &quot;Break length&quot; config (big break)">Duration of big breaks (in seconds)</string>
                 </property>
                 <property name="text">
                  <string>Break length</string>
@@ -546,7 +546,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
               <item row="0" column="0">
                <widget class="QLabel" name="label_13">
                 <property name="toolTip">
-                 <string>Time in seconds before forcing break after work reminder appears.</string>
+                 <string extracomment="Tooltip for &quot;Flash break prompt for&quot; config">Time in seconds before forcing break after work reminder appears.</string>
                 </property>
                 <property name="text">
                  <string>Flash break prompt for</string>
@@ -556,7 +556,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
               <item row="1" column="0">
                <widget class="QLabel" name="label_14">
                 <property name="toolTip">
-                 <string>After idle for that long during break, Sane Break will keep full screen and there's no way back.</string>
+                 <string extracomment="Tooltip for &quot;Confirm break after&quot; config">After idle for that long during break, Sane Break will keep full screen and there's no way back.</string>
                 </property>
                 <property name="text">
                  <string>Confirm break after</string>
@@ -717,7 +717,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
               <item>
                <widget class="QLabel" name="label_7">
                 <property name="toolTip">
-                 <string>Sane Break will pause if it detects no activity for this many minutes</string>
+                 <string extracomment="Tooltip for &quot;Pause if idle for&quot; config">Sane Break will pause if it detects no activity for this many minutes</string>
                 </property>
                 <property name="text">
                  <string>Pause if idle for</string>
@@ -1112,7 +1112,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
                 <item>
                  <widget class="QLabel" name="label_16">
                   <property name="toolTip">
-                   <string>Let's say you've configured it to 2 minutes. If the break is shorter than 2 minutes, the
+                   <string extracomment="Tooltip for &quot;Auto screen lock&quot; config">Let's say you've configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</string>
                   </property>

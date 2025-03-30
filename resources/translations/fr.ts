@@ -88,6 +88,7 @@
     <message>
         <location filename="../../src/gui/pref-window.ui" line="344"/>
         <source>Length of work time between breaks</source>
+        <extracomment>Tooltip for &quot;Break every&quot; config (small break)</extracomment>
         <translation>Durée du temps de travail entre chaque pause</translation>
     </message>
     <message>
@@ -99,6 +100,7 @@
     <message>
         <location filename="../../src/gui/pref-window.ui" line="375"/>
         <source>Every so many breaks will be a big break</source>
+        <extracomment>Tooltip for &quot;Break every&quot; config (big break)</extracomment>
         <translation>La dernière de chaque série sera une grosse pause</translation>
     </message>
     <message>
@@ -114,6 +116,7 @@
     <message>
         <location filename="../../src/gui/pref-window.ui" line="559"/>
         <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
+        <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
         <translation>Si inactif pendant ce temps lors d&apos;une pause, Sane Break restera en plein écran sans retour arrière possible.</translation>
     </message>
     <message>
@@ -166,6 +169,7 @@
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
+        <extracomment>Tooltip for &quot;Auto screen lock&quot; config</extracomment>
         <translation>Imaginons que vous mettiez 2 minutes. Si la pause est plus courte que 2 minutes,
 l&apos;écran se bloquera 2 minutes à partir du moment où la pause commence, si tant
 est que l&apos;utilisateur est bien inactif. Si la pause dure plus longue que 2 minutes,
@@ -201,16 +205,19 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="296"/>
         <source>Duration of small breaks (in seconds)</source>
+        <extracomment>Tooltip for &quot;Break length&quot; config (small break)</extracomment>
         <translation>Combien de secondes pour chaque petite pause</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="549"/>
         <source>Time in seconds before forcing break after work reminder appears.</source>
+        <extracomment>Tooltip for &quot;Flash break prompt for&quot; config</extracomment>
         <translation>Combien de secondes pour continuer le travail avant que la pause ne soit forcée.</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="445"/>
         <source>Duration of big breaks (in seconds)</source>
+        <extracomment>Tooltip for &quot;Break length&quot; config (big break)</extracomment>
         <translation>Combien de secondes pour chaque grosse pause</translation>
     </message>
     <message>
@@ -249,6 +256,7 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="720"/>
         <source>Sane Break will pause if it detects no activity for this many minutes</source>
+        <extracomment>Tooltip for &quot;Pause if idle for&quot; config</extracomment>
         <translation>Sane Break mettra son cycle en pause s&apos;il ne détecte aucune activité sur cette période</translation>
     </message>
     <message>

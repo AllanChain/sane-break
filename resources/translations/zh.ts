@@ -91,6 +91,7 @@
     <message>
         <location filename="../../src/gui/pref-window.ui" line="549"/>
         <source>Time in seconds before forcing break after work reminder appears.</source>
+        <extracomment>Tooltip for &quot;Flash break prompt for&quot; config</extracomment>
         <translation>休息提醒弹出后允许继续工作的时长（秒），超时则强制休息。</translation>
     </message>
     <message>
@@ -111,6 +112,7 @@
     <message>
         <location filename="../../src/gui/pref-window.ui" line="344"/>
         <source>Length of work time between breaks</source>
+        <extracomment>Tooltip for &quot;Break every&quot; config (small break)</extracomment>
         <translation>两次休息之间的工作时间</translation>
     </message>
     <message>
@@ -122,6 +124,7 @@
     <message>
         <location filename="../../src/gui/pref-window.ui" line="375"/>
         <source>Every so many breaks will be a big break</source>
+        <extracomment>Tooltip for &quot;Break every&quot; config (big break)</extracomment>
         <translation>每这么多次休息开始大休息</translation>
     </message>
     <message>
@@ -137,6 +140,7 @@
     <message>
         <location filename="../../src/gui/pref-window.ui" line="559"/>
         <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
+        <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
         <translation>休息提示开始后，在给定时间内持续处于空闲状态，则将自动进入强制休息状态，不会因为用户输入而重新计时。</translation>
     </message>
     <message>
@@ -179,6 +183,7 @@
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
+        <extracomment>Tooltip for &quot;Auto screen lock&quot; config</extracomment>
         <translation>假设设置为 2 分钟，则如果休息持续时间短于 2 分钟，只要休息
 结束后用户没有活动，屏幕会在休息提示开始后的 2 分钟自动锁
 定。如果休息持续超过 2 分钟，则屏幕必然会自动锁定。</translation>
@@ -218,11 +223,13 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="296"/>
         <source>Duration of small breaks (in seconds)</source>
+        <extracomment>Tooltip for &quot;Break length&quot; config (small break)</extracomment>
         <translation>小休息持续多少秒</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="445"/>
         <source>Duration of big breaks (in seconds)</source>
+        <extracomment>Tooltip for &quot;Break length&quot; config (big break)</extracomment>
         <translation>大休息持续多少秒</translation>
     </message>
     <message>
@@ -247,6 +254,7 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="720"/>
         <source>Sane Break will pause if it detects no activity for this many minutes</source>
+        <extracomment>Tooltip for &quot;Pause if idle for&quot; config</extracomment>
         <translation>在这么多时间内没有活动，Sane Break 将暂停计时</translation>
     </message>
     <message>

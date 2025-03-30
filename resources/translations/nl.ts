@@ -90,11 +90,13 @@
     <message>
         <location filename="../../src/gui/pref-window.ui" line="549"/>
         <source>Time in seconds before forcing break after work reminder appears.</source>
+        <extracomment>Tooltip for &quot;Flash break prompt for&quot; config</extracomment>
         <translation>De duur - in seconden - alvorens een pauzeherinnering wordt getoond.</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="344"/>
         <source>Length of work time between breaks</source>
+        <extracomment>Tooltip for &quot;Break every&quot; config (small break)</extracomment>
         <translation>De werktijd tussen pauzes</translation>
     </message>
     <message>
@@ -121,6 +123,7 @@
     <message>
         <location filename="../../src/gui/pref-window.ui" line="375"/>
         <source>Every so many breaks will be a big break</source>
+        <extracomment>Tooltip for &quot;Break every&quot; config (big break)</extracomment>
         <translation>Ieder x-aantal pauzes zal een lange zijn</translation>
     </message>
     <message>
@@ -136,6 +139,7 @@
     <message>
         <location filename="../../src/gui/pref-window.ui" line="559"/>
         <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
+        <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
         <translation>Na een bepaalde mate van inactiviteit tijdens een pauze, zal Sane Break een schermvullende melding tonen.</translation>
     </message>
     <message>
@@ -193,6 +197,7 @@
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
+        <extracomment>Tooltip for &quot;Auto screen lock&quot; config</extracomment>
         <translation>Voorbeeld: de ingestelde tijd is 2 minuten. Een pauze van minder dan 2 minuten zal leiden
 tot vergrendeling van het scherm, 2 minuten nadat de pauze is begonnen. Als de pauze meer
 dan 2 minuten duurt, zal het scherm sowieso worden vergrendeld.</translation>
@@ -232,11 +237,13 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="296"/>
         <source>Duration of small breaks (in seconds)</source>
+        <extracomment>Tooltip for &quot;Break length&quot; config (small break)</extracomment>
         <translation>De duur van korte pauzes (in seconden)</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="445"/>
         <source>Duration of big breaks (in seconds)</source>
+        <extracomment>Tooltip for &quot;Break length&quot; config (big break)</extracomment>
         <translation>De duur van lange pauzes (in seconden)</translation>
     </message>
     <message>
@@ -265,6 +272,7 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="720"/>
         <source>Sane Break will pause if it detects no activity for this many minutes</source>
+        <extracomment>Tooltip for &quot;Pause if idle for&quot; config</extracomment>
         <translation>Sane Break zal de pauze opschorten als er geen activiteit wordt waargenomen gedurende het opgegeven aantal minuten</translation>
     </message>
     <message>
