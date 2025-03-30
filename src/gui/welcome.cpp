@@ -27,11 +27,11 @@
 #include <QtContainerFwd>
 
 #include "config.h"
-#include "preferences.h"
+#include "lib/preferences.h"
 #include "widgets/language-select.h"
 
 #ifdef Q_OS_LINUX
-#include "linux/system-check.h"
+#include "lib/linux/system-check.h"
 #endif
 
 WelcomeWindow::WelcomeWindow(QWidget *parent) : QDialog(parent) {

@@ -22,16 +22,16 @@
 #include <QTimer>
 #include <QWindow>
 
-#include "battery-status.h"
-#include "idle-time.h"
-#include "pref-window.h"
-#include "preferences.h"
-#include "program-monitor.h"
-#include "screen-lock.h"
-#include "tray.h"
-#include "utils.h"
-#include "widgets/language-select.h"
-#include "window-manager.h"
+#include "gui/pref-window.h"
+#include "gui/tray.h"
+#include "gui/widgets/language-select.h"
+#include "gui/window-manager.h"
+#include "lib/battery-status.h"
+#include "lib/idle-time.h"
+#include "lib/preferences.h"
+#include "lib/program-monitor.h"
+#include "lib/screen-lock.h"
+#include "lib/utils.h"
 
 SaneBreakApp::SaneBreakApp() : QObject() {
   prefWindow = new PreferenceWindow();

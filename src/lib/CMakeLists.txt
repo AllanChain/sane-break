@@ -16,9 +16,7 @@ add_library(
   utils.h
 )
 target_include_directories(
-  sane-lib
-  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
-  PRIVATE ${CMAKE_BINARY_DIR}
+  sane-lib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_BINARY_DIR}
 )
 
 find_package(
@@ -26,10 +24,14 @@ find_package(
   COMPONENTS Widgets
   REQUIRED
 )
-target_link_libraries(sane-lib PRIVATE Qt6::Widgets)
+target_link_libraries(sane-lib PUBLIC Qt6::Widgets)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+  find_library(IOKit NAMES IOKit)
+  find_library(CoreFoundation NAMES CoreFoundation)
   find_library(ServiceManagement NAMES ServiceManagement)
+  target_link_libraries(sane-lib PRIVATE "-framework IOKit")
+  target_link_libraries(sane-lib PRIVATE "-framework CoreFoundation")
   target_link_libraries(sane-lib PRIVATE "-framework ServiceManagement")
   target_sources(
     sane-lib

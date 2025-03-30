@@ -10,12 +10,12 @@
 #include <QObject>
 #include <QTimer>
 
-#include "battery-status.h"
-#include "idle-time.h"
-#include "pref-window.h"
-#include "program-monitor.h"
-#include "tray.h"
-#include "window-manager.h"
+#include "gui/pref-window.h"
+#include "gui/tray.h"
+#include "gui/window-manager.h"
+#include "lib/battery-status.h"
+#include "lib/idle-time.h"
+#include "lib/program-monitor.h"
 
 enum PauseReason {
   IDLE = 1 << 0,

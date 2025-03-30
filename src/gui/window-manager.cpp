@@ -8,10 +8,6 @@
 
 #include <utility>
 
-#include "config.h"
-#include "preferences.h"
-#include "sound-player.h"
-
 #ifdef LayerShellQt_FOUND
 #include <LayerShellQt/shell.h>
 #endif
@@ -26,7 +22,10 @@
 #include <QTimer>
 
 #include "break-window.h"
-#include "idle-time.h"
+#include "config.h"
+#include "lib/idle-time.h"
+#include "lib/preferences.h"
+#include "sound-player.h"
 
 BreakWindowManager::BreakWindowManager() : QObject() {
   countdownTimer = new QTimer(this);

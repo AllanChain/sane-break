@@ -24,16 +24,16 @@
 #include <cmath>
 
 #include "config.h"
-#include "preferences.h"
-#include "utils.h"
+#include "lib/preferences.h"
+#include "lib/utils.h"
 
 #ifdef Q_OS_LINUX
-#include "linux/system-check.h"
+#include "lib/linux/system-check.h"
 #endif  // Q_OS_LINUX
 #ifdef LayerShellQt_FOUND
 #include <LayerShellQt/window.h>
 #elif defined Q_OS_MACOS
-#include "macos/workspace.h"
+#include "lib/macos/workspace.h"
 #endif
 
 const int BreakWindow::SMALL_WINDOW_WIDTH = 400;

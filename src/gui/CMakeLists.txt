@@ -1,3 +1,4 @@
+find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia)
 add_library(
   sane-gui STATIC
   break-window.cpp
@@ -19,8 +20,6 @@ add_library(
   window-manager.h
 )
 target_include_directories(
-  sane-gui
-  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
-  PRIVATE ${CMAKE_BINARY_DIR}
+  sane-gui PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_BINARY_DIR}
 )
-target_link_libraries(sane-gui PRIVATE Qt6::Widgets Qt6::Multimedia sane-lib)
+target_link_libraries(sane-gui PUBLIC Qt6::Widgets Qt6::Multimedia sane-lib)

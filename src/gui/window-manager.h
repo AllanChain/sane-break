@@ -10,7 +10,7 @@
 #include <QTimer>
 
 #include "break-window.h"  // IWYU pragma: export
-#include "idle-time.h"
+#include "lib/idle-time.h"
 #include "sound-player.h"
 
 class BreakWindowManager : public QObject {

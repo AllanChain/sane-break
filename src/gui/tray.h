@@ -4,13 +4,12 @@
 
 #ifndef SANE_TRAY_H
 #define SANE_TRAY_H
-#include <qwidget.h>
-
 #include <QContextMenuEvent>
 #include <QLabel>
 #include <QMenu>
 #include <QObject>
 #include <QSystemTrayIcon>
+#include <QWidget>
 
 class StatusTrayWindow : public QObject {
   Q_OBJECT
