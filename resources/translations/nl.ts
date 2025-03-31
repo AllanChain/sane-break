@@ -479,17 +479,17 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.cpp" line="348"/>
         <source>Save</source>
-        <translation type="unfinished">Opslaan</translation>
+        <translation>Opslaan</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.cpp" line="349"/>
         <source>Discard</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwerpen</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.cpp" line="350"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuleren</translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.cpp" line="249"/>
@@ -608,7 +608,7 @@ v%1
     <message>
         <location filename="../../src/app/app.cpp" line="347"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuleren</translation>
+        <translation>Annuleren</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/app.cpp" line="348"/>
@@ -621,7 +621,7 @@ v%1
     <message>
         <location filename="../../src/app/app.cpp" line="349"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="218"/>
