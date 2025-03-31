@@ -226,16 +226,16 @@ v%1
         <translation>Minutes de retard</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="984"/>
-        <location filename="../../src/gui/pref-window.ui" line="1015"/>
+        <location filename="../../src/gui/pref-window.ui" line="925"/>
+        <location filename="../../src/gui/pref-window.ui" line="956"/>
         <source>Try restart Sane Break if no sound</source>
         <translation>Si le son ne fonctionne pas, essayez de redémarrer Sane Break</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="945"/>
-        <location filename="../../src/gui/pref-window.ui" line="952"/>
-        <location filename="../../src/gui/pref-window.ui" line="1001"/>
-        <location filename="../../src/gui/pref-window.ui" line="1008"/>
+        <location filename="../../src/gui/pref-window.ui" line="942"/>
+        <location filename="../../src/gui/pref-window.ui" line="949"/>
+        <location filename="../../src/gui/pref-window.ui" line="1004"/>
+        <location filename="../../src/gui/pref-window.ui" line="1011"/>
         <source>Play</source>
         <translation>Écouter</translation>
     </message>
@@ -284,8 +284,8 @@ v%1
         <translation> min</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="938"/>
-        <location filename="../../src/gui/pref-window.ui" line="1018"/>
+        <location filename="../../src/gui/pref-window.ui" line="959"/>
+        <location filename="../../src/gui/pref-window.ui" line="997"/>
         <source>Bell before breaks</source>
         <translation type="unfinished">Son de cloche avant une pause</translation>
     </message>
@@ -303,8 +303,8 @@ v%1
         <translation type="unfinished">Durée d&apos;une pause</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="966"/>
-        <location filename="../../src/gui/pref-window.ui" line="987"/>
+        <location filename="../../src/gui/pref-window.ui" line="928"/>
+        <location filename="../../src/gui/pref-window.ui" line="1025"/>
         <source>Bell after breaks</source>
         <translation type="unfinished">Son de cloche après une pause</translation>
     </message>
@@ -421,22 +421,22 @@ v%1
         <translation>Démarrer la pause suivante en faisant clic du milieu sur l&amp;apos;icône dans la barre des tâches</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="279"/>
+        <location filename="../../src/gui/pref-window.cpp" line="280"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>Démarrer la pause suivante en faisant double-clic sur l&amp;apos;icône dans la barre des tâches</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="345"/>
+        <location filename="../../src/gui/pref-window.cpp" line="348"/>
         <source>Save</source>
         <translation type="unfinished">Sauvegarder</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="346"/>
+        <location filename="../../src/gui/pref-window.cpp" line="349"/>
         <source>Discard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="347"/>
+        <location filename="../../src/gui/pref-window.cpp" line="350"/>
         <source>Cancel</source>
         <translation type="unfinished">Annuler</translation>
     </message>
@@ -446,12 +446,12 @@ v%1
         <translation>La mise en place du démarrage automatique a échoué</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="342"/>
+        <location filename="../../src/gui/pref-window.cpp" line="345"/>
         <source>The preferences have been modified.</source>
         <translation>Les préférences ont été modifiées.</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="343"/>
+        <location filename="../../src/gui/pref-window.cpp" line="346"/>
         <source>Do you want to save your changes?</source>
         <translation>Voulez-vous sauvegarder les changements&#x202f;?</translation>
     </message>
@@ -482,33 +482,33 @@ v%1
 <context>
     <name>SaneBreakApp</name>
     <message>
-        <location filename="../../src/app.cpp" line="141"/>
+        <location filename="../../src/app/app.cpp" line="141"/>
         <source>big break</source>
         <translation>grosse pause</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="141"/>
+        <location filename="../../src/app/app.cpp" line="141"/>
         <source>small break</source>
         <translation>petite pause</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="153"/>
+        <location filename="../../src/app/app.cpp" line="153"/>
         <source>Next Break</source>
         <translation>Prochaine pause</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="157"/>
+        <location filename="../../src/app/app.cpp" line="157"/>
         <source>Big Break</source>
         <translation>Grosse pause</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="166"/>
+        <location filename="../../src/app/app.cpp" line="166"/>
         <source>Postpone</source>
         <translation>Retarder</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app.cpp" line="169"/>
-        <location filename="../../src/app.cpp" line="332"/>
+        <location filename="../../src/app/app.cpp" line="169"/>
+        <location filename="../../src/app/app.cpp" line="332"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -516,22 +516,22 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="186"/>
+        <location filename="../../src/app/app.cpp" line="186"/>
         <source>Quit</source>
         <translation>Quitter</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="172"/>
+        <location filename="../../src/app/app.cpp" line="172"/>
         <source>Enable Break</source>
         <translation>Activer pause</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="144"/>
+        <location filename="../../src/app/app.cpp" line="144"/>
         <source>Next break after %1</source>
         <translation>Prochaine pause dans %1</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="148"/>
+        <location filename="../../src/app/app.cpp" line="148"/>
         <source>Next big break after %1</source>
         <translation>Grosse pause dans %1</translation>
     </message>
@@ -540,27 +540,27 @@ v%1
         <translation type="vanished">Activer le mode Lecture</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="180"/>
+        <location filename="../../src/app/app.cpp" line="180"/>
         <source>Preferences</source>
         <translation>Préférences</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="344"/>
+        <location filename="../../src/app/app.cpp" line="344"/>
         <source>Are you sure to quit Sane Break?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="345"/>
+        <location filename="../../src/app/app.cpp" line="345"/>
         <source>You can postpone the breaks instead.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="347"/>
+        <location filename="../../src/app/app.cpp" line="347"/>
         <source>Cancel</source>
         <translation type="unfinished">Annuler</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app.cpp" line="348"/>
+        <location filename="../../src/app/app.cpp" line="348"/>
         <source>Postpone %n min</source>
         <translation>
             <numerusform>Retarder de %n min</numerusform>
@@ -568,22 +568,22 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="349"/>
+        <location filename="../../src/app/app.cpp" line="349"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="218"/>
+        <location filename="../../src/app/app.cpp" line="218"/>
         <source>Paused on battery</source>
         <translation>En pause sur batterie</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="220"/>
+        <location filename="../../src/app/app.cpp" line="220"/>
         <source>Paused on app running</source>
         <translation>En pause lorsqu&apos;une application est lancée</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="222"/>
+        <location filename="../../src/app/app.cpp" line="222"/>
         <source>Paused on idle</source>
         <translation>En pause en cas d&apos;inactivité</translation>
     </message>

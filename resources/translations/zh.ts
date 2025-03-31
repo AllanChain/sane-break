@@ -77,14 +77,14 @@
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="938"/>
-        <location filename="../../src/gui/pref-window.ui" line="1018"/>
+        <location filename="../../src/gui/pref-window.ui" line="959"/>
+        <location filename="../../src/gui/pref-window.ui" line="997"/>
         <source>Bell before breaks</source>
         <translation>休息前提示音</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="966"/>
-        <location filename="../../src/gui/pref-window.ui" line="987"/>
+        <location filename="../../src/gui/pref-window.ui" line="928"/>
+        <location filename="../../src/gui/pref-window.ui" line="1025"/>
         <source>Bell after breaks</source>
         <translation>休息后提示音</translation>
     </message>
@@ -238,16 +238,16 @@ v%1
         <translation>推迟分钟数</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="984"/>
-        <location filename="../../src/gui/pref-window.ui" line="1015"/>
+        <location filename="../../src/gui/pref-window.ui" line="925"/>
+        <location filename="../../src/gui/pref-window.ui" line="956"/>
         <source>Try restart Sane Break if no sound</source>
         <translation>如果没有声音，请尝试重启 Sane Break</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="945"/>
-        <location filename="../../src/gui/pref-window.ui" line="952"/>
-        <location filename="../../src/gui/pref-window.ui" line="1001"/>
-        <location filename="../../src/gui/pref-window.ui" line="1008"/>
+        <location filename="../../src/gui/pref-window.ui" line="942"/>
+        <location filename="../../src/gui/pref-window.ui" line="949"/>
+        <location filename="../../src/gui/pref-window.ui" line="1004"/>
+        <location filename="../../src/gui/pref-window.ui" line="1011"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
@@ -411,22 +411,22 @@ v%1
         <translation>在中键托盘图标后，立刻开始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="279"/>
+        <location filename="../../src/gui/pref-window.cpp" line="280"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>在双击托盘图标后，立刻开始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="345"/>
+        <location filename="../../src/gui/pref-window.cpp" line="348"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="346"/>
+        <location filename="../../src/gui/pref-window.cpp" line="349"/>
         <source>Discard</source>
         <translation>放弃</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="347"/>
+        <location filename="../../src/gui/pref-window.cpp" line="350"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
@@ -436,12 +436,12 @@ v%1
         <translation>设置开机自启失败</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="342"/>
+        <location filename="../../src/gui/pref-window.cpp" line="345"/>
         <source>The preferences have been modified.</source>
         <translation>偏好设置已被修改。</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="343"/>
+        <location filename="../../src/gui/pref-window.cpp" line="346"/>
         <source>Do you want to save your changes?</source>
         <translation>是否保存修改？</translation>
     </message>
@@ -472,102 +472,102 @@ v%1
 <context>
     <name>SaneBreakApp</name>
     <message>
-        <location filename="../../src/app.cpp" line="141"/>
+        <location filename="../../src/app/app.cpp" line="141"/>
         <source>big break</source>
         <translation>大休息</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="141"/>
+        <location filename="../../src/app/app.cpp" line="141"/>
         <source>small break</source>
         <translation>小休息</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="153"/>
+        <location filename="../../src/app/app.cpp" line="153"/>
         <source>Next Break</source>
         <translation>下次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="157"/>
+        <location filename="../../src/app/app.cpp" line="157"/>
         <source>Big Break</source>
         <translation>大休息</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="166"/>
+        <location filename="../../src/app/app.cpp" line="166"/>
         <source>Postpone</source>
         <translation>推迟</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app.cpp" line="169"/>
-        <location filename="../../src/app.cpp" line="332"/>
+        <location filename="../../src/app/app.cpp" line="169"/>
+        <location filename="../../src/app/app.cpp" line="332"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n 分钟</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="186"/>
+        <location filename="../../src/app/app.cpp" line="186"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="172"/>
+        <location filename="../../src/app/app.cpp" line="172"/>
         <source>Enable Break</source>
         <translation>启用休息</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="144"/>
+        <location filename="../../src/app/app.cpp" line="144"/>
         <source>Next break after %1</source>
         <translation>%1 后休息</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="148"/>
+        <location filename="../../src/app/app.cpp" line="148"/>
         <source>Next big break after %1</source>
         <translation>%1 后大休息</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="180"/>
+        <location filename="../../src/app/app.cpp" line="180"/>
         <source>Preferences</source>
         <translation>偏好设置</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="344"/>
+        <location filename="../../src/app/app.cpp" line="344"/>
         <source>Are you sure to quit Sane Break?</source>
         <translation>确定退出 Sane Break？</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="345"/>
+        <location filename="../../src/app/app.cpp" line="345"/>
         <source>You can postpone the breaks instead.</source>
         <translation>你可以推迟休息而非退出。</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="347"/>
+        <location filename="../../src/app/app.cpp" line="347"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app.cpp" line="348"/>
+        <location filename="../../src/app/app.cpp" line="348"/>
         <source>Postpone %n min</source>
         <translation>
             <numerusform>推迟 %n 分钟</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="349"/>
+        <location filename="../../src/app/app.cpp" line="349"/>
         <source>Yes</source>
         <translation>是的</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="218"/>
+        <location filename="../../src/app/app.cpp" line="218"/>
         <source>Paused on battery</source>
         <translation>因电池供电而暂停</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="220"/>
+        <location filename="../../src/app/app.cpp" line="220"/>
         <source>Paused on app running</source>
         <translation>因特定应用运行而暂停</translation>
     </message>
     <message>
-        <location filename="../../src/app.cpp" line="222"/>
+        <location filename="../../src/app/app.cpp" line="222"/>
         <source>Paused on idle</source>
         <translation>因用户空闲而暂停</translation>
     </message>
