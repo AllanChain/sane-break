@@ -25,4 +25,6 @@ endif()
 
 include(GNUInstallDirs)
 
+configure_file(config.h.cmake config.h)
+
 add_subdirectory(src)
