@@ -119,11 +119,11 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
       )
       target_link_libraries(sane-lib PRIVATE Wayland::Client)
       if(LayerShellQt_FOUND)
-        set(LayerShellQt_FOUND
+        set(WITH_LAYER_SHELL
             ON
-            PARENT_SCOPE
+            CACHE BOOL "Compile with layer shell"
         )
-        target_link_libraries(sane-lib PRIVATE LayerShellQt::Interface)
+        target_link_libraries(sane-lib PUBLIC LayerShellQt::Interface)
       endif()
     else()
       set(ENABLE_WAYLAND
@@ -137,7 +137,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
       if(NOT Qt6WaylandClient_FOUND)
         message(STATUS "  Qt6 Wayland (missing)")
       endif()
-      if(NOT LayerShellQt_FOUND)
+      if(NOT WITH_LAYER_SHELL)
         message(STATUS "  Layer Shell Qt (missing)")
       endif()
     endif()

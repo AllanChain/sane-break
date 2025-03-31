@@ -8,7 +8,9 @@
 
 #include <utility>
 
-#ifdef LayerShellQt_FOUND
+#include "config.h"
+
+#ifdef WITH_LAYER_SHELL
 #include <LayerShellQt/shell.h>
 #endif
 #include <QApplication>
@@ -22,7 +24,6 @@
 #include <QTimer>
 
 #include "break-window.h"
-#include "config.h"
 #include "lib/idle-time.h"
 #include "lib/preferences.h"
 #include "sound-player.h"
@@ -42,7 +43,7 @@ BreakWindowManager::BreakWindowManager() : QObject() {
   connect(idleTimer, &SystemIdleTime::idleEnd, this, &BreakWindowManager::onIdleEnd);
   soundPlayer = new SoundPlayer(this);
 
-#ifdef LayerShellQt_FOUND
+#ifdef WITH_LAYER_SHELL
   if (QGuiApplication::platformName() == "wayland")
     LayerShellQt::Shell::useLayerShell();
 #endif

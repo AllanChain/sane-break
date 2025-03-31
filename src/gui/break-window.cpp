@@ -30,7 +30,7 @@
 #ifdef Q_OS_LINUX
 #include "lib/linux/system-check.h"
 #endif  // Q_OS_LINUX
-#ifdef LayerShellQt_FOUND
+#ifdef WITH_LAYER_SHELL
 #include <LayerShellQt/window.h>
 #elif defined Q_OS_MACOS
 #include "lib/macos/workspace.h"
@@ -197,7 +197,7 @@ void BreakWindow::initSize(QScreen *screen) {
   }
   show();
   hide();
-#ifdef LayerShellQt_FOUND
+#ifdef WITH_LAYER_SHELL
   if (QGuiApplication::platformName() == "wayland")
     if (auto window = LayerShellQt::Window::get(windowHandle())) {
       using namespace LayerShellQt;

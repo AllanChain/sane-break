@@ -29,7 +29,7 @@
 void registryHandler(void *data, wl_registry *registry, uint32_t id,
                      const char *interface, uint32_t version) {
   // Layer shell shoud be supported both compile and run time
-#ifdef LayerShellQt_FOUND
+#ifdef WITH_LAYER_SHELL
   if (strcmp(interface, "zwlr_layer_shell_v1") == 0)
     LinuxSystemSupport::layerShell = true;
 #endif
@@ -88,7 +88,7 @@ const QList<QString> LinuxSystemSupport::warnings() {
 #ifdef ENABLE_WAYLAND
   if (QGuiApplication::platformName() == "wayland") {
     if (!LinuxSystemSupport::layerShell) {
-#ifdef LayerShellQt_FOUND
+#ifdef WITH_LAYER_SHELL
       list.append(QCoreApplication::tr(
           "The compositor does not support layer shell, and window positioning will be "
           "bugged"));

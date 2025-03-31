@@ -6,7 +6,10 @@ qt_add_executable(
 
 find_package(Qt6 COMPONENTS LinguistTools)
 if(Qt6_FOUND AND Qt6LinguistTools_FOUND)
-  set(WITH_TRANSLATIONS ON)
+  set(WITH_TRANSLATIONS
+      ON
+      CACHE BOOL "Enable translations"
+  )
   file(GLOB TS_FILES "${CMAKE_SOURCE_DIR}/resources/translations/*.ts")
   set(OTHER_TS_FILES ${TS_FILES})
   list(FILTER OTHER_TS_FILES EXCLUDE REGEX ".*/(en|zh)\\.ts$")
@@ -61,7 +64,10 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   set_property(CACHE LINUX_DIST PROPERTY STRINGS Flatpak Default)
   if(LINUX_DIST STREQUAL "Flatpak")
     message(STATUS "Building for Flatpak")
-    set(LINUX_DIST_FLATPAK ON)
+    set(LINUX_DIST_FLATPAK
+        ON
+        CACHE BOOL "Flatpak build"
+    )
   elseif(LINUX_DIST STREQUAL "Default")
     unset(LINUX_DIST)
   endif()
@@ -127,7 +133,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND SANE_MAKE_DEB)
   if(ENABLE_X11)
     list(APPEND DEBIAN_DEPENDENCY_LIST "libxss1(>=1.2.3)")
   endif()
-  if(LayerShellQt_FOUND)
+  if(WITH_LAYER_SHELL)
     list(APPEND DEBIAN_DEPENDENCY_LIST "layer-shell-qt(>=6.2)")
   endif()
   list(JOIN DEBIAN_DEPENDENCY_LIST ", " CPACK_DEBIAN_PACKAGE_DEPENDS)
