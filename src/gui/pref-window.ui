@@ -495,8 +495,8 @@ QPushButton[flat=&quot;true&quot;]:checked {
                <string/>
               </property>
               <property name="text">
-               <string>&lt;h3&gt;Flashing Reminder&lt;/h3&gt;
-&lt;p&gt;Sane Break shows a small reminder for &lt;b&gt;Flash break prompt for&lt;/b&gt; seconds. If you stop working or ignore it past this time, it transitions to full-screen. After &lt;b&gt;Confirm break after&lt;/b&gt; seconds of inactivity during the break, it locks until the timer ends.&lt;/p&gt;</string>
+               <string>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
+&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;Flash break prompt for&lt;/b&gt; seconds. If you stop working or ignore it past this time, it transitions to full-screen. After &lt;b&gt;Confirm break after&lt;/b&gt; seconds of inactivity during the break, it locks until the timer ends.&lt;/p&gt;</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
@@ -601,24 +601,75 @@ QPushButton[flat=&quot;true&quot;]:checked {
              </layout>
             </item>
             <item>
-             <widget class="QLabel" name="label_2">
+             <widget class="QLabel" name="label_27">
               <property name="text">
-               <string>&lt;h3&gt;Reminder Appearance&lt;/h3&gt;</string>
+               <string>&lt;h3&gt;Prompt Appearance&lt;/h3&gt;</string>
               </property>
              </widget>
             </item>
             <item>
-             <layout class="QGridLayout" name="gridLayout_10">
+             <layout class="QGridLayout" name="gridLayout_10" columnstretch="0,0">
+              <property name="horizontalSpacing">
+               <number>12</number>
+              </property>
+              <property name="verticalSpacing">
+               <number>0</number>
+              </property>
+              <item row="1" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="1,2,3,1">
+                <item>
+                 <widget class="QLabel" name="label_9">
+                  <property name="text">
+                   <string>Off</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_29">
+                  <property name="text">
+                   <string>Slower</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_31">
+                  <property name="text">
+                   <string>Default</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignmentFlag::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_32">
+                  <property name="text">
+                   <string>Faster</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="0" column="0" rowspan="2">
+               <widget class="QLabel" name="label_8">
+                <property name="text">
+                 <string>Flash speed</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+                </property>
+               </widget>
+              </item>
               <item row="0" column="1">
-               <widget class="SteppedSlider" name="flashSpeedSlider">
-                <property name="minimum">
-                 <number>0</number>
-                </property>
+               <widget class="QSlider" name="flashSpeedSlider">
                 <property name="maximum">
-                 <number>200</number>
+                 <number>150</number>
                 </property>
-                <property name="singleStep">
-                 <number>5</number>
+                <property name="pageStep">
+                 <number>25</number>
                 </property>
                 <property name="value">
                  <number>100</number>
@@ -629,39 +680,20 @@ QPushButton[flat=&quot;true&quot;]:checked {
                 <property name="tickPosition">
                  <enum>QSlider::TickPosition::TicksBelow</enum>
                 </property>
-                <property name="tickInterval">
-                 <number>20</number>
-                </property>
                </widget>
               </item>
-              <item row="0" column="2">
-               <widget class="QSpinBox" name="flashSpeedBox">
-                <property name="suffix">
-                 <string notr="true"> %</string>
-                </property>
-                <property name="maximum">
-                 <number>65535</number>
-                </property>
-                <property name="value">
-                 <number>100</number>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_8">
-                <property name="text">
-                 <string>Flash speed</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_9">
-                <property name="text">
-                 <string>Text Transparency</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
+             </layout>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>&lt;h3&gt;Break Window Appearance&lt;/h3&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayout_11">
+              <item row="0" column="1">
                <widget class="SteppedSlider" name="textTransparencySlider">
                 <property name="minimum">
                  <number>0</number>
@@ -686,13 +718,20 @@ QPushButton[flat=&quot;true&quot;]:checked {
                 </property>
                </widget>
               </item>
-              <item row="1" column="2">
+              <item row="0" column="2">
                <widget class="QSpinBox" name="textTransparencyBox">
                 <property name="suffix">
                  <string notr="true"> %</string>
                 </property>
                 <property name="maximum">
                  <number>65535</number>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_30">
+                <property name="text">
+                 <string>Text Transparency</string>
                 </property>
                </widget>
               </item>
@@ -1568,38 +1607,6 @@ v%1
    </hints>
   </connection>
   <connection>
-   <sender>flashSpeedSlider</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>flashSpeedBox</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>523</x>
-     <y>290</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>628</x>
-     <y>295</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>textTransparencySlider</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>textTransparencyBox</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>535</x>
-     <y>331</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>609</x>
-     <y>336</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>flashForBox</sender>
    <signal>valueChanged(int)</signal>
    <receiver>flashForSlider</receiver>
@@ -1628,38 +1635,6 @@ v%1
     <hint type="destinationlabel">
      <x>544</x>
      <y>227</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>flashSpeedBox</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>flashSpeedSlider</receiver>
-   <slot>setValueForce(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>651</x>
-     <y>296</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>545</x>
-     <y>293</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>textTransparencyBox</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>textTransparencySlider</receiver>
-   <slot>setValueForce(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>652</x>
-     <y>336</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>551</x>
-     <y>338</y>
     </hint>
    </hints>
   </connection>

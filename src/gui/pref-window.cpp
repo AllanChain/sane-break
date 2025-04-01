@@ -169,8 +169,8 @@ PreferenceWindow::PreferenceWindow(QWidget *parent)
           });
   controllers->add(new PrefController<QSpinBox, Setting<int>>(
       ui->confirmAfterBox, SanePreferences::confirmAfter));
-  controllers->add(new PrefController<QSpinBox, Setting<int>>(
-      ui->flashSpeedBox, SanePreferences::flashSpeed));
+  controllers->add(new PrefController<QSlider, Setting<int>>(
+      ui->flashSpeedSlider, SanePreferences::flashSpeed));
   controllers->add(new PrefController<QSpinBox, Setting<int>>(
       ui->textTransparencyBox, SanePreferences::textTransparency));
 
