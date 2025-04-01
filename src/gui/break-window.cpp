@@ -97,7 +97,9 @@ BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) 
     countdownLabel->setStyleSheet(
         QString("color: rgba(236, 239, 244, %1)").arg(opacity));
     progressBar->setStyleSheet(
-        QString("::chunk {background: rgba(236, 239, 244, %1)}").arg(opacity));
+        QString("BreakWindow[isFullScreen=\"true\"] QProgressBar::chunk "
+                "{background: rgba(236, 239, 244, %1)}")
+            .arg(opacity));
   }
 
   progressAnim = new QPropertyAnimation(progressBar, "value");
