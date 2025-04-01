@@ -620,21 +620,21 @@ QPushButton[flat=&quot;true&quot;]:checked {
                 <item>
                  <widget class="QLabel" name="label_9">
                   <property name="text">
-                   <string>Off</string>
+                   <string extracomment="Tick for flash speed">Off</string>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QLabel" name="label_29">
                   <property name="text">
-                   <string>Slower</string>
+                   <string extracomment="Tick for flash speed">Slower</string>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QLabel" name="label_31">
                   <property name="text">
-                   <string>Default</string>
+                   <string extracomment="Tick for flash speed">Default</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -644,7 +644,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
                 <item>
                  <widget class="QLabel" name="label_32">
                   <property name="text">
-                   <string>Faster</string>
+                   <string extracomment="Tick for flash speed">Faster</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>

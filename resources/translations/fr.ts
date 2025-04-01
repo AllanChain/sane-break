@@ -109,6 +109,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../src/gui/pref-window.ui" line="498"/>
+        <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
+&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;Flash break prompt for&lt;/b&gt; seconds. If you stop working or ignore it past this time, it transitions to full-screen. After &lt;b&gt;Confirm break after&lt;/b&gt; seconds of inactivity during the break, it locks until the timer ends.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/gui/pref-window.ui" line="552"/>
         <source>Flash break prompt for</source>
         <translation>Faire clignoter le message de pause pendant</translation>
@@ -125,27 +131,17 @@
         <translation>Confirmer le début de la pause après</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="606"/>
-        <source>&lt;h3&gt;Reminder Appearance&lt;/h3&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/gui/pref-window.ui" line="653"/>
+        <location filename="../../src/gui/pref-window.ui" line="659"/>
         <source>Flash speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="660"/>
-        <source>Text Transparency</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/gui/pref-window.ui" line="711"/>
+        <location filename="../../src/gui/pref-window.ui" line="750"/>
         <source>&lt;h3&gt;Pause Conditions&lt;/h3&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="797"/>
+        <location filename="../../src/gui/pref-window.ui" line="836"/>
         <source>&lt;h3&gt;Reset Break Schedule After Pause&lt;/h3&gt;
 &lt;p&gt;Sane Break will adjust the break schedule after pausing:&lt;/p&gt;
 &lt;ul&gt;
@@ -155,17 +151,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="852"/>
+        <location filename="../../src/gui/pref-window.ui" line="891"/>
         <source>Long pause threshold</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="900"/>
+        <location filename="../../src/gui/pref-window.ui" line="939"/>
         <source>Short pause threshold</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1115"/>
+        <location filename="../../src/gui/pref-window.ui" line="1154"/>
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
@@ -176,17 +172,17 @@ est que l&apos;utilisateur est bien inactif. Si la pause dure plus longue que 2 
 l&apos;écran sera quand même bloqué.</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1120"/>
+        <location filename="../../src/gui/pref-window.ui" line="1159"/>
         <source>Automatic screen lock after break start</source>
         <translation>Verrouillage automatique de l&apos;écran après le début de la pause</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1140"/>
+        <location filename="../../src/gui/pref-window.ui" line="1179"/>
         <source>Please grant accessibility permission and restart app to use auto lock screen</source>
         <translation>Merci d&apos;octroyer les droits d&apos;accès et de redémarrer l&apos;appli pour utiliser le verrouillage d&apos;écran</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1273"/>
+        <location filename="../../src/gui/pref-window.ui" line="1312"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -226,16 +222,55 @@ v%1
         <translation>Minutes de retard</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="925"/>
-        <location filename="../../src/gui/pref-window.ui" line="956"/>
+        <location filename="../../src/gui/pref-window.ui" line="606"/>
+        <source>&lt;h3&gt;Prompt Appearance&lt;/h3&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="623"/>
+        <source>Off</source>
+        <extracomment>Tick for flash speed</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="630"/>
+        <source>Slower</source>
+        <extracomment>Tick for flash speed</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="637"/>
+        <source>Default</source>
+        <extracomment>Tick for flash speed</extracomment>
+        <translation type="unfinished">Défaut</translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="647"/>
+        <source>Faster</source>
+        <extracomment>Tick for flash speed</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="690"/>
+        <source>&lt;h3&gt;Break Window Appearance&lt;/h3&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="734"/>
+        <source>Countdown Transparency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="964"/>
+        <location filename="../../src/gui/pref-window.ui" line="995"/>
         <source>Try restart Sane Break if no sound</source>
         <translation>Si le son ne fonctionne pas, essayez de redémarrer Sane Break</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="942"/>
-        <location filename="../../src/gui/pref-window.ui" line="949"/>
-        <location filename="../../src/gui/pref-window.ui" line="1004"/>
-        <location filename="../../src/gui/pref-window.ui" line="1011"/>
+        <location filename="../../src/gui/pref-window.ui" line="981"/>
+        <location filename="../../src/gui/pref-window.ui" line="988"/>
+        <location filename="../../src/gui/pref-window.ui" line="1043"/>
+        <location filename="../../src/gui/pref-window.ui" line="1050"/>
         <source>Play</source>
         <translation>Écouter</translation>
     </message>
@@ -254,13 +289,13 @@ v%1
         <translation type="vanished">Réinitialiser ce cycle s&apos;il est en pause depuis</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="720"/>
+        <location filename="../../src/gui/pref-window.ui" line="759"/>
         <source>Sane Break will pause if it detects no activity for this many minutes</source>
         <extracomment>Tooltip for &quot;Pause if idle for&quot; config</extracomment>
         <translation>Sane Break mettra son cycle en pause s&apos;il ne détecte aucune activité sur cette période</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="723"/>
+        <location filename="../../src/gui/pref-window.ui" line="762"/>
         <source>Pause if idle for</source>
         <translation>Mettre le cycle en pause si inactif depuis</translation>
     </message>
@@ -270,22 +305,22 @@ v%1
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="252"/>
-        <location filename="../../src/gui/pref-window.ui" line="916"/>
+        <location filename="../../src/gui/pref-window.ui" line="955"/>
         <source>&lt;h3&gt;Small Breaks&lt;/h3&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Petite pause&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="306"/>
         <location filename="../../src/gui/pref-window.ui" line="385"/>
-        <location filename="../../src/gui/pref-window.ui" line="764"/>
-        <location filename="../../src/gui/pref-window.ui" line="842"/>
-        <location filename="../../src/gui/pref-window.ui" line="890"/>
+        <location filename="../../src/gui/pref-window.ui" line="803"/>
+        <location filename="../../src/gui/pref-window.ui" line="881"/>
+        <location filename="../../src/gui/pref-window.ui" line="929"/>
         <source> min</source>
         <translation> min</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="959"/>
-        <location filename="../../src/gui/pref-window.ui" line="997"/>
+        <location filename="../../src/gui/pref-window.ui" line="998"/>
+        <location filename="../../src/gui/pref-window.ui" line="1036"/>
         <source>Bell before breaks</source>
         <translation type="unfinished">Son de cloche avant une pause</translation>
     </message>
@@ -303,19 +338,19 @@ v%1
         <translation type="unfinished">Durée d&apos;une pause</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="928"/>
-        <location filename="../../src/gui/pref-window.ui" line="1025"/>
+        <location filename="../../src/gui/pref-window.ui" line="967"/>
+        <location filename="../../src/gui/pref-window.ui" line="1064"/>
         <source>Bell after breaks</source>
         <translation type="unfinished">Son de cloche après une pause</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1037"/>
+        <location filename="../../src/gui/pref-window.ui" line="1076"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: You can use local sound files with URLs like &lt;code&gt;file:/D:sound.mp3&lt;/code&gt;  (Windows) or &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</source>
         <translation>&lt;strong&gt;Astuce&lt;/strong&gt; : Vous pouvez utiliser un fichier son local avec un URL du type  &lt;code&gt;file:/D:\fichierson.mp3&lt;/code&gt;  (Windows) ou &lt;code&gt;file:/home/dossier/fichierson.mp3&lt;/code&gt; (Linux).</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="356"/>
-        <location filename="../../src/gui/pref-window.ui" line="975"/>
+        <location filename="../../src/gui/pref-window.ui" line="1014"/>
         <source>&lt;h3&gt;Big Breaks&lt;/h3&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Grosse pause&lt;/h3&gt;</translation>
     </message>
@@ -325,58 +360,52 @@ v%1
         <translation> pauses</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="498"/>
-        <source>&lt;h3&gt;Flashing Reminder&lt;/h3&gt;
-&lt;p&gt;Sane Break shows a small reminder for &lt;b&gt;Flash break prompt for&lt;/b&gt; seconds. If you stop working or ignore it past this time, it transitions to full-screen. After &lt;b&gt;Confirm break after&lt;/b&gt; seconds of inactivity during the break, it locks until the timer ends.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/gui/pref-window.ui" line="776"/>
+        <location filename="../../src/gui/pref-window.ui" line="815"/>
         <source>Pause on battery</source>
         <translation>Mettre en pause sur batterie</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="783"/>
+        <location filename="../../src/gui/pref-window.ui" line="822"/>
         <source>Pause breaks when any of the following program is running:</source>
         <translation>La pause s&apos;arrête dès que l&apos;un de ces programmes se met en route&#xa0;:</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="790"/>
+        <location filename="../../src/gui/pref-window.ui" line="829"/>
         <source>(Write one program name per line)</source>
         <translation>(écrire un seul nom de programme par ligne)</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1063"/>
+        <location filename="../../src/gui/pref-window.ui" line="1102"/>
         <source>Configuration file</source>
         <translation>Fichier de configuration</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1093"/>
+        <location filename="../../src/gui/pref-window.ui" line="1132"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Aidez-nous à faire la traduction&#x202f;!&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1155"/>
+        <location filename="../../src/gui/pref-window.ui" line="1194"/>
         <source>Launch Sane Break at start up</source>
         <translation type="unfinished">Activer le démarrage automatique</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1354"/>
+        <location filename="../../src/gui/pref-window.ui" line="1393"/>
         <source>Revert to Last Saved</source>
         <translation>Revenir aux anciens paramètres sauvegardés</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1056"/>
+        <location filename="../../src/gui/pref-window.ui" line="1095"/>
         <source>Language</source>
         <translation>Langue</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1080"/>
+        <location filename="../../src/gui/pref-window.ui" line="1119"/>
         <source>Change of language will take effect after app restart.</source>
         <translation>Le changement de langue prendra effet après redémarrage de l&apos;appli.</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1377"/>
+        <location filename="../../src/gui/pref-window.ui" line="1416"/>
         <source>Save</source>
         <translation>Sauvegarder</translation>
     </message>
