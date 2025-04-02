@@ -260,6 +260,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
                 <property name="suffix">
                  <string> sec</string>
                 </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
                 <property name="maximum">
                  <number>65535</number>
                 </property>
@@ -304,6 +307,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
                <widget class="QSpinBox" name="smallBreakEveryBox">
                 <property name="suffix">
                  <string> min</string>
+                </property>
+                <property name="minimum">
+                 <number>1</number>
                 </property>
                 <property name="maximum">
                  <number>65535</number>
@@ -364,6 +370,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
                 <property name="suffix">
                  <string> breaks</string>
                 </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
                 <property name="maximum">
                  <number>65535</number>
                 </property>
@@ -383,6 +392,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
                <widget class="QSpinBox" name="bigBreakForBox">
                 <property name="suffix">
                  <string> min</string>
+                </property>
+                <property name="minimum">
+                 <number>1</number>
                 </property>
                 <property name="maximum">
                  <number>65535</number>
