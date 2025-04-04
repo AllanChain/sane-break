@@ -7,15 +7,12 @@
 // Copyright © 2016 Telegram. All rights reserved.
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-#include <qglobal.h>
+#include "idle.h"
 
-#ifdef Q_OS_MACOS
 #include <CoreFoundation/CoreFoundation.h>
 #include <IOKit/IOKitLib.h>
 
 #include <QTimer>
-
-#include "idle.h"
 
 int IdleTimeDarwin::systemIdleTime() {
   int idlesecs = -1;
@@ -43,4 +40,3 @@ int IdleTimeDarwin::systemIdleTime() {
   }
   return idlesecs;
 }
-#endif  // Q_OS_MACOS

@@ -11,17 +11,18 @@
 
 #include "break-window.h"  // IWYU pragma: export
 #include "lib/idle-time.h"
+#include "lib/preferences.h"
 #include "sound-player.h"
 
 class BreakWindowManager : public QObject {
   Q_OBJECT
 
  public:
-  BreakWindowManager();
+  BreakWindowManager(SanePreferences *preferences, QObject *parent = nullptr);
   ~BreakWindowManager();
   int remainingTime;
-  BreakType currentType;
-  void show(BreakType type);
+  BreakWindow::BreakType currentType;
+  void show(BreakWindow::BreakType type);
   bool isShowing();
   void close();
 
@@ -34,6 +35,7 @@ class BreakWindowManager : public QObject {
   bool isForceBreak = false;
   int totalTime;
   QList<BreakWindow *> windows;
+  SanePreferences *preferences;
   QTimer *countdownTimer;
   QTimer *forceBreakTimer;
   SystemIdleTime *idleTimer;

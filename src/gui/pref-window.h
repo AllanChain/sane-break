@@ -208,11 +208,12 @@ class PreferenceWindow : public QMainWindow {
   Q_OBJECT
 
  public:
-  PreferenceWindow(QWidget *parent = nullptr);
+  PreferenceWindow(SanePreferences *preferences, QWidget *parent = nullptr);
   ~PreferenceWindow();
 
  private:
   Ui::PrefWindow *ui;
+  SanePreferences *preferences;
   QList<QPushButton *> tabButtons;
   QProcess *osaProcess;
   SoundPlayer *soundPlayer;

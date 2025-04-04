@@ -8,6 +8,8 @@
 #include <QDir>
 #include <QSettings>
 
+#include "preferences.h"
+
 void AutoStart::setEnabled(bool enabled) {
   QSettings settings(
       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
@@ -32,7 +34,7 @@ void AutoStart::setEnabled(bool enabled) {
   }
 }
 
-bool AutoStart::isEnabled() {
+bool AutoStart::isEnabled(SanePreferences *preferences) {
   QSettings settings(
       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
       QSettings::NativeFormat);

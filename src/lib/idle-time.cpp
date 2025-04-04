@@ -31,15 +31,15 @@
 #include "windows/idle.h"
 #endif
 
-SystemIdleTime* SystemIdleTime::createIdleTimer() {
+SystemIdleTime* SystemIdleTime::createIdleTimer(QObject* parent) {
 #ifdef Q_OS_LINUX
   if (QGuiApplication::platformName() == "wayland") {
 #ifdef ENABLE_WAYLAND
     QDBusInterface iface("org.gnome.Mutter.IdleMonitor",
                          "/org/gnome/Mutter/IdleMonitor/Core",
                          "org.gnome.Mutter.IdleMonitor", QDBusConnection::sessionBus());
-    if (iface.isValid()) return new IdleTimeGNOME();
-    IdleTimeWayland* waylandIdleTimer = new IdleTimeWayland();
+    if (iface.isValid()) return new IdleTimeGNOME(parent);
+    IdleTimeWayland* waylandIdleTimer = new IdleTimeWayland(parent);
     if (!waylandIdleTimer->isSupported())
       qFatal("Idle time detection is not supported");
     return waylandIdleTimer;
@@ -49,22 +49,22 @@ SystemIdleTime* SystemIdleTime::createIdleTimer() {
 #endif
   } else {
 #ifdef ENABLE_X11
-    return new IdleTimeX11();
+    return new IdleTimeX11(parent);
 #else
     qFatal("Please compile with X11 support.");
     return nullptr;
 #endif
   }
 #elif defined Q_OS_MACOS
-  return new IdleTimeDarwin();
+  return new IdleTimeDarwin(parent);
 #elif defined Q_OS_WIN
-  return new IdleTimeWindows();
+  return new IdleTimeWindows(parent);
 #endif
 }
 
-ReadBasedIdleTime::ReadBasedIdleTime() : SystemIdleTime() {
-  timer = new QTimer();
-  delay = new QTimer();
+ReadBasedIdleTime::ReadBasedIdleTime(QObject* parent) : SystemIdleTime(parent) {
+  timer = new QTimer(this);
+  delay = new QTimer(this);
   delay->setSingleShot(true);
   connect(timer, &QTimer::timeout, this, &ReadBasedIdleTime::tick);
   connect(delay, &QTimer::timeout, this, [this]() { timer->start(); });
@@ -106,7 +106,7 @@ void ReadBasedIdleTime::setWatchAccuracy(int accuracy) {
   timer->start();
 }
 
-SleepMonitor::SleepMonitor() {
+SleepMonitor::SleepMonitor(QObject* parent) : QObject(parent) {
   timer = new QTimer(this);
   timer->setInterval(watchAccuracy);
   connect(timer, &QTimer::timeout, this, &SleepMonitor::tick);

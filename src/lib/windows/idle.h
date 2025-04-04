@@ -7,9 +7,6 @@
 // Copyright (c) 2014 Atlassian Pty Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
-#include <qglobal.h>
-
-#ifdef Q_OS_WIN
 #ifndef SANE_IDLE_WINDOWS_H
 #define SANE_IDLE_WINDOWS_H
 
@@ -20,8 +17,8 @@
 class IdleTimeWindows : public ReadBasedIdleTime {
   Q_OBJECT
  public:
+  using ReadBasedIdleTime::ReadBasedIdleTime;
   int systemIdleTime();
 };
 
 #endif  // SANE_IDLE_WINDOWS_H
-#endif  // Q_OS_WIN

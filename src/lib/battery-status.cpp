@@ -17,18 +17,18 @@
 #include "macos/battery.h"
 #endif
 
-BatteryStatus* BatteryStatus::createWatcher() {
+BatteryStatus* BatteryStatus::createWatcher(QObject* parent) {
 #ifdef Q_OS_LINUX
-  return new LinuxBatteryStatus();
+  return new LinuxBatteryStatus(parent);
 #elif defined Q_OS_WIN
-  return new WindowsBatteryStatus();
+  return new WindowsBatteryStatus(parent);
 #elif defined Q_OS_MACOS
-  return new DarwinBatteryStatus();
+  return new DarwinBatteryStatus(parent);
 #endif
 }
 
-BatteryStatus::BatteryStatus() : QObject() {
-  timer = new QTimer();
+BatteryStatus::BatteryStatus(QObject* parent) : QObject(parent) {
+  timer = new QTimer(this);
   connect(timer, &QTimer::timeout, this, &BatteryStatus::tick);
 }
 

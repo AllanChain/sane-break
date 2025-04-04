@@ -2,6 +2,7 @@
 #include <AppKit/AppKit.h>
 #include <ServiceManagement/ServiceManagement.h>
 #include <QString>
+#include "preferences.h"
 
 void AutoStart::setEnabled(bool enabled) {
   SMAppService *service = [SMAppService mainAppService];
@@ -21,7 +22,7 @@ void AutoStart::setEnabled(bool enabled) {
   }
 }
 
-bool AutoStart::isEnabled() {
+bool AutoStart::isEnabled(SanePreferences *preferences) {
   SMAppService *service = [SMAppService mainAppService];
   return [service status] == SMAppServiceStatusEnabled;
 }

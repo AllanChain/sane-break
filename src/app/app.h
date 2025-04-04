@@ -13,40 +13,48 @@
 #include "gui/pref-window.h"
 #include "gui/tray.h"
 #include "gui/window-manager.h"
-#include "lib/battery-status.h"
-#include "lib/idle-time.h"
-#include "lib/program-monitor.h"
+#include "lib/app-core.h"
+#include "lib/preferences.h"
+#include "lib/system-monitor.h"
 
-enum PauseReason {
-  IDLE = 1 << 0,
-  ON_BATTERY = 1 << 1,
-  APP_OPEN = 1 << 2,
-};
-
-class SaneBreakApp : public QObject {
+class Timer : public ITimer {
   Q_OBJECT
  public:
-  SaneBreakApp();
-  ~SaneBreakApp();
-  void start();
-  void breakNow();
-  void postpone(int secs);
-  void pauseBreak(unsigned int reason);
-  bool resumeBreak(unsigned int reason);
-  int smallBreaksBeforeBig();
+  Timer(QObject *parent = nullptr) : ITimer(parent) {
+    timer = new QTimer();
+    connect(timer, &QTimer::timeout, this, &ITimer::timeout);
+  };
+  ~Timer() = default;
+  void start() override { timer->start(); };
+  void start(int msec) override { timer->start(msec); };
+  void stop() override { timer->stop(); };
+  bool isActive() override { return timer->isActive(); };
+  void setInterval(int msec) override { timer->setInterval(msec); };
+  int interval() override { return timer->interval(); };
+  void setSingleShot(bool singleShot) override { timer->setSingleShot(singleShot); };
+  bool isSingleShot() override { return timer->isSingleShot(); };
+
+ private:
+  QTimer *timer;
+};
+
+class SaneBreakApp : public AbstractApp {
+  Q_OBJECT
+ public:
+  SaneBreakApp(const AppDependencies &deps, QObject *parent = nullptr);
+  ~SaneBreakApp() = default;
+  static SaneBreakApp *create(SanePreferences *preferences, QObject *parent = nullptr);
+
+  void start() override;
+  void openBreakWindow(bool isBigBreak) override;
+  void closeBreakWindow() override;
+  void updateTray() override;
+  void mayLockScreen() override;
+
+  void confirmQuit();
   void onIconTrigger();
-  void onSleepEnd();
-  void onBreakResume();
-  void onBreakEnd();
-  void onIdleStart();
-  void onIdleEnd();
-  void onOneshotIdleEnd();
-  void onBattery();
-  void onPower();
   void onBatterySettingChange();
   void onPostponeMinutesChange();
-  void mayLockScreen();
-  void confirmQuit();
 
  signals:
   void quit();
@@ -54,30 +62,15 @@ class SaneBreakApp : public QObject {
  private:
   PreferenceWindow *prefWindow;
   BreakWindowManager *breakManager;
-  SystemIdleTime *idleTimer;
-  QTimer *screenLockTimer;
-  SystemIdleTime *oneshotIdleTimer;
-  SleepMonitor *sleepMonitor;
-  BatteryStatus *batteryWatcher;
+  SystemMonitor *systemMonitor;
   StatusTrayWindow *tray;
-  QTimer *countDownTimer;
-  int lastPause = 0;
   QMenu *menu;
   QMenu *postponeMenu;
   QAction *quitAction;
   QAction *nextBreakAction;
   QAction *bigBreakAction;
   QAction *enableBreak;
-  int breakCycleCount = 1;
   void createMenu();
-  void tick();
-  void updateMenu();
-  int secondsToNextBreak;
-  void addSecondsToNextBreak(int seconds);
-  void resetSecondsToNextBreak();
-  void updateIcon();
-  unsigned int pauseReasons = 0;
-  RunningProgramsMonitor *runningProgramsMonitor;
 };
 
 #endif  // SANE_APP_H

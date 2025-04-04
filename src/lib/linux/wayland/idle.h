@@ -24,7 +24,7 @@
 class IdleTimeWayland : public SystemIdleTime {
   Q_OBJECT
  public:
-  IdleTimeWayland();
+  IdleTimeWayland(QObject *parent = nullptr);
   ~IdleTimeWayland();
   bool isSupported() { return idleNotifier != nullptr; };
   void startWatching();
@@ -58,7 +58,7 @@ class IdleTimeWayland : public SystemIdleTime {
 class IdleTimeGNOME : public ReadBasedIdleTime {
   Q_OBJECT
  public:
-  IdleTimeGNOME();
+  IdleTimeGNOME(QObject *parent = nullptr);
   int systemIdleTime();
 
  private:

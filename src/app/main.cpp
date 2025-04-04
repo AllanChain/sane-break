@@ -30,10 +30,12 @@ int main(int argc, char *argv[]) {
   a.setApplicationDisplayName("Sane Break");
   if (QSystemTrayIcon::isSystemTrayAvailable()) a.setQuitOnLastWindowClosed(false);
 
+  SanePreferences *preferences = preferences->createDefault();
+
 #ifdef WITH_TRANSLATIONS
   QTranslator translator;
-  if (SanePreferences::language->get().length() > 0 &&
-      translator.load(SanePreferences::language->get(), ":/i18n")) {
+  if (preferences->language->get().length() > 0 &&
+      translator.load(preferences->language->get(), ":/i18n")) {
     a.installTranslator(&translator);
     LanguageSelect::currentTranslator = &translator;
   } else if (translator.load(QLocale::system(), "sane-break", "_", ":/i18n")) {
@@ -46,17 +48,17 @@ int main(int argc, char *argv[]) {
   LinuxSystemSupport::check();
 #endif  // Q_OS_LINUX
 
-  if (!QFile::exists(getSettings().fileName())) {
-    WelcomeWindow *welcome = new WelcomeWindow();
+  if (!QFile::exists(preferences->settings->fileName())) {
+    WelcomeWindow *welcome = new WelcomeWindow(preferences);
     if (welcome->exec() == QDialog::Rejected) {
       return 0;
     } else {
-      SanePreferences::shownWelcome->set(true);
+      preferences->shownWelcome->set(true);
     }
     welcome->deleteLater();
   }
 
-  SaneBreakApp *app = new SaneBreakApp();
+  SaneBreakApp *app = SaneBreakApp::create(preferences);
   a.connect(app, &SaneBreakApp::quit, &a, &QCoreApplication::quit,
             Qt::QueuedConnection);
 

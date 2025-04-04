@@ -7,9 +7,6 @@
 // Copyright © 2016 Telegram. All rights reserved.
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-#include <qglobal.h>
-
-#ifdef Q_OS_MACOS
 #ifndef SANE_IDLE_DARWIN_H
 #define SANE_IDLE_DARWIN_H
 
@@ -22,8 +19,8 @@ int systemIdleTime();
 class IdleTimeDarwin : public ReadBasedIdleTime {
   Q_OBJECT
  public:
+  using ReadBasedIdleTime::ReadBasedIdleTime;
   int systemIdleTime();
 };
 
 #endif  // SANE_IDLE_DARWIN_H
-#endif  // Q_OS_MACOS

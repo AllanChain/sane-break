@@ -11,9 +11,10 @@
 class SystemIdleTime : public QObject {
   Q_OBJECT
  public:
+  SystemIdleTime(QObject *parent = nullptr) : QObject(parent) {};
   virtual void startWatching() {};
   virtual void stopWatching() {};
-  static SystemIdleTime *createIdleTimer();
+  static SystemIdleTime *createIdleTimer(QObject *parent = nullptr);
   int watchAccuracy() { return m_watchAccuracy; };
   int minIdleTime() { return m_minIdleTime; };
   virtual void setWatchAccuracy(int accuracy) {};
@@ -31,7 +32,7 @@ class SystemIdleTime : public QObject {
 class ReadBasedIdleTime : public SystemIdleTime {
   Q_OBJECT
  public:
-  ReadBasedIdleTime();
+  ReadBasedIdleTime(QObject *parent);
   void startWatching();
   void stopWatching();
   virtual int systemIdleTime() { return 0; };
@@ -47,7 +48,7 @@ class ReadBasedIdleTime : public SystemIdleTime {
 class SleepMonitor : public QObject {
   Q_OBJECT
  public:
-  SleepMonitor();
+  SleepMonitor(QObject *parent = nullptr);
   int watchAccuracy = 5000;  // in ms
  signals:
   void sleepEnd();  // in ms

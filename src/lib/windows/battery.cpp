@@ -4,10 +4,7 @@
 
 #include "battery.h"
 
-#include <qglobal.h>
 #include <windows.h>
-
-#ifdef Q_OS_WIN
 
 bool WindowsBatteryStatus::systemOnBattery() {
   SYSTEM_POWER_STATUS powerStatus;
@@ -16,4 +13,3 @@ bool WindowsBatteryStatus::systemOnBattery() {
   }
   return false;
 }
-#endif

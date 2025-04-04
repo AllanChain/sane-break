@@ -17,6 +17,7 @@ class LanguageSelect : public QComboBox {
   static QTranslator *currentTranslator;
   LanguageSelect(QWidget *parent = nullptr);
   static void setLanguage(QString language);
+  void setSelectedLanguage(QString language);
 
  signals:
   void languageChanged(QString language);

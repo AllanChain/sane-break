@@ -10,8 +10,6 @@
 #include <QSettings>
 #include <QtContainerFwd>
 
-QSettings getSettings();
-
 class SettingWithSignal : public QObject {
   Q_OBJECT
  public:
@@ -23,57 +21,65 @@ class SettingWithSignal : public QObject {
 template <typename T>
 class Setting : public SettingWithSignal {
  public:
-  Setting(const QString &key, const T &defaultValue, QObject *parent = nullptr)
-      : SettingWithSignal(parent), key(key), defaultValue(defaultValue) {}
+  Setting(QSettings *settings, const QString &key, const T &defaultValue,
+          QObject *parent = nullptr)
+      : SettingWithSignal(parent),
+        m_settings(settings),
+        m_key(key),
+        m_defaultValue(defaultValue) {}
   void set(const T &newValue) {
-    QSettings settings = getSettings();
     if (get() != newValue) {
-      value = newValue;
-      settings.setValue(key, QVariant::fromValue(value));
+      m_value = newValue;
+      m_settings->setValue(m_key, QVariant::fromValue(m_value));
       emit changed();
     }
   }
   const T get() {
-    if (cached) return value;
-    QSettings settings = getSettings();
-    value = settings.value(key, QVariant::fromValue(defaultValue)).template value<T>();
-    cached = true;
-    return value;
+    if (m_cached) return m_value;
+    m_value = m_settings->value(m_key, QVariant::fromValue(m_defaultValue))
+                  .template value<T>();
+    m_cached = true;
+    return m_value;
   };
 
  private:
-  QString key;
-  T defaultValue;
-  T value;
-  bool cached = false;
+  QSettings *m_settings;
+  QString m_key;
+  T m_defaultValue;
+  T m_value;
+  bool m_cached = false;
 };
 
 class SanePreferences : public QObject {
   Q_OBJECT
  public:
-  static Setting<bool> *shownWelcome;
-  static Setting<int> *smallEvery;
-  static Setting<int> *smallFor;
-  static Setting<int> *bigAfter;
-  static Setting<int> *bigFor;
-  static Setting<int> *flashFor;
-  static Setting<int> *confirmAfter;
-  static Setting<int> *flashSpeed;
-  static Setting<int> *textTransparency;
-  static Setting<QStringList> *postponeMinutes;
-  static Setting<int> *autoScreenLock;
-  static Setting<bool> *quickBreak;
-  static Setting<QString> *smallStartBell;
-  static Setting<QString> *smallEndBell;
-  static Setting<QString> *bigStartBell;
-  static Setting<QString> *bigEndBell;
-  static Setting<int> *pauseOnIdleFor;
-  static Setting<int> *resetAfterPause;
-  static Setting<int> *resetCycleAfterPause;
-  static Setting<bool> *pauseOnBattery;
-  static Setting<QStringList> *programsToMonitor;
-  static Setting<QString> *language;
-  static Setting<bool> *autoStart;
+  SanePreferences(QSettings *settings, QObject *parent = nullptr);
+  static SanePreferences *createDefault(QObject *parent = nullptr);
+  QSettings *settings;
+
+  Setting<bool> *shownWelcome;
+  Setting<int> *smallEvery;
+  Setting<int> *smallFor;
+  Setting<int> *bigAfter;
+  Setting<int> *bigFor;
+  Setting<int> *flashFor;
+  Setting<int> *confirmAfter;
+  Setting<int> *flashSpeed;
+  Setting<int> *textTransparency;
+  Setting<QStringList> *postponeMinutes;
+  Setting<int> *autoScreenLock;
+  Setting<bool> *quickBreak;
+  Setting<QString> *smallStartBell;
+  Setting<QString> *smallEndBell;
+  Setting<QString> *bigStartBell;
+  Setting<QString> *bigEndBell;
+  Setting<int> *pauseOnIdleFor;
+  Setting<int> *resetAfterPause;
+  Setting<int> *resetCycleAfterPause;
+  Setting<bool> *pauseOnBattery;
+  Setting<QStringList> *programsToMonitor;
+  Setting<QString> *language;
+  Setting<bool> *autoStart;
 };
 
 #endif  // SANE_PREFERENCES_H

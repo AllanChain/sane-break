@@ -20,7 +20,7 @@
 #include "idle.h"
 #include "wayland-ext-idle-notify-v1-client-protocol.h"
 
-IdleTimeWayland::IdleTimeWayland() : SystemIdleTime() {
+IdleTimeWayland::IdleTimeWayland(QObject *parent) : SystemIdleTime(parent) {
   QNativeInterface::QWaylandApplication *waylandApp =
       qGuiApp->nativeInterface<QNativeInterface::QWaylandApplication>();
   wl_display *display = waylandApp->display();
@@ -93,7 +93,7 @@ IdleTimeWayland::~IdleTimeWayland() {
   if (idleNotification != nullptr) ext_idle_notification_v1_destroy(idleNotification);
 }
 
-IdleTimeGNOME::IdleTimeGNOME() : ReadBasedIdleTime() {
+IdleTimeGNOME::IdleTimeGNOME(QObject *parent) : ReadBasedIdleTime(parent) {
   iface = new QDBusInterface(
       "org.gnome.Mutter.IdleMonitor", "/org/gnome/Mutter/IdleMonitor/Core",
       "org.gnome.Mutter.IdleMonitor", QDBusConnection::sessionBus());

@@ -2,11 +2,9 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include <qglobal.h>
-
 #include <QDBusInterface>
+#include <QObject>
 
-#ifdef Q_OS_LINUX
 #ifndef SANE_BATTERY_LINUX_H
 #define SANE_BATTERY_LINUX_H
 
@@ -15,7 +13,7 @@
 class LinuxBatteryStatus : public BatteryStatus {
   Q_OBJECT
  public:
-  LinuxBatteryStatus();
+  LinuxBatteryStatus(QObject *parent = nullptr);
   bool systemOnBattery();
 
  private:
@@ -23,4 +21,3 @@ class LinuxBatteryStatus : public BatteryStatus {
 };
 
 #endif  // SANE_BATTERY_LINUX_H
-#endif  // Q_OS_LINUX

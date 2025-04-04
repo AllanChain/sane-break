@@ -4,9 +4,6 @@
 
 #include "battery.h"
 
-#include <qglobal.h>
-
-#ifdef Q_OS_MACOS
 #include <IOKit/ps/IOPSKeys.h>
 #include <IOKit/ps/IOPowerSources.h>
 
@@ -38,4 +35,3 @@ bool DarwinBatteryStatus::systemOnBattery() {
 
   return false;
 }
-#endif

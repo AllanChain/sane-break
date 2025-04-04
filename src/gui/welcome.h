@@ -12,16 +12,18 @@
 #include <QWidget>
 
 #include "config.h"
+#include "lib/preferences.h"
 #include "widgets/language-select.h"
 
 class WelcomeWindow : public QDialog {
   Q_OBJECT
 
  public:
-  WelcomeWindow(QWidget *parent = nullptr);
+  WelcomeWindow(SanePreferences *preferences, QWidget *parent = nullptr);
   ~WelcomeWindow();
 
  private:
+  SanePreferences *preferences;
   void updateText();
   QLabel *welcome;
   QLabel *warningLabel;

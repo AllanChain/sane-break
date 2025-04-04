@@ -48,9 +48,12 @@ LanguageSelect::LanguageSelect(QWidget *parent) : QComboBox(parent) {
               language);
     }
   }
-  setCurrentIndex(findData(SanePreferences::language->get()));
   connect(this, &QComboBox::currentIndexChanged, this,
           &LanguageSelect::onLanguageSelect);
+}
+
+void LanguageSelect::setSelectedLanguage(QString language) {
+  setCurrentIndex(findData(language));
 }
 
 void LanguageSelect::onLanguageSelect() {

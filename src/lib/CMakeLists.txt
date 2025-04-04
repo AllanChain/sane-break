@@ -1,6 +1,8 @@
 add_library(
   sane-lib STATIC
   auto-start.h
+  app-core.cpp
+  app-core.h
   battery-status.cpp
   battery-status.h
   CMakeLists.txt
@@ -12,6 +14,8 @@ add_library(
   program-monitor.h
   screen-lock.cpp
   screen-lock.h
+  system-monitor.cpp
+  system-monitor.h
   utils.cpp
   utils.h
 )

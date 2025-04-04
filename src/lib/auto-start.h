@@ -8,6 +8,7 @@
 #include <QObject>
 
 #include "config.h"
+#include "lib/preferences.h"
 
 class AutoStart : public QObject {
   Q_OBJECT
@@ -15,7 +16,7 @@ class AutoStart : public QObject {
  public:
   AutoStart(QObject* parent = nullptr) : QObject(parent) {};
   void setEnabled(bool enabled);
-  bool isEnabled();
+  bool isEnabled(SanePreferences* preferences);
 #ifdef LINUX_DIST_FLATPAK
  public slots:
   void flatpakCallback(uint response, const QVariantMap& results);

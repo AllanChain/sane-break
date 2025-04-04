@@ -7,15 +7,11 @@
 // Copyright (c) 2014 Atlassian Pty Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
-#include <qglobal.h>
-
-#ifdef Q_OS_WIN
+#include "idle.h"
 
 #include <windows.h>
 
 #include <QTimer>
-
-#include "idle.h"
 
 int IdleTimeWindows::systemIdleTime() {
   LASTINPUTINFO lif;
@@ -25,4 +21,3 @@ int IdleTimeWindows::systemIdleTime() {
   int idleTime = (tickCount - (uint64_t)lif.dwTime);
   return idleTime;
 }
-#endif  // Q_OS_WIN

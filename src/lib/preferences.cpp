@@ -8,49 +8,43 @@
 #include <QObject>
 #include <QSettings>
 #include <QString>
-#include <QtContainerFwd>
+#include <QStringList>
 
-Setting<bool>* SanePreferences::shownWelcome =
-    new Setting<bool>("shown-welcome", false);
-QSettings getSettings() {
+SanePreferences* SanePreferences::createDefault(QObject* parent) {
   // We prefer settings file next to the app executable to make app more portable
   QFile portableSettings(QCoreApplication::applicationDirPath() + "/SaneBreak.ini");
-  if (!portableSettings.exists()) return QSettings();
-  return QSettings(portableSettings.fileName(), QSettings::IniFormat);
+  if (!portableSettings.exists()) {
+    return new SanePreferences(new QSettings());
+  }
+  return new SanePreferences(
+      new QSettings(portableSettings.fileName(), QSettings::IniFormat));
 };
 
-Setting<int>* SanePreferences::smallEvery = new Setting<int>("break/small-every", 1200);
-Setting<int>* SanePreferences::smallFor = new Setting<int>("break/small-for", 20);
-Setting<int>* SanePreferences::bigAfter = new Setting<int>("break/big-after", 3);
-Setting<int>* SanePreferences::bigFor = new Setting<int>("break/big-for", 60);
-Setting<int>* SanePreferences::flashFor = new Setting<int>("break/flash-for", 30);
-Setting<int>* SanePreferences::confirmAfter =
-    new Setting<int>("break/confirm-after", 30);
-Setting<QStringList>* SanePreferences::postponeMinutes = new Setting<QStringList>(
-    "break/postpone-minutes", QStringList({"5", "10", "30", "60"}));
-Setting<int>* SanePreferences::autoScreenLock =
-    new Setting<int>("break/auto-screen-lock", 0);
-Setting<bool>* SanePreferences::quickBreak =
-    new Setting<bool>("break/quick-break", false);
-Setting<int>* SanePreferences::flashSpeed = new Setting<int>("break/flash-speed", 100);
-Setting<int>* SanePreferences::textTransparency =
-    new Setting<int>("break/text-transparency", 0);
-Setting<QString>* SanePreferences::smallStartBell =
-    new Setting<QString>("bell/small-start", "");
-Setting<QString>* SanePreferences::smallEndBell =
-    new Setting<QString>("bell/small-end", "");
-Setting<QString>* SanePreferences::bigStartBell =
-    new Setting<QString>("bell/start", "");
-Setting<QString>* SanePreferences::bigEndBell = new Setting<QString>("bell/end", "");
-Setting<int>* SanePreferences::pauseOnIdleFor =
-    new Setting<int>("pause/on-idle-for", 180);
-Setting<int>* SanePreferences::resetAfterPause =
-    new Setting<int>("pause/reset-after", 120);
-Setting<int>* SanePreferences::resetCycleAfterPause =
-    new Setting<int>("pause/reset-cycle-after", 300);
-Setting<bool>* SanePreferences::pauseOnBattery =
-    new Setting<bool>("pause/on-battery", false);
-Setting<QStringList>* SanePreferences::programsToMonitor =
-    new Setting<QStringList>("pause/programs-to-monitor", QStringList());
-Setting<QString>* SanePreferences::language = new Setting<QString>("language", "");
-Setting<bool>* SanePreferences::autoStart = new Setting<bool>("auto-start", false);
+SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
+    : QObject(parent), settings(settings) {
+  shownWelcome = new Setting<bool>(settings, "shown-welcome", false);
+  smallEvery = new Setting<int>(settings, "break/small-every", 1200);
+  smallFor = new Setting<int>(settings, "break/small-for", 20);
+  bigAfter = new Setting<int>(settings, "break/big-after", 3);
+  bigFor = new Setting<int>(settings, "break/big-for", 60);
+  flashFor = new Setting<int>(settings, "break/flash-for", 30);
+  confirmAfter = new Setting<int>(settings, "break/confirm-after", 30);
+  postponeMinutes = new Setting<QStringList>(settings, "break/postpone-minutes",
+                                             QStringList({"5", "10", "30", "60"}));
+  autoScreenLock = new Setting<int>(settings, "break/auto-screen-lock", 0);
+  quickBreak = new Setting<bool>(settings, "break/quick-break", false);
+  flashSpeed = new Setting<int>(settings, "break/flash-speed", 100);
+  textTransparency = new Setting<int>(settings, "break/text-transparency", 0);
+  smallStartBell = new Setting<QString>(settings, "bell/small-start", "");
+  smallEndBell = new Setting<QString>(settings, "bell/small-end", "");
+  bigStartBell = new Setting<QString>(settings, "bell/start", "");
+  bigEndBell = new Setting<QString>(settings, "bell/end", "");
+  pauseOnIdleFor = new Setting<int>(settings, "pause/on-idle-for", 180);
+  resetAfterPause = new Setting<int>(settings, "pause/reset-after", 120);
+  resetCycleAfterPause = new Setting<int>(settings, "pause/reset-cycle-after", 300);
+  pauseOnBattery = new Setting<bool>(settings, "pause/on-battery", false);
+  programsToMonitor =
+      new Setting<QStringList>(settings, "pause/programs-to-monitor", QStringList());
+  language = new Setting<QString>(settings, "language", "");
+  autoStart = new Setting<bool>(settings, "auto-start", false);
+}

@@ -9,143 +9,125 @@
 
 #include <QAction>
 #include <QDateTime>
-#include <QGuiApplication>
-#include <QIcon>
 #include <QMenu>
 #include <QMessageBox>
 #include <QObject>
-#include <QRect>
-#include <QSettings>
-#include <QSize>
 #include <QString>
 #include <QStyleHints>
 #include <QTimer>
 #include <QWindow>
 
+#include "gui/break-window.h"
 #include "gui/pref-window.h"
 #include "gui/tray.h"
 #include "gui/widgets/language-select.h"
 #include "gui/window-manager.h"
-#include "lib/battery-status.h"
+#include "lib/app-core.h"
 #include "lib/idle-time.h"
 #include "lib/preferences.h"
-#include "lib/program-monitor.h"
 #include "lib/screen-lock.h"
+#include "lib/system-monitor.h"
 #include "lib/utils.h"
 
-SaneBreakApp::SaneBreakApp() : QObject() {
-  prefWindow = new PreferenceWindow();
-  breakManager = new BreakWindowManager();
-  idleTimer = SystemIdleTime::createIdleTimer();
-  idleTimer->setWatchAccuracy(5000);
-  idleTimer->setMinIdleTime(SanePreferences::pauseOnIdleFor->get() * 1000);
-  // One-shot idle detection right after break end is achieved by making
-  // the idle criteria as short as 1 sec, and start the idle timer right
-  // after the break starts. We will know if the user is idle after breaks
-  // by checking the idle status right after the break.
-  // This timer will be deactivated at the first activity after the break.
-  oneshotIdleTimer = SystemIdleTime::createIdleTimer();
-  oneshotIdleTimer->setWatchAccuracy(1000);
-  oneshotIdleTimer->setMinIdleTime(1000);
-  screenLockTimer = new QTimer();
-  screenLockTimer->setSingleShot(true);
-  sleepMonitor = new SleepMonitor();
-  batteryWatcher = BatteryStatus::createWatcher();
-  runningProgramsMonitor = new RunningProgramsMonitor();
+SaneBreakApp::SaneBreakApp(const AppDependencies &deps, QObject *parent)
+    : AbstractApp(deps, parent) {
+  prefWindow = new PreferenceWindow(preferences);
+  breakManager = new BreakWindowManager(preferences, this);
+  systemMonitor = new SystemMonitor(preferences, this);
   createMenu();
   tray = StatusTrayWindow::createTrayOrWindow(menu, this);
 
-  countDownTimer = new QTimer();
-  countDownTimer->setInterval(1000);
-  connect(countDownTimer, &QTimer::timeout, this, &SaneBreakApp::tick);
   connect(breakManager, &BreakWindowManager::resume, this,
           &SaneBreakApp::onBreakResume);
   connect(breakManager, &BreakWindowManager::timeout, this, &SaneBreakApp::onBreakEnd);
   connect(tray, &StatusTrayWindow::breakTriggered, this, &SaneBreakApp::onIconTrigger);
-  connect(idleTimer, &SystemIdleTime::idleStart, this, &SaneBreakApp::onIdleStart);
-  connect(idleTimer, &SystemIdleTime::idleEnd, this, &SaneBreakApp::onIdleEnd);
-  connect(oneshotIdleTimer, &SystemIdleTime::idleEnd, this,
-          &SaneBreakApp::onOneshotIdleEnd);
-  connect(screenLockTimer, &QTimer::timeout, this, &SaneBreakApp::mayLockScreen);
-  connect(sleepMonitor, &SleepMonitor::sleepEnd, this, &SaneBreakApp::onSleepEnd);
-  connect(batteryWatcher, &BatteryStatus::onBattery, this, &SaneBreakApp::onBattery);
-  connect(batteryWatcher, &BatteryStatus::onPower, this, &SaneBreakApp::onPower);
-  connect(runningProgramsMonitor, &RunningProgramsMonitor::programStarted, this,
+  connect(systemMonitor, &SystemMonitor::idleStarted, this, &SaneBreakApp::onIdleStart);
+  connect(systemMonitor, &SystemMonitor::idleEnded, this, &SaneBreakApp::onIdleEnd);
+  connect(systemMonitor, &SystemMonitor::sleepEnded, this, &SaneBreakApp::onSleepEnd);
+  connect(systemMonitor, &SystemMonitor::batteryPowered, this,
+          &SaneBreakApp::onBattery);
+  connect(systemMonitor, &SystemMonitor::adaptorPowered, this, &SaneBreakApp::onPower);
+  connect(systemMonitor, &SystemMonitor::programStarted, this,
           [this]() { pauseBreak(PauseReason::APP_OPEN); });
-  connect(runningProgramsMonitor, &RunningProgramsMonitor::programStopped, this,
+  connect(systemMonitor, &SystemMonitor::programStopped, this,
           [this]() { resumeBreak(PauseReason::APP_OPEN); });
-  connect(SanePreferences::pauseOnBattery, &SettingWithSignal::changed, this,
+  connect(preferences->pauseOnBattery, &SettingWithSignal::changed, this,
           &SaneBreakApp::onBatterySettingChange);
-  connect(SanePreferences::postponeMinutes, &SettingWithSignal::changed, this,
+  connect(preferences->postponeMinutes, &SettingWithSignal::changed, this,
           &SaneBreakApp::onPostponeMinutesChange);
-  connect(SanePreferences::smallEvery, &SettingWithSignal::changed, this,
+  connect(preferences->smallEvery, &SettingWithSignal::changed, this,
           &SaneBreakApp::resetSecondsToNextBreak);
-  connect(
-      SanePreferences::programsToMonitor, &SettingWithSignal::changed, this, [this]() {
-        runningProgramsMonitor->setPrograms(SanePreferences::programsToMonitor->get());
-      });
-  connect(SanePreferences::language, &SettingWithSignal::changed, this,
-          []() { LanguageSelect::setLanguage(SanePreferences::language->get()); });
+  connect(preferences->language, &SettingWithSignal::changed, this,
+          [this]() { LanguageSelect::setLanguage(preferences->language->get()); });
 }
 
-SaneBreakApp::~SaneBreakApp() {}
+SaneBreakApp *SaneBreakApp::create(SanePreferences *preferences, QObject *parent) {
+  auto countDownTimer = new Timer();
+  auto oneshotIdleTimer = SystemIdleTime::createIdleTimer();
+  auto screenLockTimer = new Timer();
+
+  AppDependencies deps = {.countDownTimer = countDownTimer,
+                          .oneshotIdleTimer = oneshotIdleTimer,
+                          .screenLockTimer = screenLockTimer,
+                          .preferences = preferences};
+  return new SaneBreakApp(deps, parent);
+}
 
 void SaneBreakApp::start() {
-  resetSecondsToNextBreak();
+  AbstractApp::start();
   tray->show();
-  countDownTimer->start();
-  idleTimer->startWatching();
-  batteryWatcher->startWatching();
-  runningProgramsMonitor->setPrograms(SanePreferences::programsToMonitor->get());
-  runningProgramsMonitor->startMonitoring();
+  systemMonitor->start();
 }
 
-void SaneBreakApp::tick() {
-  addSecondsToNextBreak(-1);
-  if (secondsToNextBreak <= 0) {
-    breakNow();
-    return;
-  }
-  updateMenu();
+void SaneBreakApp::openBreakWindow(bool isBigBreak) {
+  breakManager->show(isBigBreak ? BreakWindow::BreakType::BIG
+                                : BreakWindow::BreakType::SMALL);
 }
 
-void SaneBreakApp::updateIcon() {
+void SaneBreakApp::closeBreakWindow() { breakManager->close(); }
+
+void SaneBreakApp::updateTray() {
   StatusTrayWindow::IconVariants flags;
   if (pauseReasons != 0 || breakManager->isShowing() ||
-      secondsToNextBreak > SanePreferences::smallEvery->get()) {
+      secondsToNextBreak > preferences->smallEvery->get()) {
     flags |= StatusTrayWindow::IconVariant::PAUSED;
   }
   if (smallBreaksBeforeBig() == 0) {
     flags |= StatusTrayWindow::IconVariant::WILL_BIG;
   }
-  float arcRatio = float(secondsToNextBreak) / SanePreferences::smallEvery->get();
+  float arcRatio = float(secondsToNextBreak) / preferences->smallEvery->get();
   tray->updateIcon(arcRatio, flags);
-}
 
-void SaneBreakApp::onIconTrigger() {
-  if (SanePreferences::quickBreak->get()) breakNow();
-}
-
-void SaneBreakApp::addSecondsToNextBreak(int seconds) {
-  secondsToNextBreak += seconds;
-  updateIcon();
-}
-
-void SaneBreakApp::resetSecondsToNextBreak() {
-  secondsToNextBreak = SanePreferences::smallEvery->get();
-  updateIcon();
-}
-
-void SaneBreakApp::updateMenu() {
   tray->setTitle(QString("%1 %2").arg(
       smallBreaksBeforeBig() == 0 ? tr("big break") : tr("small break"),
       formatTime(secondsToNextBreak)));
   nextBreakAction->setText(
       tr("Next break after %1").arg(formatTime(secondsToNextBreak)));
   int secondsToNextbigBreak =
-      secondsToNextBreak + smallBreaksBeforeBig() * SanePreferences::smallEvery->get();
+      secondsToNextBreak + smallBreaksBeforeBig() * preferences->smallEvery->get();
   bigBreakAction->setText(
       tr("Next big break after %1").arg(formatTime(secondsToNextbigBreak)));
+
+  if (!pauseReasons) {
+    enableBreak->setVisible(false);
+    nextBreakAction->setVisible(true);
+    bigBreakAction->setVisible(true);
+  } else {
+    if (pauseReasons.testFlag(PauseReason::ON_BATTERY)) {
+      tray->setTitle(tr("Paused on battery"));
+    } else if (pauseReasons.testFlag(PauseReason::APP_OPEN)) {
+      tray->setTitle(tr("Paused on app running"));
+    } else if (pauseReasons.testFlag(PauseReason::IDLE)) {
+      tray->setTitle(tr("Paused on idle"));
+    }
+    enableBreak->setVisible(true);
+    nextBreakAction->setVisible(false);
+    bigBreakAction->setVisible(false);
+  }
+}
+
+void SaneBreakApp::onIconTrigger() {
+  if (preferences->quickBreak->get()) breakNow();
 }
 
 void SaneBreakApp::createMenu() {
@@ -164,7 +146,7 @@ void SaneBreakApp::createMenu() {
   menu->addSeparator();
 
   postponeMenu = menu->addMenu(tr("Postpone"));
-  for (const QString &minuteString : SanePreferences::postponeMinutes->get()) {
+  for (const QString &minuteString : preferences->postponeMinutes->get()) {
     int minute = minuteString.toInt();
     connect(postponeMenu->addAction(tr("%n min", "", minute)), &QAction::triggered,
             this, [this, minute]() { postpone(minute * 60); });
@@ -173,7 +155,7 @@ void SaneBreakApp::createMenu() {
   enableBreak->setVisible(false);
   connect(enableBreak, &QAction::triggered, this,
           // enable all flags
-          [this]() { resumeBreak((1 << 8) - 1); });
+          [this]() { resumeBreak(PauseReasons::fromInt((1 << 8) - 1)); });
 
   menu->addSeparator();
 
@@ -187,120 +169,8 @@ void SaneBreakApp::createMenu() {
   connect(quitAction, &QAction::triggered, this, &SaneBreakApp::confirmQuit);
 }
 
-void SaneBreakApp::breakNow() {
-  resetSecondsToNextBreak();
-  updateMenu();
-  countDownTimer->stop();
-  breakManager->show(smallBreaksBeforeBig() == 0 ? BreakType::BIG : BreakType::SMALL);
-  breakCycleCount++;
-  // For testing user is idle after break end
-  oneshotIdleTimer->startWatching();
-  // Reset icon
-  updateIcon();
-}
-
-void SaneBreakApp::postpone(int secs) {
-  // Postpone adds time from 0 instead of break interval
-  if (breakManager->isShowing()) secondsToNextBreak = 0;
-  addSecondsToNextBreak(secs);
-  breakCycleCount = 0;    // break after postpone is a big break
-  breakManager->close();  // stop current break if necessary
-}
-
-void SaneBreakApp::pauseBreak(unsigned int reason) {
-  // Should not record last pause if already paused
-  if (pauseReasons == 0) lastPause = QDateTime::currentSecsSinceEpoch();
-  pauseReasons |= reason;  // Flag should be set before closing windows
-  countDownTimer->stop();
-  // Stop current break if necessary
-  if (reason != PauseReason::IDLE) breakManager->close();
-  if (reason & PauseReason::ON_BATTERY) {
-    tray->setTitle(tr("Paused on battery"));
-  } else if (reason & PauseReason::APP_OPEN) {
-    tray->setTitle(tr("Paused on app running"));
-  } else if (reason & PauseReason::IDLE) {
-    tray->setTitle(tr("Paused on idle"));
-  }
-  enableBreak->setVisible(true);
-  nextBreakAction->setVisible(false);
-  bigBreakAction->setVisible(false);
-  updateIcon();
-}
-
-// Return true if the time is running
-bool SaneBreakApp::resumeBreak(unsigned int reason) {
-  // Do nothing if not paused
-  if (pauseReasons == 0) return true;
-  // Remove specific reason for pausing
-  pauseReasons &= ~reason;
-  // If there are other reasons for pausing, do nothing
-  if (pauseReasons != 0) return false;
-
-  if (lastPause > 0) {  // We have correctly recorded last pause time
-    int secPaused = QDateTime::currentSecsSinceEpoch() - lastPause;
-    lastPause = 0;
-    if (secPaused > SanePreferences::resetAfterPause->get()) resetSecondsToNextBreak();
-    if (secPaused > SanePreferences::resetCycleAfterPause->get()) breakCycleCount = 1;
-  }
-  countDownTimer->start();
-
-  enableBreak->setVisible(false);
-  nextBreakAction->setVisible(true);
-  bigBreakAction->setVisible(true);
-  updateIcon();
-  return true;
-}
-
-int SaneBreakApp::smallBreaksBeforeBig() {
-  int breakEvery = SanePreferences::bigAfter->get();
-  breakCycleCount %= breakEvery;
-  return (breakEvery - breakCycleCount) % breakEvery;
-}
-
-void SaneBreakApp::onSleepEnd() {
-  // We reset these regardless of paused or not
-  breakCycleCount = 1;
-  breakManager->close();  // stop current break if necessary
-  resetSecondsToNextBreak();
-  // But we update menu and icon (in case <1min) only if not paused
-  if (pauseReasons == 0) {
-    updateMenu();
-    updateIcon();
-  }
-}
-
-void SaneBreakApp::onBreakResume() {
-  int msec = SanePreferences::autoScreenLock->get() * 1000;
-  if (msec == 0 && screenLockTimer->isActive())
-    screenLockTimer->stop();
-  else
-    screenLockTimer->start(msec);
-}
-
-// Resume countdown if user is idle after breaks
-void SaneBreakApp::onBreakEnd() {
-  if (!oneshotIdleTimer->isIdle) {
-    oneshotIdleTimer->stopWatching();
-    screenLockTimer->stop();
-    // Continue countdown as normal
-    countDownTimer->start();
-  } else {
-    pauseBreak(PauseReason::IDLE);
-  }
-}
-
-void SaneBreakApp::onIdleStart() { pauseBreak(PauseReason::IDLE); }
-
-void SaneBreakApp::onIdleEnd() { bool resumed = resumeBreak(PauseReason::IDLE); }
-
-void SaneBreakApp::onOneshotIdleEnd() {
-  if (breakManager->isShowing()) return;
-  oneshotIdleTimer->stopWatching();
-  resumeBreak(PauseReason::IDLE);
-}
-
 void SaneBreakApp::mayLockScreen() {
-  if (SanePreferences::autoScreenLock->get()) {
+  if (preferences->autoScreenLock->get()) {
     if (lockScreen())
       qDebug("Screen locked");
     else
@@ -308,26 +178,17 @@ void SaneBreakApp::mayLockScreen() {
   }
 }
 
-void SaneBreakApp::onBattery() {
-  if (SanePreferences::pauseOnBattery->get()) pauseBreak(PauseReason::ON_BATTERY);
-}
-
-void SaneBreakApp::onPower() {
-  // No need to check settings because it does nothing if not paused with this
-  resumeBreak(PauseReason::ON_BATTERY);
-}
-
 void SaneBreakApp::onBatterySettingChange() {
-  bool doPause = SanePreferences::pauseOnBattery->get();
+  bool doPause = preferences->pauseOnBattery->get();
   if (!doPause)
     resumeBreak(PauseReason::ON_BATTERY);
-  else if (batteryWatcher->isOnBattery)
+  else if (systemMonitor->isOnBattery())
     pauseBreak(PauseReason::ON_BATTERY);
 }
 
 void SaneBreakApp::onPostponeMinutesChange() {
   postponeMenu->clear();
-  for (const QString &minuteString : SanePreferences::postponeMinutes->get()) {
+  for (const QString &minuteString : preferences->postponeMinutes->get()) {
     int minute = minuteString.toInt();
     connect(postponeMenu->addAction(tr("%n min", "", minute)), &QAction::triggered,
             this, [this, minute]() { postpone(minute * 60); });
@@ -336,7 +197,7 @@ void SaneBreakApp::onPostponeMinutesChange() {
 
 void SaneBreakApp::confirmQuit() {
   int largestMinutes = 0;
-  for (const QString &minuteString : SanePreferences::postponeMinutes->get()) {
+  for (const QString &minuteString : preferences->postponeMinutes->get()) {
     int minute = minuteString.toInt();
     largestMinutes = largestMinutes > minute ? largestMinutes : minute;
   }

@@ -34,7 +34,8 @@
 #include "lib/linux/system-check.h"
 #endif
 
-WelcomeWindow::WelcomeWindow(QWidget *parent) : QDialog(parent) {
+WelcomeWindow::WelcomeWindow(SanePreferences *preferences, QWidget *parent)
+    : QDialog(parent), preferences(preferences) {
   setWindowIcon(QIcon(":/images/icon.png"));
   setFixedWidth(400);
   setContentsMargins(10, 20, 10, 10);
@@ -62,12 +63,13 @@ WelcomeWindow::WelcomeWindow(QWidget *parent) : QDialog(parent) {
   languageLabel = new QLabel(this);
   hlayout->addWidget(languageLabel);
   languageSelect = new LanguageSelect(this);
+  languageSelect->setSelectedLanguage(preferences->language->get());
   hlayout->addWidget(languageSelect);
   layout->addItem(hlayout);
   connect(languageSelect, &LanguageSelect::languageChanged, this,
           [this](QString language) {
             LanguageSelect::setLanguage(language);
-            SanePreferences::language->set(language);
+            this->preferences->language->set(language);
             updateText();
           });
 #endif

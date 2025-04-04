@@ -4,15 +4,12 @@
 
 #include "battery.h"
 
-#include <qglobal.h>
-
-#ifdef Q_OS_LINUX
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QVariant>
 
-LinuxBatteryStatus::LinuxBatteryStatus() : BatteryStatus() {
+LinuxBatteryStatus::LinuxBatteryStatus(QObject* parent) : BatteryStatus(parent) {
   iface = new QDBusInterface(
       "org.freedesktop.UPower", "/org/freedesktop/UPower/devices/battery_BAT0",
       "org.freedesktop.DBus.Properties", QDBusConnection::systemBus());
@@ -28,4 +25,3 @@ bool LinuxBatteryStatus::systemOnBattery() {
   }
   return false;
 }
-#endif

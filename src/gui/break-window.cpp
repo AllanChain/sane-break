@@ -39,7 +39,8 @@
 const int BreakWindow::SMALL_WINDOW_WIDTH = 400;
 const int BreakWindow::SMALL_WINDOW_HEIGHT = 120;
 
-BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) {
+BreakWindow::BreakWindow(SanePreferences *preferences, QWidget *parent)
+    : QMainWindow(parent), preferences(preferences) {
 #ifdef Q_OS_LINUX
   // Positioning windows on Wayland is nearly impossible without layer shell protol.
   // In Wayland workaround mode, the main window is transparent and takes up all
@@ -80,9 +81,7 @@ BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) 
   textLayout->setAlignment(Qt::AlignCenter);
   layout->addLayout(textLayout);
 
-  QLabel *breakLabel =
-      new QLabel(type == BreakType::BIG ? tr("Time for a big break")
-                                        : tr("Time for a small break"));
+  breakLabel = new QLabel();
   breakLabel->setObjectName("breakLabel");
   textLayout->addWidget(breakLabel);
 
@@ -92,8 +91,8 @@ BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) 
   countdownLabel->setVisible(false);
   textLayout->addWidget(countdownLabel);
 
-  if (SanePreferences::textTransparency->get() > 0) {
-    int opacity = 256 - SanePreferences::textTransparency->get() * 256 / 100;
+  if (preferences->textTransparency->get() > 0) {
+    int opacity = 256 - preferences->textTransparency->get() * 256 / 100;
     countdownLabel->setStyleSheet(
         QString("color: rgba(236, 239, 244, %1)").arg(opacity));
     progressBar->setStyleSheet(
@@ -107,17 +106,6 @@ BreakWindow::BreakWindow(BreakType type, QWidget *parent) : QMainWindow(parent) 
   progressAnim->setEndValue(0);
 
   bgAnim = new QPropertyAnimation(this, "color");
-  if (type == BreakType::BIG)
-    bgAnim->setStartValue(QColor(180, 142, 173, 100));
-  else
-    bgAnim->setStartValue(QColor(235, 203, 139, 100));
-  bgAnim->setEndValue(QColor(46, 52, 64, 255));
-  if (SanePreferences::flashSpeed->get() <= 0) {
-    bgAnim->setStartValue(QColor(46, 52, 64, 255));
-    bgAnim->setDuration(100000);
-  } else {
-    bgAnim->setDuration(500 / SanePreferences::flashSpeed->get() * 100);
-  }
   bgAnim->setLoopCount(-1);
 }
 
@@ -132,11 +120,26 @@ void BreakWindow::colorChanged() {
                     .arg(backgroundColor.alpha()));
 }
 
-void BreakWindow::start(int totalTime) {
+void BreakWindow::start(BreakType type, int totalTime) {
   this->totalTime = totalTime;
-  progressAnim->setDuration(totalTime * 1000);
-  bgAnim->start();
   setTime(totalTime);
+  progressAnim->setDuration(totalTime * 1000);
+
+  if (type == BreakType::BIG) {
+    breakLabel->setText(tr("Time for a big break"));
+    bgAnim->setStartValue(QColor(180, 142, 173, 100));
+  } else {
+    breakLabel->setText(tr("Time for a small break"));
+    bgAnim->setStartValue(QColor(235, 203, 139, 100));
+  }
+  bgAnim->setEndValue(QColor(46, 52, 64, 255));
+  if (preferences->flashSpeed->get() <= 0) {
+    bgAnim->setStartValue(QColor(46, 52, 64, 255));
+    bgAnim->setDuration(100000);
+  } else {
+    bgAnim->setDuration(500 / preferences->flashSpeed->get() * 100);
+  }
+  bgAnim->start();
 }
 
 void BreakWindow::setTime(int remainingTime) {

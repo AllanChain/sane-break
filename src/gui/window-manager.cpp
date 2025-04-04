@@ -28,7 +28,8 @@
 #include "lib/preferences.h"
 #include "sound-player.h"
 
-BreakWindowManager::BreakWindowManager() : QObject() {
+BreakWindowManager::BreakWindowManager(SanePreferences *preferences, QObject *parent)
+    : QObject(parent), preferences(preferences) {
   countdownTimer = new QTimer(this);
   countdownTimer->setInterval(1000);
   connect(countdownTimer, &QTimer::timeout, this, &BreakWindowManager::tick);
@@ -55,27 +56,28 @@ void BreakWindowManager::createWindows() {
   QList<QScreen *> screens = QApplication::screens();
 
   for (QScreen *screen : std::as_const(screens)) {
-    BreakWindow *w = new BreakWindow(currentType);
+    BreakWindow *w = new BreakWindow(preferences);
     windows.append(w);
     w->initSize(screen);
   }
 }
 
-void BreakWindowManager::show(BreakType type) {
+void BreakWindowManager::show(BreakWindow::BreakType type) {
   currentType = type;
-  totalTime = type == BreakType::BIG ? SanePreferences::bigFor->get()
-                                     : SanePreferences::smallFor->get();
+  totalTime = type == BreakWindow::BreakType::BIG ? preferences->bigFor->get()
+                                                  : preferences->smallFor->get();
   remainingTime = totalTime;
   isIdle = false;
   isForceBreak = false;
   createWindows();
-  for (auto w : std::as_const(windows)) w->start(totalTime);
+  for (auto w : std::as_const(windows)) w->start(type, totalTime);
   countdownTimer->start();
-  forceBreakTimer->setInterval(SanePreferences::flashFor->get() * 1000);
+  forceBreakTimer->setInterval(preferences->flashFor->get() * 1000);
   forceBreakTimer->start();
   idleTimer->startWatching();
-  soundPlayer->play(type == BreakType::SMALL ? SanePreferences::smallStartBell->get()
-                                             : SanePreferences::bigStartBell->get());
+  soundPlayer->play(type == BreakWindow::BreakType::SMALL
+                        ? preferences->smallStartBell->get()
+                        : preferences->bigStartBell->get());
 }
 
 bool BreakWindowManager::isShowing() { return windows.size() != 0; }
@@ -98,12 +100,12 @@ void BreakWindowManager::tick() {
   bool shouldCountDown = isForceBreak || isIdle;
   if (shouldCountDown) remainingTime--;
   for (auto w : std::as_const(windows)) w->setTime(remainingTime);
-  if (totalTime - remainingTime >= SanePreferences::confirmAfter->get())
+  if (totalTime - remainingTime >= preferences->confirmAfter->get())
     isForceBreak = true;
   if (remainingTime <= 0) {
-    soundPlayer->play(currentType == BreakType::SMALL
-                          ? SanePreferences::smallEndBell->get()
-                          : SanePreferences::bigEndBell->get());
+    soundPlayer->play(currentType == BreakWindow::BreakType::SMALL
+                          ? preferences->smallEndBell->get()
+                          : preferences->bigEndBell->get());
     close();
   }
 }
