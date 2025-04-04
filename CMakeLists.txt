@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.12)
 
 # Should be set before project call and be a cache variable
 set(CMAKE_OSX_DEPLOYMENT_TARGET
@@ -26,5 +26,10 @@ endif()
 include(GNUInstallDirs)
 
 add_subdirectory(src)
+
+option(TESTING "Build with testing" OFF)
+if(TESTING)
+  add_subdirectory(test)
+endif()
 
 configure_file(config.h.cmake config.h)
