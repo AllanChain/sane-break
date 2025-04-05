@@ -40,7 +40,11 @@ void AbstractApp::start() {
 }
 
 void AbstractApp::tick() {
-  m_secondsPaused = m_pauseReasons ? m_secondsPaused + 1 : 0;
+  if (m_isBreaking) return;
+  if (m_pauseReasons) {
+    m_secondsPaused += 1;
+    return;
+  }
   m_secondsToNextBreak--;
   if (m_secondsToNextBreak <= 0) return breakNow();
   updateTray();
@@ -53,7 +57,6 @@ void AbstractApp::resetSecondsToNextBreak() {
 
 void AbstractApp::breakNow() {
   m_isBreaking = true;
-  m_countDownTimer->stop();
   openBreakWindow(smallBreaksBeforeBig() == 0);
   // Update cycle count after show break
   m_breakCycleCount++;
@@ -84,10 +87,7 @@ void AbstractApp::updateTray() {
 
 void AbstractApp::onBreakResume() {
   int msec = preferences->autoScreenLock->get() * 1000;
-  if (msec == 0 && m_screenLockTimer->isActive())
-    m_screenLockTimer->stop();
-  else
-    m_screenLockTimer->start(msec);
+  if (msec != 0) m_screenLockTimer->start(msec);
 }
 
 // Resume countdown if user is idle after breaks
@@ -97,8 +97,6 @@ void AbstractApp::onBreakEnd() {
   if (!m_oneshotIdleTimer->isIdle) {
     m_oneshotIdleTimer->stopWatching();
     m_screenLockTimer->stop();
-    // Continue countdown as normal
-    m_countDownTimer->start();
   } else {
     pauseBreak(SaneBreak::PauseReason::Idle);
   }
@@ -107,7 +105,6 @@ void AbstractApp::onBreakEnd() {
 void AbstractApp::pauseBreak(SaneBreak::PauseReasons reason) {
   // Flag should be set before closing windows
   m_pauseReasons |= reason;
-  m_countDownTimer->stop();
   // Stop current break if necessary
   if (reason != SaneBreak::PauseReason::Idle) {
     closeBreakWindow();
@@ -134,7 +131,6 @@ void AbstractApp::resumeBreak(SaneBreak::PauseReasons reason) {
   if (m_secondsPaused > preferences->resetCycleAfterPause->get()) {
     m_breakCycleCount = 1;
   }
-  m_countDownTimer->start();
   updateTray();
 }
 
