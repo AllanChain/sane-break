@@ -493,7 +493,7 @@ v%1
     </message>
     <message>
         <location filename="../../src/gui/pref-window.cpp" line="249"/>
-        <source>Setting auto start failed</source>
+        <source>Setting autostart failed</source>
         <translation>Automatisch opstarten is niet mogelijk</translation>
     </message>
     <message>

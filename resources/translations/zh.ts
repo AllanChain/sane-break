@@ -461,7 +461,7 @@ v%1
     </message>
     <message>
         <location filename="../../src/gui/pref-window.cpp" line="249"/>
-        <source>Setting auto start failed</source>
+        <source>Setting autostart failed</source>
         <translation>设置开机自启失败</translation>
     </message>
     <message>

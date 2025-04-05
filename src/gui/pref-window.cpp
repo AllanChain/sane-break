@@ -247,7 +247,7 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
             bool checked = ui->autoStart->isChecked();
             if (!succeeded) {
               ui->autoStart->setCheckState(!checked ? Qt::Checked : Qt::Unchecked);
-              QMessageBox::warning(this, tr("Setting auto start failed"), error);
+              QMessageBox::warning(this, tr("Setting autostart failed"), error);
             }
             ui->autoStart->blockSignals(false);
             ui->autoStart->setDisabled(false);
