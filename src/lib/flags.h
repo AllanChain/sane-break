@@ -12,7 +12,8 @@ enum class PauseReason {
   OnBattery = 1 << 1,
   AppOpen = 1 << 2,
 };
-typedef QFlags<PauseReason> PauseReasons;
+Q_DECLARE_FLAGS(PauseReasons, PauseReason)
+Q_DECLARE_OPERATORS_FOR_FLAGS(PauseReasons)
 enum class BreakType { Small, Big };
 };  // namespace SaneBreak
 #endif  // !SANE_FLAGS_H
