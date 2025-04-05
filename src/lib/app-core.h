@@ -2,8 +2,7 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SANE_STATE_H
-#define SANE_STATE_H
+#pragma once
 
 #include <QFlags>
 #include <QObject>
@@ -98,5 +97,3 @@ class AbstractApp : public QObject {
   void updateTray();
   void resetSecondsToNextBreak();
 };
-
-#endif  // SANE_STATE_H

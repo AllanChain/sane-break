@@ -5,8 +5,7 @@
 #include <QDBusInterface>
 #include <QObject>
 
-#ifndef SANE_BATTERY_LINUX_H
-#define SANE_BATTERY_LINUX_H
+#pragma once
 
 #include "battery-status.h"  // IWYU pragma: export
 
@@ -19,5 +18,3 @@ class LinuxBatteryStatus : public BatteryStatus {
  private:
   QDBusInterface *iface;
 };
-
-#endif  // SANE_BATTERY_LINUX_H

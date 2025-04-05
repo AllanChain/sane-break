@@ -7,8 +7,7 @@
 // Copyright © 2016 Telegram. All rights reserved.
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-#ifndef SANE_IDLE_DARWIN_H
-#define SANE_IDLE_DARWIN_H
+#pragma once
 
 #include <QTimer>
 
@@ -22,5 +21,3 @@ class IdleTimeDarwin : public ReadBasedIdleTime {
   using ReadBasedIdleTime::ReadBasedIdleTime;
   int systemIdleTime();
 };
-
-#endif  // SANE_IDLE_DARWIN_H

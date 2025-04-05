@@ -2,9 +2,8 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include <qglobal.h>
+#include "idle.h"
 
-#ifdef Q_OS_LINUX
 #include <wayland-client-core.h>
 #include <wayland-client-protocol.h>
 #include <wayland-client.h>
@@ -17,7 +16,6 @@
 #include <cstdint>
 #include <cstring>
 
-#include "idle.h"
 #include "wayland-ext-idle-notify-v1-client-protocol.h"
 
 IdleTimeWayland::IdleTimeWayland(QObject *parent) : SystemIdleTime(parent) {
@@ -103,5 +101,3 @@ int IdleTimeGNOME::systemIdleTime() {
   QDBusReply<qulonglong> reply = iface->call("GetIdletime");
   return reply.value();
 }
-
-#endif  // Q_OS_LINUX

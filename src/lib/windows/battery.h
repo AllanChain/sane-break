@@ -2,8 +2,7 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SANE_BATTERY_WIN_H
-#define SANE_BATTERY_WIN_H
+#pragma once
 
 #include "battery-status.h"
 
@@ -13,5 +12,3 @@ class WindowsBatteryStatus : public BatteryStatus {
   using BatteryStatus::BatteryStatus;
   bool systemOnBattery();
 };
-
-#endif  // SANE_BATTERY_WIN_H

@@ -2,8 +2,7 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SANE_WELCOME_H
-#define SANE_WELCOME_H
+#pragma once
 #include <QComboBox>
 #include <QDialog>
 #include <QDialogButtonBox>
@@ -38,4 +37,3 @@ class WelcomeWindow : public QDialog {
   LanguageSelect *languageSelect;
 #endif
 };
-#endif  // SANE_WELCOME_H

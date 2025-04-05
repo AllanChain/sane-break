@@ -2,9 +2,6 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SCREEN_LOCK_H
-#define SCREEN_LOCK_H
+#pragma once
 
 bool lockScreen();
-
-#endif  // SCREEN_LOCK_H

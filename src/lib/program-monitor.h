@@ -2,8 +2,7 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef RUNNING_PROGRAMS_MONITOR_H
-#define RUNNING_PROGRAMS_MONITOR_H
+#pragma once
 
 #include <QObject>
 #include <QRegularExpression>
@@ -33,5 +32,3 @@ class RunningProgramsMonitor : public QObject {
   QStringList programsToMonitor;
   bool previouslySeen = false;
 };
-
-#endif  // RUNNING_PROGRAMS_MONITOR_H

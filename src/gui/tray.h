@@ -2,8 +2,7 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SANE_TRAY_H
-#define SANE_TRAY_H
+#pragma once
 #include <QContextMenuEvent>
 #include <QLabel>
 #include <QMenu>
@@ -94,5 +93,3 @@ class StatusWindow : public StatusTrayWindow {
  protected:
   void contextMenuEvent(QContextMenuEvent *event);
 };
-
-#endif  // SANE_TRAY_H

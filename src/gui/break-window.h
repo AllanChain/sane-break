@@ -2,8 +2,7 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SANE_BREAK_WINDOW_H
-#define SANE_BREAK_WINDOW_H
+#pragma once
 
 #include <QColor>
 #include <QLabel>
@@ -44,4 +43,3 @@ class BreakWindow : public QMainWindow {
   QPropertyAnimation *bgAnim;
   bool waylandWorkaround = false;
 };
-#endif  // SANE_BREAK_WINDOW_H

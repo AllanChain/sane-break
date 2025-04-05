@@ -7,8 +7,7 @@
 // Copyright (c) 2014 Atlassian Pty Ltd.
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef SANE_IDLE_X11_H
-#define SANE_IDLE_X11_H
+#pragma once
 
 #include <QTimer>
 
@@ -22,5 +21,3 @@ class IdleTimeX11 : public ReadBasedIdleTime {
   using ReadBasedIdleTime::ReadBasedIdleTime;
   int systemIdleTime();
 };
-
-#endif  // SANE_IDLE_X11_H

@@ -2,8 +2,7 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SANE_BREAK_IDLE_H
-#define SANE_BREAK_IDLE_H
+#pragma once
 
 #include <QObject>
 #include <QTimer>
@@ -57,5 +56,3 @@ class SleepMonitor : public QObject {
   int lastAwake;
   void tick();
 };
-
-#endif  // SANE_BREAK_IDLE_H

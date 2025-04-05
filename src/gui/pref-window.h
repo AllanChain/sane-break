@@ -2,8 +2,7 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SANE_PREFERENCES_WINDOW_H
-#define SANE_PREFERENCES_WINDOW_H
+#pragma once
 #include <qlineedit.h>
 
 #include <QCheckBox>
@@ -224,4 +223,3 @@ class PreferenceWindow : public QMainWindow {
   void closeEvent(QCloseEvent *event);
   void showEvent(QShowEvent *event);
 };
-#endif  // SANE_PREFERENCES_WINDOW_H

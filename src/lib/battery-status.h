@@ -2,8 +2,7 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SANE_BREAK_BATTERY_H
-#define SANE_BREAK_BATTERY_H
+#pragma once
 
 #include <QObject>
 #include <QTimer>
@@ -27,5 +26,3 @@ class BatteryStatus : public QObject {
   void onBattery();
   void onPower();
 };
-
-#endif  // SANE_BREAK_BATTERY_H

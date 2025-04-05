@@ -2,10 +2,7 @@
 // Copyright (C) 2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SCREEN_UTILS_H
-#define SCREEN_UTILS_H
+#pragma once
 #include <QString>
 
 QString formatTime(int seconds);
-
-#endif  // SCREEN_UTILS_H

@@ -2,8 +2,7 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SANE_TEST_DUMMY_H
-#define SANE_TEST_DUMMY_H
+#pragma once
 #include <gmock/gmock.h>
 #include <qtestcase.h>
 
@@ -50,5 +49,3 @@ class DummyApp : public AbstractApp {
                 new QSettings(tempFile.fileName(), QSettings::IniFormat))};
   };
 };
-
-#endif  // !SANE_TEST_DUMMY_H

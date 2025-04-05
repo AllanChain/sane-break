@@ -2,11 +2,7 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include <qglobal.h>
-
-#ifdef Q_OS_LINUX
-#ifndef SANE_IDLE_WAYLAND_H
-#define SANE_IDLE_WAYLAND_H
+#pragma once
 
 #include <wayland-client-core.h>
 #include <wayland-client-protocol.h>
@@ -64,6 +60,3 @@ class IdleTimeGNOME : public ReadBasedIdleTime {
  private:
   QDBusInterface *iface;
 };
-
-#endif  // SANE_IDLE_WAYLAND_H
-#endif  // Q_OS_LINUX

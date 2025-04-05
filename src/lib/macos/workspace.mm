@@ -3,12 +3,9 @@
 // Copyright (c) 2024 Private Internet Access, Inc.
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include <qglobal.h>
-
-#ifdef Q_OS_MACOS
+#include "workspace.h"
 #import <AppKit/AppKit.h>
 #include <QWindow>
-#include "workspace.h"
 
 namespace {
 NSWindow *macGetNativeWindow(const QWindow *window) {
@@ -29,4 +26,3 @@ void macSetAllWorkspaces(QWindow *window) {
   NSWindow *pNativeWindow = macGetNativeWindow(window);
   [pNativeWindow setCollectionBehavior:NSWindowCollectionBehaviorCanJoinAllSpaces];
 }
-#endif  // Q_OS_MACOS

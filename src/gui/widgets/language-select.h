@@ -2,8 +2,7 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SANE_WIDGETS_LANGUAGE_H
-#define SANE_WIDGETS_LANGUAGE_H
+#pragma once
 
 #include <QComboBox>
 #include <QEvent>
@@ -25,5 +24,3 @@ class LanguageSelect : public QComboBox {
  private:
   void onLanguageSelect();
 };
-
-#endif  // SANE_WIDGETS_LANGUAGE_H

@@ -2,8 +2,7 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SANE_WIDGETS_SLIDER_H
-#define SANE_WIDGETS_SLIDER_H
+#pragma once
 
 #include <QMouseEvent>
 #include <QPoint>
@@ -26,5 +25,3 @@ class SteppedSlider : public QSlider {
  private:
   int calculateValueFromPosition(const QPoint &pos) const;
 };
-
-#endif  // SANE_WIDGETS_SLIDER_H

@@ -2,8 +2,7 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SANE_APP_H
-#define SANE_APP_H
+#pragma once
 
 #include <QObject>
 #include <QTimer>
@@ -61,5 +60,3 @@ class SaneBreakApp : public AbstractApp {
   StatusTrayWindow *tray;
   void confirmQuit();
 };
-
-#endif  // SANE_APP_H

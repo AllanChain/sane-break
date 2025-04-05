@@ -2,8 +2,7 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SANE_PREFERENCES_H
-#define SANE_PREFERENCES_H
+#pragma once
 
 #include <QFile>
 #include <QObject>
@@ -81,5 +80,3 @@ class SanePreferences : public QObject {
   Setting<QString> *language;
   Setting<bool> *autoStart;
 };
-
-#endif  // SANE_PREFERENCES_H

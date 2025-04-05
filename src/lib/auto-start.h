@@ -2,8 +2,7 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#ifndef SANE_BREAK_AUTOSTART_H
-#define SANE_BREAK_AUTOSTART_H
+#pragma once
 
 #include <QObject>
 
@@ -25,5 +24,3 @@ class AutoStart : public QObject {
  signals:
   void operationResult(bool succeeded, QString error = QString());
 };
-
-#endif

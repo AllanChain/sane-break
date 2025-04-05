@@ -2,9 +2,6 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include <qglobal.h>
-
-#ifdef Q_OS_LINUX
 #include <QList>
 #include <QString>
 
@@ -17,5 +14,3 @@ void check();
 const QList<QString> errors();
 const QList<QString> warnings();
 }  // namespace LinuxSystemSupport
-
-#endif
