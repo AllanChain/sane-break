@@ -4,9 +4,9 @@
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../../../src/gui/pref-window.cpp" line="265"/>
         <location filename="../../../../src/gui/pref-window.cpp" line="266"/>
         <location filename="../../../../src/gui/pref-window.cpp" line="267"/>
+        <location filename="../../../../src/gui/pref-window.cpp" line="268"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -23,7 +23,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../../../src/gui/pref-window.cpp" line="264"/>
+        <location filename="../../../../src/gui/pref-window.cpp" line="265"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec</numerusform>
@@ -34,20 +34,23 @@
 <context>
     <name>SaneBreakApp</name>
     <message numerus="yes">
-        <location filename="../../../../src/app/app.cpp" line="169"/>
-        <location filename="../../../../src/app/app.cpp" line="332"/>
-        <source>%n min</source>
-        <translation>
-            <numerusform>%n min</numerusform>
-            <numerusform>%n min</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <location filename="../../../../src/app/app.cpp" line="348"/>
+        <location filename="../../../../src/app/app.cpp" line="129"/>
         <source>Postpone %n min</source>
         <translation>
             <numerusform>Postpone %n min</numerusform>
             <numerusform></numerusform>
+        </translation>
+    </message>
+</context>
+<context>
+    <name>StatusTrayWindow</name>
+    <message numerus="yes">
+        <location filename="../../../../src/gui/tray.cpp" line="50"/>
+        <location filename="../../../../src/gui/tray.cpp" line="136"/>
+        <source>%n min</source>
+        <translation type="unfinished">
+            <numerusform>%n min</numerusform>
+            <numerusform>%n min</numerusform>
         </translation>
     </message>
 </context>
