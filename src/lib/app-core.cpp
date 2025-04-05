@@ -6,6 +6,7 @@
 
 #include <QObject>
 
+#include "lib/flags.h"
 #include "lib/idle-time.h"
 #include "lib/preferences.h"
 
@@ -15,7 +16,7 @@ AbstractApp::AbstractApp(const AppDependencies &deps, QObject *parent)
       m_countDownTimer(deps.countDownTimer),
       m_oneshotIdleTimer(deps.oneshotIdleTimer),
       m_screenLockTimer(deps.screenLockTimer) {
-  secondsToNextBreak = preferences->smallEvery->get();
+  m_secondsToNextBreak = preferences->smallEvery->get();
 
   m_countDownTimer->setInterval(1000);
   m_oneshotIdleTimer->setWatchAccuracy(1000);
@@ -39,26 +40,46 @@ void AbstractApp::start() {
 }
 
 void AbstractApp::tick() {
-  secondsPaused = pauseReasons ? secondsPaused + 1 : 0;
-  secondsToNextBreak--;
-  if (secondsToNextBreak <= 0) return breakNow();
+  m_secondsPaused = m_pauseReasons ? m_secondsPaused + 1 : 0;
+  m_secondsToNextBreak--;
+  if (m_secondsToNextBreak <= 0) return breakNow();
   updateTray();
 }
 
 void AbstractApp::resetSecondsToNextBreak() {
-  secondsToNextBreak = preferences->smallEvery->get();
+  m_secondsToNextBreak = preferences->smallEvery->get();
   updateTray();
 }
 
 void AbstractApp::breakNow() {
-  isBreaking = true;
+  m_isBreaking = true;
   m_countDownTimer->stop();
   openBreakWindow(smallBreaksBeforeBig() == 0);
   // Update cycle count after show break
-  breakCycleCount++;
+  m_breakCycleCount++;
   updateTray();
   // For testing user is idle after break end
   m_oneshotIdleTimer->startWatching();
+}
+
+void AbstractApp::bigBreakNow() {
+  m_breakCycleCount = 0;
+  breakNow();
+}
+
+void AbstractApp::updateTray() {
+  int secondsFromLastBreakToNext = preferences->smallEvery->get();
+  int secondsToNextBigBreak =
+      m_secondsToNextBreak + smallBreaksBeforeBig() * secondsFromLastBreakToNext;
+  TrayData data = {
+      .isBreaking = m_isBreaking,
+      .secondsToNextBreak = m_secondsToNextBreak,
+      .secondsToNextBigBreak = secondsToNextBigBreak,
+      .secondsFromLastBreakToNext = secondsFromLastBreakToNext,
+      .smallBreaksBeforeBigBreak = smallBreaksBeforeBig(),
+      .pauseReasons = m_pauseReasons,
+  };
+  emit trayDataUpdated(data);
 }
 
 void AbstractApp::onBreakResume() {
@@ -71,7 +92,7 @@ void AbstractApp::onBreakResume() {
 
 // Resume countdown if user is idle after breaks
 void AbstractApp::onBreakEnd() {
-  isBreaking = false;
+  m_isBreaking = false;
   resetSecondsToNextBreak();
   if (!m_oneshotIdleTimer->isIdle) {
     m_oneshotIdleTimer->stopWatching();
@@ -79,74 +100,79 @@ void AbstractApp::onBreakEnd() {
     // Continue countdown as normal
     m_countDownTimer->start();
   } else {
-    pauseBreak(PauseReason::IDLE);
+    pauseBreak(SaneBreak::PauseReason::Idle);
   }
 }
 
-void AbstractApp::pauseBreak(PauseReasons reason) {
+void AbstractApp::pauseBreak(SaneBreak::PauseReasons reason) {
   // Flag should be set before closing windows
-  pauseReasons |= reason;
+  m_pauseReasons |= reason;
   m_countDownTimer->stop();
   // Stop current break if necessary
-  if (reason != PauseReason::IDLE) {
+  if (reason != SaneBreak::PauseReason::Idle) {
     closeBreakWindow();
   }
   updateTray();
 }
 
-void AbstractApp::resumeBreak(PauseReasons reason) {
-  // Do nothing if not paused
-  if (!pauseReasons) return;
-  // Remove specific reason for pausing
-  pauseReasons &= ~reason;
-  // If there are other reasons for pausing, do nothing
-  if (pauseReasons) return;
+void AbstractApp::enableBreak() {
+  // Set all flags
+  resumeBreak(SaneBreak::PauseReasons::fromInt((1 << 8) - 1));
+}
 
-  if (secondsPaused > preferences->resetAfterPause->get()) {
+void AbstractApp::resumeBreak(SaneBreak::PauseReasons reason) {
+  // Do nothing if not paused
+  if (!m_pauseReasons) return;
+  // Remove specific reason for pausing
+  m_pauseReasons &= ~reason;
+  // If there are other reasons for pausing, do nothing
+  if (m_pauseReasons) return;
+
+  if (m_secondsPaused > preferences->resetAfterPause->get()) {
     resetSecondsToNextBreak();
   }
-  if (secondsPaused > preferences->resetCycleAfterPause->get()) {
-    breakCycleCount = 1;
+  if (m_secondsPaused > preferences->resetCycleAfterPause->get()) {
+    m_breakCycleCount = 1;
   }
   m_countDownTimer->start();
   updateTray();
 }
 
 void AbstractApp::postpone(int secs) {
-  secondsToNextBreak += secs;
-  breakCycleCount = 0;  // break after postpone is a big break
+  m_secondsToNextBreak += secs;
+  m_breakCycleCount = 0;  // break after postpone is a big break
   updateTray();
   closeBreakWindow();
 }
 
 int AbstractApp::smallBreaksBeforeBig() {
   int breakEvery = preferences->bigAfter->get();
-  breakCycleCount %= breakEvery;
-  return (breakEvery - breakCycleCount) % breakEvery;
+  m_breakCycleCount %= breakEvery;
+  return (breakEvery - m_breakCycleCount) % breakEvery;
 }
 
-void AbstractApp::onIdleStart() { pauseBreak(PauseReason::IDLE); }
+void AbstractApp::onIdleStart() { pauseBreak(SaneBreak::PauseReason::Idle); }
 
-void AbstractApp::onIdleEnd() { resumeBreak(PauseReason::IDLE); }
+void AbstractApp::onIdleEnd() { resumeBreak(SaneBreak::PauseReason::Idle); }
 
 void AbstractApp::onBattery() {
-  if (preferences->pauseOnBattery->get()) pauseBreak(PauseReason::ON_BATTERY);
+  if (preferences->pauseOnBattery->get()) pauseBreak(SaneBreak::PauseReason::OnBattery);
 }
 
 void AbstractApp::onPower() {
   // No need to check settings because it does nothing if not paused with this
-  resumeBreak(PauseReason::ON_BATTERY);
+  resumeBreak(SaneBreak::PauseReason::OnBattery);
 }
 
 void AbstractApp::onSleepEnd() {
   // We reset these regardless of paused or not
-  breakCycleCount = 1;
+  m_breakCycleCount = 1;
   closeBreakWindow();
   resetSecondsToNextBreak();
 }
 
 void AbstractApp::onOneshotIdleEnd() {
-  if (isBreaking) return;
+  if (m_isBreaking) return;
   m_oneshotIdleTimer->stopWatching();
-  resumeBreak(PauseReason::IDLE);
+  resumeBreak(SaneBreak::PauseReason::Idle);
 }

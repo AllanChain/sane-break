@@ -24,6 +24,7 @@
 #include <cmath>
 
 #include "config.h"
+#include "lib/flags.h"
 #include "lib/preferences.h"
 #include "lib/utils.h"
 
@@ -120,12 +121,12 @@ void BreakWindow::colorChanged() {
                     .arg(backgroundColor.alpha()));
 }
 
-void BreakWindow::start(BreakType type, int totalTime) {
+void BreakWindow::start(SaneBreak::BreakType type, int totalTime) {
   this->totalTime = totalTime;
   setTime(totalTime);
   progressAnim->setDuration(totalTime * 1000);
 
-  if (type == BreakType::BIG) {
+  if (type == SaneBreak::BreakType::Big) {
     breakLabel->setText(tr("Time for a big break"));
     bgAnim->setStartValue(QColor(180, 142, 173, 100));
   } else {

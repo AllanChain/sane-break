@@ -5,8 +5,6 @@
 #ifndef SANE_APP_H
 #define SANE_APP_H
 
-#include <QAction>
-#include <QMenu>
 #include <QObject>
 #include <QTimer>
 
@@ -48,13 +46,10 @@ class SaneBreakApp : public AbstractApp {
   void start() override;
   void openBreakWindow(bool isBigBreak) override;
   void closeBreakWindow() override;
-  void updateTray() override;
   void mayLockScreen() override;
 
-  void confirmQuit();
-  void onIconTrigger();
+  void showPreferences();
   void onBatterySettingChange();
-  void onPostponeMinutesChange();
 
  signals:
   void quit();
@@ -64,13 +59,7 @@ class SaneBreakApp : public AbstractApp {
   BreakWindowManager *breakManager;
   SystemMonitor *systemMonitor;
   StatusTrayWindow *tray;
-  QMenu *menu;
-  QMenu *postponeMenu;
-  QAction *quitAction;
-  QAction *nextBreakAction;
-  QAction *bigBreakAction;
-  QAction *enableBreak;
-  void createMenu();
+  void confirmQuit();
 };
 
 #endif  // SANE_APP_H

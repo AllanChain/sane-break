@@ -9,10 +9,11 @@
 #include <QObject>
 #include <QTimer>
 
-#include "break-window.h"  // IWYU pragma: export
+#include "gui/break-window.h"  // IWYU pragma: export
+#include "gui/sound-player.h"
+#include "lib/flags.h"
 #include "lib/idle-time.h"
 #include "lib/preferences.h"
-#include "sound-player.h"
 
 class BreakWindowManager : public QObject {
   Q_OBJECT
@@ -21,8 +22,8 @@ class BreakWindowManager : public QObject {
   BreakWindowManager(SanePreferences *preferences, QObject *parent = nullptr);
   ~BreakWindowManager();
   int remainingTime;
-  BreakWindow::BreakType currentType;
-  void show(BreakWindow::BreakType type);
+  SaneBreak::BreakType currentType;
+  void show(SaneBreak::BreakType type);
   bool isShowing();
   void close();
 

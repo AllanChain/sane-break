@@ -11,37 +11,52 @@
 #include <QSystemTrayIcon>
 #include <QWidget>
 
+#include "lib/app-core.h"
+#include "lib/preferences.h"
+
 class StatusTrayWindow : public QObject {
   Q_OBJECT
 
  public:
-  enum IconVariant {
-    PAUSED = 1 << 0,
-    WILL_BIG = 1 << 1,
-  };
-  Q_DECLARE_FLAGS(IconVariants, IconVariant);
+  StatusTrayWindow(SanePreferences *preferences, QObject *parent = nullptr);
+  static StatusTrayWindow *createTrayOrWindow(SanePreferences *preferences,
+                                              QObject *parent = nullptr);
 
- public:
-  StatusTrayWindow(QMenu *menu, QObject *parent = nullptr)
-      : menu(menu), QObject(parent) {};
-  static StatusTrayWindow *createTrayOrWindow(QMenu *menu, QObject *parent = nullptr);
-  QMenu *menu;
-  virtual void show() {};
-  virtual void updateIcon(float arcRatio, IconVariants flags) {};
-  virtual void setTitle(QString str) {};
-  QPixmap drawIcon(float arcRatio, IconVariants flags);
+  virtual void show() = 0;
+  virtual void setTitle(QString str) = 0;
+  virtual void update(TrayData data);
+  QPixmap drawIcon(TrayData data);
+
+  void onPostponeMinutesChange();
+
  signals:
-  void breakTriggered();
+  void nextBreakRequested();
+  void nextBigBreakRequested();
+  void enableBreakRequested();
+  void preferenceWindowRequested();
+  void postponeRequested(int secs);
+  void quitRequested();
+
+ protected:
+  SanePreferences *preferences;
+  QMenu *menu;
+  QMenu *postponeMenu;
+  QAction *quitAction;
+  QAction *nextBreakAction;
+  QAction *bigBreakAction;
+  QAction *enableBreak;
 };
 
 class StatusTray : public StatusTrayWindow {
   Q_OBJECT
 
  public:
-  StatusTray(QMenu *menu, QObject *parent = nullptr);
-  void show();
-  void updateIcon(float arcRatio, IconVariants flags);
-  void setTitle(QString str);
+  StatusTray(SanePreferences *preferences, QObject *parent = nullptr);
+
+  void show() override;
+  void update(TrayData data) override;
+  void setTitle(QString str) override;
+  void onIconTrigger(QSystemTrayIcon::ActivationReason reason);
 
  private:
   QSystemTrayIcon *icon;
@@ -66,11 +81,12 @@ class StatusWindow : public StatusTrayWindow {
   Q_OBJECT
 
  public:
-  StatusWindow(QMenu *menu, QObject *parent = nullptr);
+  StatusWindow(SanePreferences *preferences, QObject *parent = nullptr);
   ~StatusWindow();
-  void show();
-  void updateIcon(float arcRatio, IconVariants flags);
-  void setTitle(QString str);
+
+  void show() override;
+  void update(TrayData data) override;
+  void setTitle(QString str) override;
 
  private:
   StatusWindowWidget *widget;

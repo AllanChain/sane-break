@@ -29,14 +29,18 @@ class DummyIdleTime : public SystemIdleTime {
 
 class DummyApp : public AbstractApp {
  public:
-  using AbstractApp::AbstractApp;
+  DummyApp(AppDependencies deps, QObject* parent = nullptr)
+      : AbstractApp(deps, parent) {
+    connect(this, &DummyApp::trayDataUpdated, this,
+            [this](TrayData data) { trayData = data; });
+  };
   MOCK_METHOD(void, openBreakWindow, (bool), (override));
   MOCK_METHOD(void, closeBreakWindow, (), (override));
-  MOCK_METHOD(void, updateTray, (), (override));
   MOCK_METHOD(void, mayLockScreen, (), (override));
   void advance(int secs) {
     for (int i = 0; i < secs; i++) tick();
   }
+  TrayData trayData;
 };
 
 class TestApp : public QObject {
@@ -56,9 +60,11 @@ class TestApp : public QObject {
   void appInitialState() {
     AppDependencies deps = makeDeps();
     NiceMock<DummyApp> app(deps);
-    QCOMPARE(app.pauseReasons.toInt(), 0);
-    QCOMPARE(app.secondsToNextBreak, deps.preferences->smallEvery->get());
-    QCOMPARE(app.smallBreaksBeforeBig(), deps.preferences->bigAfter->get() - 1);
+    app.start();
+    QCOMPARE(app.trayData.pauseReasons.toInt(), 0);
+    QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
+             deps.preferences->bigAfter->get() - 1);
   }
   void tick() {
     AppDependencies deps = makeDeps();
@@ -67,12 +73,9 @@ class TestApp : public QObject {
 
     QVERIFY(deps.countDownTimer->isActive());
 
-    EXPECT_CALL(app, updateTray()).Times(1);
     emit deps.countDownTimer->timeout();
     // Time has ellapsed
-    QCOMPARE(app.secondsToNextBreak, deps.preferences->smallEvery->get() - 1);
-    // But not paused time
-    QCOMPARE(app.secondsPaused, 0);
+    QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get() - 1);
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
   void showFirstBreak() {
@@ -82,8 +85,9 @@ class TestApp : public QObject {
 
     // Break window will show
     EXPECT_CALL(app, openBreakWindow(false)).Times(1);
-    app.advance(app.secondsToNextBreak);
-    QCOMPARE(app.secondsToNextBreak, 0);
+    app.advance(app.trayData.secondsToNextBreak);
+    // Correctly advaces to next break
+    QCOMPARE(app.trayData.secondsToNextBreak, 0);
     // Countdown is stopped
     QVERIFY(!deps.countDownTimer->isActive());
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
@@ -94,7 +98,7 @@ class TestApp : public QObject {
     // Countdown is running again
     QVERIFY(deps.countDownTimer->isActive());
     // The remaining time is correct
-    QCOMPARE(app.secondsToNextBreak, deps.preferences->smallEvery->get());
+    QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
   }
   void showBigBreak() {
     AppDependencies deps = makeDeps();
@@ -105,7 +109,7 @@ class TestApp : public QObject {
     EXPECT_CALL(app, openBreakWindow(false)).Times(numberOfBreaks - 1);
     EXPECT_CALL(app, openBreakWindow(true)).Times(1);
     for (int j = 0; j < numberOfBreaks; j++) {
-      app.advance(app.secondsToNextBreak);
+      app.advance(app.trayData.secondsToNextBreak);
       app.onBreakEnd();
     }
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
@@ -114,7 +118,7 @@ class TestApp : public QObject {
     AppDependencies deps = makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
-    app.advance(app.secondsToNextBreak);
+    app.advance(app.trayData.secondsToNextBreak);
 
     deps.oneshotIdleTimer->isIdle = true;
     emit deps.oneshotIdleTimer->idleStart();
@@ -133,7 +137,7 @@ class TestApp : public QObject {
     AppDependencies deps = makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
-    app.advance(app.secondsToNextBreak);
+    app.advance(app.trayData.secondsToNextBreak);
 
     deps.oneshotIdleTimer->isIdle = true;
     emit deps.oneshotIdleTimer->idleStart();

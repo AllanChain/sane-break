@@ -5,8 +5,10 @@
 #ifndef SANE_STATE_H
 #define SANE_STATE_H
 
+#include <QFlags>
 #include <QObject>
 
+#include "lib/flags.h"
 #include "lib/idle-time.h"
 #include "lib/preferences.h"
 
@@ -40,29 +42,33 @@ struct AppDependencies {
   SanePreferences *preferences = nullptr;
 };
 
+struct TrayData {
+  bool isBreaking;
+  int secondsToNextBreak;
+  int secondsToNextBigBreak;
+  int secondsFromLastBreakToNext;
+  int smallBreaksBeforeBigBreak;
+  SaneBreak::PauseReasons pauseReasons;
+};
+
 class AbstractApp : public QObject {
   Q_OBJECT
  public:
   AbstractApp(const AppDependencies &deps, QObject *parent = nullptr);
   ~AbstractApp() = default;
 
-  enum PauseReason {
-    IDLE = 1 << 0,
-    ON_BATTERY = 1 << 1,
-    APP_OPEN = 1 << 2,
-  };
-  Q_DECLARE_FLAGS(PauseReasons, PauseReason);
-
   virtual void start();
   virtual void openBreakWindow(bool isBigBreak) = 0;
   virtual void closeBreakWindow() = 0;
-  virtual void updateTray() = 0;
   virtual void mayLockScreen() = 0;
 
+  void tick();
+  void breakNow();
+  void bigBreakNow();
   void postpone(int secs);
-  void pauseBreak(PauseReasons reason);
-  void resumeBreak(PauseReasons reason);
-  int smallBreaksBeforeBig();
+  void pauseBreak(SaneBreak::PauseReasons reason);
+  void resumeBreak(SaneBreak::PauseReasons reason);
+  void enableBreak();
 
   void onSleepEnd();
   void onBreakResume();
@@ -73,20 +79,23 @@ class AbstractApp : public QObject {
   void onBattery();
   void onPower();
 
-  bool isBreaking = false;
-  int breakCycleCount = 1;
-  int secondsPaused = 0;
-  int secondsToNextBreak;
-  PauseReasons pauseReasons = {};
+ signals:
+  void trayDataUpdated(TrayData trayData);
 
  protected:
+  bool m_isBreaking = false;
+  int m_breakCycleCount = 1;
+  int m_secondsPaused = 0;
+  int m_secondsToNextBreak;
+  SaneBreak::PauseReasons m_pauseReasons = {};
+
   SanePreferences *preferences;
   ITimer *m_countDownTimer;
   SystemIdleTime *m_oneshotIdleTimer;
   ITimer *m_screenLockTimer;
 
-  void tick();
-  void breakNow();
+  int smallBreaksBeforeBig();
+  void updateTray();
   void resetSecondsToNextBreak();
 };
 

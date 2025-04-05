@@ -9,6 +9,7 @@
 #include <utility>
 
 #include "config.h"
+#include "lib/flags.h"
 
 #ifdef WITH_LAYER_SHELL
 #include <LayerShellQt/shell.h>
@@ -62,10 +63,10 @@ void BreakWindowManager::createWindows() {
   }
 }
 
-void BreakWindowManager::show(BreakWindow::BreakType type) {
+void BreakWindowManager::show(SaneBreak::BreakType type) {
   currentType = type;
-  totalTime = type == BreakWindow::BreakType::BIG ? preferences->bigFor->get()
-                                                  : preferences->smallFor->get();
+  totalTime = type == SaneBreak::BreakType::Big ? preferences->bigFor->get()
+                                                : preferences->smallFor->get();
   remainingTime = totalTime;
   isIdle = false;
   isForceBreak = false;
@@ -75,7 +76,7 @@ void BreakWindowManager::show(BreakWindow::BreakType type) {
   forceBreakTimer->setInterval(preferences->flashFor->get() * 1000);
   forceBreakTimer->start();
   idleTimer->startWatching();
-  soundPlayer->play(type == BreakWindow::BreakType::SMALL
+  soundPlayer->play(type == SaneBreak::BreakType::Small
                         ? preferences->smallStartBell->get()
                         : preferences->bigStartBell->get());
 }
@@ -103,7 +104,7 @@ void BreakWindowManager::tick() {
   if (totalTime - remainingTime >= preferences->confirmAfter->get())
     isForceBreak = true;
   if (remainingTime <= 0) {
-    soundPlayer->play(currentType == BreakWindow::BreakType::SMALL
+    soundPlayer->play(currentType == SaneBreak::BreakType::Small
                           ? preferences->smallEndBell->get()
                           : preferences->bigEndBell->get());
     close();

@@ -59,8 +59,6 @@ int main(int argc, char *argv[]) {
   }
 
   SaneBreakApp *app = SaneBreakApp::create(preferences);
-  a.connect(app, &SaneBreakApp::quit, &a, &QCoreApplication::quit,
-            Qt::QueuedConnection);
 
   app->start();
   return a.exec();
