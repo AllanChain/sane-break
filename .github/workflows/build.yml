@@ -82,7 +82,7 @@ jobs:
     runs-on: macos-15
     steps:
     - uses: actions/checkout@v4
-    - uses: AllanChain/install-qt-static-custom@v6.8
+    - uses: AllanChain/install-qt-static@v6.8
 
     - name: Build Project
       run: |
@@ -274,3 +274,25 @@ jobs:
       - uses: softprops/action-gh-release@v2
         with:
           files: release/*
+          body: |
+            ## What's new
+
+            ## Installation instructions
+
+            ### macOS
+
+            Download `sane-break-macos.dmg` file and install. It is a universal bundle and both x86 and ARM version of macOS 12 or newer are supported.
+
+            ### Windows
+
+            Download the `sane-break-windows.zip` extract it. Put the `.exe` executable anywhere you like. x86 version of Windows 10 or newer is supported. Older versions may be supported too.
+
+            ### Linux
+
+            If you are using X11, `sane-break-x11.deb` is for you.
+
+            If you are using Ubuntu 24.10 (and above) or Debian Trixie (and above), you can install the `.deb` package. For GNOME users, make sure to enable the GNOME shell extension with:
+            ```bash
+            gnome-extensions enable sane-break@allanchain.github.io
+            ```
+            The difference between Wayland Ubuntu Oracular build and Debian Trixie build is the layer shell support. If you are using a Debian-based distro and a Wayland compositor with layer shell protocol support (e.g. KDE Neon), you probably need the Debian Trixie build. Otherwise, the Ubuntu Oracular build is good to go.
