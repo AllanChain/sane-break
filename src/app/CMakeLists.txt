@@ -52,7 +52,6 @@ else()
   message(STATUS "Disable translations because LinguistTools is not found")
 endif()
 
-target_include_directories(sane-break-app PRIVATE "src" ${CMAKE_BINARY_DIR})
 target_link_libraries(sane-break-app PRIVATE sane-gui)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")

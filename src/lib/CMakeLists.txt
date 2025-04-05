@@ -19,9 +19,7 @@ add_library(
   utils.cpp
   utils.h
 )
-target_include_directories(
-  sane-lib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_BINARY_DIR}
-)
+target_include_directories(sane-lib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 find_package(
   Qt6
