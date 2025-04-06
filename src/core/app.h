@@ -39,7 +39,7 @@ class AbstractApp : public QObject {
   ~AbstractApp() = default;
 
   virtual void start();
-  virtual void mayLockScreen() = 0;
+  virtual void doLockScreen() = 0;
 
   void breakNow();
   void bigBreakNow();

@@ -66,7 +66,7 @@ class DummyApp : public AbstractApp {
     connect(this, &DummyApp::trayDataUpdated, this,
             [this](TrayData data) { trayData = data; });
   };
-  MOCK_METHOD(void, mayLockScreen, (), (override));
+  MOCK_METHOD(void, doLockScreen, (), (override));
   void advance(int secs) {
     QVERIFY2(m_countDownTimer->isActive(),
              "Impossible to simulate timer tick with an inactive timer");

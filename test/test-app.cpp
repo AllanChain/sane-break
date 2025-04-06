@@ -141,7 +141,7 @@ class TestApp : public QObject {
     app.start();
     app.advance(app.trayData.secondsToNextBreak);
 
-    EXPECT_CALL(app, mayLockScreen()).Times(0);
+    EXPECT_CALL(app, doLockScreen()).Times(0);
 
     // Emitted by window manager when user is idle or force break
     emit windowControl->resume();
@@ -152,7 +152,7 @@ class TestApp : public QObject {
     emit windowControl->timeout();
     ;
 
-    EXPECT_CALL(app, mayLockScreen()).Times(1);
+    EXPECT_CALL(app, doLockScreen()).Times(1);
     emit deps.screenLockTimer->timeout();
 
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
@@ -166,7 +166,7 @@ class TestApp : public QObject {
     app.start();
     app.advance(app.trayData.secondsToNextBreak);
 
-    EXPECT_CALL(app, mayLockScreen()).Times(0);
+    EXPECT_CALL(app, doLockScreen()).Times(0);
     emit windowControl->resume();
     QVERIFY(!deps.screenLockTimer->isActive());
     emit windowControl->timeout();

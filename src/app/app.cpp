@@ -71,14 +71,7 @@ void SaneBreakApp::start() {
   tray->show();
 }
 
-void SaneBreakApp::mayLockScreen() {
-  if (preferences->autoScreenLock->get()) {
-    if (lockScreen())
-      qDebug("Screen locked");
-    else
-      qWarning("Failed to lock screen");
-  }
-}
+void SaneBreakApp::doLockScreen() { lockScreen(); }
 
 void SaneBreakApp::showPreferences() {
   prefWindow->show();

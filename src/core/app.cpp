@@ -60,8 +60,7 @@ AbstractApp::AbstractApp(const AppDependencies &deps, QObject *parent)
   connect(m_oneshotIdleTimer, &SystemIdleTime::idleEnd, this,
           &AbstractApp::onOneshotIdleEnd);
   connect(m_countDownTimer, &AbstractTimer::timeout, this, &AbstractApp::tick);
-  connect(m_screenLockTimer, &AbstractTimer::timeout, this,
-          &AbstractApp::mayLockScreen);
+  connect(m_screenLockTimer, &AbstractTimer::timeout, this, &AbstractApp::doLockScreen);
 
   connect(preferences->pauseOnBattery, &SettingWithSignal::changed, this,
           &AbstractApp::onBatterySettingChange);

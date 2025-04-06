@@ -22,7 +22,7 @@ class SaneBreakApp : public AbstractApp {
   static SaneBreakApp *create(SanePreferences *preferences, QObject *parent = nullptr);
 
   void start() override;
-  void mayLockScreen() override;
+  void doLockScreen() override;
 
   void showPreferences();
 
