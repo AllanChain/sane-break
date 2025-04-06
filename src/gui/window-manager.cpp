@@ -74,6 +74,7 @@ void BreakWindowControl::show(SaneBreak::BreakType type) {
 }
 
 void BreakWindowControl::close() {
+  AbstractWindowControl::close();
   if (m_remainingTime <= 0) {
     soundPlayer->play(m_currentType == SaneBreak::BreakType::Small
                           ? preferences->smallEndBell->get()
