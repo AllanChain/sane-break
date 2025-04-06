@@ -7,7 +7,7 @@
 #include <QObject>
 
 #include "config.h"
-#include "lib/preferences.h"
+#include "core/preferences.h"
 
 class AutoStart : public QObject {
   Q_OBJECT

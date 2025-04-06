@@ -9,9 +9,9 @@
 #include <QTest>
 #include <QTimer>
 
+#include "core/app.h"
+#include "core/flags.h"
 #include "dummy.h"
-#include "lib/app-core.h"
-#include "lib/flags.h"
 
 using testing::Mock;
 using testing::NiceMock;
@@ -21,7 +21,7 @@ class TestApp : public QObject {
  private slots:
   void init() { QTest::failOnWarning(); }
   void appInitialState() {
-    AppDependencies deps = DummyApp::makeDeps();
+    auto [deps, windowControl] = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -31,7 +31,7 @@ class TestApp : public QObject {
              deps.preferences->bigAfter->get() - 1);
   }
   void tick() {
-    AppDependencies deps = DummyApp::makeDeps();
+    auto [deps, windowControl] = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -43,12 +43,12 @@ class TestApp : public QObject {
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
   void showFirstBreak() {
-    AppDependencies deps = DummyApp::makeDeps();
+    auto [deps, windowControl] = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
     // Break window will show
-    EXPECT_CALL(app, openBreakWindow(false)).Times(1);
+    EXPECT_CALL(*windowControl, createWindows(SaneBreak::BreakType::Small)).Times(1);
     app.advance(app.trayData.secondsToNextBreak);
     // Correctly advaces to next break
     QCOMPARE(app.trayData.secondsToNextBreak, 0);
@@ -60,7 +60,7 @@ class TestApp : public QObject {
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
 
     // Simulate break window close
-    app.onBreakEnd();
+    emit windowControl->timeout();
 
     // The remaining time is correct
     int smallEvery = deps.preferences->smallEvery->get();
@@ -71,29 +71,32 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.secondsToNextBreak, smallEvery - 1);
   }
   void showBigBreak() {
-    AppDependencies deps = DummyApp::makeDeps();
+    auto [deps, windowControl] = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
     int numberOfBreaks = deps.preferences->bigAfter->get();
-    EXPECT_CALL(app, openBreakWindow(false)).Times(numberOfBreaks - 1);
-    EXPECT_CALL(app, openBreakWindow(true)).Times(1);
+    EXPECT_CALL(*windowControl, createWindows(SaneBreak::BreakType::Small))
+        .Times(numberOfBreaks - 1);
+    EXPECT_CALL(*windowControl, createWindows(SaneBreak::BreakType::Big)).Times(1);
     for (int j = 0; j < numberOfBreaks; j++) {
       QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, numberOfBreaks - j - 1);
       app.advance(app.trayData.secondsToNextBreak);
-      app.onBreakEnd();
+      emit windowControl->timeout();
+      ;
     }
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
   void idleAfterBreak() {
-    AppDependencies deps = DummyApp::makeDeps();
+    auto [deps, windowControl] = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
     app.advance(app.trayData.secondsToNextBreak);
 
     deps.oneshotIdleTimer->isIdle = true;
     emit deps.oneshotIdleTimer->idleStart();
-    app.onBreakEnd();
+    emit windowControl->timeout();
+    ;
 
     // The remaining time is correct
     int smallEvery = deps.preferences->smallEvery->get();
@@ -111,7 +114,7 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.secondsToNextBreak, smallEvery - 1);
   }
   void notIdleAfterBreak() {
-    AppDependencies deps = DummyApp::makeDeps();
+    auto [deps, windowControl] = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
     app.advance(app.trayData.secondsToNextBreak);
@@ -121,7 +124,8 @@ class TestApp : public QObject {
     deps.oneshotIdleTimer->isIdle = false;
     emit deps.oneshotIdleTimer->idleEnd();
 
-    app.onBreakEnd();
+    emit windowControl->timeout();
+    ;
 
     // Countdown resumed
     int secondsToNextBreak = app.trayData.secondsToNextBreak;
@@ -129,7 +133,7 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
   }
   void lockScreenTimerRunning() {
-    AppDependencies deps = DummyApp::makeDeps();
+    auto [deps, windowControl] = DummyApp::makeDeps();
     int autoScreenLockSeconds = 20;
     deps.preferences->autoScreenLock->set(autoScreenLockSeconds);
 
@@ -140,12 +144,13 @@ class TestApp : public QObject {
     EXPECT_CALL(app, mayLockScreen()).Times(0);
 
     // Emitted by window manager when user is idle or force break
-    app.onBreakResume();
+    emit windowControl->resume();
 
     QVERIFY(deps.screenLockTimer->isActive());
     QVERIFY(deps.screenLockTimer->isSingleShot());
 
-    app.onBreakEnd();
+    emit windowControl->timeout();
+    ;
 
     EXPECT_CALL(app, mayLockScreen()).Times(1);
     emit deps.screenLockTimer->timeout();
@@ -153,7 +158,7 @@ class TestApp : public QObject {
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
   void lockScreenTimerNotRunIfNotConfigured() {
-    AppDependencies deps = DummyApp::makeDeps();
+    auto [deps, windowControl] = DummyApp::makeDeps();
     int autoScreenLockSeconds = 0;
     deps.preferences->autoScreenLock->set(autoScreenLockSeconds);
 
@@ -162,13 +167,14 @@ class TestApp : public QObject {
     app.advance(app.trayData.secondsToNextBreak);
 
     EXPECT_CALL(app, mayLockScreen()).Times(0);
-    app.onBreakResume();
+    emit windowControl->resume();
     QVERIFY(!deps.screenLockTimer->isActive());
-    app.onBreakEnd();
+    emit windowControl->timeout();
+    ;
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
   void postponeTime() {
-    AppDependencies deps = DummyApp::makeDeps();
+    auto [deps, windowControl] = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -177,55 +183,55 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak + 100);
   }
   void pauseBreakOnIdle() {
-    AppDependencies deps = DummyApp::makeDeps();
+    auto [deps, windowControl] = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    app.onIdleStart();
+    emit deps.systemMonitor->idleStarted();
     QCOMPARE(app.trayData.pauseReasons, SaneBreak::PauseReason::Idle);
     // Countdown stopped
     int secondsToNextBreak = app.trayData.secondsToNextBreak;
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
 
-    app.onIdleEnd();
+    emit deps.systemMonitor->idleEnded();
     QVERIFY(!app.trayData.pauseReasons);
     // Countdown resumed
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
   }
   void pauseBreakOnBattery() {
-    AppDependencies deps = DummyApp::makeDeps();
+    auto [deps, windowControl] = DummyApp::makeDeps();
     deps.preferences->pauseOnBattery->set(true);
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    app.onBattery();
+    emit deps.systemMonitor->batteryPowered();
     QCOMPARE(app.trayData.pauseReasons, SaneBreak::PauseReason::OnBattery);
     // Countdown stopped
     int secondsToNextBreak = app.trayData.secondsToNextBreak;
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
 
-    app.onPower();
+    emit deps.systemMonitor->adaptorPowered();
     QVERIFY(!app.trayData.pauseReasons);
     // Countdown resumed
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
   }
   void resetAfterPause() {
-    AppDependencies deps = DummyApp::makeDeps();
+    auto [deps, windowControl] = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
     app.advance(app.trayData.secondsToNextBreak);
-    app.onBreakEnd();
+    emit windowControl->timeout();
     app.advance(100);
 
     int smallBreaksBeforeBigBreak = app.trayData.smallBreaksBeforeBigBreak;
-    app.onIdleStart();
+    emit deps.systemMonitor->idleStarted();
     app.advance(deps.preferences->resetAfterPause->get() + 1);
-    app.onIdleEnd();
+    emit deps.systemMonitor->idleEnded();
 
     int smallEvery = deps.preferences->smallEvery->get();
     // Countdown resumed and the time has been reset
@@ -234,14 +240,14 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, smallBreaksBeforeBigBreak);
   }
   void resetCycleAfterPause() {
-    AppDependencies deps = DummyApp::makeDeps();
+    auto [deps, windowControl] = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
     app.advance(100);
-    app.onIdleStart();
+    emit deps.systemMonitor->idleStarted();
     app.advance(deps.preferences->resetCycleAfterPause->get() + 1);
-    app.onIdleEnd();
+    emit deps.systemMonitor->idleEnded();
 
     int smallEvery = deps.preferences->smallEvery->get();
     // Countdown resumed and the time has been reset

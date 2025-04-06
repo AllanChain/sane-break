@@ -2,20 +2,31 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include "app-core.h"
+#include "core/app.h"
 
 #include <QObject>
 
-#include "lib/flags.h"
-#include "lib/idle-time.h"
-#include "lib/preferences.h"
+#include "core/flags.h"
+#include "core/idle-time.h"
+#include "core/preferences.h"
+#include "core/system-monitor.h"
+#include "core/timer.h"
+#include "core/window-control.h"
 
 AbstractApp::AbstractApp(const AppDependencies &deps, QObject *parent)
     : QObject(parent),
       preferences(deps.preferences),
       m_countDownTimer(deps.countDownTimer),
       m_oneshotIdleTimer(deps.oneshotIdleTimer),
-      m_screenLockTimer(deps.screenLockTimer) {
+      m_screenLockTimer(deps.screenLockTimer),
+      m_systemMonitor(deps.systemMonitor),
+      m_windowControl(deps.windowControl) {
+  if (!m_countDownTimer->parent()) m_countDownTimer->setParent(this);
+  if (!m_oneshotIdleTimer->parent()) m_oneshotIdleTimer->setParent(this);
+  if (!m_screenLockTimer->parent()) m_screenLockTimer->setParent(this);
+  if (!m_systemMonitor->parent()) m_systemMonitor->setParent(this);
+  if (!m_windowControl->parent()) m_windowControl->setParent(this);
+
   m_secondsToNextBreak = preferences->smallEvery->get();
 
   m_countDownTimer->setInterval(1000);
@@ -23,6 +34,24 @@ AbstractApp::AbstractApp(const AppDependencies &deps, QObject *parent)
   m_oneshotIdleTimer->setMinIdleTime(1000);
   m_screenLockTimer->setSingleShot(true);
 
+  connect(m_windowControl, &AbstractWindowControl::resume, this,
+          &AbstractApp::onBreakResume);
+  connect(m_windowControl, &AbstractWindowControl::timeout, this,
+          &AbstractApp::onBreakEnd);
+  connect(m_systemMonitor, &AbstractSystemMonitor::idleStarted, this,
+          &AbstractApp::onIdleStart);
+  connect(m_systemMonitor, &AbstractSystemMonitor::idleEnded, this,
+          &AbstractApp::onIdleEnd);
+  connect(m_systemMonitor, &AbstractSystemMonitor::sleepEnded, this,
+          &AbstractApp::onSleepEnd);
+  connect(m_systemMonitor, &AbstractSystemMonitor::batteryPowered, this,
+          &AbstractApp::onBattery);
+  connect(m_systemMonitor, &AbstractSystemMonitor::adaptorPowered, this,
+          &AbstractApp::onPower);
+  connect(m_systemMonitor, &AbstractSystemMonitor::programStarted, this,
+          [this]() { pauseBreak(SaneBreak::PauseReason::AppOpen); });
+  connect(m_systemMonitor, &AbstractSystemMonitor::programStopped, this,
+          [this]() { resumeBreak(SaneBreak::PauseReason::AppOpen); });
   // One-shot idle detection right after break end is achieved by making
   // the idle criteria as short as 1 sec, and start the idle timer right
   // after the break starts. We will know if the user is idle after breaks
@@ -30,13 +59,20 @@ AbstractApp::AbstractApp(const AppDependencies &deps, QObject *parent)
   // This timer will be deactivated at the first activity after the break.
   connect(m_oneshotIdleTimer, &SystemIdleTime::idleEnd, this,
           &AbstractApp::onOneshotIdleEnd);
-  connect(m_countDownTimer, &ITimer::timeout, this, &AbstractApp::tick);
-  connect(m_screenLockTimer, &ITimer::timeout, this, &AbstractApp::mayLockScreen);
+  connect(m_countDownTimer, &AbstractTimer::timeout, this, &AbstractApp::tick);
+  connect(m_screenLockTimer, &AbstractTimer::timeout, this,
+          &AbstractApp::mayLockScreen);
+
+  connect(preferences->pauseOnBattery, &SettingWithSignal::changed, this,
+          &AbstractApp::onBatterySettingChange);
+  connect(preferences->smallEvery, &SettingWithSignal::changed, this,
+          &AbstractApp::resetSecondsToNextBreak);
 };
 
 void AbstractApp::start() {
   updateTray();
   m_countDownTimer->start();
+  m_systemMonitor->start();
 }
 
 void AbstractApp::tick() {
@@ -57,7 +93,8 @@ void AbstractApp::resetSecondsToNextBreak() {
 
 void AbstractApp::breakNow() {
   m_isBreaking = true;
-  openBreakWindow(smallBreaksBeforeBig() == 0);
+  m_windowControl->show(smallBreaksBeforeBig() == 0 ? SaneBreak::BreakType::Big
+                                                    : SaneBreak::BreakType::Small);
   // Update cycle count after show break
   m_breakCycleCount++;
   updateTray();
@@ -107,7 +144,7 @@ void AbstractApp::pauseBreak(SaneBreak::PauseReasons reason) {
   m_pauseReasons |= reason;
   // Stop current break if necessary
   if (reason != SaneBreak::PauseReason::Idle) {
-    closeBreakWindow();
+    m_windowControl->close();
   }
   updateTray();
 }
@@ -138,7 +175,7 @@ void AbstractApp::postpone(int secs) {
   m_secondsToNextBreak += secs;
   m_breakCycleCount = 0;  // break after postpone is a big break
   updateTray();
-  closeBreakWindow();
+  m_windowControl->close();
 }
 
 int AbstractApp::smallBreaksBeforeBig() {
@@ -163,7 +200,7 @@ void AbstractApp::onPower() {
 void AbstractApp::onSleepEnd() {
   // We reset these regardless of paused or not
   m_breakCycleCount = 1;
-  closeBreakWindow();
+  m_windowControl->close();
   resetSecondsToNextBreak();
 }
 
@@ -171,4 +208,12 @@ void AbstractApp::onOneshotIdleEnd() {
   if (m_isBreaking) return;
   m_oneshotIdleTimer->stopWatching();
   resumeBreak(SaneBreak::PauseReason::Idle);
+}
+
+void AbstractApp::onBatterySettingChange() {
+  bool doPause = preferences->pauseOnBattery->get();
+  if (!doPause)
+    resumeBreak(SaneBreak::PauseReason::OnBattery);
+  else if (m_systemMonitor->isOnBattery())
+    pauseBreak(SaneBreak::PauseReason::OnBattery);
 }

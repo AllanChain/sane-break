@@ -17,7 +17,7 @@
 #include <QVariant>
 
 #include "config.h"
-#include "preferences.h"
+#include "core/preferences.h"
 
 void AutoStart::setEnabled(bool enabled) {
 #ifdef LINUX_DIST_FLATPAK

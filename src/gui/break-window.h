@@ -13,28 +13,25 @@
 #include <QTimer>
 #include <QWidget>
 
-#include "lib/flags.h"
-#include "lib/preferences.h"
+#include "core/window-control.h"
 
-class BreakWindow : public QMainWindow {
+class BreakWindow : public AbstractBreakWindow {
   Q_OBJECT
   Q_PROPERTY(QColor color MEMBER backgroundColor NOTIFY colorChanged)
 
  public:
-  BreakWindow(SanePreferences *preferences, QWidget *parent = nullptr);
-  ~BreakWindow();
+  BreakWindow(BreakData data, QWidget *parent = nullptr);
+  ~BreakWindow() = default;
   static const int SMALL_WINDOW_WIDTH;
   static const int SMALL_WINDOW_HEIGHT;
-  void start(SaneBreak::BreakType type, int totalTime);
-  void setTime(int remainingTime);
-  void setFullScreen();
-  void resizeToNormal();
-  void initSize(QScreen *screen);
+  void start() override;
+  void setTime(int remainingTime) override;
+  void setFullScreen() override;
+  void resizeToNormal() override;
+  void initSize(QScreen *screen) override;
   void colorChanged();
 
  private:
-  int totalTime;
-  SanePreferences *preferences;
   QWidget *mainWidget;
   QLabel *countdownLabel;
   QLabel *breakLabel;

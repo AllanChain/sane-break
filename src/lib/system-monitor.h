@@ -9,28 +9,12 @@
 #include <QObject>
 #include <QTimer>
 
+#include "core/idle-time.h"
+#include "core/preferences.h"
+#include "core/system-monitor.h"
 #include "lib/battery-status.h"
-#include "lib/idle-time.h"
-#include "lib/preferences.h"
 #include "lib/program-monitor.h"
-
-class AbstractSystemMonitor : public QObject {
-  Q_OBJECT
- public:
-  AbstractSystemMonitor(QObject *parent = nullptr) : QObject(parent) {};
-  ~AbstractSystemMonitor() = default;
-  virtual void start() = 0;
-  virtual bool isOnBattery() = 0;
-
- signals:
-  void idleStarted();
-  void idleEnded();
-  void sleepEnded();
-  void batteryPowered();
-  void adaptorPowered();
-  void programStarted();
-  void programStopped();
-};
+#include "lib/sleep-monitor.h"
 
 class SystemMonitor : public AbstractSystemMonitor {
   Q_OBJECT

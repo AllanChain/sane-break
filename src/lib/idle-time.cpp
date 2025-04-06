@@ -5,12 +5,12 @@
 #include "idle-time.h"
 
 #include <qglobal.h>
-#include <qguiapplication.h>
 
 #include <QDateTime>
 #include <QTimer>
 
 #include "config.h"
+#include "core/idle-time.h"
 
 #ifdef Q_OS_LINUX
 #include <QGuiApplication>
@@ -104,20 +104,4 @@ void ReadBasedIdleTime::setWatchAccuracy(int accuracy) {
   timer->setInterval(accuracy);
   if (timer->isActive()) timer->stop();
   timer->start();
-}
-
-SleepMonitor::SleepMonitor(QObject* parent) : QObject(parent) {
-  timer = new QTimer(this);
-  timer->setInterval(watchAccuracy);
-  connect(timer, &QTimer::timeout, this, &SleepMonitor::tick);
-  timer->start();
-  lastAwake = QDateTime::currentMSecsSinceEpoch();
-}
-
-void SleepMonitor::tick() {
-  int currentTime = QDateTime::currentMSecsSinceEpoch();
-  if (currentTime - lastAwake > 2 * watchAccuracy) {
-    emit sleepEnd();
-  }
-  lastAwake = currentTime;
 }

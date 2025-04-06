@@ -10,8 +10,8 @@
 #include <QSystemTrayIcon>
 #include <QWidget>
 
-#include "lib/app-core.h"
-#include "lib/preferences.h"
+#include "core/app.h"
+#include "core/preferences.h"
 
 class StatusTrayWindow : public QObject {
   Q_OBJECT

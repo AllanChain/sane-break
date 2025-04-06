@@ -2,8 +2,9 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include "preferences.h"
+#include "core/preferences.h"
 
+#include <QColor>
 #include <QCoreApplication>
 #include <QObject>
 #include <QSettings>
@@ -23,28 +24,44 @@ SanePreferences* SanePreferences::createDefault(QObject* parent) {
 SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
     : QObject(parent), settings(settings) {
   shownWelcome = new Setting<bool>(settings, "shown-welcome", false);
+
   smallEvery = new Setting<int>(settings, "break/small-every", 1200);
   smallFor = new Setting<int>(settings, "break/small-for", 20);
   bigAfter = new Setting<int>(settings, "break/big-after", 3);
   bigFor = new Setting<int>(settings, "break/big-for", 60);
-  flashFor = new Setting<int>(settings, "break/flash-for", 30);
-  confirmAfter = new Setting<int>(settings, "break/confirm-after", 30);
   postponeMinutes = new Setting<QStringList>(settings, "break/postpone-minutes",
                                              QStringList({"5", "10", "30", "60"}));
-  autoScreenLock = new Setting<int>(settings, "break/auto-screen-lock", 0);
-  quickBreak = new Setting<bool>(settings, "break/quick-break", false);
+
+  flashFor = new Setting<int>(settings, "break/flash-for", 30);
+  confirmAfter = new Setting<int>(settings, "break/confirm-after", 30);
   flashSpeed = new Setting<int>(settings, "break/flash-speed", 100);
   textTransparency = new Setting<int>(settings, "break/text-transparency", 0);
-  smallStartBell = new Setting<QString>(settings, "bell/small-start", "");
-  smallEndBell = new Setting<QString>(settings, "bell/small-end", "");
-  bigStartBell = new Setting<QString>(settings, "bell/start", "");
-  bigEndBell = new Setting<QString>(settings, "bell/end", "");
+  textColor = new Setting<QColor>(settings, "theme/text", QColor(236, 239, 244, 255));
+  backgroundColor =
+      new Setting<QColor>(settings, "theme/background", QColor(46, 52, 64, 255));
+  smallHighlightColor =
+      new Setting<QColor>(settings, "theme/small-bg", QColor(235, 203, 139, 100));
+  bigHighlightColor =
+      new Setting<QColor>(settings, "theme/big-bg", QColor(180, 142, 173, 100));
+  smallMessages = new Setting<QStringList>(settings, "break/small-msg",
+                                           QStringList({tr("Time for a small break")}));
+  bigMessages = new Setting<QStringList>(settings, "break/big-msg",
+                                         QStringList({tr("Time for a big break")}));
+
   pauseOnIdleFor = new Setting<int>(settings, "pause/on-idle-for", 180);
   resetAfterPause = new Setting<int>(settings, "pause/reset-after", 120);
   resetCycleAfterPause = new Setting<int>(settings, "pause/reset-cycle-after", 300);
   pauseOnBattery = new Setting<bool>(settings, "pause/on-battery", false);
   programsToMonitor =
       new Setting<QStringList>(settings, "pause/programs-to-monitor", QStringList());
+
+  smallStartBell = new Setting<QString>(settings, "bell/small-start", "");
+  smallEndBell = new Setting<QString>(settings, "bell/small-end", "");
+  bigStartBell = new Setting<QString>(settings, "bell/start", "");
+  bigEndBell = new Setting<QString>(settings, "bell/end", "");
+
   language = new Setting<QString>(settings, "language", "");
   autoStart = new Setting<bool>(settings, "auto-start", false);
+  autoScreenLock = new Setting<int>(settings, "break/auto-screen-lock", 0);
+  quickBreak = new Setting<bool>(settings, "break/quick-break", false);
 }

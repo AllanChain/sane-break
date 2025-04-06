@@ -8,39 +8,30 @@
 #include <QObject>
 #include <QTimer>
 
+#include "core/flags.h"
+#include "core/preferences.h"
+#include "core/window-control.h"
 #include "gui/break-window.h"  // IWYU pragma: export
 #include "gui/sound-player.h"
-#include "lib/flags.h"
-#include "lib/idle-time.h"
-#include "lib/preferences.h"
 
-class BreakWindowManager : public QObject {
+class BreakWindowControl : public AbstractWindowControl {
   Q_OBJECT
 
  public:
-  BreakWindowManager(SanePreferences *preferences, QObject *parent = nullptr);
-  ~BreakWindowManager();
-  int remainingTime;
-  SaneBreak::BreakType currentType;
-  void show(SaneBreak::BreakType type);
-  bool isShowing();
-  void close();
+  BreakWindowControl(const WindowDependencies &deps, QObject *parent = nullptr);
+  ~BreakWindowControl() = default;
+  static BreakWindowControl *create(SanePreferences *preferences,
+                                    QObject *parent = nullptr);
 
- signals:
-  void resume();
-  void timeout();
+  void show(SaneBreak::BreakType type) override;
+  void close() override;
+
+ protected:
+  void createWindows(SaneBreak::BreakType type) override;
+  void deleteWindows() override;
 
  private:
-  bool isIdle = false;
-  bool isForceBreak = false;
-  int totalTime;
-  QList<BreakWindow *> windows;
-  SanePreferences *preferences;
-  QTimer *countdownTimer;
-  QTimer *forceBreakTimer;
-  SystemIdleTime *idleTimer;
   SoundPlayer *soundPlayer;
-  void createWindows();
   void tick();
   void forceBreak();
   void onIdleStart();

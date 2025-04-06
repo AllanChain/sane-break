@@ -9,9 +9,9 @@
 #include <QTest>
 #include <QTimer>
 
+#include "core/app.h"
+#include "core/flags.h"
 #include "dummy.h"
-#include "lib/app-core.h"
-#include "lib/flags.h"
 
 using testing::Mock;
 using testing::NiceMock;
@@ -21,38 +21,38 @@ class TestEdge : public QObject {
  private slots:
   void init() { QTest::failOnWarning(); }
   void pauseWhileBreak() {
-    AppDependencies deps = DummyApp::makeDeps();
+    auto [deps, windowControl] = DummyApp::makeDeps();
     deps.preferences->pauseOnBattery->set(true);
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(app, openBreakWindow(false)).Times(1);
+    EXPECT_CALL(*windowControl, createWindows(SaneBreak::BreakType::Small)).Times(1);
     app.breakNow();
-    EXPECT_CALL(app, closeBreakWindow()).Times(1);
-    app.onBattery();
+    EXPECT_CALL(*windowControl, deleteWindows()).Times(1);
+    emit deps.systemMonitor->batteryPowered();
 
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
   void idleWhileBreak() {
-    AppDependencies deps = DummyApp::makeDeps();
+    auto [deps, windowControl] = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(app, openBreakWindow(false)).Times(1);
+    EXPECT_CALL(*windowControl, createWindows(SaneBreak::BreakType::Small)).Times(1);
     app.breakNow();
-    EXPECT_CALL(app, closeBreakWindow()).Times(0);
-    app.onIdleStart();
+    EXPECT_CALL(*windowControl, deleteWindows()).Times(0);
+    emit deps.systemMonitor->idleStarted();
 
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
   void moreThanOnePauseReasons() {
-    AppDependencies deps = DummyApp::makeDeps();
+    auto [deps, windowControl] = DummyApp::makeDeps();
     deps.preferences->pauseOnBattery->set(true);
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    app.onBattery();
-    app.onIdleStart();
+    emit deps.systemMonitor->batteryPowered();
+    emit deps.systemMonitor->idleStarted();
 
     // Countdown stopped
     int secondsToNextBreak = app.trayData.secondsToNextBreak;
@@ -61,12 +61,12 @@ class TestEdge : public QObject {
     QVERIFY(app.trayData.pauseReasons.testFlags(SaneBreak::PauseReason::Idle |
                                                 SaneBreak::PauseReason::OnBattery));
 
-    app.onIdleEnd();
+    emit deps.systemMonitor->idleEnded();
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
     QVERIFY(app.trayData.pauseReasons.testFlag(SaneBreak::PauseReason::OnBattery));
 
-    app.onPower();
+    emit deps.systemMonitor->adaptorPowered();
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
     QVERIFY(!app.trayData.pauseReasons);

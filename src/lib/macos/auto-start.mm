@@ -2,7 +2,7 @@
 #include <AppKit/AppKit.h>
 #include <ServiceManagement/ServiceManagement.h>
 #include <QString>
-#include "preferences.h"
+#include "core/preferences.h"
 
 void AutoStart::setEnabled(bool enabled) {
   SMAppService *service = [SMAppService mainAppService];

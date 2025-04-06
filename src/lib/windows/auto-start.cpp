@@ -8,7 +8,7 @@
 #include <QDir>
 #include <QSettings>
 
-#include "preferences.h"
+#include "core/preferences.h"
 
 void AutoStart::setEnabled(bool enabled) {
   QSettings settings(

@@ -11,7 +11,7 @@
 #include <QWidget>
 
 #include "config.h"
-#include "lib/preferences.h"
+#include "core/preferences.h"
 #include "widgets/language-select.h"
 
 class WelcomeWindow : public QDialog {

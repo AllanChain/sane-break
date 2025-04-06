@@ -9,6 +9,7 @@
 #include <QApplication>
 #include <QColor>
 #include <QFile>
+#include <QIODevice>
 #include <QLabel>
 #include <QMainWindow>
 #include <QProgressBar>
@@ -24,8 +25,8 @@
 #include <cmath>
 
 #include "config.h"
-#include "lib/flags.h"
-#include "lib/preferences.h"
+#include "core/preferences.h"
+#include "core/window-control.h"
 #include "lib/utils.h"
 
 #ifdef Q_OS_LINUX
@@ -40,8 +41,8 @@
 const int BreakWindow::SMALL_WINDOW_WIDTH = 400;
 const int BreakWindow::SMALL_WINDOW_HEIGHT = 120;
 
-BreakWindow::BreakWindow(SanePreferences *preferences, QWidget *parent)
-    : QMainWindow(parent), preferences(preferences) {
+BreakWindow::BreakWindow(BreakData data, QWidget *parent)
+    : AbstractBreakWindow(data, parent) {
 #ifdef Q_OS_LINUX
   // Positioning windows on Wayland is nearly impossible without layer shell protol.
   // In Wayland workaround mode, the main window is transparent and takes up all
@@ -82,7 +83,7 @@ BreakWindow::BreakWindow(SanePreferences *preferences, QWidget *parent)
   textLayout->setAlignment(Qt::AlignCenter);
   layout->addLayout(textLayout);
 
-  breakLabel = new QLabel();
+  breakLabel = new QLabel(data.message);
   breakLabel->setObjectName("breakLabel");
   textLayout->addWidget(breakLabel);
 
@@ -92,25 +93,26 @@ BreakWindow::BreakWindow(SanePreferences *preferences, QWidget *parent)
   countdownLabel->setVisible(false);
   textLayout->addWidget(countdownLabel);
 
-  if (preferences->textTransparency->get() > 0) {
-    int opacity = 256 - preferences->textTransparency->get() * 256 / 100;
-    countdownLabel->setStyleSheet(
-        QString("color: rgba(236, 239, 244, %1)").arg(opacity));
-    progressBar->setStyleSheet(
-        QString("BreakWindow[isFullScreen=\"true\"] QProgressBar::chunk "
-                "{background: rgba(236, 239, 244, %1)}")
-            .arg(opacity));
-  }
+  countdownLabel->setStyleSheet(
+      QString("color: rgba(236, 239, 244, %1)").arg(data.theme.countdownOpacity));
+  progressBar->setStyleSheet(
+      QString("BreakWindow[isFullScreen=\"true\"] QProgressBar::chunk "
+              "{background: rgba(236, 239, 244, %1)}")
+          .arg(data.theme.countdownOpacity));
 
   progressAnim = new QPropertyAnimation(progressBar, "value");
   progressAnim->setStartValue(progressBar->maximum());
   progressAnim->setEndValue(0);
 
+  this->totalTime = data.totalSeconds;
+  progressAnim->setDuration(totalTime * 1000);
+
   bgAnim = new QPropertyAnimation(this, "color");
+  bgAnim->setStartValue(data.theme.highlightBackground);
+  bgAnim->setEndValue(data.theme.mainBackground);
+  bgAnim->setDuration(data.theme.flashAnimationDuration);
   bgAnim->setLoopCount(-1);
 }
-
-BreakWindow::~BreakWindow() {}
 
 void BreakWindow::colorChanged() {
   setStyleSheet(QString("BreakWindow, BreakWindow .QWidget { background: "
@@ -121,25 +123,8 @@ void BreakWindow::colorChanged() {
                     .arg(backgroundColor.alpha()));
 }
 
-void BreakWindow::start(SaneBreak::BreakType type, int totalTime) {
-  this->totalTime = totalTime;
+void BreakWindow::start() {
   setTime(totalTime);
-  progressAnim->setDuration(totalTime * 1000);
-
-  if (type == SaneBreak::BreakType::Big) {
-    breakLabel->setText(tr("Time for a big break"));
-    bgAnim->setStartValue(QColor(180, 142, 173, 100));
-  } else {
-    breakLabel->setText(tr("Time for a small break"));
-    bgAnim->setStartValue(QColor(235, 203, 139, 100));
-  }
-  bgAnim->setEndValue(QColor(46, 52, 64, 255));
-  if (preferences->flashSpeed->get() <= 0) {
-    bgAnim->setStartValue(QColor(46, 52, 64, 255));
-    bgAnim->setDuration(100000);
-  } else {
-    bgAnim->setDuration(500 / preferences->flashSpeed->get() * 100);
-  }
   bgAnim->start();
 }
 

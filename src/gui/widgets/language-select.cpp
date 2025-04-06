@@ -16,7 +16,7 @@
 #include <QWidget>
 #include <QtContainerFwd>
 
-#include "lib/preferences.h"
+#include "core/preferences.h"
 
 QTranslator *LanguageSelect::currentTranslator = nullptr;
 

@@ -6,10 +6,9 @@
 
 #include <QObject>
 
-#include "battery-status.h"
-#include "idle-time.h"
-#include "preferences.h"
-#include "program-monitor.h"
+#include "lib/battery-status.h"
+#include "lib/program-monitor.h"
+#include "lib/sleep-monitor.h"
 
 SystemMonitor::SystemMonitor(SanePreferences* preferences, QObject* parent)
     : AbstractSystemMonitor(parent), preferences(preferences) {

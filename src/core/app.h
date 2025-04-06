@@ -7,38 +7,20 @@
 #include <QFlags>
 #include <QObject>
 
-#include "lib/flags.h"
-#include "lib/idle-time.h"
-#include "lib/preferences.h"
+#include "core/flags.h"
+#include "core/idle-time.h"
+#include "core/preferences.h"
+#include "core/system-monitor.h"
+#include "core/timer.h"
+#include "core/window-control.h"
 
-class ITimer : public QObject {
-  Q_OBJECT
- public:
-  ITimer(QObject *parent = nullptr) : QObject(parent) {};
-  ~ITimer() = default;
-  virtual void start() { m_active = true; };
-  virtual void start(int msec) { m_active = m_interval = msec; };
-  virtual void stop() { m_active = false; };
-  virtual bool isActive() { return m_active; }
-  virtual void setSingleShot(bool singleShot) { m_singleShot = singleShot; };
-  virtual bool isSingleShot() { return m_singleShot; };
-  virtual void setInterval(int msec) { m_interval = msec; };
-  virtual int interval() { return m_interval; }
- signals:
-  void timeout();
-
- private:
-  bool m_singleShot = false;
-  bool m_interval = 0;
-  bool m_active = false;
-};
-
-// Minimal dependencies
 struct AppDependencies {
-  ITimer *countDownTimer = nullptr;
-  SystemIdleTime *oneshotIdleTimer = nullptr;
-  ITimer *screenLockTimer = nullptr;
   SanePreferences *preferences = nullptr;
+  AbstractTimer *countDownTimer = nullptr;
+  SystemIdleTime *oneshotIdleTimer = nullptr;
+  AbstractTimer *screenLockTimer = nullptr;
+  AbstractSystemMonitor *systemMonitor = nullptr;
+  AbstractWindowControl *windowControl = nullptr;
 };
 
 struct TrayData {
@@ -57,26 +39,14 @@ class AbstractApp : public QObject {
   ~AbstractApp() = default;
 
   virtual void start();
-  virtual void openBreakWindow(bool isBigBreak) = 0;
-  virtual void closeBreakWindow() = 0;
   virtual void mayLockScreen() = 0;
 
-  void tick();
   void breakNow();
   void bigBreakNow();
   void postpone(int secs);
   void pauseBreak(SaneBreak::PauseReasons reason);
   void resumeBreak(SaneBreak::PauseReasons reason);
   void enableBreak();
-
-  void onSleepEnd();
-  void onBreakResume();
-  void onBreakEnd();
-  void onIdleStart();
-  void onIdleEnd();
-  void onOneshotIdleEnd();
-  void onBattery();
-  void onPower();
 
  signals:
   void trayDataUpdated(TrayData trayData);
@@ -89,9 +59,22 @@ class AbstractApp : public QObject {
   SaneBreak::PauseReasons m_pauseReasons = {};
 
   SanePreferences *preferences;
-  ITimer *m_countDownTimer;
+  AbstractSystemMonitor *m_systemMonitor;
+  AbstractTimer *m_countDownTimer;
   SystemIdleTime *m_oneshotIdleTimer;
-  ITimer *m_screenLockTimer;
+  AbstractTimer *m_screenLockTimer;
+  AbstractWindowControl *m_windowControl;
+
+  void tick();
+  void onSleepEnd();
+  void onBreakResume();
+  void onBreakEnd();
+  void onIdleStart();
+  void onIdleEnd();
+  void onOneshotIdleEnd();
+  void onBattery();
+  void onPower();
+  void onBatterySettingChange();
 
   int smallBreaksBeforeBig();
   void updateTray();

@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <QColor>
 #include <QFile>
 #include <QObject>
 #include <QSettings>
@@ -57,26 +58,37 @@ class SanePreferences : public QObject {
   QSettings *settings;
 
   Setting<bool> *shownWelcome;
+
   Setting<int> *smallEvery;
   Setting<int> *smallFor;
   Setting<int> *bigAfter;
   Setting<int> *bigFor;
+  Setting<QStringList> *postponeMinutes;
+
   Setting<int> *flashFor;
   Setting<int> *confirmAfter;
   Setting<int> *flashSpeed;
   Setting<int> *textTransparency;
-  Setting<QStringList> *postponeMinutes;
-  Setting<int> *autoScreenLock;
-  Setting<bool> *quickBreak;
-  Setting<QString> *smallStartBell;
-  Setting<QString> *smallEndBell;
-  Setting<QString> *bigStartBell;
-  Setting<QString> *bigEndBell;
+  Setting<QColor> *textColor;
+  Setting<QColor> *backgroundColor;
+  Setting<QColor> *smallHighlightColor;
+  Setting<QColor> *bigHighlightColor;
+  Setting<QStringList> *smallMessages;
+  Setting<QStringList> *bigMessages;
+
   Setting<int> *pauseOnIdleFor;
   Setting<int> *resetAfterPause;
   Setting<int> *resetCycleAfterPause;
   Setting<bool> *pauseOnBattery;
   Setting<QStringList> *programsToMonitor;
+
+  Setting<QString> *smallStartBell;
+  Setting<QString> *smallEndBell;
+  Setting<QString> *bigStartBell;
+  Setting<QString> *bigEndBell;
+
+  Setting<int> *autoScreenLock;
+  Setting<bool> *quickBreak;
   Setting<QString> *language;
   Setting<bool> *autoStart;
 };

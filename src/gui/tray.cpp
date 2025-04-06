@@ -17,9 +17,9 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
-#include "lib/app-core.h"
-#include "lib/flags.h"
-#include "lib/preferences.h"
+#include "core/app.h"
+#include "core/flags.h"
+#include "core/preferences.h"
 #include "lib/utils.h"
 
 StatusTrayWindow *StatusTrayWindow::createTrayOrWindow(SanePreferences *preferences,

@@ -1,21 +1,19 @@
 add_library(
   sane-lib STATIC
   auto-start.h
-  app-core.cpp
-  app-core.h
   battery-status.cpp
   battery-status.h
-  CMakeLists.txt
   idle-time.cpp
   idle-time.h
-  preferences.cpp
-  preferences.h
   program-monitor.cpp
   program-monitor.h
   screen-lock.cpp
   screen-lock.h
+  sleep-monitor.cpp
+  sleep-monitor.h
   system-monitor.cpp
   system-monitor.h
+  timer.h
   utils.cpp
   utils.h
 )
@@ -26,7 +24,7 @@ find_package(
   COMPONENTS Widgets
   REQUIRED
 )
-target_link_libraries(sane-lib PUBLIC Qt6::Widgets)
+target_link_libraries(sane-lib PUBLIC Qt6::Widgets sane-core)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
   find_library(IOKit NAMES IOKit)

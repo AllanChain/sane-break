@@ -13,9 +13,9 @@
 
 #include "app.h"
 #include "config.h"
+#include "core/preferences.h"
 #include "gui/welcome.h"
 #include "gui/widgets/language-select.h"
-#include "lib/preferences.h"
 
 #ifdef Q_OS_LINUX
 #include "lib/linux/system-check.h"

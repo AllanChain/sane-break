@@ -17,27 +17,22 @@
 #include <QWindow>
 #include <Qt>
 
+#include "core/app.h"
+#include "core/idle-time.h"
+#include "core/preferences.h"
 #include "gui/pref-window.h"
 #include "gui/tray.h"
 #include "gui/widgets/language-select.h"
 #include "gui/window-manager.h"
-#include "lib/app-core.h"
-#include "lib/flags.h"
-#include "lib/idle-time.h"
-#include "lib/preferences.h"
 #include "lib/screen-lock.h"
 #include "lib/system-monitor.h"
+#include "lib/timer.h"
 
 SaneBreakApp::SaneBreakApp(const AppDependencies &deps, QObject *parent)
     : AbstractApp(deps, parent) {
   prefWindow = new PreferenceWindow(preferences);
-  breakManager = new BreakWindowManager(preferences, this);
-  systemMonitor = new SystemMonitor(preferences, this);
   tray = StatusTrayWindow::createTrayOrWindow(preferences, this);
 
-  connect(breakManager, &BreakWindowManager::resume, this,
-          &SaneBreakApp::onBreakResume);
-  connect(breakManager, &BreakWindowManager::timeout, this, &SaneBreakApp::onBreakEnd);
   connect(this, &SaneBreakApp::trayDataUpdated, tray, &StatusTrayWindow::update);
   connect(tray, &StatusTrayWindow::nextBreakRequested, this, &SaneBreakApp::breakNow);
   connect(tray, &StatusTrayWindow::nextBigBreakRequested, this,
@@ -48,20 +43,6 @@ SaneBreakApp::SaneBreakApp(const AppDependencies &deps, QObject *parent)
   connect(tray, &StatusTrayWindow::enableBreakRequested, this,
           &SaneBreakApp::enableBreak);
   connect(tray, &StatusTrayWindow::quitRequested, this, &SaneBreakApp::confirmQuit);
-  connect(systemMonitor, &SystemMonitor::idleStarted, this, &SaneBreakApp::onIdleStart);
-  connect(systemMonitor, &SystemMonitor::idleEnded, this, &SaneBreakApp::onIdleEnd);
-  connect(systemMonitor, &SystemMonitor::sleepEnded, this, &SaneBreakApp::onSleepEnd);
-  connect(systemMonitor, &SystemMonitor::batteryPowered, this,
-          &SaneBreakApp::onBattery);
-  connect(systemMonitor, &SystemMonitor::adaptorPowered, this, &SaneBreakApp::onPower);
-  connect(systemMonitor, &SystemMonitor::programStarted, this,
-          [this]() { pauseBreak(SaneBreak::PauseReason::AppOpen); });
-  connect(systemMonitor, &SystemMonitor::programStopped, this,
-          [this]() { resumeBreak(SaneBreak::PauseReason::AppOpen); });
-  connect(preferences->pauseOnBattery, &SettingWithSignal::changed, this,
-          &SaneBreakApp::onBatterySettingChange);
-  connect(preferences->smallEvery, &SettingWithSignal::changed, this,
-          &SaneBreakApp::resetSecondsToNextBreak);
   connect(preferences->language, &SettingWithSignal::changed, this,
           [this]() { LanguageSelect::setLanguage(preferences->language->get()); });
   connect(this, &SaneBreakApp::quit, qApp, &QApplication::quit, Qt::QueuedConnection);
@@ -71,26 +52,24 @@ SaneBreakApp *SaneBreakApp::create(SanePreferences *preferences, QObject *parent
   auto countDownTimer = new Timer();
   auto oneshotIdleTimer = SystemIdleTime::createIdleTimer();
   auto screenLockTimer = new Timer();
+  auto systemMonitor = new SystemMonitor(preferences);
+  auto windowControl = BreakWindowControl::create(preferences);
 
-  AppDependencies deps = {.countDownTimer = countDownTimer,
-                          .oneshotIdleTimer = oneshotIdleTimer,
-                          .screenLockTimer = screenLockTimer,
-                          .preferences = preferences};
+  AppDependencies deps = {
+      .preferences = preferences,
+      .countDownTimer = countDownTimer,
+      .oneshotIdleTimer = oneshotIdleTimer,
+      .screenLockTimer = screenLockTimer,
+      .systemMonitor = systemMonitor,
+      .windowControl = windowControl,
+  };
   return new SaneBreakApp(deps, parent);
 }
 
 void SaneBreakApp::start() {
   AbstractApp::start();
   tray->show();
-  systemMonitor->start();
 }
-
-void SaneBreakApp::openBreakWindow(bool isBigBreak) {
-  breakManager->show(isBigBreak ? SaneBreak::BreakType::Big
-                                : SaneBreak::BreakType::Small);
-}
-
-void SaneBreakApp::closeBreakWindow() { breakManager->close(); }
 
 void SaneBreakApp::mayLockScreen() {
   if (preferences->autoScreenLock->get()) {
@@ -105,14 +84,6 @@ void SaneBreakApp::showPreferences() {
   prefWindow->show();
   prefWindow->windowHandle()->raise();
   prefWindow->windowHandle()->requestActivate();
-}
-
-void SaneBreakApp::onBatterySettingChange() {
-  bool doPause = preferences->pauseOnBattery->get();
-  if (!doPause)
-    resumeBreak(SaneBreak::PauseReason::OnBattery);
-  else if (systemMonitor->isOnBattery())
-    pauseBreak(SaneBreak::PauseReason::OnBattery);
 }
 
 void SaneBreakApp::confirmQuit() {

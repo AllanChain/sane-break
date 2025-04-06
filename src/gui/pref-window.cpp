@@ -35,8 +35,8 @@
 #include <utility>
 
 #include "config.h"
+#include "core/preferences.h"
 #include "lib/auto-start.h"
-#include "lib/preferences.h"
 #include "sound-player.h"
 #include "ui_pref-window.h"
 #include "widgets/language-select.h"
