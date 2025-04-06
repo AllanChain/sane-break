@@ -158,7 +158,7 @@
     <message>
         <location filename="../../src/gui/pref-window.ui" line="671"/>
         <source>Flash speed</source>
-        <translation>闪烁时长</translation>
+        <translation>闪烁速度</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="762"/>

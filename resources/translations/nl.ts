@@ -134,7 +134,7 @@
         <location filename="../../src/gui/pref-window.ui" line="510"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
 &lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;Flash break prompt for&lt;/b&gt; seconds. If you stop working or ignore it past this time, it transitions to full-screen. After &lt;b&gt;Confirm break after&lt;/b&gt; seconds of inactivity during the break, it locks until the timer ends.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;Flitsherinnering&lt;/h3&gt;
+        <translation>&lt;h3&gt;Flitsherinnering&lt;/h3&gt;
 &lt;p&gt;Sane Break toont een kleine &lt;b&gt;flitsherinnering gedurende&lt;/b&gt; seconden. Als u stopt met werken of de herinnering bewust negeert, dan wordt de herinnering schermvullend getoond. Na het &lt;b&gt;bevestigen van de pauze na&lt;/b&gt; seconden of inactiviteit, wordt de boel vergrendeld totdat de tijdklok afloopt.&lt;/p&gt;</translation>
     </message>
     <message>
@@ -258,41 +258,41 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="618"/>
         <source>&lt;h3&gt;Prompt Appearance&lt;/h3&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;Herinneringssnelheid&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="635"/>
         <source>Off</source>
         <extracomment>Tick for flash speed</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Uit</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="642"/>
         <source>Slower</source>
         <extracomment>Tick for flash speed</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Langzamer</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="649"/>
         <source>Default</source>
         <extracomment>Tick for flash speed</extracomment>
-        <translation type="unfinished">Standaard</translation>
+        <translation>Standaard</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="659"/>
         <source>Faster</source>
         <extracomment>Tick for flash speed</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Sneller</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="702"/>
         <source>&lt;h3&gt;Break Window Appearance&lt;/h3&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;Pauzevensteruiterlijk&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="746"/>
         <source>Countdown Transparency</source>
-        <translation type="unfinished"></translation>
+        <translation>Doorzichtigheid van aftelklok</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="976"/>
