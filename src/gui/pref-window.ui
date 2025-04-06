@@ -1313,7 +1313,7 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="copyrightLabel">
+               <widget class="DynamicLabel" name="copyrightLabel">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                   <horstretch>0</horstretch>
@@ -1451,7 +1451,12 @@ v%1
   <customwidget>
    <class>LanguageSelect</class>
    <extends>QComboBox</extends>
-   <header location="global">widgets/language-select.h</header>
+   <header>widgets/language-select.h</header>
+  </customwidget>
+  <customwidget>
+   <class>DynamicLabel</class>
+   <extends>QLabel</extends>
+   <header>widgets/dynamic-label.h</header>
   </customwidget>
  </customwidgets>
  <resources>

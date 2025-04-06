@@ -12,6 +12,7 @@ add_library(
   tray.h
   welcome.cpp
   welcome.h
+  widgets/dynamic-label.h
   widgets/stepped-slider.cpp
   widgets/stepped-slider.h
   widgets/language-select.cpp

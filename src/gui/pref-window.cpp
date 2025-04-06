@@ -303,7 +303,7 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
    *                                About tab                                *
    *                                                                         *
    ****************************************************************************/
-  ui->copyrightLabel->setText(ui->copyrightLabel->text().arg(PROJECT_VERSION));
+  ui->copyrightLabel->setArgs({PROJECT_VERSION});
   QFile noticeFile(":/NOTICE.md");
   noticeFile.open(QIODevice::ReadOnly | QIODevice::Text);
   ui->noticeLabel->setText(noticeFile.readAll());
