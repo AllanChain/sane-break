@@ -85,6 +85,7 @@ class SanePreferences : public QObject {
   Setting<int> *flashFor;
   Setting<int> *confirmAfter;
   Setting<int> *flashSpeed;
+  Setting<bool> *showKillTip;
   Setting<QColor> *messageColor;
   Setting<QColor> *countDownColor;
   Setting<QColor> *backgroundColor;

@@ -100,8 +100,11 @@ void AbstractWindowControl::tick() {
   bool shouldCountDown = m_isForceBreak || m_isIdle;
   if (shouldCountDown) m_remainingTime--;
   for (auto w : std::as_const(m_windows)) w->setTime(m_remainingTime);
-  if (m_totalTime - m_remainingTime >= preferences->confirmAfter->get())
-    m_isForceBreak = true;
+  if (m_totalTime - m_remainingTime >= preferences->confirmAfter->get()) {
+    m_isForceBreak = true;  // confirm break
+    if (preferences->showKillTip->get())
+      for (auto w : std::as_const(m_windows)) w->showKillTip();
+  }
   if (m_remainingTime <= 0) {
     close();
   }
@@ -111,6 +114,8 @@ void AbstractWindowControl::forceBreak() {
   emit resume();
   m_isForceBreak = true;
   for (auto w : std::as_const(m_windows)) w->setFullScreen();
+  if (preferences->showKillTip->get())
+    for (auto w : std::as_const(m_windows)) w->showKillTip();
 }
 
 void AbstractWindowControl::onIdleStart() {

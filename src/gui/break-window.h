@@ -10,6 +10,7 @@
 #include <QMainWindow>
 #include <QProgressBar>
 #include <QPropertyAnimation>
+#include <QPushButton>
 #include <QTimer>
 #include <QWidget>
 
@@ -29,12 +30,14 @@ class BreakWindow : public AbstractBreakWindow {
   void setFullScreen() override;
   void resizeToNormal() override;
   void initSize(QScreen *screen) override;
+  void showKillTip() override;
   void colorChanged();
 
  private:
   QWidget *mainWidget;
   QLabel *countdownLabel;
   QLabel *breakLabel;
+  QLabel *killTip;
   QColor backgroundColor;
   QPropertyAnimation *progressAnim;
   QPropertyAnimation *bgAnim;

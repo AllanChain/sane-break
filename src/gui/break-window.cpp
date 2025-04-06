@@ -14,6 +14,7 @@
 #include <QMainWindow>
 #include <QProgressBar>
 #include <QPropertyAnimation>
+#include <QPushButton>
 #include <QRect>
 #include <QScreen>
 #include <QString>
@@ -25,7 +26,6 @@
 #include <cmath>
 
 #include "config.h"
-#include "core/preferences.h"
 #include "core/window-control.h"
 #include "lib/utils.h"
 
@@ -64,8 +64,9 @@ BreakWindow::BreakWindow(BreakData data, QWidget *parent)
   if (!waylandWorkaround) setCentralWidget(mainWidget);
   mainWidget->setAttribute(Qt::WA_LayoutOnEntireRect);
   mainWidget->setContentsMargins(0, 0, 0, 0);
-  mainWidget->setStyleSheet(R"(
+  mainWidget->setStyleSheet(QString(R"(
 BreakWindow QLabel#breakLabel {
+  color: %1;
   background: transparent;
   font-size: 20px;
 }
@@ -73,10 +74,17 @@ BreakWindow[isFullScreen="true"] QLabel#breakLabel {
   font-size: 40px;
 }
 BreakWindow QLabel#countdownLabel {
+  color: %2;
   background: transparent;
 }
 BreakWindow[isFullScreen="true"] QLabel#countdownLabel {
   font-size: 100px;
+}
+BreakWindow QLabel#killTip {
+  color: %1;
+  background: transparent;
+  margin-top: 30px;
+  font-size: 20px;
 }
 
 BreakWindow QProgressBar {
@@ -85,11 +93,14 @@ BreakWindow QProgressBar {
   background: transparent;
 }
 BreakWindow QProgressBar::chunk {
+  background: %2;
   width: 1px;
 }
 BreakWindow[isFullScreen="true"] QProgressBar {
   max-height: 10px;
-})");
+})")
+                                .arg(data.theme.messageColor.name(QColor::HexArgb),
+                                     data.theme.countDownColor.name(QColor::HexArgb)));
 
   QVBoxLayout *layout = new QVBoxLayout(mainWidget);
   layout->setContentsMargins(0, 0, 0, 0);
@@ -105,20 +116,37 @@ BreakWindow[isFullScreen="true"] QProgressBar {
 
   breakLabel = new QLabel(data.message);
   breakLabel->setObjectName("breakLabel");
+  breakLabel->setAlignment(Qt::AlignCenter);
   textLayout->addWidget(breakLabel);
 
-  countdownLabel = new QLabel(this);
+  countdownLabel = new QLabel();
   countdownLabel->setObjectName("countdownLabel");
   countdownLabel->setAlignment(Qt::AlignCenter);
   countdownLabel->setVisible(false);
   textLayout->addWidget(countdownLabel);
 
-  countdownLabel->setStyleSheet(
-      QString("color: %1").arg(data.theme.countDownColor.name(QColor::HexArgb)));
-  progressBar->setStyleSheet(QString("BreakWindow QProgressBar::chunk {background: %1}")
-                                 .arg(data.theme.countDownColor.name(QColor::HexArgb)));
-  breakLabel->setStyleSheet(
-      QString("color: %1").arg(data.theme.messageColor.name(QColor::HexArgb)));
+  killTip = new QLabel();
+  killTip->setObjectName("killTip");
+  killTip->setVisible(false);
+  killTip->setMinimumWidth(600);
+  killTip->setAlignment(Qt::AlignCenter);
+  killTip->setWordWrap(true);
+  QString tipText = tr("<p>Sane Break is in force break mode.</p>");
+#ifdef Q_OS_LINUX
+  tipText +=
+      tr("<p>Quit Sane Break by running <code>killall sane-break</code> in "
+         "terminal.</p>");
+#elif defined Q_OS_MACOS
+  tipText +=
+      tr("<p>Quit Sane Break by enabling Spotlight with <code>Cmd + Space</code>, "
+         "opening terminal, and running <code>killall sane-break</code>.</p>");
+#elif defined Q_OS_WINDOWS
+  tipText +=
+      tr("<p>Quit Sane Break by pressing <code>Win + R</code> and run "
+         "<code>taskkill /IM sane-break /F</code>");
+#endif
+  killTip->setText(tipText);
+  textLayout->addWidget(killTip);
 
   progressAnim = new QPropertyAnimation(progressBar, "value");
   progressAnim->setStartValue(progressBar->maximum());
@@ -159,6 +187,8 @@ void BreakWindow::setTime(int remainingTime) {
     countdownLabel->setText(formatTime(remainingTime));
   }
 }
+
+void BreakWindow::showKillTip() { killTip->setVisible(true); }
 
 void BreakWindow::setFullScreen() {
   setProperty("isFullScreen", true);

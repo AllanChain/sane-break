@@ -48,6 +48,7 @@ class AbstractBreakWindow : public QMainWindow {
   virtual void setFullScreen() {};
   virtual void resizeToNormal() {};
   virtual void initSize(QScreen *screen) {};
+  virtual void showKillTip() {};
 
  protected:
   int totalTime;
