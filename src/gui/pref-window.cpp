@@ -166,9 +166,15 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
           &PrefControllerBase::explictSync, this, [this]() {
             ui->confirmAfterBox->setMaximum(ui->flashForBox->value());
             ui->confirmAfterSlider->setMaximum(ui->flashForBox->value());
+            ui->reminderBehaviorLabel->setArgs(
+                {ui->flashForBox->value(), ui->confirmAfterBox->value()});
           });
-  controllers->add(new PrefController<QSpinBox, Setting<int>>(
-      ui->confirmAfterBox, preferences->confirmAfter));
+  connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
+              ui->confirmAfterBox, preferences->confirmAfter)),
+          &PrefControllerBase::explictSync, this, [this]() {
+            ui->reminderBehaviorLabel->setArgs(
+                {ui->flashForBox->value(), ui->confirmAfterBox->value()});
+          });
   controllers->add(new PrefController<QSlider, Setting<int>>(ui->flashSpeedSlider,
                                                              preferences->flashSpeed));
   controllers->add(new PrefController<QSpinBox, Setting<int>>(

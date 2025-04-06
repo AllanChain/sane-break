@@ -502,13 +502,13 @@ QPushButton[flat=&quot;true&quot;]:checked {
           <widget class="QWidget" name="reminderPage">
            <layout class="QVBoxLayout" name="verticalLayout_9">
             <item>
-             <widget class="QLabel" name="label">
+             <widget class="DynamicLabel" name="reminderBehaviorLabel">
               <property name="toolTip">
                <string/>
               </property>
               <property name="text">
                <string>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
-&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;Flash break prompt for&lt;/b&gt; seconds. If you stop working or ignore it past this time, it transitions to full-screen. After &lt;b&gt;Confirm break after&lt;/b&gt; seconds of inactivity during the break, it locks until the timer ends.&lt;/p&gt;</string>
+&lt;p&gt;Sane Break shows a small prompt for %1 seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after %2 seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you're idle again or the timer ends.&lt;/p&gt;</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
