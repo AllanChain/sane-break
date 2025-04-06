@@ -508,7 +508,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
               </property>
               <property name="text">
                <string>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
-&lt;p&gt;Sane Break shows a small prompt for %1 seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after %2 seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you're idle again or the timer ends.&lt;/p&gt;</string>
+&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you're idle again or the timer ends.&lt;/p&gt;</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
@@ -691,6 +691,58 @@ QPushButton[flat=&quot;true&quot;]:checked {
                 </property>
                 <property name="tickPosition">
                  <enum>QSlider::TickPosition::TicksBelow</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="2" column="0">
+               <widget class="QPlainTextEdit" name="smallBreakMessages">
+                <property name="placeholderText">
+                 <string>(One line per message)</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLabel" name="label_34">
+                <property name="text">
+                 <string>Prompt messages:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>Prompt messages:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QPlainTextEdit" name="bigBreakMessages">
+                <property name="placeholderText">
+                 <string>(One line per message)</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_36">
+                <property name="text">
+                 <string>&lt;h4&gt;Small Break&lt;/h4&gt;</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_39">
+                <property name="text">
+                 <string>&lt;h4&gt;Big Break&lt;/h4&gt;</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
                 </property>
                </widget>
               </item>

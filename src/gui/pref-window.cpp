@@ -177,6 +177,10 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
           });
   controllers->add(new PrefController<QSlider, Setting<int>>(ui->flashSpeedSlider,
                                                              preferences->flashSpeed));
+  controllers->add(new PrefController<QPlainTextEdit, Setting<QStringList>>(
+      ui->smallBreakMessages, preferences->smallMessages));
+  controllers->add(new PrefController<QPlainTextEdit, Setting<QStringList>>(
+      ui->bigBreakMessages, preferences->bigMessages));
   controllers->add(new PrefController<QSpinBox, Setting<int>>(
       ui->textTransparencyBox, preferences->textTransparency));
 
