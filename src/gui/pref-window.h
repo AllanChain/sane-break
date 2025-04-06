@@ -7,6 +7,7 @@
 
 #include <QCheckBox>
 #include <QCloseEvent>
+#include <QColor>
 #include <QComboBox>
 #include <QEvent>
 #include <QLabel>
@@ -178,6 +179,19 @@ class PrefController<QComboBox, Setting<QString>> : public PrefControllerBase {
   };
   void loadValue() { widget->setEditText(setting->get()); }
   void saveValue() { setting->set(widget->currentText()); }
+};
+
+template <>
+class PrefController<QLineEdit, Setting<QColor>> : public PrefControllerBase {
+ public:
+  QLineEdit *widget;
+  Setting<QColor> *setting;
+  PrefController(QLineEdit *parent, Setting<QColor> *setting)
+      : PrefControllerBase(parent), widget(parent), setting(setting) {
+    connect(widget, &QLineEdit::textChanged, this, &PrefControllerBase::onChange);
+  };
+  void loadValue() { widget->setText(setting->get().name(QColor::HexArgb)); }
+  void saveValue() { setting->set(widget->text()); }
 };
 
 class ControllerHolder : public QObject {

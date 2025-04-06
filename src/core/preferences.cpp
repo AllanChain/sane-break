@@ -35,8 +35,10 @@ SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
   flashFor = new Setting<int>(settings, "break/flash-for", 30);
   confirmAfter = new Setting<int>(settings, "break/confirm-after", 30);
   flashSpeed = new Setting<int>(settings, "break/flash-speed", 100);
-  textTransparency = new Setting<int>(settings, "break/text-transparency", 0);
-  textColor = new Setting<QColor>(settings, "theme/text", QColor(236, 239, 244, 255));
+  countDownColor =
+      new Setting<QColor>(settings, "theme/count-down", QColor(236, 239, 244, 255));
+  messageColor =
+      new Setting<QColor>(settings, "theme/message", QColor(236, 239, 244, 255));
   backgroundColor =
       new Setting<QColor>(settings, "theme/background", QColor(46, 52, 64, 255));
   smallHighlightColor =

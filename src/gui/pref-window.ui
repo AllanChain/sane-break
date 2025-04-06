@@ -228,8 +228,8 @@ QPushButton[flat=&quot;true&quot;]:checked {
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>680</width>
-         <height>600</height>
+         <width>659</width>
+         <height>647</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -698,51 +698,46 @@ QPushButton[flat=&quot;true&quot;]:checked {
             </item>
             <item>
              <layout class="QGridLayout" name="gridLayout">
-              <item row="2" column="0">
-               <widget class="QPlainTextEdit" name="smallBreakMessages">
-                <property name="placeholderText">
-                 <string>(One line per message)</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QLabel" name="label_34">
-                <property name="text">
-                 <string>Prompt messages:</string>
-                </property>
-               </widget>
-              </item>
+              <property name="horizontalSpacing">
+               <number>12</number>
+              </property>
               <item row="1" column="0">
-               <widget class="QLabel" name="label">
-                <property name="text">
-                 <string>Prompt messages:</string>
+               <widget class="QPlainTextEdit" name="smallBreakMessages">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>100</height>
+                 </size>
                 </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QPlainTextEdit" name="bigBreakMessages">
                 <property name="placeholderText">
                  <string>(One line per message)</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_36">
-                <property name="text">
-                 <string>&lt;h4&gt;Small Break&lt;/h4&gt;</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignCenter</set>
                 </property>
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="QLabel" name="label_39">
+               <widget class="QLabel" name="label_34">
                 <property name="text">
-                 <string>&lt;h4&gt;Big Break&lt;/h4&gt;</string>
+                 <string>Big break prompt messages:</string>
                 </property>
-                <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignCenter</set>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>Small break prompt messages:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QPlainTextEdit" name="bigBreakMessages">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>100</height>
+                 </size>
+                </property>
+                <property name="placeholderText">
+                 <string>(One line per message)</string>
                 </property>
                </widget>
               </item>
@@ -751,51 +746,98 @@ QPushButton[flat=&quot;true&quot;]:checked {
             <item>
              <widget class="QLabel" name="label_2">
               <property name="text">
-               <string>&lt;h3&gt;Break Window Appearance&lt;/h3&gt;</string>
+               <string>&lt;h3&gt;Color Theme&lt;/h3&gt;
+All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
               </property>
              </widget>
             </item>
             <item>
-             <layout class="QGridLayout" name="gridLayout_11">
-              <item row="0" column="1">
-               <widget class="SteppedSlider" name="textTransparencySlider">
-                <property name="minimum">
-                 <number>0</number>
-                </property>
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="singleStep">
-                 <number>5</number>
-                </property>
-                <property name="value">
-                 <number>0</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Orientation::Horizontal</enum>
-                </property>
-                <property name="tickPosition">
-                 <enum>QSlider::TickPosition::TicksBelow</enum>
-                </property>
-                <property name="tickInterval">
-                 <number>20</number>
+             <layout class="QGridLayout" name="gridLayout_11" columnstretch="1,2,1,2">
+              <property name="horizontalSpacing">
+               <number>12</number>
+              </property>
+              <item row="1" column="2">
+               <widget class="QLabel" name="label_41">
+                <property name="text">
+                 <string>Big break</string>
                 </property>
                </widget>
               </item>
               <item row="0" column="2">
-               <widget class="QSpinBox" name="textTransparencyBox">
-                <property name="suffix">
-                 <string notr="true"> %</string>
+               <widget class="QLabel" name="label_43">
+                <property name="text">
+                 <string>Message</string>
                 </property>
-                <property name="maximum">
-                 <number>65535</number>
+               </widget>
+              </item>
+              <item row="1" column="3">
+               <widget class="ColorEdit" name="bigHighlight">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_30">
+                <property name="text">
+                 <string>Small break</string>
                 </property>
                </widget>
               </item>
               <item row="0" column="0">
-               <widget class="QLabel" name="label_30">
+               <widget class="QLabel" name="label_42">
                 <property name="text">
-                 <string>Countdown Transparency</string>
+                 <string>Background</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="ColorEdit" name="messageColor">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="ColorEdit" name="smallHighlight">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="ColorEdit" name="backgroundColor">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_44">
+                <property name="text">
+                 <string>Count down</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="ColorEdit" name="countDownColor">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
@@ -1510,6 +1552,11 @@ v%1
    <extends>QLabel</extends>
    <header>widgets/dynamic-label.h</header>
   </customwidget>
+  <customwidget>
+   <class>ColorEdit</class>
+   <extends>QLineEdit</extends>
+   <header>widgets/color-edit.h</header>
+  </customwidget>
  </customwidgets>
  <resources>
   <include location="../../resources/index.qrc"/>
@@ -1800,38 +1847,6 @@ v%1
     <hint type="destinationlabel">
      <x>369</x>
      <y>-71</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>textTransparencySlider</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>textTransparencyBox</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>595</x>
-     <y>435</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>711</x>
-     <y>435</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>textTransparencyBox</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>textTransparencySlider</receiver>
-   <slot>setValueForce(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>694</x>
-     <y>444</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>590</x>
-     <y>445</y>
     </hint>
    </hints>
   </connection>

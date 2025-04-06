@@ -64,12 +64,32 @@ BreakWindow::BreakWindow(BreakData data, QWidget *parent)
   if (!waylandWorkaround) setCentralWidget(mainWidget);
   mainWidget->setAttribute(Qt::WA_LayoutOnEntireRect);
   mainWidget->setContentsMargins(0, 0, 0, 0);
+  mainWidget->setStyleSheet(R"(
+BreakWindow QLabel#breakLabel {
+  background: transparent;
+  font-size: 20px;
+}
+BreakWindow[isFullScreen="true"] QLabel#breakLabel {
+  font-size: 40px;
+}
+BreakWindow QLabel#countdownLabel {
+  background: transparent;
+}
+BreakWindow[isFullScreen="true"] QLabel#countdownLabel {
+  font-size: 100px;
+}
 
-  // HACK: Not setting this at main.cpp because of
-  // https://bugreports.qt.io/browse/QTBUG-133845
-  QFile styleSheet(":/style.css");
-  if (styleSheet.open(QIODevice::ReadOnly | QIODevice::Text))
-    mainWidget->setStyleSheet(styleSheet.readAll());
+BreakWindow QProgressBar {
+  border-radius: 5px;
+  max-height: 5px;
+  background: transparent;
+}
+BreakWindow QProgressBar::chunk {
+  width: 1px;
+}
+BreakWindow[isFullScreen="true"] QProgressBar {
+  max-height: 10px;
+})");
 
   QVBoxLayout *layout = new QVBoxLayout(mainWidget);
   layout->setContentsMargins(0, 0, 0, 0);
@@ -94,11 +114,11 @@ BreakWindow::BreakWindow(BreakData data, QWidget *parent)
   textLayout->addWidget(countdownLabel);
 
   countdownLabel->setStyleSheet(
-      QString("color: rgba(236, 239, 244, %1)").arg(data.theme.countdownOpacity));
-  progressBar->setStyleSheet(
-      QString("BreakWindow[isFullScreen=\"true\"] QProgressBar::chunk "
-              "{background: rgba(236, 239, 244, %1)}")
-          .arg(data.theme.countdownOpacity));
+      QString("color: %1").arg(data.theme.countDownColor.name(QColor::HexArgb)));
+  progressBar->setStyleSheet(QString("BreakWindow QProgressBar::chunk {background: %1}")
+                                 .arg(data.theme.countDownColor.name(QColor::HexArgb)));
+  breakLabel->setStyleSheet(
+      QString("color: %1").arg(data.theme.messageColor.name(QColor::HexArgb)));
 
   progressAnim = new QPropertyAnimation(progressBar, "value");
   progressAnim->setStartValue(progressBar->maximum());

@@ -63,8 +63,8 @@ BreakData AbstractWindowControl::breakData(SaneBreak::BreakType type) {
       .highlightBackground = type == SaneBreak::BreakType::Big
                                  ? preferences->bigHighlightColor->get()
                                  : preferences->smallHighlightColor->get(),
-      .textColor = preferences->textColor->get(),
-      .countdownOpacity = 255 - preferences->textTransparency->get() * 255 / 100,
+      .messageColor = preferences->messageColor->get(),
+      .countDownColor = preferences->countDownColor->get(),
       .flashAnimationDuration = 500 / preferences->flashSpeed->get() * 100,
   };
   QStringList messagesToRoll = type == SaneBreak::BreakType::Big

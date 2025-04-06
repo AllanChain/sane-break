@@ -30,16 +30,22 @@ class Setting : public SettingWithSignal {
   void set(const T &newValue) {
     if (get() != newValue) {
       m_value = newValue;
-      m_settings->setValue(m_key, QVariant::fromValue(m_value));
+      m_settings->setValue(m_key, toFriendlyFormat(m_value));
       emit changed();
     }
   }
   const T get() {
     if (m_cached) return m_value;
-    m_value = m_settings->value(m_key, QVariant::fromValue(m_defaultValue))
-                  .template value<T>();
+    m_value =
+        fromFriendlyFormat(m_settings->value(m_key, toFriendlyFormat(m_defaultValue)));
     m_cached = true;
     return m_value;
+  };
+  virtual QVariant toFriendlyFormat(const T &value) {
+    return QVariant::fromValue(value);
+  };
+  virtual const T fromFriendlyFormat(QVariant value) {
+    return value.template value<T>();
   };
 
  private:
@@ -49,6 +55,17 @@ class Setting : public SettingWithSignal {
   T m_value;
   bool m_cached = false;
 };
+
+template <>
+inline QVariant Setting<QColor>::toFriendlyFormat(const QColor &value) {
+  QString argb = value.name(QColor::HexArgb);
+  return QVariant::fromValue(argb);
+}
+
+template <>
+inline const QColor Setting<QColor>::fromFriendlyFormat(QVariant value) {
+  return QColor::fromString(value.toString());
+}
 
 class SanePreferences : public QObject {
   Q_OBJECT
@@ -68,8 +85,8 @@ class SanePreferences : public QObject {
   Setting<int> *flashFor;
   Setting<int> *confirmAfter;
   Setting<int> *flashSpeed;
-  Setting<int> *textTransparency;
-  Setting<QColor> *textColor;
+  Setting<QColor> *messageColor;
+  Setting<QColor> *countDownColor;
   Setting<QColor> *backgroundColor;
   Setting<QColor> *smallHighlightColor;
   Setting<QColor> *bigHighlightColor;

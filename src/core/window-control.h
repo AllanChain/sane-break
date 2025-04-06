@@ -24,8 +24,8 @@ struct WindowDependencies {
 struct BreakTheme {
   QColor mainBackground;
   QColor highlightBackground;
-  QColor textColor;
-  int countdownOpacity;
+  QColor messageColor;
+  QColor countDownColor;
   int flashAnimationDuration;
 };
 

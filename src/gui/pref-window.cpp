@@ -8,6 +8,7 @@
 
 #include <QAudioOutput>
 #include <QCheckBox>
+#include <QColor>
 #include <QComboBox>
 #include <QDesktopServices>
 #include <QEvent>
@@ -177,12 +178,22 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
           });
   controllers->add(new PrefController<QSlider, Setting<int>>(ui->flashSpeedSlider,
                                                              preferences->flashSpeed));
+
+  controllers->add(new PrefController<QLineEdit, Setting<QColor>>(
+      ui->backgroundColor, preferences->backgroundColor));
+  controllers->add(new PrefController<QLineEdit, Setting<QColor>>(
+      ui->messageColor, preferences->messageColor));
+  controllers->add(new PrefController<QLineEdit, Setting<QColor>>(
+      ui->smallHighlight, preferences->smallHighlightColor));
+  controllers->add(new PrefController<QLineEdit, Setting<QColor>>(
+      ui->bigHighlight, preferences->bigHighlightColor));
+  controllers->add(new PrefController<QLineEdit, Setting<QColor>>(
+      ui->countDownColor, preferences->countDownColor));
+
   controllers->add(new PrefController<QPlainTextEdit, Setting<QStringList>>(
       ui->smallBreakMessages, preferences->smallMessages));
   controllers->add(new PrefController<QPlainTextEdit, Setting<QStringList>>(
       ui->bigBreakMessages, preferences->bigMessages));
-  controllers->add(new PrefController<QSpinBox, Setting<int>>(
-      ui->textTransparencyBox, preferences->textTransparency));
 
   /***************************************************************************
    *                                                                         *
