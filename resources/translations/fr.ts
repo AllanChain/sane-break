@@ -154,11 +154,6 @@
         <translation>Vitesse de clignotement</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="702"/>
-        <source>Show tips to kill Sane Break when locked in full-screen mode.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/gui/pref-window.ui" line="720"/>
         <location filename="../../src/gui/pref-window.ui" line="747"/>
         <source>(One line per message)</source>
@@ -436,6 +431,11 @@ v%1
         <location filename="../../src/gui/pref-window.ui" line="510"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
 &lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="702"/>
+        <source>Show tips to kill Sane Break when locked in full-screen mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -364,6 +364,11 @@ v%1
         <translation> min.</translation>
     </message>
     <message>
+        <location filename="../../src/gui/pref-window.ui" line="702"/>
+        <source>Show tips to kill Sane Break when locked in full-screen mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/gui/pref-window.ui" line="1111"/>
         <location filename="../../src/gui/pref-window.ui" line="1149"/>
         <source>Bell before breaks</source>
@@ -381,11 +386,6 @@ v%1
         <location filename="../../src/gui/pref-window.ui" line="460"/>
         <source>Break length</source>
         <translation>Pauzeduur</translation>
-    </message>
-    <message>
-        <location filename="../../src/gui/pref-window.ui" line="702"/>
-        <source>Show tips to kill Sane Break when locked in full-screen mode.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="720"/>

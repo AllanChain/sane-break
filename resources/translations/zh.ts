@@ -165,8 +165,8 @@
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="702"/>
-        <source>Show tips to kill Sane Break when locked in full-screen mode.</source>
-        <translation>在全屏模式显示强杀 Sane Break 的提示。</translation>
+        <source>Show tips to kill Sane Break when locked in full-screen mode</source>
+        <translation>在全屏模式显示强杀 Sane Break 的提示</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="720"/>
