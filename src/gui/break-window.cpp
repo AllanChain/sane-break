@@ -143,7 +143,7 @@ BreakWindow[isFullScreen="true"] QProgressBar {
 #elif defined Q_OS_WINDOWS
   tipText +=
       tr("<p>Quit Sane Break by pressing <code>Win + R</code> and run "
-         "<code>taskkill /IM sane-break /F</code>");
+         "<code>taskkill /IM sane-break.exe /F</code>");
 #endif
   killTip->setText(tipText);
   textLayout->addWidget(killTip);
