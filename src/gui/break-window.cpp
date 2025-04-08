@@ -51,12 +51,11 @@ BreakWindow::BreakWindow(BreakData data, QWidget *parent)
   waylandWorkaround =
       QGuiApplication::platformName() == "wayland" && !LinuxSystemSupport::layerShell;
 #endif
-  setAttribute(Qt::WA_TranslucentBackground);      // transparent window
-  setAttribute(Qt::WA_ShowWithoutActivating);      // avoid gaining keyboard focus
-  setAttribute(Qt::WA_LayoutOnEntireRect);         // ignore safe zone on macOS
-  setAttribute(Qt::WA_TransparentForMouseEvents);  // mouse can click through
+  setAttribute(Qt::WA_TranslucentBackground);  // transparent window
+  setAttribute(Qt::WA_ShowWithoutActivating);  // avoid gaining keyboard focus
+  setAttribute(Qt::WA_LayoutOnEntireRect);     // ignore safe zone on macOS
   setWindowFlags(Qt::ToolTip | Qt::WindowDoesNotAcceptFocus | Qt::FramelessWindowHint |
-                 Qt::WindowStaysOnTopHint);
+                 Qt::WindowStaysOnTopHint | Qt::WindowTransparentForInput);
   setWindowTitle("Break reminder - Sane Break");
   setProperty("isFullScreen", false);
 
@@ -192,7 +191,8 @@ void BreakWindow::showKillTip() { killTip->setVisible(true); }
 
 void BreakWindow::setFullScreen() {
   setProperty("isFullScreen", true);
-  setAttribute(Qt::WA_TransparentForMouseEvents, false);
+  setWindowFlag(Qt::WindowTransparentForInput, false);
+  show();  // required for modifying window flags
   bgAnim->stop();
   setProperty("color", bgAnim->endValue());
   countdownLabel->setVisible(true);
@@ -207,7 +207,8 @@ void BreakWindow::setFullScreen() {
 
 void BreakWindow::resizeToNormal() {
   setProperty("isFullScreen", false);
-  setAttribute(Qt::WA_TransparentForMouseEvents);
+  setWindowFlag(Qt::WindowTransparentForInput);
+  show();  // required for modifying window flags
   bgAnim->start();
   countdownLabel->setVisible(false);
   QPropertyAnimation *resizeAnim =
