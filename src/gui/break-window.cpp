@@ -236,8 +236,7 @@ void BreakWindow::initSize(QScreen *screen) {
     setGeometry(rect.x() + rect.width() / 2 - SMALL_WINDOW_WIDTH / 2, rect.y(),
                 SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
   }
-  show();
-  hide();
+  createWinId();
 #ifdef WITH_LAYER_SHELL
   if (QGuiApplication::platformName() == "wayland")
     if (auto window = LayerShellQt::Window::get(windowHandle())) {
