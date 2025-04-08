@@ -64,13 +64,14 @@ void PrefControllerBase::load() {
 }
 
 void PrefControllerBase::onChange() {
-  if (changeMeansDirty) {
-    if (!isDirty) {
-      isDirty = true;
-      emit dirtyChanged();
-    }
-    emit explictSync();
+  // Do nothing if the change is caused by loading values
+  if (!changeMeansDirty) return;
+  if (!isDirty) {
+    isDirty = true;
+    emit dirtyChanged();
   }
+  emit changed();
+  emit explictSync();
 }
 
 PrefControllerBase *ControllerHolder::add(PrefControllerBase *controller) {
@@ -251,16 +252,19 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
    *                                                                         *
    ****************************************************************************/
   ui->configFile->setText(preferences->settings->fileName());
-  connect(controllers->add(new PrefController<QCheckBox, Setting<bool>>(
-              ui->autoStart, preferences->autoStart)),
-          &PrefControllerBase::loaded, this, [this]() {
-            ui->autoStart->setChecked(autoStart->isEnabled(this->preferences));
-          });
-#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
-  connect(ui->autoStart, &QCheckBox::checkStateChanged, this, [this]() {
-#else
-  connect(ui->autoStart, &QCheckBox::stateChanged, this, [this]() {
-#endif
+
+  auto autoStartController =
+      controllers->add(new PrefController<QCheckBox, Setting<bool>>(
+          ui->autoStart, preferences->autoStart));
+  connect(autoStartController, &PrefControllerBase::loaded, this, [this]() {
+    // Tell the handler to ignore this change
+    ui->autoStart->setDisabled(true);
+    ui->autoStart->setChecked(autoStart->isEnabled(this->preferences));
+    ui->autoStart->setDisabled(false);
+  });
+  connect(autoStartController, &PrefControllerBase::changed, this, [this]() {
+    // Do nothing if the it is disabled to avoid races
+    if (!ui->autoStart->isEnabled()) return;
     ui->autoStart->setDisabled(true);
     autoStart->setEnabled(ui->autoStart->isChecked());
   });
