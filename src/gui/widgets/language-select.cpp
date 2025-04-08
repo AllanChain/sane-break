@@ -16,8 +16,6 @@
 #include <QWidget>
 #include <QtContainerFwd>
 
-#include "core/preferences.h"
-
 QTranslator *LanguageSelect::currentTranslator = nullptr;
 
 void LanguageSelect::setLanguage(QString language) {
@@ -44,6 +42,7 @@ LanguageSelect::LanguageSelect(QWidget *parent) : QComboBox(parent) {
     if (language == "en")
       addItem("English", language);
     else if (translator.load(language, ":/i18n")) {
+      //: This is the name of the current language in the current language
       addItem(translator.translate("LanguageSelect", "English", "current language"),
               language);
     }

@@ -26,6 +26,7 @@ void AutoStart::setEnabled(bool enabled) {
       emit operationResult(true);
       return;
     case QSettings::AccessError:
+      //: Error message when requesting autostart got permission denied
       emit operationResult(false, tr("Permission denied"));
       return;
     default:

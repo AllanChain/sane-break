@@ -4,30 +4,39 @@
 <context>
     <name>AutoStart</name>
     <message>
-        <location filename="../../src/lib/linux/auto-start.cpp" line="51"/>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="53"/>
         <source>Failed to connect to Flatpak response</source>
+        <extracomment>Error message when requesting autostart in Flatpak got no response</extracomment>
         <translation>Er kan geen verbinding met Flatpak worden gemaakt</translation>
     </message>
     <message>
-        <location filename="../../src/lib/linux/auto-start.cpp" line="73"/>
-        <location filename="../../src/lib/linux/auto-start.cpp" line="79"/>
-        <source>File not writable</source>
-        <translation>Het bestand is niet beschrijfbaar</translation>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="76"/>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="82"/>
+        <source>Autostart desktop entry not writable</source>
+        <extracomment>Error message when failed to write Linux desktop entry for autostart</extracomment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/lib/linux/auto-start.cpp" line="96"/>
-        <source>The request to autostart was cancelled.</source>
+        <source>File not writable</source>
+        <translation type="vanished">Het bestand is niet beschrijfbaar</translation>
+    </message>
+    <message>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="100"/>
+        <source>The request to autostart was cancelled</source>
+        <extracomment>Error message when requesting autostart in Flatpak got cancelled by user</extracomment>
         <translation>Het verzoek tot automatisch opstarten is afgebroken.</translation>
     </message>
     <message>
-        <location filename="../../src/lib/windows/auto-start.cpp" line="29"/>
+        <location filename="../../src/lib/windows/auto-start.cpp" line="30"/>
         <source>Permission denied</source>
+        <extracomment>Error message when requesting autostart got permission denied</extracomment>
         <translation>Toegang geweigerd</translation>
     </message>
     <message>
-        <location filename="../../src/lib/linux/auto-start.cpp" line="42"/>
-        <location filename="../../src/lib/windows/auto-start.cpp" line="32"/>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="43"/>
+        <location filename="../../src/lib/windows/auto-start.cpp" line="33"/>
         <source>Unknown error</source>
+        <extracomment>Error message when requesting autostart got unknown error</extracomment>
         <translation>Onbekende foutmelding</translation>
     </message>
 </context>
@@ -65,15 +74,16 @@
 <context>
     <name>LanguageSelect</name>
     <message>
-        <location filename="../../src/gui/widgets/language-select.cpp" line="36"/>
-        <location filename="../../src/gui/widgets/language-select.cpp" line="62"/>
+        <location filename="../../src/gui/widgets/language-select.cpp" line="34"/>
+        <location filename="../../src/gui/widgets/language-select.cpp" line="61"/>
         <source>Default</source>
         <translation>Standaard</translation>
     </message>
     <message>
-        <location filename="../../src/gui/widgets/language-select.cpp" line="47"/>
+        <location filename="../../src/gui/widgets/language-select.cpp" line="46"/>
         <source>English</source>
         <comment>current language</comment>
+        <extracomment>This is the name of the current language in the current language</extracomment>
         <translation>Nederlands</translation>
     </message>
 </context>
@@ -509,9 +519,9 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="289"/>
-        <location filename="../../src/gui/pref-window.cpp" line="290"/>
-        <location filename="../../src/gui/pref-window.cpp" line="291"/>
+        <location filename="../../src/gui/pref-window.cpp" line="299"/>
+        <location filename="../../src/gui/pref-window.cpp" line="300"/>
+        <location filename="../../src/gui/pref-window.cpp" line="301"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min.</numerusform>
@@ -519,8 +529,8 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="141"/>
-        <location filename="../../src/gui/pref-window.cpp" line="150"/>
+        <location filename="../../src/gui/pref-window.cpp" line="142"/>
+        <location filename="../../src/gui/pref-window.cpp" line="151"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>Iedere %n min.</numerusform>
@@ -528,7 +538,7 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="288"/>
+        <location filename="../../src/gui/pref-window.cpp" line="298"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec.</numerusform>
@@ -536,47 +546,47 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
         </translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="287"/>
+        <location filename="../../src/gui/pref-window.cpp" line="297"/>
         <source>Disabled</source>
         <translation>Uitgeschakeld</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="298"/>
+        <location filename="../../src/gui/pref-window.cpp" line="308"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>Volgende pauze starten na middelklikken op systeemvakpictogram</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="304"/>
+        <location filename="../../src/gui/pref-window.cpp" line="314"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>Volgende pauze starten na dubbelklikken op systeemvakpictogram</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="372"/>
+        <location filename="../../src/gui/pref-window.cpp" line="382"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="373"/>
+        <location filename="../../src/gui/pref-window.cpp" line="383"/>
         <source>Discard</source>
         <translation>Verwerpen</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="374"/>
+        <location filename="../../src/gui/pref-window.cpp" line="384"/>
         <source>Cancel</source>
         <translation>Annuleren</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="273"/>
+        <location filename="../../src/gui/pref-window.cpp" line="279"/>
         <source>Setting autostart failed</source>
         <translation>Automatisch opstarten is niet mogelijk</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="369"/>
+        <location filename="../../src/gui/pref-window.cpp" line="379"/>
         <source>The preferences have been modified.</source>
         <translation>De instellingen zijn aangepast.</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="370"/>
+        <location filename="../../src/gui/pref-window.cpp" line="380"/>
         <source>Do you want to save your changes?</source>
         <translation>Wilt u de instellingen opslaan?</translation>
     </message>

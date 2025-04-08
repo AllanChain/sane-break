@@ -39,6 +39,7 @@ void AutoStart::setEnabled(bool enabled) {
     emit operationResult(false, response.errorMessage());
     return;
   } else if (response.type() != QDBusMessage::ReplyMessage) {
+    //: Error message when requesting autostart got unknown error
     emit operationResult(false, tr("Unknown error"));
     return;
   }
@@ -48,6 +49,7 @@ void AutoStart::setEnabled(bool enabled) {
                                       "org.freedesktop.portal.Request", "Response",
                                       this, SLOT(flatpakCallback(uint, QVariantMap)));
   if (!connected) {
+    //: Error message when requesting autostart in Flatpak got no response
     emit operationResult(false, tr("Failed to connect to Flatpak response"));
     return;
   }
@@ -70,13 +72,14 @@ void AutoStart::setEnabled(bool enabled) {
       file.close();
       emit operationResult(true);
     } else {
-      emit operationResult(false, tr("File not writable"));
+      //: Error message when failed to write Linux desktop entry for autostart
+      emit operationResult(false, tr("Autostart desktop entry not writable"));
     }
   } else {
     if (QFile::remove(desktopPath))
       emit operationResult(true);
     else
-      emit operationResult(false, tr("File not writable"));
+      emit operationResult(false, tr("Autostart desktop entry not writable"));
   }
 #endif
 }
@@ -92,9 +95,11 @@ bool AutoStart::isEnabled(SanePreferences* preferences) {
 
 #ifdef LINUX_DIST_FLATPAK
 void AutoStart::flatpakCallback(uint response, const QVariantMap& results) {
-  if (response > 0)
-    emit operationResult(false, tr("The request to autostart was cancelled."));
-  else
+  if (response > 0) {
+    //: Error message when requesting autostart in Flatpak got cancelled by user
+    emit operationResult(false, tr("The request to autostart was cancelled"));
+  } else {
     emit operationResult(true);
+  }
 }
 #endif
