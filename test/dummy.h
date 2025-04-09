@@ -79,7 +79,7 @@ class DummyApp : public AbstractApp {
         new SanePreferences(new QSettings(tempFile.fileName(), QSettings::IniFormat));
     auto windowDeps = DummyWindowControl::makeDeps();
     windowDeps.preferences = preferences;
-    auto windowControl = new DummyWindowControl(windowDeps);
+    auto windowControl = new testing::NiceMock<DummyWindowControl>(windowDeps);
     AppDependencies deps = {
         .preferences = preferences,
         .countDownTimer = new AbstractTimer(),
