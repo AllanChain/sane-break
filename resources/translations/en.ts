@@ -34,7 +34,7 @@
 <context>
     <name>SaneBreakApp</name>
     <message numerus="yes">
-        <location filename="../../../../src/app/app.cpp" line="93"/>
+        <location filename="../../../../src/app/app.cpp" line="95"/>
         <source>Postpone %n min</source>
         <translation>
             <numerusform>Postpone %n min</numerusform>
@@ -45,8 +45,8 @@
 <context>
     <name>StatusTrayWindow</name>
     <message numerus="yes">
-        <location filename="../../../../src/gui/tray.cpp" line="50"/>
-        <location filename="../../../../src/gui/tray.cpp" line="136"/>
+        <location filename="../../../../src/gui/tray.cpp" line="55"/>
+        <location filename="../../../../src/gui/tray.cpp" line="141"/>
         <source>%n min</source>
         <translation type="unfinished">
             <numerusform>%n min</numerusform>
