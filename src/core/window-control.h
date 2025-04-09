@@ -64,13 +64,13 @@ class AbstractWindowControl : public QObject {
 
   virtual void show(SaneBreak::BreakType type);
   virtual void close();
-  bool isShowing();
 
  signals:
   void timeout();
   void countDownStateChanged(bool countingDown);
 
  protected:
+  bool m_isShowing;
   SaneBreak::BreakType m_currentType;
   int m_remainingTime;
   bool m_isIdle = false;

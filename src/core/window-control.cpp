@@ -43,6 +43,7 @@ AbstractWindowControl::AbstractWindowControl(const WindowDependencies &deps,
 }
 
 void AbstractWindowControl::show(SaneBreak::BreakType type) {
+  m_isShowing = true;
   m_currentType = type;
   m_totalTime = type == SaneBreak::BreakType::Big ? preferences->bigFor->get()
                                                   : preferences->smallFor->get();
@@ -84,11 +85,10 @@ BreakData AbstractWindowControl::breakData(SaneBreak::BreakType type) {
   };
 }
 
-bool AbstractWindowControl::isShowing() { return m_windows.size() != 0; }
-
 void AbstractWindowControl::close() {
   // Do nothing if window is already closed
-  if (!isShowing()) return;
+  if (!m_isShowing) return;
+  m_isShowing = false;
   m_countDownTimer->stop();
   m_forceBreakTimer->stop();
   m_idleTimer->stopWatching();

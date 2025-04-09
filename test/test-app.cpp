@@ -83,7 +83,6 @@ class TestApp : public QObject {
       QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, numberOfBreaks - j - 1);
       app.advance(app.trayData.secondsToNextBreak);
       emit windowControl->timeout();
-      ;
     }
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
@@ -150,7 +149,6 @@ class TestApp : public QObject {
     QVERIFY(deps.screenLockTimer->isSingleShot());
 
     emit windowControl->timeout();
-    ;
 
     EXPECT_CALL(app, doLockScreen()).Times(1);
     emit deps.screenLockTimer->timeout();
@@ -170,7 +168,7 @@ class TestApp : public QObject {
     emit windowControl->countDownStateChanged(true);
     QVERIFY(!deps.screenLockTimer->isActive());
     emit windowControl->timeout();
-    ;
+
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
   void postponeTime() {

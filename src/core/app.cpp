@@ -136,6 +136,7 @@ void AbstractApp::onBreakEnd() {
   m_isBreaking = false;
   resetSecondsToNextBreak();
   m_breakCycleCount++;
+  updateTray();
   if (!m_oneshotIdleTimer->isIdle) {
     m_oneshotIdleTimer->stopWatching();
     m_screenLockTimer->stop();

@@ -28,9 +28,10 @@ class TestEdge : public QObject {
 
     EXPECT_CALL(*windowControl, createWindows(SaneBreak::BreakType::Small)).Times(1);
     app.breakNow();
+    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+
     EXPECT_CALL(*windowControl, deleteWindows()).Times(1);
     emit deps.systemMonitor->batteryPowered();
-
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
   void idleWhileBreak() {
