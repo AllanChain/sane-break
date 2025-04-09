@@ -144,7 +144,7 @@ class TestApp : public QObject {
     EXPECT_CALL(app, doLockScreen()).Times(0);
 
     // Emitted by window manager when user is idle or force break
-    emit windowControl->resume();
+    emit windowControl->countDownStateChanged(true);
 
     QVERIFY(deps.screenLockTimer->isActive());
     QVERIFY(deps.screenLockTimer->isSingleShot());
@@ -167,7 +167,7 @@ class TestApp : public QObject {
     app.advance(app.trayData.secondsToNextBreak);
 
     EXPECT_CALL(app, doLockScreen()).Times(0);
-    emit windowControl->resume();
+    emit windowControl->countDownStateChanged(true);
     QVERIFY(!deps.screenLockTimer->isActive());
     emit windowControl->timeout();
     ;

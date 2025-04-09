@@ -67,7 +67,7 @@ class AbstractApp : public QObject {
 
   void tick();
   void onSleepEnd();
-  void onBreakResume();
+  void onBreakCountDownStateChange(bool countingDown);
   void onBreakEnd();
   void onIdleStart();
   void onIdleEnd();

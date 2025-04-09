@@ -34,8 +34,8 @@ AbstractApp::AbstractApp(const AppDependencies &deps, QObject *parent)
   m_oneshotIdleTimer->setMinIdleTime(1000);
   m_screenLockTimer->setSingleShot(true);
 
-  connect(m_windowControl, &AbstractWindowControl::resume, this,
-          &AbstractApp::onBreakResume);
+  connect(m_windowControl, &AbstractWindowControl::countDownStateChanged, this,
+          &AbstractApp::onBreakCountDownStateChange);
   connect(m_windowControl, &AbstractWindowControl::timeout, this,
           &AbstractApp::onBreakEnd);
   connect(m_systemMonitor, &AbstractSystemMonitor::idleStarted, this,
@@ -121,7 +121,8 @@ void AbstractApp::updateTray() {
   emit trayDataUpdated(data);
 }
 
-void AbstractApp::onBreakResume() {
+void AbstractApp::onBreakCountDownStateChange(bool countingDown) {
+  if (!countingDown) return m_screenLockTimer->stop();
   int msec = preferences->autoScreenLock->get() * 1000;
   if (msec != 0) m_screenLockTimer->start(msec);
 }

@@ -67,8 +67,8 @@ class AbstractWindowControl : public QObject {
   bool isShowing();
 
  signals:
-  void resume();
   void timeout();
+  void countDownStateChanged(bool countingDown);
 
  protected:
   SaneBreak::BreakType m_currentType;

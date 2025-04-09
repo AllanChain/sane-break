@@ -111,7 +111,7 @@ void AbstractWindowControl::tick() {
 }
 
 void AbstractWindowControl::forceBreak() {
-  emit resume();
+  emit countDownStateChanged(true);
   m_isForceBreak = true;
   for (auto w : std::as_const(m_windows)) w->setFullScreen();
   if (preferences->showKillTip->get())
@@ -120,7 +120,7 @@ void AbstractWindowControl::forceBreak() {
 
 void AbstractWindowControl::onIdleStart() {
   if (m_isForceBreak || m_remainingTime <= 0) return;
-  emit resume();
+  emit countDownStateChanged(true);
   m_isIdle = true;
   for (auto w : std::as_const(m_windows)) w->setFullScreen();
 }
@@ -131,6 +131,7 @@ void AbstractWindowControl::onIdleEnd() {
   // have the whole break again just because they accidentally touch the mouse
   // when the break almost finishes.
   if (m_isForceBreak || m_remainingTime <= 3) return;
+  emit countDownStateChanged(false);
   for (auto w : std::as_const(m_windows)) {
     w->resizeToNormal();
   }
