@@ -70,7 +70,7 @@ class AbstractWindowControl : public QObject {
   void countDownStateChanged(bool countingDown);
 
  protected:
-  bool m_isShowing;
+  bool m_isShowing = false;
   SaneBreak::BreakType m_currentType;
   int m_remainingTime;
   bool m_isIdle = false;
