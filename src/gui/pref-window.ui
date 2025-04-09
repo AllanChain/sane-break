@@ -261,7 +261,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
                  <string> sec</string>
                 </property>
                 <property name="minimum">
-                 <number>1</number>
+                 <number>5</number>
                 </property>
                 <property name="maximum">
                  <number>65535</number>
@@ -309,7 +309,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
                  <string> min</string>
                 </property>
                 <property name="minimum">
-                 <number>1</number>
+                 <number>5</number>
                 </property>
                 <property name="maximum">
                  <number>65535</number>
@@ -525,6 +525,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
                 <property name="suffix">
                  <string> sec</string>
                 </property>
+                <property name="minimum">
+                 <number>10</number>
+                </property>
                 <property name="maximum">
                  <number>65535</number>
                 </property>
@@ -533,7 +536,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
               <item row="1" column="1">
                <widget class="SteppedSlider" name="confirmAfterSlider">
                 <property name="minimum">
-                 <number>0</number>
+                 <number>5</number>
                 </property>
                 <property name="maximum">
                  <number>30</number>
@@ -577,6 +580,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
               </item>
               <item row="0" column="1">
                <widget class="SteppedSlider" name="flashForSlider">
+                <property name="minimum">
+                 <number>10</number>
+                </property>
                 <property name="maximum">
                  <number>300</number>
                 </property>
@@ -604,6 +610,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
                <widget class="QSpinBox" name="confirmAfterBox">
                 <property name="suffix">
                  <string> sec</string>
+                </property>
+                <property name="minimum">
+                 <number>5</number>
                 </property>
                 <property name="maximum">
                  <number>65535</number>
@@ -915,6 +924,9 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                 <property name="suffix">
                  <string> min</string>
                 </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
                 <property name="maximum">
                  <number>65535</number>
                 </property>
@@ -993,6 +1005,9 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                 <property name="suffix">
                  <string> min</string>
                 </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
                 <property name="maximum">
                  <number>65535</number>
                 </property>
@@ -1040,6 +1055,9 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                <widget class="QSpinBox" name="resetCycleBox">
                 <property name="suffix">
                  <string> min</string>
+                </property>
+                <property name="minimum">
+                 <number>2</number>
                 </property>
                 <property name="maximum">
                  <number>65535</number>
