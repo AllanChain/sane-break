@@ -42,6 +42,11 @@ StatusTrayWindow::StatusTrayWindow(SanePreferences *preferences, QObject *parent
   connect(bigBreakAction, &QAction::triggered, this,
           &StatusTrayWindow::nextBigBreakRequested);
 
+  smallBreakInsteadAction = menu->addAction(tr("Take a small break instead"));
+  smallBreakInsteadAction->setVisible(false);
+  connect(smallBreakInsteadAction, &QAction::triggered, this,
+          &StatusTrayWindow::smallBreakInsteadRequested);
+
   menu->addSeparator();
 
   postponeMenu = menu->addMenu(tr("Postpone"));
@@ -65,19 +70,18 @@ StatusTrayWindow::StatusTrayWindow(SanePreferences *preferences, QObject *parent
 }
 
 void StatusTrayWindow::update(TrayData data) {
-  setTitle(QString("%1 %2").arg(
-      data.smallBreaksBeforeBigBreak == 0 ? tr("big break") : tr("small break"),
-      formatTime(data.secondsToNextBreak)));
   nextBreakAction->setText(
       tr("Next break after %1").arg(formatTime(data.secondsToNextBreak)));
   bigBreakAction->setText(
       tr("Next big break after %1").arg(formatTime(data.secondsToNextBigBreak)));
 
-  if (!data.pauseReasons) {
-    enableBreak->setVisible(false);
-    nextBreakAction->setVisible(true);
-    bigBreakAction->setVisible(true);
-  } else {
+  enableBreak->setVisible(data.pauseReasons);
+  nextBreakAction->setVisible(!data.isBreaking && !data.pauseReasons);
+  bigBreakAction->setVisible(!data.isBreaking && !data.pauseReasons);
+  smallBreakInsteadAction->setVisible(data.isBreaking &&
+                                      data.smallBreaksBeforeBigBreak == 0);
+
+  if (data.pauseReasons) {
     if (data.pauseReasons.testFlag(SaneBreak::PauseReason::OnBattery)) {
       setTitle(tr("Paused on battery"));
     } else if (data.pauseReasons.testFlag(SaneBreak::PauseReason::AppOpen)) {
@@ -85,9 +89,10 @@ void StatusTrayWindow::update(TrayData data) {
     } else if (data.pauseReasons.testFlag(SaneBreak::PauseReason::Idle)) {
       setTitle(tr("Paused on idle"));
     }
-    enableBreak->setVisible(true);
-    nextBreakAction->setVisible(false);
-    bigBreakAction->setVisible(false);
+  } else {
+    setTitle(QString("%1 %2").arg(
+        data.smallBreaksBeforeBigBreak == 0 ? tr("big break") : tr("small break"),
+        formatTime(data.secondsToNextBreak)));
   }
 }
 

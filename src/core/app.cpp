@@ -94,8 +94,6 @@ void AbstractApp::breakNow() {
   m_isBreaking = true;
   m_windowControl->show(smallBreaksBeforeBig() == 0 ? SaneBreak::BreakType::Big
                                                     : SaneBreak::BreakType::Small);
-  // Update cycle count after show break
-  m_breakCycleCount++;
   updateTray();
   // For testing user is idle after break end
   m_oneshotIdleTimer->startWatching();
@@ -103,6 +101,13 @@ void AbstractApp::breakNow() {
 
 void AbstractApp::bigBreakNow() {
   m_breakCycleCount = 0;
+  breakNow();
+}
+
+void AbstractApp::smallBreakInstead() {
+  m_windowControl->close();
+  // Next break will be a big break
+  m_breakCycleCount = -1;
   breakNow();
 }
 
@@ -127,10 +132,10 @@ void AbstractApp::onBreakCountDownStateChange(bool countingDown) {
   if (msec != 0) m_screenLockTimer->start(msec);
 }
 
-// Resume countdown if user is idle after breaks
 void AbstractApp::onBreakEnd() {
   m_isBreaking = false;
   resetSecondsToNextBreak();
+  m_breakCycleCount++;
   if (!m_oneshotIdleTimer->isIdle) {
     m_oneshotIdleTimer->stopWatching();
     m_screenLockTimer->stop();

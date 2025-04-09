@@ -43,6 +43,8 @@ class AbstractApp : public QObject {
 
   void breakNow();
   void bigBreakNow();
+  // Take a small break when big break is on
+  void smallBreakInstead();
   void postpone(int secs);
   void pauseBreak(SaneBreak::PauseReasons reason);
   void resumeBreak(SaneBreak::PauseReasons reason);

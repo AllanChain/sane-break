@@ -37,6 +37,8 @@ SaneBreakApp::SaneBreakApp(const AppDependencies &deps, QObject *parent)
   connect(tray, &StatusTrayWindow::nextBreakRequested, this, &SaneBreakApp::breakNow);
   connect(tray, &StatusTrayWindow::nextBigBreakRequested, this,
           &SaneBreakApp::bigBreakNow);
+  connect(tray, &StatusTrayWindow::smallBreakInsteadRequested, this,
+          &SaneBreakApp::smallBreakInstead);
   connect(tray, &StatusTrayWindow::postponeRequested, this, &SaneBreakApp::postpone);
   connect(tray, &StatusTrayWindow::preferenceWindowRequested, this,
           &SaneBreakApp::showPreferences);

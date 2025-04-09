@@ -31,6 +31,7 @@ class StatusTrayWindow : public QObject {
  signals:
   void nextBreakRequested();
   void nextBigBreakRequested();
+  void smallBreakInsteadRequested();
   void enableBreakRequested();
   void preferenceWindowRequested();
   void postponeRequested(int secs);
@@ -43,6 +44,7 @@ class StatusTrayWindow : public QObject {
   QAction *quitAction;
   QAction *nextBreakAction;
   QAction *bigBreakAction;
+  QAction *smallBreakInsteadAction;
   QAction *enableBreak;
 };
 
