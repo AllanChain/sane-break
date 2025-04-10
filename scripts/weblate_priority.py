@@ -1,4 +1,3 @@
-import json
 import os
 
 import requests
@@ -52,7 +51,7 @@ while url:
         extra_flags = unit.get("extra_flags", "")
         new_extra_flags = update_flags_priority(extra_flags, priority)
         if new_extra_flags == extra_flags or (
-            not "priority" in extra_flags and priority == 100
+            "priority" not in extra_flags and priority == 100
         ):
             continue
         print(f"{new_extra_flags:<20} {unit['source']}")
