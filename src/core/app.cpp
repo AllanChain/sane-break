@@ -38,6 +38,8 @@ AbstractApp::AbstractApp(const AppDependencies &deps, QObject *parent)
           &AbstractApp::onBreakCountDownStateChange);
   connect(m_windowControl, &AbstractWindowControl::timeout, this,
           &AbstractApp::onBreakEnd);
+  connect(m_windowControl, &AbstractWindowControl::aborted, this,
+          &AbstractApp::onBreakAbort);
   connect(m_systemMonitor, &AbstractSystemMonitor::idleStarted, this,
           &AbstractApp::onIdleStart);
   connect(m_systemMonitor, &AbstractSystemMonitor::idleEnded, this,
@@ -91,11 +93,11 @@ void AbstractApp::resetSecondsToNextBreak() {
 }
 
 void AbstractApp::breakNow() {
+  m_secondsToNextBreak = 0;
   m_isBreaking = true;
   m_windowControl->show(smallBreaksBeforeBig() == 0 ? SaneBreak::BreakType::Big
                                                     : SaneBreak::BreakType::Small);
   updateTray();
-  m_breakCycleCount++;
   // For testing user is idle after break end
   m_oneshotIdleTimer->startWatching();
 }
@@ -133,8 +135,14 @@ void AbstractApp::onBreakCountDownStateChange(bool countingDown) {
   if (msec != 0) m_screenLockTimer->start(msec);
 }
 
+void AbstractApp::onBreakAbort() {
+  m_isBreaking = false;
+  updateTray();
+}
+
 void AbstractApp::onBreakEnd() {
   m_isBreaking = false;
+  m_breakCycleCount++;
   resetSecondsToNextBreak();
   updateTray();
   if (!m_oneshotIdleTimer->isIdle) {

@@ -255,6 +255,23 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
              deps.preferences->bigAfter->get() - 1);
   }
+  void postponeWhileBreak() {
+    auto [deps, windowControl] = DummyApp::makeDeps();
+    deps.preferences->pauseOnBattery->set(true);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    EXPECT_CALL(*windowControl, createWindows(SaneBreak::BreakType::Small)).Times(1);
+    app.breakNow();
+    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+
+    EXPECT_CALL(*windowControl, deleteWindows()).Times(1);
+    app.postpone(100);
+    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
+    QCOMPARE(app.trayData.secondsToNextBreak, 100);
+    QCOMPARE(app.trayData.secondsToNextBigBreak, 100);
+  }
   void pauseWhileBreak() {
     auto [deps, windowControl] = DummyApp::makeDeps();
     deps.preferences->pauseOnBattery->set(true);

@@ -67,6 +67,7 @@ class AbstractWindowControl : public QObject {
 
  signals:
   void timeout();
+  void aborted();
   void countDownStateChanged(bool countingDown);
 
  protected:

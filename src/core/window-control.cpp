@@ -93,7 +93,10 @@ void AbstractWindowControl::close() {
   m_forceBreakTimer->stop();
   m_idleTimer->stopWatching();
   deleteWindows();
-  emit timeout();
+  if (m_remainingTime > 0)
+    emit aborted();
+  else
+    emit timeout();
 }
 
 void AbstractWindowControl::tick() {
@@ -105,9 +108,7 @@ void AbstractWindowControl::tick() {
     if (preferences->showKillTip->get())
       for (auto w : std::as_const(m_windows)) w->showKillTip();
   }
-  if (m_remainingTime <= 0) {
-    close();
-  }
+  if (m_remainingTime <= 0) close();
 }
 
 void AbstractWindowControl::forceBreak() {
