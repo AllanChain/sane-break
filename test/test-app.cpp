@@ -40,7 +40,6 @@ class TestApp : public QObject {
     emit deps.countDownTimer->timeout();
     // Time has ellapsed
     QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get() - 1);
-    QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
   void showFirstBreak() {
     auto [deps, windowControl] = DummyApp::makeDeps();
@@ -57,7 +56,7 @@ class TestApp : public QObject {
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, 0);
 
-    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+    QVERIFY(Mock::VerifyAndClearExpectations(windowControl));
 
     // Simulate break window close
     emit windowControl->timeout();
@@ -84,7 +83,7 @@ class TestApp : public QObject {
       app.advance(app.trayData.secondsToNextBreak);
       emit windowControl->timeout();
     }
-    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+    QVERIFY(Mock::VerifyAndClearExpectations(windowControl));
   }
   void idleAfterBreak() {
     auto [deps, windowControl] = DummyApp::makeDeps();
@@ -255,6 +254,27 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
              deps.preferences->bigAfter->get() - 1);
   }
+  void takeSmallBreakInstead() {
+    auto [deps, windowControl] = DummyApp::makeDeps();
+    deps.preferences->pauseOnBattery->set(true);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    EXPECT_CALL(*windowControl, createWindows(SaneBreak::BreakType::Big)).Times(1);
+    app.bigBreakNow();
+    QVERIFY(Mock::VerifyAndClearExpectations(windowControl));
+
+    EXPECT_CALL(*windowControl, createWindows(SaneBreak::BreakType::Small)).Times(1);
+    EXPECT_CALL(*windowControl, deleteWindows()).Times(1);
+    app.smallBreakInstead();
+    QVERIFY(Mock::VerifyAndClearExpectations(windowControl));
+    QVERIFY(app.trayData.isBreaking);
+
+    emit windowControl->timeout();
+    QVERIFY(!app.trayData.isBreaking);
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
+    QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
+  }
   void postponeWhileBreak() {
     auto [deps, windowControl] = DummyApp::makeDeps();
     deps.preferences->pauseOnBattery->set(true);
@@ -263,11 +283,11 @@ class TestApp : public QObject {
 
     EXPECT_CALL(*windowControl, createWindows(SaneBreak::BreakType::Small)).Times(1);
     app.breakNow();
-    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+    QVERIFY(Mock::VerifyAndClearExpectations(windowControl));
 
     EXPECT_CALL(*windowControl, deleteWindows()).Times(1);
     app.postpone(100);
-    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+    QVERIFY(Mock::VerifyAndClearExpectations(windowControl));
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
     QCOMPARE(app.trayData.secondsToNextBreak, 100);
     QCOMPARE(app.trayData.secondsToNextBigBreak, 100);
@@ -280,11 +300,11 @@ class TestApp : public QObject {
 
     EXPECT_CALL(*windowControl, createWindows(SaneBreak::BreakType::Small)).Times(1);
     app.breakNow();
-    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+    QVERIFY(Mock::VerifyAndClearExpectations(windowControl));
 
     EXPECT_CALL(*windowControl, deleteWindows()).Times(1);
     emit deps.systemMonitor->batteryPowered();
-    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+    QVERIFY(Mock::VerifyAndClearExpectations(windowControl));
   }
   void idleWhileBreak() {
     auto [deps, windowControl] = DummyApp::makeDeps();
@@ -295,8 +315,24 @@ class TestApp : public QObject {
     app.breakNow();
     EXPECT_CALL(*windowControl, deleteWindows()).Times(0);
     emit deps.systemMonitor->idleStarted();
+    QVERIFY(Mock::VerifyAndClearExpectations(windowControl));
+    QVERIFY(app.trayData.isBreaking);
+    QCOMPARE(app.trayData.secondsToNextBreak, 0);
+  }
+  void sleepEndWhileBreak() {
+    auto [deps, windowControl] = DummyApp::makeDeps();
+    NiceMock<DummyApp> app(deps);
+    app.start();
 
-    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+    EXPECT_CALL(*windowControl, createWindows(SaneBreak::BreakType::Small)).Times(1);
+    app.breakNow();
+    EXPECT_CALL(*windowControl, deleteWindows()).Times(1);
+    emit deps.systemMonitor->sleepEnded();
+    QVERIFY(Mock::VerifyAndClearExpectations(windowControl));
+    QVERIFY(!app.trayData.isBreaking);
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
+             deps.preferences->bigAfter->get() - 1);
+    QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
   }
   void moreThanOnePauseReasons() {
     auto [deps, windowControl] = DummyApp::makeDeps();
