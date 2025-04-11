@@ -1237,7 +1237,9 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
               <item row="0" column="1">
                <widget class="QLineEdit" name="configFile">
                 <property name="styleSheet">
-                 <string notr="true">background-color: #00000000</string>
+                 <string notr="true">QLineEdit {
+  background: transparent;
+}</string>
                 </property>
                 <property name="readOnly">
                  <bool>true</bool>
