@@ -55,8 +55,8 @@
     </message>
     <message>
         <location filename="../../src/gui/break-window.cpp" line="144"/>
-        <source>&lt;p&gt;Quit Sane Break by pressing &lt;code&gt;Win + R&lt;/code&gt; and run &lt;code&gt;taskkill /IM sane-break.exe /F&lt;/code&gt;</source>
-        <translation>&lt;p&gt;按 &lt;code&gt;Win + R&lt;/code&gt; 并运行 &lt;code&gt;taskkill /IM sane-break.exe /F&lt;/code&gt; 以退出 Sane Break。&lt;/p&gt;</translation>
+        <source>&lt;p&gt;Pospone Sane Break by pressing &lt;code&gt;Win&lt;/code&gt; and right click Sane Break icon in the system tray.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;按 &lt;code&gt;Win&lt;/code&gt; 键后右键系统托盘中的 Sane Break 图标以推迟休息&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -238,7 +238,7 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
         <translation>短时间暂停阈值</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1285"/>
+        <location filename="../../src/gui/pref-window.ui" line="1287"/>
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
@@ -248,22 +248,22 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
 定。如果休息持续超过 2 分钟，则屏幕必然会自动锁定。</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1290"/>
+        <location filename="../../src/gui/pref-window.ui" line="1292"/>
         <source>Automatic screen lock after break start</source>
         <translation>休息开始一段时间后自动锁屏</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1310"/>
+        <location filename="../../src/gui/pref-window.ui" line="1312"/>
         <source>Please grant accessibility permission and restart app to use auto lock screen</source>
         <translation>请授予辅助功能权限并重启应用以使用自动锁屏功能</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1263"/>
+        <location filename="../../src/gui/pref-window.ui" line="1265"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;帮我们翻译！&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1443"/>
+        <location filename="../../src/gui/pref-window.ui" line="1445"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -437,12 +437,12 @@ v%1
         <translation>配置文件</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1325"/>
+        <location filename="../../src/gui/pref-window.ui" line="1327"/>
         <source>Launch Sane Break at start up</source>
         <translation>开机自动启动 Sane Break</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1524"/>
+        <location filename="../../src/gui/pref-window.ui" line="1526"/>
         <source>Revert to Last Saved</source>
         <translation>恢复上次设置</translation>
     </message>
@@ -452,12 +452,12 @@ v%1
         <translation>语言</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1250"/>
+        <location filename="../../src/gui/pref-window.ui" line="1252"/>
         <source>Change of language will take effect after app restart.</source>
         <translation>改变语言将在重启应用后生效。</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1547"/>
+        <location filename="../../src/gui/pref-window.ui" line="1549"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
