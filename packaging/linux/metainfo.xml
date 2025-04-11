@@ -56,6 +56,26 @@
   </screenshots>
 
   <releases>
+    <release version="0.8.0" data="2025-04-11">
+      <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.8.0</url>
+      <description>
+        <p>Features</p>
+        <ul>
+          <li>Introduced custom color themes for break windows</li>
+          <li>Added customizable break messages</li>
+          <li>Added option to take a small break instead of a big break</li>
+          <li>Optional tips to exit the application during forced breaks</li>
+        </ul>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>Resolved Wayland protocol errors on Qt 6.9 platforms</li>
+          <li>Enhanced minimum value settings for sliders and spin boxes</li>
+          <li>Fixed menu background color inconsistencies in configuration</li>
+          <li>Fixed unexpected autostart requests</li>
+          <li>Fixed lock screen logic during breaks</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.7.1" date="2025-04-02">
       <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.7.1</url>
       <description>
