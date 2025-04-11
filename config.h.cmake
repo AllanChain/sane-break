@@ -4,3 +4,4 @@
 #cmakedefine ENABLE_WAYLAND
 #cmakedefine WITH_TRANSLATIONS
 #cmakedefine LINUX_DIST_FLATPAK
+#cmakedefine BUNDLE_QT_TRANSLATIONS

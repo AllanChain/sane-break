@@ -6,6 +6,7 @@
 
 #include <QComboBox>
 #include <QEvent>
+#include <QList>
 #include <QString>
 #include <QTranslator>
 #include <QWidget>
@@ -13,7 +14,7 @@
 class LanguageSelect : public QComboBox {
   Q_OBJECT
  public:
-  static QTranslator *currentTranslator;
+  static QList<QTranslator *> currentTranslators;
   LanguageSelect(QWidget *parent = nullptr);
   static void setLanguage(QString language);
   void setSelectedLanguage(QString language);

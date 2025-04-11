@@ -9,6 +9,8 @@
 #include <QDir>
 #include <QEvent>
 #include <QFileInfo>
+#include <QLibraryInfo>
+#include <QList>
 #include <QListIterator>
 #include <QString>
 #include <QStyleOptionSlider>
@@ -16,18 +18,49 @@
 #include <QWidget>
 #include <QtContainerFwd>
 
-QTranslator *LanguageSelect::currentTranslator = nullptr;
+#include "config.h"
+
+QList<QTranslator *> LanguageSelect::currentTranslators = {};
 
 void LanguageSelect::setLanguage(QString language) {
   QTranslator *translator = new QTranslator();
-  if (language == "" &&
-          translator->load(QLocale::system(), "sane-break", "_", ":/i18n") ||
-      translator->load(language, ":/i18n")) {
-    if (LanguageSelect::currentTranslator)
-      qApp->removeTranslator(LanguageSelect::currentTranslator);
-    qApp->installTranslator(translator);
-    LanguageSelect::currentTranslator = translator;
+  if (language == "" && !translator->load(QLocale::system(), "", "", ":/i18n") ||
+      !translator->load(language, ":/i18n")) {
+    if (language == "en") return;
+    // Fall back to English
+    return setLanguage("en");
   }
+  if (!currentTranslators.isEmpty()) {
+    const QList<QTranslator *> translatorsToRemove = currentTranslators;
+    for (QTranslator *translatorToRemove : translatorsToRemove) {
+      qApp->removeTranslator(translatorToRemove);
+    }
+    currentTranslators.empty();
+  }
+  qApp->installTranslator(translator);
+  currentTranslators.append(translator);
+
+  QLocale::setDefault(QLocale(language));
+
+  QTranslator *qtBaseTranslater = new QTranslator();
+#ifdef BUNDLE_QT_TRANSLATIONS
+  if (language == "" &&
+          !qtBaseTranslater->load(QLocale::system(), "", "", ":/i18n-qtbase") ||
+      !qtBaseTranslater->load(language, ":/i18n-qtbase")) {
+    qDebug() << "Failed to set Qt base translator" << language;
+    return;
+  }
+#else
+  QString translatorPath = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
+  if (language == "" &&
+          !qtBaseTranslater->load(QLocale::system(), "qtbase", "_", translatorPath) ||
+      !qtBaseTranslater->load("qtbase_" + language, translatorPath)) {
+    qDebug() << "Failed to set Qt base translator" << language;
+    return;
+  }
+#endif
+  qApp->installTranslator(qtBaseTranslater);
+  currentTranslators.append(qtBaseTranslater);
 }
 
 LanguageSelect::LanguageSelect(QWidget *parent) : QComboBox(parent) {

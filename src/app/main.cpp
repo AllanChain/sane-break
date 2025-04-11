@@ -33,15 +33,7 @@ int main(int argc, char *argv[]) {
   SanePreferences *preferences = preferences->createDefault();
 
 #ifdef WITH_TRANSLATIONS
-  QTranslator translator;
-  if (preferences->language->get().length() > 0 &&
-      translator.load(preferences->language->get(), ":/i18n")) {
-    a.installTranslator(&translator);
-    LanguageSelect::currentTranslator = &translator;
-  } else if (translator.load(QLocale::system(), "sane-break", "_", ":/i18n")) {
-    a.installTranslator(&translator);
-    LanguageSelect::currentTranslator = &translator;
-  }
+  LanguageSelect::setLanguage(preferences->language->get());
 #endif
 
 #ifdef Q_OS_LINUX
