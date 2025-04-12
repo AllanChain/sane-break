@@ -77,9 +77,13 @@ jobs:
          path: ./release/*
 
   build-macos:
-    name: Build (macOS)
+    name: Build (macOS, ${{ matrix.arch }})
     needs: test
     runs-on: macos-15
+    strategy:
+      fail-fast: false # continue other jobs if one failed
+      matrix:
+        arch: [x86_64, arm64]
     steps:
     - uses: actions/checkout@v4
     - uses: AllanChain/install-qt-static@v6.9
@@ -88,7 +92,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" ..
+        qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_OSX_ARCHITECTURES=${{ matrix.arch }} ..
         cmake --build . --parallel
 
     - uses: apple-actions/import-codesign-certs@v3
@@ -134,7 +138,7 @@ jobs:
           --icon "Sane Break" 141 249 \
           --app-drop-link 458 249 \
           --eula LICENSE \
-          "release/sane-break-macos.dmg" \
+          "release/sane-break-macos-${{ matrix.arch }}.dmg" \
           "build/Sane Break.app"
 
     - name: Attestation
@@ -145,7 +149,7 @@ jobs:
     - name: Create Artifact
       uses: actions/upload-artifact@v4
       with:
-         name: "sane-break-macos"
+         name: "sane-break-macos-${{ matrix.arch }}"
          path: ./release/*
 
   build-x11:
@@ -281,7 +285,7 @@ jobs:
 
             ### macOS
 
-            Download `sane-break-macos.dmg` file and install. It is a universal bundle and both x86 and ARM version of macOS 12 or newer are supported.
+            Download `sane-break-macos-x86_64.dmg` file if you are using Intel mac, or `sane-break-macos-arm64` if you are using ARM chip. Open and install it. macOS 13 or newer are supported.
 
             ### Windows
 
