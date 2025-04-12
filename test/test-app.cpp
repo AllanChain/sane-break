@@ -59,7 +59,7 @@ class TestApp : public QObject {
     QVERIFY(Mock::VerifyAndClearExpectations(windowControl));
 
     // Simulate break window close
-    emit windowControl->timeout();
+    windowControl->advanceToEnd();
 
     // The remaining time is correct
     int smallEvery = deps.preferences->smallEvery->get();
@@ -68,6 +68,24 @@ class TestApp : public QObject {
     // Countdown is stopped
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, smallEvery - 1);
+  }
+  void breakTick() {
+    auto [deps, windowControl] = DummyApp::makeDeps();
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.advance(app.trayData.secondsToNextBreak);
+    QCOMPARE(app.trayData.secondsToNextBreak, 0);
+
+    QVERIFY(app.trayData.isBreaking);
+    int expectedTimeForBreak =
+        deps.preferences->smallFor->get() + deps.preferences->flashFor->get();
+    app.advance(expectedTimeForBreak);
+    QVERIFY(!app.trayData.isBreaking);
+
+    // The remaining time is correct
+    int smallEvery = deps.preferences->smallEvery->get();
+    QCOMPARE(app.trayData.secondsToNextBreak, smallEvery);
   }
   void showBigBreak() {
     auto [deps, windowControl] = DummyApp::makeDeps();
@@ -81,7 +99,7 @@ class TestApp : public QObject {
     for (int j = 0; j < numberOfBreaks; j++) {
       QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, numberOfBreaks - j - 1);
       app.advance(app.trayData.secondsToNextBreak);
-      emit windowControl->timeout();
+      windowControl->advanceToEnd();
     }
     QVERIFY(Mock::VerifyAndClearExpectations(windowControl));
   }
@@ -93,7 +111,7 @@ class TestApp : public QObject {
 
     deps.oneshotIdleTimer->isIdle = true;
     emit deps.oneshotIdleTimer->idleStart();
-    emit windowControl->timeout();
+    windowControl->advanceToEnd();
     ;
 
     // The remaining time is correct
@@ -122,7 +140,7 @@ class TestApp : public QObject {
     deps.oneshotIdleTimer->isIdle = false;
     emit deps.oneshotIdleTimer->idleEnd();
 
-    emit windowControl->timeout();
+    windowControl->advanceToEnd();
     ;
 
     // Countdown resumed
@@ -147,7 +165,7 @@ class TestApp : public QObject {
     QVERIFY(deps.screenLockTimer->isActive());
     QVERIFY(deps.screenLockTimer->isSingleShot());
 
-    emit windowControl->timeout();
+    windowControl->advanceToEnd();
 
     EXPECT_CALL(app, doLockScreen()).Times(1);
     emit deps.screenLockTimer->timeout();
@@ -166,7 +184,7 @@ class TestApp : public QObject {
     EXPECT_CALL(app, doLockScreen()).Times(0);
     emit windowControl->countDownStateChanged(true);
     QVERIFY(!deps.screenLockTimer->isActive());
-    emit windowControl->timeout();
+    windowControl->advanceToEnd();
 
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
@@ -223,7 +241,7 @@ class TestApp : public QObject {
     app.start();
 
     app.advance(app.trayData.secondsToNextBreak);
-    emit windowControl->timeout();
+    windowControl->advanceToEnd();
     app.advance(100);
 
     int smallBreaksBeforeBigBreak = app.trayData.smallBreaksBeforeBigBreak;
@@ -270,7 +288,7 @@ class TestApp : public QObject {
     QVERIFY(Mock::VerifyAndClearExpectations(windowControl));
     QVERIFY(app.trayData.isBreaking);
 
-    emit windowControl->timeout();
+    windowControl->advanceToEnd();
     QVERIFY(!app.trayData.isBreaking);
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
     QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());

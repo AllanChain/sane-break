@@ -34,15 +34,13 @@ class DummyWindowControl : public AbstractWindowControl {
   Q_OBJECT
  public:
   using AbstractWindowControl::AbstractWindowControl;
-  static WindowDependencies makeDeps() {
-    return {
-        .countDownTimer = new AbstractTimer(),
-        .idleTimer = new DummyIdleTime(),
-        .forceBreakTimer = new AbstractTimer(),
-    };
-  }
+  static WindowDependencies makeDeps() { return {.idleTimer = new DummyIdleTime()}; }
   MOCK_METHOD(void, createWindows, (SaneBreak::BreakType), (override));
   MOCK_METHOD(void, deleteWindows, (), (override));
+  void advanceToEnd() {
+    m_remainingSeconds = 0;
+    close();
+  }
 };
 
 class DummySystemMonitor : public AbstractSystemMonitor {

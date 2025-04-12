@@ -16,26 +16,12 @@
 #include "config.h"
 #include "core/flags.h"
 #include "core/idle-time.h"
-#include "core/timer.h"
 
 AbstractWindowControl::AbstractWindowControl(const WindowDependencies &deps,
                                              QObject *parent)
-    : QObject(parent),
-      preferences(deps.preferences),
-      m_countDownTimer(deps.countDownTimer),
-      m_forceBreakTimer(deps.forceBreakTimer),
-      m_idleTimer(deps.idleTimer) {
-  if (!m_countDownTimer->parent()) m_countDownTimer->setParent(this);
-  if (!m_forceBreakTimer->parent()) m_forceBreakTimer->setParent(this);
+    : QObject(parent), preferences(deps.preferences), m_idleTimer(deps.idleTimer) {
   if (!m_idleTimer->parent()) m_idleTimer->setParent(this);
 
-  m_countDownTimer->setInterval(1000);
-  m_forceBreakTimer->setSingleShot(true);
-
-  connect(m_countDownTimer, &AbstractTimer::timeout, this,
-          &AbstractWindowControl::tick);
-  connect(m_forceBreakTimer, &AbstractTimer::timeout, this,
-          &AbstractWindowControl::forceBreak);
   connect(m_idleTimer, &SystemIdleTime::idleStart, this,
           &AbstractWindowControl::onIdleStart);
   connect(m_idleTimer, &SystemIdleTime::idleEnd, this,
@@ -45,16 +31,16 @@ AbstractWindowControl::AbstractWindowControl(const WindowDependencies &deps,
 void AbstractWindowControl::show(SaneBreak::BreakType type) {
   m_isShowing = true;
   m_currentType = type;
-  m_totalTime = type == SaneBreak::BreakType::Big ? preferences->bigFor->get()
-                                                  : preferences->smallFor->get();
-  m_remainingTime = m_totalTime;
+  m_totalSeconds = type == SaneBreak::BreakType::Big ? preferences->bigFor->get()
+                                                     : preferences->smallFor->get();
+  m_remainingSeconds = m_totalSeconds;
   m_isIdle = false;
   m_isForceBreak = false;
+  m_secondsToForceBreak = preferences->flashFor->get();
+
   createWindows(type);
   for (auto w : std::as_const(m_windows)) w->start();
-  m_countDownTimer->start();
-  m_forceBreakTimer->setInterval(preferences->flashFor->get() * 1000);
-  m_forceBreakTimer->start();
+
   m_idleTimer->startWatching();
 }
 
@@ -89,11 +75,9 @@ void AbstractWindowControl::close() {
   // Do nothing if window is already closed
   if (!m_isShowing) return;
   m_isShowing = false;
-  m_countDownTimer->stop();
-  m_forceBreakTimer->stop();
   m_idleTimer->stopWatching();
   deleteWindows();
-  if (m_remainingTime > 0)
+  if (m_remainingSeconds > 0)
     emit aborted();
   else
     emit timeout();
@@ -101,14 +85,19 @@ void AbstractWindowControl::close() {
 
 void AbstractWindowControl::tick() {
   bool shouldCountDown = m_isForceBreak || m_isIdle;
-  if (shouldCountDown) m_remainingTime--;
-  for (auto w : std::as_const(m_windows)) w->setTime(m_remainingTime);
-  if (m_totalTime - m_remainingTime >= preferences->confirmAfter->get()) {
-    m_isForceBreak = true;  // confirm break
+  if (shouldCountDown) m_remainingSeconds--;
+  for (auto w : std::as_const(m_windows)) w->setTime(m_remainingSeconds);
+
+  // Confirm break
+  if (m_totalSeconds - m_remainingSeconds >= preferences->confirmAfter->get()) {
+    m_isForceBreak = true;
     if (preferences->showKillTip->get())
       for (auto w : std::as_const(m_windows)) w->showKillTip();
   }
-  if (m_remainingTime <= 0) close();
+  if (m_remainingSeconds <= 0)
+    close();
+  else if (!m_isForceBreak && --m_secondsToForceBreak <= 0)
+    forceBreak();
 }
 
 void AbstractWindowControl::forceBreak() {
@@ -120,7 +109,7 @@ void AbstractWindowControl::forceBreak() {
 }
 
 void AbstractWindowControl::onIdleStart() {
-  if (m_isForceBreak || m_remainingTime <= 0) return;
+  if (m_isForceBreak || m_remainingSeconds <= 0) return;
   emit countDownStateChanged(true);
   m_isIdle = true;
   for (auto w : std::as_const(m_windows)) w->setFullScreen();
@@ -131,11 +120,11 @@ void AbstractWindowControl::onIdleEnd() {
   // Because in most cases, user can wait for 3 seconds, but they don't want to
   // have the whole break again just because they accidentally touch the mouse
   // when the break almost finishes.
-  if (m_isForceBreak || m_remainingTime <= 3) return;
+  if (m_isForceBreak || m_remainingSeconds <= 3) return;
   emit countDownStateChanged(false);
   for (auto w : std::as_const(m_windows)) {
     w->resizeToNormal();
   }
   m_isIdle = false;
-  m_remainingTime = m_totalTime;
+  m_remainingSeconds = m_totalSeconds;
 }

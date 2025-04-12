@@ -12,13 +12,10 @@
 #include "core/flags.h"
 #include "core/idle-time.h"
 #include "core/preferences.h"
-#include "core/timer.h"
 
 struct WindowDependencies {
   SanePreferences *preferences = nullptr;
-  AbstractTimer *countDownTimer = nullptr;
   SystemIdleTime *idleTimer = nullptr;
-  AbstractTimer *forceBreakTimer = nullptr;
 };
 
 struct BreakTheme {
@@ -64,6 +61,8 @@ class AbstractWindowControl : public QObject {
 
   virtual void show(SaneBreak::BreakType type);
   virtual void close();
+  void tick();
+  bool isShowing() { return m_isShowing; };
 
  signals:
   void timeout();
@@ -71,24 +70,22 @@ class AbstractWindowControl : public QObject {
   void countDownStateChanged(bool countingDown);
 
  protected:
-  bool m_isShowing = false;
   SaneBreak::BreakType m_currentType;
-  int m_remainingTime;
+  bool m_isShowing = false;
   bool m_isIdle = false;
   bool m_isForceBreak = false;
-  int m_totalTime;
+  int m_secondsToForceBreak;
+  int m_remainingSeconds;
+  int m_totalSeconds;
   QList<AbstractBreakWindow *> m_windows;
 
   SanePreferences *preferences;
-  AbstractTimer *m_countDownTimer;
-  AbstractTimer *m_forceBreakTimer;
   SystemIdleTime *m_idleTimer;
 
   virtual void createWindows(SaneBreak::BreakType type) = 0;
   virtual void deleteWindows() = 0;
 
   BreakData breakData(SaneBreak::BreakType type);
-  void tick();
   void forceBreak();
   void onIdleStart();
   void onIdleEnd();

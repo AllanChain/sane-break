@@ -12,7 +12,6 @@
 #include "core/flags.h"
 #include "core/idle-time.h"
 #include "core/window-control.h"
-#include "lib/timer.h"
 
 #ifdef WITH_LAYER_SHELL
 #include <LayerShellQt/shell.h>
@@ -43,14 +42,9 @@ BreakWindowControl::BreakWindowControl(const WindowDependencies &deps, QObject *
 
 BreakWindowControl *BreakWindowControl::create(SanePreferences *preferences,
                                                QObject *parent) {
-  auto countDownTimer = new Timer();
-  auto forceBreakTimer = new Timer();
-  auto idleTimer = SystemIdleTime::createIdleTimer();
   WindowDependencies deps = {
       .preferences = preferences,
-      .countDownTimer = countDownTimer,
-      .idleTimer = idleTimer,
-      .forceBreakTimer = forceBreakTimer,
+      .idleTimer = SystemIdleTime::createIdleTimer(),
   };
   return new BreakWindowControl(deps, parent);
 }
@@ -75,7 +69,7 @@ void BreakWindowControl::show(SaneBreak::BreakType type) {
 
 void BreakWindowControl::close() {
   AbstractWindowControl::close();
-  if (m_remainingTime <= 0) {
+  if (m_remainingSeconds <= 0) {
     soundPlayer->play(m_currentType == SaneBreak::BreakType::Small
                           ? preferences->smallEndBell->get()
                           : preferences->bigEndBell->get());

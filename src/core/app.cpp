@@ -77,7 +77,10 @@ void AbstractApp::start() {
 }
 
 void AbstractApp::tick() {
-  if (m_isBreaking) return;
+  if (m_windowControl->isShowing()) {
+    m_windowControl->tick();
+    return;
+  }
   if (m_pauseReasons) {
     m_secondsPaused += 1;
     return;
@@ -94,7 +97,6 @@ void AbstractApp::resetSecondsToNextBreak() {
 
 void AbstractApp::breakNow() {
   m_secondsToNextBreak = 0;
-  m_isBreaking = true;
   m_windowControl->show(smallBreaksBeforeBig() == 0 ? SaneBreak::BreakType::Big
                                                     : SaneBreak::BreakType::Small);
   updateTray();
@@ -119,7 +121,7 @@ void AbstractApp::updateTray() {
   int secondsToNextBigBreak =
       m_secondsToNextBreak + smallBreaksBeforeBig() * secondsFromLastBreakToNext;
   TrayData data = {
-      .isBreaking = m_isBreaking,
+      .isBreaking = m_windowControl->isShowing(),
       .secondsToNextBreak = m_secondsToNextBreak,
       .secondsToNextBigBreak = secondsToNextBigBreak,
       .secondsFromLastBreakToNext = secondsFromLastBreakToNext,
@@ -135,13 +137,9 @@ void AbstractApp::onBreakCountDownStateChange(bool countingDown) {
   if (msec != 0) m_screenLockTimer->start(msec);
 }
 
-void AbstractApp::onBreakAbort() {
-  m_isBreaking = false;
-  updateTray();
-}
+void AbstractApp::onBreakAbort() { updateTray(); }
 
 void AbstractApp::onBreakEnd() {
-  m_isBreaking = false;
   m_breakCycleCount++;
   resetSecondsToNextBreak();
   updateTray();
@@ -219,7 +217,7 @@ void AbstractApp::onSleepEnd() {
 }
 
 void AbstractApp::onOneshotIdleEnd() {
-  if (m_isBreaking) return;
+  if (m_windowControl->isShowing()) return;
   m_oneshotIdleTimer->stopWatching();
   resumeBreak(SaneBreak::PauseReason::Idle);
 }

@@ -54,7 +54,6 @@ class AbstractApp : public QObject {
   void trayDataUpdated(TrayData trayData);
 
  protected:
-  bool m_isBreaking = false;
   int m_breakCycleCount = 1;
   int m_secondsPaused = 0;
   int m_secondsToNextBreak;
