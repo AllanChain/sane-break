@@ -28,7 +28,6 @@ class BreakWindowControl : public AbstractWindowControl {
 
  protected:
   void createWindows(SaneBreak::BreakType type) override;
-  void deleteWindows() override;
 
  private:
   SoundPlayer *soundPlayer;

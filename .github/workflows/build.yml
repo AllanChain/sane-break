@@ -37,6 +37,8 @@ jobs:
         apt-get install -y g++ cmake qt6-base-dev qt6-multimedia-dev libgmock-dev libxss-dev
 
     - name: Run Tests
+      env:
+        QT_QPA_PLATFORM: offscreen
       run: |
         mkdir build
         cd build

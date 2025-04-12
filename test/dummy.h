@@ -19,6 +19,12 @@
 #include "core/system-monitor.h"
 #include "core/timer.h"
 #include "core/window-control.h"
+#include "gmock/gmock.h"
+
+inline SanePreferences *tempPreferences() {
+  QTemporaryFile tempFile;
+  return new SanePreferences(new QSettings(tempFile.fileName(), QSettings::IniFormat));
+}
 
 class DummyIdleTime : public SystemIdleTime {
   Q_OBJECT
@@ -30,17 +36,49 @@ class DummyIdleTime : public SystemIdleTime {
   void setMinIdleTime(int idleTime) {};
 };
 
+class DummyBreakWindow : public AbstractBreakWindow {
+  Q_OBJECT
+ public:
+  using AbstractBreakWindow::AbstractBreakWindow;
+  MOCK_METHOD(void, start, (), (override));
+  MOCK_METHOD(void, setTime, (int), (override));
+  MOCK_METHOD(void, resizeToNormal, (), (override));
+  MOCK_METHOD(void, setFullScreen, (), (override));
+  MOCK_METHOD(void, showKillTip, (), (override));
+};
+
 class DummyWindowControl : public AbstractWindowControl {
   Q_OBJECT
  public:
   using AbstractWindowControl::AbstractWindowControl;
-  static WindowDependencies makeDeps() { return {.idleTimer = new DummyIdleTime()}; }
+  static WindowDependencies makeDeps() {
+    return {.preferences = tempPreferences(), .idleTimer = new DummyIdleTime()};
+  }
   MOCK_METHOD(void, createWindows, (SaneBreak::BreakType), (override));
   MOCK_METHOD(void, deleteWindows, (), (override));
   void advanceToEnd() {
     m_remainingSeconds = 0;
     close();
   }
+};
+
+class SimpleWindowControl : public AbstractWindowControl {
+  Q_OBJECT
+ public:
+  using AbstractWindowControl::AbstractWindowControl;
+  static WindowDependencies makeDeps() {
+    return {.preferences = tempPreferences(), .idleTimer = new DummyIdleTime()};
+  }
+  void createWindows(SaneBreak::BreakType type) {
+    window = new testing::NiceMock<DummyBreakWindow>(breakData(type));
+    m_windows.append(window);
+  }
+  bool hasWindows() { return !m_windows.isEmpty() && window != nullptr; }
+  void advance(int secs) {
+    for (int i = 0; i < secs; i++) tick();
+  }
+  DummyBreakWindow *window = nullptr;
+  using AbstractWindowControl::breakData;
 };
 
 class DummySystemMonitor : public AbstractSystemMonitor {
@@ -72,11 +110,11 @@ class DummyApp : public AbstractApp {
   }
   TrayData trayData;
   static std::pair<AppDependencies, DummyWindowControl *> makeDeps() {
-    QTemporaryFile tempFile;
-    auto preferences =
-        new SanePreferences(new QSettings(tempFile.fileName(), QSettings::IniFormat));
-    auto windowDeps = DummyWindowControl::makeDeps();
-    windowDeps.preferences = preferences;
+    auto preferences = tempPreferences();
+    WindowDependencies windowDeps = {
+        .preferences = preferences,
+        .idleTimer = new DummyIdleTime(),
+    };
     auto windowControl = new testing::NiceMock<DummyWindowControl>(windowDeps);
     AppDependencies deps = {
         .preferences = preferences,

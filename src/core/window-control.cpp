@@ -128,3 +128,11 @@ void AbstractWindowControl::onIdleEnd() {
   m_isIdle = false;
   m_remainingSeconds = m_totalSeconds;
 }
+
+void AbstractWindowControl::deleteWindows() {
+  for (auto w : std::as_const(m_windows)) {
+    w->close();
+    w->deleteLater();
+  }
+  m_windows.clear();
+}

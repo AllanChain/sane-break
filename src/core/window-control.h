@@ -44,7 +44,6 @@ class AbstractBreakWindow : public QMainWindow {
   virtual void setTime(int remainingTime) {};
   virtual void setFullScreen() {};
   virtual void resizeToNormal() {};
-  virtual void initSize(QScreen *screen) {};
   virtual void showKillTip() {};
 
  protected:
@@ -83,8 +82,7 @@ class AbstractWindowControl : public QObject {
   SystemIdleTime *m_idleTimer;
 
   virtual void createWindows(SaneBreak::BreakType type) = 0;
-  virtual void deleteWindows() = 0;
-
+  virtual void deleteWindows();
   BreakData breakData(SaneBreak::BreakType type);
   void forceBreak();
   void onIdleStart();

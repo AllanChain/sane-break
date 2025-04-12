@@ -25,12 +25,14 @@ class BreakWindow : public AbstractBreakWindow {
   ~BreakWindow() = default;
   static const int SMALL_WINDOW_WIDTH;
   static const int SMALL_WINDOW_HEIGHT;
+
   void start() override;
   void setTime(int remainingTime) override;
   void setFullScreen() override;
   void resizeToNormal() override;
-  void initSize(QScreen *screen) override;
   void showKillTip() override;
+
+  void initSize(QScreen *screen);
   void colorChanged();
 
  private:

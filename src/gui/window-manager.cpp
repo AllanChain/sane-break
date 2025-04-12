@@ -75,10 +75,3 @@ void BreakWindowControl::close() {
                           : preferences->bigEndBell->get());
   }
 }
-void BreakWindowControl::deleteWindows() {
-  for (auto w : std::as_const(m_windows)) {
-    w->close();
-    w->deleteLater();
-  }
-  m_windows.clear();
-}
