@@ -34,7 +34,7 @@ jobs:
     - name: Install dependencies
       run: |
         apt-get update
-        apt-get install -y g++ cmake qt6-base-dev qt6-multimedia-dev qt6-tools-dev qt6-wayland-dev libgmock-dev liblayershellqtinterface-dev
+        apt-get install -y g++ cmake qt6-base-dev qt6-multimedia-dev libgmock-dev libxss-dev
 
     - name: Run Tests
       run: |
