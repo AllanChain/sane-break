@@ -254,6 +254,13 @@ class TestApp : public QObject {
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, smallEvery - 1);
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, smallBreaksBeforeBigBreak);
+
+    // Subsequent short idles should not be affected
+    emit deps.systemMonitor->idleStarted();
+    app.advance(1);
+    emit deps.systemMonitor->idleEnded();
+    // Since the time ellapsed is in paused state, the time should not change
+    QCOMPARE(app.trayData.secondsToNextBreak, smallEvery - 1);
   }
   void resetCycleAfterPause() {
     auto [deps, windowControl] = DummyApp::makeDeps();
