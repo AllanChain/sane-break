@@ -174,13 +174,13 @@ void AbstractApp::resumeBreak(SaneBreak::PauseReasons reason) {
   // If there are other reasons for pausing, do nothing
   if (m_pauseReasons) return;
 
-  m_secondsPaused = 0;
   if (m_secondsPaused > preferences->resetAfterPause->get()) {
     resetSecondsToNextBreak();
   }
   if (m_secondsPaused > preferences->resetCycleAfterPause->get()) {
     m_breakCycleCount = 1;
   }
+  m_secondsPaused = 0;
   updateTray();
 }
 
