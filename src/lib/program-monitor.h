@@ -27,6 +27,7 @@ class RunningProgramsMonitor : public QObject {
   void tick();
 
  private:
+  const QStringList runningPrograms();
   const QRegularExpression validProgramFilter = QRegularExpression(".");
   QTimer *monitorTimer;
   QStringList programsToMonitor;

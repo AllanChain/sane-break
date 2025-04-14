@@ -40,13 +40,14 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
             macos/battery.h
             macos/idle.cpp
             macos/idle.h
+            macos/program-monitor.cpp
             macos/workspace.h
             macos/workspace.mm
   )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   target_sources(
     sane-lib PRIVATE windows/auto-start.cpp windows/battery.cpp windows/battery.h
-                     windows/idle.cpp windows/idle.h
+                     windows/program-monitor.cpp windows/idle.cpp windows/idle.h
   )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   find_package(
@@ -60,8 +61,9 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   option(AUTO_ENABLE_WAYLAND "Build with Wayland support" ON)
 
   target_sources(
-    sane-lib PRIVATE linux/auto-start.cpp linux/battery.cpp linux/battery.h
-                     linux/system-check.cpp linux/system-check.h
+    sane-lib
+    PRIVATE linux/auto-start.cpp linux/battery.cpp linux/battery.h
+            linux/program-monitor.cpp linux/system-check.cpp linux/system-check.h
   )
 
   if(AUTO_ENABLE_X11)

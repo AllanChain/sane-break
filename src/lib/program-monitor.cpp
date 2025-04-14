@@ -32,36 +32,9 @@ void RunningProgramsMonitor::setPrograms(const QStringList &programs) {
 
 void RunningProgramsMonitor::tick() {
   if (programsToMonitor.isEmpty()) return;
-  QStringList runningPrograms;
-
-  QProcess process;
-#ifdef Q_OS_LINUX
-  process.start("ps", QStringList() << "-e" << "-o" << "comm=");
-#elif defined Q_OS_MACOS
-  process.start("ps", QStringList() << "-ax" << "-o" << "comm=");
-#elif defined Q_OS_WIN
-  process.start("tasklist", QStringList() << "/fo" << "csv" << "/nh");
-#endif
-
-  process.waitForFinished();
-  QString output = process.readAllStandardOutput();
-  if (output.isEmpty()) return;
-
-#ifdef Q_OS_WIN
-  QStringList lines = output.split('\n', Qt::SkipEmptyParts);
-  for (const QString &line : lines) {
-    QStringList parts = line.split(',', Qt::SkipEmptyParts);
-    if (parts.size() > 0) {
-      QString program = parts[0].trimmed();
-      runningPrograms.append(program);
-    }
-  }
-#else
-  runningPrograms = output.split('\n', Qt::SkipEmptyParts);
-#endif
 
   bool currentlySeen = false;
-  for (const QString &program : std::as_const(runningPrograms)) {
+  for (const QString &program : runningPrograms()) {
     for (const QString &entry : std::as_const(programsToMonitor)) {
       if (program.contains(entry)) {
         currentlySeen = true;
