@@ -40,7 +40,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
             macos/battery.h
             macos/idle.cpp
             macos/idle.h
-            macos/program-monitor.cpp
+            macos/program-monitor.mm
             macos/workspace.h
             macos/workspace.mm
   )
