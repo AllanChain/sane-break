@@ -41,22 +41,22 @@
     <message>
         <location filename="../../src/gui/break-window.cpp" line="133"/>
         <source>&lt;p&gt;Sane Break is in force break mode.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Sane Break הוא במצב של פריצה כוח</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/break-window.cpp" line="136"/>
         <source>&lt;p&gt;Quit Sane Break by running &lt;code&gt;killall sane-break&lt;/code&gt; in terminal.&lt;/p&gt;</source>
-        <translation type="unfinished">[x0X] קוויט לשבור על ידי ריצה &lt;code&gt; sane-break &lt;/code&gt; בטרמינל.[x74X]</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/break-window.cpp" line="140"/>
         <source>&lt;p&gt;Quit Sane Break by enabling Spotlight with &lt;code&gt;Cmd + Space&lt;/code&gt;, opening terminal, and running &lt;code&gt;killall sane-break&lt;/code&gt;.&lt;/p&gt;</source>
-        <translation type="unfinished">[x0X] קוויט לשבור על ידי הפעלת Spotlight with [x46X]Cmd + Space &lt;/code&gt;, פתח מסוף, וריצה &lt;code&gt; sane-break &lt;/code&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/break-window.cpp" line="144"/>
         <source>&lt;p&gt;Pospone Sane Break by pressing &lt;code&gt;Win&lt;/code&gt; and right click Sane Break icon in the system tray.&lt;/p&gt;</source>
-        <translation type="unfinished">[x0X]פונטון סן לשבור על ידי לחיצה על &lt;code&gt;Win [x43X] ולחיצה נכונה על סמל Sane Break במגש המערכת</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -194,8 +194,7 @@
         <location filename="../../src/gui/pref-window.ui" line="765"/>
         <source>&lt;h3&gt;Color Theme&lt;/h3&gt;
 All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
-        <translation type="unfinished">[x0X]Color Theme[עריכת קוד מקור]
-כל הצבעים הם בפורמט X38X#AARRGGBB &lt;/code&gt;.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="778"/>
@@ -225,7 +224,7 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="872"/>
         <source>&lt;h3&gt;Pause Conditions&lt;/h3&gt;</source>
-        <translation type="unfinished">(X0X) תנאי שימוש (X20X)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1019"/>
@@ -271,13 +270,7 @@ v%1
 &lt;p&gt;Remind breaks without mindless skips. &lt;/p&gt;
 &lt;p&gt;2024-2025, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break developers&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
 &lt;/p&gt;</source>
-        <translation type="unfinished">[x0X]
-[x6X]Sane Break[עריכת קוד מקור]
-%1
-[x77X]
-[x84X]Remind Breaks Without Mindless. (X125X)
-[x130X]2024-2025, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break Developer[x217X][x223X]
-(X291X)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="299"/>
@@ -299,7 +292,7 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="627"/>
         <source>&lt;h3&gt;Prompt Appearance&lt;/h3&gt;</source>
-        <translation type="unfinished">[x0X] תוצאות [x21x]</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="644"/>
@@ -354,7 +347,7 @@ v%1
         <location filename="../../src/gui/pref-window.ui" line="252"/>
         <location filename="../../src/gui/pref-window.ui" line="1086"/>
         <source>&lt;h3&gt;Small Breaks&lt;/h3&gt;</source>
-        <translation type="unfinished">[x0X] הפסקות קטנות[x16x]</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="309"/>
@@ -381,13 +374,13 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1207"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: You can use local sound files with URLs like &lt;code&gt;file:/D:sound.mp3&lt;/code&gt;  (Windows) or &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</source>
-        <translation type="unfinished">[x0X]Tip[x11] באפשרותך להשתמש בקבצי קול מקומיים עם כתובת URLs כגון &lt;code&gt;file:/D:sound.mp3&lt;/code&gt; או &lt;code&gt;file:/home/name/sound.mp3[x143X] (לינוקס).</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="362"/>
         <location filename="../../src/gui/pref-window.ui" line="1145"/>
         <source>&lt;h3&gt;Big Breaks&lt;/h3&gt;</source>
-        <translation type="unfinished">(X0X) Big Breaks[עריכת קוד מקור]</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="371"/>
@@ -398,8 +391,7 @@ v%1
         <location filename="../../src/gui/pref-window.ui" line="510"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
 &lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
-        <translation type="unfinished">(X0X) Reminder Behavior[עריכת קוד מקור]
-&lt;p&gt;Sane Break מראה תגובה קטנה ל-X66X%1 שניות. אם אתה מפסיק את הפעילות שלך במהלך אותו זמן, או בוחר להמשיך עד שהזמן יגמר, הוא עובר למסך מלא. במהלך ההפסקה, סן שוברת מנעולים למצב מסך מלא לאחר &lt;b&gt;%2 &lt;/b&gt; שניות של חוסר פעילות. אם אתה חוזר לפעילות לפני נעילה, המהירות מתכווצת לחלון קטן באופן זמני, אך חוזר למסך מלא כאשר אתה שוב מתפוגג או חוזר מסתיים</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="940"/>
@@ -424,12 +416,7 @@ v%1
   &lt;li&gt;If the pause is short, Sane Break will reset the time to the next break.&lt;/li&gt;
   &lt;li&gt;If it is longer, Sane Break will reset the entire break cycle, and the next break will be the first small break in the cycle.&lt;/li&gt;
 &lt;/ul&gt;</source>
-        <translation type="unfinished">[x0X] ביטול לוח הזמנים לאחר הפסקה
-[x42x]Sane Break יתאים את לוח הזמנים של ההפסקה לאחר שיפוך: &lt;/p&gt;
-[x106X]
-[x113X] אם ההפסקה קצרה, סן-Break תרוקן את הזמן לשבר הבא.
-&lt;li&gt; אם זה יותר זמן, סן-Break תחדש את כל מחזור ההפסקה, והשבר הבא יהיה הפריצה הקטנה הראשונה במחזור.
-(X332X)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1233"/>
@@ -470,8 +457,8 @@ v%1
         <location filename="../../src/gui/pref-window.cpp" line="301"/>
         <source>%n min</source>
         <translation type="unfinished">
-            <numerusform>אחוזה</numerusform>
-            <numerusform>אחוזה</numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -479,8 +466,8 @@ v%1
         <location filename="../../src/gui/pref-window.cpp" line="151"/>
         <source>Every %n min</source>
         <translation type="unfinished">
-            <numerusform>כל אחוזה</numerusform>
-            <numerusform>כל אחוזה</numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
