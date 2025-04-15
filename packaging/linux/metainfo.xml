@@ -56,6 +56,21 @@
   </screenshots>
 
   <releases>
+    <release version="0.8.1" date="2025-04-15">
+      <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.8.1</url>
+      <description>
+        <p>Bug fixes</p>
+        <ul>
+          <li>Fix seconds paused is not correctly reset</li>
+          <li>Fix default message prompt not translated</li>
+        </ul>
+        <p>Minor changes</p>
+        <ul>
+          <li>Update builds to Qt 6.9</li>
+          <li>Add traditional Chinese and Spanish translations</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.8.0" date="2025-04-11">
       <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.8.0</url>
       <description>
