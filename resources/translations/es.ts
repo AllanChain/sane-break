@@ -72,7 +72,7 @@
         <source>English</source>
         <comment>current language</comment>
         <extracomment>This is the name of the current language in the current language</extracomment>
-        <translation>Inglés</translation>
+        <translation>Español</translation>
     </message>
 </context>
 <context>
