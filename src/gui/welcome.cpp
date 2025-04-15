@@ -103,7 +103,7 @@ WelcomeWindow::WelcomeWindow(SanePreferences *preferences, QWidget *parent)
   }
   layout->addWidget(buttonBox);
   updateText();
-  connect(docButton, &QPushButton::clicked, this, [=]() {
+  connect(docButton, &QPushButton::clicked, this, []() {
     QDesktopServices::openUrl(QUrl("https://github.com/AllanChain/sane-break/#readme"));
   });
   connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);

@@ -325,14 +325,14 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
   ui->quickBreakLabel->setHidden(true);
   osaProcess = new QProcess(this);
   // Set up permission
-  connect(ui->autoScreenLock, &QComboBox::currentIndexChanged, this, [=](int index) {
+  connect(ui->autoScreenLock, &QComboBox::currentIndexChanged, this, [this](int index) {
     if (ui->autoScreenLock->itemData(index).toInt() == 0) return;
     if (osaProcess->isOpen()) return;
     osaProcess->start("osascript",
                       {"-e", "tell application \"System Events\" to keystroke \"q\""});
   });
   connect(osaProcess, &QProcess::finished, this,
-          [=](int retcode, QProcess::ExitStatus status) {
+          [this](int retcode, QProcess::ExitStatus status) {
             ui->macPermissionHint->setHidden(retcode == 0);
           });
 #endif
