@@ -7,14 +7,14 @@
         <location filename="../../src/lib/linux/auto-start.cpp" line="53"/>
         <source>Failed to connect to Flatpak response</source>
         <extracomment>Error message when requesting autostart in Flatpak got no response</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo conectar a la respuesta de Flatpak</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="76"/>
         <location filename="../../src/lib/linux/auto-start.cpp" line="82"/>
         <source>Autostart desktop entry not writable</source>
         <extracomment>Error message when failed to write Linux desktop entry for autostart</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo escribir la entrada de escritorio para el auto-arranque</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="100"/>
@@ -96,13 +96,13 @@
         <location filename="../../src/gui/pref-window.ui" line="1129"/>
         <location filename="../../src/gui/pref-window.ui" line="1167"/>
         <source>Bell before breaks</source>
-        <translation>Sonido antes de los descansos</translation>
+        <translation>Sonido al comienzo de los descansos</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1098"/>
         <location filename="../../src/gui/pref-window.ui" line="1195"/>
         <source>Bell after breaks</source>
-        <translation>Sonido después de los descansos</translation>
+        <translation>Sonido al final de los descansos</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="564"/>
@@ -230,12 +230,12 @@ Todos los colores están en formato &lt;code&gt;#AARRGGBB&lt;/code&gt;.</transla
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1019"/>
         <source>Long pause threshold</source>
-        <translation>Umbral de la pausa larga</translation>
+        <translation>Límite de la pausa larga</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1070"/>
         <source>Short pause threshold</source>
-        <translation>Umbral de la pausa breve</translation>
+        <translation>Límite de la pausa breve</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1287"/>
@@ -558,7 +558,7 @@ v%1
     <message>
         <location filename="../../src/lib/linux/system-check.cpp" line="100"/>
         <source>You need to install the shell extension if you are using GNOME. Otherwise, Sane break is almost unusable</source>
-        <translation type="unfinished"></translation>
+        <translation>Si estás usando GNOME, debes instalar la extensión &quot;shell&quot;. De lo contrario Sane Break será prácticamente inservible</translation>
     </message>
 </context>
 <context>
