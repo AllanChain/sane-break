@@ -46,10 +46,12 @@ SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
       new Setting<QColor>(settings, "theme/small-bg", QColor(235, 203, 139, 100));
   bigHighlightColor =
       new Setting<QColor>(settings, "theme/big-bg", QColor(180, 142, 173, 100));
-  smallMessages = new Setting<QStringList>(settings, "break/small-msg",
-                                           QStringList({tr("Time for a small break")}));
-  bigMessages = new Setting<QStringList>(settings, "break/big-msg",
-                                         QStringList({tr("Time for a big break")}));
+  smallMessages = new Setting<QStringList>(settings, "break/small-msg", [this]() {
+    return QStringList({tr("Time for a small break")});
+  });
+  bigMessages = new Setting<QStringList>(settings, "break/big-msg", [this]() {
+    return QStringList({tr("Time for a big break")});
+  });
 
   pauseOnIdleFor = new Setting<int>(settings, "pause/on-idle-for", 180);
   resetAfterPause = new Setting<int>(settings, "pause/reset-after", 120);

@@ -9,6 +9,7 @@
 #include <QObject>
 #include <QSettings>
 #include <QtContainerFwd>
+#include <functional>
 
 class SettingWithSignal : public QObject {
   Q_OBJECT
@@ -26,7 +27,18 @@ class Setting : public SettingWithSignal {
       : SettingWithSignal(parent),
         m_settings(settings),
         m_key(key),
-        m_defaultValue(defaultValue) {}
+        m_defaultValue(defaultValue),
+        m_defaultIsFunction(false) {}
+  Setting(QSettings *settings, const QString &key,
+          std::function<T()> defaultValueFunction, QObject *parent = nullptr)
+      : SettingWithSignal(parent),
+        m_settings(settings),
+        m_key(key),
+        m_defaultValueFunction(defaultValueFunction),
+        m_defaultIsFunction(true) {}
+  T defaultValue() {
+    return m_defaultIsFunction ? m_defaultValueFunction() : m_defaultValue;
+  }
   void set(const T &newValue) {
     if (get() != newValue) {
       m_value = newValue;
@@ -37,7 +49,7 @@ class Setting : public SettingWithSignal {
   const T get() {
     if (m_cached) return m_value;
     m_value =
-        fromFriendlyFormat(m_settings->value(m_key, toFriendlyFormat(m_defaultValue)));
+        fromFriendlyFormat(m_settings->value(m_key, toFriendlyFormat(defaultValue())));
     m_cached = true;
     return m_value;
   };
@@ -51,6 +63,8 @@ class Setting : public SettingWithSignal {
  private:
   QSettings *m_settings;
   QString m_key;
+  bool m_defaultIsFunction;
+  std::function<T()> m_defaultValueFunction;
   T m_defaultValue;
   T m_value;
   bool m_cached = false;
