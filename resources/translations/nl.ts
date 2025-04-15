@@ -14,7 +14,7 @@
         <location filename="../../src/lib/linux/auto-start.cpp" line="82"/>
         <source>Autostart desktop entry not writable</source>
         <extracomment>Error message when failed to write Linux desktop entry for autostart</extracomment>
-        <translation type="unfinished">Autostart desktop ingang niet te schrijven</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File not writable</source>
@@ -53,22 +53,22 @@
     <message>
         <location filename="../../src/gui/break-window.cpp" line="133"/>
         <source>&lt;p&gt;Sane Break is in force break mode.&lt;/p&gt;</source>
-        <translation type="unfinished">Sane Break is in een breuk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/break-window.cpp" line="136"/>
         <source>&lt;p&gt;Quit Sane Break by running &lt;code&gt;killall sane-break&lt;/code&gt; in terminal.&lt;/p&gt;</source>
-        <translation type="unfinished">_Quit Sane Break by run 38,killall sane-break 54 in terminal X</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/break-window.cpp" line="140"/>
         <source>&lt;p&gt;Quit Sane Break by enabling Spotlight with &lt;code&gt;Cmd + Space&lt;/code&gt;, opening terminal, and running &lt;code&gt;killall sane-break&lt;/code&gt;.&lt;/p&gt;</source>
-        <translation type="unfinished">_Quit Sane Break by Enabling Spotlight with 46 ~CMd Space X, open de terminal en run * * * * * * * * * * * = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/break-window.cpp" line="144"/>
         <source>&lt;p&gt;Pospone Sane Break by pressing &lt;code&gt;Win&lt;/code&gt; and right click Sane Break icon in the system tray.&lt;/p&gt;</source>
-        <translation type="unfinished">Paul Sane Quality over Quantity (QoQ) Releases Vertaling:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -286,8 +286,7 @@ v%1
         <location filename="../../src/gui/pref-window.ui" line="510"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
 &lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
-        <translation type="unfinished">Vertaling:
-Soane Break toont een kleine prompt voor 66. Als je tijdens die tijd stopt met je activiteiten, of ervoor kiest om door te gaan totdat de timer op is, gaat het over op volle kracht. Tijdens de breuk, sluit Sane Break af in volledige-screende na £271X, tweede inactiviteit. Als je de activiteiten voor het slot hervat, krimpt de prompt tijdelijk naar een klein raam, maar re-expanden tot full-screen als je weer idle bent of de timer eindigt</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="627"/>
@@ -377,7 +376,7 @@ Soane Break toont een kleine prompt voor 66. Als je tijdens die tijd stopt met j
     <message>
         <location filename="../../src/gui/pref-window.ui" line="711"/>
         <source>Show tips to kill Sane Break when locked in full-screen mode</source>
-        <translation type="unfinished">Toon tips om Sane Break te doden als ze opgesloten zitten in volle graad</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1129"/>
@@ -402,49 +401,48 @@ Soane Break toont een kleine prompt voor 66. Als je tijdens die tijd stopt met j
         <location filename="../../src/gui/pref-window.ui" line="729"/>
         <location filename="../../src/gui/pref-window.ui" line="756"/>
         <source>(One line per message)</source>
-        <translation type="unfinished">(Een lijn per boodschap)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="736"/>
         <source>Big break prompt messages:</source>
-        <translation type="unfinished">Grote doorbraak berichten:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="743"/>
         <source>Small break prompt messages:</source>
-        <translation type="unfinished">Kleine doorbraak berichten:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="765"/>
         <source>&lt;h3&gt;Color Theme&lt;/h3&gt;
 All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
-        <translation type="unfinished">Commandant De 15X
-Alle kleuren zijn in 38X.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="778"/>
         <source>Big break</source>
-        <translation type="unfinished">Grote breuk</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="785"/>
         <source>Message</source>
-        <translation type="unfinished">Bericht</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="802"/>
         <source>Small break</source>
-        <translation type="unfinished">Klein</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="809"/>
         <source>Background</source>
-        <translation type="unfinished">Achtergrond</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="846"/>
         <source>Count down</source>
-        <translation type="unfinished">Graaf</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1098"/>
@@ -776,7 +774,7 @@ Alle kleuren zijn in 38X.</translation>
     <message>
         <location filename="../../src/gui/tray.cpp" line="45"/>
         <source>Take a small break instead</source>
-        <translation type="unfinished">Neem een kleine pauze</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/gui/tray.cpp" line="76"/>
