@@ -5,12 +5,13 @@ name: Build app
 
 on:
   push:
-    branches-ignore:
-      - 'weblate'
+    branches:
+      - '**'
     tags:
       - '*'
     paths-ignore:
       - '**.md'
+      - '**.ts'
 
 permissions:
   contents: write
