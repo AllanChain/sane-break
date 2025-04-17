@@ -23,6 +23,14 @@ if(POLICY CMP0071)
   cmake_policy(SET CMP0071 NEW)
 endif()
 
+if(MSVC)
+  add_compile_options(/O1 /GL)
+  add_link_options(/LTCG)
+else()
+  add_compile_options(-Os -flto)
+  add_link_options(-flto)
+endif()
+
 include(GNUInstallDirs)
 
 add_subdirectory(src)

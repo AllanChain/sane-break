@@ -51,7 +51,7 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: AllanChain/install-qt-static@v6.9
+    - uses: AllanChain/install-qt-static-custom@v6.9.0-1
     - uses: ilammy/msvc-dev-cmd@v1
 
     - name: Build Project
@@ -88,7 +88,7 @@ jobs:
         arch: [x86_64, arm64]
     steps:
     - uses: actions/checkout@v4
-    - uses: AllanChain/install-qt-static@v6.9
+    - uses: AllanChain/install-qt-static-custom@v6.9.0-1
 
     - name: Build Project
       run: |
