@@ -17,13 +17,13 @@
 #include <QWindow>
 #include <Qt>
 
+#include "app/window-control.h"
 #include "core/app.h"
 #include "core/idle-time.h"
 #include "core/preferences.h"
 #include "gui/pref-window.h"
 #include "gui/tray.h"
 #include "gui/widgets/language-select.h"
-#include "gui/window-manager.h"
 #include "lib/screen-lock.h"
 #include "lib/system-monitor.h"
 #include "lib/timer.h"

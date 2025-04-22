@@ -1,6 +1,12 @@
 find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia)
 qt_add_executable(
-  sane-break-app MANUAL_FINALIZATION app.cpp app.h main.cpp
+  sane-break-app
+  MANUAL_FINALIZATION
+  app.cpp
+  app.h
+  main.cpp
+  window-control.cpp
+  window-control.h
   ${CMAKE_SOURCE_DIR}/resources/index.qrc
 )
 

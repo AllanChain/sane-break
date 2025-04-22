@@ -7,12 +7,11 @@
 #include <QObject>
 #include <QTimer>
 
+#include "app/window-control.h"
 #include "core/app.h"
 #include "core/preferences.h"
 #include "gui/pref-window.h"
 #include "gui/tray.h"
-#include "gui/window-manager.h"
-#include "lib/system-monitor.h"
 
 class SaneBreakApp : public AbstractApp {
   Q_OBJECT

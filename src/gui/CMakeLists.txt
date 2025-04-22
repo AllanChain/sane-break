@@ -18,8 +18,6 @@ add_library(
   widgets/stepped-slider.h
   widgets/language-select.cpp
   widgets/language-select.h
-  window-manager.cpp
-  window-manager.h
 )
 target_include_directories(sane-gui PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(sane-gui PUBLIC Qt6::Widgets Qt6::Multimedia sane-lib)

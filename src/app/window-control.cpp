@@ -2,7 +2,7 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include "window-manager.h"
+#include "window-control.h"
 
 #include <qglobal.h>
 
