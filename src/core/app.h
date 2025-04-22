@@ -76,6 +76,8 @@ class AbstractApp : public QObject {
   void onOneshotIdleEnd();
   void onBattery();
   void onPower();
+  void onProgramStart();
+  void onProgramStop();
   void onBatterySettingChange();
 
   int smallBreaksBeforeBig();

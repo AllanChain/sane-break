@@ -51,9 +51,9 @@ AbstractApp::AbstractApp(const AppDependencies &deps, QObject *parent)
   connect(m_systemMonitor, &AbstractSystemMonitor::adaptorPowered, this,
           &AbstractApp::onPower);
   connect(m_systemMonitor, &AbstractSystemMonitor::programStarted, this,
-          [this]() { pauseBreak(SaneBreak::PauseReason::AppOpen); });
+          &AbstractApp::onProgramStart);
   connect(m_systemMonitor, &AbstractSystemMonitor::programStopped, this,
-          [this]() { resumeBreak(SaneBreak::PauseReason::AppOpen); });
+          &AbstractApp::onProgramStop);
   // One-shot idle detection right after break end is achieved by making
   // the idle criteria as short as 1 sec, and start the idle timer right
   // after the break starts. We will know if the user is idle after breaks
@@ -198,17 +198,14 @@ int AbstractApp::smallBreaksBeforeBig() {
 }
 
 void AbstractApp::onIdleStart() { pauseBreak(SaneBreak::PauseReason::Idle); }
-
 void AbstractApp::onIdleEnd() { resumeBreak(SaneBreak::PauseReason::Idle); }
-
+void AbstractApp::onProgramStart() { pauseBreak(SaneBreak::PauseReason::AppOpen); }
+void AbstractApp::onProgramStop() { resumeBreak(SaneBreak::PauseReason::AppOpen); }
 void AbstractApp::onBattery() {
   if (preferences->pauseOnBattery->get()) pauseBreak(SaneBreak::PauseReason::OnBattery);
 }
-
-void AbstractApp::onPower() {
-  // No need to check settings because it does nothing if not paused with this
-  resumeBreak(SaneBreak::PauseReason::OnBattery);
-}
+// No need to check settings because it does nothing if not paused with this
+void AbstractApp::onPower() { resumeBreak(SaneBreak::PauseReason::OnBattery); }
 
 void AbstractApp::onSleepEnd() {
   // We reset these regardless of paused or not
