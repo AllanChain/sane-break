@@ -121,6 +121,54 @@ class TestWindow : public QObject {
     windowControl.advance(1);
     QVERIFY(!windowControl.hasWindows());
   }
+  void confirmBreak() {
+    auto deps = SimpleWindowControl::makeDeps();
+    deps.preferences->confirmAfter->set(10);
+    NiceMock<SimpleWindowControl> windowControl(deps);
+
+    windowControl.show(SaneBreak::BreakType::Small);
+    DummyBreakWindow *window = windowControl.window;
+
+    EXPECT_CALL(*window, setFullScreen()).Times(1);
+    emit deps.idleTimer->idleStart();
+    QVERIFY(Mock::VerifyAndClearExpectations(window));
+
+    // Should not resize to normal after confirm break
+    windowControl.advance(10);
+    EXPECT_CALL(*window, resizeToNormal()).Times(0);
+    emit deps.idleTimer->idleEnd();
+    QVERIFY(Mock::VerifyAndClearExpectations(window));
+    // Qt will delete them later be we need to clear mocks now
+    windowControl.deleteWindows();
+  }
+  void exitForceBreak() {
+    auto deps = SimpleWindowControl::makeDeps();
+    deps.preferences->confirmAfter->set(10);
+    NiceMock<SimpleWindowControl> windowControl(deps);
+
+    windowControl.show(SaneBreak::BreakType::Small);
+    DummyBreakWindow *window = windowControl.window;
+
+    int smallFor = deps.preferences->smallFor->get();
+
+    emit deps.idleTimer->idleStart();
+    // Fast forward to confirm break
+    windowControl.advance(10);
+    emit deps.idleTimer->idleEnd();
+
+    // Force break is exited
+    EXPECT_CALL(*window, resizeToNormal()).Times(1);
+    windowControl.exitForceBreak();
+    QVERIFY(Mock::VerifyAndClearExpectations(window));
+
+    // Timer is reset and is not counting down
+    EXPECT_CALL(*window, setTime(smallFor)).Times(3);
+    windowControl.advance(3);
+    QVERIFY(Mock::VerifyAndClearExpectations(window));
+
+    // Qt will delete them later be we need to clear mocks now
+    windowControl.deleteWindows();
+  }
 };
 
 QTEST_MAIN(TestWindow)

@@ -179,8 +179,6 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
           });
   controllers->add(new PrefController<QSlider, Setting<int>>(ui->flashSpeedSlider,
                                                              preferences->flashSpeed));
-  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
-      ui->showKillTip, preferences->showKillTip));
 
   controllers->add(new PrefController<QLineEdit, Setting<QColor>>(
       ui->backgroundColor, preferences->backgroundColor));

@@ -19,6 +19,7 @@
 #include <QScreen>
 #include <QString>
 #include <QTimer>
+#include <QToolButton>
 #include <QVBoxLayout>
 #include <QWidget>
 #include <QWindow>
@@ -28,6 +29,7 @@
 #include "config.h"
 #include "core/window-control.h"
 #include "lib/utils.h"
+#include "ui_break-window.h"
 
 #ifdef Q_OS_LINUX
 #include "lib/linux/system-check.h"
@@ -57,98 +59,34 @@ BreakWindow::BreakWindow(BreakData data, QWidget *parent)
   setWindowFlags(Qt::ToolTip | Qt::WindowDoesNotAcceptFocus | Qt::FramelessWindowHint |
                  Qt::WindowStaysOnTopHint | Qt::WindowTransparentForInput);
   setWindowTitle("Break reminder - Sane Break");
-  setProperty("isFullScreen", false);
 
   mainWidget = new QWidget(this);
   if (!waylandWorkaround) setCentralWidget(mainWidget);
+
+  ui = new Ui::BreakReminder();
+  ui->setupUi(mainWidget);
+  mainWidget->resize(0, 0);
+  mainWidget->setStyleSheet(
+      QString("BreakWindow QLabel { color: %1; }"
+              "BreakWindow #countdownLabel { color: %2; }"
+              "BreakWindow QProgressBar::chunk { background: %2; }")
+          .arg(data.theme.messageColor.name(QColor::HexArgb),
+               data.theme.countDownColor.name(QColor::HexArgb)));
+  mainWidget->setProperty("isFullScreen", false);
   mainWidget->setAttribute(Qt::WA_LayoutOnEntireRect);
-  mainWidget->setContentsMargins(0, 0, 0, 0);
-  mainWidget->setStyleSheet(QString(R"(
-BreakWindow QLabel#breakLabel {
-  color: %1;
-  background: transparent;
-  font-size: 20px;
-}
-BreakWindow[isFullScreen="true"] QLabel#breakLabel {
-  font-size: 40px;
-}
-BreakWindow QLabel#countdownLabel {
-  color: %2;
-  background: transparent;
-}
-BreakWindow[isFullScreen="true"] QLabel#countdownLabel {
-  font-size: 100px;
-}
-BreakWindow QLabel#killTip {
-  color: %1;
-  background: transparent;
-  margin-top: 30px;
-  font-size: 20px;
-}
 
-BreakWindow QProgressBar {
-  border-radius: 5px;
-  max-height: 5px;
-  background: transparent;
-}
-BreakWindow QProgressBar::chunk {
-  background: %2;
-  width: 1px;
-}
-BreakWindow[isFullScreen="true"] QProgressBar {
-  max-height: 10px;
-})")
-                                .arg(data.theme.messageColor.name(QColor::HexArgb),
-                                     data.theme.countDownColor.name(QColor::HexArgb)));
+  ui->breakLabel->setText(data.message);
+  ui->countdownLabel->setVisible(false);
+  ui->buttons->setVisible(false);
+  colorizeButton(ui->lockScreen, data.theme.messageColor);
+  colorizeButton(ui->exitForceBreak, data.theme.messageColor);
+  connect(ui->lockScreen, &QToolButton::pressed, this,
+          &AbstractBreakWindow::lockScreenRequested);
+  connect(ui->exitForceBreak, &QToolButton::pressed, this,
+          &AbstractBreakWindow::exitForceBreakRequested);
 
-  QVBoxLayout *layout = new QVBoxLayout(mainWidget);
-  layout->setContentsMargins(0, 0, 0, 0);
-
-  QProgressBar *progressBar = new QProgressBar();
-  progressBar->setMaximum(10000);
-  progressBar->setTextVisible(false);
-  layout->addWidget(progressBar);
-
-  QVBoxLayout *textLayout = new QVBoxLayout();
-  textLayout->setAlignment(Qt::AlignCenter);
-  layout->addLayout(textLayout);
-
-  breakLabel = new QLabel(data.message);
-  breakLabel->setObjectName("breakLabel");
-  breakLabel->setAlignment(Qt::AlignCenter);
-  textLayout->addWidget(breakLabel);
-
-  countdownLabel = new QLabel();
-  countdownLabel->setObjectName("countdownLabel");
-  countdownLabel->setAlignment(Qt::AlignCenter);
-  countdownLabel->setVisible(false);
-  textLayout->addWidget(countdownLabel);
-
-  killTip = new QLabel();
-  killTip->setObjectName("killTip");
-  killTip->setVisible(false);
-  killTip->setMinimumWidth(600);
-  killTip->setAlignment(Qt::AlignCenter);
-  killTip->setWordWrap(true);
-  QString tipText = tr("<p>Sane Break is in force break mode.</p>");
-#ifdef Q_OS_LINUX
-  tipText +=
-      tr("<p>Quit Sane Break by running <code>killall sane-break</code> in "
-         "terminal.</p>");
-#elif defined Q_OS_MACOS
-  tipText +=
-      tr("<p>Quit Sane Break by enabling Spotlight with <code>Cmd + Space</code>, "
-         "opening terminal, and running <code>killall sane-break</code>.</p>");
-#elif defined Q_OS_WINDOWS
-  tipText +=
-      tr("<p>Pospone Sane Break by pressing <code>Win</code> and right click "
-         "Sane Break icon in the system tray.</p>");
-#endif
-  killTip->setText(tipText);
-  textLayout->addWidget(killTip);
-
-  progressAnim = new QPropertyAnimation(progressBar, "value");
-  progressAnim->setStartValue(progressBar->maximum());
+  progressAnim = new QPropertyAnimation(ui->progressBar, "value");
+  progressAnim->setStartValue(ui->progressBar->maximum());
   progressAnim->setEndValue(0);
 
   this->totalTime = data.totalSeconds;
@@ -162,7 +100,7 @@ BreakWindow[isFullScreen="true"] QProgressBar {
 }
 
 void BreakWindow::colorChanged() {
-  setStyleSheet(QString("BreakWindow, BreakWindow .QWidget { background: "
+  setStyleSheet(QString("BreakWindow, BreakWindow #BreakReminder { background: "
                         "rgba(%1, %2, %3, %4); }")
                     .arg(backgroundColor.red())
                     .arg(backgroundColor.green())
@@ -181,21 +119,21 @@ void BreakWindow::setTime(int remainingTime) {
     progressAnim->start();
   }
   if (totalTime <= 60) {
-    countdownLabel->setText(QString("%1").arg(remainingTime));
+    ui->countdownLabel->setText(QString("%1").arg(remainingTime));
   } else {
-    countdownLabel->setText(formatTime(remainingTime));
+    ui->countdownLabel->setText(formatTime(remainingTime));
   }
 }
 
-void BreakWindow::showKillTip() { killTip->setVisible(true); }
+void BreakWindow::showButtons(bool show) { ui->buttons->setVisible(show); }
 
 void BreakWindow::setFullScreen() {
-  setProperty("isFullScreen", true);
+  mainWidget->setProperty("isFullScreen", true);
   setWindowFlag(Qt::WindowTransparentForInput, false);
   show();  // required for modifying window flags
   bgAnim->stop();
   setProperty("color", bgAnim->endValue());
-  countdownLabel->setVisible(true);
+  ui->countdownLabel->setVisible(true);
   QPropertyAnimation *resizeAnim =
       new QPropertyAnimation(waylandWorkaround ? mainWidget : this, "geometry");
   resizeAnim->setStartValue(waylandWorkaround ? mainWidget->geometry() : geometry());
@@ -206,11 +144,11 @@ void BreakWindow::setFullScreen() {
 }
 
 void BreakWindow::resizeToNormal() {
-  setProperty("isFullScreen", false);
+  mainWidget->setProperty("isFullScreen", false);
   setWindowFlag(Qt::WindowTransparentForInput);
   show();  // required for modifying window flags
   bgAnim->start();
-  countdownLabel->setVisible(false);
+  ui->countdownLabel->setVisible(false);
   QPropertyAnimation *resizeAnim =
       new QPropertyAnimation(waylandWorkaround ? mainWidget : this, "geometry");
   QRect rect = waylandWorkaround ? screen()->availableGeometry() : screen()->geometry();
@@ -257,4 +195,12 @@ void BreakWindow::initSize(QScreen *screen) {
   // GNOME mutter will also refuse to make a window always on top if maximized.
   // Therefore, we use the same `show()` with and without Wayland workaround.
   show();
+}
+
+void BreakWindow::colorizeButton(QToolButton *button, QColor color) {
+  auto pixmap = button->icon().pixmap(button->iconSize());
+  auto mask = pixmap.mask();
+  pixmap.fill(color);
+  pixmap.setMask(mask);
+  button->setIcon(pixmap);
 }

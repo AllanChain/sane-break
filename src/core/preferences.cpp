@@ -35,7 +35,6 @@ SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
   flashFor = new Setting<int>(settings, "break/flash-for", 30);
   confirmAfter = new Setting<int>(settings, "break/confirm-after", 30);
   flashSpeed = new Setting<int>(settings, "break/flash-speed", 100);
-  showKillTip = new Setting<bool>(settings, "break/show-kill-tip", true);
   countDownColor =
       new Setting<QColor>(settings, "theme/count-down", QColor(236, 239, 244, 255));
   messageColor =

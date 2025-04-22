@@ -39,8 +39,13 @@ void AbstractWindowControl::show(SaneBreak::BreakType type) {
   m_secondsToForceBreak = preferences->flashFor->get();
 
   createWindows(type);
-  for (auto w : std::as_const(m_windows)) w->start();
-
+  for (auto w : std::as_const(m_windows)) {
+    connect(w, &AbstractBreakWindow::lockScreenRequested, this,
+            &AbstractWindowControl::lockScreen);
+    connect(w, &AbstractBreakWindow::exitForceBreakRequested, this,
+            &AbstractWindowControl::exitForceBreak);
+    w->start();
+  }
   m_idleTimer->startWatching();
 }
 
@@ -91,8 +96,7 @@ void AbstractWindowControl::tick() {
   // Confirm break
   if (m_totalSeconds - m_remainingSeconds >= preferences->confirmAfter->get()) {
     m_isForceBreak = true;
-    if (preferences->showKillTip->get())
-      for (auto w : std::as_const(m_windows)) w->showKillTip();
+    for (auto w : std::as_const(m_windows)) w->showButtons();
   }
   if (m_remainingSeconds <= 0)
     close();
@@ -103,9 +107,22 @@ void AbstractWindowControl::tick() {
 void AbstractWindowControl::forceBreak() {
   emit countDownStateChanged(true);
   m_isForceBreak = true;
-  for (auto w : std::as_const(m_windows)) w->setFullScreen();
-  if (preferences->showKillTip->get())
-    for (auto w : std::as_const(m_windows)) w->showKillTip();
+  for (auto w : std::as_const(m_windows)) {
+    w->setFullScreen();
+    w->showButtons();
+  }
+}
+
+void AbstractWindowControl::exitForceBreak() {
+  emit countDownStateChanged(false);
+  m_remainingSeconds = m_totalSeconds;
+  m_isIdle = m_idleTimer->isIdle;
+  m_isForceBreak = false;
+  m_secondsToForceBreak = preferences->flashFor->get();
+  for (auto w : std::as_const(m_windows)) {
+    w->resizeToNormal();
+    w->showButtons(false);
+  }
 }
 
 void AbstractWindowControl::onIdleStart() {

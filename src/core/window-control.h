@@ -44,7 +44,11 @@ class AbstractBreakWindow : public QMainWindow {
   virtual void setTime(int remainingTime) {};
   virtual void setFullScreen() {};
   virtual void resizeToNormal() {};
-  virtual void showKillTip() {};
+  virtual void showButtons(bool show = true) {};
+
+ signals:
+  void lockScreenRequested();
+  void exitForceBreakRequested();
 
  protected:
   int totalTime;
@@ -59,8 +63,10 @@ class AbstractWindowControl : public QObject {
   ~AbstractWindowControl() = default;
 
   virtual void show(SaneBreak::BreakType type);
+  virtual void lockScreen() {};
   virtual void close();
   void tick();
+  void exitForceBreak();
   bool isShowing() { return m_isShowing; };
 
  signals:

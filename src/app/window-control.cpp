@@ -12,6 +12,7 @@
 #include "core/flags.h"
 #include "core/idle-time.h"
 #include "core/window-control.h"
+#include "lib/screen-lock.h"
 
 #ifdef WITH_LAYER_SHELL
 #include <LayerShellQt/shell.h>
@@ -75,3 +76,5 @@ void BreakWindowControl::close() {
                           : preferences->bigEndBell->get());
   }
 }
+
+void BreakWindowControl::lockScreen() { ::lockScreen(); }

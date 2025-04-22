@@ -12,9 +12,14 @@
 #include <QPropertyAnimation>
 #include <QPushButton>
 #include <QTimer>
+#include <QToolButton>
 #include <QWidget>
 
 #include "core/window-control.h"
+
+namespace Ui {
+class BreakReminder;
+}
 
 class BreakWindow : public AbstractBreakWindow {
   Q_OBJECT
@@ -30,18 +35,18 @@ class BreakWindow : public AbstractBreakWindow {
   void setTime(int remainingTime) override;
   void setFullScreen() override;
   void resizeToNormal() override;
-  void showKillTip() override;
+  void showButtons(bool show = true) override;
 
   void initSize(QScreen *screen);
   void colorChanged();
 
  private:
+  Ui::BreakReminder *ui;
   QWidget *mainWidget;
-  QLabel *countdownLabel;
-  QLabel *breakLabel;
-  QLabel *killTip;
   QColor backgroundColor;
   QPropertyAnimation *progressAnim;
   QPropertyAnimation *bgAnim;
   bool waylandWorkaround = false;
+
+  static void colorizeButton(QToolButton *button, QColor color);
 };

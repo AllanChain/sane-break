@@ -706,13 +706,6 @@ QPushButton[flat=&quot;true&quot;]:checked {
              </layout>
             </item>
             <item>
-             <widget class="QCheckBox" name="showKillTip">
-              <property name="text">
-               <string>Show tips to kill Sane Break when locked in full-screen mode</string>
-              </property>
-             </widget>
-            </item>
-            <item>
              <layout class="QGridLayout" name="gridLayout">
               <property name="horizontalSpacing">
                <number>12</number>

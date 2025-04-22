@@ -44,7 +44,7 @@ class DummyBreakWindow : public AbstractBreakWindow {
   MOCK_METHOD(void, setTime, (int), (override));
   MOCK_METHOD(void, resizeToNormal, (), (override));
   MOCK_METHOD(void, setFullScreen, (), (override));
-  MOCK_METHOD(void, showKillTip, (), (override));
+  MOCK_METHOD(void, showButtons, (bool), (override));
 };
 
 class DummyWindowControl : public AbstractWindowControl {
@@ -66,6 +66,7 @@ class SimpleWindowControl : public AbstractWindowControl {
   Q_OBJECT
  public:
   using AbstractWindowControl::AbstractWindowControl;
+  using AbstractWindowControl::deleteWindows;
   static WindowDependencies makeDeps() {
     return {.preferences = tempPreferences(), .idleTimer = new DummyIdleTime()};
   }
