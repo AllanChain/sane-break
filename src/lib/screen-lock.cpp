@@ -9,6 +9,10 @@
 #ifdef Q_OS_WIN
 #include <windows.h>
 #endif
+// https://stackoverflow.com/a/26492632/8810271
+#ifdef Q_OS_MAC
+extern "C" int SACLockScreenImmediate(void);
+#endif
 
 bool lockScreen() {
 #ifdef Q_OS_WIN
@@ -17,9 +21,7 @@ bool lockScreen() {
   QProcess process;
 
 #ifdef Q_OS_MAC
-  process.start("osascript", {"-e",
-                              "tell application \"System Events\" to keystroke "
-                              "\"q\" using {control down, command down}"});
+  SACLockScreenImmediate();
 #elif defined Q_OS_LINUX
   process.start("xdg-screensaver", {"lock"});
 #endif

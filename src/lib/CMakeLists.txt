@@ -27,12 +27,13 @@ find_package(
 target_link_libraries(sane-lib PUBLIC Qt6::Widgets sane-core)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-  find_library(IOKit NAMES IOKit)
-  find_library(CoreFoundation NAMES CoreFoundation)
-  find_library(ServiceManagement NAMES ServiceManagement)
   target_link_libraries(sane-lib PRIVATE "-framework IOKit")
   target_link_libraries(sane-lib PRIVATE "-framework CoreFoundation")
   target_link_libraries(sane-lib PRIVATE "-framework ServiceManagement")
+  # Screen lock requires private frameworks
+  target_compile_options(sane-lib PRIVATE "-F/System/Library/PrivateFrameworks")
+  target_link_options(sane-lib PUBLIC "-F/System/Library/PrivateFrameworks")
+  target_link_libraries(sane-lib PRIVATE "-framework login")
   target_sources(
     sane-lib
     PRIVATE macos/auto-start.mm

@@ -229,7 +229,6 @@ class PreferenceWindow : public QMainWindow {
   Ui::PrefWindow *ui;
   SanePreferences *preferences;
   QList<QPushButton *> tabButtons;
-  QProcess *osaProcess;
   SoundPlayer *soundPlayer;
   ControllerHolder *controllers;
   AutoStart *autoStart;
