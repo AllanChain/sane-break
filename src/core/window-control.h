@@ -77,7 +77,6 @@ class AbstractWindowControl : public QObject {
  protected:
   SaneBreak::BreakType m_currentType;
   bool m_isShowing = false;
-  bool m_isIdle = false;
   bool m_isForceBreak = false;
   int m_secondsToForceBreak;
   int m_remainingSeconds;

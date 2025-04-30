@@ -72,7 +72,7 @@ ReadBasedIdleTime::ReadBasedIdleTime(QObject* parent) : SystemIdleTime(parent) {
 
 void ReadBasedIdleTime::startWatching() {
   // Assume currently not idle and nofity first idle event
-  isIdle = false;
+  m_isIdle = false;
   timer->setInterval(m_watchAccuracy);
   // We emit idleStart after at least m_minIdleTime msec.
   // In other words, we don't count idle times before watch starts.
@@ -88,11 +88,11 @@ void ReadBasedIdleTime::stopWatching() {
 
 void ReadBasedIdleTime::tick() {
   int currentIdleTime = systemIdleTime();
-  if (currentIdleTime < m_minIdleTime && isIdle) {
-    isIdle = false;
+  if (currentIdleTime < m_minIdleTime && m_isIdle) {
+    m_isIdle = false;
     emit idleEnd();
-  } else if (currentIdleTime > m_minIdleTime && !isIdle) {
-    isIdle = true;
+  } else if (currentIdleTime > m_minIdleTime && !m_isIdle) {
+    m_isIdle = true;
     emit idleStart();
   }
 }

@@ -34,6 +34,14 @@ class DummyIdleTime : public SystemIdleTime {
   void stopWatching() {};
   void setWatchAccuracy(int accuracy) {};
   void setMinIdleTime(int idleTime) {};
+  void setIdle(bool idle) {
+    m_isIdle = idle;
+    if (idle) {
+      emit idleStart();
+    } else {
+      emit idleEnd();
+    }
+  }
 };
 
 class DummyBreakWindow : public AbstractBreakWindow {
@@ -95,11 +103,22 @@ class DummySystemMonitor : public AbstractSystemMonitor {
   bool m_battery = false;
 };
 
+struct DummyAppDependencies {
+  SanePreferences *preferences = nullptr;
+  AbstractTimer *countDownTimer = nullptr;
+  DummyIdleTime *oneshotIdleTimer = nullptr;
+  AbstractTimer *screenLockTimer = nullptr;
+  DummySystemMonitor *systemMonitor = nullptr;
+  DummyWindowControl *windowControl = nullptr;
+};
+
 class DummyApp : public AbstractApp {
   Q_OBJECT
  public:
-  DummyApp(const AppDependencies &deps, QObject *parent = nullptr)
-      : AbstractApp(deps, parent) {
+  DummyApp(const DummyAppDependencies &deps, QObject *parent = nullptr)
+      : AbstractApp({deps.preferences, deps.countDownTimer, deps.oneshotIdleTimer,
+                     deps.screenLockTimer, deps.systemMonitor, deps.windowControl},
+                    parent) {
     connect(this, &DummyApp::trayDataUpdated, this,
             [this](TrayData data) { trayData = data; });
   };
@@ -110,14 +129,14 @@ class DummyApp : public AbstractApp {
     for (int i = 0; i < secs; i++) tick();
   }
   TrayData trayData;
-  static std::pair<AppDependencies, DummyWindowControl *> makeDeps() {
+  static DummyAppDependencies makeDeps() {
     auto preferences = tempPreferences();
     WindowDependencies windowDeps = {
         .preferences = preferences,
         .idleTimer = new DummyIdleTime(),
     };
     auto windowControl = new testing::NiceMock<DummyWindowControl>(windowDeps);
-    AppDependencies deps = {
+    return {
         .preferences = preferences,
         .countDownTimer = new AbstractTimer(),
         .oneshotIdleTimer = new DummyIdleTime(),
@@ -125,6 +144,5 @@ class DummyApp : public AbstractApp {
         .systemMonitor = new DummySystemMonitor(),
         .windowControl = windowControl,
     };
-    return {deps, windowControl};
   };
 };

@@ -66,7 +66,8 @@ class TestWindow : public QObject {
     QVERIFY(!windowControl.hasWindows());
   }
   void tickWithoutForceBreak() {
-    auto deps = SimpleWindowControl::makeDeps();
+    auto idleTimer = new DummyIdleTime();
+    WindowDependencies deps = {tempPreferences(), idleTimer};
     NiceMock<SimpleWindowControl> windowControl(deps);
 
     windowControl.show(SaneBreak::BreakType::Small);
@@ -76,7 +77,7 @@ class TestWindow : public QObject {
     int smallFor = deps.preferences->smallFor->get();
 
     EXPECT_CALL(*window, setFullScreen()).Times(1);
-    emit deps.idleTimer->idleStart();
+    idleTimer->setIdle(true);
     QVERIFY(Mock::VerifyAndClearExpectations(window));
 
     EXPECT_CALL(*window, setTime(_)).Times(smallFor - 2);
@@ -89,7 +90,8 @@ class TestWindow : public QObject {
     QVERIFY(!windowControl.hasWindows());
   }
   void activityInBreak() {
-    auto deps = SimpleWindowControl::makeDeps();
+    auto idleTimer = new DummyIdleTime();
+    WindowDependencies deps = {tempPreferences(), idleTimer};
     NiceMock<SimpleWindowControl> windowControl(deps);
 
     windowControl.show(SaneBreak::BreakType::Small);
@@ -99,17 +101,17 @@ class TestWindow : public QObject {
     int smallFor = deps.preferences->smallFor->get();
 
     EXPECT_CALL(*window, setFullScreen()).Times(1);
-    emit deps.idleTimer->idleStart();
+    idleTimer->setIdle(true);
     QVERIFY(Mock::VerifyAndClearExpectations(window));
 
     windowControl.advance(3);
     EXPECT_CALL(*window, resizeToNormal()).Times(1);
-    emit deps.idleTimer->idleEnd();
+    idleTimer->setIdle(false);
     QVERIFY(Mock::VerifyAndClearExpectations(window));
 
     EXPECT_CALL(*window, setTime(smallFor)).Times(3);
     windowControl.advance(3);
-    emit deps.idleTimer->idleStart();
+    idleTimer->setIdle(true);
     QVERIFY(Mock::VerifyAndClearExpectations(window));
 
     EXPECT_CALL(*window, setTime(_)).Times(smallFor - 2);
@@ -122,28 +124,32 @@ class TestWindow : public QObject {
     QVERIFY(!windowControl.hasWindows());
   }
   void confirmBreak() {
-    auto deps = SimpleWindowControl::makeDeps();
-    deps.preferences->confirmAfter->set(10);
+    auto preferences = tempPreferences();
+    preferences->confirmAfter->set(10);
+    auto idleTimer = new DummyIdleTime();
+    WindowDependencies deps = {preferences, idleTimer};
     NiceMock<SimpleWindowControl> windowControl(deps);
 
     windowControl.show(SaneBreak::BreakType::Small);
     DummyBreakWindow *window = windowControl.window;
 
     EXPECT_CALL(*window, setFullScreen()).Times(1);
-    emit deps.idleTimer->idleStart();
+    idleTimer->setIdle(true);
     QVERIFY(Mock::VerifyAndClearExpectations(window));
 
     // Should not resize to normal after confirm break
     windowControl.advance(10);
     EXPECT_CALL(*window, resizeToNormal()).Times(0);
-    emit deps.idleTimer->idleEnd();
+    idleTimer->setIdle(false);
     QVERIFY(Mock::VerifyAndClearExpectations(window));
     // Qt will delete them later be we need to clear mocks now
     windowControl.deleteWindows();
   }
   void exitForceBreak() {
-    auto deps = SimpleWindowControl::makeDeps();
-    deps.preferences->confirmAfter->set(10);
+    auto preferences = tempPreferences();
+    preferences->confirmAfter->set(10);
+    auto idleTimer = new DummyIdleTime();
+    WindowDependencies deps = {preferences, idleTimer};
     NiceMock<SimpleWindowControl> windowControl(deps);
 
     windowControl.show(SaneBreak::BreakType::Small);
@@ -151,10 +157,10 @@ class TestWindow : public QObject {
 
     int smallFor = deps.preferences->smallFor->get();
 
-    emit deps.idleTimer->idleStart();
+    idleTimer->setIdle(true);
     // Fast forward to confirm break
     windowControl.advance(10);
-    emit deps.idleTimer->idleEnd();
+    idleTimer->setIdle(false);
 
     // Force break is exited
     EXPECT_CALL(*window, resizeToNormal()).Times(1);
