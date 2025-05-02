@@ -4,9 +4,9 @@
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../../../src/gui/pref-window.cpp" line="299"/>
-        <location filename="../../../../src/gui/pref-window.cpp" line="300"/>
-        <location filename="../../../../src/gui/pref-window.cpp" line="301"/>
+        <location filename="../../../../src/gui/pref-window.cpp" line="302"/>
+        <location filename="../../../../src/gui/pref-window.cpp" line="303"/>
+        <location filename="../../../../src/gui/pref-window.cpp" line="304"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -17,13 +17,13 @@
         <location filename="../../../../src/gui/pref-window.cpp" line="142"/>
         <location filename="../../../../src/gui/pref-window.cpp" line="151"/>
         <source>Every %n min</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Every %n min</numerusform>
+            <numerusform>Every %n min</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../../../src/gui/pref-window.cpp" line="298"/>
+        <location filename="../../../../src/gui/pref-window.cpp" line="301"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec</numerusform>
@@ -34,11 +34,19 @@
 <context>
     <name>SaneBreakApp</name>
     <message numerus="yes">
-        <location filename="../../../../src/app/app.cpp" line="95"/>
+        <location filename="../../../../src/app/app.cpp" line="87"/>
+        <source>Are you sure to postpone for %n minute?</source>
+        <translation>
+            <numerusform>Are you sure to postpone for %n minute?</numerusform>
+            <numerusform>Are you sure to postpone for %n minutes?</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../../../src/app/app.cpp" line="116"/>
         <source>Postpone %n min</source>
         <translation>
             <numerusform>Postpone %n min</numerusform>
-            <numerusform></numerusform>
+            <numerusform>Postpone %n min</numerusform>
         </translation>
     </message>
 </context>
@@ -48,7 +56,7 @@
         <location filename="../../../../src/gui/tray.cpp" line="55"/>
         <location filename="../../../../src/gui/tray.cpp" line="141"/>
         <source>%n min</source>
-        <translation type="unfinished">
+        <translation>
             <numerusform>%n min</numerusform>
             <numerusform>%n min</numerusform>
         </translation>
