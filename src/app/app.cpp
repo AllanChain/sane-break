@@ -81,6 +81,27 @@ void SaneBreakApp::showPreferences() {
   prefWindow->windowHandle()->requestActivate();
 }
 
+bool SaneBreakApp::confirmPostpone(int secondsToPostpone) {
+  QMessageBox msgBox;
+  msgBox.setText(
+      tr("Are you sure to postpone for %n minute?", nullptr, secondsToPostpone / 60));
+  msgBox.setInformativeText(
+      tr("You haven't taken breaks for %1 minutes.").arg(m_secondsSinceLastBreak / 60));
+  msgBox.setIcon(QMessageBox::Icon::Question);
+  msgBox.addButton(QMessageBox::Cancel)->setText(tr("Cancel"));
+  msgBox.addButton(QMessageBox::Yes)->setText(tr("Yes"));
+
+  msgBox.setDefaultButton(QMessageBox::Cancel);
+  switch (msgBox.exec()) {
+    case QMessageBox::Yes:
+      return true;
+    case QMessageBox::Cancel:
+      return false;
+    default:
+      return false;
+  }
+}
+
 void SaneBreakApp::confirmQuit() {
   int largestMinutes = 0;
   for (const QString &minuteString : preferences->postponeMinutes->get()) {

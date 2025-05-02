@@ -7,7 +7,6 @@
 #include <QObject>
 #include <QTimer>
 
-#include "app/window-control.h"
 #include "core/app.h"
 #include "core/preferences.h"
 #include "gui/pref-window.h"
@@ -22,6 +21,7 @@ class SaneBreakApp : public AbstractApp {
 
   void start() override;
   void doLockScreen() override;
+  bool confirmPostpone(int secondsToPostpone) override;
 
   void showPreferences();
 

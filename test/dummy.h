@@ -10,7 +10,6 @@
 #include <QSettings>
 #include <QTemporaryFile>
 #include <QTest>
-#include <utility>
 
 #include "core/app.h"
 #include "core/flags.h"
@@ -123,6 +122,7 @@ class DummyApp : public AbstractApp {
             [this](TrayData data) { trayData = data; });
   };
   MOCK_METHOD(void, doLockScreen, (), (override));
+  MOCK_METHOD(bool, confirmPostpone, (int), (override));
   void advance(int secs) {
     QVERIFY2(m_countDownTimer->isActive(),
              "Impossible to simulate timer tick with an inactive timer");

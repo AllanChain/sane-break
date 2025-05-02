@@ -85,6 +85,7 @@ void AbstractApp::tick() {
     m_secondsPaused += 1;
     return;
   }
+  m_secondsSinceLastBreak++;
   m_secondsToNextBreak--;
   if (m_secondsToNextBreak <= 0) return breakNow();
   updateTray();
@@ -140,6 +141,7 @@ void AbstractApp::onBreakCountDownStateChange(bool countingDown) {
 void AbstractApp::onBreakAbort() { updateTray(); }
 
 void AbstractApp::onBreakEnd() {
+  m_secondsSinceLastBreak = 0;
   m_breakCycleCount++;
   resetSecondsToNextBreak();
   updateTray();
@@ -185,6 +187,8 @@ void AbstractApp::resumeBreak(SaneBreak::PauseReasons reason) {
 }
 
 void AbstractApp::postpone(int secs) {
+  bool needsConfirm = m_secondsSinceLastBreak > preferences->smallEvery->get() + 60;
+  if (needsConfirm && !confirmPostpone(secs)) return;
   m_secondsToNextBreak += secs;
   m_breakCycleCount = 0;  // break after postpone is a big break
   updateTray();

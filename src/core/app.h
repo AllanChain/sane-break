@@ -40,6 +40,7 @@ class AbstractApp : public QObject {
 
   virtual void start();
   virtual void doLockScreen() = 0;
+  virtual bool confirmPostpone(int secondsToPostpone) = 0;
 
   void breakNow();
   void bigBreakNow();
@@ -56,6 +57,7 @@ class AbstractApp : public QObject {
  protected:
   int m_breakCycleCount = 1;
   int m_secondsPaused = 0;
+  int m_secondsSinceLastBreak = 0;
   int m_secondsToNextBreak;
   SaneBreak::PauseReasons m_pauseReasons = {};
 

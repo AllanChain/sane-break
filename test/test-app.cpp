@@ -13,8 +13,7 @@
 #include "core/flags.h"
 #include "dummy.h"
 
-using testing::Mock;
-using testing::NiceMock;
+using testing::Mock, testing::Return, testing::NiceMock;
 
 class TestApp : public QObject {
   Q_OBJECT
@@ -384,6 +383,27 @@ class TestApp : public QObject {
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
     QVERIFY(!app.trayData.pauseReasons);
+  }
+  void confirmPostponeIfLongTimeSinceLastBreak() {
+    auto deps = DummyApp::makeDeps();
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    int smallEvery = deps.preferences->smallEvery->get();
+    app.advance(smallEvery - 1);
+
+    // First postpone should not trigger confirmation
+    EXPECT_CALL(app, confirmPostpone).Times(0);
+    app.postpone(100);
+    QCOMPARE(app.trayData.secondsToNextBreak, 101);
+    app.advance(100);
+    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+
+    // Second postpone triggers confirmation and the break is postponed
+    EXPECT_CALL(app, confirmPostpone).WillOnce(Return(true));
+    app.postpone(100);
+    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+    QCOMPARE(app.trayData.secondsToNextBreak, 101);
   }
 };
 
