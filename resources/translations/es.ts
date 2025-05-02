@@ -41,12 +41,12 @@
     <message>
         <location filename="../../src/gui/break-window.ui" line="134"/>
         <source>Lock Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloquear pantalla</translation>
     </message>
     <message>
         <location filename="../../src/gui/break-window.ui" line="170"/>
         <source>Exit Force Break</source>
-        <translation type="unfinished"></translation>
+        <translation>Salir del descanso forzoso</translation>
     </message>
 </context>
 <context>
@@ -105,13 +105,13 @@
         <location filename="../../src/gui/pref-window.ui" line="1122"/>
         <location filename="../../src/gui/pref-window.ui" line="1160"/>
         <source>Bell before breaks</source>
-        <translation>Sonido al comienzo de los descansos</translation>
+        <translation>Sonido al comenzar descanso</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1091"/>
         <location filename="../../src/gui/pref-window.ui" line="1188"/>
         <source>Bell after breaks</source>
-        <translation>Sonido al final de los descansos</translation>
+        <translation>Sonido al finalizar descanso</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="564"/>
@@ -346,7 +346,7 @@ v%1
         <location filename="../../src/gui/pref-window.ui" line="1167"/>
         <location filename="../../src/gui/pref-window.ui" line="1174"/>
         <source>Play</source>
-        <translation>Escuchar</translation>
+        <translation>Reproducir</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="874"/>
@@ -390,7 +390,7 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1200"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: You can use local sound files with URLs like &lt;code&gt;file:/D:sound.mp3&lt;/code&gt;  (Windows) or &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</source>
-        <translation>&lt;strong&gt;Tip&lt;/strong&gt;: Puedes usar archivos de audio locales mediante URLs como &lt;code&gt;file:/D:sound.mp3&lt;/code&gt;  (Windows) o &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</translation>
+        <translation>&lt;strong&gt;Tip&lt;/strong&gt;: Puedes usar archivos de audio locales mediante URLs como &lt;code&gt;file:/D:sound.mp3&lt;/code&gt;  (en Windows) o &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (en Linux).</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="362"/>
@@ -590,15 +590,15 @@ v%1
     <message numerus="yes">
         <location filename="../../src/app/app.cpp" line="87"/>
         <source>Are you sure to postpone for %n minute?</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>¿Seguro que deseas posponer el descanso %n minuto?</numerusform>
+            <numerusform>¿Seguro que deseas posponer el descanso %n minutos?</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="89"/>
         <source>You haven&apos;t taken breaks for %1 minutes.</source>
-        <translation type="unfinished"></translation>
+        <translation>No te has tomado ningún descanso en %1 minutos.</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/app.cpp" line="116"/>
@@ -620,12 +620,12 @@ v%1
     <message>
         <location filename="../../src/core/preferences.cpp" line="49"/>
         <source>Time for a small break</source>
-        <translation>Es hora de hacer una pausa breve</translation>
+        <translation>Es hora de hacer un descanso breve</translation>
     </message>
     <message>
         <location filename="../../src/core/preferences.cpp" line="52"/>
         <source>Time for a big break</source>
-        <translation>Es hora de hacer una pausa larga</translation>
+        <translation>Es hora de hacer un descanso largo</translation>
     </message>
 </context>
 <context>
@@ -672,7 +672,7 @@ v%1
     <message>
         <location filename="../../src/gui/tray.cpp" line="74"/>
         <source>Next break after %1</source>
-        <translation>Siguiente descanso tras %1</translation>
+        <translation>Siguiente descanso en %1</translation>
     </message>
     <message>
         <location filename="../../src/gui/tray.cpp" line="45"/>
@@ -682,7 +682,7 @@ v%1
     <message>
         <location filename="../../src/gui/tray.cpp" line="76"/>
         <source>Next big break after %1</source>
-        <translation>Siguiente gran descanso tras %1</translation>
+        <translation>Siguiente descanso largo en %1</translation>
     </message>
     <message>
         <location filename="../../src/gui/tray.cpp" line="86"/>
