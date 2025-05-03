@@ -39,3 +39,9 @@ repos:
           - --comment-style
           - //
           - --use-current-year
+      - id: insert-license
+        files: \.py$
+        args:
+          - --license-filepath
+          - .github/license_header.txt
+          - --use-current-year
