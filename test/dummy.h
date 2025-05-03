@@ -54,11 +54,16 @@ class DummyBreakWindow : public AbstractBreakWindow {
   MOCK_METHOD(void, showButtons, (bool), (override));
 };
 
+struct DummyWindowDependencies {
+  SanePreferences *preferences;
+  DummyIdleTime *idleTimer;
+};
+
 class DummyWindowControl : public AbstractWindowControl {
   Q_OBJECT
  public:
   using AbstractWindowControl::AbstractWindowControl;
-  static WindowDependencies makeDeps() {
+  static DummyWindowDependencies makeDeps() {
     return {.preferences = tempPreferences(), .idleTimer = new DummyIdleTime()};
   }
   MOCK_METHOD(void, createWindows, (SaneBreak::BreakType), (override));
@@ -72,9 +77,10 @@ class DummyWindowControl : public AbstractWindowControl {
 class SimpleWindowControl : public AbstractWindowControl {
   Q_OBJECT
  public:
-  using AbstractWindowControl::AbstractWindowControl;
+  SimpleWindowControl(const DummyWindowDependencies &deps, QObject *parent = nullptr)
+      : AbstractWindowControl({deps.preferences, deps.idleTimer}, parent) {};
   using AbstractWindowControl::deleteWindows;
-  static WindowDependencies makeDeps() {
+  static DummyWindowDependencies makeDeps() {
     return {.preferences = tempPreferences(), .idleTimer = new DummyIdleTime()};
   }
   void createWindows(SaneBreak::BreakType type) {
