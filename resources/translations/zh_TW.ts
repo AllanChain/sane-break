@@ -41,31 +41,12 @@
     <message>
         <location filename="../../src/gui/break-window.ui" line="134"/>
         <source>Lock Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>鎖屏</translation>
     </message>
     <message>
         <location filename="../../src/gui/break-window.ui" line="170"/>
         <source>Exit Force Break</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>BreakWindow</name>
-    <message>
-        <source>&lt;p&gt;Sane Break is in force break mode.&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;Sane Break 已進入強制休息模式。&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Quit Sane Break by running &lt;code&gt;killall sane-break&lt;/code&gt; in terminal.&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;在終端中運行 &lt;code&gt;killall sane-break&lt;/code&gt; 以退出 Sane Break。&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Quit Sane Break by enabling Spotlight with &lt;code&gt;Cmd + Space&lt;/code&gt;, opening terminal, and running &lt;code&gt;killall sane-break&lt;/code&gt;.&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;使用 &lt;code&gt;Cmd + Space&lt;/code&gt; 喚出聚焦搜索，打開終端，運行 &lt;code&gt;killall sane-break&lt;/code&gt; 以退出 Sane Break。&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Pospone Sane Break by pressing &lt;code&gt;Win&lt;/code&gt; and right click Sane Break icon in the system tray.&lt;/p&gt;</source>
-        <translation type="vanished">&lt;p&gt;按 &lt;code&gt;Win&lt;/code&gt; 鍵後右鍵系統托盤中的 Sane Break 圖標以推遲休息&lt;/p&gt;</translation>
+        <translation>退出強制休息</translation>
     </message>
 </context>
 <context>
@@ -177,10 +158,6 @@
         <location filename="../../src/gui/pref-window.ui" line="680"/>
         <source>Flash speed</source>
         <translation>閃爍速度</translation>
-    </message>
-    <message>
-        <source>Show tips to kill Sane Break when locked in full-screen mode</source>
-        <translation type="vanished">在全屏模式顯示強殺 Sane Break 的提示</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="722"/>
@@ -478,7 +455,7 @@ v%1
         <location filename="../../src/gui/pref-window.cpp" line="304"/>
         <source>%n min</source>
         <translation>
-            <numerusform>%n 分钟</numerusform>
+            <numerusform>%n 分鐘</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -486,7 +463,7 @@ v%1
         <location filename="../../src/gui/pref-window.cpp" line="151"/>
         <source>Every %n min</source>
         <translation>
-            <numerusform>每 %n 分钟</numerusform>
+            <numerusform>每 %n 分鐘</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -586,20 +563,20 @@ v%1
     <message numerus="yes">
         <location filename="../../src/app/app.cpp" line="87"/>
         <source>Are you sure to postpone for %n minute?</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>確定推遲 %n 分鐘嗎？</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="89"/>
         <source>You haven&apos;t taken breaks for %1 minutes.</source>
-        <translation type="unfinished"></translation>
+        <translation>您已經 %1 分鐘沒有休息了。</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/app.cpp" line="116"/>
         <source>Postpone %n min</source>
         <translation>
-            <numerusform>推迟 %n 分钟</numerusform>
+            <numerusform>推遲 %n 分鐘</numerusform>
         </translation>
     </message>
     <message>
@@ -634,7 +611,7 @@ v%1
         <location filename="../../src/gui/tray.cpp" line="141"/>
         <source>%n min</source>
         <translation>
-            <numerusform>%n 分钟</numerusform>
+            <numerusform>%n 分鐘</numerusform>
         </translation>
     </message>
     <message>

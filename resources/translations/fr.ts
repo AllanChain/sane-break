@@ -14,7 +14,7 @@
         <location filename="../../src/lib/linux/auto-start.cpp" line="82"/>
         <source>Autostart desktop entry not writable</source>
         <extracomment>Error message when failed to write Linux desktop entry for autostart</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Entrée de démarrage automatique non modifiable</translation>
     </message>
     <message>
         <source>File not writable</source>
@@ -45,12 +45,12 @@
     <message>
         <location filename="../../src/gui/break-window.ui" line="134"/>
         <source>Lock Screen</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Verrouiller l&apos;écran</translation>
     </message>
     <message>
         <location filename="../../src/gui/break-window.ui" line="170"/>
         <source>Exit Force Break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Quitter la pause forcée</translation>
     </message>
 </context>
 <context>
@@ -160,48 +160,49 @@
         <location filename="../../src/gui/pref-window.ui" line="722"/>
         <location filename="../../src/gui/pref-window.ui" line="749"/>
         <source>(One line per message)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(Une ligne par message)</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="729"/>
         <source>Big break prompt messages:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Messages de rappel pour les grosses pauses :</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="736"/>
         <source>Small break prompt messages:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Messages de rappel pour les petites pauses :</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="758"/>
         <source>&lt;h3&gt;Color Theme&lt;/h3&gt;
 All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h3&gt;Thème de couleur&lt;/h3&gt;
+Toutes les couleurs sont au format &lt;code&gt;#AARRGGBB&lt;/code&gt;.</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="771"/>
         <source>Big break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Grosse pause</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="778"/>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Message</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="795"/>
         <source>Small break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Petite pause</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="802"/>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fond</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="839"/>
         <source>Count down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Compte à rebours</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="865"/>
