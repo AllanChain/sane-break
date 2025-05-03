@@ -21,7 +21,7 @@ class TestWindow : public QObject {
   Q_OBJECT
  private slots:
   void init() { QTest::failOnWarning(); }
-  void breakData() {
+  void break_data() {
     auto deps = SimpleWindowControl::makeDeps();
     NiceMock<SimpleWindowControl> windowControl(deps);
 
@@ -37,35 +37,45 @@ class TestWindow : public QObject {
     QCOMPARE(data.theme.highlightBackground,
              deps.preferences->bigHighlightColor->get());
   }
-  void tickWithForceBreak() {
+  void tick_with_force_break_data() {
+    auto preferences = tempPreferences();
+    QTest::addColumn<SaneBreak::BreakType>("type");
+    QTest::addColumn<int>("duration");
+
+    QTest::newRow("small") << SaneBreak::BreakType::Small
+                           << preferences->smallFor->get();
+    QTest::newRow("big") << SaneBreak::BreakType::Big << preferences->bigFor->get();
+  }
+  void tick_with_force_break() {
     auto deps = SimpleWindowControl::makeDeps();
     NiceMock<SimpleWindowControl> windowControl(deps);
 
-    windowControl.show(SaneBreak::BreakType::Small);
+    QFETCH(SaneBreak::BreakType, type);
+    windowControl.show(type);
     QVERIFY(windowControl.hasWindows());
     DummyBreakWindow *window = windowControl.window;
 
-    int smallFor = deps.preferences->smallFor->get();
+    QFETCH(int, duration);
     int flashFor = deps.preferences->flashFor->get();
 
     // Never countdown without idle
-    EXPECT_CALL(*window, setTime(smallFor)).Times(flashFor);
+    EXPECT_CALL(*window, setTime(duration)).Times(flashFor);
     windowControl.advance(deps.preferences->flashFor->get() - 1);
     // Set full-screen after time runs out
     EXPECT_CALL(*window, setFullScreen()).Times(1);
     windowControl.advance(1);
     QVERIFY(Mock::VerifyAndClearExpectations(window));
 
-    EXPECT_CALL(*window, setTime(_)).Times(smallFor - 2);
+    EXPECT_CALL(*window, setTime(_)).Times(duration - 2);
     EXPECT_CALL(*window, setTime(1));
     EXPECT_CALL(*window, setTime(0)).Times(0);
-    windowControl.advance(smallFor - 1);
+    windowControl.advance(duration - 1);
     QVERIFY(Mock::VerifyAndClearExpectations(window));
 
     windowControl.advance(1);
     QVERIFY(!windowControl.hasWindows());
   }
-  void tickWithoutForceBreak() {
+  void tick_without_force_break() {
     auto idleTimer = new DummyIdleTime();
     WindowDependencies deps = {tempPreferences(), idleTimer};
     NiceMock<SimpleWindowControl> windowControl(deps);
@@ -89,7 +99,7 @@ class TestWindow : public QObject {
     windowControl.advance(1);
     QVERIFY(!windowControl.hasWindows());
   }
-  void activityInBreak() {
+  void activity_in_break() {
     auto idleTimer = new DummyIdleTime();
     WindowDependencies deps = {tempPreferences(), idleTimer};
     NiceMock<SimpleWindowControl> windowControl(deps);
@@ -123,7 +133,7 @@ class TestWindow : public QObject {
     windowControl.advance(1);
     QVERIFY(!windowControl.hasWindows());
   }
-  void confirmBreak() {
+  void confirm_break() {
     auto preferences = tempPreferences();
     preferences->confirmAfter->set(10);
     auto idleTimer = new DummyIdleTime();
@@ -145,7 +155,7 @@ class TestWindow : public QObject {
     // Qt will delete them later be we need to clear mocks now
     windowControl.deleteWindows();
   }
-  void exitForceBreak() {
+  void exit_force_break() {
     auto preferences = tempPreferences();
     preferences->confirmAfter->set(10);
     auto idleTimer = new DummyIdleTime();
