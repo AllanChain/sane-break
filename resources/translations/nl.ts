@@ -45,12 +45,12 @@
     <message>
         <location filename="../../src/gui/break-window.ui" line="134"/>
         <source>Lock Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Scherm vergrendelen</translation>
     </message>
     <message>
         <location filename="../../src/gui/break-window.ui" line="170"/>
         <source>Exit Force Break</source>
-        <translation type="unfinished"></translation>
+        <translation>Gedwongen pauze beëindigen</translation>
     </message>
 </context>
 <context>
@@ -674,15 +674,15 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
     <message numerus="yes">
         <location filename="../../src/app/app.cpp" line="87"/>
         <source>Are you sure to postpone for %n minute?</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Weet u zeker dat u de pauze gedurende %n minuut wilt uitstellen?</numerusform>
+            <numerusform>Weet u zeker dat u de pauze gedurende %n minuten wilt uitstellen?</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="89"/>
         <source>You haven&apos;t taken breaks for %1 minutes.</source>
-        <translation type="unfinished"></translation>
+        <translation>U heeft al %1 minuten lang geen pauze genomen.</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/app.cpp" line="116"/>
