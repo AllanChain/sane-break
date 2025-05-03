@@ -56,7 +56,6 @@ BreakWindow::BreakWindow(BreakData data, QWidget *parent)
   setAttribute(Qt::WA_TranslucentBackground);  // transparent window
   setAttribute(Qt::WA_ShowWithoutActivating);  // avoid gaining keyboard focus
   setAttribute(Qt::WA_LayoutOnEntireRect);     // ignore safe zone on macOS
-  setAttribute(Qt::WA_TransparentForMouseEvents);
   setWindowFlags(Qt::ToolTip | Qt::WindowDoesNotAcceptFocus | Qt::FramelessWindowHint |
                  Qt::WindowStaysOnTopHint | Qt::WindowTransparentForInput);
   setWindowTitle("Break reminder - Sane Break");
@@ -130,11 +129,9 @@ void BreakWindow::showButtons(bool show) { ui->buttons->setVisible(show); }
 
 void BreakWindow::setFullScreen() {
   mainWidget->setProperty("isFullScreen", true);
-  setAttribute(Qt::WA_TransparentForMouseEvents, false);
-  // Removing WA_TransparentForMouseEvents does not automatically removes
-  // the window flag WindowTransparentForInput
-  setWindowFlag(Qt::WindowTransparentForInput, false);
-  show();  // required for modifying window flags
+  // setWindowFlag will reparent the window and do a lot of unnecessary works
+  // Instead, we just change the flags of QWindow
+  windowHandle()->setFlag(Qt::WindowTransparentForInput, false);
   bgAnim->stop();
   setProperty("color", bgAnim->endValue());
   ui->countdownLabel->setVisible(true);
@@ -149,7 +146,7 @@ void BreakWindow::setFullScreen() {
 
 void BreakWindow::resizeToNormal() {
   mainWidget->setProperty("isFullScreen", false);
-  setAttribute(Qt::WA_TransparentForMouseEvents);
+  windowHandle()->setFlag(Qt::WindowTransparentForInput, true);
   bgAnim->start();
   ui->countdownLabel->setVisible(false);
   QPropertyAnimation *resizeAnim =
