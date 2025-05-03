@@ -177,7 +177,11 @@ void AbstractApp::resumeBreak(SaneBreak::PauseReasons reason) {
   // If there are other reasons for pausing, do nothing
   if (m_pauseReasons) return;
 
-  if (m_secondsPaused > preferences->resetAfterPause->get()) {
+  // To avoid immediate breaks after break resume, we consider the user have
+  // already taken the break if there shall be breaks during the pause.
+  // Of course, if the user have configured `resetAfterPause`, we just reset it
+  if (m_secondsPaused > m_secondsToNextBreak ||
+      m_secondsPaused > preferences->resetAfterPause->get()) {
     resetSecondsToNextBreak();
   }
   if (m_secondsPaused > preferences->resetCycleAfterPause->get()) {

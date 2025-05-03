@@ -291,6 +291,18 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
              deps.preferences->bigAfter->get() - 1);
   }
+  void avoid_immediate_break_after_pause() {
+    auto deps = DummyApp::makeDeps();
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    int smallEvery = deps.preferences->smallEvery->get();
+    app.advance(smallEvery - 30);
+    emit deps.systemMonitor->idleStarted();
+    app.advance(60);
+    emit deps.systemMonitor->idleEnded();
+    QCOMPARE(app.trayData.secondsToNextBreak, smallEvery);
+  }
   void take_small_break_instead() {
     auto deps = DummyApp::makeDeps();
     deps.preferences->pauseOnBattery->set(true);
