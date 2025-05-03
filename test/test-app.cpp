@@ -423,6 +423,24 @@ class TestApp : public QObject {
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
     QCOMPARE(app.trayData.secondsToNextBreak, 101);
   }
+  void no_confirm_postpone_if_countdown_reset() {
+    auto deps = DummyApp::makeDeps();
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    int smallEvery = deps.preferences->smallEvery->get();
+    app.advance(smallEvery - 1);
+
+    emit deps.systemMonitor->sleepEnded();
+    QCOMPARE(app.trayData.secondsToNextBreak, smallEvery);
+    app.advance(smallEvery - 1);
+
+    // Postpone should not trigger confirmation
+    EXPECT_CALL(app, confirmPostpone).Times(0);
+    app.postpone(100);
+    QCOMPARE(app.trayData.secondsToNextBreak, 101);
+    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+  }
 };
 
 QTEST_APPLESS_MAIN(TestApp)

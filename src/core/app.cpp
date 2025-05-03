@@ -93,6 +93,7 @@ void AbstractApp::tick() {
 
 void AbstractApp::resetSecondsToNextBreak() {
   m_secondsToNextBreak = preferences->smallEvery->get();
+  m_secondsSinceLastBreak = 0;
   updateTray();
 }
 
