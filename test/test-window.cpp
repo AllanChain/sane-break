@@ -98,6 +98,40 @@ class TestWindow : public QObject {
     windowControl.advance(1);
     QVERIFY(!windowControl.hasWindows());
   }
+  void idle_timer_is_reset() {
+    auto deps = SimpleWindowControl::makeDeps();
+    NiceMock<SimpleWindowControl> windowControl(deps);
+
+    int smallFor = deps.preferences->smallFor->get();
+    int flashFor = deps.preferences->flashFor->get();
+
+    windowControl.show(SaneBreak::BreakType::Small);
+    QVERIFY(windowControl.hasWindows());
+    DummyBreakWindow *window = windowControl.window;
+
+    // During first break, the user is idled
+    deps.idleTimer->setIdle(true);
+    EXPECT_CALL(*window, setTime(_)).Times(smallFor);
+    windowControl.advance(smallFor);
+    QVERIFY(Mock::VerifyAndClearExpectations(window));
+    QVERIFY(!windowControl.hasWindows());
+
+    windowControl.show(SaneBreak::BreakType::Small);
+    QVERIFY(windowControl.hasWindows());
+    window = windowControl.window;
+
+    QVERIFY(!deps.idleTimer->isIdle());
+
+    // During next break, the user is not idled
+    // We should not consider the user is idled
+    EXPECT_CALL(*window, setTime(smallFor)).Times(flashFor);
+    windowControl.advance(flashFor);
+    QVERIFY(Mock::VerifyAndClearExpectations(window));
+    EXPECT_CALL(*window, setTime(_)).Times(smallFor);
+    windowControl.advance(smallFor);
+    QVERIFY(Mock::VerifyAndClearExpectations(window));
+    QVERIFY(!windowControl.hasWindows());
+  }
   void activity_in_break() {
     auto deps = SimpleWindowControl::makeDeps();
     NiceMock<SimpleWindowControl> windowControl(deps);

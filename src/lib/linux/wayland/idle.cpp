@@ -68,6 +68,7 @@ void IdleTimeWayland::resumed(void *data, ext_idle_notification_v1 *object) {
 void IdleTimeWayland::startWatching() {
   if (idleNotifier == nullptr) return;
   isWatching = true;
+  m_isIdle = false;
   idleNotification = get_idle_notification(idleNotifier, m_minIdleTime, seat);
   ext_idle_notification_v1_add_listener(idleNotification, &idleListener, this);
 }

@@ -29,7 +29,7 @@ class DummyIdleTime : public SystemIdleTime {
   Q_OBJECT
  public:
   using SystemIdleTime::SystemIdleTime;
-  void startWatching() {};
+  void startWatching() { m_isIdle = false; };
   void stopWatching() {};
   void setWatchAccuracy(int accuracy) {};
   void setMinIdleTime(int idleTime) {};
