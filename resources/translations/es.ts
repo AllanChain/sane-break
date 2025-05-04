@@ -150,7 +150,7 @@
         <location filename="../../src/gui/pref-window.ui" line="384"/>
         <source>Every so many breaks will be a big break</source>
         <extracomment>Tooltip for &quot;Break every&quot; config (big break)</extracomment>
-        <translation>Cada tantos descansos habrá un descanso largo</translation>
+        <translation>Cada tantos descansos breves habrá un descanso largo</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="469"/>
@@ -251,10 +251,9 @@ Todos los colores están en formato &lt;code&gt;#AARRGGBB&lt;/code&gt;.</transla
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
         <extracomment>Tooltip for &quot;Auto screen lock&quot; config</extracomment>
-        <translation>Ejemplo: lo has configurado para 2 minutos. Si el descanso dura menos de 2 minutos, la
-pantalla se bloqueará 2 minutos después de que comience el descanso, suponiendo que
-no haya actividad tras el descanso. Si el descanso dura más de 2 minutos, la pantalla se
-bloqueará en cualquier caso.</translation>
+        <translation>Ejemplo: has configurado el bloqueo de pantalla para que ocurra tras 2 minutos de inactividad. Si el descanso dura menos
+de 2 minutos, la pantalla se bloqueará 2 minutos después de que comience el descanso, suponiendo que se mantenga la
+inactividad tras finalizar el descanso. Si el descanso dura más de 2 minutos, la pantalla se bloqueará en cualquier caso.</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1285"/>

@@ -14,7 +14,7 @@
         <location filename="../../src/lib/linux/auto-start.cpp" line="82"/>
         <source>Autostart desktop entry not writable</source>
         <extracomment>Error message when failed to write Linux desktop entry for autostart</extracomment>
-        <translation type="unfinished">Automatisch opstarten is niet beschrijfbaar</translation>
+        <translation>Automatisch opstarten is niet beschrijfbaar</translation>
     </message>
     <message>
         <source>File not writable</source>
@@ -279,7 +279,7 @@ v%1
         <location filename="../../src/gui/pref-window.ui" line="510"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
 &lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;Gedrag van herinnering&lt;/h3&gt;
+        <translation>&lt;h3&gt;Gedrag van herinnering&lt;/h3&gt;
 &lt;p&gt;Sane Break toont een kleine melding gedurende &lt;b&gt;%1&lt;/b&gt; seconden. Als u stopt met werken of ervoor kiest om door te gaan tot de tijd is verlopen, dan wordt het venster schermvullend weergegeven. Tijdens de pauze wordt het scherm vergrendeld na &lt;b&gt;%2&lt;/b&gt; seconden van inactiviteit. Indien u weer actief bent vóór het vergrendelen, dan krimpt de melding tijdelijk naar een klein venster, maar zodra u weer inactief bent of de tijd is verstreken, wordt het opnieuw schermvullend getoond.&lt;/p&gt;</translation>
     </message>
     <message>
@@ -390,49 +390,49 @@ v%1
         <location filename="../../src/gui/pref-window.ui" line="722"/>
         <location filename="../../src/gui/pref-window.ui" line="749"/>
         <source>(One line per message)</source>
-        <translation type="unfinished">(Eén regel per bericht)</translation>
+        <translation>(Eén regel per bericht)</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="729"/>
         <source>Big break prompt messages:</source>
-        <translation type="unfinished">Berichten voor lange pauze:</translation>
+        <translation>Berichten voor lange pauze:</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="736"/>
         <source>Small break prompt messages:</source>
-        <translation type="unfinished">Berichten voor korte pauze:</translation>
+        <translation>Berichten voor korte pauze:</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="758"/>
         <source>&lt;h3&gt;Color Theme&lt;/h3&gt;
 All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
-        <translation type="unfinished">&lt;h3&gt;Kleurthema&lt;/h3&gt;
+        <translation>&lt;h3&gt;Kleurenschema&lt;/h3&gt;
 Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="771"/>
         <source>Big break</source>
-        <translation type="unfinished">Lange pauze</translation>
+        <translation>Lange pauze</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="778"/>
         <source>Message</source>
-        <translation type="unfinished">Bericht</translation>
+        <translation>Bericht</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="795"/>
         <source>Small break</source>
-        <translation type="unfinished">Korte pauze</translation>
+        <translation>Korte pauze</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="802"/>
         <source>Background</source>
-        <translation type="unfinished">Achtergrond</translation>
+        <translation>Achtergrond</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="839"/>
         <source>Count down</source>
-        <translation type="unfinished">Aftellen</translation>
+        <translation>Aftellen</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1091"/>
@@ -722,12 +722,12 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     <message>
         <location filename="../../src/core/preferences.cpp" line="49"/>
         <source>Time for a small break</source>
-        <translation type="unfinished">Tijd voor een korte pauze</translation>
+        <translation>Tijd voor een korte pauze</translation>
     </message>
     <message>
         <location filename="../../src/core/preferences.cpp" line="52"/>
         <source>Time for a big break</source>
-        <translation type="unfinished">Tijd voor een lange pauze</translation>
+        <translation>Tijd voor een lange pauze</translation>
     </message>
 </context>
 <context>
@@ -779,7 +779,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     <message>
         <location filename="../../src/gui/tray.cpp" line="45"/>
         <source>Take a small break instead</source>
-        <translation type="unfinished">Neem liever een korte pauze</translation>
+        <translation>Neem liever een korte pauze</translation>
     </message>
     <message>
         <location filename="../../src/gui/tray.cpp" line="76"/>
