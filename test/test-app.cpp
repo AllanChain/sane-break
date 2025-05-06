@@ -182,6 +182,28 @@ class TestApp : public QObject {
 
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
+  void lock_screen_timer_not_running_if_not_idle() {
+    auto deps = DummyApp::makeDeps();
+    int autoScreenLockSeconds = 20;
+    deps.preferences->autoScreenLock->set(autoScreenLockSeconds);
+
+    NiceMock<DummyApp> app(deps);
+    app.start();
+    app.advance(app.trayData.secondsToNextBreak);
+
+    EXPECT_CALL(app, doLockScreen()).Times(0);
+    // Emitted by window manager when user is idle or force break
+    emit deps.windowControl->countDownStateChanged(true);
+    QVERIFY(deps.screenLockTimer->isActive());
+    // User is idle during break
+    deps.oneshotIdleTimer->setIdle(true);
+    deps.windowControl->advanceToEnd();
+    app.advance(1);
+    // But is not idle immediately after break
+    deps.oneshotIdleTimer->setIdle(false);
+    QVERIFY(!deps.screenLockTimer->isActive());
+    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+  }
   void postpone_time() {
     auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);

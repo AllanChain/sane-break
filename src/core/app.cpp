@@ -226,6 +226,7 @@ void AbstractApp::onSleepEnd() {
 void AbstractApp::onOneshotIdleEnd() {
   if (m_windowControl->isShowing()) return;
   m_oneshotIdleTimer->stopWatching();
+  m_screenLockTimer->stop();
   resumeBreak(SaneBreak::PauseReason::Idle);
 }
 
