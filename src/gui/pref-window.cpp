@@ -39,6 +39,7 @@
 #include "core/preferences.h"
 #include "lib/auto-start.h"
 #include "sound-player.h"
+#include "text-window.h"
 #include "ui_pref-window.h"
 #include "widgets/language-select.h"
 #include "widgets/stepped-slider.h"
@@ -328,10 +329,15 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
    *                                                                         *
    ****************************************************************************/
   ui->copyrightLabel->setArgs({PROJECT_VERSION});
-  QFile noticeFile(":/NOTICE.md");
-  noticeFile.open(QIODevice::ReadOnly | QIODevice::Text);
-  ui->noticeLabel->setText(noticeFile.readAll());
+  connect(ui->noticeButton, &QPushButton::pressed, this, &PreferenceWindow::openNotice);
+  connect(ui->sourceCodeButton, &QPushButton::pressed, this,
+          &PreferenceWindow::openSourceCode);
 
+  /***************************************************************************
+   *                                                                         *
+   *                               Bottom row                                *
+   *                                                                         *
+   ****************************************************************************/
   connect(ui->resetButton, &QPushButton::pressed, controllers, &ControllerHolder::load);
   connect(ui->saveButton, &QPushButton::pressed, controllers, &ControllerHolder::save);
   connect(controllers, &ControllerHolder::dirtyChanged, ui->saveButton,
@@ -386,4 +392,18 @@ bool PreferenceWindow::confirmLeave() {
     default:
       return false;
   }
+}
+
+void PreferenceWindow::openNotice() {
+  if (openingTextWindow != nullptr) {
+    openingTextWindow->close();
+  }
+  QFile noticeFile(":/NOTICE.md");
+  noticeFile.open(QIODevice::ReadOnly | QIODevice::Text);
+  openingTextWindow = new TextWindow(noticeFile.readAll());
+  openingTextWindow->show();
+}
+
+void PreferenceWindow::openSourceCode() {
+  QDesktopServices::openUrl(QUrl("https://github.com/AllanChain/sane-break"));
 }

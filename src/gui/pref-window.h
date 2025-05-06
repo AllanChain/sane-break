@@ -25,6 +25,7 @@
 #include <QtGlobal>
 
 #include "core/preferences.h"
+#include "gui/text-window.h"
 #include "lib/auto-start.h"
 #include "sound-player.h"
 #include "widgets/language-select.h"
@@ -232,8 +233,12 @@ class PreferenceWindow : public QMainWindow {
   SoundPlayer *soundPlayer;
   ControllerHolder *controllers;
   AutoStart *autoStart;
+  TextWindow *openingTextWindow = nullptr;
+
   bool confirmLeave();
   void setTab(int tabNum);
+  void openNotice();
+  void openSourceCode();
   void closeEvent(QCloseEvent *event);
   void showEvent(QShowEvent *event);
 };

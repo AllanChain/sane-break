@@ -3,11 +3,14 @@ add_library(
   sane-gui STATIC
   break-window.cpp
   break-window.h
+  break-window.ui
   pref-window.cpp
   pref-window.h
   pref-window.ui
   sound-player.cpp
   sound-player.h
+  text-window.cpp
+  text-window.h
   tray.cpp
   tray.h
   welcome.cpp
@@ -18,7 +21,6 @@ add_library(
   widgets/stepped-slider.h
   widgets/language-select.cpp
   widgets/language-select.h
-  break-window.ui
 )
 target_include_directories(sane-gui PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(sane-gui PUBLIC Qt6::Widgets Qt6::Multimedia sane-lib)
