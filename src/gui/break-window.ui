@@ -96,6 +96,9 @@ QProgressBar::chunk {
       <item>
        <widget class="QWidget" name="buttons" native="true">
         <layout class="QHBoxLayout" name="buttons_2">
+         <property name="spacing">
+          <number>12</number>
+         </property>
          <property name="topMargin">
           <number>40</number>
          </property>
