@@ -6,21 +6,27 @@ import os
 
 import requests
 
+WEBLATE_DEFAULT_PRIORITY = 100
+MANUAL_PRIORITY_THRESHOLD = 500
 WEBLATE_API_KEY = os.getenv("WEBLATE_API_KEY")
-headers = {"User-Agent": "F-Droid", "Authorization": "Token " + WEBLATE_API_KEY}
+headers = {"User-Agent": "Python", "Authorization": "Token " + WEBLATE_API_KEY}
 weblate_api_base = "https://hosted.weblate.org/api/translations/sane-break/sane-break"
 url = weblate_api_base + "/en/units/?format=json"
 priorities = {
-    "PrefWindow": 100,
-    "PreferenceWindow": 90,
-    "SanePreferences": 90,
-    "StatusTrayWindow": 90,
-    "WelcomeWindow": 80,
-    "LanguageSelect": 70,
-    "QCoreApplication": 60,
-    "BreakWindow": 60,
-    "SaneBreakApp": 60,
-    "AutoStart": 20,
+    "PrefWindow": 200,
+    "PreferenceWindow": 190,
+    "SanePreferences": 180,
+    "BreakReminder": 180,
+    "BreakWindow": 180,
+    "WelcomeWindow": 180,
+    "StatusTrayWindow": 170,
+    "LanguageSelect": 170,
+    "QCoreApplication": 160,
+    # Weblate default priority is 100
+    "SaneBreakApp": 90,
+    "AutoStart": 60,
+    # For any other strings not in the listed contexts
+    "Others": 10,
 }
 
 
@@ -35,7 +41,7 @@ def update_flags_priority(flags: str, priority: int) -> str:
             except (ValueError, IndexError):
                 pass  # invalid format, ignore
 
-    if existing_priority is not None and existing_priority > 100:
+    if existing_priority is not None and existing_priority >= MANUAL_PRIORITY_THRESHOLD:
         return flags
     else:
         # Remove existing priority parts and add new one
@@ -51,11 +57,11 @@ while url:
 
     for unit in units["results"]:
         context = unit["context"]
-        priority = priorities.get(context, 10)
+        priority = priorities.get(context, priorities["Others"])
         extra_flags = unit.get("extra_flags", "")
         new_extra_flags = update_flags_priority(extra_flags, priority)
         if new_extra_flags == extra_flags or (
-            "priority" not in extra_flags and priority == 100
+            "priority" not in extra_flags and priority == WEBLATE_DEFAULT_PRIORITY
         ):
             continue
         print(f"{new_extra_flags:<20} {unit['source']}")
