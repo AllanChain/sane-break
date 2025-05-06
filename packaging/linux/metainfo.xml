@@ -56,6 +56,22 @@
   </screenshots>
 
   <releases>
+    <release version="0.8.2" date="2025-05-06">
+      <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.8.2</url>
+      <description>
+        <p>Features</p>
+        <ul>
+          <li>Confirm postpone if long time no break</li>
+          <li>Add lock screen and exit force break buttons</li>
+        </ul>
+        <p>Bug fixes</p>
+        <ul>
+          <li>Fix auto screen lock even if not idle after break</li>
+          <li>Move notices to a separate window for better performance</li>
+          <li>Improve preference UI in different languages</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.8.1" date="2025-04-15">
       <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.8.1</url>
       <description>
