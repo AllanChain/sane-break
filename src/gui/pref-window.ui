@@ -1480,7 +1480,7 @@ v%1
               <item>
                <widget class="QPushButton" name="noticeButton">
                 <property name="text">
-                 <string>Third-party Libraries Notice</string>
+                 <string>Third-party Libraries Licenses</string>
                 </property>
                </widget>
               </item>

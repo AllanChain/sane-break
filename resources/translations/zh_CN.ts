@@ -39,12 +39,12 @@
 <context>
     <name>BreakReminder</name>
     <message>
-        <location filename="../../src/gui/break-window.ui" line="134"/>
+        <location filename="../../src/gui/break-window.ui" line="137"/>
         <source>Lock Screen</source>
         <translation>锁屏</translation>
     </message>
     <message>
-        <location filename="../../src/gui/break-window.ui" line="170"/>
+        <location filename="../../src/gui/break-window.ui" line="173"/>
         <source>Exit Force Break</source>
         <translation>退出强制休息</translation>
     </message>
@@ -248,7 +248,7 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
         <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;帮我们翻译！&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1438"/>
+        <location filename="../../src/gui/pref-window.ui" line="1439"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -427,7 +427,12 @@ v%1
         <translation>开机自动启动 Sane Break</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1519"/>
+        <location filename="../../src/gui/pref-window.ui" line="1463"/>
+        <source>Get the Source Code</source>
+        <translation>获取源代码</translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="1518"/>
         <source>Revert to Last Saved</source>
         <translation>恢复上次设置</translation>
     </message>
@@ -442,7 +447,12 @@ v%1
         <translation>改变语言将在重启应用后生效。</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1542"/>
+        <location filename="../../src/gui/pref-window.ui" line="1483"/>
+        <source>Third-party Libraries Licenses</source>
+        <translation>第三方库许可</translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="1541"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
@@ -450,71 +460,71 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="302"/>
         <location filename="../../src/gui/pref-window.cpp" line="303"/>
         <location filename="../../src/gui/pref-window.cpp" line="304"/>
+        <location filename="../../src/gui/pref-window.cpp" line="305"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n 分钟</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="142"/>
-        <location filename="../../src/gui/pref-window.cpp" line="151"/>
+        <location filename="../../src/gui/pref-window.cpp" line="143"/>
+        <location filename="../../src/gui/pref-window.cpp" line="152"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>每 %n 分钟</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="301"/>
+        <location filename="../../src/gui/pref-window.cpp" line="302"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n 秒</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="300"/>
+        <location filename="../../src/gui/pref-window.cpp" line="301"/>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="311"/>
+        <location filename="../../src/gui/pref-window.cpp" line="312"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>在中键托盘图标后，立刻开始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="317"/>
+        <location filename="../../src/gui/pref-window.cpp" line="318"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>在双击托盘图标后，立刻开始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="373"/>
+        <location filename="../../src/gui/pref-window.cpp" line="379"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="374"/>
+        <location filename="../../src/gui/pref-window.cpp" line="380"/>
         <source>Discard</source>
         <translation>放弃</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="375"/>
+        <location filename="../../src/gui/pref-window.cpp" line="381"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="282"/>
+        <location filename="../../src/gui/pref-window.cpp" line="283"/>
         <source>Setting autostart failed</source>
         <translation>设置开机自启失败</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="370"/>
+        <location filename="../../src/gui/pref-window.cpp" line="376"/>
         <source>The preferences have been modified.</source>
         <translation>偏好设置已被修改。</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="371"/>
+        <location filename="../../src/gui/pref-window.cpp" line="377"/>
         <source>Do you want to save your changes?</source>
         <translation>是否保存修改？</translation>
     </message>
