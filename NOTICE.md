@@ -17,12 +17,6 @@ As required by Qt LGPL 3.0, a copy of Qt source used is available [here](https:/
 - Copyright (C) 2018 Drew DeVault <sir@cmpwn.com>
 - SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
-## KIdleTime
-
-- Website: <https://invent.kde.org/frameworks/kidletime>
-- Copyright (C) 2009 Dario Freddi <drf@kde.org>
-- SPDX-License-Identifier: LGPL-2.1-or-later
-
 ## Others
 
 Some of the [source code](https://github.com/AllanChain/sane-break/) is adapted from other open source code.

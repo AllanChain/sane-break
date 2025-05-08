@@ -171,9 +171,9 @@ guix shell --container make cmake gcc-toolchain pkg-config vulkan-headers \
 
 ## FAQ
 
-### How to exit?
+### What if I really want to skip a break?
 
-Right-click the menu icon and hover over the "Postpone" menu. The "Quit" menu is there. This design is intended to make users think twice about whether they want to postpone breaks or really quit the software.
+You can postpone or quit via tray icon before Sane Break enters force break mode. If it's already in the force break mode, you can first click "Exit Force Break" and then postpone via tray icon.
 
 ### Will Sane Break pause when I'm away?
 
@@ -190,15 +190,6 @@ The default locations for settings are:
 Beside default locations, Qt also supports reading settings from [other locations](https://doc.qt.io/qt-6/qsettings.html#locations-where-application-settings-are-stored).
 
 If you want to make Sane Break portable, especially on Windows, you can put an empty file named `SaneBreak.ini` next to the `.exe` file and Sane Break will automatically pick that file for settings.
-
-### What if I really want to skip a break?
-
-You can postpone or quit via tray icon within a short time even after the break starts.
-
-However, if you really want to quit when Sane Break is set to fullscreen, you can kill the app via system command line. For example:
-- KDE: Enable KRunner with <kbd>Alt</kbd> + <kbd>Space</kbd> and run `killall sane-break`
-- macOS: Enable Spotlight with <kbd>Cmd</kbd> + <kbd>Space</kbd>, open Terminal, and run `killall sane-break`
-- Windows: Press <kbd>Win</kbd> + <kbd>R</kbd> and run `taskkill /IM sane-break /F`
 
 ## Contributing
 
