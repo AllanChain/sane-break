@@ -7,6 +7,12 @@
     <img src="https://img.shields.io/github/v/release/AllanChain/sane-break" alt="GitHub release">
   </a>
   <img src="https://img.shields.io/badge/built_with-Qt_6-Qt" alt="Built with Qt 6">
+  <a href="https://flathub.org/apps/io.github.AllanChain.sane-break">
+    <img src="https://img.shields.io/flathub/downloads/io.github.AllanChain.sane-break?logo=flathub" alt="Flathub Downloads">
+  </a>
+  <a href="https://github.com/AllanChain/sane-break/releases">
+    <img src="https://img.shields.io/github/downloads/AllanChain/sane-break/total?logo=github&color=black" alt="total downloads">
+  </a>
   <a href="https://hosted.weblate.org/engage/sane-break/">
     <img src="https://hosted.weblate.org/widget/sane-break/sane-break/svg-badge.svg" alt="Translation status" />
   </a>
