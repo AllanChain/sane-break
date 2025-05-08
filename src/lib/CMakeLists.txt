@@ -7,7 +7,6 @@ add_library(
   idle-time.h
   program-monitor.cpp
   program-monitor.h
-  screen-lock.cpp
   screen-lock.h
   sleep-monitor.cpp
   sleep-monitor.h
@@ -42,13 +41,20 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
             macos/idle.cpp
             macos/idle.h
             macos/program-monitor.mm
+            macos/screen-lock.cpp
             macos/workspace.h
             macos/workspace.mm
   )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   target_sources(
-    sane-lib PRIVATE windows/auto-start.cpp windows/battery.cpp windows/battery.h
-                     windows/program-monitor.cpp windows/idle.cpp windows/idle.h
+    sane-lib
+    PRIVATE windows/auto-start.cpp
+            windows/battery.cpp
+            windows/battery.h
+            windows/screen-lock.cpp
+            windows/program-monitor.cpp
+            windows/idle.cpp
+            windows/idle.h
   )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   find_package(
@@ -63,8 +69,13 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 
   target_sources(
     sane-lib
-    PRIVATE linux/auto-start.cpp linux/battery.cpp linux/battery.h
-            linux/program-monitor.cpp linux/system-check.cpp linux/system-check.h
+    PRIVATE linux/auto-start.cpp
+            linux/battery.cpp
+            linux/battery.h
+            linux/screen-lock.cpp
+            linux/program-monitor.cpp
+            linux/system-check.cpp
+            linux/system-check.h
   )
 
   if(AUTO_ENABLE_X11)
