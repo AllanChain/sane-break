@@ -19,12 +19,10 @@
 #include <QScreen>
 #include <QString>
 #include <QTimer>
-#include <QToolButton>
 #include <QVBoxLayout>
 #include <QWidget>
 #include <QWindow>
 #include <Qt>
-#include <cmath>
 
 #include "config.h"
 #include "core/window-control.h"
@@ -78,11 +76,15 @@ BreakWindow::BreakWindow(BreakData data, QWidget *parent)
   ui->breakLabel->setText(data.message);
   ui->countdownLabel->setVisible(false);
   ui->buttons->setVisible(false);
+  QColor hoverColor = data.theme.messageColor;
+  hoverColor.setAlpha(40);
+  ui->buttons->setStyleSheet(
+      ui->buttons->styleSheet().replace("#aaaaaaaa", hoverColor.name(QColor::HexArgb)));
   colorizeButton(ui->lockScreen, data.theme.messageColor);
   colorizeButton(ui->exitForceBreak, data.theme.messageColor);
-  connect(ui->lockScreen, &QToolButton::pressed, this,
+  connect(ui->lockScreen, &QPushButton::pressed, this,
           &AbstractBreakWindow::lockScreenRequested);
-  connect(ui->exitForceBreak, &QToolButton::pressed, this,
+  connect(ui->exitForceBreak, &QPushButton::pressed, this,
           &AbstractBreakWindow::exitForceBreakRequested);
 
   progressAnim = new QPropertyAnimation(ui->progressBar, "value");
@@ -197,7 +199,7 @@ void BreakWindow::initSize(QScreen *screen) {
   show();
 }
 
-void BreakWindow::colorizeButton(QToolButton *button, QColor color) {
+void BreakWindow::colorizeButton(QPushButton *button, QColor color) {
   auto pixmap = button->icon().pixmap(button->iconSize());
   auto mask = pixmap.mask();
   pixmap.fill(color);

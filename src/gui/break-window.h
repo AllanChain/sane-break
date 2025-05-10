@@ -12,7 +12,6 @@
 #include <QPropertyAnimation>
 #include <QPushButton>
 #include <QTimer>
-#include <QToolButton>
 #include <QWidget>
 
 #include "core/window-control.h"
@@ -48,5 +47,5 @@ class BreakWindow : public AbstractBreakWindow {
   QPropertyAnimation *bgAnim;
   bool waylandWorkaround = false;
 
-  static void colorizeButton(QToolButton *button, QColor color);
+  static void colorizeButton(QPushButton *button, QColor color);
 };
