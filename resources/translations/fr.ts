@@ -160,23 +160,23 @@
         <location filename="../../src/gui/pref-window.ui" line="722"/>
         <location filename="../../src/gui/pref-window.ui" line="749"/>
         <source>(One line per message)</source>
-        <translation type="unfinished">(Une ligne par message)</translation>
+        <translation>(Une ligne par message)</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="729"/>
         <source>Big break prompt messages:</source>
-        <translation type="unfinished">Messages de rappel pour les grosses pauses :</translation>
+        <translation>Message du panneau de rappel pour les grosses pauses&#xa0;:</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="736"/>
         <source>Small break prompt messages:</source>
-        <translation type="unfinished">Messages de rappel pour les petites pauses :</translation>
+        <translation>Message du panneau de rappel pour les petites pauses&#xa0;:</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="758"/>
         <source>&lt;h3&gt;Color Theme&lt;/h3&gt;
 All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
-        <translation type="unfinished">&lt;h3&gt;Thème de couleur&lt;/h3&gt;
+        <translation>&lt;h3&gt;Thème de couleur&lt;/h3&gt;
 Toutes les couleurs sont au format &lt;code&gt;#AARRGGBB&lt;/code&gt;.</translation>
     </message>
     <message>
@@ -187,7 +187,7 @@ Toutes les couleurs sont au format &lt;code&gt;#AARRGGBB&lt;/code&gt;.</translat
     <message>
         <location filename="../../src/gui/pref-window.ui" line="778"/>
         <source>Message</source>
-        <translation type="unfinished">Message</translation>
+        <translation>Message</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="795"/>
@@ -668,15 +668,15 @@ v%1
     <message numerus="yes">
         <location filename="../../src/app/app.cpp" line="87"/>
         <source>Are you sure to postpone for %n minute?</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Voulez-vous vraiment retarder cette de pour %n minute&#x202f;?</numerusform>
+            <numerusform>Voulez-vous vraiment retarder cette pause de %n minutes&#x202f;?</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="89"/>
         <source>You haven&apos;t taken breaks for %1 minutes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous n&apos;avez pas pris de pause depuis %1 minutes.</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/app.cpp" line="116"/>
@@ -771,7 +771,7 @@ v%1
     <message>
         <location filename="../../src/gui/tray.cpp" line="45"/>
         <source>Take a small break instead</source>
-        <translation type="unfinished"></translation>
+        <translation>Prendre une petite pause à la place</translation>
     </message>
     <message>
         <location filename="../../src/gui/tray.cpp" line="76"/>

@@ -488,7 +488,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1463"/>
         <source>Get the Source Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Broncode bekijken</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1518"/>
@@ -508,7 +508,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1483"/>
         <source>Third-party Libraries Licenses</source>
-        <translation type="unfinished"></translation>
+        <translation>Licenties van externe bibliotheken</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1541"/>

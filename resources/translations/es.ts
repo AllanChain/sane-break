@@ -452,7 +452,7 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1463"/>
         <source>Get the Source Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver el código fuente</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1518"/>
@@ -472,7 +472,7 @@ v%1
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1483"/>
         <source>Third-party Libraries Licenses</source>
-        <translation type="unfinished"></translation>
+        <translation>Licencias de bibliotecas de terceros</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="1541"/>
@@ -743,7 +743,7 @@ v%1
         <location filename="../../src/gui/welcome.cpp" line="102"/>
         <location filename="../../src/gui/welcome.cpp" line="129"/>
         <source>OK</source>
-        <translation>Vale</translation>
+        <translation>Confirmar</translation>
     </message>
     <message>
         <location filename="../../src/gui/welcome.cpp" line="124"/>
