@@ -37,7 +37,7 @@ class AbstractBreakWindow : public QMainWindow {
 
  public:
   AbstractBreakWindow(BreakData data, QWidget *parent = nullptr)
-      : data(data), QMainWindow(parent) {};
+      : QMainWindow(parent), data(data) {};
   ~AbstractBreakWindow() = default;
 
   virtual void start() {};

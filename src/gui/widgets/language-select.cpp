@@ -24,7 +24,7 @@ QList<QTranslator *> LanguageSelect::currentTranslators = {};
 
 void LanguageSelect::setLanguage(QString language) {
   QTranslator *translator = new QTranslator();
-  if (language == "" && !translator->load(QLocale::system(), "", "", ":/i18n") ||
+  if ((language == "" && !translator->load(QLocale::system(), "", "", ":/i18n")) ||
       !translator->load(language, ":/i18n")) {
     if (language == "en") return;
     // Fall back to English
@@ -52,8 +52,8 @@ void LanguageSelect::setLanguage(QString language) {
   }
 #else
   QString translatorPath = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
-  if (language == "" &&
-          !qtBaseTranslater->load(QLocale::system(), "qtbase", "_", translatorPath) ||
+  if ((language == "" &&
+       !qtBaseTranslater->load(QLocale::system(), "qtbase", "_", translatorPath)) ||
       !qtBaseTranslater->load("qtbase_" + language, translatorPath)) {
     qDebug() << "Failed to set Qt base translator" << language;
     return;

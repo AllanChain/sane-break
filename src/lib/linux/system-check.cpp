@@ -62,7 +62,6 @@ void LinuxSystemSupport::check() {
         qGuiApp->nativeInterface<QNativeInterface::QWaylandApplication>();
     wl_display *display = waylandApp->display();
     wl_registry *registry = wl_display_get_registry(display);
-    wl_seat *seat = waylandApp->seat();
     wl_registry_add_listener(registry, &registryListener, nullptr);
     wl_display_roundtrip(display);
     wl_registry_destroy(registry);

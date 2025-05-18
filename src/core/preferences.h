@@ -63,9 +63,9 @@ class Setting : public SettingWithSignal {
  private:
   QSettings *m_settings;
   QString m_key;
-  bool m_defaultIsFunction;
-  std::function<T()> m_defaultValueFunction;
   T m_defaultValue;
+  std::function<T()> m_defaultValueFunction;
+  bool m_defaultIsFunction;
   T m_value;
   bool m_cached = false;
 };

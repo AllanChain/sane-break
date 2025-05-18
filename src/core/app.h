@@ -62,10 +62,10 @@ class AbstractApp : public QObject {
   SaneBreak::PauseReasons m_pauseReasons = {};
 
   SanePreferences *preferences;
-  AbstractSystemMonitor *m_systemMonitor;
   AbstractTimer *m_countDownTimer;
   SystemIdleTime *m_oneshotIdleTimer;
   AbstractTimer *m_screenLockTimer;
+  AbstractSystemMonitor *m_systemMonitor;
   AbstractWindowControl *m_windowControl;
 
   void tick();
