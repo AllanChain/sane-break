@@ -169,18 +169,14 @@ install(
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-option(SANE_BUILD_DEB "Build Debian package" OFF)
+set(CPACK_PACKAGE_CONTACT "Allan Chain")
+set(CPACK_PACKAGE_FILE_NAME "sane-break")
+
+option(SANE_MAKE_DEB "Build Debian package" OFF)
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND SANE_MAKE_DEB)
   message(STATUS "Making .deb packages")
   set(CPACK_GENERATOR "DEB")
-  set(CPACK_DEBIAN_PACKAGE_NAME "sane-break")
   set(CPACK_DEBIAN_PACKAGE_SECTION "utils")
-  set(CPACK_DEBIAN_FILE_NAME "sane-break.deb")
-  set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/AllanChain/sane-break/")
-  set(CPACK_DEBIAN_PACKAGE_DESCRIPTION
-      "A gentle break reminder that helps you avoid mindlessly skipping breaks"
-  )
-  set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Allan Chain")
   set(DEBIAN_DEPENDENCY_LIST "")
   if(ENABLE_WAYLAND)
     list(APPEND DEBIAN_DEPENDENCY_LIST "qt6-wayland(>=6.6)")
@@ -192,6 +188,13 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND SANE_MAKE_DEB)
     list(APPEND DEBIAN_DEPENDENCY_LIST "layer-shell-qt(>=6.2)")
   endif()
   list(JOIN DEBIAN_DEPENDENCY_LIST ", " CPACK_DEBIAN_PACKAGE_DEPENDS)
+  include(CPack)
+endif()
+option(SANE_MAKE_RPM "Build RPM package" OFF)
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND SANE_MAKE_RPM)
+  message(STATUS "Making .rpm packages")
+  set(CPACK_GENERATOR "RPM")
+  set(CPACK_RPM_PACKAGE_LICENSE "GPLv3")
   include(CPack)
 endif()
 

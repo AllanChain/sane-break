@@ -10,6 +10,8 @@ project(
   sane-break
   VERSION 0.8.2
   LANGUAGES C CXX
+  HOMEPAGE_URL "https://github.com/AllanChain/sane-break/"
+  DESCRIPTION "A gentle break reminder that helps you avoid mindlessly skipping breaks"
 )
 
 set(CMAKE_AUTOUIC ON)
