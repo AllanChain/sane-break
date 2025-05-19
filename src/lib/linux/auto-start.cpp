@@ -8,6 +8,7 @@
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <QDBusObjectPath>
+#include <QDir>
 #include <QFile>
 #include <QIODevice>
 #include <QMap>
@@ -54,9 +55,9 @@ void AutoStart::setEnabled(bool enabled) {
     return;
   }
 #else
-  QString desktopPath =
-      QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) +
-      "/autostart/sane-break.desktop";
+  QString configPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+  QString autostartPath = configPath + "/autostart";
+  QString desktopPath = autostartPath + "/sane-break.desktop";
   QFile desktopFile(":/sane-break.desktop");
   desktopFile.open(QIODevice::ReadOnly | QIODevice::Text);
   QString contents = desktopFile.readAll() +
@@ -66,13 +67,20 @@ void AutoStart::setEnabled(bool enabled) {
                      "X-KDE-autostart-after=panel\n"
                      "X-LXQt-Need-Tray=true\n";
   if (enabled) {
+    QDir configDir(configPath);
+    if (!configDir.exists("autostart")) {
+      if (!configDir.mkdir("autostart")) {
+        //: Error message when failed to write Linux desktop entry for autostart
+        emit operationResult(false, tr("Autostart desktop entry not writable"));
+        return;
+      }
+    }
     QFile file(desktopPath);
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
       file.write(contents.toUtf8());
       file.close();
       emit operationResult(true);
     } else {
-      //: Error message when failed to write Linux desktop entry for autostart
       emit operationResult(false, tr("Autostart desktop entry not writable"));
     }
   } else {
