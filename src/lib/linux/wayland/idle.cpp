@@ -48,17 +48,16 @@ void IdleTimeWayland::globalAdded(void *data, wl_registry *registry, uint32_t na
   }
 }
 
-void IdleTimeWayland::globalRemoved(void *data, wl_registry *registry, uint32_t name) {
-};
+void IdleTimeWayland::globalRemoved(void *, wl_registry *, uint32_t) {};
 
-void IdleTimeWayland::idled(void *data, ext_idle_notification_v1 *object) {
+void IdleTimeWayland::idled(void *data, ext_idle_notification_v1 *) {
   IdleTimeWayland *self = static_cast<IdleTimeWayland *>(data);
   if (!self->isWatching) return;
   self->m_isIdle = true;
   emit self->idleStart();
 };
 
-void IdleTimeWayland::resumed(void *data, ext_idle_notification_v1 *object) {
+void IdleTimeWayland::resumed(void *data, ext_idle_notification_v1 *) {
   IdleTimeWayland *self = static_cast<IdleTimeWayland *>(data);
   if (!self->isWatching) return;
   self->m_isIdle = false;

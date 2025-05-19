@@ -26,8 +26,7 @@
 #include <cstdint>
 #include <cstring>
 
-void registryHandler(void *data, wl_registry *registry, uint32_t id,
-                     const char *interface, uint32_t version) {
+void registryHandler(void *, wl_registry *, uint32_t, const char *interface, uint32_t) {
   // Layer shell shoud be supported both compile and run time
 #ifdef WITH_LAYER_SHELL
   if (strcmp(interface, "zwlr_layer_shell_v1") == 0)
@@ -37,7 +36,7 @@ void registryHandler(void *data, wl_registry *registry, uint32_t id,
     LinuxSystemSupport::idleNotify = true;
 }
 
-void registryRemover(void *data, wl_registry *registry, uint32_t id) {}
+void registryRemover(void *, wl_registry *, uint32_t) {}
 
 const wl_registry_listener registryListener = {registryHandler, registryRemover};
 #endif  // ENABLE_WAYLAND

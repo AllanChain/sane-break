@@ -15,10 +15,10 @@ SanePreferences* SanePreferences::createDefault(QObject* parent) {
   // We prefer settings file next to the app executable to make app more portable
   QFile portableSettings(QCoreApplication::applicationDirPath() + "/SaneBreak.ini");
   if (!portableSettings.exists()) {
-    return new SanePreferences(new QSettings());
+    return new SanePreferences(new QSettings(), parent);
   }
   return new SanePreferences(
-      new QSettings(portableSettings.fileName(), QSettings::IniFormat));
+      new QSettings(portableSettings.fileName(), QSettings::IniFormat), parent);
 };
 
 SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
@@ -45,10 +45,10 @@ SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
       new Setting<QColor>(settings, "theme/small-bg", QColor(235, 203, 139, 100));
   bigHighlightColor =
       new Setting<QColor>(settings, "theme/big-bg", QColor(180, 142, 173, 100));
-  smallMessages = new Setting<QStringList>(settings, "break/small-msg", [this]() {
+  smallMessages = new Setting<QStringList>(settings, "break/small-msg", []() {
     return QStringList({tr("Time for a small break")});
   });
-  bigMessages = new Setting<QStringList>(settings, "break/big-msg", [this]() {
+  bigMessages = new Setting<QStringList>(settings, "break/big-msg", []() {
     return QStringList({tr("Time for a big break")});
   });
 

@@ -25,7 +25,7 @@ class IdleTimeWayland : public SystemIdleTime {
   bool isSupported() { return idleNotifier != nullptr; };
   void startWatching();
   void stopWatching();
-  void setWatchAccuracy(int accuracy) {};
+  void setWatchAccuracy(int) {};
   void setMinIdleTime(int idleTime);
 
  private:

@@ -353,7 +353,7 @@ void PreferenceWindow::closeEvent(QCloseEvent *event) {
   QMainWindow::closeEvent(event);
 }
 
-void PreferenceWindow::showEvent(QShowEvent *event) { controllers->load(); }
+void PreferenceWindow::showEvent(QShowEvent *) { controllers->load(); }
 
 void PreferenceWindow::setTab(int tabNum) {
   if (!confirmLeave()) {

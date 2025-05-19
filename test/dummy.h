@@ -31,8 +31,8 @@ class DummyIdleTime : public SystemIdleTime {
   using SystemIdleTime::SystemIdleTime;
   void startWatching() { m_isIdle = false; };
   void stopWatching() {};
-  void setWatchAccuracy(int accuracy) {};
-  void setMinIdleTime(int idleTime) {};
+  void setWatchAccuracy(int) {};
+  void setMinIdleTime(int) {};
   void setIdle(bool idle) {
     m_isIdle = idle;
     if (idle) {

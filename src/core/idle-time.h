@@ -11,13 +11,13 @@ class SystemIdleTime : public QObject {
   Q_OBJECT
  public:
   SystemIdleTime(QObject *parent = nullptr) : QObject(parent) {}
-  virtual void startWatching() {}
-  virtual void stopWatching() {}
+  virtual void startWatching() = 0;
+  virtual void stopWatching() = 0;
   static SystemIdleTime *createIdleTimer(QObject *parent = nullptr);
   int watchAccuracy() { return m_watchAccuracy; }
   int minIdleTime() { return m_minIdleTime; }
-  virtual void setWatchAccuracy(int accuracy) {}
-  virtual void setMinIdleTime(int idleTime) {}
+  virtual void setWatchAccuracy(int accuracy) = 0;
+  virtual void setMinIdleTime(int idleTime) = 0;
   bool isIdle() { return m_isIdle; }
  signals:
   void idleStart();

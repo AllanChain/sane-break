@@ -92,7 +92,7 @@ void AutoStart::setEnabled(bool enabled) {
 #endif
 }
 
-bool AutoStart::isEnabled(SanePreferences* preferences) {
+bool AutoStart::isEnabled([[maybe_unused]] SanePreferences* preferences) {
 #ifdef LINUX_DIST_FLATPAK
   return preferences->autoStart;
 #endif

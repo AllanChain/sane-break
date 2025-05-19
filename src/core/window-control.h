@@ -40,11 +40,11 @@ class AbstractBreakWindow : public QMainWindow {
       : QMainWindow(parent), data(data) {};
   ~AbstractBreakWindow() = default;
 
-  virtual void start() {};
-  virtual void setTime(int remainingTime) {};
-  virtual void setFullScreen() {};
-  virtual void resizeToNormal() {};
-  virtual void showButtons(bool show = true) {};
+  virtual void start() = 0;
+  virtual void setTime(int remainingTime) = 0;
+  virtual void setFullScreen() = 0;
+  virtual void resizeToNormal() = 0;
+  virtual void showButtons(bool show = true) = 0;
 
  signals:
   void lockScreenRequested();
