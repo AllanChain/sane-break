@@ -266,6 +266,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
                 <property name="maximum">
                  <number>65535</number>
                 </property>
+                <property name="value">
+                 <number>20</number>
+                </property>
                </widget>
               </item>
               <item row="1" column="1">
@@ -313,6 +316,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
                 </property>
                 <property name="maximum">
                  <number>65535</number>
+                </property>
+                <property name="value">
+                 <number>20</number>
                 </property>
                </widget>
               </item>
@@ -375,6 +381,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
                 </property>
                 <property name="maximum">
                  <number>65535</number>
+                </property>
+                <property name="value">
+                 <number>3</number>
                 </property>
                </widget>
               </item>
@@ -531,6 +540,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
                 <property name="maximum">
                  <number>65535</number>
                 </property>
+                <property name="value">
+                 <number>30</number>
+                </property>
                </widget>
               </item>
               <item row="1" column="1">
@@ -616,6 +628,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
                 </property>
                 <property name="maximum">
                  <number>65535</number>
+                </property>
+                <property name="value">
+                 <number>30</number>
                 </property>
                </widget>
               </item>
@@ -929,6 +944,9 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                 <property name="maximum">
                  <number>65535</number>
                 </property>
+                <property name="value">
+                 <number>3</number>
+                </property>
                </widget>
               </item>
              </layout>
@@ -1010,6 +1028,9 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                 <property name="maximum">
                  <number>65535</number>
                 </property>
+                <property name="value">
+                 <number>2</number>
+                </property>
                </widget>
               </item>
               <item row="1" column="0">
@@ -1060,6 +1081,9 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                 </property>
                 <property name="maximum">
                  <number>65535</number>
+                </property>
+                <property name="value">
+                 <number>5</number>
                 </property>
                </widget>
               </item>
