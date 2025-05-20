@@ -73,6 +73,9 @@ BreakWindow::BreakWindow(BreakData data, QWidget *parent)
   mainWidget->setProperty("isFullScreen", false);
   mainWidget->setAttribute(Qt::WA_LayoutOnEntireRect);
 
+#ifdef LINUX_DIST_FLATPAK
+  ui->lockScreenGroup->setHidden(true);
+#endif
   ui->breakLabel->setText(data.message);
   ui->countdownLabel->setVisible(false);
   ui->buttons->setVisible(false);

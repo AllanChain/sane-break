@@ -297,7 +297,14 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
   ui->languageLabel->setHidden(true);
   ui->languageSelect->setHidden(true);
   ui->languageHint->setHidden(true);
+  ui->languageLink->setHidden(true);
 #endif
+
+#ifdef LINUX_DIST_FLATPAK
+  ui->autoScreenLock->setHidden(true);
+  ui->autoScreenLockLabel->setHidden(true);
+  ui->macPermissionHint->setHidden(true);
+#else
   ui->autoScreenLock->addItem(tr("Disabled"), 0);
   ui->autoScreenLock->addItem(tr("%n sec", "", 30), 30);
   ui->autoScreenLock->addItem(tr("%n min", "", 1), 60);
@@ -306,6 +313,7 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
   ui->macPermissionHint->setHidden(true);
   controllers->add(new PrefController<QComboBox, Setting<int>>(
       ui->autoScreenLock, preferences->autoScreenLock));
+#endif
 
 #ifdef Q_OS_LINUX
   ui->quickBreakLabel->setText(

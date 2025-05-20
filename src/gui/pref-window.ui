@@ -1283,7 +1283,7 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                </widget>
               </item>
               <item row="2" column="0" alignment="Qt::AlignmentFlag::AlignTop">
-               <widget class="QLabel" name="label_19">
+               <widget class="QLabel" name="languageLink">
                 <property name="text">
                  <string>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</string>
                 </property>
@@ -1305,7 +1305,7 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                  <number>20</number>
                 </property>
                 <item alignment="Qt::AlignmentFlag::AlignVCenter">
-                 <widget class="QLabel" name="label_16">
+                 <widget class="QLabel" name="autoScreenLockLabel">
                   <property name="toolTip">
                    <string extracomment="Tooltip for &quot;Auto screen lock&quot; config">Let's say you've configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the

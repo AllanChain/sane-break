@@ -102,7 +102,7 @@ bool AutoStart::isEnabled([[maybe_unused]] SanePreferences* preferences) {
 }
 
 #ifdef LINUX_DIST_FLATPAK
-void AutoStart::flatpakCallback(uint response, const QVariantMap& results) {
+void AutoStart::flatpakCallback(uint response, const QVariantMap&) {
   if (response > 0) {
     //: Error message when requesting autostart in Flatpak got cancelled by user
     emit operationResult(false, tr("The request to autostart was cancelled"));

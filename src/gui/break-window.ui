@@ -112,7 +112,7 @@ QPushButton::hover {
           <number>40</number>
          </property>
          <item alignment="Qt::AlignmentFlag::AlignHCenter">
-          <widget class="QWidget" name="verticalWidget" native="true">
+          <widget class="QWidget" name="lockScreenGroup" native="true">
            <layout class="QVBoxLayout" name="verticalLayout_3">
             <item alignment="Qt::AlignmentFlag::AlignHCenter">
              <widget class="QPushButton" name="lockScreen">
@@ -172,7 +172,7 @@ QPushButton::hover {
           </widget>
          </item>
          <item alignment="Qt::AlignmentFlag::AlignHCenter">
-          <widget class="QWidget" name="verticalWidget_1" native="true">
+          <widget class="QWidget" name="exitForceBreakGroup" native="true">
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <item alignment="Qt::AlignmentFlag::AlignHCenter">
              <widget class="QPushButton" name="exitForceBreak">
