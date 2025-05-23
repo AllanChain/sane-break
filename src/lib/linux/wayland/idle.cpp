@@ -4,6 +4,7 @@
 
 #include "idle.h"
 
+#include <qglobal.h>
 #include <wayland-client-core.h>
 #include <wayland-client-protocol.h>
 #include <wayland-client.h>
@@ -13,17 +14,30 @@
 #include <QDBusReply>
 #include <QElapsedTimer>
 #include <QGuiApplication>
+#if QT_VERSION < QT_VERSION_CHECK(6, 5, 0)
+#include <QtGui/qpa/qplatformnativeinterface.h>
+#endif
 #include <cstdint>
 #include <cstring>
 
 #include "wayland-ext-idle-notify-v1-client-protocol.h"
 
 IdleTimeWayland::IdleTimeWayland(QObject *parent) : SystemIdleTime(parent) {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
   QNativeInterface::QWaylandApplication *waylandApp =
       qGuiApp->nativeInterface<QNativeInterface::QWaylandApplication>();
+  if (!waylandApp) return;
   wl_display *display = waylandApp->display();
-  wl_registry *registry = wl_display_get_registry(display);
   seat = waylandApp->seat();
+#else
+  QPlatformNativeInterface *nativeInterface = qGuiApp->platformNativeInterface();
+  if (!nativeInterface) return;
+  wl_display *display = static_cast<wl_display *>(
+      nativeInterface->nativeResourceForIntegration("display"));
+  seat =
+      static_cast<wl_seat *>(nativeInterface->nativeResourceForIntegration("wl_seat"));
+#endif
+  wl_registry *registry = wl_display_get_registry(display);
   wl_registry_add_listener(registry, &globalListener, this);
   wl_display_roundtrip(display);
 

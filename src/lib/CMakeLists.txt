@@ -128,6 +128,9 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
         "${CMAKE_CURRENT_SOURCE_DIR}/linux/wayland/ext-idle-notify-v1.xml"
       )
       target_link_libraries(sane-lib PRIVATE Wayland::Client)
+      if(Qt6_VERSION_MINOR LESS 5) # Qt < 6.5 need private API to get wl_display
+        target_link_libraries(sane-lib PRIVATE Qt6::GuiPrivate)
+      endif()
       if(LayerShellQt_FOUND)
         set(WITH_LAYER_SHELL
             ON

@@ -17,6 +17,9 @@
 
 #include "system-check.h"
 #ifdef ENABLE_WAYLAND
+#if QT_VERSION < QT_VERSION_CHECK(6, 5, 0)
+#include <QtGui/qpa/qplatformnativeinterface.h>
+#endif
 #include <wayland-client-core.h>
 #include <wayland-client-protocol.h>
 #include <wayland-client.h>
@@ -57,9 +60,17 @@ void LinuxSystemSupport::check() {
   LinuxSystemSupport::idleGNOME = iface.isValid();
 #ifdef ENABLE_WAYLAND
   if (QGuiApplication::platformName() == "wayland") {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
     QNativeInterface::QWaylandApplication *waylandApp =
         qGuiApp->nativeInterface<QNativeInterface::QWaylandApplication>();
+    if (!waylandApp) return;
     wl_display *display = waylandApp->display();
+#else
+    QPlatformNativeInterface *nativeInterface = qGuiApp->platformNativeInterface();
+    if (!nativeInterface) return;
+    wl_display *display = static_cast<wl_display *>(
+        nativeInterface->nativeResourceForIntegration("display"));
+#endif
     wl_registry *registry = wl_display_get_registry(display);
     wl_registry_add_listener(registry, &registryListener, nullptr);
     wl_display_roundtrip(display);
