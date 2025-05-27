@@ -45,3 +45,5 @@ repos:
           - --license-filepath
           - .github/license_header.txt
           - --use-current-year
+ci:
+  autoupdate_schedule: quarterly
