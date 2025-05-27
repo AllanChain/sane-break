@@ -5,8 +5,8 @@ name: Build app
 
 on:
   push:
-    branches:
-      - '**'
+    branches-ignore:
+      - 'pre-commit-ci-update-config'
     tags:
       - '*'
     paths-ignore:
