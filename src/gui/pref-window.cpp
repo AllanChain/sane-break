@@ -316,20 +316,17 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
 #endif
 
 #ifdef Q_OS_LINUX
-  ui->quickBreakLabel->setText(
-      tr("Start next break after middle clicking on tray icon"));
+  ui->quickBreak->setText(tr("Start next break after middle clicking on tray icon"));
   controllers->add(new PrefController<QCheckBox, Setting<bool>>(
       ui->quickBreak, preferences->quickBreak));
 #endif
 #ifdef Q_OS_WIN
-  ui->quickBreakLabel->setText(
-      tr("Start next break after double clicking on tray icon"));
+  ui->quickBreak->setText(tr("Start next break after double clicking on tray icon"));
   controllers->add(new PrefController<QCheckBox, Setting<bool>>(
       ui->quickBreak, preferences->quickBreak));
 #endif
 #ifdef Q_OS_MAC
   ui->quickBreak->setHidden(true);
-  ui->quickBreakLabel->setHidden(true);
 #endif
   /***************************************************************************
    *                                                                         *

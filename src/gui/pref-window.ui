@@ -1348,35 +1348,18 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
              </layout>
             </item>
             <item>
-             <widget class="QCheckBox" name="autoStart">
+             <widget class="WrappedCheckBox" name="autoStart">
               <property name="text">
                <string>Launch Sane Break at start up</string>
               </property>
              </widget>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,1">
-              <property name="spacing">
-               <number>3</number>
+             <widget class="WrappedCheckBox" name="quickBreak">
+              <property name="text">
+               <string notr="true">Start next break after %1 on tray icon</string>
               </property>
-              <item alignment="Qt::AlignmentFlag::AlignTop">
-               <widget class="QCheckBox" name="quickBreak">
-                <property name="text">
-                 <string notr="true"/>
-                </property>
-               </widget>
-              </item>
-              <item alignment="Qt::AlignmentFlag::AlignTop">
-               <widget class="QLabel" name="quickBreakLabel">
-                <property name="text">
-                 <string notr="true">Start next break after %1 on tray icon</string>
-                </property>
-                <property name="wordWrap">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-             </layout>
+             </widget>
             </item>
             <item>
              <spacer name="verticalSpacer_3">
@@ -1608,6 +1591,11 @@ v%1
    <class>ColorEdit</class>
    <extends>QLineEdit</extends>
    <header>widgets/color-edit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>WrappedCheckBox</class>
+   <extends>QCheckBox</extends>
+   <header>widgets/wrapped-checkbox.h</header>
   </customwidget>
  </customwidgets>
  <resources>
