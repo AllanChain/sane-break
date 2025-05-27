@@ -27,7 +27,6 @@ class WelcomeWindow : public QDialog {
   QLabel *welcome;
   QLabel *warningLabel;
   QLabel *errorLabel;
-  QDialogButtonBox *buttonBox;
   QPushButton *docButton;
   QPushButton *ignoreButton = nullptr;
   QPushButton *cancelButton = nullptr;

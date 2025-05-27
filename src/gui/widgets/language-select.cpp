@@ -44,8 +44,8 @@ void LanguageSelect::setLanguage(QString language) {
 
   QTranslator *qtBaseTranslater = new QTranslator();
 #ifdef BUNDLE_QT_TRANSLATIONS
-  if (language == "" &&
-          !qtBaseTranslater->load(QLocale::system(), "", "", ":/i18n-qtbase") ||
+  if ((language == "" &&
+       !qtBaseTranslater->load(QLocale::system(), "", "", ":/i18n-qtbase")) ||
       !qtBaseTranslater->load(language, ":/i18n-qtbase")) {
     qDebug() << "Failed to set Qt base translator" << language;
     return;
