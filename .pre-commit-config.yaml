@@ -1,15 +1,15 @@
 repos:
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: 'v19.1.7'
+    rev: 'v20.1.5'
     hooks:
       - id: clang-format
         types: ["c++"]
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: trailing-whitespace
   - repo: https://github.com/biomejs/pre-commit
-    rev: v0.6.1
+    rev: v2.0.0-beta.5
     hooks:
       - id: biome-check
         additional_dependencies: ["@biomejs/biome@1.9.4"]
@@ -21,7 +21,7 @@ repos:
     - id: cmake-format
       files: CMakeLists\.txt
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.4
+    rev: v0.11.11
     hooks:
       - id: ruff
         types: ["python"]
