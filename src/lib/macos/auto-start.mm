@@ -22,7 +22,7 @@ void AutoStart::setEnabled(bool enabled) {
   }
 }
 
-bool AutoStart::isEnabled(SanePreferences) {
+bool AutoStart::isEnabled(SanePreferences *) {
   SMAppService *service = [SMAppService mainAppService];
   return [service status] == SMAppServiceStatusEnabled;
 }

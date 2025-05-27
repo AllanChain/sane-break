@@ -35,7 +35,7 @@ void AutoStart::setEnabled(bool enabled) {
   }
 }
 
-bool AutoStart::isEnabled(SanePreferences) {
+bool AutoStart::isEnabled(SanePreferences*) {
   QSettings settings(
       "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
       QSettings::NativeFormat);
