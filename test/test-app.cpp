@@ -321,9 +321,23 @@ class TestApp : public QObject {
     int smallEvery = deps.preferences->smallEvery->get();
     app.advance(smallEvery - 30);
     emit deps.systemMonitor->idleStarted();
-    app.advance(60);
+    // Enough time paused
+    app.advance(30 + deps.preferences->smallFor->get() + 10);
     emit deps.systemMonitor->idleEnded();
     QCOMPARE(app.trayData.secondsToNextBreak, smallEvery);
+  }
+  void do_not_avoid_immediate_break_after_pause_too_short() {
+    auto deps = DummyApp::makeDeps();
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    int smallEvery = deps.preferences->smallEvery->get();
+    app.advance(smallEvery - 30);
+    emit deps.systemMonitor->idleStarted();
+    // Not enough time paused
+    app.advance(30 + deps.preferences->smallFor->get() - 10);
+    emit deps.systemMonitor->idleEnded();
+    QCOMPARE(app.trayData.secondsToNextBreak, 30);
   }
   void take_small_break_instead() {
     auto deps = DummyApp::makeDeps();
