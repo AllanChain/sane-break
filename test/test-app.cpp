@@ -40,6 +40,7 @@ class TestApp : public QObject {
     // Time has ellapsed
     QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get() - 1);
   }
+  // Simple test if the break window shows after the countdown ends.
   void show_first_break() {
     auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
@@ -69,6 +70,11 @@ class TestApp : public QObject {
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, smallEvery - 1);
   }
+  /* For consistency and easy testing, the timer for the break windows is actually
+   * managed by the app. Here we test if advancing the app timer is currectly
+   * controlling the break windows. We are not emitting idle events and we rely on the
+   * force break mechanism.
+   */
   void break_tick() {
     auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
@@ -87,6 +93,7 @@ class TestApp : public QObject {
     int smallEvery = deps.preferences->smallEvery->get();
     QCOMPARE(app.trayData.secondsToNextBreak, smallEvery);
   }
+  // Advance a full cycle of breaks and see if small and big breaks are shown correctly
   void show_big_break() {
     auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
@@ -103,6 +110,11 @@ class TestApp : public QObject {
     }
     QVERIFY(Mock::VerifyAndClearExpectations(deps.windowControl));
   }
+  /* If the user is idle after the break finishes, we should not start the countdown
+   * until the user comes back. This is important because if we don't do so, we are kind
+   * of telling the user to engage in work immediately after the break since the clock
+   * is ticking.
+   */
   void countdown_pause_if_idle_after_break() {
     auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
@@ -126,6 +138,7 @@ class TestApp : public QObject {
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, smallEvery - 1);
   }
+  // See `countdown_pause_if_idle_after_break`
   void countdown_resume_if_not_idle_after_break() {
     auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
@@ -313,6 +326,13 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
              deps.preferences->bigAfter->get() - 1);
   }
+  /* If the time when the pause starts is close to the next break, and the pause is not
+   * long enough to reset the break countdown, the break will start very soon after the
+   * pause ends. Having a break right after coming back from other things can be
+   * annoying. Therefore, we consider the case where there were no pauses. If the break
+   * happens and finishes before the user comes back, we just consider the break has
+   * ended and starts the next cycle.
+   */
   void avoid_immediate_break_after_pause() {
     auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
@@ -326,6 +346,10 @@ class TestApp : public QObject {
     emit deps.systemMonitor->idleEnded();
     QCOMPARE(app.trayData.secondsToNextBreak, smallEvery);
   }
+  /* Similar to the previous `avoid_immediate_break_after_pause`, but if the pause is so
+   * short that we should not consider that the user has taken the break, we will not
+   * reset the break cycle.
+   */
   void do_not_avoid_immediate_break_after_pause_too_short() {
     auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
@@ -339,25 +363,33 @@ class TestApp : public QObject {
     emit deps.systemMonitor->idleEnded();
     QCOMPARE(app.trayData.secondsToNextBreak, 30);
   }
+  /* During a big break, user can choose to take a small break instead for now, and the
+   * next break is still a big break. Technically, this will close the current big break
+   * windows and create new small break windows.
+   */
   void take_small_break_instead() {
     auto deps = DummyApp::makeDeps();
     deps.preferences->pauseOnBattery->set(true);
     NiceMock<DummyApp> app(deps);
     app.start();
 
+    // Verify we successfully triggered a big break
     EXPECT_CALL(*deps.windowControl, createWindows(SaneBreak::BreakType::Big)).Times(1);
     app.bigBreakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.windowControl));
 
+    // Triggering small break instead is deleting previous windows and creating new ones
     EXPECT_CALL(*deps.windowControl, createWindows(SaneBreak::BreakType::Small))
         .Times(1);
     EXPECT_CALL(*deps.windowControl, deleteWindows()).Times(1);
     app.smallBreakInstead();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.windowControl));
+    // We are still in breaking mode. Verify the break has not magically ended.
     QVERIFY(app.trayData.isBreaking);
 
     deps.windowControl->advanceToEnd();
     QVERIFY(!app.trayData.isBreaking);
+    // The next break is a big break
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
     QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
   }
