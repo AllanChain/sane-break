@@ -77,16 +77,20 @@ void AbstractApp::start() {
 }
 
 void AbstractApp::tick() {
+  // Break window is showing, only need to tick window control timer
   if (m_windowControl->isShowing()) {
     m_windowControl->tick();
     return;
   }
+  // We are paused, only need to count seconds paused
   if (m_pauseReasons) {
     m_secondsPaused += 1;
     return;
   }
-  m_secondsSinceLastBreak++;
+  // Otherwise, count down
   m_secondsToNextBreak--;
+  // Also count second since we last taken break
+  m_secondsSinceLastBreak++;
   if (m_secondsToNextBreak <= 0) return breakNow();
   updateTray();
 }

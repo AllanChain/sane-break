@@ -227,6 +227,7 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak + 100);
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
   }
+  // During the pause, the count down should not change, and state should be reflected
   void pause_break_on_idle() {
     auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
@@ -245,6 +246,7 @@ class TestApp : public QObject {
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
   }
+  // Similar to `pause_break_on_idle`, but for battery
   void pause_break_on_battery() {
     auto deps = DummyApp::makeDeps();
     deps.preferences->pauseOnBattery->set(true);
@@ -264,6 +266,7 @@ class TestApp : public QObject {
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
   }
+  // Similar to `pause_break_on_idle`, but for running apps
   void pause_break_on_app_running() {
     auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
@@ -282,6 +285,7 @@ class TestApp : public QObject {
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
   }
+  // If paused for a long time, we consider the user has taken a break and reset timer.
   void reset_countdown_after_pause() {
     auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
@@ -309,6 +313,7 @@ class TestApp : public QObject {
     // Since the time ellapsed is in paused state, the time should not change
     QCOMPARE(app.trayData.secondsToNextBreak, smallEvery - 1);
   }
+  // If paused for even longer, we also reset the break cycle
   void reset_cycle_after_pause() {
     auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
@@ -363,9 +368,10 @@ class TestApp : public QObject {
     emit deps.systemMonitor->idleEnded();
     QCOMPARE(app.trayData.secondsToNextBreak, 30);
   }
-  /* During a big break, user can choose to take a small break instead for now, and the
-   * next break is still a big break. Technically, this will close the current big break
-   * windows and create new small break windows.
+  /* During a big break, if the user is not ready for a big break, he/she can choose to
+   * take a small break instead for now, and the next break is still a big break.
+   * Technically, this will close the current big break windows and create new small
+   * break windows.
    */
   void take_small_break_instead() {
     auto deps = DummyApp::makeDeps();
@@ -393,6 +399,7 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
     QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
   }
+  // User should be able to postpone the break while its happening
   void postpone_while_break() {
     auto deps = DummyApp::makeDeps();
     deps.preferences->pauseOnBattery->set(true);
@@ -411,6 +418,7 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.secondsToNextBreak, 100);
     QCOMPARE(app.trayData.secondsToNextBigBreak, 100);
   }
+  // We should end the break if the pause happens during the break
   void pause_while_break() {
     auto deps = DummyApp::makeDeps();
     deps.preferences->pauseOnBattery->set(true);
@@ -426,6 +434,7 @@ class TestApp : public QObject {
     emit deps.systemMonitor->batteryPowered();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.windowControl));
   }
+  // Ignore pauses caused by idles during the break
   void idle_while_break() {
     auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
@@ -440,6 +449,8 @@ class TestApp : public QObject {
     QVERIFY(app.trayData.isBreaking);
     QCOMPARE(app.trayData.secondsToNextBreak, 0);
   }
+  // If the system went asleep during the break, after awaken, the break windows should
+  // be closed.
   void sleep_end_while_break() {
     auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
@@ -456,6 +467,7 @@ class TestApp : public QObject {
              deps.preferences->bigAfter->get() - 1);
     QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
   }
+  // Multiple pause reasons should work
   void more_than_one_pause_reasons() {
     auto deps = DummyApp::makeDeps();
     deps.preferences->pauseOnBattery->set(true);
@@ -482,6 +494,18 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
     QVERIFY(!app.trayData.pauseReasons);
   }
+  /* If the user has postponed the breaks for at least one time, when the user want to
+   * postpone again, we are showing a confirmation window telling the user to think
+   * twice before postponing the breaks.
+   *
+   * Note that we should avoid showing the confirmation window if the user clicked
+   * postpone right after the previous postpone. In this case, the user is actually
+   * postponing once. He/she clicked twice just because the preset durations are not
+   * suitable for the current postpone. Therefore, we are determining whether to show
+   * the window based one the time since last break. If it is longer than the break
+   * schdule, and the user is postponing again (obviously there was at least one
+   * postpone), we show this confirm window.
+   */
   void confirm_postpone_if_long_time_since_last_break() {
     auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
@@ -503,6 +527,11 @@ class TestApp : public QObject {
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
     QCOMPARE(app.trayData.secondsToNextBreak, 101);
   }
+  /* In addition to `confirm_postpone_if_long_time_since_last_break`, if we have reset
+   * the countdown after the last break, also time since last break is longer than the
+   * break schedule, we should not show the confirmation window. In other words, we
+   * should also reset time since last break when resetting the break countdown.
+   */
   void no_confirm_postpone_if_countdown_reset() {
     auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
