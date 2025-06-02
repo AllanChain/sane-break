@@ -181,17 +181,10 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND SANE_MAKE_DEB)
       "A gentle break reminder that helps you avoid mindlessly skipping breaks"
   )
   set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Allan Chain")
-  set(DEBIAN_DEPENDENCY_LIST "")
-  if(ENABLE_WAYLAND)
-    list(APPEND DEBIAN_DEPENDENCY_LIST "qt6-wayland(>=6.6)")
-  endif()
-  if(ENABLE_X11)
-    list(APPEND DEBIAN_DEPENDENCY_LIST "libxss1(>=1.2.3)")
-  endif()
-  if(WITH_LAYER_SHELL)
-    list(APPEND DEBIAN_DEPENDENCY_LIST "layer-shell-qt(>=6.2)")
-  endif()
-  list(JOIN DEBIAN_DEPENDENCY_LIST ", " CPACK_DEBIAN_PACKAGE_DEPENDS)
+  set(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt6gui6(>=6.4), libqt6multimedia6(>=6.4)")
+  set(CPACK_DEBIAN_PACKAGE_RECOMMENDS
+      "qt6-wayland(>=6.4), layer-shell-qt(>=6.2), libxss1(>=1.2.3)"
+  )
   include(CPack)
 endif()
 

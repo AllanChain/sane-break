@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <qglobal.h>
+
 #include <QList>
 #include <QObject>
 #include <QTimer>
@@ -13,6 +15,9 @@
 #include "core/window-control.h"
 #include "gui/break-window.h"  // IWYU pragma: export
 #include "gui/sound-player.h"
+#ifdef Q_OS_LINUX
+#include "gui/layer-shell/interface.h"
+#endif
 
 class BreakWindowControl : public AbstractWindowControl {
   Q_OBJECT
@@ -32,6 +37,9 @@ class BreakWindowControl : public AbstractWindowControl {
 
  private:
   SoundPlayer *soundPlayer;
+#ifdef Q_OS_LINUX
+  LayerShellInterface *layerShell = nullptr;
+#endif
   void tick();
   void forceBreak();
   void onIdleStart();

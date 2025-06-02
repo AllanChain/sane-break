@@ -6,26 +6,29 @@
 
 #include <qglobal.h>
 
-#include <utility>
-
-#include "config.h"
-#include "core/flags.h"
-#include "core/idle-time.h"
-#include "core/window-control.h"
-#include "lib/screen-lock.h"
-
-#ifdef WITH_LAYER_SHELL
-#include <LayerShellQt/shell.h>
-#endif
 #include <QApplication>
 #include <QAudioOutput>
-#include <QGuiApplication>
 #include <QList>
 #include <QMediaPlayer>
 #include <QObject>
 #include <QScreen>
 #include <QSettings>
 #include <QTimer>
+#include <utility>
+
+#include "config.h"
+#include "core/flags.h"
+#include "core/idle-time.h"
+#include "core/window-control.h"
+#include "idle/factory.h"
+#include "lib/screen-lock.h"
+#ifdef Q_OS_LINUX
+#include <QGuiApplication>
+#include <QPluginLoader>
+
+#include "gui/layer-shell/interface.h"
+#include "lib/linux/system-check.h"
+#endif
 
 #include "core/preferences.h"
 #include "gui/break-window.h"
@@ -34,10 +37,19 @@
 BreakWindowControl::BreakWindowControl(const WindowDependencies &deps, QObject *parent)
     : AbstractWindowControl(deps, parent) {
   soundPlayer = new SoundPlayer(this);
-
-#ifdef WITH_LAYER_SHELL
-  if (QGuiApplication::platformName() == "wayland")
-    LayerShellQt::Shell::useLayerShell();
+#ifdef Q_OS_LINUX
+  if (QGuiApplication::platformName() == "wayland" && LinuxSystemSupport::layerShell) {
+    QPluginLoader loader("libsanebreak_layer_shell");
+    if (!loader.load()) {
+      qWarning("Fail to find layer-shell plugin. Window layout may go wrong.");
+    } else {
+      layerShell = qobject_cast<LayerShellInterface *>(loader.instance());
+      if (!layerShell) {
+        qWarning("Fail to load layer-shell plugin. Window layout may go wrong.");
+      } else {
+      }
+    }
+  }
 #endif
 }
 
@@ -45,7 +57,7 @@ BreakWindowControl *BreakWindowControl::create(SanePreferences *preferences,
                                                QObject *parent) {
   WindowDependencies deps = {
       .preferences = preferences,
-      .idleTimer = SystemIdleTime::createIdleTimer(),
+      .idleTimer = createIdleTimer(parent),
   };
   return new BreakWindowControl(deps, parent);
 }
@@ -58,6 +70,14 @@ void BreakWindowControl::createWindows(SaneBreak::BreakType type) {
     BreakWindow *w = new BreakWindow(data);
     m_windows.append(w);
     w->initSize(screen);
+#ifdef Q_OS_LINUX
+    if (layerShell) layerShell->layout(w->windowHandle());
+#endif
+    // GNOME mutter will make the window black if show full screen
+    // See https://gitlab.gnome.org/GNOME/mutter/-/issues/2520
+    // GNOME mutter will also refuse to make a window always on top if maximized.
+    // Therefore, we use the same `show()` with and without Wayland workaround.
+    w->show();
   }
 }
 

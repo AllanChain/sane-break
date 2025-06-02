@@ -6,13 +6,17 @@
 
 #include <QObject>
 
+#include "core/idle-time.h"
+#include "core/preferences.h"
+#include "core/system-monitor.h"
+#include "idle/factory.h"
 #include "lib/battery-status.h"
 #include "lib/program-monitor.h"
 #include "lib/sleep-monitor.h"
 
 SystemMonitor::SystemMonitor(SanePreferences* preferences, QObject* parent)
     : AbstractSystemMonitor(parent), preferences(preferences) {
-  idleTimer = SystemIdleTime::createIdleTimer(this);
+  idleTimer = createIdleTimer(this);
   idleTimer->setWatchAccuracy(5000);
   idleTimer->setMinIdleTime(preferences->pauseOnIdleFor->get() * 1000);
   sleepMonitor = new SleepMonitor(this);

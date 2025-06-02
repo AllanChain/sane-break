@@ -4,16 +4,30 @@
 
 #pragma once
 
+#include <qglobal.h>
+
 #include <QObject>
 #include <QTimer>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
+#include <QtCompilerDetection>
+#endif
 
-class SystemIdleTime : public QObject {
+#if defined(QT_SHARED) || !defined(QT_STATIC)
+#if defined(BUILD_COREIDLE_LIB)
+#define COREIDLE_EXPORT Q_DECL_EXPORT
+#else
+#define COREIDLE_EXPORT Q_DECL_IMPORT
+#endif
+#else
+#define COREIDLE_EXPORT
+#endif
+
+class COREIDLE_EXPORT SystemIdleTime : public QObject {
   Q_OBJECT
  public:
   SystemIdleTime(QObject *parent = nullptr) : QObject(parent) {}
   virtual void startWatching() = 0;
   virtual void stopWatching() = 0;
-  static SystemIdleTime *createIdleTimer(QObject *parent = nullptr);
   int watchAccuracy() { return m_watchAccuracy; }
   int minIdleTime() { return m_minIdleTime; }
   virtual void setWatchAccuracy(int accuracy) = 0;

@@ -8,25 +8,26 @@
 #include <wayland-client-protocol.h>
 #include <wayland-client.h>
 
-#include <QDBusConnection>
-#include <QDBusInterface>
 #include <QElapsedTimer>
+#include <QObject>
 #include <QTimer>
 #include <cstdint>
 
-#include "idle-time.h"  // IWYU pragma: export
+#include "idle/idle-interface.h"
 #include "wayland-ext-idle-notify-v1-client-protocol.h"
 
-class IdleTimeWayland : public SystemIdleTime {
+class IdleTimeWayland : public IdleTimeInterface {
   Q_OBJECT
+  Q_PLUGIN_METADATA(IID IdleTimeInterface_iid)
+  Q_INTERFACES(IdleTimeInterface)
  public:
   IdleTimeWayland(QObject *parent = nullptr);
   ~IdleTimeWayland();
   bool isSupported() { return idleNotifier != nullptr; };
-  void startWatching();
-  void stopWatching();
-  void setWatchAccuracy(int) {};
-  void setMinIdleTime(int idleTime);
+  void startWatching() override;
+  void stopWatching() override;
+  void setWatchAccuracy(int) override {};
+  void setMinIdleTime(int idleTime) override;
 
  private:
   static void globalAdded(void *data, wl_registry *registry, uint32_t name,
@@ -45,14 +46,4 @@ class IdleTimeWayland : public SystemIdleTime {
       struct wl_seat *seat);
 
   bool isWatching = false;
-};
-
-class IdleTimeGNOME : public ReadBasedIdleTime {
-  Q_OBJECT
- public:
-  IdleTimeGNOME(QObject *parent = nullptr);
-  int systemIdleTime();
-
- private:
-  QDBusInterface *iface;
 };

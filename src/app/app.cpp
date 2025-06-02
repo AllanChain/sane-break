@@ -24,6 +24,7 @@
 #include "gui/pref-window.h"
 #include "gui/tray.h"
 #include "gui/widgets/language-select.h"
+#include "idle/factory.h"
 #include "lib/screen-lock.h"
 #include "lib/system-monitor.h"
 #include "lib/timer.h"
@@ -52,7 +53,7 @@ SaneBreakApp::SaneBreakApp(const AppDependencies &deps, QObject *parent)
 
 SaneBreakApp *SaneBreakApp::create(SanePreferences *preferences, QObject *parent) {
   auto countDownTimer = new Timer();
-  auto oneshotIdleTimer = SystemIdleTime::createIdleTimer();
+  auto oneshotIdleTimer = createIdleTimer(parent);
   auto screenLockTimer = new Timer();
   auto systemMonitor = new SystemMonitor(preferences);
   auto windowControl = BreakWindowControl::create(preferences);

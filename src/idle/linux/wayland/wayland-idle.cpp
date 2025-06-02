@@ -2,18 +2,16 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include "idle.h"
+#include "wayland-idle.h"
 
 #include <qglobal.h>
 #include <wayland-client-core.h>
 #include <wayland-client-protocol.h>
 #include <wayland-client.h>
 
-#include <QDBusConnection>
-#include <QDBusInterface>
-#include <QDBusReply>
 #include <QElapsedTimer>
 #include <QGuiApplication>
+#include <QObject>
 #if QT_VERSION < QT_VERSION_CHECK(6, 5, 0)
 #include <QtGui/qpa/qplatformnativeinterface.h>
 #endif
@@ -22,7 +20,8 @@
 
 #include "wayland-ext-idle-notify-v1-client-protocol.h"
 
-IdleTimeWayland::IdleTimeWayland(QObject *parent) : SystemIdleTime(parent) {
+IdleTimeWayland::IdleTimeWayland(QObject *parent) {
+  setParent(parent);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
   QNativeInterface::QWaylandApplication *waylandApp =
       qGuiApp->nativeInterface<QNativeInterface::QWaylandApplication>();
@@ -103,15 +102,4 @@ void IdleTimeWayland::setMinIdleTime(int idleTime) {
 IdleTimeWayland::~IdleTimeWayland() {
   if (idleNotifier != nullptr) ext_idle_notifier_v1_destroy(idleNotifier);
   if (idleNotification != nullptr) ext_idle_notification_v1_destroy(idleNotification);
-}
-
-IdleTimeGNOME::IdleTimeGNOME(QObject *parent) : ReadBasedIdleTime(parent) {
-  iface = new QDBusInterface(
-      "org.gnome.Mutter.IdleMonitor", "/org/gnome/Mutter/IdleMonitor/Core",
-      "org.gnome.Mutter.IdleMonitor", QDBusConnection::sessionBus());
-}
-
-int IdleTimeGNOME::systemIdleTime() {
-  QDBusReply<qulonglong> reply = iface->call("GetIdletime");
-  return reply.value();
 }
