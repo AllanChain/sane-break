@@ -8,7 +8,7 @@ set(CMAKE_OSX_DEPLOYMENT_TARGET
 
 project(
   sane-break
-  VERSION 0.8.2
+  VERSION 0.8.3
   LANGUAGES C CXX
 )
 

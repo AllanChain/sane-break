@@ -56,6 +56,19 @@
   </screenshots>
 
   <releases>
+    <release version="0.8.3" date="2025-06-02">
+      <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.8.3</url>
+      <description>
+        <p>Bug fixes</p>
+        <ul>
+          <li>Unified icon button appearance in break window on all platforms</li>
+          <li>Fix values of spin box and slider out of sync</li>
+          <li>Create autostart dir on Linux if not already exists</li>
+          <li>Disable lock screen on Flatpak as it's not supported</li>
+          <li>When there is break right after the pause, Sane Break now takes the duration of the next break into consideration to decide whether to regard the user has taken a break</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.8.2" date="2025-05-06">
       <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.8.2</url>
       <description>
