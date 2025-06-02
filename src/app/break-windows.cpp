@@ -25,19 +25,35 @@
 #include "core/preferences.h"
 #include "gui/break-window.h"
 #include "gui/sound-player.h"
+#include "idle/factory.h"
 
-#ifdef WITH_LAYER_SHELL
-#include <LayerShellQt/shell.h>
+#ifdef Q_OS_LINUX
+#include <QGuiApplication>
+#include <QPluginLoader>
+
+#include "gui/layer-shell/interface.h"
+#include "lib/linux/system-check.h"
 #endif
+
 BreakWindows::BreakWindows(QObject *parent) : AbstractBreakWindows(parent) {
   soundPlayer = new SoundPlayer(this);
 
   clockUpdateTimer = new QTimer(this);
   connect(clockUpdateTimer, &QTimer::timeout, this, &BreakWindows::updateClocks);
 
-#ifdef WITH_LAYER_SHELL
-  if (QGuiApplication::platformName() == "wayland")
-    LayerShellQt::Shell::useLayerShell();
+#ifdef Q_OS_LINUX
+  if (QGuiApplication::platformName() == "wayland" && LinuxSystemSupport::layerShell) {
+    QPluginLoader loader("libsanebreak_layer_shell");
+    if (!loader.load()) {
+      qWarning("Fail to find layer-shell plugin. Window layout may go wrong.");
+    } else {
+      layerShell = qobject_cast<LayerShellInterface *>(loader.instance());
+      if (!layerShell) {
+        qWarning("Fail to load layer-shell plugin. Window layout may go wrong.");
+      } else {
+      }
+    }
+  }
 #endif
 }
 
@@ -79,6 +95,14 @@ void BreakWindows::create(SaneBreak::BreakType type, SanePreferences *preference
     BreakWindow *w = new BreakWindow(data);
     m_windows.append(w);
     w->initSize(screen);
+#ifdef Q_OS_LINUX
+    if (layerShell) layerShell->layout(w->windowHandle());
+#endif
+    // GNOME mutter will make the window black if show full screen
+    // See https://gitlab.gnome.org/GNOME/mutter/-/issues/2520
+    // GNOME mutter will also refuse to make a window always on top if maximized.
+    // Therefore, we use the same `show()` with and without Wayland workaround.
+    w->show();
   }
   for (auto w : std::as_const(m_windows)) {
     connect(w, &BreakWindow::lockScreenRequested, this,

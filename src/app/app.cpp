@@ -19,11 +19,11 @@
 
 #include "app/break-windows.h"
 #include "core/app.h"
-#include "core/idle-time.h"
 #include "core/preferences.h"
 #include "gui/pref-window.h"
 #include "gui/tray.h"
 #include "gui/widgets/language-select.h"
+#include "idle/factory.h"
 #include "lib/screen-lock.h"
 #include "lib/system-monitor.h"
 #include "lib/timer.h"
@@ -55,7 +55,7 @@ SaneBreakApp *SaneBreakApp::create(SanePreferences *preferences, QObject *parent
       .preferences = preferences,
       .countDownTimer = new Timer(),
       .screenLockTimer = new Timer(),
-      .idleTimer = SystemIdleTime::createIdleTimer(),
+      .idleTimer = createIdleTimer(parent),
       .systemMonitor = new SystemMonitor(preferences),
       .breakWindows = new BreakWindows(),
   };

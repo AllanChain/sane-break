@@ -31,9 +31,7 @@
 #ifdef Q_OS_LINUX
 #include "lib/linux/system-check.h"
 #endif  // Q_OS_LINUX
-#ifdef WITH_LAYER_SHELL
-#include <LayerShellQt/window.h>
-#elif defined Q_OS_MACOS
+#ifdef Q_OS_MACOS
 #include "lib/macos/workspace.h"
 #endif
 
@@ -201,25 +199,9 @@ void BreakWindow::initSize(QScreen *screen) {
                 SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
   }
   createWinId();
-#ifdef WITH_LAYER_SHELL
-  if (QGuiApplication::platformName() == "wayland")
-    if (auto window = LayerShellQt::Window::get(windowHandle())) {
-      using namespace LayerShellQt;
-      window->setCloseOnDismissed(true);
-      window->setLayer(Window::LayerOverlay);
-      window->setKeyboardInteractivity(Window::KeyboardInteractivityNone);
-      window->setAnchors(Window::AnchorTop);
-      // We do not want to reserve space for widgets like taskbar (#19)
-      window->setExclusiveZone(-1);
-    }
-#elif defined Q_OS_MACOS
+#ifdef Q_OS_MACOS
   macSetAllWorkspaces(windowHandle());
 #endif
-  // GNOME mutter will make the window black if show full screen
-  // See https://gitlab.gnome.org/GNOME/mutter/-/issues/2520
-  // GNOME mutter will also refuse to make a window always on top if maximized.
-  // Therefore, we use the same `show()` with and without Wayland workaround.
-  show();
 }
 
 void BreakWindow::colorizeButton(QPushButton *button, QColor color) {

@@ -2,17 +2,14 @@
 // Copyright (C) 2024-2025 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-// This file contains code adapted from
-// node-system-idle-time (https://github.com/anaisbetts/node-system-idle-time)
-// Copyright (c) 2014 Atlassian Pty Ltd.
-// SPDX-License-Identifier: Apache-2.0
-
-#include "idle.h"
+#include "x11-idle.h"
 
 #include <X11/Xlib.h>
 #include <X11/extensions/scrnsaver.h>
 
-int IdleTimeX11::systemIdleTime() {
+#include <cstddef>
+
+int IdleTimeX11::read() {
   Display *dpy = XOpenDisplay(NULL);
   XScreenSaverInfo *ssi = XScreenSaverAllocInfo();
   XScreenSaverQueryInfo(dpy, DefaultRootWindow(dpy), ssi);

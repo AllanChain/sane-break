@@ -9,6 +9,7 @@
 #include "core/flags.h"
 #include "core/preferences.h"
 #include "core/system-monitor.h"
+#include "idle/factory.h"
 #include "lib/battery-status.h"
 #include "lib/program-monitor.h"
 #include "lib/sleep-monitor.h"

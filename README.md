@@ -128,7 +128,6 @@ sudo cmake --install .
 ```
 
 The above command will automatically enable X11 or Wayland support based on libraries found.
-You can disable X11 or Wayland support using the option `-DAUTO_ENABLE_X11=OFF` or `-DAUTO_ENABLE_WAYLAND=OFF` during `cmake`.
 
 To build with translations, install `qt6-tools` package (name may vary across distros).
 

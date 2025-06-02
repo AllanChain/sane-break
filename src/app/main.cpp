@@ -5,6 +5,7 @@
 #include <QApplication>
 #include <QCoreApplication>
 #include <QDialog>
+#include <QDir>
 #include <QFile>
 #include <QSettings>
 #include <QSystemTrayIcon>
@@ -30,13 +31,17 @@ int main(int argc, char *argv[]) {
   a.setApplicationDisplayName("Sane Break");
   if (QSystemTrayIcon::isSystemTrayAvailable()) a.setQuitOnLastWindowClosed(false);
 
-  SanePreferences *preferences = preferences->createDefault();
+  SanePreferences *preferences = SanePreferences::createDefault();
 
 #ifdef WITH_TRANSLATIONS
   LanguageSelect::setLanguage(preferences->language->get());
 #endif
 
 #ifdef Q_OS_LINUX
+  QDir appPath = a.applicationDirPath();
+  appPath.cdUp();
+  appPath.cd("lib");
+  a.addLibraryPath(appPath.filePath("sane-break"));
   LinuxSystemSupport::check();
 #endif  // Q_OS_LINUX
 

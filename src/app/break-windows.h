@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <qglobal.h>
+
 #include <QList>
 #include <QObject>
 #include <QTimer>
@@ -13,6 +15,9 @@
 #include "core/preferences.h"
 #include "gui/break-window.h"
 #include "gui/sound-player.h"
+#ifdef Q_OS_LINUX
+#include "gui/layer-shell/interface.h"
+#endif
 
 class BreakWindows : public AbstractBreakWindows {
   Q_OBJECT
@@ -35,4 +40,7 @@ class BreakWindows : public AbstractBreakWindows {
   SoundPlayer *soundPlayer;
   QTimer *clockUpdateTimer;
   void updateClocks();
+#ifdef Q_OS_LINUX
+  LayerShellInterface *layerShell = nullptr;
+#endif
 };
