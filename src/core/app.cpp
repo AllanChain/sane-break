@@ -188,8 +188,9 @@ void AbstractApp::resumeBreak(SaneBreak::PauseReasons reason) {
   int nextBreakDuration = (smallBreaksBeforeBig() == 0 ? preferences->bigFor->get()
                                                        : preferences->smallFor->get());
   int secondsToNextBreakEnd = m_secondsToNextBreak + nextBreakDuration;
-  if (m_secondsPaused > secondsToNextBreakEnd ||
-      m_secondsPaused > preferences->resetAfterPause->get()) {
+  if ((m_secondsPaused > secondsToNextBreakEnd ||
+       m_secondsPaused > preferences->resetAfterPause->get()) &&
+      m_secondsToNextBreak < preferences->smallEvery->get()) {
     resetSecondsToNextBreak();
   }
   if (m_secondsPaused > preferences->resetCycleAfterPause->get()) {

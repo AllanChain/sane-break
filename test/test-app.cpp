@@ -550,6 +550,27 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.secondsToNextBreak, 101);
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
+  /* We reset the countdown timer if the user is idle for sufficiently long time.
+   * However, if the user is postponing the breaks and the current countdown time is
+   * longer than a break cycle, then resetting the countdown actually makes break
+   * happening earlier instead of later. Therefore, we should avoid resetting the
+   * countdown in this case.
+   */
+  void pause_should_not_affect_postpone() {
+    auto deps = DummyApp::makeDeps();
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    int smallEvery = deps.preferences->smallEvery->get();
+    app.postpone(1000);
+
+    emit deps.systemMonitor->idleStarted();
+    app.advance(deps.preferences->resetAfterPause->get() + 1);
+    emit deps.systemMonitor->idleEnded();
+    app.advance(1);
+
+    QCOMPARE(app.trayData.secondsToNextBreak, smallEvery + 999);
+  }
 };
 
 QTEST_APPLESS_MAIN(TestApp)
