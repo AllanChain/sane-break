@@ -35,6 +35,7 @@ void AbstractWindowControl::show(SaneBreak::BreakType type) {
                                                      : preferences->smallFor->get();
   m_remainingSeconds = m_totalSeconds;
   m_isForceBreak = false;
+  m_numberForceBreakExits = 0;
   m_secondsToForceBreak = preferences->flashFor->get();
 
   createWindows(type);
@@ -95,7 +96,11 @@ void AbstractWindowControl::tick() {
   // Confirm break
   if (m_totalSeconds - m_remainingSeconds >= preferences->confirmAfter->get()) {
     m_isForceBreak = true;
-    for (auto w : std::as_const(m_windows)) w->showButtons();
+    for (auto w : std::as_const(m_windows)) {
+      w->showScreenLockButton();
+      if (m_numberForceBreakExits < preferences->maxForceBreakExits->get())
+        w->showExitForceBreakButton();
+    }
   }
   if (m_remainingSeconds <= 0)
     close();
@@ -108,18 +113,22 @@ void AbstractWindowControl::forceBreak() {
   m_isForceBreak = true;
   for (auto w : std::as_const(m_windows)) {
     w->setFullScreen();
-    w->showButtons();
+    w->showScreenLockButton();
+    if (m_numberForceBreakExits < preferences->maxForceBreakExits->get())
+      w->showExitForceBreakButton();
   }
 }
 
 void AbstractWindowControl::exitForceBreak() {
   emit countDownStateChanged(false);
+  m_numberForceBreakExits++;
   m_remainingSeconds = m_totalSeconds;
   m_isForceBreak = false;
   m_secondsToForceBreak = preferences->flashFor->get();
   for (auto w : std::as_const(m_windows)) {
     w->resizeToNormal();
-    w->showButtons(false);
+    w->showScreenLockButton(false);
+    w->showExitForceBreakButton(false);
   }
 }
 

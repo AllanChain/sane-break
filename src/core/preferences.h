@@ -106,6 +106,7 @@ class SanePreferences : public QObject {
   Setting<QColor> *bigHighlightColor;
   Setting<QStringList> *smallMessages;
   Setting<QStringList> *bigMessages;
+  Setting<int> *maxForceBreakExits;
 
   Setting<int> *pauseOnIdleFor;
   Setting<int> *resetAfterPause;

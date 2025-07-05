@@ -197,6 +197,9 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
   controllers->add(new PrefController<QPlainTextEdit, Setting<QStringList>>(
       ui->bigBreakMessages, preferences->bigMessages));
 
+  controllers->add(new PrefController<QSpinBox, Setting<int>>(
+      ui->maxForceBreakExits, preferences->maxForceBreakExits));
+
   /***************************************************************************
    *                                                                         *
    *                                Pause tab                                *

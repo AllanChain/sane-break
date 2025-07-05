@@ -79,6 +79,8 @@ BreakWindow::BreakWindow(BreakData data, QWidget *parent)
   ui->breakLabel->setText(data.message);
   ui->countdownLabel->setVisible(false);
   ui->buttons->setVisible(false);
+  ui->lockScreenGroup->setVisible(false);
+  ui->exitForceBreakGroup->setVisible(false);
   QColor hoverColor = data.theme.messageColor;
   hoverColor.setAlpha(40);
   ui->buttons->setStyleSheet(
@@ -130,7 +132,13 @@ void BreakWindow::setTime(int remainingTime) {
   }
 }
 
-void BreakWindow::showButtons(bool show) { ui->buttons->setVisible(show); }
+void BreakWindow::showScreenLockButton(bool show) {
+  ui->lockScreenGroup->setVisible(show);
+}
+
+void BreakWindow::showExitForceBreakButton(bool show) {
+  ui->exitForceBreakGroup->setVisible(show);
+}
 
 void BreakWindow::setFullScreen() {
   mainWidget->setProperty("isFullScreen", true);
@@ -140,6 +148,7 @@ void BreakWindow::setFullScreen() {
   bgAnim->stop();
   setProperty("color", bgAnim->endValue());
   ui->countdownLabel->setVisible(true);
+  ui->buttons->setVisible(true);
   QPropertyAnimation *resizeAnim =
       new QPropertyAnimation(waylandWorkaround ? mainWidget : this, "geometry");
   resizeAnim->setStartValue(waylandWorkaround ? mainWidget->geometry() : geometry());
@@ -154,6 +163,7 @@ void BreakWindow::resizeToNormal() {
   windowHandle()->setFlag(Qt::WindowTransparentForInput, true);
   bgAnim->start();
   ui->countdownLabel->setVisible(false);
+  ui->buttons->setVisible(false);
   QPropertyAnimation *resizeAnim =
       new QPropertyAnimation(waylandWorkaround ? mainWidget : this, "geometry");
   QRect rect = waylandWorkaround ? screen()->availableGeometry() : screen()->geometry();

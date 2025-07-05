@@ -774,6 +774,24 @@ QPushButton[flat=&quot;true&quot;]:checked {
              </layout>
             </item>
             <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="2,1">
+              <item>
+               <widget class="QLabel" name="label_12">
+                <property name="text">
+                 <string>Max number of force break exits</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="maxForceBreakExits">
+                <property name="suffix">
+                 <string> times</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
              <widget class="QLabel" name="label_2">
               <property name="text">
                <string>&lt;h3&gt;Color Theme&lt;/h3&gt;

@@ -34,7 +34,8 @@ class BreakWindow : public AbstractBreakWindow {
   void setTime(int remainingTime) override;
   void setFullScreen() override;
   void resizeToNormal() override;
-  void showButtons(bool show = true) override;
+  void showScreenLockButton(bool show = true) override;
+  void showExitForceBreakButton(bool show = true) override;
 
   void initSize(QScreen *screen);
   void colorChanged();

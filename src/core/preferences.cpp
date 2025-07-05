@@ -51,6 +51,7 @@ SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
   bigMessages = new Setting<QStringList>(settings, "break/big-msg", []() {
     return QStringList({tr("Time for a big break")});
   });
+  maxForceBreakExits = new Setting<int>(settings, "break/max-force-break-exits", 2);
 
   pauseOnIdleFor = new Setting<int>(settings, "pause/on-idle-for", 180);
   resetAfterPause = new Setting<int>(settings, "pause/reset-after", 120);

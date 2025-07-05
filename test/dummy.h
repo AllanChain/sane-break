@@ -51,7 +51,8 @@ class DummyBreakWindow : public AbstractBreakWindow {
   MOCK_METHOD(void, setTime, (int), (override));
   MOCK_METHOD(void, resizeToNormal, (), (override));
   MOCK_METHOD(void, setFullScreen, (), (override));
-  MOCK_METHOD(void, showButtons, (bool), (override));
+  MOCK_METHOD(void, showScreenLockButton, (bool), (override));
+  MOCK_METHOD(void, showExitForceBreakButton, (bool), (override));
 };
 
 struct DummyWindowDependencies {
