@@ -84,14 +84,14 @@
         <translation type="unfinished">О программе</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1152"/>
-        <location filename="../../src/gui/pref-window.ui" line="1190"/>
+        <location filename="../../src/gui/pref-window.ui" line="1170"/>
+        <location filename="../../src/gui/pref-window.ui" line="1208"/>
         <source>Bell before breaks</source>
         <translation type="unfinished">Звонок перед перерывами</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1121"/>
-        <location filename="../../src/gui/pref-window.ui" line="1218"/>
+        <location filename="../../src/gui/pref-window.ui" line="1139"/>
+        <location filename="../../src/gui/pref-window.ui" line="1236"/>
         <source>Bell after breaks</source>
         <translation type="unfinished">Звонок после перерывов</translation>
     </message>
@@ -177,54 +177,64 @@
         <translation type="unfinished">Сообщения напоминания о коротком перерыве:</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="779"/>
+        <location filename="../../src/gui/pref-window.ui" line="781"/>
+        <source>Max number of force break exits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="788"/>
+        <source> times</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="797"/>
         <source>&lt;h3&gt;Color Theme&lt;/h3&gt;
 All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
         <translation type="unfinished">&lt;h3&gt;Цветовая схема&lt;/h3&gt;
 Все цвета в формате &lt;code&gt;#AARRGGBB&lt;/code&gt;.</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="792"/>
+        <location filename="../../src/gui/pref-window.ui" line="810"/>
         <source>Big break</source>
         <translation type="unfinished">Длинный перерыв</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="799"/>
+        <location filename="../../src/gui/pref-window.ui" line="817"/>
         <source>Message</source>
         <translation type="unfinished">Сообщение</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="816"/>
+        <location filename="../../src/gui/pref-window.ui" line="834"/>
         <source>Small break</source>
         <translation type="unfinished">Короткий перерыв</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="823"/>
+        <location filename="../../src/gui/pref-window.ui" line="841"/>
         <source>Background</source>
         <translation type="unfinished">Фон</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="860"/>
+        <location filename="../../src/gui/pref-window.ui" line="878"/>
         <source>Count down</source>
         <translation type="unfinished">Обратный отсчет</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="886"/>
+        <location filename="../../src/gui/pref-window.ui" line="904"/>
         <source>&lt;h3&gt;Pause Conditions&lt;/h3&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Условия паузы&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1039"/>
+        <location filename="../../src/gui/pref-window.ui" line="1057"/>
         <source>Long pause threshold</source>
         <translation type="unfinished">Порог длительной паузы</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1093"/>
+        <location filename="../../src/gui/pref-window.ui" line="1111"/>
         <source>Short pause threshold</source>
         <translation type="unfinished">Порог короткой паузы</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1310"/>
+        <location filename="../../src/gui/pref-window.ui" line="1328"/>
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
@@ -232,22 +242,22 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
         <translation type="unfinished">Предположим, вы настроили это на 2 минуты. Если перерыв короче 2 минут, экран заблокируется через 2 минуты после начала перерыва при условии отсутствия активности после перерыва. Если перерыв дольше 2 минут, экран будет заблокирован независимо от этого.</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1315"/>
+        <location filename="../../src/gui/pref-window.ui" line="1333"/>
         <source>Automatic screen lock after break start</source>
         <translation type="unfinished">Автоматическая блокировка экрана после начала перерыва</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1338"/>
+        <location filename="../../src/gui/pref-window.ui" line="1356"/>
         <source>Please grant accessibility permission and restart app to use auto lock screen</source>
         <translation type="unfinished">Пожалуйста, предоставьте разрешение на доступность и перезапустите приложение, чтобы использовать автоматическую блокировку экрана</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1288"/>
+        <location filename="../../src/gui/pref-window.ui" line="1306"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
         <translation type="unfinished">&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Помогите перевести!&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1455"/>
+        <location filename="../../src/gui/pref-window.ui" line="1473"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -310,42 +320,42 @@ v%1
         <translation type="unfinished">Быстрее</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1118"/>
-        <location filename="../../src/gui/pref-window.ui" line="1149"/>
+        <location filename="../../src/gui/pref-window.ui" line="1136"/>
+        <location filename="../../src/gui/pref-window.ui" line="1167"/>
         <source>Try restart Sane Break if no sound</source>
         <translation type="unfinished">Попробуйте перезапустить Sane Break, если нет звука</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1135"/>
-        <location filename="../../src/gui/pref-window.ui" line="1142"/>
-        <location filename="../../src/gui/pref-window.ui" line="1197"/>
-        <location filename="../../src/gui/pref-window.ui" line="1204"/>
+        <location filename="../../src/gui/pref-window.ui" line="1153"/>
+        <location filename="../../src/gui/pref-window.ui" line="1160"/>
+        <location filename="../../src/gui/pref-window.ui" line="1215"/>
+        <location filename="../../src/gui/pref-window.ui" line="1222"/>
         <source>Play</source>
         <translation type="unfinished">Воспроизвести</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="895"/>
+        <location filename="../../src/gui/pref-window.ui" line="913"/>
         <source>Sane Break will pause if it detects no activity for this many minutes</source>
         <extracomment>Tooltip for &quot;Pause if idle for&quot; config</extracomment>
         <translation type="unfinished">Sane Break приостановится, если не обнаружит активности в течение этого количества минут</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="898"/>
+        <location filename="../../src/gui/pref-window.ui" line="916"/>
         <source>Pause if idle for</source>
         <translation type="unfinished">Пауза при бездействии на</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="252"/>
-        <location filename="../../src/gui/pref-window.ui" line="1109"/>
+        <location filename="../../src/gui/pref-window.ui" line="1127"/>
         <source>&lt;h3&gt;Small Breaks&lt;/h3&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Короткие перерывы&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="312"/>
         <location filename="../../src/gui/pref-window.ui" line="403"/>
-        <location filename="../../src/gui/pref-window.ui" line="939"/>
-        <location filename="../../src/gui/pref-window.ui" line="1023"/>
-        <location filename="../../src/gui/pref-window.ui" line="1077"/>
+        <location filename="../../src/gui/pref-window.ui" line="957"/>
+        <location filename="../../src/gui/pref-window.ui" line="1041"/>
+        <location filename="../../src/gui/pref-window.ui" line="1095"/>
         <source> min</source>
         <translation type="unfinished">мин</translation>
     </message>
@@ -363,13 +373,13 @@ v%1
         <translation type="unfinished">Продолжительность перерыва</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1230"/>
+        <location filename="../../src/gui/pref-window.ui" line="1248"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: You can use local sound files with URLs like &lt;code&gt;file:/D:sound.mp3&lt;/code&gt;  (Windows) or &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</source>
         <translation type="unfinished">&lt;strong&gt;Совет&lt;/strong&gt;: Вы можете использовать локальные файлы со звуком с URL, такими как &lt;code&gt;file:/D:sound.mp3&lt;/code&gt; (Windows) или &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="368"/>
-        <location filename="../../src/gui/pref-window.ui" line="1168"/>
+        <location filename="../../src/gui/pref-window.ui" line="1186"/>
         <source>&lt;h3&gt;Big Breaks&lt;/h3&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Длинные перерывы&lt;/h3&gt;</translation>
     </message>
@@ -386,22 +396,22 @@ v%1
 &lt;p&gt;Sane Break показывает небольшое напоминание на &lt;b&gt;%1&lt;/b&gt; секунд. Если вы прекращаете свою деятельность в это время или выбираете продолжить до окончания таймера, оно переходит в полноэкранный режим. Во время перерыва Sane Break переходит в полноэкранный режим после &lt;b&gt;%2&lt;/b&gt; секунд бездействия. Если вы возобновляете деятельность до блокировки, напоминание временно уменьшается до маленького окна, но снова расширяется до полноэкранного режима, когда вы снова становитесь бездействующим или таймер заканчивается.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="957"/>
+        <location filename="../../src/gui/pref-window.ui" line="975"/>
         <source>Pause on battery</source>
         <translation type="unfinished">Пауза при питании от батареи</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="964"/>
+        <location filename="../../src/gui/pref-window.ui" line="982"/>
         <source>Pause breaks when any of the following program is running:</source>
         <translation type="unfinished">Приостановить перерывы, когда один из следующих программ запущен:</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="971"/>
+        <location filename="../../src/gui/pref-window.ui" line="989"/>
         <source>(Write one program name per line)</source>
         <translation type="unfinished">(Введите одно имя программы на строку)</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="978"/>
+        <location filename="../../src/gui/pref-window.ui" line="996"/>
         <source>&lt;h3&gt;Reset Break Schedule After Pause&lt;/h3&gt;
 &lt;p&gt;Sane Break will adjust the break schedule after pausing:&lt;/p&gt;
 &lt;ul&gt;
@@ -416,42 +426,42 @@ v%1
 &lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1256"/>
+        <location filename="../../src/gui/pref-window.ui" line="1274"/>
         <source>Configuration file</source>
         <translation type="unfinished">Конфигурационный файл</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1353"/>
+        <location filename="../../src/gui/pref-window.ui" line="1371"/>
         <source>Launch Sane Break at start up</source>
         <translation type="unfinished">Запускать Sane Break при старте системы</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1479"/>
+        <location filename="../../src/gui/pref-window.ui" line="1497"/>
         <source>Get the Source Code</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1534"/>
+        <location filename="../../src/gui/pref-window.ui" line="1552"/>
         <source>Revert to Last Saved</source>
         <translation type="unfinished">Вернуться к последнему сохраненному</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1249"/>
+        <location filename="../../src/gui/pref-window.ui" line="1267"/>
         <source>Language</source>
         <translation type="unfinished">Язык</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1275"/>
+        <location filename="../../src/gui/pref-window.ui" line="1293"/>
         <source>Change of language will take effect after app restart.</source>
         <translation type="unfinished">Изменение языка вступит в силу после перезапуска приложения.</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1499"/>
+        <location filename="../../src/gui/pref-window.ui" line="1517"/>
         <source>Third-party Libraries Licenses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1557"/>
+        <location filename="../../src/gui/pref-window.ui" line="1575"/>
         <source>Save</source>
         <translation type="unfinished">Сохранить</translation>
     </message>
@@ -459,9 +469,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="310"/>
-        <location filename="../../src/gui/pref-window.cpp" line="311"/>
-        <location filename="../../src/gui/pref-window.cpp" line="312"/>
+        <location filename="../../src/gui/pref-window.cpp" line="313"/>
+        <location filename="../../src/gui/pref-window.cpp" line="314"/>
+        <location filename="../../src/gui/pref-window.cpp" line="315"/>
         <source>%n min</source>
         <translation type="unfinished">
             <numerusform>%n мин</numerusform>
@@ -480,7 +490,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="309"/>
+        <location filename="../../src/gui/pref-window.cpp" line="312"/>
         <source>%n sec</source>
         <translation type="unfinished">
             <numerusform>%n сек</numerusform>
@@ -489,47 +499,47 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="308"/>
+        <location filename="../../src/gui/pref-window.cpp" line="311"/>
         <source>Disabled</source>
         <translation type="unfinished">Отключено</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="283"/>
+        <location filename="../../src/gui/pref-window.cpp" line="286"/>
         <source>Setting autostart failed</source>
         <translation type="unfinished">Настройка автозапуска не удалась</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="319"/>
+        <location filename="../../src/gui/pref-window.cpp" line="322"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation type="unfinished">Начать следующий перерыв после среднего клика на значке в трее</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="324"/>
+        <location filename="../../src/gui/pref-window.cpp" line="327"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation type="unfinished">Начать следующий перерыв после двойного клика на значке в трее</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="384"/>
+        <location filename="../../src/gui/pref-window.cpp" line="387"/>
         <source>Save</source>
         <translation type="unfinished">Сохранить</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="385"/>
+        <location filename="../../src/gui/pref-window.cpp" line="388"/>
         <source>Discard</source>
         <translation type="unfinished">Отменить</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="386"/>
+        <location filename="../../src/gui/pref-window.cpp" line="389"/>
         <source>Cancel</source>
         <translation type="unfinished">Отмена</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="381"/>
+        <location filename="../../src/gui/pref-window.cpp" line="384"/>
         <source>The preferences have been modified.</source>
         <translation type="unfinished">Настройки были изменены.</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="382"/>
+        <location filename="../../src/gui/pref-window.cpp" line="385"/>
         <source>Do you want to save your changes?</source>
         <translation type="unfinished">Хотите сохранить изменения?</translation>
     </message>

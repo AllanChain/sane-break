@@ -84,14 +84,14 @@
         <translation>關於</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1152"/>
-        <location filename="../../src/gui/pref-window.ui" line="1190"/>
+        <location filename="../../src/gui/pref-window.ui" line="1170"/>
+        <location filename="../../src/gui/pref-window.ui" line="1208"/>
         <source>Bell before breaks</source>
         <translation>休息前提示音</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1121"/>
-        <location filename="../../src/gui/pref-window.ui" line="1218"/>
+        <location filename="../../src/gui/pref-window.ui" line="1139"/>
+        <location filename="../../src/gui/pref-window.ui" line="1236"/>
         <source>Bell after breaks</source>
         <translation>休息後提示音</translation>
     </message>
@@ -177,54 +177,64 @@
         <translation>小休息提示文本：</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="779"/>
+        <location filename="../../src/gui/pref-window.ui" line="781"/>
+        <source>Max number of force break exits</source>
+        <translation>退出強制休息次數上限</translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="788"/>
+        <source> times</source>
+        <translation>次</translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="797"/>
         <source>&lt;h3&gt;Color Theme&lt;/h3&gt;
 All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
         <translation>&lt;h3&gt;顏色主題&lt;/h3&gt;
 所有顏色的格式均為 &lt;code&gt;#AARRGGBB&lt;/code&gt;。</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="792"/>
+        <location filename="../../src/gui/pref-window.ui" line="810"/>
         <source>Big break</source>
         <translation>大休息</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="799"/>
+        <location filename="../../src/gui/pref-window.ui" line="817"/>
         <source>Message</source>
         <translation>提示文本</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="816"/>
+        <location filename="../../src/gui/pref-window.ui" line="834"/>
         <source>Small break</source>
         <translation>小休息</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="823"/>
+        <location filename="../../src/gui/pref-window.ui" line="841"/>
         <source>Background</source>
         <translation>背景</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="860"/>
+        <location filename="../../src/gui/pref-window.ui" line="878"/>
         <source>Count down</source>
         <translation>倒計時</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="886"/>
+        <location filename="../../src/gui/pref-window.ui" line="904"/>
         <source>&lt;h3&gt;Pause Conditions&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;暫停條件&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1039"/>
+        <location filename="../../src/gui/pref-window.ui" line="1057"/>
         <source>Long pause threshold</source>
         <translation>長時間暫停閾值</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1093"/>
+        <location filename="../../src/gui/pref-window.ui" line="1111"/>
         <source>Short pause threshold</source>
         <translation>短時間暫停閾值</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1310"/>
+        <location filename="../../src/gui/pref-window.ui" line="1328"/>
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
@@ -234,22 +244,22 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
 定。如果休息持續超過 2 分鐘，則屏幕必然會自動鎖定。</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1315"/>
+        <location filename="../../src/gui/pref-window.ui" line="1333"/>
         <source>Automatic screen lock after break start</source>
         <translation>休息開始一段時間後自動鎖屏</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1338"/>
+        <location filename="../../src/gui/pref-window.ui" line="1356"/>
         <source>Please grant accessibility permission and restart app to use auto lock screen</source>
         <translation>請授予輔助功能權限並重啟應用以使用自動鎖屏功能</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1288"/>
+        <location filename="../../src/gui/pref-window.ui" line="1306"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;幫我們翻譯！&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1455"/>
+        <location filename="../../src/gui/pref-window.ui" line="1473"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -312,42 +322,42 @@ v%1
         <translation>更快</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1118"/>
-        <location filename="../../src/gui/pref-window.ui" line="1149"/>
+        <location filename="../../src/gui/pref-window.ui" line="1136"/>
+        <location filename="../../src/gui/pref-window.ui" line="1167"/>
         <source>Try restart Sane Break if no sound</source>
         <translation>如果沒有聲音，請嘗試重啟 Sane Break</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1135"/>
-        <location filename="../../src/gui/pref-window.ui" line="1142"/>
-        <location filename="../../src/gui/pref-window.ui" line="1197"/>
-        <location filename="../../src/gui/pref-window.ui" line="1204"/>
+        <location filename="../../src/gui/pref-window.ui" line="1153"/>
+        <location filename="../../src/gui/pref-window.ui" line="1160"/>
+        <location filename="../../src/gui/pref-window.ui" line="1215"/>
+        <location filename="../../src/gui/pref-window.ui" line="1222"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="895"/>
+        <location filename="../../src/gui/pref-window.ui" line="913"/>
         <source>Sane Break will pause if it detects no activity for this many minutes</source>
         <extracomment>Tooltip for &quot;Pause if idle for&quot; config</extracomment>
         <translation>在這麼多時間內沒有活動，Sane Break 將暫停計時</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="898"/>
+        <location filename="../../src/gui/pref-window.ui" line="916"/>
         <source>Pause if idle for</source>
         <translation>空閒一段時間後暫停</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="252"/>
-        <location filename="../../src/gui/pref-window.ui" line="1109"/>
+        <location filename="../../src/gui/pref-window.ui" line="1127"/>
         <source>&lt;h3&gt;Small Breaks&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;小休息&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="312"/>
         <location filename="../../src/gui/pref-window.ui" line="403"/>
-        <location filename="../../src/gui/pref-window.ui" line="939"/>
-        <location filename="../../src/gui/pref-window.ui" line="1023"/>
-        <location filename="../../src/gui/pref-window.ui" line="1077"/>
+        <location filename="../../src/gui/pref-window.ui" line="957"/>
+        <location filename="../../src/gui/pref-window.ui" line="1041"/>
+        <location filename="../../src/gui/pref-window.ui" line="1095"/>
         <source> min</source>
         <translation> 分鐘</translation>
     </message>
@@ -365,13 +375,13 @@ v%1
         <translation>休息時長</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1230"/>
+        <location filename="../../src/gui/pref-window.ui" line="1248"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: You can use local sound files with URLs like &lt;code&gt;file:/D:sound.mp3&lt;/code&gt;  (Windows) or &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</source>
         <translation>&lt;strong&gt;提示&lt;/strong&gt;：你可以這樣使用本地文件 &lt;code&gt;file:/D:\sound.mp3&lt;/code&gt;  (Windows) 或 &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux)。</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="368"/>
-        <location filename="../../src/gui/pref-window.ui" line="1168"/>
+        <location filename="../../src/gui/pref-window.ui" line="1186"/>
         <source>&lt;h3&gt;Big Breaks&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;大休息&lt;/h3&gt;</translation>
     </message>
@@ -388,22 +398,22 @@ v%1
 &lt;p&gt;Sane Break 會顯示一個持續 &lt;b&gt;%1&lt;/b&gt; 秒的小型提示窗。若您在此期間停止活動，或選擇繼續超過這個時間，界面將轉換至全屏模式。休息期間，若持續 &lt;b&gt;%2&lt;/b&gt; 秒無操作，Sane Break 會鎖定全屏狀態。若在鎖定前恢復活動，提示窗會暫時縮成小窗口，但當再次無操作或到時間後，界面將重新轉換至全屏。&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="957"/>
+        <location filename="../../src/gui/pref-window.ui" line="975"/>
         <source>Pause on battery</source>
         <translation>電池供電時暫停</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="964"/>
+        <location filename="../../src/gui/pref-window.ui" line="982"/>
         <source>Pause breaks when any of the following program is running:</source>
         <translation>當以下程序運行時暫停休息提示：</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="971"/>
+        <location filename="../../src/gui/pref-window.ui" line="989"/>
         <source>(Write one program name per line)</source>
         <translation>（每一行寫一個程序名）</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="978"/>
+        <location filename="../../src/gui/pref-window.ui" line="996"/>
         <source>&lt;h3&gt;Reset Break Schedule After Pause&lt;/h3&gt;
 &lt;p&gt;Sane Break will adjust the break schedule after pausing:&lt;/p&gt;
 &lt;ul&gt;
@@ -418,42 +428,42 @@ v%1
 &lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1256"/>
+        <location filename="../../src/gui/pref-window.ui" line="1274"/>
         <source>Configuration file</source>
         <translation>配置文件</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1353"/>
+        <location filename="../../src/gui/pref-window.ui" line="1371"/>
         <source>Launch Sane Break at start up</source>
         <translation>開機自動啟動 Sane Break</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1479"/>
+        <location filename="../../src/gui/pref-window.ui" line="1497"/>
         <source>Get the Source Code</source>
         <translation>獲取源代碼</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1534"/>
+        <location filename="../../src/gui/pref-window.ui" line="1552"/>
         <source>Revert to Last Saved</source>
         <translation>恢復上次設置</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1249"/>
+        <location filename="../../src/gui/pref-window.ui" line="1267"/>
         <source>Language</source>
         <translation>語言</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1275"/>
+        <location filename="../../src/gui/pref-window.ui" line="1293"/>
         <source>Change of language will take effect after app restart.</source>
         <translation>改變語言將在重啟應用後生效。</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1499"/>
+        <location filename="../../src/gui/pref-window.ui" line="1517"/>
         <source>Third-party Libraries Licenses</source>
         <translation>第三方庫許可</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1557"/>
+        <location filename="../../src/gui/pref-window.ui" line="1575"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
@@ -461,9 +471,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="310"/>
-        <location filename="../../src/gui/pref-window.cpp" line="311"/>
-        <location filename="../../src/gui/pref-window.cpp" line="312"/>
+        <location filename="../../src/gui/pref-window.cpp" line="313"/>
+        <location filename="../../src/gui/pref-window.cpp" line="314"/>
+        <location filename="../../src/gui/pref-window.cpp" line="315"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n 分鐘</numerusform>
@@ -478,54 +488,54 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="309"/>
+        <location filename="../../src/gui/pref-window.cpp" line="312"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n 秒</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="308"/>
+        <location filename="../../src/gui/pref-window.cpp" line="311"/>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="319"/>
+        <location filename="../../src/gui/pref-window.cpp" line="322"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>在中鍵托盤圖標後，立刻開始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="324"/>
+        <location filename="../../src/gui/pref-window.cpp" line="327"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>在雙擊托盤圖標後，立刻開始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="384"/>
+        <location filename="../../src/gui/pref-window.cpp" line="387"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="385"/>
+        <location filename="../../src/gui/pref-window.cpp" line="388"/>
         <source>Discard</source>
         <translation>放棄</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="386"/>
+        <location filename="../../src/gui/pref-window.cpp" line="389"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="283"/>
+        <location filename="../../src/gui/pref-window.cpp" line="286"/>
         <source>Setting autostart failed</source>
         <translation>設置開機自啟失敗</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="381"/>
+        <location filename="../../src/gui/pref-window.cpp" line="384"/>
         <source>The preferences have been modified.</source>
         <translation>偏好設置已被修改。</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="382"/>
+        <location filename="../../src/gui/pref-window.cpp" line="385"/>
         <source>Do you want to save your changes?</source>
         <translation>是否保存修改？</translation>
     </message>
