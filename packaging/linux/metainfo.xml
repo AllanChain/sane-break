@@ -56,6 +56,19 @@
   </screenshots>
 
   <releases>
+    <release version="0.8.4" date="2025-07-20">
+      <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.8.4</url>
+      <description>
+        <p>Features</p>
+        <ul>
+          <li>Limited number of exits of force-breaks (default 2)</li>
+        </ul>
+        <p>Bug fixes</p>
+        <ul>
+          <li>Avoid resetting time to next break when postponing</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.8.3" date="2025-06-02">
       <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.8.3</url>
       <description>
