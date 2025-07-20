@@ -184,7 +184,7 @@
     <message>
         <location filename="../../src/gui/pref-window.ui" line="788"/>
         <source> times</source>
-        <translation>次</translation>
+        <translation> 次</translation>
     </message>
     <message>
         <location filename="../../src/gui/pref-window.ui" line="797"/>
