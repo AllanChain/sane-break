@@ -7,6 +7,7 @@
 #include <QFlags>
 #include <QObject>
 
+#include "core/app-states.h"
 #include "core/flags.h"
 #include "core/idle-time.h"
 #include "core/preferences.h"
@@ -17,10 +18,8 @@
 struct AppDependencies {
   SanePreferences *preferences = nullptr;
   AbstractTimer *countDownTimer = nullptr;
-  SystemIdleTime *oneshotIdleTimer = nullptr;
-  AbstractTimer *screenLockTimer = nullptr;
+  SystemIdleTime *idleTimer = nullptr;
   AbstractSystemMonitor *systemMonitor = nullptr;
-  AbstractWindowControl *windowControl = nullptr;
 };
 
 struct TrayData {
@@ -32,7 +31,7 @@ struct TrayData {
   SaneBreak::PauseReasons pauseReasons;
 };
 
-class AbstractApp : public QObject {
+class AbstractApp : public QObject, AppContext {
   Q_OBJECT
  public:
   AbstractApp(const AppDependencies &deps, QObject *parent = nullptr);
@@ -42,7 +41,6 @@ class AbstractApp : public QObject {
   virtual void doLockScreen() = 0;
   virtual bool confirmPostpone(int secondsToPostpone) = 0;
 
-  void breakNow();
   void bigBreakNow();
   // Take a small break when big break is on
   void smallBreakInstead();
@@ -51,38 +49,18 @@ class AbstractApp : public QObject {
   void resumeBreak(SaneBreak::PauseReasons reason);
   void enableBreak();
 
- signals:
-  void trayDataUpdated(TrayData trayData);
-
  protected:
-  int m_breakCycleCount = 1;
-  int m_secondsPaused = 0;
-  int m_secondsSinceLastBreak = 0;
-  int m_secondsToNextBreak;
-  SaneBreak::PauseReasons m_pauseReasons = {};
-
-  SanePreferences *preferences;
   AbstractTimer *m_countDownTimer;
-  SystemIdleTime *m_oneshotIdleTimer;
-  AbstractTimer *m_screenLockTimer;
   AbstractSystemMonitor *m_systemMonitor;
   AbstractWindowControl *m_windowControl;
 
   void tick();
   void onSleepEnd();
-  void onBreakCountDownStateChange(bool countingDown);
   void onBreakAbort();
   void onBreakEnd();
-  void onIdleStart();
-  void onIdleEnd();
   void onOneshotIdleEnd();
-  void onBattery();
-  void onPower();
-  void onProgramStart();
-  void onProgramStop();
   void onBatterySettingChange();
 
   int smallBreaksBeforeBig();
-  void updateTray();
   void resetSecondsToNextBreak();
 };
