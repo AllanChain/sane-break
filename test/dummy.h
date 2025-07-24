@@ -10,14 +10,15 @@
 #include <QSettings>
 #include <QTemporaryFile>
 #include <QTest>
+#include <memory>
 
+#include "core/app-states.h"
 #include "core/app.h"
-#include "core/flags.h"
+#include "core/break-windows.h"
 #include "core/idle-time.h"
 #include "core/preferences.h"
 #include "core/system-monitor.h"
 #include "core/timer.h"
-#include "core/window-control.h"
 #include "gmock/gmock.h"
 
 inline SanePreferences *tempPreferences() {
@@ -49,51 +50,31 @@ class DummyBreakWindow : public AbstractBreakWindow {
   using AbstractBreakWindow::AbstractBreakWindow;
   MOCK_METHOD(void, start, (), (override));
   MOCK_METHOD(void, setTime, (int), (override));
-  MOCK_METHOD(void, resizeToNormal, (), (override));
-  MOCK_METHOD(void, setFullScreen, (), (override));
-  MOCK_METHOD(void, showScreenLockButton, (bool), (override));
-  MOCK_METHOD(void, showExitForceBreakButton, (bool), (override));
+  MOCK_METHOD(void, showFullScreen, (), (override));
+  MOCK_METHOD(void, showFlashPrompt, (), (override));
+  MOCK_METHOD(void, showButtons, (AbstractBreakWindow::Buttons), (override));
 };
 
-struct DummyWindowDependencies {
-  SanePreferences *preferences;
-  DummyIdleTime *idleTimer;
-};
-
-class DummyWindowControl : public AbstractWindowControl {
+class DummyBreakWindows : public AbstractBreakWindows {
   Q_OBJECT
  public:
-  using AbstractWindowControl::AbstractWindowControl;
-  static DummyWindowDependencies makeDeps() {
-    return {.preferences = tempPreferences(), .idleTimer = new DummyIdleTime()};
-  }
-  MOCK_METHOD(void, createWindows, (SaneBreak::BreakType), (override));
-  MOCK_METHOD(void, deleteWindows, (), (override));
-  void advanceToEnd() {
-    m_remainingSeconds = 0;
-    close();
-  }
+  using AbstractBreakWindows::AbstractBreakWindows;
+  MOCK_METHOD(void, createWindows, (BreakWindowData), (override));
+  MOCK_METHOD(void, destroy, (), ());
 };
 
-class SimpleWindowControl : public AbstractWindowControl {
+class SimpleBreakWindows : public AbstractBreakWindows {
   Q_OBJECT
  public:
-  SimpleWindowControl(const DummyWindowDependencies &deps, QObject *parent = nullptr)
-      : AbstractWindowControl({deps.preferences, deps.idleTimer}, parent) {};
-  using AbstractWindowControl::deleteWindows;
-  static DummyWindowDependencies makeDeps() {
-    return {.preferences = tempPreferences(), .idleTimer = new DummyIdleTime()};
-  }
-  void createWindows(SaneBreak::BreakType type) {
-    window = new testing::NiceMock<DummyBreakWindow>(breakData(type));
+  using AbstractBreakWindows::AbstractBreakWindows;
+  void createWindows(BreakWindowData data) {
+    this->data = data;
+    window = new testing::NiceMock<DummyBreakWindow>(data);
     m_windows.append(window);
   }
   bool hasWindows() { return !m_windows.isEmpty() && window != nullptr; }
-  void advance(int secs) {
-    for (int i = 0; i < secs; i++) tick();
-  }
   DummyBreakWindow *window = nullptr;
-  using AbstractWindowControl::breakData;
+  BreakWindowData data;
 };
 
 class DummySystemMonitor : public AbstractSystemMonitor {
@@ -112,44 +93,73 @@ class DummySystemMonitor : public AbstractSystemMonitor {
 struct DummyAppDependencies {
   SanePreferences *preferences = nullptr;
   AbstractTimer *countDownTimer = nullptr;
-  DummyIdleTime *oneshotIdleTimer = nullptr;
   AbstractTimer *screenLockTimer = nullptr;
+  DummyIdleTime *idleTimer = nullptr;
   DummySystemMonitor *systemMonitor = nullptr;
-  DummyWindowControl *windowControl = nullptr;
+  DummyBreakWindows *breakWindows = nullptr;
+};
+
+struct SimpleAppDependencies {
+  SanePreferences *preferences = nullptr;
+  AbstractTimer *countDownTimer = nullptr;
+  AbstractTimer *screenLockTimer = nullptr;
+  DummyIdleTime *idleTimer = nullptr;
+  DummySystemMonitor *systemMonitor = nullptr;
+  SimpleBreakWindows *breakWindows = nullptr;
 };
 
 class DummyApp : public AbstractApp {
   Q_OBJECT
  public:
   DummyApp(const DummyAppDependencies &deps, QObject *parent = nullptr)
-      : AbstractApp({deps.preferences, deps.countDownTimer, deps.oneshotIdleTimer,
-                     deps.screenLockTimer, deps.systemMonitor, deps.windowControl},
+      : AbstractApp({deps.preferences, deps.countDownTimer, deps.screenLockTimer,
+                     deps.idleTimer, deps.systemMonitor, deps.breakWindows},
+                    parent) {
+    connect(this, &DummyApp::trayDataUpdated, this,
+            [this](TrayData data) { trayData = data; });
+  };
+  DummyApp(const SimpleAppDependencies &deps, QObject *parent = nullptr)
+      : AbstractApp({deps.preferences, deps.countDownTimer, deps.screenLockTimer,
+                     deps.idleTimer, deps.systemMonitor, deps.breakWindows},
                     parent) {
     connect(this, &DummyApp::trayDataUpdated, this,
             [this](TrayData data) { trayData = data; });
   };
   MOCK_METHOD(void, doLockScreen, (), (override));
   MOCK_METHOD(bool, confirmPostpone, (int), (override));
+  AppState::StateID currentState() { return m_currentState->getID(); }
   void advance(int secs) {
     QVERIFY2(m_countDownTimer->isActive(),
              "Impossible to simulate timer tick with an inactive timer");
     for (int i = 0; i < secs; i++) tick();
   }
+  void advanceToBreakEnd() {
+    QCOMPARE(currentState(), AppState::Break);
+    while (data->breaks->remainingSeconds() > 0) tick();
+  }
+  void advanceToForceBreakStart() {
+    QCOMPARE(currentState(), AppState::Break);
+    while (!data->breaks->isForceBreak()) tick();
+  }
   TrayData trayData;
   static DummyAppDependencies makeDeps() {
-    auto preferences = tempPreferences();
-    WindowDependencies windowDeps = {
-        .preferences = preferences,
-        .idleTimer = new DummyIdleTime(),
-    };
-    auto windowControl = new testing::NiceMock<DummyWindowControl>(windowDeps);
     return {
-        .preferences = preferences,
+        .preferences = tempPreferences(),
         .countDownTimer = new AbstractTimer(),
-        .oneshotIdleTimer = new DummyIdleTime(),
         .screenLockTimer = new AbstractTimer(),
+        .idleTimer = new DummyIdleTime(),
         .systemMonitor = new DummySystemMonitor(),
-        .windowControl = windowControl,
+        .breakWindows = new testing::NiceMock<DummyBreakWindows>(),
+    };
+  };
+  static SimpleAppDependencies makeSimpleDeps() {
+    return {
+        .preferences = tempPreferences(),
+        .countDownTimer = new AbstractTimer(),
+        .screenLockTimer = new AbstractTimer(),
+        .idleTimer = new DummyIdleTime(),
+        .systemMonitor = new DummySystemMonitor(),
+        .breakWindows = new testing::NiceMock<SimpleBreakWindows>(),
     };
   };
 };

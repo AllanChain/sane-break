@@ -6,6 +6,8 @@
 
 #include <QObject>
 
+#include "core/flags.h"
+
 class AbstractSystemMonitor : public QObject {
   Q_OBJECT
  public:
@@ -15,11 +17,7 @@ class AbstractSystemMonitor : public QObject {
   virtual bool isOnBattery() = 0;
 
  signals:
-  void idleStarted();
-  void idleEnded();
   void sleepEnded();
-  void batteryPowered();
-  void adaptorPowered();
-  void programStarted();
-  void programStopped();
+  void pauseRequested(SaneBreak::PauseReason reason);
+  void resumeRequested(SaneBreak::PauseReason reason);
 };

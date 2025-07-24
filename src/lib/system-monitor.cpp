@@ -6,30 +6,32 @@
 
 #include <QObject>
 
+#include "core/flags.h"
+#include "core/preferences.h"
+#include "core/system-monitor.h"
 #include "lib/battery-status.h"
 #include "lib/program-monitor.h"
 #include "lib/sleep-monitor.h"
 
 SystemMonitor::SystemMonitor(SanePreferences* preferences, QObject* parent)
     : AbstractSystemMonitor(parent), preferences(preferences) {
-  idleTimer = SystemIdleTime::createIdleTimer(this);
-  idleTimer->setWatchAccuracy(5000);
-  idleTimer->setMinIdleTime(preferences->pauseOnIdleFor->get() * 1000);
   sleepMonitor = new SleepMonitor(this);
   batteryWatcher = BatteryStatus::createWatcher(this);
   runningProgramsMonitor = new RunningProgramsMonitor(this);
 
-  connect(idleTimer, &SystemIdleTime::idleStart, this, &SystemMonitor::idleStarted);
-  connect(idleTimer, &SystemIdleTime::idleEnd, this, &SystemMonitor::idleEnded);
   connect(sleepMonitor, &SleepMonitor::sleepEnd, this, &SystemMonitor::sleepEnded);
-  connect(batteryWatcher, &BatteryStatus::onBattery, this,
-          &SystemMonitor::batteryPowered);
-  connect(batteryWatcher, &BatteryStatus::onPower, this,
-          &SystemMonitor::adaptorPowered);
+  connect(batteryWatcher, &BatteryStatus::onBattery, this, [this]() {
+    if (this->preferences->pauseOnBattery->get())
+      emit pauseRequested(SaneBreak::PauseReason::OnBattery);
+  });
+  connect(batteryWatcher, &BatteryStatus::onPower, this, [this]() {
+    if (this->preferences->pauseOnBattery->get())
+      emit resumeRequested(SaneBreak::PauseReason::OnBattery);
+  });
   connect(runningProgramsMonitor, &RunningProgramsMonitor::programStarted, this,
-          &SystemMonitor::programStarted);
+          [this]() { emit pauseRequested(SaneBreak::PauseReason::AppOpen); });
   connect(runningProgramsMonitor, &RunningProgramsMonitor::programStopped, this,
-          &SystemMonitor::programStopped);
+          [this]() { emit resumeRequested(SaneBreak::PauseReason::AppOpen); });
 
   connect(preferences->programsToMonitor, &SettingWithSignal::changed, this, [this]() {
     runningProgramsMonitor->setPrograms(this->preferences->programsToMonitor->get());
@@ -37,7 +39,6 @@ SystemMonitor::SystemMonitor(SanePreferences* preferences, QObject* parent)
 }
 
 void SystemMonitor::start() {
-  idleTimer->startWatching();
   batteryWatcher->startWatching();
   runningProgramsMonitor->setPrograms(preferences->programsToMonitor->get());
   runningProgramsMonitor->startMonitoring();

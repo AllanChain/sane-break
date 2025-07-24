@@ -25,7 +25,7 @@
 #include <Qt>
 
 #include "config.h"
-#include "core/window-control.h"
+#include "core/break-windows.h"
 #include "lib/utils.h"
 #include "ui_break-window.h"
 
@@ -41,14 +41,14 @@
 const int BreakWindow::SMALL_WINDOW_WIDTH = 400;
 const int BreakWindow::SMALL_WINDOW_HEIGHT = 120;
 
-BreakWindow::BreakWindow(BreakData data, QWidget *parent)
+BreakWindow::BreakWindow(BreakWindowData data, QWidget *parent)
     : AbstractBreakWindow(data, parent) {
 #ifdef Q_OS_LINUX
   // Positioning windows on Wayland is nearly impossible without layer shell protol.
   // In Wayland workaround mode, the main window is transparent and takes up all
   // available space on the screen (but not the system panels), and the main widget
   // changes size and covers the space.
-  waylandWorkaround =
+  m_waylandWorkaround =
       QGuiApplication::platformName() == "wayland" && !LinuxSystemSupport::layerShell;
 #endif
   setAttribute(Qt::WA_TranslucentBackground);  // transparent window
@@ -59,7 +59,7 @@ BreakWindow::BreakWindow(BreakData data, QWidget *parent)
   setWindowTitle("Break reminder - Sane Break");
 
   mainWidget = new QWidget(this);
-  if (!waylandWorkaround) setCentralWidget(mainWidget);
+  if (!m_waylandWorkaround) setCentralWidget(mainWidget);
 
   ui = new Ui::BreakReminder();
   ui->setupUi(mainWidget);
@@ -92,18 +92,18 @@ BreakWindow::BreakWindow(BreakData data, QWidget *parent)
   connect(ui->exitForceBreak, &QPushButton::pressed, this,
           &AbstractBreakWindow::exitForceBreakRequested);
 
-  progressAnim = new QPropertyAnimation(ui->progressBar, "value");
-  progressAnim->setStartValue(ui->progressBar->maximum());
-  progressAnim->setEndValue(0);
+  m_progressAnim = new QPropertyAnimation(ui->progressBar, "value");
+  m_progressAnim->setStartValue(ui->progressBar->maximum());
+  m_progressAnim->setEndValue(0);
 
-  this->totalTime = data.totalSeconds;
-  progressAnim->setDuration(totalTime * 1000);
+  this->m_totalSeconds = data.totalSeconds;
+  m_progressAnim->setDuration(m_totalSeconds * 1000);
 
-  bgAnim = new QPropertyAnimation(this, "color");
-  bgAnim->setStartValue(data.theme.highlightBackground);
-  bgAnim->setEndValue(data.theme.mainBackground);
-  bgAnim->setDuration(data.theme.flashAnimationDuration);
-  bgAnim->setLoopCount(-1);
+  m_bgAnim = new QPropertyAnimation(this, "color");
+  m_bgAnim->setStartValue(data.theme.highlightBackground);
+  m_bgAnim->setEndValue(data.theme.mainBackground);
+  m_bgAnim->setDuration(data.theme.flashAnimationDuration);
+  m_bgAnim->setLoopCount(-1);
 }
 
 void BreakWindow::colorChanged() {
@@ -116,67 +116,66 @@ void BreakWindow::colorChanged() {
 }
 
 void BreakWindow::start() {
-  setTime(totalTime);
-  bgAnim->start();
+  setTime(m_totalSeconds);
+  m_bgAnim->start();
 }
 
 void BreakWindow::setTime(int remainingTime) {
-  if (remainingTime == totalTime) {
-    progressAnim->stop();
-    progressAnim->start();
+  if (remainingTime == m_totalSeconds) {
+    m_progressAnim->stop();
+    m_progressAnim->start();
   }
-  if (totalTime <= 60) {
+  if (m_totalSeconds <= 60) {
     ui->countdownLabel->setText(QString("%1").arg(remainingTime));
   } else {
     ui->countdownLabel->setText(formatTime(remainingTime));
   }
 }
 
-void BreakWindow::showScreenLockButton(bool show) {
-  ui->lockScreenGroup->setVisible(show);
+void BreakWindow::showButtons(Buttons buttons) {
+  if (buttons.testFlag(Button::LockScreen)) ui->lockScreenGroup->setVisible(true);
+  if (buttons.testFlag(Button::ExitForceBreak))
+    ui->exitForceBreakGroup->setVisible(true);
 }
 
-void BreakWindow::showExitForceBreakButton(bool show) {
-  ui->exitForceBreakGroup->setVisible(show);
-}
-
-void BreakWindow::setFullScreen() {
+void BreakWindow::showFullScreen() {
   mainWidget->setProperty("isFullScreen", true);
   // setWindowFlag will reparent the window and do a lot of unnecessary works
   // Instead, we just change the flags of QWindow
   windowHandle()->setFlag(Qt::WindowTransparentForInput, false);
-  bgAnim->stop();
-  setProperty("color", bgAnim->endValue());
+  m_bgAnim->stop();
+  setProperty("color", m_bgAnim->endValue());
   ui->countdownLabel->setVisible(true);
   ui->buttons->setVisible(true);
   QPropertyAnimation *resizeAnim =
-      new QPropertyAnimation(waylandWorkaround ? mainWidget : this, "geometry");
-  resizeAnim->setStartValue(waylandWorkaround ? mainWidget->geometry() : geometry());
-  resizeAnim->setEndValue(waylandWorkaround ? screen()->availableGeometry()
-                                            : screen()->geometry());
+      new QPropertyAnimation(m_waylandWorkaround ? mainWidget : this, "geometry");
+  resizeAnim->setStartValue(m_waylandWorkaround ? mainWidget->geometry() : geometry());
+  resizeAnim->setEndValue(m_waylandWorkaround ? screen()->availableGeometry()
+                                              : screen()->geometry());
   resizeAnim->setDuration(300);
   resizeAnim->start();
 }
 
-void BreakWindow::resizeToNormal() {
+void BreakWindow::showFlashPrompt() {
   mainWidget->setProperty("isFullScreen", false);
   windowHandle()->setFlag(Qt::WindowTransparentForInput, true);
-  bgAnim->start();
+  m_bgAnim->start();
   ui->countdownLabel->setVisible(false);
   ui->buttons->setVisible(false);
   QPropertyAnimation *resizeAnim =
-      new QPropertyAnimation(waylandWorkaround ? mainWidget : this, "geometry");
-  QRect rect = waylandWorkaround ? screen()->availableGeometry() : screen()->geometry();
+      new QPropertyAnimation(m_waylandWorkaround ? mainWidget : this, "geometry");
+  QRect rect =
+      m_waylandWorkaround ? screen()->availableGeometry() : screen()->geometry();
   QRect targetGeometry = QRect(rect.x() + rect.width() / 2 - SMALL_WINDOW_WIDTH / 2,
                                rect.y(), SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
-  resizeAnim->setStartValue(waylandWorkaround ? mainWidget->geometry() : geometry());
+  resizeAnim->setStartValue(m_waylandWorkaround ? mainWidget->geometry() : geometry());
   resizeAnim->setEndValue(targetGeometry);
   resizeAnim->setDuration(100);
   resizeAnim->start();
 }
 
 void BreakWindow::initSize(QScreen *screen) {
-  if (waylandWorkaround) {
+  if (m_waylandWorkaround) {
     QRect rect = screen->availableGeometry();
     // Avoid using full height when initializing the main window. GNOME will refuse to
     // make the window always on top (done in custom shell extension) if it is too large
