@@ -1313,11 +1313,6 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
              </layout>
             </item>
             <item>
-             <layout class="QVBoxLayout" name="verticalLayout_4">
-              <property name="spacing">
-               <number>0</number>
-              </property>
-              <item>
                <layout class="QHBoxLayout" name="horizontalLayout_3">
                 <property name="spacing">
                  <number>20</number>
@@ -1341,29 +1336,6 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
                  <widget class="QComboBox" name="autoScreenLock"/>
                 </item>
                </layout>
-              </item>
-              <item>
-               <widget class="QLabel" name="macPermissionHint">
-                <property name="font">
-                 <font>
-                  <pointsize>11</pointsize>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">color: rgb(216, 0, 3)</string>
-                </property>
-                <property name="text">
-                 <string>Please grant accessibility permission and restart app to use auto lock screen</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-                </property>
-                <property name="wordWrap">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-             </layout>
             </item>
             <item>
              <widget class="WrappedCheckBox" name="autoStart">

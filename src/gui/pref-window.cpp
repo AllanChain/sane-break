@@ -306,14 +306,12 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
 #ifdef LINUX_DIST_FLATPAK
   ui->autoScreenLock->setHidden(true);
   ui->autoScreenLockLabel->setHidden(true);
-  ui->macPermissionHint->setHidden(true);
 #else
   ui->autoScreenLock->addItem(tr("Disabled"), 0);
   ui->autoScreenLock->addItem(tr("%n sec", "", 30), 30);
   ui->autoScreenLock->addItem(tr("%n min", "", 1), 60);
   ui->autoScreenLock->addItem(tr("%n min", "", 2), 120);
   ui->autoScreenLock->addItem(tr("%n min", "", 5), 300);
-  ui->macPermissionHint->setHidden(true);
   controllers->add(new PrefController<QComboBox, Setting<int>>(
       ui->autoScreenLock, preferences->autoScreenLock));
 #endif
