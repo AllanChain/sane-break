@@ -26,7 +26,6 @@ class SystemMonitor : public AbstractSystemMonitor {
 
  private:
   SanePreferences *preferences;
-  SystemIdleTime *idleTimer;
   SleepMonitor *sleepMonitor;
   BatteryStatus *batteryWatcher;
   RunningProgramsMonitor *runningProgramsMonitor;

@@ -14,7 +14,7 @@
 #include <QTimer>
 #include <QWidget>
 
-#include "core/window-control.h"
+#include "core/break-windows.h"
 
 namespace Ui {
 class BreakReminder;
@@ -25,17 +25,16 @@ class BreakWindow : public AbstractBreakWindow {
   Q_PROPERTY(QColor color MEMBER backgroundColor NOTIFY colorChanged)
 
  public:
-  BreakWindow(BreakData data, QWidget *parent = nullptr);
+  BreakWindow(BreakWindowData data, QWidget *parent = nullptr);
   ~BreakWindow() = default;
   static const int SMALL_WINDOW_WIDTH;
   static const int SMALL_WINDOW_HEIGHT;
 
   void start() override;
   void setTime(int remainingTime) override;
-  void setFullScreen() override;
-  void resizeToNormal() override;
-  void showScreenLockButton(bool show = true) override;
-  void showExitForceBreakButton(bool show = true) override;
+  void showFullScreen() override;
+  void showFlashPrompt() override;
+  void showButtons(Buttons buttons) override;
 
   void initSize(QScreen *screen);
   void colorChanged();
@@ -44,9 +43,10 @@ class BreakWindow : public AbstractBreakWindow {
   Ui::BreakReminder *ui;
   QWidget *mainWidget;
   QColor backgroundColor;
-  QPropertyAnimation *progressAnim;
-  QPropertyAnimation *bgAnim;
-  bool waylandWorkaround = false;
+  QPropertyAnimation *m_progressAnim;
+  QPropertyAnimation *m_bgAnim;
+  bool m_waylandWorkaround = false;
+  int m_totalSeconds;
 
   static void colorizeButton(QPushButton *button, QColor color);
 };

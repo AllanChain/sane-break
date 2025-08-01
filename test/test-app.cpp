@@ -10,10 +10,11 @@
 #include <QTimer>
 
 #include "core/app.h"
+#include "core/break-windows.h"
 #include "core/flags.h"
 #include "dummy.h"
 
-using testing::Mock, testing::Return, testing::NiceMock;
+using testing::Mock, testing::Field, testing::Return, testing::NiceMock;
 
 class TestApp : public QObject {
   Q_OBJECT
@@ -46,8 +47,10 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
+    int breakTotalSeconds = deps.preferences->smallFor->get();
     // Break window will show
-    EXPECT_CALL(*deps.windowControl, createWindows(SaneBreak::BreakType::Small))
+    EXPECT_CALL(*deps.breakWindows,
+                createWindows(Field(&BreakWindowData::totalSeconds, breakTotalSeconds)))
         .Times(1);
     app.advance(app.trayData.secondsToNextBreak);
     // Correctly advaces to next break
@@ -57,10 +60,10 @@ class TestApp : public QObject {
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, 0);
 
-    QVERIFY(Mock::VerifyAndClearExpectations(deps.windowControl));
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
     // Simulate break window close
-    deps.windowControl->advanceToEnd();
+    app.advanceToBreakEnd();
 
     // The remaining time is correct
     int smallEvery = deps.preferences->smallEvery->get();
@@ -84,6 +87,7 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.secondsToNextBreak, 0);
 
     QVERIFY(app.trayData.isBreaking);
+
     int expectedTimeForBreak =
         deps.preferences->smallFor->get() + deps.preferences->flashFor->get();
     app.advance(expectedTimeForBreak);
@@ -100,15 +104,20 @@ class TestApp : public QObject {
     app.start();
 
     int numberOfBreaks = deps.preferences->bigAfter->get();
-    EXPECT_CALL(*deps.windowControl, createWindows(SaneBreak::BreakType::Small))
+    EXPECT_CALL(*deps.breakWindows,
+                createWindows(Field(&BreakWindowData::totalSeconds,
+                                    deps.preferences->smallFor->get())))
         .Times(numberOfBreaks - 1);
-    EXPECT_CALL(*deps.windowControl, createWindows(SaneBreak::BreakType::Big)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                createWindows(Field(&BreakWindowData::totalSeconds,
+                                    deps.preferences->bigFor->get())))
+        .Times(1);
     for (int j = 0; j < numberOfBreaks; j++) {
       QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, numberOfBreaks - j - 1);
       app.advance(app.trayData.secondsToNextBreak);
-      deps.windowControl->advanceToEnd();
+      app.advanceToBreakEnd();
     }
-    QVERIFY(Mock::VerifyAndClearExpectations(deps.windowControl));
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
   }
   /* If the user is idle after the break finishes, we should not start the countdown
    * until the user comes back. This is important because if we don't do so, we are kind
@@ -120,9 +129,8 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
     app.advance(app.trayData.secondsToNextBreak);
-
-    deps.oneshotIdleTimer->setIdle(true);
-    deps.windowControl->advanceToEnd();
+    deps.idleTimer->setIdle(true);
+    app.advanceToBreakEnd();
 
     // The remaining time is correct
     int smallEvery = deps.preferences->smallEvery->get();
@@ -132,7 +140,7 @@ class TestApp : public QObject {
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, smallEvery);
 
-    deps.oneshotIdleTimer->setIdle(false);
+    deps.idleTimer->setIdle(false);
 
     // Countdown resumed
     app.advance(1);
@@ -145,10 +153,10 @@ class TestApp : public QObject {
     app.start();
     app.advance(app.trayData.secondsToNextBreak);
 
-    deps.oneshotIdleTimer->setIdle(true);
-    deps.oneshotIdleTimer->setIdle(false);
+    deps.idleTimer->setIdle(true);
+    deps.idleTimer->setIdle(false);
 
-    deps.windowControl->advanceToEnd();
+    app.advanceToBreakEnd();
 
     // Countdown resumed
     int secondsToNextBreak = app.trayData.secondsToNextBreak;
@@ -167,12 +175,12 @@ class TestApp : public QObject {
     EXPECT_CALL(app, doLockScreen()).Times(0);
 
     // Emitted by window manager when user is idle or force break
-    emit deps.windowControl->countDownStateChanged(true);
+    app.advanceToForceBreakStart();
 
     QVERIFY(deps.screenLockTimer->isActive());
     QVERIFY(deps.screenLockTimer->isSingleShot());
 
-    deps.windowControl->advanceToEnd();
+    app.advanceToBreakEnd();
 
     EXPECT_CALL(app, doLockScreen()).Times(1);
     emit deps.screenLockTimer->timeout();
@@ -189,9 +197,9 @@ class TestApp : public QObject {
     app.advance(app.trayData.secondsToNextBreak);
 
     EXPECT_CALL(app, doLockScreen()).Times(0);
-    emit deps.windowControl->countDownStateChanged(true);
+    app.advanceToForceBreakStart();
     QVERIFY(!deps.screenLockTimer->isActive());
-    deps.windowControl->advanceToEnd();
+    app.advanceToBreakEnd();
 
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
@@ -206,14 +214,14 @@ class TestApp : public QObject {
 
     EXPECT_CALL(app, doLockScreen()).Times(0);
     // Emitted by window manager when user is idle or force break
-    emit deps.windowControl->countDownStateChanged(true);
+    app.advanceToForceBreakStart();
     QVERIFY(deps.screenLockTimer->isActive());
     // User is idle during break
-    deps.oneshotIdleTimer->setIdle(true);
-    deps.windowControl->advanceToEnd();
+    deps.idleTimer->setIdle(true);
+    app.advanceToBreakEnd();
     app.advance(1);
     // But is not idle immediately after break
-    deps.oneshotIdleTimer->setIdle(false);
+    deps.idleTimer->setIdle(false);
     QVERIFY(!deps.screenLockTimer->isActive());
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
@@ -233,53 +241,40 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    emit deps.systemMonitor->idleStarted();
+    deps.idleTimer->setIdle(true);
     QCOMPARE(app.trayData.pauseReasons, SaneBreak::PauseReason::Idle);
     // Countdown stopped
     int secondsToNextBreak = app.trayData.secondsToNextBreak;
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
 
-    emit deps.systemMonitor->idleEnded();
+    deps.idleTimer->setIdle(false);
     QVERIFY(!app.trayData.pauseReasons);
     // Countdown resumed
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
   }
-  // Similar to `pause_break_on_idle`, but for battery
-  void pause_break_on_battery() {
+  // Similar to `pause_break_on_idle`, but for other reasons
+  void pause_break_on_request_data() {
+    QTest::addColumn<SaneBreak::PauseReason>("reason");
+    QTest::newRow("battery") << SaneBreak::PauseReason::OnBattery;
+    QTest::newRow("program") << SaneBreak::PauseReason::AppOpen;
+  };
+  void pause_break_on_request() {
     auto deps = DummyApp::makeDeps();
     deps.preferences->pauseOnBattery->set(true);
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    emit deps.systemMonitor->batteryPowered();
-    QCOMPARE(app.trayData.pauseReasons, SaneBreak::PauseReason::OnBattery);
+    QFETCH(SaneBreak::PauseReason, reason);
+    emit deps.systemMonitor->pauseRequested(reason);
+    QCOMPARE(app.trayData.pauseReasons, reason);
     // Countdown stopped
     int secondsToNextBreak = app.trayData.secondsToNextBreak;
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
 
-    emit deps.systemMonitor->adaptorPowered();
-    QVERIFY(!app.trayData.pauseReasons);
-    // Countdown resumed
-    app.advance(1);
-    QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
-  }
-  // Similar to `pause_break_on_idle`, but for running apps
-  void pause_break_on_app_running() {
-    auto deps = DummyApp::makeDeps();
-    NiceMock<DummyApp> app(deps);
-    app.start();
-
-    emit deps.systemMonitor->programStarted();
-    QCOMPARE(app.trayData.pauseReasons, SaneBreak::PauseReason::AppOpen);
-    // Countdown stopped
-    int secondsToNextBreak = app.trayData.secondsToNextBreak;
-    app.advance(1);
-    QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
-
-    emit deps.systemMonitor->programStopped();
+    emit deps.systemMonitor->resumeRequested(reason);
     QVERIFY(!app.trayData.pauseReasons);
     // Countdown resumed
     app.advance(1);
@@ -292,13 +287,13 @@ class TestApp : public QObject {
     app.start();
 
     app.advance(app.trayData.secondsToNextBreak);
-    deps.windowControl->advanceToEnd();
+    app.advanceToBreakEnd();
     app.advance(100);
 
     int smallBreaksBeforeBigBreak = app.trayData.smallBreaksBeforeBigBreak;
-    emit deps.systemMonitor->idleStarted();
+    deps.idleTimer->setIdle(true);
     app.advance(deps.preferences->resetAfterPause->get() + 1);
-    emit deps.systemMonitor->idleEnded();
+    deps.idleTimer->setIdle(false);
 
     int smallEvery = deps.preferences->smallEvery->get();
     // Countdown resumed and the time has been reset
@@ -307,9 +302,9 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, smallBreaksBeforeBigBreak);
 
     // Subsequent short idles should not be affected
-    emit deps.systemMonitor->idleStarted();
+    deps.idleTimer->setIdle(true);
     app.advance(1);
-    emit deps.systemMonitor->idleEnded();
+    deps.idleTimer->setIdle(false);
     // Since the time ellapsed is in paused state, the time should not change
     QCOMPARE(app.trayData.secondsToNextBreak, smallEvery - 1);
   }
@@ -320,9 +315,9 @@ class TestApp : public QObject {
     app.start();
 
     app.advance(100);
-    emit deps.systemMonitor->idleStarted();
+    deps.idleTimer->setIdle(true);
     app.advance(deps.preferences->resetCycleAfterPause->get() + 1);
-    emit deps.systemMonitor->idleEnded();
+    deps.idleTimer->setIdle(false);
 
     int smallEvery = deps.preferences->smallEvery->get();
     // Countdown resumed and the time has been reset
@@ -331,11 +326,15 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
              deps.preferences->bigAfter->get() - 1);
   }
-  /* If the time when the pause starts is close to the next break, and the pause is not
-   * long enough to reset the break countdown, the break will start very soon after the
+  /* If the time when the pause starts is close to the next break, and the pause is
+  not
+   * long enough to reset the break countdown, the break will start very soon after
+   the
    * pause ends. Having a break right after coming back from other things can be
-   * annoying. Therefore, we consider the case where there were no pauses. If the break
-   * happens and finishes before the user comes back, we just consider the break has
+   * annoying. Therefore, we consider the case where there were no pauses. If the
+   break
+   * happens and finishes before the user comes back, we just consider the break
+   has
    * ended and starts the next cycle.
    */
   void avoid_immediate_break_after_pause() {
@@ -345,14 +344,16 @@ class TestApp : public QObject {
 
     int smallEvery = deps.preferences->smallEvery->get();
     app.advance(smallEvery - 30);
-    emit deps.systemMonitor->idleStarted();
+    deps.idleTimer->setIdle(true);
     // Enough time paused
     app.advance(30 + deps.preferences->smallFor->get() + 10);
-    emit deps.systemMonitor->idleEnded();
+    deps.idleTimer->setIdle(false);
     QCOMPARE(app.trayData.secondsToNextBreak, smallEvery);
   }
-  /* Similar to the previous `avoid_immediate_break_after_pause`, but if the pause is so
-   * short that we should not consider that the user has taken the break, we will not
+  /* Similar to the previous `avoid_immediate_break_after_pause`, but if the pause
+  is so
+   * short that we should not consider that the user has taken the break, we will
+   not
    * reset the break cycle.
    */
   void do_not_avoid_immediate_break_after_pause_too_short() {
@@ -362,10 +363,10 @@ class TestApp : public QObject {
 
     int smallEvery = deps.preferences->smallEvery->get();
     app.advance(smallEvery - 30);
-    emit deps.systemMonitor->idleStarted();
+    deps.idleTimer->setIdle(true);
     // Not enough time paused
     app.advance(30 + deps.preferences->smallFor->get() - 10);
-    emit deps.systemMonitor->idleEnded();
+    deps.idleTimer->setIdle(false);
     QCOMPARE(app.trayData.secondsToNextBreak, 30);
   }
   /* During a big break, if the user is not ready for a big break, he/she can choose to
@@ -380,20 +381,25 @@ class TestApp : public QObject {
     app.start();
 
     // Verify we successfully triggered a big break
-    EXPECT_CALL(*deps.windowControl, createWindows(SaneBreak::BreakType::Big)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                createWindows(Field(&BreakWindowData::totalSeconds,
+                                    deps.preferences->bigFor->get())))
+        .Times(1);
     app.bigBreakNow();
-    QVERIFY(Mock::VerifyAndClearExpectations(deps.windowControl));
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
     // Triggering small break instead is deleting previous windows and creating new ones
-    EXPECT_CALL(*deps.windowControl, createWindows(SaneBreak::BreakType::Small))
+    EXPECT_CALL(*deps.breakWindows,
+                createWindows(Field(&BreakWindowData::totalSeconds,
+                                    deps.preferences->smallFor->get())))
         .Times(1);
-    EXPECT_CALL(*deps.windowControl, deleteWindows()).Times(1);
+    EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
     app.smallBreakInstead();
-    QVERIFY(Mock::VerifyAndClearExpectations(deps.windowControl));
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
     // We are still in breaking mode. Verify the break has not magically ended.
     QVERIFY(app.trayData.isBreaking);
 
-    deps.windowControl->advanceToEnd();
+    app.advanceToBreakEnd();
     QVERIFY(!app.trayData.isBreaking);
     // The next break is a big break
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
@@ -406,14 +412,16 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.windowControl, createWindows(SaneBreak::BreakType::Small))
+    EXPECT_CALL(*deps.breakWindows,
+                createWindows(Field(&BreakWindowData::totalSeconds,
+                                    deps.preferences->smallFor->get())))
         .Times(1);
     app.breakNow();
-    QVERIFY(Mock::VerifyAndClearExpectations(deps.windowControl));
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
-    EXPECT_CALL(*deps.windowControl, deleteWindows()).Times(1);
+    EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
     app.postpone(100);
-    QVERIFY(Mock::VerifyAndClearExpectations(deps.windowControl));
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
     QCOMPARE(app.trayData.secondsToNextBreak, 100);
     QCOMPARE(app.trayData.secondsToNextBigBreak, 100);
@@ -425,14 +433,16 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.windowControl, createWindows(SaneBreak::BreakType::Small))
+    EXPECT_CALL(*deps.breakWindows,
+                createWindows(Field(&BreakWindowData::totalSeconds,
+                                    deps.preferences->smallFor->get())))
         .Times(1);
     app.breakNow();
-    QVERIFY(Mock::VerifyAndClearExpectations(deps.windowControl));
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
-    EXPECT_CALL(*deps.windowControl, deleteWindows()).Times(1);
-    emit deps.systemMonitor->batteryPowered();
-    QVERIFY(Mock::VerifyAndClearExpectations(deps.windowControl));
+    EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
+    emit deps.systemMonitor->pauseRequested(SaneBreak::PauseReason::OnBattery);
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
   }
   // Ignore pauses caused by idles during the break
   void idle_while_break() {
@@ -440,12 +450,14 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.windowControl, createWindows(SaneBreak::BreakType::Small))
+    EXPECT_CALL(*deps.breakWindows,
+                createWindows(Field(&BreakWindowData::totalSeconds,
+                                    deps.preferences->smallFor->get())))
         .Times(1);
     app.breakNow();
-    EXPECT_CALL(*deps.windowControl, deleteWindows()).Times(0);
-    emit deps.systemMonitor->idleStarted();
-    QVERIFY(Mock::VerifyAndClearExpectations(deps.windowControl));
+    EXPECT_CALL(*deps.breakWindows, destroy()).Times(0);
+    deps.idleTimer->setIdle(true);
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
     QVERIFY(app.trayData.isBreaking);
     QCOMPARE(app.trayData.secondsToNextBreak, 0);
   }
@@ -456,12 +468,14 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.windowControl, createWindows(SaneBreak::BreakType::Small))
+    EXPECT_CALL(*deps.breakWindows,
+                createWindows(Field(&BreakWindowData::totalSeconds,
+                                    deps.preferences->smallFor->get())))
         .Times(1);
     app.breakNow();
-    EXPECT_CALL(*deps.windowControl, deleteWindows()).Times(1);
+    EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
     emit deps.systemMonitor->sleepEnded();
-    QVERIFY(Mock::VerifyAndClearExpectations(deps.windowControl));
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
     QVERIFY(!app.trayData.isBreaking);
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
              deps.preferences->bigAfter->get() - 1);
@@ -474,22 +488,25 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    emit deps.systemMonitor->batteryPowered();
-    emit deps.systemMonitor->idleStarted();
+    emit deps.systemMonitor->pauseRequested(SaneBreak::PauseReason::OnBattery);
+    QVERIFY(app.trayData.pauseReasons.testFlags(SaneBreak::PauseReason::OnBattery));
 
+    deps.idleTimer->setIdle(true);
+    QVERIFY(app.trayData.pauseReasons.testFlags(SaneBreak::PauseReason::Idle |
+                                                SaneBreak::PauseReason::OnBattery));
     // Countdown stopped
     int secondsToNextBreak = app.trayData.secondsToNextBreak;
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
-    QVERIFY(app.trayData.pauseReasons.testFlags(SaneBreak::PauseReason::Idle |
-                                                SaneBreak::PauseReason::OnBattery));
 
-    emit deps.systemMonitor->idleEnded();
+    deps.idleTimer->setIdle(false);
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
     QVERIFY(app.trayData.pauseReasons.testFlag(SaneBreak::PauseReason::OnBattery));
 
-    emit deps.systemMonitor->adaptorPowered();
+    emit deps.systemMonitor->resumeRequested(SaneBreak::PauseReason::OnBattery);
+    QVERIFY(!app.trayData.pauseReasons);
+
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
     QVERIFY(!app.trayData.pauseReasons);
@@ -564,9 +581,9 @@ class TestApp : public QObject {
     int smallEvery = deps.preferences->smallEvery->get();
     app.postpone(1000);
 
-    emit deps.systemMonitor->idleStarted();
+    deps.idleTimer->setIdle(true);
     app.advance(deps.preferences->resetAfterPause->get() + 1);
-    emit deps.systemMonitor->idleEnded();
+    deps.idleTimer->setIdle(false);
     app.advance(1);
 
     QCOMPARE(app.trayData.secondsToNextBreak, smallEvery + 999);

@@ -5,8 +5,8 @@ qt_add_executable(
   app.cpp
   app.h
   main.cpp
-  window-control.cpp
-  window-control.h
+  break-windows.cpp
+  break-windows.h
   ${CMAKE_SOURCE_DIR}/resources/index.qrc
 )
 

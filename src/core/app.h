@@ -7,20 +7,21 @@
 #include <QFlags>
 #include <QObject>
 
+#include "core/app-states.h"
+#include "core/break-windows.h"
 #include "core/flags.h"
 #include "core/idle-time.h"
 #include "core/preferences.h"
 #include "core/system-monitor.h"
 #include "core/timer.h"
-#include "core/window-control.h"
 
 struct AppDependencies {
   SanePreferences *preferences = nullptr;
   AbstractTimer *countDownTimer = nullptr;
-  SystemIdleTime *oneshotIdleTimer = nullptr;
   AbstractTimer *screenLockTimer = nullptr;
+  SystemIdleTime *idleTimer = nullptr;
   AbstractSystemMonitor *systemMonitor = nullptr;
-  AbstractWindowControl *windowControl = nullptr;
+  AbstractBreakWindows *breakWindows = nullptr;
 };
 
 struct TrayData {
@@ -32,57 +33,32 @@ struct TrayData {
   SaneBreak::PauseReasons pauseReasons;
 };
 
-class AbstractApp : public QObject {
+class AbstractApp : public AppContext {
   Q_OBJECT
  public:
   AbstractApp(const AppDependencies &deps, QObject *parent = nullptr);
   ~AbstractApp() = default;
 
   virtual void start();
-  virtual void doLockScreen() = 0;
-  virtual bool confirmPostpone(int secondsToPostpone) = 0;
 
   void breakNow();
   void bigBreakNow();
   // Take a small break when big break is on
   void smallBreakInstead();
   void postpone(int secs);
-  void pauseBreak(SaneBreak::PauseReasons reason);
-  void resumeBreak(SaneBreak::PauseReasons reason);
   void enableBreak();
 
  signals:
-  void trayDataUpdated(TrayData trayData);
+  void trayDataUpdated(TrayData);
 
  protected:
-  int m_breakCycleCount = 1;
-  int m_secondsPaused = 0;
-  int m_secondsSinceLastBreak = 0;
-  int m_secondsToNextBreak;
-  SaneBreak::PauseReasons m_pauseReasons = {};
-
-  SanePreferences *preferences;
   AbstractTimer *m_countDownTimer;
-  SystemIdleTime *m_oneshotIdleTimer;
-  AbstractTimer *m_screenLockTimer;
   AbstractSystemMonitor *m_systemMonitor;
-  AbstractWindowControl *m_windowControl;
 
-  void tick();
-  void onSleepEnd();
-  void onBreakCountDownStateChange(bool countingDown);
-  void onBreakAbort();
-  void onBreakEnd();
-  void onIdleStart();
-  void onIdleEnd();
-  void onOneshotIdleEnd();
-  void onBattery();
-  void onPower();
-  void onProgramStart();
-  void onProgramStop();
   void onBatterySettingChange();
-
-  int smallBreaksBeforeBig();
+  void onSleepEnd();
   void updateTray();
-  void resetSecondsToNextBreak();
+
+  virtual void doLockScreen() = 0;
+  virtual bool confirmPostpone(int secondsToPostpone) = 0;
 };

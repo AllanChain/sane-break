@@ -17,7 +17,7 @@
 #include <QWindow>
 #include <Qt>
 
-#include "app/window-control.h"
+#include "app/break-windows.h"
 #include "core/app.h"
 #include "core/idle-time.h"
 #include "core/preferences.h"
@@ -51,19 +51,13 @@ SaneBreakApp::SaneBreakApp(const AppDependencies &deps, QObject *parent)
 }
 
 SaneBreakApp *SaneBreakApp::create(SanePreferences *preferences, QObject *parent) {
-  auto countDownTimer = new Timer();
-  auto oneshotIdleTimer = SystemIdleTime::createIdleTimer();
-  auto screenLockTimer = new Timer();
-  auto systemMonitor = new SystemMonitor(preferences);
-  auto windowControl = BreakWindowControl::create(preferences);
-
   AppDependencies deps = {
       .preferences = preferences,
-      .countDownTimer = countDownTimer,
-      .oneshotIdleTimer = oneshotIdleTimer,
-      .screenLockTimer = screenLockTimer,
-      .systemMonitor = systemMonitor,
-      .windowControl = windowControl,
+      .countDownTimer = new Timer(),
+      .screenLockTimer = new Timer(),
+      .idleTimer = SystemIdleTime::createIdleTimer(),
+      .systemMonitor = new SystemMonitor(preferences),
+      .breakWindows = new BreakWindows(),
   };
   return new SaneBreakApp(deps, parent);
 }
@@ -85,8 +79,8 @@ bool SaneBreakApp::confirmPostpone(int secondsToPostpone) {
   QMessageBox msgBox;
   msgBox.setText(
       tr("Are you sure to postpone for %n minute?", nullptr, secondsToPostpone / 60));
-  msgBox.setInformativeText(
-      tr("You haven't taken breaks for %1 minutes.").arg(m_secondsSinceLastBreak / 60));
+  msgBox.setInformativeText(tr("You haven't taken breaks for %1 minutes.")
+                                .arg(data->secondsSinceLastBreak() / 60));
   msgBox.setIcon(QMessageBox::Icon::Question);
   msgBox.addButton(QMessageBox::Cancel)->setText(tr("Cancel"));
   msgBox.addButton(QMessageBox::Yes)->setText(tr("Yes"));
