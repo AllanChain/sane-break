@@ -87,7 +87,7 @@ QProgressBar::chunk {
 }</string>
         </property>
         <property name="text">
-         <string>20</string>
+         <string notr="true">20</string>
         </property>
        </widget>
       </item>
@@ -119,7 +119,7 @@ QProgressBar::chunk {
 }</string>
            </property>
            <property name="text">
-            <string>12:34</string>
+            <string notr="true">12:34</string>
            </property>
           </widget>
          </item>
@@ -133,7 +133,7 @@ QProgressBar::chunk {
 }</string>
            </property>
            <property name="text">
-            <string>56</string>
+            <string notr="true">56</string>
            </property>
           </widget>
          </item>
