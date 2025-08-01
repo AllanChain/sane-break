@@ -26,7 +26,6 @@
 
 #include "config.h"
 #include "core/break-windows.h"
-#include "lib/utils.h"
 #include "ui_break-window.h"
 
 #ifdef Q_OS_LINUX
@@ -41,7 +40,8 @@
 const int BreakWindow::SMALL_WINDOW_WIDTH = 400;
 const int BreakWindow::SMALL_WINDOW_HEIGHT = 120;
 
-BreakWindow::BreakWindow(BreakWindowData data, QWidget *parent) : QMainWindow(parent) {
+BreakWindow::BreakWindow(BreakWindowData data, QWidget *parent)
+    : QMainWindow(parent), m_data(data) {
 #ifdef Q_OS_LINUX
   // Positioning windows on Wayland is nearly impossible without layer shell protol.
   // In Wayland workaround mode, the main window is transparent and takes up all
@@ -66,26 +66,23 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget *parent) : QMainWindow(pa
   mainWidget->setStyleSheet(
       QString("BreakWindow QLabel { color: %1; }"
               "BreakWindow #countdownLabel { color: %2; }"
+              "BreakWindow #breakEndTimeLabel { color: %2; }"
               "BreakWindow QProgressBar::chunk { background: %2; }")
           .arg(data.theme.messageColor.name(QColor::HexArgb),
                data.theme.countDownColor.name(QColor::HexArgb)));
   mainWidget->setProperty("isFullScreen", false);
   mainWidget->setAttribute(Qt::WA_LayoutOnEntireRect);
 
-#ifdef LINUX_DIST_FLATPAK
-  ui->lockScreenGroup->setHidden(true);
-#endif
   ui->breakLabel->setText(data.message);
-  ui->countdownLabel->setVisible(false);
-  ui->buttons->setVisible(false);
-  ui->lockScreenGroup->setVisible(false);
-  ui->exitForceBreakGroup->setVisible(false);
+
   QColor hoverColor = data.theme.messageColor;
   hoverColor.setAlpha(40);
   ui->buttons->setStyleSheet(
       ui->buttons->styleSheet().replace("#aaaaaaaa", hoverColor.name(QColor::HexArgb)));
   colorizeButton(ui->lockScreen, data.theme.messageColor);
   colorizeButton(ui->exitForceBreak, data.theme.messageColor);
+  ui->lockScreenGroup->setVisible(false);
+  ui->exitForceBreakGroup->setVisible(false);
   connect(ui->lockScreen, &QPushButton::pressed, this,
           &BreakWindow::lockScreenRequested);
   connect(ui->exitForceBreak, &QPushButton::pressed, this,
@@ -97,12 +94,14 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget *parent) : QMainWindow(pa
 
   this->m_totalSeconds = data.totalSeconds;
   m_progressAnim->setDuration(m_totalSeconds * 1000);
+  m_progressAnim->start();
 
   m_bgAnim = new QPropertyAnimation(this, "color");
   m_bgAnim->setStartValue(data.theme.highlightBackground);
   m_bgAnim->setEndValue(data.theme.mainBackground);
   m_bgAnim->setDuration(data.theme.flashAnimationDuration);
   m_bgAnim->setLoopCount(-1);
+  m_bgAnim->start();
 }
 
 void BreakWindow::colorChanged() {
@@ -114,28 +113,29 @@ void BreakWindow::colorChanged() {
                     .arg(backgroundColor.alpha()));
 }
 
-void BreakWindow::start() {
-  setTime(m_totalSeconds);
-  m_bgAnim->start();
-}
-
-void BreakWindow::setTime(int remainingTime) {
-  if (remainingTime == m_totalSeconds) {
-    m_progressAnim->stop();
-    m_progressAnim->start();
-  }
-  if (m_totalSeconds <= 60) {
-    ui->countdownLabel->setText(QString("%1").arg(remainingTime));
+void BreakWindow::setTime(int remainingTime, QString estimatedEndTime) {
+  ui->countDownLabel->setText(QString("%1").arg(remainingTime));
+  m_progressAnim->setCurrentTime((m_totalSeconds - remainingTime) * 1000);
+  if (remainingTime > 0) {
+    ui->breakEndTimeLabel->setText(tr("Break will end at: %1").arg(estimatedEndTime));
   } else {
-    ui->countdownLabel->setText(formatTime(remainingTime));
+    ui->breakEndTimeLabel->setText(tr("Break has ended"));
   }
 }
 
-void BreakWindow::showButtons(AbstractBreakWindows::Buttons buttons) {
+void BreakWindow::setClock(QString hourMinute, QString second) {
+  ui->hourMinuteLabel->setText(hourMinute);
+  ui->secondsLabel->setText(second);
+}
+
+void BreakWindow::showButtons(AbstractBreakWindows::Buttons buttons, bool show) {
+  // Lock screen is not supported on Flatpak
+#ifndef LINUX_DIST_FLATPAK
   if (buttons.testFlag(AbstractBreakWindows::Button::LockScreen))
-    ui->lockScreenGroup->setVisible(true);
+    ui->lockScreenGroup->setVisible(show);
+#endif
   if (buttons.testFlag(AbstractBreakWindows::Button::ExitForceBreak))
-    ui->exitForceBreakGroup->setVisible(true);
+    ui->exitForceBreakGroup->setVisible(show);
 }
 
 void BreakWindow::showFullScreen() {
@@ -145,8 +145,12 @@ void BreakWindow::showFullScreen() {
   windowHandle()->setFlag(Qt::WindowTransparentForInput, false);
   m_bgAnim->stop();
   setProperty("color", m_bgAnim->endValue());
-  ui->countdownLabel->setVisible(true);
-  ui->buttons->setVisible(true);
+
+  if (m_data.show.countdown) ui->countDownLabel->setVisible(true);
+  if (m_data.show.clock) ui->clock->setVisible(true);
+  if (m_data.show.endTime) ui->breakEndTimeLabel->setVisible(true);
+  if (m_data.show.buttons) ui->buttons->setVisible(true);
+
   QPropertyAnimation *resizeAnim =
       new QPropertyAnimation(m_waylandWorkaround ? mainWidget : this, "geometry");
   resizeAnim->setStartValue(m_waylandWorkaround ? mainWidget->geometry() : geometry());
@@ -160,8 +164,15 @@ void BreakWindow::showFlashPrompt() {
   mainWidget->setProperty("isFullScreen", false);
   windowHandle()->setFlag(Qt::WindowTransparentForInput, true);
   m_bgAnim->start();
-  ui->countdownLabel->setVisible(false);
+
+  if (!m_data.show.prograssBar) {
+    ui->progressBar->setVisible(false);
+  }
+  ui->countDownLabel->setVisible(false);
+  ui->clock->setVisible(false);
+  ui->breakEndTimeLabel->setVisible(false);
   ui->buttons->setVisible(false);
+
   QPropertyAnimation *resizeAnim =
       new QPropertyAnimation(m_waylandWorkaround ? mainWidget : this, "geometry");
   QRect rect =

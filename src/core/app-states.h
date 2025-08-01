@@ -132,3 +132,9 @@ class BreakPhaseFullScreen : public BreakPhase {
   bool canExitOnActivity(AppContext *app);
   void showWindowClickableWidgets(AppContext *app);
 };
+
+class BreakPhasePost : public BreakPhase {
+ public:
+  void enter(AppContext *app, AppStateBreak *breakState) override;
+  void onIdleEnd(AppContext *app, AppStateBreak *breakState) override;
+};

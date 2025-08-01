@@ -229,7 +229,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
          <x>0</x>
          <y>0</y>
          <width>659</width>
-         <height>647</height>
+         <height>887</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -786,6 +786,61 @@ QPushButton[flat=&quot;true&quot;]:checked {
                <widget class="QSpinBox" name="maxForceBreakExits">
                 <property name="suffix">
                  <string> times</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="autoCloseWindowAfterBreak">
+              <property name="text">
+               <string>Close windows right after break ends</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_16">
+              <property name="text">
+               <string>&lt;h3&gt;Components to Show&lt;/h3&gt;
+
+&lt;p&gt;User interface components to show in the prompt and full-screen window.&lt;/p&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayout_12">
+              <item row="1" column="1">
+               <widget class="QCheckBox" name="showEndTime">
+                <property name="text">
+                 <string>Time when break ends</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QCheckBox" name="showCountdown">
+                <property name="text">
+                 <string>Countdown timer</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="showProgressBar">
+                <property name="text">
+                 <string>Progress bar</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QCheckBox" name="showClock">
+                <property name="text">
+                 <string>Clock</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QCheckBox" name="showButtons">
+                <property name="text">
+                 <string>Buttons</string>
                 </property>
                </widget>
               </item>

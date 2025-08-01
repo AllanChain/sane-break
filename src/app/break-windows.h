@@ -26,11 +26,13 @@ class BreakWindows : public AbstractBreakWindows {
   void setTime(int remainingTime) override;
   void showFullScreen() override;
   void showFlashPrompt() override;
-  void showButtons(Buttons) override;
+  void showButtons(Buttons, bool show = true) override;
   void playEnterSound(SaneBreak::BreakType, SanePreferences *) override;
   void playExitSound(SaneBreak::BreakType, SanePreferences *) override;
 
  private:
-  SoundPlayer *soundPlayer;
   QList<BreakWindow *> m_windows;
+  SoundPlayer *soundPlayer;
+  QTimer *clockUpdateTimer;
+  void updateClocks();
 };

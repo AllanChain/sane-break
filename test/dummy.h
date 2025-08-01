@@ -54,7 +54,7 @@ class DummyBreakWindows : public AbstractBreakWindows {
   MOCK_METHOD(void, setTime, (int), ());
   MOCK_METHOD(void, showFullScreen, (), ());
   MOCK_METHOD(void, showFlashPrompt, (), ());
-  MOCK_METHOD(void, showButtons, (Buttons), ());
+  MOCK_METHOD(void, showButtons, (Buttons, bool), ());
   MOCK_METHOD(void, playEnterSound, (SaneBreak::BreakType, SanePreferences *), ());
   MOCK_METHOD(void, playExitSound, (SaneBreak::BreakType, SanePreferences *), ());
 };

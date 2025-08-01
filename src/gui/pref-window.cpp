@@ -199,6 +199,19 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
 
   controllers->add(new PrefController<QSpinBox, Setting<int>>(
       ui->maxForceBreakExits, preferences->maxForceBreakExits));
+  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
+      ui->autoCloseWindowAfterBreak, preferences->autoCloseWindowAfterBreak));
+
+  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
+      ui->showProgressBar, preferences->showProgressBar));
+  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
+      ui->showCountdown, preferences->showCountdown));
+  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
+      ui->showClock, preferences->showClock));
+  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
+      ui->showEndTime, preferences->showEndTime));
+  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
+      ui->showButtons, preferences->showButtons));
 
   /***************************************************************************
    *                                                                         *

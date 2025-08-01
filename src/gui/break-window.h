@@ -11,6 +11,7 @@
 #include <QProgressBar>
 #include <QPropertyAnimation>
 #include <QPushButton>
+#include <QString>
 #include <QTimer>
 #include <QWidget>
 #include <QWindow>
@@ -31,11 +32,11 @@ class BreakWindow : public QMainWindow {
   static const int SMALL_WINDOW_WIDTH;
   static const int SMALL_WINDOW_HEIGHT;
 
-  void start();
-  void setTime(int remainingTime);
+  void setTime(int remainingTime, QString estimatedEndTime);
+  void setClock(QString hourMinite, QString second);
   void showFullScreen();
   void showFlashPrompt();
-  void showButtons(AbstractBreakWindows::Buttons buttons);
+  void showButtons(AbstractBreakWindows::Buttons buttons, bool show = true);
 
   void initSize(QScreen *screen);
   void colorChanged();
@@ -48,6 +49,7 @@ class BreakWindow : public QMainWindow {
   Ui::BreakReminder *ui;
   QWidget *mainWidget;
   QColor backgroundColor;
+  BreakWindowData m_data;
   QPropertyAnimation *m_progressAnim;
   QPropertyAnimation *m_bgAnim;
   bool m_waylandWorkaround = false;

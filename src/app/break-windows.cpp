@@ -15,6 +15,7 @@
 #include <QRandomGenerator>
 #include <QScreen>
 #include <QSettings>
+#include <QTime>
 #include <QTimer>
 #include <utility>
 
@@ -30,6 +31,9 @@
 #endif
 BreakWindows::BreakWindows(QObject *parent) : AbstractBreakWindows(parent) {
   soundPlayer = new SoundPlayer(this);
+
+  clockUpdateTimer = new QTimer(this);
+  connect(clockUpdateTimer, &QTimer::timeout, this, &BreakWindows::updateClocks);
 
 #ifdef WITH_LAYER_SHELL
   if (QGuiApplication::platformName() == "wayland")
@@ -61,6 +65,14 @@ void BreakWindows::create(SaneBreak::BreakType type, SanePreferences *preference
               .countDownColor = preferences->countDownColor->get(),
               .flashAnimationDuration = 500 / preferences->flashSpeed->get() * 100,
           },
+      .show =
+          {
+              .prograssBar = preferences->showProgressBar->get(),
+              .countdown = preferences->showCountdown->get(),
+              .clock = preferences->showClock->get(),
+              .endTime = preferences->showEndTime->get(),
+              .buttons = preferences->showButtons->get(),
+          },
   };
   QList<QScreen *> screens = QApplication::screens();
   for (QScreen *screen : std::as_const(screens)) {
@@ -74,6 +86,7 @@ void BreakWindows::create(SaneBreak::BreakType type, SanePreferences *preference
     connect(w, &BreakWindow::exitForceBreakRequested, this,
             &BreakWindows::exitForceBreakRequested);
   }
+  clockUpdateTimer->start(250);
 }
 
 void BreakWindows::destroy() {
@@ -82,6 +95,7 @@ void BreakWindows::destroy() {
     w->deleteLater();
   }
   m_windows.clear();
+  clockUpdateTimer->stop();
 }
 
 void BreakWindows::playEnterSound(SaneBreak::BreakType type,
@@ -99,7 +113,14 @@ void BreakWindows::playExitSound(SaneBreak::BreakType type,
 }
 
 void BreakWindows::setTime(int remainingTime) {
-  for (auto w : std::as_const(m_windows)) w->setTime(remainingTime);
+  QTime estimatedEndTime = QTime::currentTime().addSecs(remainingTime);
+  // Round time to seconds
+  if (estimatedEndTime.msec() > 500) {
+    estimatedEndTime = estimatedEndTime.addMSecs(500);
+  }
+  for (auto w : std::as_const(m_windows)) {
+    w->setTime(remainingTime, estimatedEndTime.toString("hh:mm:ss"));
+  }
 }
 void BreakWindows::showFullScreen() {
   for (auto w : std::as_const(m_windows)) w->showFullScreen();
@@ -107,6 +128,14 @@ void BreakWindows::showFullScreen() {
 void BreakWindows::showFlashPrompt() {
   for (auto w : std::as_const(m_windows)) w->showFlashPrompt();
 }
-void BreakWindows::showButtons(AbstractBreakWindows::Buttons buttons) {
-  for (auto w : std::as_const(m_windows)) w->showButtons(buttons);
+void BreakWindows::showButtons(Buttons buttons, bool show) {
+  for (auto w : std::as_const(m_windows)) w->showButtons(buttons, show);
+}
+void BreakWindows::updateClocks() {
+  QTime now = QTime::currentTime();
+  QString hourMinute = now.toString("hh:mm");
+  QString second = now.toString("ss");
+  for (auto w : std::as_const(m_windows)) {
+    w->setClock(hourMinute, second);
+  }
 }

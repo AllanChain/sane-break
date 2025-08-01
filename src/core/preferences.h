@@ -107,6 +107,13 @@ class SanePreferences : public QObject {
   Setting<QStringList> *smallMessages;
   Setting<QStringList> *bigMessages;
   Setting<int> *maxForceBreakExits;
+  Setting<bool> *autoCloseWindowAfterBreak;
+
+  Setting<bool> *showProgressBar;
+  Setting<bool> *showCountdown;
+  Setting<bool> *showClock;
+  Setting<bool> *showEndTime;
+  Setting<bool> *showButtons;
 
   Setting<int> *pauseOnIdleFor;
   Setting<int> *resetAfterPause;

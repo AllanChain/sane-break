@@ -203,7 +203,7 @@ void BreakPhaseFullScreen::enter(AppContext *app, AppStateBreak *) {
     app->screenLockTimer->start(secs * 1000);
   }
 }
-void BreakPhaseFullScreen::tick(AppContext *app, AppStateBreak *) {
+void BreakPhaseFullScreen::tick(AppContext *app, AppStateBreak *breakState) {
   app->data->breaks->tickRemainingTime();
   app->breakWindows->setTime(app->data->breaks->remainingSeconds());
   if (!canExitOnActivity(app)) {
@@ -213,9 +213,14 @@ void BreakPhaseFullScreen::tick(AppContext *app, AppStateBreak *) {
     app->breakWindows->playExitSound(app->data->breakType(), app->preferences);
     app->data->finishAndStartNextCycle();
     if (app->idleTimer->isIdle()) {
-      // We don't count down immediately after break. We wait for user activities.
-      app->data->addPauseReasons(SaneBreak::PauseReason::Idle);
-      app->transitionTo(std::make_unique<AppStatePaused>());
+      if (!app->preferences->autoCloseWindowAfterBreak->get()) {
+        // Leave break window open until user activities
+        breakState->transitionTo(app, std::make_unique<BreakPhasePost>());
+      } else {
+        // We don't count down immediately after break. We wait for user activities.
+        app->data->addPauseReasons(SaneBreak::PauseReason::Idle);
+        app->transitionTo(std::make_unique<AppStatePaused>());
+      }
     } else {
       app->screenLockTimer->stop();
       app->transitionTo(std::make_unique<AppStateNormal>());
@@ -241,4 +246,12 @@ void BreakPhaseFullScreen::showWindowClickableWidgets(AppContext *app) {
     buttons |= AbstractBreakWindows::Button::ExitForceBreak;
   }
   app->breakWindows->showButtons(buttons);
+}
+
+void BreakPhasePost::enter(AppContext *app, AppStateBreak *) {
+  app->breakWindows->showButtons(AbstractBreakWindows::Button::LockScreen, false);
+}
+void BreakPhasePost::onIdleEnd(AppContext *app, AppStateBreak *) {
+  app->screenLockTimer->stop();
+  app->transitionTo(std::make_unique<AppStateNormal>());
 }

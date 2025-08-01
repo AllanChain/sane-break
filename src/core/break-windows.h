@@ -23,6 +23,13 @@ struct BreakWindowData {
     QColor countDownColor;
     int flashAnimationDuration;
   } theme;
+  struct {
+    bool prograssBar;
+    bool countdown;
+    bool clock;
+    bool endTime;
+    bool buttons;
+  } show;
 };
 
 class AbstractBreakWindows : public QObject {
@@ -41,7 +48,7 @@ class AbstractBreakWindows : public QObject {
   virtual void setTime(int remainingTime) = 0;
   virtual void showFullScreen() = 0;
   virtual void showFlashPrompt() = 0;
-  virtual void showButtons(Buttons) = 0;
+  virtual void showButtons(Buttons, bool show = true) = 0;
   virtual void playEnterSound(SaneBreak::BreakType, SanePreferences *) = 0;
   virtual void playExitSound(SaneBreak::BreakType, SanePreferences *) = 0;
 
