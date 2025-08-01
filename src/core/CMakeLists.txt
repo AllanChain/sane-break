@@ -7,7 +7,6 @@ add_library(
   app-states.h
   app.cpp
   app.h
-  break-windows.cpp
   break-windows.h
   flags.h
   idle-time.h

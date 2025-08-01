@@ -25,55 +25,29 @@ struct BreakWindowData {
   } theme;
 };
 
-class AbstractBreakWindow : public QMainWindow {
+class AbstractBreakWindows : public QObject {
   Q_OBJECT
-
  public:
   enum class Button {
     LockScreen = 1 << 0,
     ExitForceBreak = 1 << 1,
   };
   Q_DECLARE_FLAGS(Buttons, Button)
-
-  AbstractBreakWindow(BreakWindowData data, QWidget *parent = nullptr)
-      : QMainWindow(parent), data(data) {};
-  ~AbstractBreakWindow() = default;
-
-  virtual void start() = 0;
+  using QObject::QObject;
+  ~AbstractBreakWindows() = default;
+  // static BreakWindowData breakData(SaneBreak::BreakType, SanePreferences *);
+  virtual void create(SaneBreak::BreakType, SanePreferences *) = 0;
+  virtual void destroy() = 0;
   virtual void setTime(int remainingTime) = 0;
   virtual void showFullScreen() = 0;
   virtual void showFlashPrompt() = 0;
-  virtual void showButtons(Buttons buttons) = 0;
+  virtual void showButtons(Buttons) = 0;
+  virtual void playEnterSound(SaneBreak::BreakType, SanePreferences *) = 0;
+  virtual void playExitSound(SaneBreak::BreakType, SanePreferences *) = 0;
 
  signals:
   void lockScreenRequested();
   void exitForceBreakRequested();
-
- protected:
-  BreakWindowData data;
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(AbstractBreakWindow::Buttons)
-
-class AbstractBreakWindows : public QObject {
-  Q_OBJECT
- public:
-  using QObject::QObject;
-  ~AbstractBreakWindows() = default;
-  void create(SaneBreak::BreakType type, SanePreferences *preferences);
-  virtual void destroy();  // virtual for easy testing
-  void setTime(int remainingTime);
-  void showFullScreen();
-  void showFlashPrompt();
-  void showButtons(AbstractBreakWindow::Buttons buttons);
-  virtual void playEnterSound(SaneBreak::BreakType, SanePreferences *) {};
-  virtual void playExitSound(SaneBreak::BreakType, SanePreferences *) {};
-
- signals:
-  void lockScreenRequested();
-  void exitForceBreakRequested();
-
- protected:
-  QList<AbstractBreakWindow *> m_windows;
-  virtual void createWindows(BreakWindowData data) = 0;
-};
+Q_DECLARE_OPERATORS_FOR_FLAGS(AbstractBreakWindows::Buttons)

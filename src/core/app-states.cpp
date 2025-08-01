@@ -235,10 +235,10 @@ bool BreakPhaseFullScreen::canExitOnActivity(AppContext *app) {
           app->preferences->confirmAfter->get());
 }
 void BreakPhaseFullScreen::showWindowClickableWidgets(AppContext *app) {
-  AbstractBreakWindow::Buttons buttons = AbstractBreakWindow::Button::LockScreen;
+  AbstractBreakWindows::Buttons buttons = AbstractBreakWindows::Button::LockScreen;
   if (app->data->breaks->numberForceBreakExits() <
       app->preferences->maxForceBreakExits->get()) {
-    buttons |= AbstractBreakWindow::Button::ExitForceBreak;
+    buttons |= AbstractBreakWindows::Button::ExitForceBreak;
   }
   app->breakWindows->showButtons(buttons);
 }

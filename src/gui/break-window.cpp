@@ -41,8 +41,7 @@
 const int BreakWindow::SMALL_WINDOW_WIDTH = 400;
 const int BreakWindow::SMALL_WINDOW_HEIGHT = 120;
 
-BreakWindow::BreakWindow(BreakWindowData data, QWidget *parent)
-    : AbstractBreakWindow(data, parent) {
+BreakWindow::BreakWindow(BreakWindowData data, QWidget *parent) : QMainWindow(parent) {
 #ifdef Q_OS_LINUX
   // Positioning windows on Wayland is nearly impossible without layer shell protol.
   // In Wayland workaround mode, the main window is transparent and takes up all
@@ -88,9 +87,9 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget *parent)
   colorizeButton(ui->lockScreen, data.theme.messageColor);
   colorizeButton(ui->exitForceBreak, data.theme.messageColor);
   connect(ui->lockScreen, &QPushButton::pressed, this,
-          &AbstractBreakWindow::lockScreenRequested);
+          &BreakWindow::lockScreenRequested);
   connect(ui->exitForceBreak, &QPushButton::pressed, this,
-          &AbstractBreakWindow::exitForceBreakRequested);
+          &BreakWindow::exitForceBreakRequested);
 
   m_progressAnim = new QPropertyAnimation(ui->progressBar, "value");
   m_progressAnim->setStartValue(ui->progressBar->maximum());
@@ -132,9 +131,10 @@ void BreakWindow::setTime(int remainingTime) {
   }
 }
 
-void BreakWindow::showButtons(Buttons buttons) {
-  if (buttons.testFlag(Button::LockScreen)) ui->lockScreenGroup->setVisible(true);
-  if (buttons.testFlag(Button::ExitForceBreak))
+void BreakWindow::showButtons(AbstractBreakWindows::Buttons buttons) {
+  if (buttons.testFlag(AbstractBreakWindows::Button::LockScreen))
+    ui->lockScreenGroup->setVisible(true);
+  if (buttons.testFlag(AbstractBreakWindows::Button::ExitForceBreak))
     ui->exitForceBreakGroup->setVisible(true);
 }
 

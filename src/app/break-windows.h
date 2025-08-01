@@ -11,6 +11,7 @@
 #include "core/break-windows.h"
 #include "core/flags.h"
 #include "core/preferences.h"
+#include "gui/break-window.h"
 #include "gui/sound-player.h"
 
 class BreakWindows : public AbstractBreakWindows {
@@ -19,12 +20,17 @@ class BreakWindows : public AbstractBreakWindows {
  public:
   BreakWindows(QObject *parent = nullptr);
   ~BreakWindows() = default;
+
+  void create(SaneBreak::BreakType, SanePreferences *) override;
+  void destroy() override;
+  void setTime(int remainingTime) override;
+  void showFullScreen() override;
+  void showFlashPrompt() override;
+  void showButtons(Buttons) override;
   void playEnterSound(SaneBreak::BreakType, SanePreferences *) override;
   void playExitSound(SaneBreak::BreakType, SanePreferences *) override;
 
- protected:
-  void createWindows(BreakWindowData data) override;
-
  private:
   SoundPlayer *soundPlayer;
+  QList<BreakWindow *> m_windows;
 };

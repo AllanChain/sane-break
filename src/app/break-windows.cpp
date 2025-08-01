@@ -12,6 +12,7 @@
 #include <QList>
 #include <QMediaPlayer>
 #include <QObject>
+#include <QRandomGenerator>
 #include <QScreen>
 #include <QSettings>
 #include <QTimer>
@@ -36,13 +37,51 @@ BreakWindows::BreakWindows(QObject *parent) : AbstractBreakWindows(parent) {
 #endif
 }
 
-void BreakWindows::createWindows(BreakWindowData data) {
+void BreakWindows::create(SaneBreak::BreakType type, SanePreferences *preferences) {
+  QStringList messagesToRoll = type == SaneBreak::BreakType::Big
+                                   ? preferences->bigMessages->get()
+                                   : preferences->smallMessages->get();
+  QString message = "";
+  if (!messagesToRoll.empty()) {
+    int randomIndex = QRandomGenerator::global()->bounded(messagesToRoll.size());
+    message = messagesToRoll[randomIndex];
+  }
+
+  BreakWindowData data = {
+      .totalSeconds = type == SaneBreak::BreakType::Big ? preferences->bigFor->get()
+                                                        : preferences->smallFor->get(),
+      .message = message,
+      .theme =
+          {
+              .mainBackground = preferences->backgroundColor->get(),
+              .highlightBackground = type == SaneBreak::BreakType::Big
+                                         ? preferences->bigHighlightColor->get()
+                                         : preferences->smallHighlightColor->get(),
+              .messageColor = preferences->messageColor->get(),
+              .countDownColor = preferences->countDownColor->get(),
+              .flashAnimationDuration = 500 / preferences->flashSpeed->get() * 100,
+          },
+  };
   QList<QScreen *> screens = QApplication::screens();
   for (QScreen *screen : std::as_const(screens)) {
     BreakWindow *w = new BreakWindow(data);
     m_windows.append(w);
     w->initSize(screen);
   }
+  for (auto w : std::as_const(m_windows)) {
+    connect(w, &BreakWindow::lockScreenRequested, this,
+            &BreakWindows::lockScreenRequested);
+    connect(w, &BreakWindow::exitForceBreakRequested, this,
+            &BreakWindows::exitForceBreakRequested);
+  }
+}
+
+void BreakWindows::destroy() {
+  for (auto w : std::as_const(m_windows)) {
+    w->close();
+    w->deleteLater();
+  }
+  m_windows.clear();
 }
 
 void BreakWindows::playEnterSound(SaneBreak::BreakType type,
@@ -57,4 +96,17 @@ void BreakWindows::playExitSound(SaneBreak::BreakType type,
   soundPlayer->play(type == SaneBreak::BreakType::Small
                         ? preferences->smallEndBell->get()
                         : preferences->bigEndBell->get());
+}
+
+void BreakWindows::setTime(int remainingTime) {
+  for (auto w : std::as_const(m_windows)) w->setTime(remainingTime);
+}
+void BreakWindows::showFullScreen() {
+  for (auto w : std::as_const(m_windows)) w->showFullScreen();
+}
+void BreakWindows::showFlashPrompt() {
+  for (auto w : std::as_const(m_windows)) w->showFlashPrompt();
+}
+void BreakWindows::showButtons(AbstractBreakWindows::Buttons buttons) {
+  for (auto w : std::as_const(m_windows)) w->showButtons(buttons);
 }

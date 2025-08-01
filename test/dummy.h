@@ -15,6 +15,7 @@
 #include "core/app-states.h"
 #include "core/app.h"
 #include "core/break-windows.h"
+#include "core/flags.h"
 #include "core/idle-time.h"
 #include "core/preferences.h"
 #include "core/system-monitor.h"
@@ -44,37 +45,18 @@ class DummyIdleTime : public SystemIdleTime {
   }
 };
 
-class DummyBreakWindow : public AbstractBreakWindow {
-  Q_OBJECT
- public:
-  using AbstractBreakWindow::AbstractBreakWindow;
-  MOCK_METHOD(void, start, (), (override));
-  MOCK_METHOD(void, setTime, (int), (override));
-  MOCK_METHOD(void, showFullScreen, (), (override));
-  MOCK_METHOD(void, showFlashPrompt, (), (override));
-  MOCK_METHOD(void, showButtons, (AbstractBreakWindow::Buttons), (override));
-};
-
 class DummyBreakWindows : public AbstractBreakWindows {
   Q_OBJECT
  public:
   using AbstractBreakWindows::AbstractBreakWindows;
-  MOCK_METHOD(void, createWindows, (BreakWindowData), (override));
+  MOCK_METHOD(void, create, (SaneBreak::BreakType, SanePreferences *), (override));
   MOCK_METHOD(void, destroy, (), ());
-};
-
-class SimpleBreakWindows : public AbstractBreakWindows {
-  Q_OBJECT
- public:
-  using AbstractBreakWindows::AbstractBreakWindows;
-  void createWindows(BreakWindowData data) {
-    this->data = data;
-    window = new testing::NiceMock<DummyBreakWindow>(data);
-    m_windows.append(window);
-  }
-  bool hasWindows() { return !m_windows.isEmpty() && window != nullptr; }
-  DummyBreakWindow *window = nullptr;
-  BreakWindowData data;
+  MOCK_METHOD(void, setTime, (int), ());
+  MOCK_METHOD(void, showFullScreen, (), ());
+  MOCK_METHOD(void, showFlashPrompt, (), ());
+  MOCK_METHOD(void, showButtons, (Buttons), ());
+  MOCK_METHOD(void, playEnterSound, (SaneBreak::BreakType, SanePreferences *), ());
+  MOCK_METHOD(void, playExitSound, (SaneBreak::BreakType, SanePreferences *), ());
 };
 
 class DummySystemMonitor : public AbstractSystemMonitor {
@@ -98,27 +80,10 @@ struct DummyAppDependencies {
   DummySystemMonitor *systemMonitor = nullptr;
   DummyBreakWindows *breakWindows = nullptr;
 };
-
-struct SimpleAppDependencies {
-  SanePreferences *preferences = nullptr;
-  AbstractTimer *countDownTimer = nullptr;
-  AbstractTimer *screenLockTimer = nullptr;
-  DummyIdleTime *idleTimer = nullptr;
-  DummySystemMonitor *systemMonitor = nullptr;
-  SimpleBreakWindows *breakWindows = nullptr;
-};
-
 class DummyApp : public AbstractApp {
   Q_OBJECT
  public:
   DummyApp(const DummyAppDependencies &deps, QObject *parent = nullptr)
-      : AbstractApp({deps.preferences, deps.countDownTimer, deps.screenLockTimer,
-                     deps.idleTimer, deps.systemMonitor, deps.breakWindows},
-                    parent) {
-    connect(this, &DummyApp::trayDataUpdated, this,
-            [this](TrayData data) { trayData = data; });
-  };
-  DummyApp(const SimpleAppDependencies &deps, QObject *parent = nullptr)
       : AbstractApp({deps.preferences, deps.countDownTimer, deps.screenLockTimer,
                      deps.idleTimer, deps.systemMonitor, deps.breakWindows},
                     parent) {
@@ -150,16 +115,6 @@ class DummyApp : public AbstractApp {
         .idleTimer = new DummyIdleTime(),
         .systemMonitor = new DummySystemMonitor(),
         .breakWindows = new testing::NiceMock<DummyBreakWindows>(),
-    };
-  };
-  static SimpleAppDependencies makeSimpleDeps() {
-    return {
-        .preferences = tempPreferences(),
-        .countDownTimer = new AbstractTimer(),
-        .screenLockTimer = new AbstractTimer(),
-        .idleTimer = new DummyIdleTime(),
-        .systemMonitor = new DummySystemMonitor(),
-        .breakWindows = new testing::NiceMock<SimpleBreakWindows>(),
     };
   };
 };
