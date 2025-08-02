@@ -71,8 +71,6 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget *parent)
   mainWidget->setProperty("isFullScreen", false);
   mainWidget->setAttribute(Qt::WA_LayoutOnEntireRect);
 
-  ui->breakLabel->setText(data.message);
-
   QColor hoverColor = data.theme.messageColor;
   hoverColor.setAlpha(40);
   ui->buttons->setStyleSheet(
@@ -144,6 +142,7 @@ void BreakWindow::showFullScreen() {
   m_bgAnim->stop();
   setProperty("color", m_bgAnim->endValue());
 
+  ui->breakLabel->setText(m_data.message.fullScreen);
   if (m_data.show.countdown) ui->countDownLabel->setVisible(true);
   if (m_data.show.clock) ui->clock->setVisible(true);
   if (m_data.show.endTime) ui->breakEndTimeLabel->setVisible(true);
@@ -163,6 +162,7 @@ void BreakWindow::showFlashPrompt() {
   windowHandle()->setFlag(Qt::WindowTransparentForInput, true);
   m_bgAnim->start();
 
+  ui->breakLabel->setText(m_data.message.prompt);
   if (!m_data.show.prograssBar) {
     ui->progressBar->setVisible(false);
   }

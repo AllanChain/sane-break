@@ -58,19 +58,22 @@ BreakWindows::BreakWindows(QObject *parent) : AbstractBreakWindows(parent) {
 }
 
 void BreakWindows::create(SaneBreak::BreakType type, SanePreferences *preferences) {
+  QString promptMessage = type == SaneBreak::BreakType::Big
+                              ? preferences->bigMessages->defaultValue()[0]
+                              : preferences->smallMessages->defaultValue()[0];
   QStringList messagesToRoll = type == SaneBreak::BreakType::Big
                                    ? preferences->bigMessages->get()
                                    : preferences->smallMessages->get();
-  QString message = "";
+  QString fullScreenMessage = "";
   if (!messagesToRoll.empty()) {
     int randomIndex = QRandomGenerator::global()->bounded(messagesToRoll.size());
-    message = messagesToRoll[randomIndex];
+    fullScreenMessage = messagesToRoll[randomIndex];
   }
 
   BreakWindowData data = {
       .totalSeconds = type == SaneBreak::BreakType::Big ? preferences->bigFor->get()
                                                         : preferences->smallFor->get(),
-      .message = message,
+      .message = {.prompt = promptMessage, .fullScreen = fullScreenMessage},
       .theme =
           {
               .mainBackground = preferences->backgroundColor->get(),

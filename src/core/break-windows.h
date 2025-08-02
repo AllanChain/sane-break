@@ -15,7 +15,10 @@
 
 struct BreakWindowData {
   int totalSeconds;
-  QString message;
+  struct {
+    QString prompt;
+    QString fullScreen;
+  } message;
   struct {
     QColor mainBackground;
     QColor highlightBackground;
