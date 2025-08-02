@@ -122,8 +122,9 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
    *                               Tab switch                                *
    *                                                                         *
    ****************************************************************************/
-  tabButtons = {ui->tabScheduleButton, ui->tabReminderButton, ui->tabPauseButton,
-                ui->tabSoundButton,    ui->tabGeneralButton,  ui->tabAboutButton};
+  tabButtons = {ui->tabScheduleButton, ui->tabReminderButton, ui->tabInterfaceButton,
+                ui->tabPauseButton,    ui->tabSoundButton,    ui->tabGeneralButton,
+                ui->tabAboutButton};
   for (int i = 0; i < tabButtons.size(); ++i) {
     connect(tabButtons[i], &QPushButton::released, this, [this, i]() { setTab(i); });
   }
@@ -178,6 +179,16 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
             ui->reminderBehaviorLabel->setArgs(
                 {ui->flashForBox->value(), ui->confirmAfterBox->value()});
           });
+  controllers->add(new PrefController<QSpinBox, int>(ui->maxForceBreakExits,
+                                                     preferences->maxForceBreakExits));
+  controllers->add(new PrefController<QCheckBox, bool>(
+      ui->autoCloseWindowAfterBreak, preferences->autoCloseWindowAfterBreak));
+
+  /***************************************************************************
+   *                                                                         *
+   *                             Interface tab                               *
+   *                                                                         *
+   ****************************************************************************/
   controllers->add(
       new PrefController<QSlider, int>(ui->flashSpeedSlider, preferences->flashSpeed));
 
@@ -196,11 +207,6 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
       ui->smallBreakMessages, preferences->smallMessages));
   controllers->add(new PrefController<QPlainTextEdit, QStringList>(
       ui->bigBreakMessages, preferences->bigMessages));
-
-  controllers->add(new PrefController<QSpinBox, int>(ui->maxForceBreakExits,
-                                                     preferences->maxForceBreakExits));
-  controllers->add(new PrefController<QCheckBox, bool>(
-      ui->autoCloseWindowAfterBreak, preferences->autoCloseWindowAfterBreak));
 
   controllers->add(new PrefController<QCheckBox, bool>(ui->showProgressBar,
                                                        preferences->showProgressBar));
