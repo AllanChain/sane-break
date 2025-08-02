@@ -7,7 +7,10 @@
 #include <QDialog>
 #include <QDir>
 #include <QFile>
+#include <QLockFile>
+#include <QMessageBox>
 #include <QSettings>
+#include <QStandardPaths>
 #include <QSystemTrayIcon>
 #include <QTranslator>
 #include <Qt>
@@ -36,6 +39,24 @@ int main(int argc, char *argv[]) {
 #ifdef WITH_TRANSLATIONS
   LanguageSelect::setLanguage(preferences->language->get());
 #endif
+
+  // Use lock file to avoid starting multiple instances of app
+  const QString lockFilePath =
+      QDir(QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation))
+          .filePath("sane-break.lock");
+  QLockFile lock(lockFilePath);
+  lock.setStaleLockTime(0);
+  if (!lock.tryLock()) {
+    if (lock.error() == QLockFile::LockFailedError) {
+      QMessageBox msgBox;
+      msgBox.setText(a.tr("Another instance of Sane Break is running."));
+      msgBox.setInformativeText(a.tr("Do you want to start anyway?"));
+      msgBox.setIcon(QMessageBox::Icon::Question);
+      msgBox.addButton(QMessageBox::No);
+      msgBox.addButton(QMessageBox::Yes);
+      if (msgBox.exec()) return 1;
+    }
+  }
 
 #ifdef Q_OS_LINUX
   QDir appPath = a.applicationDirPath();
