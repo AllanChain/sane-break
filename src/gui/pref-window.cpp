@@ -135,28 +135,28 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
    *                              Schedule tab                               *
    *                                                                         *
    ****************************************************************************/
-  connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
+  connect(controllers->add(new PrefController<QSpinBox, int>(
               ui->smallBreakEveryBox, preferences->smallEvery, 60)),
           &PrefControllerBase::explictSync, this, [this]() {
             int value = ui->smallBreakEveryBox->value();
             ui->bigBreakAfterBox->setToolTip(
                 tr("Every %n min", "", value * ui->bigBreakAfterBox->value()));
           });
-  controllers->add(new PrefController<QSpinBox, Setting<int>>(ui->smallBreakForBox,
-                                                              preferences->smallFor));
-  connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
-              ui->bigBreakAfterBox, preferences->bigAfter)),
+  controllers->add(
+      new PrefController<QSpinBox, int>(ui->smallBreakForBox, preferences->smallFor));
+  connect(controllers->add(new PrefController<QSpinBox, int>(ui->bigBreakAfterBox,
+                                                             preferences->bigAfter)),
           &PrefControllerBase::explictSync, this, [this]() {
             int value = ui->bigBreakAfterBox->value();
             ui->bigBreakAfterBox->setToolTip(
                 tr("Every %n min", "", value * ui->smallBreakEveryBox->value()));
           });
-  controllers->add(new PrefController<QSpinBox, Setting<int>>(ui->bigBreakForBox,
-                                                              preferences->bigFor, 60));
+  controllers->add(
+      new PrefController<QSpinBox, int>(ui->bigBreakForBox, preferences->bigFor, 60));
 
   QRegularExpression re("^\\d+(,\\d+)*$");
   ui->postponeMinutes->setValidator(new QRegularExpressionValidator(re, this));
-  controllers->add(new PrefController<QLineEdit, Setting<QStringList>>(
+  controllers->add(new PrefController<QLineEdit, QStringList>(
       ui->postponeMinutes, preferences->postponeMinutes));
 
   /***************************************************************************
@@ -164,81 +164,81 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
    *                              Reminder tab                               *
    *                                                                         *
    ****************************************************************************/
-  connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
-              ui->flashForBox, preferences->flashFor)),
+  connect(controllers->add(new PrefController<QSpinBox, int>(ui->flashForBox,
+                                                             preferences->flashFor)),
           &PrefControllerBase::explictSync, this, [this]() {
             ui->confirmAfterBox->setMaximum(ui->flashForBox->value());
             ui->confirmAfterSlider->setMaximum(ui->flashForBox->value());
             ui->reminderBehaviorLabel->setArgs(
                 {ui->flashForBox->value(), ui->confirmAfterBox->value()});
           });
-  connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
+  connect(controllers->add(new PrefController<QSpinBox, int>(
               ui->confirmAfterBox, preferences->confirmAfter)),
           &PrefControllerBase::explictSync, this, [this]() {
             ui->reminderBehaviorLabel->setArgs(
                 {ui->flashForBox->value(), ui->confirmAfterBox->value()});
           });
-  controllers->add(new PrefController<QSlider, Setting<int>>(ui->flashSpeedSlider,
-                                                             preferences->flashSpeed));
+  controllers->add(
+      new PrefController<QSlider, int>(ui->flashSpeedSlider, preferences->flashSpeed));
 
-  controllers->add(new PrefController<QLineEdit, Setting<QColor>>(
-      ui->backgroundColor, preferences->backgroundColor));
-  controllers->add(new PrefController<QLineEdit, Setting<QColor>>(
-      ui->messageColor, preferences->messageColor));
-  controllers->add(new PrefController<QLineEdit, Setting<QColor>>(
+  controllers->add(new PrefController<QLineEdit, QColor>(ui->backgroundColor,
+                                                         preferences->backgroundColor));
+  controllers->add(new PrefController<QLineEdit, QColor>(ui->messageColor,
+                                                         preferences->messageColor));
+  controllers->add(new PrefController<QLineEdit, QColor>(
       ui->smallHighlight, preferences->smallHighlightColor));
-  controllers->add(new PrefController<QLineEdit, Setting<QColor>>(
+  controllers->add(new PrefController<QLineEdit, QColor>(
       ui->bigHighlight, preferences->bigHighlightColor));
-  controllers->add(new PrefController<QLineEdit, Setting<QColor>>(
-      ui->countDownColor, preferences->countDownColor));
+  controllers->add(new PrefController<QLineEdit, QColor>(ui->countDownColor,
+                                                         preferences->countDownColor));
 
-  controllers->add(new PrefController<QPlainTextEdit, Setting<QStringList>>(
+  controllers->add(new PrefController<QPlainTextEdit, QStringList>(
       ui->smallBreakMessages, preferences->smallMessages));
-  controllers->add(new PrefController<QPlainTextEdit, Setting<QStringList>>(
+  controllers->add(new PrefController<QPlainTextEdit, QStringList>(
       ui->bigBreakMessages, preferences->bigMessages));
 
-  controllers->add(new PrefController<QSpinBox, Setting<int>>(
-      ui->maxForceBreakExits, preferences->maxForceBreakExits));
-  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
+  controllers->add(new PrefController<QSpinBox, int>(ui->maxForceBreakExits,
+                                                     preferences->maxForceBreakExits));
+  controllers->add(new PrefController<QCheckBox, bool>(
       ui->autoCloseWindowAfterBreak, preferences->autoCloseWindowAfterBreak));
 
-  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
-      ui->showProgressBar, preferences->showProgressBar));
-  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
-      ui->showCountdown, preferences->showCountdown));
-  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
-      ui->showClock, preferences->showClock));
-  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
-      ui->showEndTime, preferences->showEndTime));
-  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
-      ui->showButtons, preferences->showButtons));
+  controllers->add(new PrefController<QCheckBox, bool>(ui->showProgressBar,
+                                                       preferences->showProgressBar));
+  controllers->add(new PrefController<QCheckBox, bool>(ui->showCountdown,
+                                                       preferences->showCountdown));
+  controllers->add(
+      new PrefController<QCheckBox, bool>(ui->showClock, preferences->showClock));
+  controllers->add(
+      new PrefController<QCheckBox, bool>(ui->showEndTime, preferences->showEndTime));
+  controllers->add(
+      new PrefController<QCheckBox, bool>(ui->showButtons, preferences->showButtons));
 
   /***************************************************************************
    *                                                                         *
    *                                Pause tab                                *
    *                                                                         *
    ****************************************************************************/
-  controllers->add(new PrefController<QSpinBox, Setting<int>>(
-      ui->pauseOnIdleBox, preferences->pauseOnIdleFor, 60));
-  connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
+  controllers->add(new PrefController<QSpinBox, int>(ui->pauseOnIdleBox,
+                                                     preferences->pauseOnIdleFor, 60));
+  connect(controllers->add(new PrefController<QSpinBox, int>(
               ui->resetBreakBox, preferences->resetAfterPause, 60)),
           &PrefControllerBase::explictSync, this, [this]() {
             ui->resetCycleBox->setMinimum(ui->resetBreakBox->value());
             ui->resetCycleSlider->setMinimum(ui->resetBreakBox->value());
           });
-  connect(controllers->add(new PrefController<QSpinBox, Setting<int>>(
+  connect(controllers->add(new PrefController<QSpinBox, int>(
               ui->resetCycleBox, preferences->resetCycleAfterPause, 60)),
           &PrefControllerBase::explictSync, this, [this]() {
             ui->resetBreakBox->setMaximum(ui->resetCycleBox->value());
             ui->resetBreakSlider->setMaximum(ui->resetCycleBox->value());
           });
-  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
-      ui->pauseOnBatteryCheck, preferences->pauseOnBattery));
+  controllers->add(new PrefController<QCheckBox, bool>(ui->pauseOnBatteryCheck,
+                                                       preferences->pauseOnBattery));
 #ifdef LINUX_DIST_FLATPAK
   ui->programList->setHidden(true);
   ui->programListLabel->setHidden(true);
 #else
-  controllers->add(new PrefController<QPlainTextEdit, Setting<QStringList>>(
+  controllers->add(new PrefController<QPlainTextEdit, QStringList>(
       ui->programList, preferences->programsToMonitor));
 #endif
 
@@ -262,8 +262,8 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
             [this, soundSelects, i]() {
               soundPlayer->play(soundSelects[i]->currentText());
             });
-    controllers->add(new PrefController<QComboBox, Setting<QString>>(soundSelects[i],
-                                                                     soundSettings[i]));
+    controllers->add(
+        new PrefController<QComboBox, QString>(soundSelects[i], soundSettings[i]));
   }
 
   /***************************************************************************
@@ -273,9 +273,8 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
    ****************************************************************************/
   ui->configFile->setText(preferences->settings->fileName());
 
-  auto autoStartController =
-      controllers->add(new PrefController<QCheckBox, Setting<bool>>(
-          ui->autoStart, preferences->autoStart));
+  auto autoStartController = controllers->add(
+      new PrefController<QCheckBox, bool>(ui->autoStart, preferences->autoStart));
   connect(autoStartController, &PrefControllerBase::loaded, this, [this]() {
     // Tell the handler to ignore this change
     ui->autoStart->setDisabled(true);
@@ -307,8 +306,8 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
           });
 #ifdef WITH_TRANSLATIONS
   ui->languageSelect->setSelectedLanguage(preferences->language->get());
-  controllers->add(new PrefController<LanguageSelect, Setting<QString>>(
-      ui->languageSelect, preferences->language));
+  controllers->add(new PrefController<LanguageSelect, QString>(ui->languageSelect,
+                                                               preferences->language));
 #else
   ui->languageLabel->setHidden(true);
   ui->languageSelect->setHidden(true);
@@ -325,19 +324,19 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
   ui->autoScreenLock->addItem(tr("%n min", "", 1), 60);
   ui->autoScreenLock->addItem(tr("%n min", "", 2), 120);
   ui->autoScreenLock->addItem(tr("%n min", "", 5), 300);
-  controllers->add(new PrefController<QComboBox, Setting<int>>(
-      ui->autoScreenLock, preferences->autoScreenLock));
+  controllers->add(new PrefController<QComboBox, int>(ui->autoScreenLock,
+                                                      preferences->autoScreenLock));
 #endif
 
 #ifdef Q_OS_LINUX
   ui->quickBreak->setText(tr("Start next break after middle clicking on tray icon"));
-  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
-      ui->quickBreak, preferences->quickBreak));
+  controllers->add(
+      new PrefController<QCheckBox, bool>(ui->quickBreak, preferences->quickBreak));
 #endif
 #ifdef Q_OS_WIN
   ui->quickBreak->setText(tr("Start next break after double clicking on tray icon"));
-  controllers->add(new PrefController<QCheckBox, Setting<bool>>(
-      ui->quickBreak, preferences->quickBreak));
+  controllers->add(
+      new PrefController<QCheckBox, bool>(ui->quickBreak, preferences->quickBreak));
 #endif
 #ifdef Q_OS_MAC
   ui->quickBreak->setHidden(true);

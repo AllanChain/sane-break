@@ -51,17 +51,17 @@ class PrefControllerBase : public QObject {
   void dirtyChanged();
 };
 
-template <typename W, typename S>
+template <typename W, typename T>
 class PrefController : public PrefControllerBase {
  public:
   W *widget;
-  S *setting;
-  PrefController(W *parent, S *setting)
+  Setting<T> *setting;
+  PrefController(W *parent, Setting<T> *setting)
       : PrefControllerBase(parent), widget(parent), setting(setting) {};
 };
 
 template <>
-class PrefController<QCheckBox, Setting<bool>> : public PrefControllerBase {
+class PrefController<QCheckBox, bool> : public PrefControllerBase {
  public:
   QCheckBox *widget;
   Setting<bool> *setting;
@@ -78,7 +78,7 @@ class PrefController<QCheckBox, Setting<bool>> : public PrefControllerBase {
 };
 
 template <>
-class PrefController<QSlider, Setting<int>> : public PrefControllerBase {
+class PrefController<QSlider, int> : public PrefControllerBase {
  public:
   QSlider *widget;
   Setting<int> *setting;
@@ -95,7 +95,7 @@ class PrefController<QSlider, Setting<int>> : public PrefControllerBase {
 };
 
 template <>
-class PrefController<QSpinBox, Setting<int>> : public PrefControllerBase {
+class PrefController<QSpinBox, int> : public PrefControllerBase {
  public:
   QSpinBox *widget;
   Setting<int> *setting;
@@ -112,7 +112,7 @@ class PrefController<QSpinBox, Setting<int>> : public PrefControllerBase {
 };
 
 template <>
-class PrefController<QPlainTextEdit, Setting<QStringList>> : public PrefControllerBase {
+class PrefController<QPlainTextEdit, QStringList> : public PrefControllerBase {
  public:
   QPlainTextEdit *widget;
   Setting<QStringList> *setting;
@@ -127,7 +127,7 @@ class PrefController<QPlainTextEdit, Setting<QStringList>> : public PrefControll
 };
 
 template <>
-class PrefController<QLineEdit, Setting<QStringList>> : public PrefControllerBase {
+class PrefController<QLineEdit, QStringList> : public PrefControllerBase {
  public:
   QLineEdit *widget;
   Setting<QStringList> *setting;
@@ -140,7 +140,7 @@ class PrefController<QLineEdit, Setting<QStringList>> : public PrefControllerBas
 };
 
 template <>
-class PrefController<QComboBox, Setting<int>> : public PrefControllerBase {
+class PrefController<QComboBox, int> : public PrefControllerBase {
  public:
   QComboBox *widget;
   Setting<int> *setting;
@@ -154,7 +154,7 @@ class PrefController<QComboBox, Setting<int>> : public PrefControllerBase {
 };
 
 template <>
-class PrefController<LanguageSelect, Setting<QString>> : public PrefControllerBase {
+class PrefController<LanguageSelect, QString> : public PrefControllerBase {
  public:
   LanguageSelect *widget;
   Setting<QString> *setting;
@@ -168,7 +168,7 @@ class PrefController<LanguageSelect, Setting<QString>> : public PrefControllerBa
 };
 
 template <>
-class PrefController<QComboBox, Setting<QString>> : public PrefControllerBase {
+class PrefController<QComboBox, QString> : public PrefControllerBase {
  public:
   QComboBox *widget;
   Setting<QString> *setting;
@@ -184,7 +184,7 @@ class PrefController<QComboBox, Setting<QString>> : public PrefControllerBase {
 };
 
 template <>
-class PrefController<QLineEdit, Setting<QColor>> : public PrefControllerBase {
+class PrefController<QLineEdit, QColor> : public PrefControllerBase {
  public:
   QLineEdit *widget;
   Setting<QColor> *setting;
