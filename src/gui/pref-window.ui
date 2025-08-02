@@ -1601,6 +1601,13 @@ v%1
             </widget>
            </item>
            <item>
+            <widget class="QPushButton" name="defaultsButton">
+             <property name="text">
+              <string>Defaults</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <spacer name="horizontalSpacer">
              <property name="orientation">
               <enum>Qt::Orientation::Horizontal</enum>

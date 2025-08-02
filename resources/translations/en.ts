@@ -4,9 +4,9 @@
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../../../src/gui/pref-window.cpp" line="330"/>
-        <location filename="../../../../src/gui/pref-window.cpp" line="331"/>
-        <location filename="../../../../src/gui/pref-window.cpp" line="332"/>
+        <location filename="../../../../src/gui/pref-window.cpp" line="374"/>
+        <location filename="../../../../src/gui/pref-window.cpp" line="375"/>
+        <location filename="../../../../src/gui/pref-window.cpp" line="376"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -14,8 +14,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../../../src/gui/pref-window.cpp" line="144"/>
-        <location filename="../../../../src/gui/pref-window.cpp" line="153"/>
+        <location filename="../../../../src/gui/pref-window.cpp" line="161"/>
+        <location filename="../../../../src/gui/pref-window.cpp" line="172"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>Every %n min</numerusform>
@@ -23,7 +23,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../../../src/gui/pref-window.cpp" line="329"/>
+        <location filename="../../../../src/gui/pref-window.cpp" line="373"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec</numerusform>

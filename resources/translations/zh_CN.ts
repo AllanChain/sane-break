@@ -515,7 +515,12 @@ v%1
         <translation>第三方库许可</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1622"/>
+        <location filename="../../src/gui/pref-window.ui" line="1606"/>
+        <source>Defaults</source>
+        <translation>恢复默认</translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="1629"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
@@ -523,71 +528,71 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="330"/>
-        <location filename="../../src/gui/pref-window.cpp" line="331"/>
-        <location filename="../../src/gui/pref-window.cpp" line="332"/>
+        <location filename="../../src/gui/pref-window.cpp" line="374"/>
+        <location filename="../../src/gui/pref-window.cpp" line="375"/>
+        <location filename="../../src/gui/pref-window.cpp" line="376"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n 分钟</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="144"/>
-        <location filename="../../src/gui/pref-window.cpp" line="153"/>
+        <location filename="../../src/gui/pref-window.cpp" line="161"/>
+        <location filename="../../src/gui/pref-window.cpp" line="172"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>每 %n 分钟</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="329"/>
+        <location filename="../../src/gui/pref-window.cpp" line="373"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n 秒</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="328"/>
+        <location filename="../../src/gui/pref-window.cpp" line="372"/>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="338"/>
+        <location filename="../../src/gui/pref-window.cpp" line="383"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>在中键托盘图标后，立刻开始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="343"/>
+        <location filename="../../src/gui/pref-window.cpp" line="388"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>在双击托盘图标后，立刻开始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="403"/>
+        <location filename="../../src/gui/pref-window.cpp" line="452"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="404"/>
+        <location filename="../../src/gui/pref-window.cpp" line="453"/>
         <source>Discard</source>
         <translation>放弃</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="405"/>
+        <location filename="../../src/gui/pref-window.cpp" line="454"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="304"/>
+        <location filename="../../src/gui/pref-window.cpp" line="348"/>
         <source>Setting autostart failed</source>
         <translation>设置开机自启失败</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="400"/>
+        <location filename="../../src/gui/pref-window.cpp" line="449"/>
         <source>The preferences have been modified.</source>
         <translation>偏好设置已被修改。</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="401"/>
+        <location filename="../../src/gui/pref-window.cpp" line="450"/>
         <source>Do you want to save your changes?</source>
         <translation>是否保存修改？</translation>
     </message>

@@ -537,7 +537,12 @@ v%1
         <translation>Licencias de bibliotecas de terceros</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1622"/>
+        <location filename="../../src/gui/pref-window.ui" line="1606"/>
+        <source>Defaults</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="1629"/>
         <source>Save</source>
         <translation>Guardar</translation>
     </message>
@@ -545,9 +550,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="330"/>
-        <location filename="../../src/gui/pref-window.cpp" line="331"/>
-        <location filename="../../src/gui/pref-window.cpp" line="332"/>
+        <location filename="../../src/gui/pref-window.cpp" line="374"/>
+        <location filename="../../src/gui/pref-window.cpp" line="375"/>
+        <location filename="../../src/gui/pref-window.cpp" line="376"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -555,8 +560,8 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="144"/>
-        <location filename="../../src/gui/pref-window.cpp" line="153"/>
+        <location filename="../../src/gui/pref-window.cpp" line="161"/>
+        <location filename="../../src/gui/pref-window.cpp" line="172"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>Cada %n min</numerusform>
@@ -564,7 +569,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="329"/>
+        <location filename="../../src/gui/pref-window.cpp" line="373"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n seg</numerusform>
@@ -572,47 +577,47 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="328"/>
+        <location filename="../../src/gui/pref-window.cpp" line="372"/>
         <source>Disabled</source>
         <translation>Desactivado</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="338"/>
+        <location filename="../../src/gui/pref-window.cpp" line="383"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>Comenzar el siguiente descanso tras clicar con el botón central en el icono de la bandeja</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="343"/>
+        <location filename="../../src/gui/pref-window.cpp" line="388"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>Comenzar el siguiente descanso tras hacer doble clic en el icono de la bandeja</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="403"/>
+        <location filename="../../src/gui/pref-window.cpp" line="452"/>
         <source>Save</source>
         <translation>Guardar</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="404"/>
+        <location filename="../../src/gui/pref-window.cpp" line="453"/>
         <source>Discard</source>
         <translation>Descartar</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="405"/>
+        <location filename="../../src/gui/pref-window.cpp" line="454"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="304"/>
+        <location filename="../../src/gui/pref-window.cpp" line="348"/>
         <source>Setting autostart failed</source>
         <translation>La configuración de inicio automático falló</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="400"/>
+        <location filename="../../src/gui/pref-window.cpp" line="449"/>
         <source>The preferences have been modified.</source>
         <translation>Las preferencias se han modificado.</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="401"/>
+        <location filename="../../src/gui/pref-window.cpp" line="450"/>
         <source>Do you want to save your changes?</source>
         <translation>¿Quieres guardar los cambios?</translation>
     </message>

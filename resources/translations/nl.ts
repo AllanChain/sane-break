@@ -573,7 +573,12 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation>Licenties van externe bibliotheken</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.ui" line="1622"/>
+        <location filename="../../src/gui/pref-window.ui" line="1606"/>
+        <source>Defaults</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/gui/pref-window.ui" line="1629"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
@@ -581,9 +586,9 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="330"/>
-        <location filename="../../src/gui/pref-window.cpp" line="331"/>
-        <location filename="../../src/gui/pref-window.cpp" line="332"/>
+        <location filename="../../src/gui/pref-window.cpp" line="374"/>
+        <location filename="../../src/gui/pref-window.cpp" line="375"/>
+        <location filename="../../src/gui/pref-window.cpp" line="376"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min.</numerusform>
@@ -591,8 +596,8 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="144"/>
-        <location filename="../../src/gui/pref-window.cpp" line="153"/>
+        <location filename="../../src/gui/pref-window.cpp" line="161"/>
+        <location filename="../../src/gui/pref-window.cpp" line="172"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>Iedere %n min.</numerusform>
@@ -600,7 +605,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/gui/pref-window.cpp" line="329"/>
+        <location filename="../../src/gui/pref-window.cpp" line="373"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec.</numerusform>
@@ -608,47 +613,47 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="328"/>
+        <location filename="../../src/gui/pref-window.cpp" line="372"/>
         <source>Disabled</source>
         <translation>Uitgeschakeld</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="338"/>
+        <location filename="../../src/gui/pref-window.cpp" line="383"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>Volgende pauze starten na middelklikken op systeemvakpictogram</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="343"/>
+        <location filename="../../src/gui/pref-window.cpp" line="388"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>Volgende pauze starten na dubbelklikken op systeemvakpictogram</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="403"/>
+        <location filename="../../src/gui/pref-window.cpp" line="452"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="404"/>
+        <location filename="../../src/gui/pref-window.cpp" line="453"/>
         <source>Discard</source>
         <translation>Verwerpen</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="405"/>
+        <location filename="../../src/gui/pref-window.cpp" line="454"/>
         <source>Cancel</source>
         <translation>Annuleren</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="304"/>
+        <location filename="../../src/gui/pref-window.cpp" line="348"/>
         <source>Setting autostart failed</source>
         <translation>Automatisch opstarten is niet mogelijk</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="400"/>
+        <location filename="../../src/gui/pref-window.cpp" line="449"/>
         <source>The preferences have been modified.</source>
         <translation>De instellingen zijn aangepast.</translation>
     </message>
     <message>
-        <location filename="../../src/gui/pref-window.cpp" line="401"/>
+        <location filename="../../src/gui/pref-window.cpp" line="450"/>
         <source>Do you want to save your changes?</source>
         <translation>Wilt u de instellingen opslaan?</translation>
     </message>
