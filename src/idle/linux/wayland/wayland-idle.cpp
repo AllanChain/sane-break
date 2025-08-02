@@ -87,14 +87,19 @@ void IdleTimeWayland::startWatching() {
 
 void IdleTimeWayland::stopWatching() {
   isWatching = false;
-  if (idleNotification != nullptr) ext_idle_notification_v1_destroy(idleNotification);
+  if (idleNotification != nullptr) {
+    ext_idle_notification_v1_destroy(idleNotification);
+    idleNotification = nullptr;
+  }
 }
 
 void IdleTimeWayland::setMinIdleTime(int idleTime) {
   if (idleTime == m_minIdleTime) return;
   m_minIdleTime = idleTime;
   if (!isWatching) return;
-  if (idleNotification != nullptr) ext_idle_notification_v1_destroy(idleNotification);
+  if (idleNotification != nullptr) {
+    ext_idle_notification_v1_destroy(idleNotification);
+  }
   idleNotification = get_idle_notification(idleNotifier, m_minIdleTime, seat);
   ext_idle_notification_v1_add_listener(idleNotification, &idleListener, this);
 }

@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
     welcome->deleteLater();
   }
 
-  SaneBreakApp *app = SaneBreakApp::create(preferences);
+  SaneBreakApp *app = SaneBreakApp::create(preferences, &a);
 
   app->start();
   return a.exec();
