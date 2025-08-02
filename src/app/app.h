@@ -7,10 +7,10 @@
 #include <QObject>
 #include <QTimer>
 
+#include "app/pref-window.h"
+#include "app/tray.h"
 #include "core/app.h"
 #include "core/preferences.h"
-#include "gui/pref-window.h"
-#include "gui/tray.h"
 
 class SaneBreakApp : public AbstractApp {
   Q_OBJECT

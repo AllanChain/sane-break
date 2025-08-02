@@ -10,13 +10,13 @@
 #include <QObject>
 #include <QTimer>
 
+#include "app/break-window.h"
+#include "app/sound-player.h"
 #include "core/break-windows.h"
 #include "core/flags.h"
 #include "core/preferences.h"
-#include "gui/break-window.h"
-#include "gui/sound-player.h"
 #ifdef Q_OS_LINUX
-#include "gui/layer-shell/interface.h"
+#include "app/layer-shell/interface.h"
 #endif
 
 class BreakWindows : public AbstractBreakWindows {

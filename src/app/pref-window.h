@@ -26,8 +26,8 @@
 #include <QtGlobal>
 #include <functional>
 
+#include "app/text-window.h"
 #include "core/preferences.h"
-#include "gui/text-window.h"
 #include "lib/auto-start.h"
 #include "sound-player.h"
 #include "widgets/language-select.h"

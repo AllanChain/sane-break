@@ -19,19 +19,19 @@
 #include <QTimer>
 #include <utility>
 
+#include "app/break-window.h"
+#include "app/sound-player.h"
 #include "config.h"
 #include "core/break-windows.h"
 #include "core/flags.h"
 #include "core/preferences.h"
-#include "gui/break-window.h"
-#include "gui/sound-player.h"
 #include "idle/factory.h"
 
 #ifdef Q_OS_LINUX
 #include <QGuiApplication>
 #include <QPluginLoader>
 
-#include "gui/layer-shell/interface.h"
+#include "app/layer-shell/interface.h"
 #include "lib/linux/system-check.h"
 #endif
 

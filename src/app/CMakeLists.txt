@@ -5,10 +5,36 @@ qt_add_executable(
   app.cpp
   app.h
   main.cpp
+  break-window.cpp
+  break-window.h
+  break-window.ui
   break-windows.cpp
   break-windows.h
+  pref-window.cpp
+  pref-window.h
+  pref-window.ui
+  sound-player.cpp
+  sound-player.h
+  text-window.cpp
+  text-window.h
+  tray.cpp
+  tray.h
+  welcome.cpp
+  welcome.h
+  widgets/color-edit.h
+  widgets/dynamic-label.h
+  widgets/stepped-slider.cpp
+  widgets/stepped-slider.h
+  widgets/language-select.cpp
+  widgets/language-select.h
+  widgets/wrapped-checkbox.cpp
+  widgets/wrapped-checkbox.h
   ${CMAKE_SOURCE_DIR}/resources/index.qrc
 )
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+  add_subdirectory(layer-shell)
+endif()
+target_include_directories(sane-break-app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 find_package(Qt6 COMPONENTS LinguistTools)
 if(Qt6_FOUND AND Qt6LinguistTools_FOUND)
@@ -108,7 +134,7 @@ else()
   message(STATUS "Disable translations because LinguistTools is not found")
 endif()
 
-target_link_libraries(sane-break-app PRIVATE sane-gui)
+target_link_libraries(sane-break-app PRIVATE Qt6::Widgets Qt6::Multimedia sane-lib)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   add_subdirectory(${CMAKE_SOURCE_DIR}/packaging/linux ${CMAKE_BINARY_DIR}/packaging)

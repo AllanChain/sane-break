@@ -18,11 +18,11 @@
 #include <Qt>
 
 #include "app/break-windows.h"
+#include "app/pref-window.h"
+#include "app/tray.h"
+#include "app/widgets/language-select.h"
 #include "core/app.h"
 #include "core/preferences.h"
-#include "gui/pref-window.h"
-#include "gui/tray.h"
-#include "gui/widgets/language-select.h"
 #include "idle/factory.h"
 #include "lib/screen-lock.h"
 #include "lib/system-monitor.h"
