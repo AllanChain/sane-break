@@ -245,7 +245,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
          <x>0</x>
          <y>0</y>
          <width>659</width>
-         <height>655</height>
+         <height>736</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -879,46 +879,8 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
               <property name="horizontalSpacing">
                <number>12</number>
               </property>
-              <item row="1" column="2">
-               <widget class="QLabel" name="label_41">
-                <property name="text">
-                 <string>Big break</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QLabel" name="label_43">
-                <property name="text">
-                 <string>Message</string>
-                </property>
-               </widget>
-              </item>
               <item row="1" column="3">
                <widget class="ColorEdit" name="bigHighlight">
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="clearButtonEnabled">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_30">
-                <property name="text">
-                 <string>Small break</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_42">
-                <property name="text">
-                 <string>Background</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="3">
-               <widget class="ColorEdit" name="messageColor">
                 <property name="text">
                  <string/>
                 </property>
@@ -937,23 +899,6 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                 </property>
                </widget>
               </item>
-              <item row="0" column="1">
-               <widget class="ColorEdit" name="backgroundColor">
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="clearButtonEnabled">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_44">
-                <property name="text">
-                 <string>Count down</string>
-                </property>
-               </widget>
-              </item>
               <item row="2" column="1">
                <widget class="ColorEdit" name="countDownColor">
                 <property name="text">
@@ -964,7 +909,86 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                 </property>
                </widget>
               </item>
+              <item row="0" column="3">
+               <widget class="ColorEdit" name="messageColor">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLabel" name="label_43">
+                <property name="text">
+                 <string>Message</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_42">
+                <property name="text">
+                 <string>Background</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_44">
+                <property name="text">
+                 <string>Count down</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="ColorEdit" name="backgroundColor">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QLabel" name="label_41">
+                <property name="text">
+                 <string>Big break</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_30">
+                <property name="text">
+                 <string>Small break</string>
+                </property>
+               </widget>
+              </item>
              </layout>
+            </item>
+            <item>
+             <widget class="Line" name="line">
+              <property name="orientation">
+               <enum>Qt::Orientation::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_19">
+              <property name="text">
+               <string>&lt;p&gt;To preview break windows, save all changes first. The preview begins with a 2-second flashing prompt, followed by a 4-second full-screen break. A small break window will appear first, then a big break window.&lt;/p&gt;</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignmentFlag::AlignHCenter">
+             <widget class="QPushButton" name="previewButton">
+              <property name="text">
+               <string>Preview Break Windows</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>

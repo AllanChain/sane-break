@@ -26,6 +26,7 @@
 #include <QtGlobal>
 #include <functional>
 
+#include "app/break-windows.h"
 #include "app/text-window.h"
 #include "core/preferences.h"
 #include "lib/auto-start.h"
@@ -237,11 +238,13 @@ class PreferenceWindow : public QMainWindow {
   ControllerHolder *controllers;
   AutoStart *autoStart;
   TextWindow *openingTextWindow = nullptr;
+  BreakWindows *breakWindows;
 
   bool confirmLeave();
   void setTab(int tabNum);
   void openNotice();
   void openSourceCode();
+  void openBreakWindowPreview();
   void closeEvent(QCloseEvent *event);
   void showEvent(QShowEvent *event);
 };

@@ -97,14 +97,14 @@
         <translation>關於</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1245"/>
-        <location filename="../../src/app/pref-window.ui" line="1283"/>
+        <location filename="../../src/app/pref-window.ui" line="1269"/>
+        <location filename="../../src/app/pref-window.ui" line="1307"/>
         <source>Bell before breaks</source>
         <translation>休息前提示音</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1214"/>
-        <location filename="../../src/app/pref-window.ui" line="1311"/>
+        <location filename="../../src/app/pref-window.ui" line="1238"/>
+        <location filename="../../src/app/pref-window.ui" line="1335"/>
         <source>Bell after breaks</source>
         <translation>休息後提示音</translation>
     </message>
@@ -251,47 +251,47 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
 所有顏色的格式均為 &lt;code&gt;#AARRGGBB&lt;/code&gt;。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="885"/>
+        <location filename="../../src/app/pref-window.ui" line="956"/>
         <source>Big break</source>
         <translation>大休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="892"/>
+        <location filename="../../src/app/pref-window.ui" line="925"/>
         <source>Message</source>
         <translation>提示文本</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="909"/>
+        <location filename="../../src/app/pref-window.ui" line="963"/>
         <source>Small break</source>
         <translation>小休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="916"/>
+        <location filename="../../src/app/pref-window.ui" line="932"/>
         <source>Background</source>
         <translation>背景</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="953"/>
+        <location filename="../../src/app/pref-window.ui" line="939"/>
         <source>Count down</source>
         <translation>倒計時</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="979"/>
+        <location filename="../../src/app/pref-window.ui" line="1003"/>
         <source>&lt;h3&gt;Pause Conditions&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;暫停條件&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1132"/>
+        <location filename="../../src/app/pref-window.ui" line="1156"/>
         <source>Long pause threshold</source>
         <translation>長時間暫停閾值</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1186"/>
+        <location filename="../../src/app/pref-window.ui" line="1210"/>
         <source>Short pause threshold</source>
         <translation>短時間暫停閾值</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1398"/>
+        <location filename="../../src/app/pref-window.ui" line="1422"/>
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
@@ -301,17 +301,17 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
 定。如果休息持續超過 2 分鐘，則屏幕必然會自動鎖定。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1403"/>
+        <location filename="../../src/app/pref-window.ui" line="1427"/>
         <source>Automatic screen lock after break start</source>
         <translation>休息開始一段時間後自動鎖屏</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1381"/>
+        <location filename="../../src/app/pref-window.ui" line="1405"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;幫我們翻譯！&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1520"/>
+        <location filename="../../src/app/pref-window.ui" line="1544"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -374,42 +374,42 @@ v%1
         <translation>更快</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1211"/>
-        <location filename="../../src/app/pref-window.ui" line="1242"/>
+        <location filename="../../src/app/pref-window.ui" line="1235"/>
+        <location filename="../../src/app/pref-window.ui" line="1266"/>
         <source>Try restart Sane Break if no sound</source>
         <translation>如果沒有聲音，請嘗試重啟 Sane Break</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1228"/>
-        <location filename="../../src/app/pref-window.ui" line="1235"/>
-        <location filename="../../src/app/pref-window.ui" line="1290"/>
-        <location filename="../../src/app/pref-window.ui" line="1297"/>
+        <location filename="../../src/app/pref-window.ui" line="1252"/>
+        <location filename="../../src/app/pref-window.ui" line="1259"/>
+        <location filename="../../src/app/pref-window.ui" line="1314"/>
+        <location filename="../../src/app/pref-window.ui" line="1321"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="988"/>
+        <location filename="../../src/app/pref-window.ui" line="1012"/>
         <source>Sane Break will pause if it detects no activity for this many minutes</source>
         <extracomment>Tooltip for &quot;Pause if idle for&quot; config</extracomment>
         <translation>在這麼多時間內沒有活動，Sane Break 將暫停計時</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="991"/>
+        <location filename="../../src/app/pref-window.ui" line="1015"/>
         <source>Pause if idle for</source>
         <translation>空閒一段時間後暫停</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="268"/>
-        <location filename="../../src/app/pref-window.ui" line="1202"/>
+        <location filename="../../src/app/pref-window.ui" line="1226"/>
         <source>&lt;h3&gt;Small Breaks&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;小休息&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="328"/>
         <location filename="../../src/app/pref-window.ui" line="419"/>
-        <location filename="../../src/app/pref-window.ui" line="1032"/>
-        <location filename="../../src/app/pref-window.ui" line="1116"/>
-        <location filename="../../src/app/pref-window.ui" line="1170"/>
+        <location filename="../../src/app/pref-window.ui" line="1056"/>
+        <location filename="../../src/app/pref-window.ui" line="1140"/>
+        <location filename="../../src/app/pref-window.ui" line="1194"/>
         <source> min</source>
         <translation> 分鐘</translation>
     </message>
@@ -427,13 +427,13 @@ v%1
         <translation>休息時長</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1323"/>
+        <location filename="../../src/app/pref-window.ui" line="1347"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: You can use local sound files with URLs like &lt;code&gt;file:/D:sound.mp3&lt;/code&gt;  (Windows) or &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</source>
         <translation>&lt;strong&gt;提示&lt;/strong&gt;：你可以這樣使用本地文件 &lt;code&gt;file:/D:\sound.mp3&lt;/code&gt;  (Windows) 或 &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux)。</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="384"/>
-        <location filename="../../src/app/pref-window.ui" line="1261"/>
+        <location filename="../../src/app/pref-window.ui" line="1285"/>
         <source>&lt;h3&gt;Big Breaks&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;大休息&lt;/h3&gt;</translation>
     </message>
@@ -450,22 +450,32 @@ v%1
 &lt;p&gt;Sane Break 會顯示一個持續 &lt;b&gt;%1&lt;/b&gt; 秒的小型提示窗。若您在此期間停止活動，或選擇繼續超過這個時間，界面將轉換至全屏模式。休息期間，若持續 &lt;b&gt;%2&lt;/b&gt; 秒無操作，Sane Break 會鎖定全屏狀態。若在鎖定前恢復活動，提示窗會暫時縮成小窗口，但當再次無操作或到時間後，界面將重新轉換至全屏。&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1050"/>
+        <location filename="../../src/app/pref-window.ui" line="979"/>
+        <source>&lt;p&gt;To preview break windows, save all changes first. The preview begins with a 2-second flashing prompt, followed by a 4-second full-screen break. A small break window will appear first, then a big break window.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;預覽休息窗口前，請先保存所有設置。預覽時，會先顯示2秒提示小窗，隨後進入4秒全屏窗口。先顯示小休息窗口，再顯示大休息窗口。&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="989"/>
+        <source>Preview Break Windows</source>
+        <translation>預覽休息窗口</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1074"/>
         <source>Pause on battery</source>
         <translation>電池供電時暫停</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1057"/>
+        <location filename="../../src/app/pref-window.ui" line="1081"/>
         <source>Pause breaks when any of the following program is running:</source>
         <translation>當以下程序運行時暫停休息提示：</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1064"/>
+        <location filename="../../src/app/pref-window.ui" line="1088"/>
         <source>(Write one program name per line)</source>
         <translation>（每一行寫一個程序名）</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1071"/>
+        <location filename="../../src/app/pref-window.ui" line="1095"/>
         <source>&lt;h3&gt;Reset Break Schedule After Pause&lt;/h3&gt;
 &lt;p&gt;Sane Break will adjust the break schedule after pausing:&lt;/p&gt;
 &lt;ul&gt;
@@ -480,47 +490,47 @@ v%1
 &lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1349"/>
+        <location filename="../../src/app/pref-window.ui" line="1373"/>
         <source>Configuration file</source>
         <translation>配置文件</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1418"/>
+        <location filename="../../src/app/pref-window.ui" line="1442"/>
         <source>Launch Sane Break at start up</source>
         <translation>開機自動啟動 Sane Break</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1544"/>
+        <location filename="../../src/app/pref-window.ui" line="1568"/>
         <source>Get the Source Code</source>
         <translation>獲取源代碼</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1599"/>
+        <location filename="../../src/app/pref-window.ui" line="1623"/>
         <source>Revert to Last Saved</source>
         <translation>恢復上次設置</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1342"/>
+        <location filename="../../src/app/pref-window.ui" line="1366"/>
         <source>Language</source>
         <translation>語言</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1368"/>
+        <location filename="../../src/app/pref-window.ui" line="1392"/>
         <source>Change of language will take effect after app restart.</source>
         <translation>改變語言將在重啟應用後生效。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1564"/>
+        <location filename="../../src/app/pref-window.ui" line="1588"/>
         <source>Third-party Libraries Licenses</source>
         <translation>第三方庫許可</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1606"/>
+        <location filename="../../src/app/pref-window.ui" line="1630"/>
         <source>Defaults</source>
         <translation>恢復默認</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1629"/>
+        <location filename="../../src/app/pref-window.ui" line="1653"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
@@ -528,71 +538,71 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="374"/>
-        <location filename="../../src/app/pref-window.cpp" line="375"/>
-        <location filename="../../src/app/pref-window.cpp" line="376"/>
+        <location filename="../../src/app/pref-window.cpp" line="378"/>
+        <location filename="../../src/app/pref-window.cpp" line="379"/>
+        <location filename="../../src/app/pref-window.cpp" line="380"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n 分鐘</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="161"/>
-        <location filename="../../src/app/pref-window.cpp" line="172"/>
+        <location filename="../../src/app/pref-window.cpp" line="165"/>
+        <location filename="../../src/app/pref-window.cpp" line="176"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>每 %n 分鐘</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="373"/>
+        <location filename="../../src/app/pref-window.cpp" line="377"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n 秒</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="372"/>
+        <location filename="../../src/app/pref-window.cpp" line="376"/>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="383"/>
+        <location filename="../../src/app/pref-window.cpp" line="387"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>在中鍵托盤圖標後，立刻開始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="388"/>
+        <location filename="../../src/app/pref-window.cpp" line="392"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>在雙擊托盤圖標後，立刻開始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="452"/>
+        <location filename="../../src/app/pref-window.cpp" line="460"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="453"/>
+        <location filename="../../src/app/pref-window.cpp" line="461"/>
         <source>Discard</source>
         <translation>放棄</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="454"/>
+        <location filename="../../src/app/pref-window.cpp" line="462"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="348"/>
+        <location filename="../../src/app/pref-window.cpp" line="352"/>
         <source>Setting autostart failed</source>
         <translation>設置開機自啟失敗</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="449"/>
+        <location filename="../../src/app/pref-window.cpp" line="457"/>
         <source>The preferences have been modified.</source>
         <translation>偏好設置已被修改。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="450"/>
+        <location filename="../../src/app/pref-window.cpp" line="458"/>
         <source>Do you want to save your changes?</source>
         <translation>是否保存修改？</translation>
     </message>

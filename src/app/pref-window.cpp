@@ -28,20 +28,23 @@
 #include <QSpinBox>
 #include <QString>
 #include <QStringList>
+#include <QTimer>
 #include <QVBoxLayout>
 #include <QWidget>
 #include <Qt>
 #include <QtContainerFwd>
 #include <functional>
 
+#include "app/break-windows.h"
+#include "app/sound-player.h"
+#include "app/text-window.h"
+#include "app/widgets/language-select.h"
+#include "app/widgets/stepped-slider.h"
 #include "config.h"
+#include "core/flags.h"
 #include "core/preferences.h"
 #include "lib/auto-start.h"
-#include "sound-player.h"
-#include "text-window.h"
 #include "ui_pref-window.h"
-#include "widgets/language-select.h"
-#include "widgets/stepped-slider.h"
 
 void PrefControllerBase::saveIfDirty() {
   if (isDirty) {
@@ -132,6 +135,7 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
   soundPlayer = new SoundPlayer(this);
   controllers = new ControllerHolder(this);
   autoStart = new AutoStart(this);
+  breakWindows = new BreakWindows(this);
 
   /***************************************************************************
    *                                                                         *
@@ -413,6 +417,10 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
     this->controllers->setGroupToDefault(
         static_cast<PrefGroup>(this->ui->stackedWidget->currentIndex()));
   });
+  connect(ui->previewButton, &QPushButton::pressed, this,
+          &PreferenceWindow::openBreakWindowPreview);
+  connect(controllers, &ControllerHolder::dirtyChanged, ui->previewButton,
+          &QPushButton::setDisabled);
   connect(controllers, &ControllerHolder::dirtyChanged, ui->saveButton,
           &QPushButton::setEnabled);
   connect(controllers, &ControllerHolder::dirtyChanged, ui->resetButton,
@@ -479,4 +487,21 @@ void PreferenceWindow::openNotice() {
 
 void PreferenceWindow::openSourceCode() {
   QDesktopServices::openUrl(QUrl("https://github.com/AllanChain/sane-break"));
+}
+
+void PreferenceWindow::openBreakWindowPreview() {
+  breakWindows->create(SaneBreak::BreakType::Small, preferences);
+  breakWindows->showFlashPrompt();
+  QTimer::singleShot(2000, [this]() {
+    breakWindows->showFullScreen();
+    QTimer::singleShot(4000, [this]() {
+      breakWindows->destroy();
+      breakWindows->create(SaneBreak::BreakType::Big, preferences);
+      breakWindows->showFlashPrompt();
+      QTimer::singleShot(2000, [this]() {
+        breakWindows->showFullScreen();
+        QTimer::singleShot(4000, [this]() { breakWindows->destroy(); });
+      });
+    });
+  });
 }
