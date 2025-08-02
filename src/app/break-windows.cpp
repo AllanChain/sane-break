@@ -82,7 +82,7 @@ void BreakWindows::create(SaneBreak::BreakType type, SanePreferences *preference
                                          : preferences->smallHighlightColor->get(),
               .messageColor = preferences->messageColor->get(),
               .countDownColor = preferences->countDownColor->get(),
-              .flashAnimationDuration = 500 / preferences->flashSpeed->get() * 100,
+              .flashAnimationDuration = 60000 / preferences->flashSpeed->get(),
           },
       .show =
           {

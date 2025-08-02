@@ -98,6 +98,9 @@ class SanePreferences : public QObject {
 
   Setting<int> *flashFor;
   Setting<int> *confirmAfter;
+  Setting<int> *maxForceBreakExits;
+  Setting<bool> *autoCloseWindowAfterBreak;
+
   Setting<int> *flashSpeed;
   Setting<QColor> *messageColor;
   Setting<QColor> *countDownColor;
@@ -106,8 +109,6 @@ class SanePreferences : public QObject {
   Setting<QColor> *bigHighlightColor;
   Setting<QStringList> *smallMessages;
   Setting<QStringList> *bigMessages;
-  Setting<int> *maxForceBreakExits;
-  Setting<bool> *autoCloseWindowAfterBreak;
 
   Setting<bool> *showProgressBar;
   Setting<bool> *showCountdown;

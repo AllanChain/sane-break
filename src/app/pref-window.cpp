@@ -220,7 +220,7 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
    ****************************************************************************/
   controllers->add(
       PrefGroup::Interface,
-      new PrefController<QSlider, int>(ui->flashSpeedSlider, preferences->flashSpeed));
+      new PrefController<QSpinBox, int>(ui->flashSpeedBox, preferences->flashSpeed));
 
   controllers->add(PrefGroup::Interface,
                    new PrefController<QLineEdit, QColor>(ui->backgroundColor,

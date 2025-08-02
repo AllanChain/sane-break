@@ -245,7 +245,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
          <x>0</x>
          <y>0</y>
          <width>659</width>
-         <height>736</height>
+         <height>724</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -689,51 +689,13 @@ QPushButton[flat=&quot;true&quot;]:checked {
              </widget>
             </item>
             <item>
-             <layout class="QGridLayout" name="gridLayout_10" columnstretch="0,0">
+             <layout class="QGridLayout" name="gridLayout_10" columnstretch="0,0,0">
               <property name="horizontalSpacing">
                <number>12</number>
               </property>
               <property name="verticalSpacing">
                <number>0</number>
               </property>
-              <item row="1" column="1">
-               <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="1,2,3,1">
-                <item>
-                 <widget class="QLabel" name="label_9">
-                  <property name="text">
-                   <string extracomment="Tick for flash speed">Off</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="label_29">
-                  <property name="text">
-                   <string extracomment="Tick for flash speed">Slower</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="label_31">
-                  <property name="text">
-                   <string extracomment="Tick for flash speed">Default</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignmentFlag::AlignCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="label_32">
-                  <property name="text">
-                   <string extracomment="Tick for flash speed">Faster</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
               <item row="0" column="0" rowspan="2">
                <widget class="QLabel" name="label_8">
                 <property name="text">
@@ -747,7 +709,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
               <item row="0" column="1">
                <widget class="QSlider" name="flashSpeedSlider">
                 <property name="maximum">
-                 <number>150</number>
+                 <number>200</number>
                 </property>
                 <property name="pageStep">
                  <number>25</number>
@@ -760,6 +722,19 @@ QPushButton[flat=&quot;true&quot;]:checked {
                 </property>
                 <property name="tickPosition">
                  <enum>QSlider::TickPosition::TicksBelow</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QSpinBox" name="flashSpeedBox">
+                <property name="suffix">
+                 <string notr="true"> bpm</string>
+                </property>
+                <property name="maximum">
+                 <number>65535</number>
+                </property>
+                <property name="value">
+                 <number>100</number>
                 </property>
                </widget>
               </item>
@@ -1705,12 +1680,12 @@ v%1
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>665</x>
-     <y>8</y>
+     <x>650</x>
+     <y>138</y>
     </hint>
     <hint type="destinationlabel">
-     <x>786</x>
-     <y>14</y>
+     <x>765</x>
+     <y>132</y>
     </hint>
    </hints>
   </connection>
@@ -1721,12 +1696,12 @@ v%1
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>671</x>
-     <y>49</y>
+     <x>650</x>
+     <y>208</y>
     </hint>
     <hint type="destinationlabel">
-     <x>786</x>
-     <y>55</y>
+     <x>765</x>
+     <y>212</y>
     </hint>
    </hints>
   </connection>
@@ -1737,12 +1712,12 @@ v%1
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>651</x>
-     <y>179</y>
+     <x>630</x>
+     <y>373</y>
     </hint>
     <hint type="destinationlabel">
-     <x>786</x>
-     <y>185</y>
+     <x>765</x>
+     <y>379</y>
     </hint>
    </hints>
   </connection>
@@ -1753,12 +1728,12 @@ v%1
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>651</x>
-     <y>220</y>
+     <x>630</x>
+     <y>421</y>
     </hint>
     <hint type="destinationlabel">
-     <x>786</x>
-     <y>226</y>
+     <x>765</x>
+     <y>427</y>
     </hint>
    </hints>
   </connection>
@@ -1769,12 +1744,12 @@ v%1
    <slot>setValueForce(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>786</x>
-     <y>14</y>
+     <x>765</x>
+     <y>132</y>
     </hint>
     <hint type="destinationlabel">
-     <x>671</x>
-     <y>8</y>
+     <x>650</x>
+     <y>138</y>
     </hint>
    </hints>
   </connection>
@@ -1785,12 +1760,12 @@ v%1
    <slot>setValueForce(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>786</x>
-     <y>55</y>
+     <x>765</x>
+     <y>212</y>
     </hint>
     <hint type="destinationlabel">
-     <x>671</x>
-     <y>49</y>
+     <x>650</x>
+     <y>208</y>
     </hint>
    </hints>
   </connection>
@@ -1801,12 +1776,12 @@ v%1
    <slot>setValueForce(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>786</x>
-     <y>185</y>
+     <x>765</x>
+     <y>379</y>
     </hint>
     <hint type="destinationlabel">
-     <x>651</x>
-     <y>179</y>
+     <x>630</x>
+     <y>373</y>
     </hint>
    </hints>
   </connection>
@@ -1817,12 +1792,12 @@ v%1
    <slot>setValueForce(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>786</x>
-     <y>226</y>
+     <x>765</x>
+     <y>427</y>
     </hint>
     <hint type="destinationlabel">
-     <x>651</x>
-     <y>220</y>
+     <x>630</x>
+     <y>421</y>
     </hint>
    </hints>
   </connection>
@@ -1834,11 +1809,11 @@ v%1
    <hints>
     <hint type="sourcelabel">
      <x>654</x>
-     <y>35</y>
+     <y>311</y>
     </hint>
     <hint type="destinationlabel">
      <x>765</x>
-     <y>41</y>
+     <y>312</y>
     </hint>
    </hints>
   </connection>
@@ -1850,11 +1825,11 @@ v%1
    <hints>
     <hint type="sourcelabel">
      <x>654</x>
-     <y>84</y>
+     <y>401</y>
     </hint>
     <hint type="destinationlabel">
      <x>765</x>
-     <y>90</y>
+     <y>407</y>
     </hint>
    </hints>
   </connection>
@@ -1866,11 +1841,11 @@ v%1
    <hints>
     <hint type="sourcelabel">
      <x>765</x>
-     <y>41</y>
+     <y>312</y>
     </hint>
     <hint type="destinationlabel">
      <x>654</x>
-     <y>35</y>
+     <y>311</y>
     </hint>
    </hints>
   </connection>
@@ -1882,11 +1857,11 @@ v%1
    <hints>
     <hint type="sourcelabel">
      <x>765</x>
-     <y>90</y>
+     <y>407</y>
     </hint>
     <hint type="destinationlabel">
      <x>654</x>
-     <y>84</y>
+     <y>401</y>
     </hint>
    </hints>
   </connection>
@@ -1897,12 +1872,12 @@ v%1
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>369</x>
-     <y>-101</y>
+     <x>331</x>
+     <y>12</y>
     </hint>
     <hint type="destinationlabel">
-     <x>224</x>
-     <y>-101</y>
+     <x>231</x>
+     <y>12</y>
     </hint>
    </hints>
   </connection>
@@ -1913,12 +1888,12 @@ v%1
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>369</x>
-     <y>-75</y>
+     <x>331</x>
+     <y>12</y>
     </hint>
     <hint type="destinationlabel">
-     <x>224</x>
-     <y>-75</y>
+     <x>231</x>
+     <y>12</y>
     </hint>
    </hints>
   </connection>
@@ -1929,12 +1904,12 @@ v%1
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>369</x>
-     <y>-71</y>
+     <x>331</x>
+     <y>12</y>
     </hint>
     <hint type="destinationlabel">
-     <x>224</x>
-     <y>-71</y>
+     <x>231</x>
+     <y>12</y>
     </hint>
    </hints>
   </connection>
@@ -1945,12 +1920,12 @@ v%1
    <slot>setValueForce(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>224</x>
-     <y>-101</y>
+     <x>231</x>
+     <y>12</y>
     </hint>
     <hint type="destinationlabel">
-     <x>369</x>
-     <y>-101</y>
+     <x>331</x>
+     <y>12</y>
     </hint>
    </hints>
   </connection>
@@ -1961,12 +1936,12 @@ v%1
    <slot>setValueForce(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>224</x>
-     <y>-75</y>
+     <x>231</x>
+     <y>12</y>
     </hint>
     <hint type="destinationlabel">
-     <x>369</x>
-     <y>-75</y>
+     <x>331</x>
+     <y>12</y>
     </hint>
    </hints>
   </connection>
@@ -1977,12 +1952,44 @@ v%1
    <slot>setValueForce(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>224</x>
-     <y>-71</y>
+     <x>231</x>
+     <y>12</y>
     </hint>
     <hint type="destinationlabel">
-     <x>369</x>
-     <y>-71</y>
+     <x>331</x>
+     <y>12</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>flashSpeedSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>flashSpeedBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>609</x>
+     <y>73</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>702</x>
+     <y>81</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>flashSpeedBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>flashSpeedSlider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>714</x>
+     <y>55</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>597</x>
+     <y>70</y>
     </hint>
    </hints>
   </connection>
