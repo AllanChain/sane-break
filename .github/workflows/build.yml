@@ -204,6 +204,62 @@ jobs:
          name: "sane-break-${{ matrix.tag }}"
          path: ./release/*
 
+  build-appimage:
+    name: Build (Linux, AppImage)
+    needs: test
+    runs-on: ubuntu-latest
+    container:
+      image: debian:trixie
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        apt-get update
+        apt-get install -y nodejs g++ cmake wget file \
+          qt6-base-dev qt6-multimedia-dev qt6-tools-dev \
+          qt6-wayland-dev qt6-wayland qt6-base-private-dev \
+          liblayershellqtinterface-dev
+
+    - name: Install linuxdeploy
+      run: |
+        wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage -O ~/linuxdeploy
+        wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage -O ~/linuxdeploy-qt
+        chmod u+x ~/linuxdeploy ~/linuxdeploy-qt
+
+    - name: Build Project
+      run: |
+        mkdir build
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
+        cmake --build . --parallel
+
+    - name: Packing
+      run: |
+        cd build
+        cmake --install . --prefix AppDir/usr
+        cp AppDir/usr/share/metainfo/io.github.AllanChain.sane-break.metainfo.xml \
+           AppDir/usr/share/metainfo/io.github.AllanChain.sane-break.appdata.xml
+        ~/linuxdeploy-qt --appdir AppDir --extra-module waylandcompositor || true
+        ~/linuxdeploy --appdir AppDir --output appimage --deploy-deps-only=AppDir/usr/lib/sane-break
+        mkdir ../release
+        cp Sane_Break-x86_64.AppImage ../release/sane-break.AppImage
+      env:
+        APPIMAGE_EXTRACT_AND_RUN: 1
+        EXTRA_PLATFORM_PLUGINS: libqwayland-egl.so;libqwayland-generic.so
+
+    - name: Attestation
+      uses: actions/attest-build-provenance@v2
+      with:
+        subject-path: ./release/*
+
+    - name: Create Artifact
+      uses: actions/upload-artifact@v4
+      with:
+         name: "sane-break-appimage"
+         path: ./release/*
+
   build-gnome:
     name: Build GNOME shell extension
     needs: test
@@ -227,7 +283,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    needs: [build-macos, build-windows, build-debian, build-gnome]
+    needs: [build-macos, build-windows, build-debian, build-appimage, build-gnome]
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - uses: actions/checkout@v4
@@ -243,17 +299,27 @@ jobs:
           body: |
             ## What's new
 
-            ## Installation instructions
+            To be written.
 
-            ### macOS
+            ---
 
-            Download `sane-break-macos-x86_64.dmg` file if you are using Intel mac, or `sane-break-macos-arm64` if you are using ARM chip. Open and install it. macOS 13 or newer are supported.
+            Installation instructions:
 
-            ### Windows
+            <details>
+            <summary>macOS</summary>
+
+            Download `sane-break-macos-x86_64.dmg` file if you are using Intel mac, or `sane-break-macos-arm64.dmg` if you are using ARM chip. Open and install it. macOS 13 or newer are supported.
+            </details>
+
+            <details>
+            <summary>Windows</summary>
 
             Download the `sane-break-windows.zip` extract it. Put the `.exe` executable anywhere you like. x86 version of Windows 10 or newer is supported. Older versions may be supported too.
 
-            ### Linux
+            </details>
+
+            <details>
+            <summary>Linux</summary>
 
             If you are using X11, `sane-break-x11.deb` is for you.
 
@@ -261,4 +327,7 @@ jobs:
             ```bash
             gnome-extensions enable sane-break@allanchain.github.io
             ```
-            The difference between Wayland Bookworm build and Trixie build is the layer shell support. If you are using a Debian-based distro and a Wayland compositor with layer shell protocol support (e.g. KDE Neon), you probably need the Debian Trixie build. Otherwise, the Bookworm build is good to go.
+            The difference between Wayland Ubuntu Oracular build and Debian Trixie build is the layer shell support. If you are using a Debian-based distro and a Wayland compositor with layer shell protocol support (e.g. KDE Neon), you probably need the Debian Trixie build. Otherwise, the Ubuntu Oracular build is good to go.
+
+            AppImage version is experimental. It may or may not work on your machine.
+            </details>

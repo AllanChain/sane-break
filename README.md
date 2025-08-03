@@ -129,6 +129,10 @@ gnome-extensions enable sane-break@allanchain.github.io
 
 You can contribute to the package by submitting PR to https://github.com/AllanChain/sane-break.spec
 
+##### AppImage version
+
+Starting from `v0.9.0`, Sane Break also provides an experimental AppImage binary. It has several known limitations such as doesn't respect system themes. We are open to contributions to improve the AppImage version.
+
 #### Compiling from source
 
 Assume all required packages described below is installed, you can use the following commands to compile and install Sane Break.
