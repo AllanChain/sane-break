@@ -45,12 +45,12 @@ BreakWindows::BreakWindows(QObject *parent) : AbstractBreakWindows(parent) {
   if (QGuiApplication::platformName() == "wayland" && LinuxSystemSupport::layerShell) {
     QPluginLoader loader("libsanebreak_layer_shell");
     if (!loader.load()) {
-      qWarning("Fail to find layer-shell plugin. Window layout may go wrong.");
+      qWarning() << "Fail to load layer-shell plugin. Window layout may go wrong:"
+                 << loader.errorString();
     } else {
       layerShell = qobject_cast<LayerShellInterface *>(loader.instance());
       if (!layerShell) {
-        qWarning("Fail to load layer-shell plugin. Window layout may go wrong.");
-      } else {
+        qWarning("Fail to instantiate layer-shell plugin. Window layout may go wrong.");
       }
     }
   }

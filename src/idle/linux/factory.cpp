@@ -25,30 +25,30 @@ SystemIdleTime* createLinuxIdleTimer(QObject* parent) {
       QPluginLoader loader(SANE_BREAK_LIB_PREFIX "gnome");
       if (!loader.load()) {
         qCritical() << loader.errorString();
-        qFatal("Fail to find GNOME idle time plugin.");
+        qFatal("Fail to load GNOME idle time plugin.");
       }
       auto reader = qobject_cast<IdleTimeReaderInterface*>(loader.instance());
-      if (!reader) qFatal("Fail to load GNOME idle time plugin.");
+      if (!reader) qFatal("Fail to instantiate GNOME idle time plugin.");
       reader->setParent(parent);
       return new ReadBasedIdleTime(parent, [reader]() { return reader->read(); });
     }
     QPluginLoader loader(SANE_BREAK_LIB_PREFIX "wayland");
     if (!loader.load()) {
       qCritical() << loader.errorString();
-      qFatal("Fail to find Wayland idle time plugin.");
+      qFatal("Fail to load Wayland idle time plugin.");
     }
     auto reader = qobject_cast<IdleTimeInterface*>(loader.instance());
-    if (!reader) qFatal("Fail to load Wayland idle time plugin.");
+    if (!reader) qFatal("Fail to instantiate Wayland idle time plugin.");
     reader->setParent(parent);
     return reader;
   } else {
     QPluginLoader loader(SANE_BREAK_LIB_PREFIX "x11");
     if (!loader.load()) {
       qCritical() << loader.errorString();
-      qFatal("Fail to find X11 idle time plugin.");
+      qFatal("Fail to load X11 idle time plugin.");
     }
     auto reader = qobject_cast<IdleTimeReaderInterface*>(loader.instance());
-    if (!reader) qFatal("Fail to load X11 idle time plugin.");
+    if (!reader) qFatal("Fail to instantiate X11 idle time plugin.");
     reader->setParent(parent);
     return new ReadBasedIdleTime(parent, [reader]() { return reader->read(); });
   }
