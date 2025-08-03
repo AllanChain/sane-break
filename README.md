@@ -113,6 +113,22 @@ gnome-extensions enable sane-break@allanchain.github.io
 
 The difference between Wayland Ubuntu Oracular build and Debian Trixie build is the layer shell support. If you are using a Debian-based distro and a Wayland compositor with layer shell protocol support (e.g. KDE Neon), you probably need the Debian Trixie build. Otherwise, the Ubuntu Oracular build is good to go.
 
+##### RPM packages from Copr
+
+If you are using Fedora or similar distros, you can install Sane Break from [Copr](https://copr.fedorainfracloud.org/coprs/allanchain/sane-break/):
+
+```bash
+sudo dnf copr enable allanchain/sane-break
+sudo dnf install sane-break
+```
+
+For GNOME users, sure to enable the GNOME shell extension with:
+```bash
+gnome-extensions enable sane-break@allanchain.github.io
+```
+
+You can contribute to the package by submitting PR to https://github.com/AllanChain/sane-break.spec
+
 #### Compiling from source
 
 Assume all required packages described below is installed, you can use the following commands to compile and install Sane Break.
