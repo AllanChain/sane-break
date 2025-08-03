@@ -26,6 +26,7 @@
 
 #include "config.h"
 #include "core/break-windows.h"
+#include "lib/utils.h"
 #include "ui_break-window.h"
 
 #ifdef Q_OS_LINUX
@@ -110,8 +111,12 @@ void BreakWindow::colorChanged() {
 }
 
 void BreakWindow::setTime(int remainingTime, QString estimatedEndTime) {
-  ui->countDownLabel->setText(QString("%1").arg(remainingTime));
   m_progressAnim->setCurrentTime((m_totalSeconds - remainingTime) * 1000);
+  if (m_totalSeconds <= 60) {
+    ui->countDownLabel->setText(QString("%1").arg(remainingTime));
+  } else {
+    ui->countDownLabel->setText(formatTime(remainingTime));
+  }
   if (remainingTime > 0) {
     ui->breakEndTimeLabel->setText(tr("Break will end at: %1").arg(estimatedEndTime));
   } else {
