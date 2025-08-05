@@ -206,27 +206,49 @@ jobs:
 
   build-appimage:
     name: Build (Linux, AppImage)
-    needs: test
-    runs-on: ubuntu-latest
-    container:
-      image: debian:trixie
+    # It's recommended to support old Ubuntu LTS for AppImages.
+    runs-on: ubuntu-22.04
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-    - name: Install dependencies
+    - name: Install Wayland & X11
       run: |
-        apt-get update
-        apt-get install -y nodejs g++ cmake wget file \
-          qt6-base-dev qt6-multimedia-dev qt6-tools-dev \
-          qt6-wayland-dev qt6-wayland qt6-base-private-dev \
-          liblayershellqtinterface-dev
+        sudo apt update
+        sudo apt install -y libwayland-dev wayland-protocols libxss-dev
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v4
+      with:
+        version: 6.9.1
+        dir: ..
+        modules: qtmultimedia
+        setup-python: false
+        cache: true
+
+    - name: Install extra-cmake-modules
+      working-directory: ..
+      run: |
+        git clone https://github.com/KDE/extra-cmake-modules --branch v6.16.0
+        cd extra-cmake-modules
+        cmake .
+        cmake --build . --parallel
+        sudo cmake --install .
+
+    - name: Install layer-shell-qt
+      working-directory: ..
+      run: |
+        git clone https://github.com/KDE/layer-shell-qt --branch v6.4.3
+        cd layer-shell-qt
+        cmake -DCMAKE_INSTALL_PREFIX=/usr .
+        cmake --build . --parallel
+        sudo cmake --install .
 
     - name: Install linuxdeploy
+      working-directory: ..
       run: |
-        wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage -O ~/linuxdeploy
-        wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage -O ~/linuxdeploy-qt
-        chmod u+x ~/linuxdeploy ~/linuxdeploy-qt
+        wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+        wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
+        chmod u+x *.AppImage
 
     - name: Build Project
       run: |
@@ -240,14 +262,14 @@ jobs:
         cd build
         cmake --install . --prefix AppDir/usr
         cp AppDir/usr/share/metainfo/io.github.AllanChain.sane-break.metainfo.xml \
-           AppDir/usr/share/metainfo/io.github.AllanChain.sane-break.appdata.xml
-        ~/linuxdeploy-qt --appdir AppDir --extra-module waylandcompositor || true
-        ~/linuxdeploy --appdir AppDir --output appimage --deploy-deps-only=AppDir/usr/lib/sane-break
+          AppDir/usr/share/metainfo/io.github.AllanChain.sane-break.appdata.xml
+        ../../linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage \
+          --plugin qt --deploy-deps-only=AppDir/usr/lib/sane-break
         mkdir ../release
         cp Sane_Break-x86_64.AppImage ../release/sane-break.AppImage
       env:
-        APPIMAGE_EXTRACT_AND_RUN: 1
         EXTRA_PLATFORM_PLUGINS: libqwayland-egl.so;libqwayland-generic.so
+        EXTRA_QT_MODULES: waylandcompositor
 
     - name: Attestation
       uses: actions/attest-build-provenance@v2
