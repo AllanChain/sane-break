@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
       msgBox.setIcon(QMessageBox::Icon::Question);
       msgBox.addButton(QMessageBox::No);
       msgBox.addButton(QMessageBox::Yes);
-      if (msgBox.exec()) return 1;
+      if (msgBox.exec() == QDialog::Rejected) return 1;
     }
   }
 
