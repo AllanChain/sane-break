@@ -49,8 +49,9 @@ int main(int argc, char *argv[]) {
   if (!lock.tryLock()) {
     if (lock.error() == QLockFile::LockFailedError) {
       QMessageBox msgBox;
-      msgBox.setText(a.tr("Another instance of Sane Break is running."));
-      msgBox.setInformativeText(a.tr("Do you want to start anyway?"));
+      msgBox.setText(
+          QCoreApplication::tr("Another instance of Sane Break is running."));
+      msgBox.setInformativeText(QCoreApplication::tr("Do you want to start anyway?"));
       msgBox.setIcon(QMessageBox::Icon::Question);
       msgBox.addButton(QMessageBox::No);
       msgBox.addButton(QMessageBox::Yes);

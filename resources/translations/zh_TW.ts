@@ -620,6 +620,16 @@ v%1
         <source>You need to install the shell extension if you are using GNOME. Otherwise, Sane break is almost unusable</source>
         <translation>如果你在使用 GNOME，那麼需要安裝對應的 shell 擴展，否則 Sane Break 不能正常使用</translation>
     </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="53"/>
+        <source>Another instance of Sane Break is running.</source>
+        <translation>另一個 Sane Break 實例正在運行。</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="54"/>
+        <source>Do you want to start anyway?</source>
+        <translation>是否仍要運行？</translation>
+    </message>
 </context>
 <context>
     <name>SaneBreakApp</name>
