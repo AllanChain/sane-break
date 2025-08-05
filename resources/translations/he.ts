@@ -53,12 +53,12 @@
 <context>
     <name>BreakWindow</name>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="116"/>
+        <location filename="../../src/app/break-window.cpp" line="121"/>
         <source>Break will end at: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="118"/>
+        <location filename="../../src/app/break-window.cpp" line="123"/>
         <source>Break has ended</source>
         <translation type="unfinished"></translation>
     </message>
@@ -97,14 +97,14 @@
         <translation>על אודות</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1269"/>
-        <location filename="../../src/app/pref-window.ui" line="1307"/>
+        <location filename="../../src/app/pref-window.ui" line="1304"/>
+        <location filename="../../src/app/pref-window.ui" line="1342"/>
         <source>Bell before breaks</source>
         <translation>צלצול פעמונים לפני הפסקות</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1238"/>
-        <location filename="../../src/app/pref-window.ui" line="1335"/>
+        <location filename="../../src/app/pref-window.ui" line="1273"/>
+        <location filename="../../src/app/pref-window.ui" line="1370"/>
         <source>Bell after breaks</source>
         <translation>צלצול פעמונים אחרי הפסקות</translation>
     </message>
@@ -169,23 +169,33 @@
         <translation type="unfinished">אשר את הפסקה לאחר</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="740"/>
+        <location filename="../../src/app/pref-window.ui" line="676"/>
+        <source>Close windows right after small break ends</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="683"/>
+        <source>Close windows right after big break ends</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="709"/>
         <source>Flash speed</source>
         <translation type="unfinished">מהירות הבזק</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="782"/>
-        <location filename="../../src/app/pref-window.ui" line="815"/>
+        <location filename="../../src/app/pref-window.ui" line="764"/>
+        <location filename="../../src/app/pref-window.ui" line="797"/>
         <source>(One line per message)</source>
         <translation type="unfinished">(שורה אחת לכל הודעה)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="789"/>
+        <location filename="../../src/app/pref-window.ui" line="771"/>
         <source>Big break prompt messages:</source>
         <translation type="unfinished">הודעות תזכורת לפסקות גדולות:</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="799"/>
+        <location filename="../../src/app/pref-window.ui" line="781"/>
         <source>Small break prompt messages:</source>
         <translation type="unfinished">הודעות תזכורת לפסקות קטנות:</translation>
     </message>
@@ -205,91 +215,91 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="676"/>
-        <source>Close windows right after break ends</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/pref-window.ui" line="824"/>
+        <location filename="../../src/app/pref-window.ui" line="806"/>
         <source>&lt;h3&gt;Components to Show&lt;/h3&gt;
 
 &lt;p&gt;User interface components to show in the prompt and full-screen window.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="835"/>
+        <location filename="../../src/app/pref-window.ui" line="831"/>
+        <location filename="../../src/app/pref-window.ui" line="877"/>
         <source>Time when break ends</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="842"/>
+        <location filename="../../src/app/pref-window.ui" line="852"/>
+        <location filename="../../src/app/pref-window.ui" line="898"/>
         <source>Countdown timer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="849"/>
+        <location filename="../../src/app/pref-window.ui" line="824"/>
+        <location filename="../../src/app/pref-window.ui" line="870"/>
         <source>Progress bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="856"/>
+        <location filename="../../src/app/pref-window.ui" line="838"/>
+        <location filename="../../src/app/pref-window.ui" line="884"/>
         <source>Clock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="863"/>
+        <location filename="../../src/app/pref-window.ui" line="845"/>
+        <location filename="../../src/app/pref-window.ui" line="891"/>
         <source>Buttons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="872"/>
+        <location filename="../../src/app/pref-window.ui" line="907"/>
         <source>&lt;h3&gt;Color Theme&lt;/h3&gt;
 All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
         <translation type="unfinished">&lt;h3&gt;ערכת צבעים&lt;/h3&gt;
 כל הצבעים בפורמט &lt;code&gt;#AARRGGBB&lt;/code&gt;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="956"/>
+        <location filename="../../src/app/pref-window.ui" line="991"/>
         <source>Big break</source>
         <translation>הפסקה גדולה</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="925"/>
+        <location filename="../../src/app/pref-window.ui" line="960"/>
         <source>Message</source>
         <translation type="unfinished">הודעה</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="963"/>
+        <location filename="../../src/app/pref-window.ui" line="998"/>
         <source>Small break</source>
         <translation type="unfinished">הפסקה קטנה</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="932"/>
+        <location filename="../../src/app/pref-window.ui" line="967"/>
         <source>Background</source>
         <translation type="unfinished">רקע</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="939"/>
+        <location filename="../../src/app/pref-window.ui" line="974"/>
         <source>Count down</source>
         <translation type="unfinished">ספירה לאחור</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1003"/>
+        <location filename="../../src/app/pref-window.ui" line="1038"/>
         <source>&lt;h3&gt;Pause Conditions&lt;/h3&gt;</source>
         <translation type="unfinished">&lt;h3&gt;תנאי השהייה&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1156"/>
+        <location filename="../../src/app/pref-window.ui" line="1191"/>
         <source>Long pause threshold</source>
         <translation type="unfinished">סף השהייה ארוכה</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1210"/>
+        <location filename="../../src/app/pref-window.ui" line="1245"/>
         <source>Short pause threshold</source>
         <translation type="unfinished">סף השהייה קצרה</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1422"/>
+        <location filename="../../src/app/pref-window.ui" line="1457"/>
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
@@ -299,7 +309,7 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
 ההפסקה. אם ההפסקה ארוכה מ-2 דקות, המסך י נעול בכל מקרה.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1427"/>
+        <location filename="../../src/app/pref-window.ui" line="1462"/>
         <source>Automatic screen lock after break start</source>
         <translation type="unfinished">נעילת מסך אוטומטית לאחר תחילת ההפסקה</translation>
     </message>
@@ -308,12 +318,12 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
         <translation type="obsolete">יש להעניק הרשאת נגישות ו рестארט את האפליקציה כדי להשתמש בנעילת מסך אוטומטית</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1405"/>
+        <location filename="../../src/app/pref-window.ui" line="1440"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;עזרו לנו לתרגם!&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1544"/>
+        <location filename="../../src/app/pref-window.ui" line="1579"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -347,71 +357,67 @@ v%1
         <translation type="unfinished">דחה דקות</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="687"/>
+        <location filename="../../src/app/pref-window.ui" line="694"/>
         <source>&lt;h3&gt;Prompt Appearance&lt;/h3&gt;</source>
         <translation type="unfinished">&lt;h3&gt;мַראה&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="704"/>
         <source>Off</source>
         <extracomment>Tick for flash speed</extracomment>
-        <translation type="unfinished">כבוי</translation>
+        <translation type="obsolete">כבוי</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="711"/>
         <source>Slower</source>
         <extracomment>Tick for flash speed</extracomment>
-        <translation type="unfinished">יותר לאט</translation>
+        <translation type="obsolete">יותר לאט</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="718"/>
         <source>Default</source>
         <extracomment>Tick for flash speed</extracomment>
-        <translation type="unfinished">ברירת מחדל</translation>
+        <translation type="obsolete">ברירת מחדל</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="728"/>
         <source>Faster</source>
         <extracomment>Tick for flash speed</extracomment>
-        <translation type="unfinished">מהיר יותר</translation>
+        <translation type="obsolete">מהיר יותר</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1235"/>
-        <location filename="../../src/app/pref-window.ui" line="1266"/>
+        <location filename="../../src/app/pref-window.ui" line="1270"/>
+        <location filename="../../src/app/pref-window.ui" line="1301"/>
         <source>Try restart Sane Break if no sound</source>
         <translation type="unfinished">נסה לעדכן את Sane Break אם אין צליל</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1252"/>
-        <location filename="../../src/app/pref-window.ui" line="1259"/>
-        <location filename="../../src/app/pref-window.ui" line="1314"/>
-        <location filename="../../src/app/pref-window.ui" line="1321"/>
+        <location filename="../../src/app/pref-window.ui" line="1287"/>
+        <location filename="../../src/app/pref-window.ui" line="1294"/>
+        <location filename="../../src/app/pref-window.ui" line="1349"/>
+        <location filename="../../src/app/pref-window.ui" line="1356"/>
         <source>Play</source>
         <translation type="unfinished">נגן</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1012"/>
+        <location filename="../../src/app/pref-window.ui" line="1047"/>
         <source>Sane Break will pause if it detects no activity for this many minutes</source>
         <extracomment>Tooltip for &quot;Pause if idle for&quot; config</extracomment>
         <translation type="unfinished">Sane Break יושעה אם הוא מאתר שאין פעולה למשך מספר דקות אלו</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1015"/>
+        <location filename="../../src/app/pref-window.ui" line="1050"/>
         <source>Pause if idle for</source>
         <translation type="unfinished">השעה אם אין פעולה למשך</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="268"/>
-        <location filename="../../src/app/pref-window.ui" line="1226"/>
+        <location filename="../../src/app/pref-window.ui" line="1261"/>
         <source>&lt;h3&gt;Small Breaks&lt;/h3&gt;</source>
         <translation type="unfinished">&lt;h3&gt;הפסקות קטנות&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="328"/>
         <location filename="../../src/app/pref-window.ui" line="419"/>
-        <location filename="../../src/app/pref-window.ui" line="1056"/>
-        <location filename="../../src/app/pref-window.ui" line="1140"/>
-        <location filename="../../src/app/pref-window.ui" line="1194"/>
+        <location filename="../../src/app/pref-window.ui" line="1091"/>
+        <location filename="../../src/app/pref-window.ui" line="1175"/>
+        <location filename="../../src/app/pref-window.ui" line="1229"/>
         <source> min</source>
         <translation type="unfinished">דקה</translation>
     </message>
@@ -429,13 +435,13 @@ v%1
         <translation type="unfinished">אורך הפסקה</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1347"/>
+        <location filename="../../src/app/pref-window.ui" line="1382"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: You can use local sound files with URLs like &lt;code&gt;file:/D:sound.mp3&lt;/code&gt;  (Windows) or &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</source>
         <translation type="unfinished">&lt;strong&gt;טיפ&lt;/strong&gt;: ניתן להשתמש בקבצי צליל מקומיים עם כתובות כמו &lt;code&gt;file:/D:sound.mp3&lt;/code&gt;  (וינדוס) או &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (לינוקס).</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="384"/>
-        <location filename="../../src/app/pref-window.ui" line="1285"/>
+        <location filename="../../src/app/pref-window.ui" line="1320"/>
         <source>&lt;h3&gt;Big Breaks&lt;/h3&gt;</source>
         <translation type="unfinished">&lt;h3&gt;הפסקות גדולות&lt;/h3&gt;</translation>
     </message>
@@ -452,32 +458,42 @@ v%1
 &lt;p&gt;Sane Break מציג תזכורת קטנה למשך &lt;b&gt;%1&lt;/b&gt; שניות. אם אתה עוצר את הפעילות שלך בזמן זה, או שאתה בוחר להמשיך עד שהטיימר נגמר, הוא עובר למצב מסך מלא. במהלך ההפסקה, Sane Break נעול במצב מסך מלא לאחר &lt;b&gt;%2&lt;/b&gt; שניות של חוסר פעולה. אם אתה מתאפס לפעילות לפני הנעילה, התזכורת מצטמצמת לחלון קטן באופן זמני אך מתרחבת שוב למצב מסך מלא כאשר אתה חוסר פעילות או שהטיימר נגמר.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="979"/>
+        <location filename="../../src/app/pref-window.ui" line="815"/>
+        <source>&lt;h4&gt;Small break&lt;/h4&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="861"/>
+        <source>&lt;h4&gt;Big break&lt;/h4&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1014"/>
         <source>&lt;p&gt;To preview break windows, save all changes first. The preview begins with a 2-second flashing prompt, followed by a 4-second full-screen break. A small break window will appear first, then a big break window.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="989"/>
+        <location filename="../../src/app/pref-window.ui" line="1024"/>
         <source>Preview Break Windows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1074"/>
+        <location filename="../../src/app/pref-window.ui" line="1109"/>
         <source>Pause on battery</source>
         <translation type="unfinished">השעה עקב סוללה</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1081"/>
+        <location filename="../../src/app/pref-window.ui" line="1116"/>
         <source>Pause breaks when any of the following program is running:</source>
         <translation type="unfinished">השהה הפסקות כאשר אחד מהתוכנות הבאות רץ:</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1088"/>
+        <location filename="../../src/app/pref-window.ui" line="1123"/>
         <source>(Write one program name per line)</source>
         <translation type="unfinished">(כתוב שם תוכנה אחת לשורה)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1095"/>
+        <location filename="../../src/app/pref-window.ui" line="1130"/>
         <source>&lt;h3&gt;Reset Break Schedule After Pause&lt;/h3&gt;
 &lt;p&gt;Sane Break will adjust the break schedule after pausing:&lt;/p&gt;
 &lt;ul&gt;
@@ -492,47 +508,47 @@ v%1
 &lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1373"/>
+        <location filename="../../src/app/pref-window.ui" line="1408"/>
         <source>Configuration file</source>
         <translation type="unfinished">קובץ הגדרות</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1442"/>
+        <location filename="../../src/app/pref-window.ui" line="1477"/>
         <source>Launch Sane Break at start up</source>
         <translation type="unfinished">הפעל את Sane Break בעת הפעלה</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1568"/>
+        <location filename="../../src/app/pref-window.ui" line="1603"/>
         <source>Get the Source Code</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1623"/>
+        <location filename="../../src/app/pref-window.ui" line="1658"/>
         <source>Revert to Last Saved</source>
         <translation type="unfinished">שחזר להגדרות האחרונות שנשמרו</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1366"/>
+        <location filename="../../src/app/pref-window.ui" line="1401"/>
         <source>Language</source>
         <translation type="unfinished">שפה</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1392"/>
+        <location filename="../../src/app/pref-window.ui" line="1427"/>
         <source>Change of language will take effect after app restart.</source>
         <translation type="unfinished">שינוי השפה ייכנס לתוקף לאחר הפעלה מחדש של האפליקציה</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1588"/>
+        <location filename="../../src/app/pref-window.ui" line="1623"/>
         <source>Third-party Libraries Licenses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1630"/>
+        <location filename="../../src/app/pref-window.ui" line="1665"/>
         <source>Defaults</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1653"/>
+        <location filename="../../src/app/pref-window.ui" line="1688"/>
         <source>Save</source>
         <translation type="unfinished">שמור</translation>
     </message>
@@ -540,9 +556,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="378"/>
-        <location filename="../../src/app/pref-window.cpp" line="379"/>
-        <location filename="../../src/app/pref-window.cpp" line="380"/>
+        <location filename="../../src/app/pref-window.cpp" line="399"/>
+        <location filename="../../src/app/pref-window.cpp" line="400"/>
+        <location filename="../../src/app/pref-window.cpp" line="401"/>
         <source>%n min</source>
         <translation type="unfinished">
             <numerusform>%n דקה</numerusform>
@@ -559,7 +575,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="377"/>
+        <location filename="../../src/app/pref-window.cpp" line="398"/>
         <source>%n sec</source>
         <translation type="unfinished">
             <numerusform>%n שניות</numerusform>
@@ -567,47 +583,47 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="376"/>
+        <location filename="../../src/app/pref-window.cpp" line="397"/>
         <source>Disabled</source>
         <translation type="unfinished">מושבת</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="387"/>
+        <location filename="../../src/app/pref-window.cpp" line="408"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation type="unfinished">התחל את ההפסקה הבאה לאחר לחיצה אמצעית בסמל במקלדת</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="392"/>
+        <location filename="../../src/app/pref-window.cpp" line="413"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation type="unfinished">התחל את ההפסקה הבאה לאחר לחיצה כפולה בסמל במקלדת</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="460"/>
+        <location filename="../../src/app/pref-window.cpp" line="481"/>
         <source>Save</source>
         <translation type="unfinished">שמור</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="461"/>
+        <location filename="../../src/app/pref-window.cpp" line="482"/>
         <source>Discard</source>
         <translation type="unfinished">בטל</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="462"/>
+        <location filename="../../src/app/pref-window.cpp" line="483"/>
         <source>Cancel</source>
         <translation type="unfinished">ביטול</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="352"/>
+        <location filename="../../src/app/pref-window.cpp" line="373"/>
         <source>Setting autostart failed</source>
         <translation type="unfinished">הגדרת ההפעלה האוטומטית נכשלה</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="457"/>
+        <location filename="../../src/app/pref-window.cpp" line="478"/>
         <source>The preferences have been modified.</source>
         <translation type="unfinished">ההעדפות שונו</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="458"/>
+        <location filename="../../src/app/pref-window.cpp" line="479"/>
         <source>Do you want to save your changes?</source>
         <translation type="unfinished">האם ברצונך לשמור את השינויים?</translation>
     </message>
