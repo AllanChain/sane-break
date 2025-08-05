@@ -209,9 +209,13 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
   controllers->add(PrefGroup::Reminder,
                    new PrefController<QSpinBox, int>(ui->maxForceBreakExits,
                                                      preferences->maxForceBreakExits));
+  controllers->add(
+      PrefGroup::Reminder,
+      new PrefController<QCheckBox, bool>(ui->autoCloseWindowAfterSmallBreak,
+                                          preferences->autoCloseWindowAfterSmallBreak));
   controllers->add(PrefGroup::Reminder, new PrefController<QCheckBox, bool>(
-                                            ui->autoCloseWindowAfterBreak,
-                                            preferences->autoCloseWindowAfterBreak));
+                                            ui->autoCloseWindowAfterBigBreak,
+                                            preferences->autoCloseWindowAfterBigBreak));
 
   /***************************************************************************
    *                                                                         *
@@ -245,20 +249,37 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
                    new PrefController<QPlainTextEdit, QStringList>(
                        ui->bigBreakMessages, preferences->bigMessages));
 
-  controllers->add(PrefGroup::Interface,
-                   new PrefController<QCheckBox, bool>(ui->showProgressBar,
-                                                       preferences->showProgressBar));
-  controllers->add(PrefGroup::Interface,
-                   new PrefController<QCheckBox, bool>(ui->showCountdown,
-                                                       preferences->showCountdown));
   controllers->add(PrefGroup::Interface, new PrefController<QCheckBox, bool>(
-                                             ui->showClock, preferences->showClock));
-  controllers->add(
-      PrefGroup::Interface,
-      new PrefController<QCheckBox, bool>(ui->showEndTime, preferences->showEndTime));
-  controllers->add(
-      PrefGroup::Interface,
-      new PrefController<QCheckBox, bool>(ui->showButtons, preferences->showButtons));
+                                             ui->smallBreakShowProgressBar,
+                                             preferences->smallBreakShowProgressBar));
+  controllers->add(PrefGroup::Interface, new PrefController<QCheckBox, bool>(
+                                             ui->smallBreakShowCountdown,
+                                             preferences->smallBreakShowCountdown));
+  controllers->add(PrefGroup::Interface,
+                   new PrefController<QCheckBox, bool>(ui->smallBreakShowClock,
+                                                       preferences->bigBreakShowClock));
+  controllers->add(PrefGroup::Interface,
+                   new PrefController<QCheckBox, bool>(
+                       ui->smallBreakShowEndTime, preferences->bigBreakShowEndTime));
+  controllers->add(PrefGroup::Interface,
+                   new PrefController<QCheckBox, bool>(
+                       ui->smallBreakShowButtons, preferences->bigBreakShowButtons));
+
+  controllers->add(PrefGroup::Interface, new PrefController<QCheckBox, bool>(
+                                             ui->bigBreakShowProgressBar,
+                                             preferences->bigBreakShowProgressBar));
+  controllers->add(PrefGroup::Interface,
+                   new PrefController<QCheckBox, bool>(
+                       ui->bigBreakShowCountdown, preferences->bigBreakShowCountdown));
+  controllers->add(PrefGroup::Interface,
+                   new PrefController<QCheckBox, bool>(ui->bigBreakShowClock,
+                                                       preferences->bigBreakShowClock));
+  controllers->add(PrefGroup::Interface,
+                   new PrefController<QCheckBox, bool>(
+                       ui->bigBreakShowEndTime, preferences->bigBreakShowEndTime));
+  controllers->add(PrefGroup::Interface,
+                   new PrefController<QCheckBox, bool>(
+                       ui->bigBreakShowButtons, preferences->bigBreakShowButtons));
 
   /***************************************************************************
    *                                                                         *

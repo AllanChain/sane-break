@@ -213,7 +213,12 @@ void BreakPhaseFullScreen::tick(AppContext *app, AppStateBreak *breakState) {
     app->breakWindows->playExitSound(app->data->breakType(), app->preferences);
     app->data->finishAndStartNextCycle();
     if (app->idleTimer->isIdle()) {
-      if (!app->preferences->autoCloseWindowAfterBreak->get()) {
+      bool shouldCloseWindow =
+          (app->data->breakType() == SaneBreak::BreakType::Small &&
+           app->preferences->autoCloseWindowAfterSmallBreak->get()) ||
+          (app->data->breakType() == SaneBreak::BreakType::Big &&
+           app->preferences->autoCloseWindowAfterBigBreak->get());
+      if (!shouldCloseWindow) {
         // Leave break window open until user activities
         breakState->transitionTo(app, std::make_unique<BreakPhasePost>());
       } else {
@@ -249,7 +254,7 @@ void BreakPhaseFullScreen::showWindowClickableWidgets(AppContext *app) {
 }
 
 void BreakPhasePost::enter(AppContext *app, AppStateBreak *) {
-  app->breakWindows->showButtons(AbstractBreakWindows::Button::LockScreen, false);
+  app->breakWindows->showButtons(AbstractBreakWindows::Button::ExitForceBreak, false);
 }
 void BreakPhasePost::onIdleEnd(AppContext *app, AppStateBreak *) {
   app->screenLockTimer->stop();

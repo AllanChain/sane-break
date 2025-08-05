@@ -52,14 +52,28 @@ SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
     return QStringList({tr("Time for a big break")});
   });
   maxForceBreakExits = new Setting<int>(settings, "break/max-force-break-exits", 2);
-  autoCloseWindowAfterBreak =
-      new Setting<bool>(settings, "break/auto-close-window-after-break", true);
+  autoCloseWindowAfterSmallBreak =
+      new Setting<bool>(settings, "break/auto-close-window-after-small-break", true);
+  autoCloseWindowAfterBigBreak =
+      new Setting<bool>(settings, "break/auto-close-window-after-big-break", true);
 
-  showProgressBar = new Setting<bool>(settings, "ui/show-progress-bar", true);
-  showCountdown = new Setting<bool>(settings, "ui/show-countdown", true);
-  showClock = new Setting<bool>(settings, "ui/show-clock", false);
-  showEndTime = new Setting<bool>(settings, "ui/show-end-time", false);
-  showButtons = new Setting<bool>(settings, "ui/show-buttons", true);
+  smallBreakShowProgressBar =
+      new Setting<bool>(settings, "ui/small-break-show-progress-bar", true);
+  smallBreakShowCountdown =
+      new Setting<bool>(settings, "ui/small-break-show-countdown", true);
+  smallBreakShowClock = new Setting<bool>(settings, "ui/small-break-show-clock", false);
+  smallBreakShowEndTime =
+      new Setting<bool>(settings, "ui/small-break-show-end-time", false);
+  smallBreakShowButtons =
+      new Setting<bool>(settings, "ui/small-break-show-buttons", true);
+  bigBreakShowProgressBar =
+      new Setting<bool>(settings, "ui/big-break-show-progress-bar", true);
+  bigBreakShowCountdown =
+      new Setting<bool>(settings, "ui/big-break-show-countdown", true);
+  bigBreakShowClock = new Setting<bool>(settings, "ui/big-break-show-clock", false);
+  bigBreakShowEndTime =
+      new Setting<bool>(settings, "ui/big-break-show-end-time", false);
+  bigBreakShowButtons = new Setting<bool>(settings, "ui/big-break-show-buttons", true);
 
   pauseOnIdleFor = new Setting<int>(settings, "pause/on-idle-for", 180);
   resetAfterPause = new Setting<int>(settings, "pause/reset-after", 120);

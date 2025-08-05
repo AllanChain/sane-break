@@ -70,29 +70,51 @@ void BreakWindows::create(SaneBreak::BreakType type, SanePreferences *preference
     fullScreenMessage = messagesToRoll[randomIndex];
   }
 
-  BreakWindowData data = {
-      .totalSeconds = type == SaneBreak::BreakType::Big ? preferences->bigFor->get()
-                                                        : preferences->smallFor->get(),
-      .message = {.prompt = promptMessage, .fullScreen = fullScreenMessage},
-      .theme =
-          {
-              .mainBackground = preferences->backgroundColor->get(),
-              .highlightBackground = type == SaneBreak::BreakType::Big
-                                         ? preferences->bigHighlightColor->get()
-                                         : preferences->smallHighlightColor->get(),
-              .messageColor = preferences->messageColor->get(),
-              .countDownColor = preferences->countDownColor->get(),
-              .flashAnimationDuration = 60000 / preferences->flashSpeed->get(),
-          },
-      .show =
-          {
-              .prograssBar = preferences->showProgressBar->get(),
-              .countdown = preferences->showCountdown->get(),
-              .clock = preferences->showClock->get(),
-              .endTime = preferences->showEndTime->get(),
-              .buttons = preferences->showButtons->get(),
-          },
-  };
+  BreakWindowData data;
+  if (type == SaneBreak::BreakType::Small) {
+    data = {
+        .totalSeconds = preferences->smallFor->get(),
+        .message = {.prompt = promptMessage, .fullScreen = fullScreenMessage},
+        .theme =
+            {
+                .mainBackground = preferences->backgroundColor->get(),
+                .highlightBackground = preferences->smallHighlightColor->get(),
+                .messageColor = preferences->messageColor->get(),
+                .countDownColor = preferences->countDownColor->get(),
+                .flashAnimationDuration = 60000 / preferences->flashSpeed->get(),
+            },
+        .show =
+            {
+                .prograssBar = preferences->smallBreakShowProgressBar->get(),
+                .countdown = preferences->smallBreakShowCountdown->get(),
+                .clock = preferences->smallBreakShowClock->get(),
+                .endTime = preferences->smallBreakShowEndTime->get(),
+                .buttons = preferences->smallBreakShowButtons->get(),
+            },
+    };
+
+  } else {
+    data = {
+        .totalSeconds = preferences->bigFor->get(),
+        .message = {.prompt = promptMessage, .fullScreen = fullScreenMessage},
+        .theme =
+            {
+                .mainBackground = preferences->backgroundColor->get(),
+                .highlightBackground = preferences->bigHighlightColor->get(),
+                .messageColor = preferences->messageColor->get(),
+                .countDownColor = preferences->countDownColor->get(),
+                .flashAnimationDuration = 60000 / preferences->flashSpeed->get(),
+            },
+        .show =
+            {
+                .prograssBar = preferences->bigBreakShowProgressBar->get(),
+                .countdown = preferences->bigBreakShowCountdown->get(),
+                .clock = preferences->bigBreakShowClock->get(),
+                .endTime = preferences->bigBreakShowEndTime->get(),
+                .buttons = preferences->bigBreakShowButtons->get(),
+            },
+    };
+  }
   QList<QScreen *> screens = QApplication::screens();
   for (QScreen *screen : std::as_const(screens)) {
     BreakWindow *w = new BreakWindow(data);
