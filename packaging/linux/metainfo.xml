@@ -56,10 +56,37 @@
   </screenshots>
 
   <releases>
-    <release version="0.8.4" date="2025-07-20">
-      <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.8.4</url>
-      <description>
-        <p>Features</p>
+  <release version="0.9.0" data="2025-08-05">
+    <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.9.0</url>
+    <description>
+      <p>Breaking changes</p>
+      <ul>
+        <li>Use bpm as unit for flash speed</li>
+        <li>Only show custom messages in full-screen</li>
+      </ul>
+      <p>Feature</p>
+      <ul>
+        <li>Enable immersive break experience</li>
+        <li>Avoid starting more than one instance of the app</li>
+        <li>Preview button for break window interface setting</li>
+        <li>Button to revert preferences to default values</li>
+      </ul>
+      <p>Changes</p>
+      <ul>
+        <li>Organize preference tabs and add “Interface” tab</li>
+        <li>Separate Wayland and X11 deps with plugins</li>
+        <li>Adopt state machine pattern for app logic</li>
+      </ul>
+      <p>Bug fixes</p>
+      <ul>
+        <li>Remove unused macOS permission hint</li>
+      </ul>
+    </description>
+  </release>
+  <release version="0.8.4" date="2025-07-20">
+    <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.8.4</url>
+    <description>
+      <p>Features</p>
         <ul>
           <li>Limited number of exits of force-breaks (default 2)</li>
         </ul>
