@@ -321,13 +321,12 @@ jobs:
             <details>
             <summary>Linux</summary>
 
-            If you are using X11, `sane-break-x11.deb` is for you.
-
-            If you are using Ubuntu 24.10 (and above) or Debian Trixie (and above), you can install the `.deb` package. For GNOME users, make sure to enable the GNOME shell extension with:
+            For Debian-based distributions, there is a notoriously large number of derivatives, and many of them ship old versions of Qt and do not include the latest `layer-shell-qt`. It is impractical to create `.deb` packages for all of them, so we only provide support for Debian Bookworm and Trixie. (Unfortunately, Ubuntu LTS ships with a very old version of Qt and lacks `layer-shell-qt`.)
+            The difference between Bookworm build and Trixie build is the layer shell support. If you are using a Debian-based distro and a Wayland compositor with layer shell protocol support (e.g. KDE Neon), you probably need the Debian Trixie build. Otherwise, the Bookworm build is good to go.
+            For GNOME users, make sure to enable the GNOME shell extension with:
             ```bash
             gnome-extensions enable sane-break@allanchain.github.io
             ```
-            The difference between Wayland Ubuntu Oracular build and Debian Trixie build is the layer shell support. If you are using a Debian-based distro and a Wayland compositor with layer shell protocol support (e.g. KDE Neon), you probably need the Debian Trixie build. Otherwise, the Ubuntu Oracular build is good to go.
 
             AppImage version is experimental. It may or may not work on your machine.
             </details>

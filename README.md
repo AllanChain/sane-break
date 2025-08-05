@@ -74,7 +74,7 @@ https://github.com/user-attachments/assets/35002673-ce83-4848-bd5e-6cc6dbbd4c8c
 
 ### macOS
 
-Download macOS `.dmg` file from the [release page](https://github.com/AllanChain/sane-break/releases). It is a universal bundle and both x86 and ARM version of macOS 13 or newer are supported.
+Sane Break is available on [App Store](https://apps.apple.com/us/app/sane-break/id6740942634)
 
 ### Windows
 
