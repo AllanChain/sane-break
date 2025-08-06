@@ -25,17 +25,23 @@ jobs:
       startsWith(github.ref, 'refs/tags/') ||
       !startsWith(github.event.head_commit.message, 'release')
     runs-on: ubuntu-latest
-    # We need newer version of Qt to run the tests
-    container:
-      image: debian:trixie
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
-
+    - uses: actions/checkout@v4
     - name: Install dependencies
       run: |
-        apt-get update
-        apt-get install -y g++ cmake qt6-base-dev qt6-multimedia-dev libgmock-dev libxss-dev
+        sudo apt update
+        sudo apt install -y libgmock-dev libgl1-mesa-dev
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v4
+      with:
+        version: 6.9.1
+        dir: ..
+        # We keep the same set of modules as the AppImage build to reuse cache
+        modules: qtmultimedia
+        setup-python: false
+        install-deps: false
+        cache: true
 
     - name: Run Tests
       env:
@@ -206,6 +212,7 @@ jobs:
 
   build-appimage:
     name: Build (Linux, AppImage)
+    needs: test
     # It's recommended to support old Ubuntu LTS for AppImages.
     runs-on: ubuntu-22.04
     steps:
