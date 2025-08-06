@@ -52,7 +52,7 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget *parent)
   setAttribute(Qt::WA_TranslucentBackground);  // transparent window
   setAttribute(Qt::WA_ShowWithoutActivating);  // avoid gaining keyboard focus
   setAttribute(Qt::WA_LayoutOnEntireRect);     // ignore safe zone on macOS
-  setWindowFlags(Qt::ToolTip | Qt::WindowDoesNotAcceptFocus | Qt::FramelessWindowHint |
+  setWindowFlags(Qt::Tool | Qt::WindowDoesNotAcceptFocus | Qt::FramelessWindowHint |
                  Qt::WindowStaysOnTopHint | Qt::WindowTransparentForInput);
   setWindowTitle("Break reminder - Sane Break");
 
