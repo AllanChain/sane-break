@@ -211,12 +211,14 @@ void BreakPhaseFullScreen::tick(AppContext *app, AppStateBreak *breakState) {
   }
   if (app->data->breaks->remainingSeconds() <= 0) {
     app->breakWindows->playExitSound(app->data->breakType(), app->preferences);
+    // record break type before we start next cycle
+    auto breakType = app->data->breakType();
     app->data->finishAndStartNextCycle();
     if (app->idleTimer->isIdle()) {
       bool shouldCloseWindow =
-          (app->data->breakType() == SaneBreak::BreakType::Small &&
+          (breakType == SaneBreak::BreakType::Small &&
            app->preferences->autoCloseWindowAfterSmallBreak->get()) ||
-          (app->data->breakType() == SaneBreak::BreakType::Big &&
+          (breakType == SaneBreak::BreakType::Big &&
            app->preferences->autoCloseWindowAfterBigBreak->get());
       if (!shouldCloseWindow) {
         // Leave break window open until user activities
