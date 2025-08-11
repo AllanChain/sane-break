@@ -256,14 +256,14 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
                                              ui->smallBreakShowCountdown,
                                              preferences->smallBreakShowCountdown));
   controllers->add(PrefGroup::Interface,
-                   new PrefController<QCheckBox, bool>(ui->smallBreakShowClock,
-                                                       preferences->bigBreakShowClock));
+                   new PrefController<QCheckBox, bool>(
+                       ui->smallBreakShowClock, preferences->smallBreakShowClock));
   controllers->add(PrefGroup::Interface,
                    new PrefController<QCheckBox, bool>(
-                       ui->smallBreakShowEndTime, preferences->bigBreakShowEndTime));
+                       ui->smallBreakShowEndTime, preferences->smallBreakShowEndTime));
   controllers->add(PrefGroup::Interface,
                    new PrefController<QCheckBox, bool>(
-                       ui->smallBreakShowButtons, preferences->bigBreakShowButtons));
+                       ui->smallBreakShowButtons, preferences->smallBreakShowButtons));
 
   controllers->add(PrefGroup::Interface, new PrefController<QCheckBox, bool>(
                                              ui->bigBreakShowProgressBar,
