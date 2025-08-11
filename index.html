@@ -4,22 +4,65 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Sane‑Break — Gentle break reminder that helps you avoid mindlessly skipping breaks</title>
+    <title>Sane Break — Gentle break reminder that helps you avoid mindlessly skipping breaks</title>
     <meta name="description"
         content="Sane Break is a cross-platform break reminder designed to help you take meaningful breaks without disrupting your workflow." />
     <link rel="icon" href="icon.svg">
     <style>
         :root {
-            --bg: #0f1724;
-            --card: #0b1220;
-            --muted: #9aa4b2;
-            --accent: #6ee7b7;
-            --glass: rgba(255, 255, 255, 0.03);
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --muted: #64748b;
+            --accent: #0ea5e9;
+            --glass: rgba(0, 0, 0, 0.04);
             --max: 1100px;
             --radius: 14px;
-            color-scheme: dark;
-            color: #e6eef6
+            color-scheme: light;
+            color: #1e293b;
         }
+
+        .btn-ghost {
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            color: var(--muted);
+            background: transparent;
+        }
+
+        .btn-ghost:hover {
+            background: #3b82f6;
+            color: #ffffff;
+        }
+
+        .btn-primary,
+        .btn-ghost {
+            transition: all 0.4s ease;
+        }
+
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0f1724;
+                --card: #0b1220;
+                --muted: #9aa4b2;
+                --accent: #6ee7b7;
+                --glass: rgba(255, 255, 255, 0.03);
+                --max: 1100px;
+                --radius: 14px;
+                color-scheme: dark;
+                color: #e6eef6
+            }
+
+            body {
+                background: linear-gradient(180deg, #071021 0%, var(--bg) 50%);
+            }
+
+
+            .btn-ghost {
+                border: 1px solid rgba(255, 255, 255, 0.06);
+                color: var(--muted);
+                background: transparent
+            }
+        }
+
 
         * {
             box-sizing: border-box
@@ -33,7 +76,6 @@
         body {
             margin: 0;
             font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-            background: linear-gradient(180deg, #071021 0%, var(--bg) 50%);
             background-attachment: fixed;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -101,7 +143,7 @@
             background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
             padding: 28px;
             border-radius: var(--radius);
-            box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+            box-shadow: 0 10px 10px rgba(2, 6, 23, 0.133);
         }
 
         .card video {
@@ -143,18 +185,6 @@
             border-radius: 12px;
             text-decoration: none;
             font-weight: 600
-        }
-
-        .btn-primary {
-            background: linear-gradient(90deg, var(--accent), #60a5fa);
-            color: #042022;
-            box-shadow: 0 8px 30px rgba(50, 200, 170, 0.12)
-        }
-
-        .btn-ghost {
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            color: var(--muted);
-            background: transparent
         }
 
         .download-list {
@@ -258,7 +288,7 @@
             <div class="brand">
                 <img class="logo" src="icon.svg" alt="logo">
                 <div>
-                    <h1>Sane‑Break</h1>
+                    <h1>Sane Break</h1>
                     <div class="subtitle">Cross‑platform break reminders with a gentle two‑phase approach.</div>
                 </div>
             </div>
@@ -334,8 +364,11 @@
                             <div style="display:flex;gap:6px;padding-left:15px">
                                 <a class="btn btn-ghost" id="macStore" target="_blank"
                                     href="https://apps.apple.com/us/app/sane-break/id6740942634">Mac Store</a>
-                                <a class="btn btn-ghost" id="macBtn" href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break-macos-arm64.dmg">Apple Silicon</a>
-                                <a class="btn btn-ghost" id="macBtn" href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break-macos-x86_64.dmg">Intel</a>
+                                <a class="btn btn-ghost" id="macBtn"
+                                    href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break-macos-arm64.dmg">Apple
+                                    Silicon</a>
+                                <a class="btn btn-ghost" id="macBtn"
+                                    href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break-macos-x86_64.dmg">Intel</a>
                             </div>
                         </div>
 
@@ -343,7 +376,8 @@
                             <div class="dl-left"><span class="platform">Linux</span>
                             </div>
                             <div style="display:flex;gap:8px">
-                                <a class="btn btn-ghost" id="appimageBtn" href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break.AppImage">AppImage</a>
+                                <a class="btn btn-ghost" id="appimageBtn"
+                                    href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break.AppImage">AppImage</a>
                                 <a class="btn btn-ghost" id="flathubBtn"
                                     href="https://flathub.org/apps/details/io.github.AllanChain.sane-break"
                                     target="_blank" rel="noopener">Flathub</a>
@@ -368,7 +402,6 @@
     </div>
 
     <script>
-       
     </script>
 </body>
 
