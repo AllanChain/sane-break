@@ -98,6 +98,8 @@ void AppStatePaused::exit(AppContext *app) {
     app->data->resetBreakCycle();
   }
   app->data->resetSecondsPaused();
+  // Ensure pause reasons are cleared on exit
+  app->data->clearPauseReasons();
 }
 void AppStatePaused::tick(AppContext *app) { app->data->tickSecondsPaused(); }
 void AppStatePaused::onIdleStart(AppContext *app) {
