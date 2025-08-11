@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sane‑Break — Gentle break reminder that helps you avoid mindlessly skipping breaks</title>
+    <meta name="description"
+        content="Sane Break is a cross-platform break reminder designed to help you take meaningful breaks without disrupting your workflow." />
+    <link rel="icon"
+        href="https://raw.githubusercontent.com/AllanChain/sane-break/ff7356d7df455a91178b23c142cce6abe22393ff/resources/images/icon.svg">
+    <style>
+        :root {
+            --bg: #0f1724;
+            --card: #0b1220;
+            --muted: #9aa4b2;
+            --accent: #6ee7b7;
+            --glass: rgba(255, 255, 255, 0.03);
+            --max: 1100px;
+            --radius: 14px;
+            color-scheme: dark;
+            color: #e6eef6
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: linear-gradient(180deg, #071021 0%, var(--bg) 50%);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.45;
+            padding: 32px 20px
+        }
+
+        .container {
+            max-width: var(--max);
+            margin: 0 auto
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 28px
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 20px;
+            margin: 0
+        }
+
+        .subtitle {
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 28px;
+            align-items: center;
+            margin-bottom: 36px
+        }
+
+        @media (max-width:880px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding-bottom: 10px
+            }
+
+            .hero>* {
+                width: 100%
+            }
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            padding: 28px;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+        }
+
+        .card video {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .eyebrow {
+            font-size: 13px;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.06em
+        }
+
+        .lead {
+            font-size: 28px;
+            margin: 12px 0 8px
+        }
+
+        .lead small {
+            display: block;
+            color: var(--muted);
+            font-size: 15px;
+            margin-top: 8px
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent), #60a5fa);
+            color: #042022;
+            box-shadow: 0 8px 30px rgba(50, 200, 170, 0.12)
+        }
+
+        .btn-ghost {
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--muted);
+            background: transparent
+        }
+
+        .download-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .dl-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.02)
+        }
+
+        .dl-left {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .platform {
+            font-weight: 700
+        }
+
+        .platform-meta {
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        section.features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 18px
+        }
+
+        @media (max-width:880px) {
+            section.features {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .feature {
+            padding: 18px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.02));
+            min-height: 120px
+        }
+
+        .feature h3 {
+            margin: 0 0 8px
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        .screenshot {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .screenshot p {
+            color: var(--muted)
+        }
+
+        .chip {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        .chip a {
+            text-decoration: none;
+
+        }
+
+        code {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 2px 6px;
+            border-radius: 6px;
+            color: inherit
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">
+                <img class="logo"
+                    src="https://raw.githubusercontent.com/AllanChain/sane-break/ff7356d7df455a91178b23c142cce6abe22393ff/resources/images/icon.svg"
+                    alt="logo">
+                <div>
+                    <h1>Sane‑Break</h1>
+                    <div class="subtitle">Cross‑platform break reminders with a gentle two‑phase approach.</div>
+                </div>
+            </div>
+
+        </header>
+
+        <main class="hero">
+            <div class="card">
+                <div class="eyebrow">Free · Open source · Cross‑platform</div>
+                <div class="lead">Gentle break reminder that helps you avoid mindlessly skipping breaks
+                    <small>Two‑phase reminders (subtle flash → expanded break), keyboard & tray controls, and
+                        privacy‑first defaults.</small>
+                </div>
+
+                <ul class="muted" style="margin:16px 0 0;padding-left:18px;line-height:1.7">
+                    <li>Two‑phase break system: subtle flash first, full screen if ignored.</li>
+                    <li>No prominent skip/postpone buttons — use tray/menu to delay breaks intentionally.</li>
+                    <li>Clean UI, minimal memory usage.</li>
+                </ul>
+
+                <div class="actions">
+                    <!-- <a class="btn btn-primary" id="primaryDownload"
+                        href="https://github.com/AllanChain/sane-break/releases/latest" title="Download"
+                        target="_blank">Download</a> -->
+                    <a class="btn btn-ghost" id="github" href="https://github.com/AllanChain/sane-break" target="_blank"
+                        rel="noopener">View on GitHub</a>
+                </div>
+
+                <section id="features" class="features" aria-label="Key features">
+                    <div class="feature">
+                        <h3>Two‑phase reminders</h3>
+                        <p class="muted">First a subtle flash, then an expanded break window if you remain active —
+                            encourages real rest without accidental skipping.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Privacy & simplicity</h3>
+                        <p class="muted">No telemetry, local configuration, and intentionally minimal UI to avoid
+                            distraction.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Cross‑platform</h3>
+                        <p class="muted">Officially supported on Windows, macOS and Linux. Flatpak on Flathub, AppImage
+                            and packages for popular distros.</p>
+                    </div>
+                </section>
+            </div>
+
+            <aside style="display:flex;flex-direction:column;gap:14px">
+                <div class="card">
+                    <div
+                        style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px">
+                        <div>
+                            <div class="chip">
+                                <a target="_blank"
+                                    href="https://github.com/AllanChain/sane-break/releases/latest">Latest release</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="download" class="download-list">
+                        <div class="dl-item">
+                            <div class="dl-left"><span class="platform">Windows</span>
+                            </div>
+                            <div><a class="btn btn-ghost" id="winBtn"
+                                    href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break-windows.zip">Download</a>
+                            </div>
+                        </div>
+
+                        <div class="dl-item">
+                            <div class="dl-left"><span class="platform">macOS</span>
+                            </div>
+                            <div style="display:flex;gap:6px;padding-left:15px">
+                                <a class="btn btn-ghost" id="macStore" target="_blank"
+                                    href="https://apps.apple.com/us/app/sane-break/id6740942634">Mac Store</a>
+                                <a class="btn btn-ghost" id="macBtn" href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break-macos-arm64.dmg">Apple Silicon</a>
+                                <a class="btn btn-ghost" id="macBtn" href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break-macos-x86_64.dmg">Intel</a>
+                            </div>
+                        </div>
+
+                        <div class="dl-item">
+                            <div class="dl-left"><span class="platform">Linux</span>
+                            </div>
+                            <div style="display:flex;gap:8px">
+                                <a class="btn btn-ghost" id="appimageBtn" href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break.AppImage">AppImage</a>
+                                <a class="btn btn-ghost" id="flathubBtn"
+                                    href="https://flathub.org/apps/details/io.github.AllanChain.sane-break"
+                                    target="_blank" rel="noopener">Flathub</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card screenshot" aria-hidden>
+                    <video controls>
+                        <source src="https://github.com/user-attachments/assets/35002673-ce83-4848-bd5e-6cc6dbbd4c8c"
+                            type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </aside>
+
+        </main>
+
+    </div>
+
+    <script>
+       
+    </script>
+</body>
+
+</html>
