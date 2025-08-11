@@ -1,12 +1,15 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Sane Break — Gentle break reminder that helps you avoid mindlessly skipping breaks</title>
-    <meta name="description"
-        content="Sane Break is a cross-platform break reminder designed to help you take meaningful breaks without disrupting your workflow." />
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>
+      Sane Break — Gentle break reminder that helps you avoid mindlessly skipping breaks
+    </title>
+    <meta
+      name="description"
+      content="Sane Break is a cross-platform break reminder designed to help you take meaningful breaks without disrupting your workflow."
+    >
     <link rel="icon" href="icon.svg">
     <style>
         :root {
@@ -280,129 +283,174 @@
             color: inherit
         }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <header>
-            <div class="brand">
-                <img class="logo" src="icon.svg" alt="logo">
-                <div>
-                    <h1>Sane Break</h1>
-                    <div class="subtitle">Cross‑platform break reminders with a gentle two‑phase approach.</div>
-                </div>
+      <header>
+        <div class="brand">
+          <img class="logo" src="icon.svg" alt="logo">
+          <div>
+            <h1>Sane Break</h1>
+            <div class="subtitle">
+              Cross‑platform break reminders with a gentle two‑phase approach.
             </div>
+          </div>
+        </div>
+      </header>
 
-        </header>
+      <main class="hero">
+        <div class="card">
+          <div class="eyebrow">Free · Open source · Cross‑platform</div>
+          <div class="lead">
+            Gentle break reminder that helps you avoid mindlessly skipping breaks
+            <small
+              >Two‑phase reminders (subtle flash → expanded break), keyboard & tray
+              controls, and privacy‑first defaults.</small
+            >
+          </div>
 
-        <main class="hero">
-            <div class="card">
-                <div class="eyebrow">Free · Open source · Cross‑platform</div>
-                <div class="lead">Gentle break reminder that helps you avoid mindlessly skipping breaks
-                    <small>Two‑phase reminders (subtle flash → expanded break), keyboard & tray controls, and
-                        privacy‑first defaults.</small>
-                </div>
+          <ul class="muted" style="margin:16px 0 0;padding-left:18px;line-height:1.7">
+            <li>Two‑phase break system: subtle flash first, full screen if ignored.</li>
+            <li>
+              No prominent skip/postpone buttons — use tray/menu to delay breaks
+              intentionally.
+            </li>
+            <li>Clean UI, minimal memory usage.</li>
+          </ul>
 
-                <ul class="muted" style="margin:16px 0 0;padding-left:18px;line-height:1.7">
-                    <li>Two‑phase break system: subtle flash first, full screen if ignored.</li>
-                    <li>No prominent skip/postpone buttons — use tray/menu to delay breaks intentionally.</li>
-                    <li>Clean UI, minimal memory usage.</li>
-                </ul>
-
-                <div class="actions">
-                    <!-- <a class="btn btn-primary" id="primaryDownload"
+          <div class="actions">
+            <!-- <a class="btn btn-primary" id="primaryDownload"
                         href="https://github.com/AllanChain/sane-break/releases/latest" title="Download"
                         target="_blank">Download</a> -->
-                    <a class="btn btn-ghost" id="github" href="https://github.com/AllanChain/sane-break" target="_blank"
-                        rel="noopener">View on GitHub</a>
-                </div>
+            <a
+              class="btn btn-ghost"
+              id="github"
+              href="https://github.com/AllanChain/sane-break"
+              target="_blank"
+              rel="noopener"
+              >View on GitHub</a
+            >
+          </div>
 
-                <section id="features" class="features" aria-label="Key features">
-                    <div class="feature">
-                        <h3>Two‑phase reminders</h3>
-                        <p class="muted">First a subtle flash, then an expanded break window if you remain active —
-                            encourages real rest without accidental skipping.</p>
-                    </div>
-                    <div class="feature">
-                        <h3>Privacy & simplicity</h3>
-                        <p class="muted">No telemetry, local configuration, and intentionally minimal UI to avoid
-                            distraction.</p>
-                    </div>
-                    <div class="feature">
-                        <h3>Cross‑platform</h3>
-                        <p class="muted">Officially supported on Windows, macOS and Linux. Flatpak on Flathub, AppImage
-                            and packages for popular distros.</p>
-                    </div>
-                </section>
+          <section id="features" class="features" aria-label="Key features">
+            <div class="feature">
+              <h3>Two‑phase reminders</h3>
+              <p class="muted">
+                First a subtle flash, then an expanded break window if you remain active
+                — encourages real rest without accidental skipping.
+              </p>
+            </div>
+            <div class="feature">
+              <h3>Privacy & simplicity</h3>
+              <p class="muted">
+                No telemetry, local configuration, and intentionally minimal UI to avoid
+                distraction.
+              </p>
+            </div>
+            <div class="feature">
+              <h3>Cross‑platform</h3>
+              <p class="muted">
+                Officially supported on Windows, macOS and Linux. Flatpak on Flathub,
+                AppImage and packages for popular distros.
+              </p>
+            </div>
+          </section>
+        </div>
+
+        <aside style="display:flex;flex-direction:column;gap:14px">
+          <div class="card">
+            <div
+              style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px"
+            >
+              <div>
+                <div class="chip">
+                  <a
+                    target="_blank"
+                    href="https://github.com/AllanChain/sane-break/releases/latest"
+                    >Latest release</a
+                  >
+                </div>
+              </div>
             </div>
 
-            <aside style="display:flex;flex-direction:column;gap:14px">
-                <div class="card">
-                    <div
-                        style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px">
-                        <div>
-                            <div class="chip">
-                                <a target="_blank"
-                                    href="https://github.com/AllanChain/sane-break/releases/latest">Latest release</a>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div id="download" class="download-list">
-                        <div class="dl-item">
-                            <div class="dl-left"><span class="platform">Windows</span>
-                            </div>
-                            <div><a class="btn btn-ghost" id="winBtn"
-                                    href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break-windows.zip">Download</a>
-                            </div>
-                        </div>
-
-                        <div class="dl-item">
-                            <div class="dl-left"><span class="platform">macOS</span>
-                            </div>
-                            <div style="display:flex;gap:6px;padding-left:15px">
-                                <a class="btn btn-ghost" id="macStore" target="_blank"
-                                    href="https://apps.apple.com/us/app/sane-break/id6740942634">Mac Store</a>
-                                <a class="btn btn-ghost" id="macBtn"
-                                    href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break-macos-arm64.dmg">Apple
-                                    Silicon</a>
-                                <a class="btn btn-ghost" id="macBtn"
-                                    href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break-macos-x86_64.dmg">Intel</a>
-                            </div>
-                        </div>
-
-                        <div class="dl-item">
-                            <div class="dl-left"><span class="platform">Linux</span>
-                            </div>
-                            <div style="display:flex;gap:8px">
-                                <a class="btn btn-ghost" id="appimageBtn"
-                                    href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break.AppImage">AppImage</a>
-                                <a class="btn btn-ghost" id="flathubBtn"
-                                    href="https://flathub.org/apps/details/io.github.AllanChain.sane-break"
-                                    target="_blank" rel="noopener">Flathub</a>
-                            </div>
-                        </div>
-
-                    </div>
-
+            <div id="download" class="download-list">
+              <div class="dl-item">
+                <div class="dl-left">
+                  <span class="platform">Windows</span>
                 </div>
-
-                <div class="card screenshot" aria-hidden>
-                    <video controls>
-                        <source src="https://github.com/user-attachments/assets/35002673-ce83-4848-bd5e-6cc6dbbd4c8c"
-                            type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                <div>
+                  <a
+                    class="btn btn-ghost"
+                    id="winBtn"
+                    href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break-windows.zip"
+                    >Download</a
+                  >
                 </div>
-            </aside>
+              </div>
 
-        </main>
+              <div class="dl-item">
+                <div class="dl-left">
+                  <span class="platform">macOS</span>
+                </div>
+                <div style="display:flex;gap:6px;padding-left:15px">
+                  <a
+                    class="btn btn-ghost"
+                    id="macStore"
+                    target="_blank"
+                    href="https://apps.apple.com/us/app/sane-break/id6740942634"
+                    >Mac Store</a
+                  >
+                  <a
+                    class="btn btn-ghost"
+                    id="macBtn"
+                    href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break-macos-arm64.dmg"
+                    >Apple Silicon</a
+                  >
+                  <a
+                    class="btn btn-ghost"
+                    id="macBtn"
+                    href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break-macos-x86_64.dmg"
+                    >Intel</a
+                  >
+                </div>
+              </div>
 
+              <div class="dl-item">
+                <div class="dl-left">
+                  <span class="platform">Linux</span>
+                </div>
+                <div style="display:flex;gap:8px">
+                  <a
+                    class="btn btn-ghost"
+                    id="appimageBtn"
+                    href="https://github.com/AllanChain/sane-break/releases/latest/download/sane-break.AppImage"
+                    >AppImage</a
+                  >
+                  <a
+                    class="btn btn-ghost"
+                    id="flathubBtn"
+                    href="https://flathub.org/apps/details/io.github.AllanChain.sane-break"
+                    target="_blank"
+                    rel="noopener"
+                    >Flathub</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card screenshot" aria-hidden>
+            <video controls>
+              <source
+                src="https://github.com/user-attachments/assets/35002673-ce83-4848-bd5e-6cc6dbbd4c8c"
+                type="video/mp4"
+              >
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </aside>
+      </main>
     </div>
-
-    <script>
-    </script>
-</body>
-
+  </body>
 </html>

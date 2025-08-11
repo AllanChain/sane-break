@@ -1,0 +1,17 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v2.1.4
+    hooks:
+      - id: biome-format
+        files: "\\.html"
+        args:
+          - "--html-formatter-enabled=true"
+          - "--html-formatter-line-width=88"
+          - "--html-formatter-indent-style=space"
+          - "--html-formatter-indent-width=2"
+ci:
+  autoupdate_schedule: quarterly
