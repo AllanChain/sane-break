@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
 #ifdef Q_OS_LINUX
   QDir appPath = a.applicationDirPath();
   appPath.cdUp();
-  appPath.cd("lib");
+  appPath.cd(CMAKE_INSTALL_LIBDIR);
   a.addLibraryPath(appPath.filePath("sane-break"));
   LinuxSystemSupport::check();
 #endif  // Q_OS_LINUX
