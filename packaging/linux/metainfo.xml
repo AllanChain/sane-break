@@ -56,6 +56,18 @@
   </screenshots>
 
   <releases>
+  <release version="0.9.1" date="2025-08-12">
+    <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.9.0</url>
+    <description>
+      <p>Bug fixes</p>
+      <ul>
+        <li>Fix show components for small break windows</li>
+        <li>Fix pause reason not cleared on sleep end</li>
+        <li>Fix auto close window for small and big breaks</li>
+        <li>Fix break window auto close after closing preference window</li>
+      </ul>
+    </description>
+  </release>
   <release version="0.9.0" date="2025-08-05">
     <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.9.0</url>
     <description>
