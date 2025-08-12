@@ -651,14 +651,18 @@ v%1
         <translation type="unfinished">Вам нужно установить расширение оболочки, если вы используете GNOME. В противном случае, Sane Break почти непригоден для использования</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="53"/>
+        <location filename="../../src/app/main.cpp" line="55"/>
         <source>Another instance of Sane Break is running.</source>
         <translation>Запущен ещё один экземпляр Sane Break.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="54"/>
+        <location filename="../../src/app/main.cpp" line="56"/>
+        <source>Please quit the old instance before starting a new one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Do you want to start anyway?</source>
-        <translation>Вы все равно хотите начать?</translation>
+        <translation type="vanished">Вы все равно хотите начать?</translation>
     </message>
 </context>
 <context>

@@ -706,13 +706,13 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation>Installeer de uitbreiding indien u gebruikmaakt van GNOME, anders zal Sane Break niet naar behoren werken.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="53"/>
+        <location filename="../../src/app/main.cpp" line="55"/>
         <source>Another instance of Sane Break is running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="54"/>
-        <source>Do you want to start anyway?</source>
+        <location filename="../../src/app/main.cpp" line="56"/>
+        <source>Please quit the old instance before starting a new one.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

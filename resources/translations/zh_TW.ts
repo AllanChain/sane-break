@@ -621,14 +621,14 @@ v%1
         <translation>如果你在使用 GNOME，那麼需要安裝對應的 shell 擴展，否則 Sane Break 不能正常使用</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="53"/>
+        <location filename="../../src/app/main.cpp" line="55"/>
         <source>Another instance of Sane Break is running.</source>
         <translation>另一個 Sane Break 實例正在運行。</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="54"/>
-        <source>Do you want to start anyway?</source>
-        <translation>是否仍要運行？</translation>
+        <location filename="../../src/app/main.cpp" line="56"/>
+        <source>Please quit the old instance before starting a new one.</source>
+        <translation>請先退出舊的實例，再運行新的。</translation>
     </message>
 </context>
 <context>

@@ -688,13 +688,13 @@ v%1
         <translation>Si vous utilisez GNOME, vous devrez installer l&apos;extension &quot;shell&quot;, ou Sane Break sera presque inutilisable</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="53"/>
+        <location filename="../../src/app/main.cpp" line="55"/>
         <source>Another instance of Sane Break is running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="54"/>
-        <source>Do you want to start anyway?</source>
+        <location filename="../../src/app/main.cpp" line="56"/>
+        <source>Please quit the old instance before starting a new one.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

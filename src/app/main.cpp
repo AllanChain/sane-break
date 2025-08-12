@@ -43,20 +43,22 @@ int main(int argc, char *argv[]) {
   // Use lock file to avoid starting multiple instances of app
   const QString lockFilePath =
       QDir(QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation))
+#ifndef NDEBUG
+          .filePath("sane-break-debug.lock");
+#else
           .filePath("sane-break.lock");
+#endif
   QLockFile lock(lockFilePath);
   lock.setStaleLockTime(0);
-  if (!lock.tryLock()) {
-    if (lock.error() == QLockFile::LockFailedError) {
-      QMessageBox msgBox;
-      msgBox.setText(
-          QCoreApplication::tr("Another instance of Sane Break is running."));
-      msgBox.setInformativeText(QCoreApplication::tr("Do you want to start anyway?"));
-      msgBox.setIcon(QMessageBox::Icon::Question);
-      msgBox.addButton(QMessageBox::No);
-      msgBox.addButton(QMessageBox::Yes);
-      if (msgBox.exec() == QDialog::Rejected) return 1;
-    }
+  if (!lock.tryLock() && lock.error() == QLockFile::LockFailedError) {
+    QMessageBox msgBox;
+    msgBox.setText(QCoreApplication::tr("Another instance of Sane Break is running."));
+    msgBox.setInformativeText(QCoreApplication::tr(
+        "Please quit the old instance before starting a new one."));
+    msgBox.setIcon(QMessageBox::Icon::Question);
+    msgBox.addButton(QMessageBox::Ok);
+    msgBox.exec();
+    return 1;
   }
 
 #ifdef Q_OS_LINUX

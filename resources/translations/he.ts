@@ -650,13 +650,13 @@ v%1
         <translation type="unfinished">יש להתקין את הרחבת Shell אם אתה משתמש ב-GNOME. אחרת, Sane Break כמעט בלתי ניתן לשימוש</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="53"/>
+        <location filename="../../src/app/main.cpp" line="55"/>
         <source>Another instance of Sane Break is running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="54"/>
-        <source>Do you want to start anyway?</source>
+        <location filename="../../src/app/main.cpp" line="56"/>
+        <source>Please quit the old instance before starting a new one.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
