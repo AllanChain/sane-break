@@ -55,12 +55,12 @@
     <message>
         <location filename="../../src/app/break-window.cpp" line="121"/>
         <source>Break will end at: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Перерыв закончится в:% 1</translation>
     </message>
     <message>
         <location filename="../../src/app/break-window.cpp" line="123"/>
         <source>Break has ended</source>
-        <translation type="unfinished"></translation>
+        <translation>Перерыв закончился</translation>
     </message>
 </context>
 <context>
@@ -89,12 +89,12 @@
     <message>
         <location filename="../../src/app/pref-window.ui" line="161"/>
         <source>General</source>
-        <translation type="unfinished">Общие</translation>
+        <translation>General</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="183"/>
         <source>About</source>
-        <translation type="unfinished">О программе</translation>
+        <translation>О Программе</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1304"/>
@@ -171,12 +171,12 @@
     <message>
         <location filename="../../src/app/pref-window.ui" line="676"/>
         <source>Close windows right after small break ends</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть окна сразу после небольшого перерыва</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="683"/>
         <source>Close windows right after big break ends</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть окна сразу после большого перерыва</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="709"/>
@@ -202,17 +202,17 @@
     <message>
         <location filename="../../src/app/pref-window.ui" line="660"/>
         <source>Max number of force break exits</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимальное количество выходов с принудительным прерыванием</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="110"/>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Интерфейс</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="667"/>
         <source> times</source>
-        <translation type="unfinished"></translation>
+        <translation> раз</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="806"/>
@@ -225,31 +225,31 @@
         <location filename="../../src/app/pref-window.ui" line="831"/>
         <location filename="../../src/app/pref-window.ui" line="877"/>
         <source>Time when break ends</source>
-        <translation type="unfinished"></translation>
+        <translation>Время, когда заканчивается перерыв</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="852"/>
         <location filename="../../src/app/pref-window.ui" line="898"/>
         <source>Countdown timer</source>
-        <translation type="unfinished"></translation>
+        <translation>Время отсчета</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="824"/>
         <location filename="../../src/app/pref-window.ui" line="870"/>
         <source>Progress bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Индикатор прогресса</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="838"/>
         <location filename="../../src/app/pref-window.ui" line="884"/>
         <source>Clock</source>
-        <translation type="unfinished"></translation>
+        <translation>Часы</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="845"/>
         <location filename="../../src/app/pref-window.ui" line="891"/>
         <source>Buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Кнопки</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="907"/>
@@ -458,22 +458,22 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="815"/>
         <source>&lt;h4&gt;Small break&lt;/h4&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h4&gt;Небольшой перерыв&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="861"/>
         <source>&lt;h4&gt;Big break&lt;/h4&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h4&gt;Большой перерыв&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1014"/>
         <source>&lt;p&gt;To preview break windows, save all changes first. The preview begins with a 2-second flashing prompt, followed by a 4-second full-screen break. A small break window will appear first, then a big break window.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Чтобы просмотреть окна прерывания, сначала сохраните все изменения. Предварительный просмотр начинается с 2-секундного мигающего приглашения, за которым следует 4-секундный полноэкранный перерыв. Сначала появится маленькое окно перерыва, затем большое окно перерыва.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1024"/>
         <source>Preview Break Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Просмотр окон перерыва</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1109"/>
@@ -518,7 +518,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1603"/>
         <source>Get the Source Code</source>
-        <translation type="unfinished"></translation>
+        <translation>Просмотреть исходный код</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1658"/>
@@ -538,12 +538,12 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1623"/>
         <source>Third-party Libraries Licenses</source>
-        <translation type="unfinished"></translation>
+        <translation>Лицензии сторонних библиотек</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1665"/>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>По умолчанию</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1688"/>
@@ -653,12 +653,12 @@ v%1
     <message>
         <location filename="../../src/app/main.cpp" line="53"/>
         <source>Another instance of Sane Break is running.</source>
-        <translation type="unfinished"></translation>
+        <translation>Запущен ещё один экземпляр Sane Break.</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="54"/>
         <source>Do you want to start anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы все равно хотите начать?</translation>
     </message>
 </context>
 <context>
@@ -714,12 +714,12 @@ v%1
     <message>
         <location filename="../../src/core/preferences.cpp" line="49"/>
         <source>Time for a small break</source>
-        <translation type="unfinished">Время для короткого перерыва</translation>
+        <translation>Время для небольшого перерыва</translation>
     </message>
     <message>
         <location filename="../../src/core/preferences.cpp" line="52"/>
         <source>Time for a big break</source>
-        <translation type="unfinished">Время для длинного перерыва</translation>
+        <translation>Время для большого перерыва</translation>
     </message>
 </context>
 <context>
@@ -757,12 +757,12 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="94"/>
         <source>big break</source>
-        <translation type="unfinished">длинный перерыв</translation>
+        <translation>большой перерыв</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="94"/>
         <source>small break</source>
-        <translation type="unfinished">короткий перерыв</translation>
+        <translation>небольшой перерыв</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="74"/>
