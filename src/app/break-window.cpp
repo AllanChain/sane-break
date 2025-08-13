@@ -49,9 +49,10 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget *parent)
   m_waylandWorkaround =
       QGuiApplication::platformName() == "wayland" && !LinuxSystemSupport::layerShell;
 #endif
-  setAttribute(Qt::WA_TranslucentBackground);  // transparent window
-  setAttribute(Qt::WA_ShowWithoutActivating);  // avoid gaining keyboard focus
-  setAttribute(Qt::WA_LayoutOnEntireRect);     // ignore safe zone on macOS
+  setAttribute(Qt::WA_TranslucentBackground);    // transparent window
+  setAttribute(Qt::WA_ShowWithoutActivating);    // avoid gaining keyboard focus
+  setAttribute(Qt::WA_LayoutOnEntireRect);       // ignore safe zone on macOS
+  setAttribute(Qt::WA_MacAlwaysShowToolWindow);  // always show window on macOS
   setWindowFlags(Qt::Tool | Qt::WindowDoesNotAcceptFocus | Qt::FramelessWindowHint |
                  Qt::WindowStaysOnTopHint | Qt::WindowTransparentForInput);
   setWindowTitle("Break reminder - Sane Break");
