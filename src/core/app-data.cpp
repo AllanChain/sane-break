@@ -64,6 +64,7 @@ void AppData::resetSecondsToNextBreak() {
   emit changed();
 };
 void AppData::refillSecondsToNextBreak() {
+  m_secondsSinceLastBreak = 0;
   if (m_secondsToNextBreak < preferences->smallEvery->get()) {
     m_secondsToNextBreak = preferences->smallEvery->get();
     emit changed();
