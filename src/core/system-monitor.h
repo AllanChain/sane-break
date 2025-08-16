@@ -17,7 +17,7 @@ class AbstractSystemMonitor : public QObject {
   virtual bool isOnBattery() = 0;
 
  signals:
-  void sleepEnded();
+  void sleepEnded(int sleptSeconds);
   void pauseRequested(SaneBreak::PauseReason reason);
   void resumeRequested(SaneBreak::PauseReason reason);
 };

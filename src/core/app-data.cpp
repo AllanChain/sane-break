@@ -82,8 +82,9 @@ void AppData::resetSecondsSinceLastBreak() {
 };
 
 int AppData::secondsPaused() { return m_secondsPaused; };
-void AppData::tickSecondsPaused() {
-  m_secondsPaused++;
+void AppData::tickSecondsPaused() { addSecondsPaused(1); };
+void AppData::addSecondsPaused(int secs) {
+  m_secondsPaused += secs;
   emit changed();
 };
 void AppData::resetSecondsPaused() {

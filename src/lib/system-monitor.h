@@ -9,7 +9,6 @@
 #include <QObject>
 #include <QTimer>
 
-#include "core/idle-time.h"
 #include "core/preferences.h"
 #include "core/system-monitor.h"
 #include "lib/battery-status.h"

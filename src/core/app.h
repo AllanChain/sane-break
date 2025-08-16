@@ -56,7 +56,7 @@ class AbstractApp : public AppContext {
   AbstractSystemMonitor *m_systemMonitor;
 
   void onBatterySettingChange();
-  void onSleepEnd();
+  void onSleepEnd(int sleptSeconds);
   void updateTray();
 
   virtual void doLockScreen() = 0;

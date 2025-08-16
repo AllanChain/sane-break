@@ -66,6 +66,7 @@ class AppData : public QObject {
 
   int secondsPaused();
   void tickSecondsPaused();
+  void addSecondsPaused(int secs);
   void resetSecondsPaused();
 
   SaneBreak::PauseReasons pauseReasons();

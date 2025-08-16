@@ -18,8 +18,9 @@ SleepMonitor::SleepMonitor(QObject* parent) : QObject(parent) {
 
 void SleepMonitor::tick() {
   int currentTime = QDateTime::currentMSecsSinceEpoch();
-  if (currentTime - lastAwake > 2 * watchAccuracy) {
-    emit sleepEnd();
-  }
+  int elapsedTime = currentTime - lastAwake;
   lastAwake = currentTime;
+  if (elapsedTime > 2 * watchAccuracy) {
+    emit sleepEnd(elapsedTime / 1000);
+  }
 }

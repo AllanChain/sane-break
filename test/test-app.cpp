@@ -448,11 +448,9 @@ class TestApp : public QObject {
     EXPECT_CALL(*deps.breakWindows, create(SaneBreak::BreakType::Small, _)).Times(1);
     app.breakNow();
     EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
-    emit deps.systemMonitor->sleepEnded();
+    emit deps.systemMonitor->sleepEnded(1);
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
     QVERIFY(!app.trayData.isBreaking);
-    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
-             deps.preferences->bigAfter->get() - 1);
     QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
   }
   // Multiple pause reasons should work
@@ -531,7 +529,7 @@ class TestApp : public QObject {
     int smallEvery = deps.preferences->smallEvery->get();
     app.advance(smallEvery - 1);
 
-    emit deps.systemMonitor->sleepEnded();
+    emit deps.systemMonitor->sleepEnded(deps.preferences->resetAfterPause->get());
     QCOMPARE(app.trayData.secondsToNextBreak, smallEvery);
     app.advance(smallEvery - 1);
 

@@ -110,11 +110,11 @@ void AbstractApp::postpone(int secs) {
   }
 }
 
-void AbstractApp::onSleepEnd() {
-  // We reset these regardless of paused or not
-  data->resetBreakCycle();
-  data->resetSecondsToNextBreak();
-  transitionTo(std::make_unique<AppStateNormal>());
+void AbstractApp::onSleepEnd(int sleptSeconds) {
+  onPauseRequest(SaneBreak::PauseReason::Sleep);
+  // Timers does not tick during sleep, therefore we need to add them back.
+  data->addSecondsPaused(sleptSeconds);
+  onResumeRequest(SaneBreak::PauseReason::Sleep);
 }
 
 void AbstractApp::onBatterySettingChange() {
