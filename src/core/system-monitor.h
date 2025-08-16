@@ -18,6 +18,6 @@ class AbstractSystemMonitor : public QObject {
 
  signals:
   void sleepEnded(int sleptSeconds);
-  void pauseRequested(SaneBreak::PauseReason reason);
-  void resumeRequested(SaneBreak::PauseReason reason);
+  void pauseRequested(PauseReason reason);
+  void resumeRequested(PauseReason reason);
 };

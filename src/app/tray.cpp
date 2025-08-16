@@ -82,11 +82,11 @@ void StatusTrayWindow::update(TrayData data) {
                                       data.smallBreaksBeforeBigBreak == 0);
 
   if (data.pauseReasons) {
-    if (data.pauseReasons.testFlag(SaneBreak::PauseReason::OnBattery)) {
+    if (data.pauseReasons.testFlag(PauseReason::OnBattery)) {
       setTitle(tr("Paused on battery"));
-    } else if (data.pauseReasons.testFlag(SaneBreak::PauseReason::AppOpen)) {
+    } else if (data.pauseReasons.testFlag(PauseReason::AppOpen)) {
       setTitle(tr("Paused on app running"));
-    } else if (data.pauseReasons.testFlag(SaneBreak::PauseReason::Idle)) {
+    } else if (data.pauseReasons.testFlag(PauseReason::Idle)) {
       setTitle(tr("Paused on idle"));
     }
   } else {

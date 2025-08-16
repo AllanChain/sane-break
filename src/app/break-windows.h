@@ -26,14 +26,14 @@ class BreakWindows : public AbstractBreakWindows {
   BreakWindows(QObject *parent = nullptr);
   ~BreakWindows() = default;
 
-  void create(SaneBreak::BreakType, SanePreferences *) override;
+  void create(BreakType, SanePreferences *) override;
   void destroy() override;
   void setTime(int remainingTime) override;
   void showFullScreen() override;
   void showFlashPrompt() override;
   void showButtons(Buttons, bool show = true) override;
-  void playEnterSound(SaneBreak::BreakType, SanePreferences *) override;
-  void playExitSound(SaneBreak::BreakType, SanePreferences *) override;
+  void playEnterSound(BreakType, SanePreferences *) override;
+  void playExitSound(BreakType, SanePreferences *) override;
 
  private:
   QList<BreakWindow *> m_windows;

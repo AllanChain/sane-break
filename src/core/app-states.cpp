@@ -32,11 +32,11 @@ void AppContext::onIdleEnd() { m_currentState->onIdleEnd(this); }
 void AppContext::onMenuAction(MenuAction action) {
   m_currentState->onMenuAction(this, action);
 }
-void AppContext::onPauseRequest(SaneBreak::PauseReasons reasons) {
+void AppContext::onPauseRequest(PauseReasons reasons) {
   data->addPauseReasons(reasons);
   m_currentState->onPauseRequest(this, reasons);
 }
-void AppContext::onResumeRequest(SaneBreak::PauseReasons reasons) {
+void AppContext::onResumeRequest(PauseReasons reasons) {
   data->removePauseReasons(reasons);
   m_currentState->OnResumeRequest(this, reasons);
 }
@@ -54,10 +54,10 @@ void AppStateNormal::tick(AppContext *app) {
     app->transitionTo(std::make_unique<AppStateBreak>());
 }
 void AppStateNormal::onIdleStart(AppContext *app) {
-  app->data->addPauseReasons(SaneBreak::PauseReason::Idle);
+  app->data->addPauseReasons(PauseReason::Idle);
   app->transitionTo(std::make_unique<AppStatePaused>());
 }
-void AppStateNormal::onPauseRequest(AppContext *app, SaneBreak::PauseReasons) {
+void AppStateNormal::onPauseRequest(AppContext *app, PauseReasons) {
   app->transitionTo(std::make_unique<AppStatePaused>());
 }
 void AppStateNormal::onMenuAction(AppContext *app, MenuAction action) {
@@ -86,9 +86,9 @@ void AppStateNormal::onMenuAction(AppContext *app, MenuAction action) {
  * have configured `resetAfterPause`, we just reset it.
  */
 void AppStatePaused::exit(AppContext *app) {
-  int nextBreakDuration = (app->data->breakType() == SaneBreak::BreakType::Big
-                               ? app->preferences->bigFor->get()
-                               : app->preferences->smallFor->get());
+  int nextBreakDuration =
+      (app->data->breakType() == BreakType::Big ? app->preferences->bigFor->get()
+                                                : app->preferences->smallFor->get());
   int secondsToNextBreakEnd = app->data->secondsToNextBreak() + nextBreakDuration;
   if (app->data->secondsPaused() > secondsToNextBreakEnd ||
       app->data->secondsPaused() > app->preferences->resetAfterPause->get()) {
@@ -103,17 +103,17 @@ void AppStatePaused::exit(AppContext *app) {
 }
 void AppStatePaused::tick(AppContext *app) { app->data->tickSecondsPaused(); }
 void AppStatePaused::onIdleStart(AppContext *app) {
-  app->data->addPauseReasons(SaneBreak::PauseReason::Idle);
+  app->data->addPauseReasons(PauseReason::Idle);
 }
 void AppStatePaused::onIdleEnd(AppContext *app) {
   // We need to clear screenLockTimer when going through break -> paused -> idleEnd
   app->screenLockTimer->stop();
-  app->data->removePauseReasons(SaneBreak::PauseReason::Idle);
+  app->data->removePauseReasons(PauseReason::Idle);
   if (!app->data->pauseReasons()) {
     app->transitionTo(std::make_unique<AppStateNormal>());
   }
 }
-void AppStatePaused::OnResumeRequest(AppContext *app, SaneBreak::PauseReasons) {
+void AppStatePaused::OnResumeRequest(AppContext *app, PauseReasons) {
   if (!app->data->pauseReasons()) {
     app->transitionTo(std::make_unique<AppStateNormal>());
   }
@@ -148,16 +148,16 @@ void AppStateBreak::onIdleStart(AppContext *app) {
   m_currentPhase->onIdleStart(app, this);
 }
 void AppStateBreak::onIdleEnd(AppContext *app) { m_currentPhase->onIdleEnd(app, this); }
-void AppStateBreak::onPauseRequest(AppContext *app, SaneBreak::PauseReasons reasons) {
+void AppStateBreak::onPauseRequest(AppContext *app, PauseReasons reasons) {
   // We don't exit break if request pause on idle
-  if (reasons != SaneBreak::PauseReason::Idle) {
+  if (reasons != PauseReason::Idle) {
     app->data->finishAndStartNextCycle();
     app->transitionTo(std::make_unique<AppStatePaused>());
   }
 }
 void AppStateBreak::initBreakData(AppContext *app) {
   app->data->breaks->init({
-      .totalSeconds = app->data->breakType() == SaneBreak::BreakType::Big
+      .totalSeconds = app->data->breakType() == BreakType::Big
                           ? app->preferences->bigFor->get()
                           : app->preferences->smallFor->get(),
       .flashFor = app->preferences->flashFor->get(),
@@ -218,16 +218,16 @@ void BreakPhaseFullScreen::tick(AppContext *app, AppStateBreak *breakState) {
     app->data->finishAndStartNextCycle();
     if (app->idleTimer->isIdle()) {
       bool shouldCloseWindow =
-          (breakType == SaneBreak::BreakType::Small &&
+          (breakType == BreakType::Small &&
            app->preferences->autoCloseWindowAfterSmallBreak->get()) ||
-          (breakType == SaneBreak::BreakType::Big &&
+          (breakType == BreakType::Big &&
            app->preferences->autoCloseWindowAfterBigBreak->get());
       if (!shouldCloseWindow) {
         // Leave break window open until user activities
         breakState->transitionTo(app, std::make_unique<BreakPhasePost>());
       } else {
         // We don't count down immediately after break. We wait for user activities.
-        app->data->addPauseReasons(SaneBreak::PauseReason::Idle);
+        app->data->addPauseReasons(PauseReason::Idle);
         app->transitionTo(std::make_unique<AppStatePaused>());
       }
     } else {

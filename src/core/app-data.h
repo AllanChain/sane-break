@@ -45,7 +45,7 @@ class AppData : public QObject {
   AppData(QObject *parent, SanePreferences *preferences);
   std::unique_ptr<BreaksData> breaks;
 
-  SaneBreak::BreakType breakType();
+  BreakType breakType();
   int smallBreaksBeforeBigBreak();
   void finishAndStartNextCycle();
   void resetBreakCycle();
@@ -69,9 +69,9 @@ class AppData : public QObject {
   void addSecondsPaused(int secs);
   void resetSecondsPaused();
 
-  SaneBreak::PauseReasons pauseReasons();
-  void addPauseReasons(SaneBreak::PauseReasons);
-  void removePauseReasons(SaneBreak::PauseReasons);
+  PauseReasons pauseReasons();
+  void addPauseReasons(PauseReasons);
+  void removePauseReasons(PauseReasons);
   void clearPauseReasons();
 
  signals:
@@ -82,7 +82,7 @@ class AppData : public QObject {
   int m_secondsToNextBreak;
   int m_secondsSinceLastBreak = 0;
   int m_secondsPaused = 0;
-  SaneBreak::PauseReasons m_pauseReasons = {};
+  PauseReasons m_pauseReasons = {};
 
   SanePreferences *preferences;
 };

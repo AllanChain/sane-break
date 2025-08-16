@@ -30,7 +30,7 @@ struct TrayData {
   int secondsToNextBigBreak;
   int secondsFromLastBreakToNext;
   int smallBreaksBeforeBigBreak;
-  SaneBreak::PauseReasons pauseReasons;
+  PauseReasons pauseReasons;
 };
 
 class AbstractApp : public AppContext {

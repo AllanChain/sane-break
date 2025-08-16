@@ -111,16 +111,16 @@ void AbstractApp::postpone(int secs) {
 }
 
 void AbstractApp::onSleepEnd(int sleptSeconds) {
-  onPauseRequest(SaneBreak::PauseReason::Sleep);
+  onPauseRequest(PauseReason::Sleep);
   // Timers does not tick during sleep, therefore we need to add them back.
   data->addSecondsPaused(sleptSeconds);
-  onResumeRequest(SaneBreak::PauseReason::Sleep);
+  onResumeRequest(PauseReason::Sleep);
 }
 
 void AbstractApp::onBatterySettingChange() {
   bool doPause = preferences->pauseOnBattery->get();
   if (!doPause)
-    onResumeRequest(SaneBreak::PauseReason::OnBattery);
+    onResumeRequest(PauseReason::OnBattery);
   else if (m_systemMonitor->isOnBattery())
-    onPauseRequest(SaneBreak::PauseReason::OnBattery);
+    onPauseRequest(PauseReason::OnBattery);
 }

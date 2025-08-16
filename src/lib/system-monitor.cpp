@@ -23,16 +23,16 @@ SystemMonitor::SystemMonitor(SanePreferences* preferences, QObject* parent)
   connect(sleepMonitor, &SleepMonitor::sleepEnd, this, &SystemMonitor::sleepEnded);
   connect(batteryWatcher, &BatteryStatus::onBattery, this, [this]() {
     if (this->preferences->pauseOnBattery->get())
-      emit pauseRequested(SaneBreak::PauseReason::OnBattery);
+      emit pauseRequested(PauseReason::OnBattery);
   });
   connect(batteryWatcher, &BatteryStatus::onPower, this, [this]() {
     if (this->preferences->pauseOnBattery->get())
-      emit resumeRequested(SaneBreak::PauseReason::OnBattery);
+      emit resumeRequested(PauseReason::OnBattery);
   });
   connect(runningProgramsMonitor, &RunningProgramsMonitor::programStarted, this,
-          [this]() { emit pauseRequested(SaneBreak::PauseReason::AppOpen); });
+          [this]() { emit pauseRequested(PauseReason::AppOpen); });
   connect(runningProgramsMonitor, &RunningProgramsMonitor::programStopped, this,
-          [this]() { emit resumeRequested(SaneBreak::PauseReason::AppOpen); });
+          [this]() { emit resumeRequested(PauseReason::AppOpen); });
 
   connect(preferences->programsToMonitor, &SettingWithSignal::changed, this, [this]() {
     runningProgramsMonitor->setPrograms(this->preferences->programsToMonitor->get());

@@ -57,11 +57,11 @@ BreakWindows::BreakWindows(QObject *parent) : AbstractBreakWindows(parent) {
 #endif
 }
 
-void BreakWindows::create(SaneBreak::BreakType type, SanePreferences *preferences) {
-  QString promptMessage = type == SaneBreak::BreakType::Big
+void BreakWindows::create(BreakType type, SanePreferences *preferences) {
+  QString promptMessage = type == BreakType::Big
                               ? preferences->bigMessages->defaultValue()[0]
                               : preferences->smallMessages->defaultValue()[0];
-  QStringList messagesToRoll = type == SaneBreak::BreakType::Big
+  QStringList messagesToRoll = type == BreakType::Big
                                    ? preferences->bigMessages->get()
                                    : preferences->smallMessages->get();
   QString fullScreenMessage = "";
@@ -71,7 +71,7 @@ void BreakWindows::create(SaneBreak::BreakType type, SanePreferences *preference
   }
 
   BreakWindowData data;
-  if (type == SaneBreak::BreakType::Small) {
+  if (type == BreakType::Small) {
     data = {
         .totalSeconds = preferences->smallFor->get(),
         .message = {.prompt = promptMessage, .fullScreen = fullScreenMessage},
@@ -147,18 +147,14 @@ void BreakWindows::destroy() {
   clockUpdateTimer->stop();
 }
 
-void BreakWindows::playEnterSound(SaneBreak::BreakType type,
-                                  SanePreferences *preferences) {
-  soundPlayer->play(type == SaneBreak::BreakType::Small
-                        ? preferences->smallStartBell->get()
-                        : preferences->bigStartBell->get());
+void BreakWindows::playEnterSound(BreakType type, SanePreferences *preferences) {
+  soundPlayer->play(type == BreakType::Small ? preferences->smallStartBell->get()
+                                             : preferences->bigStartBell->get());
 }
 
-void BreakWindows::playExitSound(SaneBreak::BreakType type,
-                                 SanePreferences *preferences) {
-  soundPlayer->play(type == SaneBreak::BreakType::Small
-                        ? preferences->smallEndBell->get()
-                        : preferences->bigEndBell->get());
+void BreakWindows::playExitSound(BreakType type, SanePreferences *preferences) {
+  soundPlayer->play(type == BreakType::Small ? preferences->smallEndBell->get()
+                                             : preferences->bigEndBell->get());
 }
 
 void BreakWindows::setTime(int remainingTime) {

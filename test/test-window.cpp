@@ -24,12 +24,11 @@ class TestWindow : public QObject {
   // Data for `tick_with_force_break`
   void tick_with_force_break_data() {
     auto preferences = tempPreferences();
-    QTest::addColumn<SaneBreak::BreakType>("type");
+    QTest::addColumn<BreakType>("type");
     QTest::addColumn<int>("duration");
 
-    QTest::newRow("small") << SaneBreak::BreakType::Small
-                           << preferences->smallFor->get();
-    QTest::newRow("big") << SaneBreak::BreakType::Big << preferences->bigFor->get();
+    QTest::newRow("small") << BreakType::Small << preferences->smallFor->get();
+    QTest::newRow("big") << BreakType::Big << preferences->bigFor->get();
   }
   /* When the timer ticks all the way down without an idle event triggered, the window
    * should first stay in the small prompt mode without counting down until the force
@@ -43,10 +42,10 @@ class TestWindow : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    QFETCH(SaneBreak::BreakType, type);
+    QFETCH(BreakType, type);
 
     EXPECT_CALL(*deps.breakWindows, create(type, _)).Times(1);
-    if (type == SaneBreak::BreakType::Small) {
+    if (type == BreakType::Small) {
       app.breakNow();
     } else {
       app.bigBreakNow();
@@ -79,7 +78,7 @@ class TestWindow : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(SaneBreak::BreakType::Small, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
     app.breakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 

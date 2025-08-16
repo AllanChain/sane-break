@@ -35,8 +35,8 @@ class AppState {
   virtual void onIdleStart(AppContext *) {};
   virtual void onIdleEnd(AppContext *) {};
   virtual void onMenuAction(AppContext *, MenuAction) {};
-  virtual void onPauseRequest(AppContext *, SaneBreak::PauseReasons) {};
-  virtual void OnResumeRequest(AppContext *, SaneBreak::PauseReasons) {};
+  virtual void onPauseRequest(AppContext *, PauseReasons) {};
+  virtual void OnResumeRequest(AppContext *, PauseReasons) {};
   virtual ~AppState() = default;
 };
 
@@ -60,8 +60,8 @@ class AppContext : public QObject {
   void onIdleStart();
   void onIdleEnd();
   void onMenuAction(MenuAction action);
-  void onPauseRequest(SaneBreak::PauseReasons reasons);
-  void onResumeRequest(SaneBreak::PauseReasons reasons);
+  void onPauseRequest(PauseReasons reasons);
+  void onResumeRequest(PauseReasons reasons);
 };
 
 class AppStateNormal : public AppState {
@@ -71,7 +71,7 @@ class AppStateNormal : public AppState {
   void tick(AppContext *app) override;
   void onIdleStart(AppContext *app) override;
   void onMenuAction(AppContext *app, MenuAction action) override;
-  void onPauseRequest(AppContext *app, SaneBreak::PauseReasons reasons) override;
+  void onPauseRequest(AppContext *app, PauseReasons reasons) override;
 };
 
 class AppStatePaused : public AppState {
@@ -82,7 +82,7 @@ class AppStatePaused : public AppState {
   void onIdleStart(AppContext *app) override;
   void onIdleEnd(AppContext *app) override;
   void onMenuAction(AppContext *app, MenuAction action) override;
-  void OnResumeRequest(AppContext *app, SaneBreak::PauseReasons reasons) override;
+  void OnResumeRequest(AppContext *app, PauseReasons reasons) override;
 };
 
 class BreakPhase;
@@ -98,7 +98,7 @@ class AppStateBreak : public AppState {
   void onIdleStart(AppContext *app) override;
   void onIdleEnd(AppContext *app) override;
   void onMenuAction(AppContext *app, MenuAction action) override;
-  void onPauseRequest(AppContext *app, SaneBreak::PauseReasons reasons) override;
+  void onPauseRequest(AppContext *app, PauseReasons reasons) override;
 
   void initBreakData(AppContext *);
 

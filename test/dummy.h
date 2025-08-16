@@ -49,14 +49,14 @@ class DummyBreakWindows : public AbstractBreakWindows {
   Q_OBJECT
  public:
   using AbstractBreakWindows::AbstractBreakWindows;
-  MOCK_METHOD(void, create, (SaneBreak::BreakType, SanePreferences *), (override));
+  MOCK_METHOD(void, create, (BreakType, SanePreferences *), (override));
   MOCK_METHOD(void, destroy, (), ());
   MOCK_METHOD(void, setTime, (int), ());
   MOCK_METHOD(void, showFullScreen, (), ());
   MOCK_METHOD(void, showFlashPrompt, (), ());
   MOCK_METHOD(void, showButtons, (Buttons, bool), ());
-  MOCK_METHOD(void, playEnterSound, (SaneBreak::BreakType, SanePreferences *), ());
-  MOCK_METHOD(void, playExitSound, (SaneBreak::BreakType, SanePreferences *), ());
+  MOCK_METHOD(void, playEnterSound, (BreakType, SanePreferences *), ());
+  MOCK_METHOD(void, playExitSound, (BreakType, SanePreferences *), ());
 };
 
 class DummySystemMonitor : public AbstractSystemMonitor {

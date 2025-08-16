@@ -511,13 +511,13 @@ void PreferenceWindow::openSourceCode() {
 }
 
 void PreferenceWindow::openBreakWindowPreview() {
-  breakWindows->create(SaneBreak::BreakType::Small, preferences);
+  breakWindows->create(BreakType::Small, preferences);
   breakWindows->showFlashPrompt();
   QTimer::singleShot(2000, [this]() {
     breakWindows->showFullScreen();
     QTimer::singleShot(4000, [this]() {
       breakWindows->destroy();
-      breakWindows->create(SaneBreak::BreakType::Big, preferences);
+      breakWindows->create(BreakType::Big, preferences);
       breakWindows->showFlashPrompt();
       QTimer::singleShot(2000, [this]() {
         breakWindows->showFullScreen();

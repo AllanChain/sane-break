@@ -16,9 +16,8 @@ AppData::AppData(QObject *parent, SanePreferences *preferences)
   breaks = std::make_unique<BreaksData>();
 }
 
-SaneBreak::BreakType AppData::breakType() {
-  return smallBreaksBeforeBigBreak() == 0 ? SaneBreak::BreakType::Big
-                                          : SaneBreak::BreakType::Small;
+BreakType AppData::breakType() {
+  return smallBreaksBeforeBigBreak() == 0 ? BreakType::Big : BreakType::Small;
 };
 
 int AppData::smallBreaksBeforeBigBreak() {
@@ -92,17 +91,17 @@ void AppData::resetSecondsPaused() {
   emit changed();
 };
 
-SaneBreak::PauseReasons AppData::pauseReasons() { return m_pauseReasons; };
-void AppData::addPauseReasons(SaneBreak::PauseReasons reason) {
+PauseReasons AppData::pauseReasons() { return m_pauseReasons; };
+void AppData::addPauseReasons(PauseReasons reason) {
   m_pauseReasons |= reason;
   emit changed();
 };
-void AppData::removePauseReasons(SaneBreak::PauseReasons reason) {
+void AppData::removePauseReasons(PauseReasons reason) {
   m_pauseReasons &= ~reason;
   emit changed();
 };
 void AppData::clearPauseReasons() {
-  m_pauseReasons = SaneBreak::PauseReasons::fromInt(0);
+  m_pauseReasons = PauseReasons::fromInt(0);
   emit changed();
 }
 

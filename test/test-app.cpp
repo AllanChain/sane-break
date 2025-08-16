@@ -48,7 +48,7 @@ class TestApp : public QObject {
     app.start();
 
     // Break window will show
-    EXPECT_CALL(*deps.breakWindows, create(SaneBreak::BreakType::Small, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
     app.advance(app.trayData.secondsToNextBreak);
     // Correctly advaces to next break
     QCOMPARE(app.trayData.secondsToNextBreak, 0);
@@ -101,9 +101,9 @@ class TestApp : public QObject {
     app.start();
 
     int numberOfBreaks = deps.preferences->bigAfter->get();
-    EXPECT_CALL(*deps.breakWindows, create(SaneBreak::BreakType::Small, _))
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _))
         .Times(numberOfBreaks - 1);
-    EXPECT_CALL(*deps.breakWindows, create(SaneBreak::BreakType::Big, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Big, _)).Times(1);
     for (int j = 0; j < numberOfBreaks; j++) {
       QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, numberOfBreaks - j - 1);
       app.advance(app.trayData.secondsToNextBreak);
@@ -234,7 +234,7 @@ class TestApp : public QObject {
     app.start();
 
     deps.idleTimer->setIdle(true);
-    QCOMPARE(app.trayData.pauseReasons, SaneBreak::PauseReason::Idle);
+    QCOMPARE(app.trayData.pauseReasons, PauseReason::Idle);
     // Countdown stopped
     int secondsToNextBreak = app.trayData.secondsToNextBreak;
     app.advance(1);
@@ -248,9 +248,9 @@ class TestApp : public QObject {
   }
   // Similar to `pause_break_on_idle`, but for other reasons
   void pause_break_on_request_data() {
-    QTest::addColumn<SaneBreak::PauseReason>("reason");
-    QTest::newRow("battery") << SaneBreak::PauseReason::OnBattery;
-    QTest::newRow("program") << SaneBreak::PauseReason::AppOpen;
+    QTest::addColumn<PauseReason>("reason");
+    QTest::newRow("battery") << PauseReason::OnBattery;
+    QTest::newRow("program") << PauseReason::AppOpen;
   };
   void pause_break_on_request() {
     auto deps = DummyApp::makeDeps();
@@ -258,7 +258,7 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    QFETCH(SaneBreak::PauseReason, reason);
+    QFETCH(PauseReason, reason);
     emit deps.systemMonitor->pauseRequested(reason);
     QCOMPARE(app.trayData.pauseReasons, reason);
     // Countdown stopped
@@ -373,12 +373,12 @@ class TestApp : public QObject {
     app.start();
 
     // Verify we successfully triggered a big break
-    EXPECT_CALL(*deps.breakWindows, create(SaneBreak::BreakType::Big, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Big, _)).Times(1);
     app.bigBreakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
     // Triggering small break instead is deleting previous windows and creating new ones
-    EXPECT_CALL(*deps.breakWindows, create(SaneBreak::BreakType::Small, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
     EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
     app.smallBreakInstead();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
@@ -398,7 +398,7 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(SaneBreak::BreakType::Small, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
     app.breakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
@@ -416,12 +416,12 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(SaneBreak::BreakType::Small, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
     app.breakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
     EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
-    emit deps.systemMonitor->pauseRequested(SaneBreak::PauseReason::OnBattery);
+    emit deps.systemMonitor->pauseRequested(PauseReason::OnBattery);
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
   }
   // Ignore pauses caused by idles during the break
@@ -430,7 +430,7 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(SaneBreak::BreakType::Small, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
     app.breakNow();
     EXPECT_CALL(*deps.breakWindows, destroy()).Times(0);
     deps.idleTimer->setIdle(true);
@@ -445,7 +445,7 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(SaneBreak::BreakType::Small, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
     app.breakNow();
     EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
     emit deps.systemMonitor->sleepEnded(1);
@@ -487,7 +487,7 @@ class TestApp : public QObject {
     emit deps.systemMonitor->sleepEnded(30);
 
     // Should remain paused
-    QCOMPARE(app.trayData.pauseReasons, SaneBreak::PauseReason::Idle);
+    QCOMPARE(app.trayData.pauseReasons, PauseReason::Idle);
   }
   // Multiple pause reasons should work
   void more_than_one_pause_reasons() {
@@ -496,12 +496,12 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    emit deps.systemMonitor->pauseRequested(SaneBreak::PauseReason::OnBattery);
-    QVERIFY(app.trayData.pauseReasons.testFlags(SaneBreak::PauseReason::OnBattery));
+    emit deps.systemMonitor->pauseRequested(PauseReason::OnBattery);
+    QVERIFY(app.trayData.pauseReasons.testFlags(PauseReason::OnBattery));
 
     deps.idleTimer->setIdle(true);
-    QVERIFY(app.trayData.pauseReasons.testFlags(SaneBreak::PauseReason::Idle |
-                                                SaneBreak::PauseReason::OnBattery));
+    QVERIFY(app.trayData.pauseReasons.testFlags(PauseReason::Idle |
+                                                PauseReason::OnBattery));
     // Countdown stopped
     int secondsToNextBreak = app.trayData.secondsToNextBreak;
     app.advance(1);
@@ -510,9 +510,9 @@ class TestApp : public QObject {
     deps.idleTimer->setIdle(false);
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
-    QVERIFY(app.trayData.pauseReasons.testFlag(SaneBreak::PauseReason::OnBattery));
+    QVERIFY(app.trayData.pauseReasons.testFlag(PauseReason::OnBattery));
 
-    emit deps.systemMonitor->resumeRequested(SaneBreak::PauseReason::OnBattery);
+    emit deps.systemMonitor->resumeRequested(PauseReason::OnBattery);
     QVERIFY(!app.trayData.pauseReasons);
 
     app.advance(1);
