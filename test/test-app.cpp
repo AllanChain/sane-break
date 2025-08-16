@@ -453,6 +453,42 @@ class TestApp : public QObject {
     QVERIFY(!app.trayData.isBreaking);
     QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
   }
+  void short_sleep_does_nothing() {
+    auto deps = DummyApp::makeDeps();
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.advance(1);
+    emit deps.systemMonitor->sleepEnded(1);
+
+    QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get() - 1);
+  }
+  void long_sleep_resets_cycle() {
+    auto deps = DummyApp::makeDeps();
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.advance(1);
+    emit deps.systemMonitor->sleepEnded(deps.preferences->resetCycleAfterPause->get() +
+                                        1);
+
+    // Long sleep should reset both countdown and cycle
+    QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
+             deps.preferences->bigAfter->get() - 1);
+  }
+  // Sleep end should not change the pause state
+  void sleep_end_while_idle_paused() {
+    auto deps = DummyApp::makeDeps();
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    deps.idleTimer->setIdle(true);
+    emit deps.systemMonitor->sleepEnded(30);
+
+    // Should remain paused
+    QCOMPARE(app.trayData.pauseReasons, SaneBreak::PauseReason::Idle);
+  }
   // Multiple pause reasons should work
   void more_than_one_pause_reasons() {
     auto deps = DummyApp::makeDeps();
