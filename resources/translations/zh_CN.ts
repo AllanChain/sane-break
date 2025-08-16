@@ -53,12 +53,12 @@
 <context>
     <name>BreakWindow</name>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="121"/>
+        <location filename="../../src/app/break-window.cpp" line="122"/>
         <source>Break will end at: %1</source>
         <translation>休息将在 %1 结束</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="123"/>
+        <location filename="../../src/app/break-window.cpp" line="124"/>
         <source>Break has ended</source>
         <translation>休息已结束</translation>
     </message>
