@@ -135,6 +135,9 @@ void AppStateBreak::enter(AppContext *app) {
   app->idleTimer->setMinIdleTime(2000);
   initBreakData(app);
   app->breakWindows->create(app->data->breakType(), app->preferences);
+  // Ensure we set the time at least once. Sometimes there is no tick called to set the
+  // time if the user is idle.
+  app->breakWindows->setTime(app->data->breaks->remainingSeconds());
   app->breakWindows->playEnterSound(app->data->breakType(), app->preferences);
   if (app->idleTimer->isIdle()) {
     this->transitionTo(app, std::make_unique<BreakPhaseFullScreen>());
