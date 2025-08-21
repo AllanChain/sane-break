@@ -185,6 +185,9 @@ void AppStateBreak::onMenuAction(AppContext *app, MenuAction action) {
 
 void BreakPhasePrompt::enter(AppContext *app, AppStateBreak *) {
   app->breakWindows->showFlashPrompt();
+  app->breakWindows->showButtons(AbstractBreakWindows::Button::ExitForceBreak |
+                                     AbstractBreakWindows::Button::LockScreen,
+                                 false);
   // screenLockTimer should only be active in BreakPhaseFullScreen and AppStatePaused
   app->screenLockTimer->stop();
 }
