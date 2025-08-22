@@ -576,9 +576,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="399"/>
         <location filename="../../src/app/pref-window.cpp" line="400"/>
         <location filename="../../src/app/pref-window.cpp" line="401"/>
+        <location filename="../../src/app/pref-window.cpp" line="402"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -586,8 +586,8 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="165"/>
-        <location filename="../../src/app/pref-window.cpp" line="176"/>
+        <location filename="../../src/app/pref-window.cpp" line="166"/>
+        <location filename="../../src/app/pref-window.cpp" line="177"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>Cada %n min</numerusform>
@@ -595,7 +595,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="398"/>
+        <location filename="../../src/app/pref-window.cpp" line="399"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n seg</numerusform>
@@ -603,47 +603,47 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="397"/>
+        <location filename="../../src/app/pref-window.cpp" line="398"/>
         <source>Disabled</source>
         <translation>Desactivado</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="408"/>
+        <location filename="../../src/app/pref-window.cpp" line="409"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>Comenzar el siguiente descanso tras clicar con el botón central en el icono de la bandeja</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="413"/>
+        <location filename="../../src/app/pref-window.cpp" line="414"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>Comenzar el siguiente descanso tras hacer doble clic en el icono de la bandeja</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="481"/>
+        <location filename="../../src/app/pref-window.cpp" line="482"/>
         <source>Save</source>
         <translation>Guardar</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="482"/>
+        <location filename="../../src/app/pref-window.cpp" line="483"/>
         <source>Discard</source>
         <translation>Descartar</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="483"/>
+        <location filename="../../src/app/pref-window.cpp" line="484"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="373"/>
+        <location filename="../../src/app/pref-window.cpp" line="374"/>
         <source>Setting autostart failed</source>
         <translation>La configuración de inicio automático falló</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="478"/>
+        <location filename="../../src/app/pref-window.cpp" line="479"/>
         <source>The preferences have been modified.</source>
         <translation>Las preferencias se han modificado.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="479"/>
+        <location filename="../../src/app/pref-window.cpp" line="480"/>
         <source>Do you want to save your changes?</source>
         <translation>¿Quieres guardar los cambios?</translation>
     </message>

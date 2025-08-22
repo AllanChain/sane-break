@@ -41,6 +41,7 @@
 #include "app/widgets/language-select.h"
 #include "app/widgets/stepped-slider.h"
 #include "config.h"
+#include "core/break-windows.h"
 #include "core/flags.h"
 #include "core/preferences.h"
 #include "lib/auto-start.h"
@@ -515,12 +516,16 @@ void PreferenceWindow::openBreakWindowPreview() {
   breakWindows->showFlashPrompt();
   QTimer::singleShot(2000, [this]() {
     breakWindows->showFullScreen();
+    breakWindows->showButtons(AbstractBreakWindows::Button::LockScreen |
+                              AbstractBreakWindows::Button::ExitForceBreak);
     QTimer::singleShot(4000, [this]() {
       breakWindows->destroy();
       breakWindows->create(BreakType::Big, preferences);
       breakWindows->showFlashPrompt();
       QTimer::singleShot(2000, [this]() {
         breakWindows->showFullScreen();
+        breakWindows->showButtons(AbstractBreakWindows::Button::LockScreen |
+                                  AbstractBreakWindows::Button::ExitForceBreak);
         QTimer::singleShot(4000, [this]() { breakWindows->destroy(); });
       });
     });
