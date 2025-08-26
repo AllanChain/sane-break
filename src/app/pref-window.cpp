@@ -147,7 +147,8 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
                 ui->tabPauseButton,    ui->tabSoundButton,    ui->tabGeneralButton,
                 ui->tabAboutButton};
   for (int i = 0; i < tabButtons.size(); ++i) {
-    connect(tabButtons[i], &QPushButton::released, this, [this, i]() { setTab(i); });
+    connect(tabButtons[i], &QPushButton::released, this,
+            [this, i]() { setTab(i, tabButtons.length()); });
   }
   // Qt Designer is having problem setting align center
   ui->sideBar->layout()->setAlignment(ui->sidebarImage, Qt::AlignHCenter);
@@ -458,7 +459,7 @@ void PreferenceWindow::closeEvent(QCloseEvent *event) {
 
 void PreferenceWindow::showEvent(QShowEvent *) { controllers->load(); }
 
-void PreferenceWindow::setTab(int tabNum) {
+void PreferenceWindow::setTab(int tabNum, int totalTabCount) {
   if (!confirmLeave()) {
     tabButtons[tabNum]->setChecked(false);
     return;
@@ -467,7 +468,7 @@ void PreferenceWindow::setTab(int tabNum) {
   for (int i = 0; i < tabButtons.size(); ++i) {
     tabButtons[i]->setChecked(i == tabNum);
   }
-  ui->controlBar->setHidden(tabNum == 5);
+  ui->controlBar->setHidden(tabNum == totalTabCount - 1);
   ui->stackedWidget->setFixedHeight(
       ui->stackedWidget->currentWidget()->sizeHint().height());
 }

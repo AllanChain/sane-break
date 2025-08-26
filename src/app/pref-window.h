@@ -241,7 +241,7 @@ class PreferenceWindow : public QMainWindow {
   BreakWindows *breakWindows;
 
   bool confirmLeave();
-  void setTab(int tabNum);
+  void setTab(int tabNum, int totalTabCount);
   void openNotice();
   void openSourceCode();
   void openBreakWindowPreview();
