@@ -71,12 +71,12 @@
     <message>
         <location filename="../../src/app/break-window.cpp" line="122"/>
         <source>Break will end at: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>El descanso finaliza a las: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/break-window.cpp" line="124"/>
         <source>Break has ended</source>
-        <translation type="unfinished"></translation>
+        <translation>El descanso ha terminado</translation>
     </message>
 </context>
 <context>
@@ -212,54 +212,56 @@
     <message>
         <location filename="../../src/app/pref-window.ui" line="660"/>
         <source>Max number of force break exits</source>
-        <translation type="unfinished"></translation>
+        <translation>Permitir posponer el descanso un máximo de</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="110"/>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Interfaz</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="667"/>
         <source> times</source>
-        <translation type="unfinished"></translation>
+        <translation> veces</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="806"/>
         <source>&lt;h3&gt;Components to Show&lt;/h3&gt;
 
 &lt;p&gt;User interface components to show in the prompt and full-screen window.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;Elementos a mostrar&lt;/h3&gt;
+
+&lt;p&gt;Elementos a mostrar en los avisos, tanto pequeños como a pantalla completa.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="831"/>
         <location filename="../../src/app/pref-window.ui" line="877"/>
         <source>Time when break ends</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora a la que termina el descanso</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="852"/>
         <location filename="../../src/app/pref-window.ui" line="898"/>
         <source>Countdown timer</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuenta atrás</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="824"/>
         <location filename="../../src/app/pref-window.ui" line="870"/>
         <source>Progress bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Barra de progreso</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="838"/>
         <location filename="../../src/app/pref-window.ui" line="884"/>
         <source>Clock</source>
-        <translation type="unfinished"></translation>
+        <translation>Reloj</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="845"/>
         <location filename="../../src/app/pref-window.ui" line="891"/>
         <source>Buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Botones</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="907"/>
@@ -470,32 +472,32 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="676"/>
         <source>Close windows right after small break ends</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerrar ventanas justo después de finalizar un descanso breve</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="683"/>
         <source>Close windows right after big break ends</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerrar ventanas justo después de finalizar un descanso largo</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="815"/>
         <source>&lt;h4&gt;Small break&lt;/h4&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h4&gt;Descanso breve&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="861"/>
         <source>&lt;h4&gt;Big break&lt;/h4&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h4&gt;Descanso largo&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1014"/>
         <source>&lt;p&gt;To preview break windows, save all changes first. The preview begins with a 2-second flashing prompt, followed by a 4-second full-screen break. A small break window will appear first, then a big break window.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Para previsualizar las ventanas de descanso, guarda todos los cambios primero. La vista previa se inicia con un aviso parpadeante durante 2 segundos, seguido de una ventana de descanso a pantalla completa durante 4 segundos. Primero aparecerá una ventana pequeña, y después una ventana grande.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1024"/>
         <source>Preview Break Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Vista previa de la ventana de descanso</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1109"/>
@@ -565,7 +567,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1665"/>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Valores por defecto</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1688"/>
@@ -672,12 +674,12 @@ v%1
     <message>
         <location filename="../../src/app/main.cpp" line="55"/>
         <source>Another instance of Sane Break is running.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sane Break ya se está ejecutando en otra instancia.</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="56"/>
         <source>Please quit the old instance before starting a new one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cierra la instancia anterior antes de iniciar una nueva.</translation>
     </message>
 </context>
 <context>
