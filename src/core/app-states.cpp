@@ -264,7 +264,9 @@ void BreakPhaseFullScreen::showWindowClickableWidgets(AppContext *app) {
 }
 
 void BreakPhasePost::enter(AppContext *app, AppStateBreak *) {
-  app->breakWindows->showButtons(AbstractBreakWindows::Button::ExitForceBreak, false);
+  app->breakWindows->showButtons(AbstractBreakWindows::Button::ExitForceBreak |
+                                     AbstractBreakWindows::Button::LockScreen,
+                                 false);
 }
 void BreakPhasePost::onIdleEnd(AppContext *app, AppStateBreak *) {
   app->screenLockTimer->stop();
