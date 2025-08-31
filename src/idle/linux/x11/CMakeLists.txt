@@ -3,7 +3,8 @@ include(FindPkgConfig)
 pkg_check_modules(X11 x11)
 pkg_check_modules(XSCRNSAVER xscrnsaver)
 if(X11_FOUND AND XSCRNSAVER_FOUND)
-  qt_add_plugin(sane-idle-x11 CLASS_NAME IdleTimeX11 x11-idle.cpp x11-idle.h)
+  qt_add_plugin(sane-idle-x11 CLASS_NAME IdleTimeX11)
+  target_sources(sane-idle-x11 PRIVATE x11-idle.cpp x11-idle.h)
   target_link_libraries(
     sane-idle-x11 PRIVATE Qt6::Widgets ${X11_LIBRARIES} ${XSCRNSAVER_LIBRARIES}
   )
