@@ -534,71 +534,71 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="400"/>
         <location filename="../../src/app/pref-window.cpp" line="401"/>
         <location filename="../../src/app/pref-window.cpp" line="402"/>
+        <location filename="../../src/app/pref-window.cpp" line="403"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n 分鐘</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="166"/>
-        <location filename="../../src/app/pref-window.cpp" line="177"/>
+        <location filename="../../src/app/pref-window.cpp" line="167"/>
+        <location filename="../../src/app/pref-window.cpp" line="178"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>每 %n 分鐘</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="399"/>
+        <location filename="../../src/app/pref-window.cpp" line="400"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n 秒</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="398"/>
+        <location filename="../../src/app/pref-window.cpp" line="399"/>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="409"/>
+        <location filename="../../src/app/pref-window.cpp" line="410"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>在中鍵托盤圖標後，立刻開始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="414"/>
+        <location filename="../../src/app/pref-window.cpp" line="415"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>在雙擊托盤圖標後，立刻開始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="482"/>
+        <location filename="../../src/app/pref-window.cpp" line="483"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="483"/>
+        <location filename="../../src/app/pref-window.cpp" line="484"/>
         <source>Discard</source>
         <translation>放棄</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="484"/>
+        <location filename="../../src/app/pref-window.cpp" line="485"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="374"/>
+        <location filename="../../src/app/pref-window.cpp" line="375"/>
         <source>Setting autostart failed</source>
         <translation>設置開機自啟失敗</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="479"/>
+        <location filename="../../src/app/pref-window.cpp" line="480"/>
         <source>The preferences have been modified.</source>
         <translation>偏好設置已被修改。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="480"/>
+        <location filename="../../src/app/pref-window.cpp" line="481"/>
         <source>Do you want to save your changes?</source>
         <translation>是否保存修改？</translation>
     </message>

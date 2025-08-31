@@ -597,9 +597,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="400"/>
         <location filename="../../src/app/pref-window.cpp" line="401"/>
         <location filename="../../src/app/pref-window.cpp" line="402"/>
+        <location filename="../../src/app/pref-window.cpp" line="403"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -607,8 +607,8 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="166"/>
-        <location filename="../../src/app/pref-window.cpp" line="177"/>
+        <location filename="../../src/app/pref-window.cpp" line="167"/>
+        <location filename="../../src/app/pref-window.cpp" line="178"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>Chaque minute</numerusform>
@@ -616,7 +616,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="399"/>
+        <location filename="../../src/app/pref-window.cpp" line="400"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec</numerusform>
@@ -624,47 +624,47 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="398"/>
+        <location filename="../../src/app/pref-window.cpp" line="399"/>
         <source>Disabled</source>
         <translation>Désactivé</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="409"/>
+        <location filename="../../src/app/pref-window.cpp" line="410"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>Démarrer la pause suivante en faisant clic du milieu sur l&apos;icône dans la barre des tâches</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="414"/>
+        <location filename="../../src/app/pref-window.cpp" line="415"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>Démarrer la pause suivante en faisant double-clic sur l&apos;icône dans la barre des tâches</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="482"/>
+        <location filename="../../src/app/pref-window.cpp" line="483"/>
         <source>Save</source>
         <translation>Sauvegarder</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="483"/>
+        <location filename="../../src/app/pref-window.cpp" line="484"/>
         <source>Discard</source>
         <translation>Rejeter</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="484"/>
+        <location filename="../../src/app/pref-window.cpp" line="485"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="374"/>
+        <location filename="../../src/app/pref-window.cpp" line="375"/>
         <source>Setting autostart failed</source>
         <translation>La mise en place du démarrage automatique a échoué</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="479"/>
+        <location filename="../../src/app/pref-window.cpp" line="480"/>
         <source>The preferences have been modified.</source>
         <translation>Les préférences ont été modifiées.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="480"/>
+        <location filename="../../src/app/pref-window.cpp" line="481"/>
         <source>Do you want to save your changes?</source>
         <translation>Voulez-vous sauvegarder les changements&#x202f;?</translation>
     </message>
