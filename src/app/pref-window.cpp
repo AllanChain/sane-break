@@ -128,7 +128,7 @@ void ControllerHolder::setGroupToDefault(PrefGroup group) {
 PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::PrefWindow), preferences(preferences) {
   setWindowFlag(Qt::Dialog);
-  setWindowIcon(QIcon(":/images/icon_tray-color.png"));
+  setWindowIcon(QIcon(":/images/icon.png"));
 
   ui->setupUi(this);
   ui->stackedWidget->setFixedHeight(
