@@ -53,6 +53,7 @@ class BreakWindow : public QMainWindow {
   QPropertyAnimation *m_progressAnim;
   QPropertyAnimation *m_bgAnim;
   bool m_waylandWorkaround = false;
+  bool m_supportTransparentInput = true;
   int m_totalSeconds;
 
   static void colorizeButton(QPushButton *button, QColor color);

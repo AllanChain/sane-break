@@ -48,13 +48,17 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget *parent)
   // changes size and covers the space.
   m_waylandWorkaround =
       QGuiApplication::platformName() == "wayland" && !LinuxSystemSupport::layerShell;
+  // X11 does not support changing WindowTransparentForInput flag afterwards.
+  // Therefore, we just don't set the WindowTransparentForInput flag.
+  m_supportTransparentInput = QGuiApplication::platformName() == "wayland";
 #endif
   setAttribute(Qt::WA_TranslucentBackground);    // transparent window
   setAttribute(Qt::WA_ShowWithoutActivating);    // avoid gaining keyboard focus
   setAttribute(Qt::WA_LayoutOnEntireRect);       // ignore safe zone on macOS
   setAttribute(Qt::WA_MacAlwaysShowToolWindow);  // always show window on macOS
   setWindowFlags(Qt::Tool | Qt::WindowDoesNotAcceptFocus | Qt::FramelessWindowHint |
-                 Qt::WindowStaysOnTopHint | Qt::WindowTransparentForInput);
+                 Qt::WindowStaysOnTopHint);
+  if (m_supportTransparentInput) setWindowFlag(Qt::WindowTransparentForInput);
   setWindowTitle("Break reminder - Sane Break");
 
   mainWidget = new QWidget(this);
@@ -142,9 +146,11 @@ void BreakWindow::showButtons(AbstractBreakWindows::Buttons buttons, bool show) 
 
 void BreakWindow::showFullScreen() {
   mainWidget->setProperty("isFullScreen", true);
-  // setWindowFlag will reparent the window and do a lot of unnecessary works
-  // Instead, we just change the flags of QWindow
-  windowHandle()->setFlag(Qt::WindowTransparentForInput, false);
+  if (m_supportTransparentInput) {
+    // setWindowFlag will reparent the window and do a lot of unnecessary works
+    // Instead, we just change the flags of QWindow
+    windowHandle()->setFlag(Qt::WindowTransparentForInput, false);
+  }
   m_bgAnim->stop();
   setProperty("color", m_bgAnim->endValue());
 
@@ -165,7 +171,9 @@ void BreakWindow::showFullScreen() {
 
 void BreakWindow::showFlashPrompt() {
   mainWidget->setProperty("isFullScreen", false);
-  windowHandle()->setFlag(Qt::WindowTransparentForInput, true);
+  if (m_supportTransparentInput) {
+    windowHandle()->setFlag(Qt::WindowTransparentForInput, true);
+  }
   m_bgAnim->start();
 
   ui->breakLabel->setText(m_data.message.prompt);
