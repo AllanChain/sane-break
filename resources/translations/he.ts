@@ -523,7 +523,12 @@ v%1
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1658"/>
+        <location filename="../../src/app/pref-window.ui" line="1632"/>
+        <source>Help Us Translate!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1665"/>
         <source>Revert to Last Saved</source>
         <translation type="unfinished">שחזר להגדרות האחרונות שנשמרו</translation>
     </message>
@@ -543,12 +548,12 @@ v%1
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1665"/>
+        <location filename="../../src/app/pref-window.ui" line="1672"/>
         <source>Defaults</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1688"/>
+        <location filename="../../src/app/pref-window.ui" line="1695"/>
         <source>Save</source>
         <translation type="unfinished">שמור</translation>
     </message>
@@ -598,17 +603,17 @@ v%1
         <translation type="unfinished">התחל את ההפסקה הבאה לאחר לחיצה כפולה בסמל במקלדת</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="483"/>
+        <location filename="../../src/app/pref-window.cpp" line="485"/>
         <source>Save</source>
         <translation type="unfinished">שמור</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="484"/>
+        <location filename="../../src/app/pref-window.cpp" line="486"/>
         <source>Discard</source>
         <translation type="unfinished">בטל</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="485"/>
+        <location filename="../../src/app/pref-window.cpp" line="487"/>
         <source>Cancel</source>
         <translation type="unfinished">ביטול</translation>
     </message>
@@ -618,12 +623,12 @@ v%1
         <translation type="unfinished">הגדרת ההפעלה האוטומטית נכשלה</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="480"/>
+        <location filename="../../src/app/pref-window.cpp" line="482"/>
         <source>The preferences have been modified.</source>
         <translation type="unfinished">ההעדפות שונו</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="481"/>
+        <location filename="../../src/app/pref-window.cpp" line="483"/>
         <source>Do you want to save your changes?</source>
         <translation type="unfinished">האם ברצונך לשמור את השינויים?</translation>
     </message>

@@ -1626,6 +1626,13 @@ v%1
               </item>
              </layout>
             </item>
+            <item alignment="Qt::AlignmentFlag::AlignLeft">
+             <widget class="QPushButton" name="helpTranslateButton">
+              <property name="text">
+               <string>Help Us Translate!</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
          </widget>

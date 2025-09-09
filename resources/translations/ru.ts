@@ -521,7 +521,12 @@ v%1
         <translation>Просмотреть исходный код</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1658"/>
+        <location filename="../../src/app/pref-window.ui" line="1632"/>
+        <source>Help Us Translate!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1665"/>
         <source>Revert to Last Saved</source>
         <translation type="unfinished">Вернуться к последнему сохраненному</translation>
     </message>
@@ -541,12 +546,12 @@ v%1
         <translation>Лицензии сторонних библиотек</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1665"/>
+        <location filename="../../src/app/pref-window.ui" line="1672"/>
         <source>Defaults</source>
         <translation>По умолчанию</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1688"/>
+        <location filename="../../src/app/pref-window.ui" line="1695"/>
         <source>Save</source>
         <translation type="unfinished">Сохранить</translation>
     </message>
@@ -604,27 +609,27 @@ v%1
         <translation type="unfinished">Начать следующий перерыв после двойного клика на значке в трее</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="483"/>
+        <location filename="../../src/app/pref-window.cpp" line="485"/>
         <source>Save</source>
         <translation type="unfinished">Сохранить</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="484"/>
+        <location filename="../../src/app/pref-window.cpp" line="486"/>
         <source>Discard</source>
         <translation type="unfinished">Отменить</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="485"/>
+        <location filename="../../src/app/pref-window.cpp" line="487"/>
         <source>Cancel</source>
         <translation type="unfinished">Отмена</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="480"/>
+        <location filename="../../src/app/pref-window.cpp" line="482"/>
         <source>The preferences have been modified.</source>
         <translation type="unfinished">Настройки были изменены.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="481"/>
+        <location filename="../../src/app/pref-window.cpp" line="483"/>
         <source>Do you want to save your changes?</source>
         <translation type="unfinished">Хотите сохранить изменения?</translation>
     </message>

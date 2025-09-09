@@ -564,7 +564,12 @@ v%1
         <translation>Obtenir le code source</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1658"/>
+        <location filename="../../src/app/pref-window.ui" line="1632"/>
+        <source>Help Us Translate!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1665"/>
         <source>Revert to Last Saved</source>
         <translation>Revenir aux anciens paramètres sauvegardés</translation>
     </message>
@@ -584,12 +589,12 @@ v%1
         <translation>Licences des bibliothèques tierces</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1665"/>
+        <location filename="../../src/app/pref-window.ui" line="1672"/>
         <source>Defaults</source>
         <translation>Paramètres par défaut</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1688"/>
+        <location filename="../../src/app/pref-window.ui" line="1695"/>
         <source>Save</source>
         <translation>Sauvegarder</translation>
     </message>
@@ -639,17 +644,17 @@ v%1
         <translation>Démarrer la pause suivante en faisant double-clic sur l&apos;icône dans la barre des tâches</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="483"/>
+        <location filename="../../src/app/pref-window.cpp" line="485"/>
         <source>Save</source>
         <translation>Sauvegarder</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="484"/>
+        <location filename="../../src/app/pref-window.cpp" line="486"/>
         <source>Discard</source>
         <translation>Rejeter</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="485"/>
+        <location filename="../../src/app/pref-window.cpp" line="487"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
@@ -659,12 +664,12 @@ v%1
         <translation>La mise en place du démarrage automatique a échoué</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="480"/>
+        <location filename="../../src/app/pref-window.cpp" line="482"/>
         <source>The preferences have been modified.</source>
         <translation>Les préférences ont été modifiées.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="481"/>
+        <location filename="../../src/app/pref-window.cpp" line="483"/>
         <source>Do you want to save your changes?</source>
         <translation>Voulez-vous sauvegarder les changements&#x202f;?</translation>
     </message>

@@ -501,7 +501,12 @@ v%1
         <translation>獲取源代碼</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1658"/>
+        <location filename="../../src/app/pref-window.ui" line="1632"/>
+        <source>Help Us Translate!</source>
+        <translation>幫助我們翻譯！</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1665"/>
         <source>Revert to Last Saved</source>
         <translation>恢復上次設置</translation>
     </message>
@@ -521,12 +526,12 @@ v%1
         <translation>第三方庫許可</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1665"/>
+        <location filename="../../src/app/pref-window.ui" line="1672"/>
         <source>Defaults</source>
         <translation>恢復默認</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1688"/>
+        <location filename="../../src/app/pref-window.ui" line="1695"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
@@ -573,17 +578,17 @@ v%1
         <translation>在雙擊托盤圖標後，立刻開始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="483"/>
+        <location filename="../../src/app/pref-window.cpp" line="485"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="484"/>
+        <location filename="../../src/app/pref-window.cpp" line="486"/>
         <source>Discard</source>
         <translation>放棄</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="485"/>
+        <location filename="../../src/app/pref-window.cpp" line="487"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
@@ -593,12 +598,12 @@ v%1
         <translation>設置開機自啟失敗</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="480"/>
+        <location filename="../../src/app/pref-window.cpp" line="482"/>
         <source>The preferences have been modified.</source>
         <translation>偏好設置已被修改。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="481"/>
+        <location filename="../../src/app/pref-window.cpp" line="483"/>
         <source>Do you want to save your changes?</source>
         <translation>是否保存修改？</translation>
     </message>

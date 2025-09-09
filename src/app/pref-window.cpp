@@ -428,6 +428,8 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
   connect(ui->noticeButton, &QPushButton::pressed, this, &PreferenceWindow::openNotice);
   connect(ui->sourceCodeButton, &QPushButton::pressed, this,
           &PreferenceWindow::openSourceCode);
+  connect(ui->helpTranslateButton, &QPushButton::pressed, this,
+          &PreferenceWindow::openWeblate);
 
   /***************************************************************************
    *                                                                         *
@@ -510,6 +512,10 @@ void PreferenceWindow::openNotice() {
 
 void PreferenceWindow::openSourceCode() {
   QDesktopServices::openUrl(QUrl("https://github.com/AllanChain/sane-break"));
+}
+
+void PreferenceWindow::openWeblate() {
+  QDesktopServices::openUrl(QUrl("https://hosted.weblate.org/engage/sane-break/"));
 }
 
 void PreferenceWindow::openBreakWindowPreview() {

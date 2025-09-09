@@ -244,6 +244,7 @@ class PreferenceWindow : public QMainWindow {
   void setTab(int tabNum, int totalTabCount);
   void openNotice();
   void openSourceCode();
+  void openWeblate();
   void openBreakWindowPreview();
   void closeEvent(QCloseEvent *event);
   void showEvent(QShowEvent *event);
