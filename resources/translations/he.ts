@@ -40,12 +40,12 @@
 <context>
     <name>BreakReminder</name>
     <message>
-        <location filename="../../src/app/break-window.ui" line="246"/>
+        <location filename="../../src/app/break-window.ui" line="210"/>
         <source>Lock Screen</source>
         <translation type="unfinished">נעילת מסך</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.ui" line="300"/>
+        <location filename="../../src/app/break-window.ui" line="264"/>
         <source>Exit Force Break</source>
         <translation type="unfinished">יציאה ממצב ההפסקה המחייבת</translation>
     </message>
@@ -53,12 +53,12 @@
 <context>
     <name>BreakWindow</name>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="122"/>
+        <location filename="../../src/app/break-window.cpp" line="126"/>
         <source>Break will end at: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="124"/>
+        <location filename="../../src/app/break-window.cpp" line="128"/>
         <source>Break has ended</source>
         <translation type="unfinished"></translation>
     </message>

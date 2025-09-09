@@ -38,9 +38,6 @@
 BreakWindows::BreakWindows(QObject *parent) : AbstractBreakWindows(parent) {
   soundPlayer = new SoundPlayer(this);
 
-  clockUpdateTimer = new QTimer(this);
-  connect(clockUpdateTimer, &QTimer::timeout, this, &BreakWindows::updateClocks);
-
 #ifdef Q_OS_LINUX
   if (QGuiApplication::platformName() == "wayland" && LinuxSystemSupport::layerShell) {
     QPluginLoader loader("libsanebreak_layer_shell");
@@ -135,7 +132,6 @@ void BreakWindows::create(BreakType type, SanePreferences *preferences) {
     connect(w, &BreakWindow::exitForceBreakRequested, this,
             &BreakWindows::exitForceBreakRequested);
   }
-  clockUpdateTimer->start(250);
 }
 
 void BreakWindows::destroy() {
@@ -144,7 +140,6 @@ void BreakWindows::destroy() {
     w->deleteLater();
   }
   m_windows.clear();
-  clockUpdateTimer->stop();
 }
 
 void BreakWindows::playEnterSound(BreakType type, SanePreferences *preferences) {
@@ -158,12 +153,14 @@ void BreakWindows::playExitSound(BreakType type, SanePreferences *preferences) {
 }
 
 void BreakWindows::setTime(int remainingTime) {
-  QTime estimatedEndTime = QTime::currentTime().addSecs(remainingTime);
+  QTime now = QTime::currentTime();
+  QTime estimatedEndTime = now.addSecs(remainingTime);
   // Round time to seconds
   if (estimatedEndTime.msec() > 500) {
     estimatedEndTime = estimatedEndTime.addMSecs(500);
   }
   for (auto w : std::as_const(m_windows)) {
+    w->setClock(now.toString("hh:mm"));
     w->setTime(remainingTime, estimatedEndTime.toString("hh:mm:ss"));
   }
 }
@@ -175,12 +172,4 @@ void BreakWindows::showFlashPrompt() {
 }
 void BreakWindows::showButtons(Buttons buttons, bool show) {
   for (auto w : std::as_const(m_windows)) w->showButtons(buttons, show);
-}
-void BreakWindows::updateClocks() {
-  QTime now = QTime::currentTime();
-  QString hourMinute = now.toString("hh:mm");
-  QString second = now.toString("ss");
-  for (auto w : std::as_const(m_windows)) {
-    w->setClock(hourMinute, second);
-  }
 }

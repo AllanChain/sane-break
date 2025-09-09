@@ -129,10 +129,7 @@ void BreakWindow::setTime(int remainingTime, QString estimatedEndTime) {
   }
 }
 
-void BreakWindow::setClock(QString hourMinute, QString second) {
-  ui->hourMinuteLabel->setText(hourMinute);
-  ui->secondsLabel->setText(second);
-}
+void BreakWindow::setClock(QString hourMinute) { ui->clock->setText(hourMinute); }
 
 void BreakWindow::showButtons(AbstractBreakWindows::Buttons buttons, bool show) {
   // Lock screen is not supported on Flatpak
@@ -156,7 +153,12 @@ void BreakWindow::showFullScreen() {
 
   ui->breakLabel->setText(m_data.message.fullScreen);
   if (m_data.show.countdown) ui->countDownLabel->setVisible(true);
-  if (m_data.show.clock) ui->clock->setVisible(true);
+  if (m_data.show.clock) {
+    ui->clock->setVisible(true);
+    ui->clock->setStyleSheet(
+        QString("QLabel { background: transparent; font-size: %1px; }")
+            .arg(m_data.show.countdown ? 50 : 100));
+  }
   if (m_data.show.endTime) ui->breakEndTimeLabel->setVisible(true);
   if (m_data.show.buttons) ui->buttons->setVisible(true);
 

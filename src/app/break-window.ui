@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>780</width>
-    <height>519</height>
+    <height>623</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -91,53 +91,17 @@ QProgressBar::chunk {
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QWidget" name="clock" native="true">
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <property name="bottomMargin">
-          <number>24</number>
-         </property>
-         <item>
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Orientation::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item alignment="Qt::AlignmentFlag::AlignRight">
-          <widget class="QLabel" name="hourMinuteLabel">
-           <property name="styleSheet">
-            <string notr="true">QLabel {
+      <item alignment="Qt::AlignmentFlag::AlignHCenter">
+       <widget class="QLabel" name="clock">
+        <property name="styleSheet">
+         <string notr="true">QLabel {
   background: transparent;
   font-size: 100px;
 }</string>
-           </property>
-           <property name="text">
-            <string notr="true">12:34</string>
-           </property>
-          </widget>
-         </item>
-         <item alignment="Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignBottom">
-          <widget class="QLabel" name="secondsLabel">
-           <property name="styleSheet">
-            <string notr="true">QLabel {
-  background: transparent;
-  font-size: 50px;
-  margin-bottom: 15px;
-}</string>
-           </property>
-           <property name="text">
-            <string notr="true">56</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        </property>
+        <property name="text">
+         <string notr="true">12:34</string>
+        </property>
        </widget>
       </item>
       <item alignment="Qt::AlignmentFlag::AlignHCenter">

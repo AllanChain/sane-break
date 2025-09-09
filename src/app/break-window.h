@@ -33,7 +33,7 @@ class BreakWindow : public QMainWindow {
   static const int SMALL_WINDOW_HEIGHT;
 
   void setTime(int remainingTime, QString estimatedEndTime);
-  void setClock(QString hourMinite, QString second);
+  void setClock(QString hourMinite);
   void showFullScreen();
   void showFlashPrompt();
   void showButtons(AbstractBreakWindows::Buttons buttons, bool show = true);
