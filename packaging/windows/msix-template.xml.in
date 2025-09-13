@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<MsixPackagingToolTemplate xmlns="http://schemas.microsoft.com/appx/msixpackagingtool/template/2018">
+  <PrepareComputer
+    DisableWindowsSearchService="false"
+    DisableWindowsUpdateService="true" />
+  <SaveLocation
+    PackagePath="@CMAKE_BINARY_DIR@\sane-break-windows.msix"
+    TemplatePath="@CMAKE_BINARY_DIR@\template.xml" />
+  <Installer
+    Path="@CMAKE_BINARY_DIR@\sane-break-windows.exe"
+    Arguments="/S" />
+  <PackageInformation
+    PackageName="AllanChain.SaneBreak"
+    PackageDisplayName="Sane Break"
+    PublisherName="CN=AD5F869F-F2F9-408C-A9D4-205141FDF313"
+    PublisherDisplayName="Allan Chain"
+    Version="@CMAKE_PROJECT_VERSION@.0"
+    p4:PackageDescription="A gentle break reminder that helps you avoid mindlessly skipping breaks"
+    xmlns:p4="http://schemas.microsoft.com/msix/msixpackagingtool/template/1910" />
+</MsixPackagingToolTemplate>
