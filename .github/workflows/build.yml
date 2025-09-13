@@ -61,17 +61,27 @@ jobs:
     - uses: AllanChain/install-qt-static@v6.9
     - uses: ilammy/msvc-dev-cmd@v1
 
+    - name: Install NSIS
+      run: |
+        iwr -useb get.scoop.sh -outfile 'install.ps1'
+        .\install.ps1 -RunAsAdmin
+        scoop update
+        scoop bucket add extras
+        scoop install nsis
+
     - name: Build Project
       run: |
         mkdir build
         cd build
         qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel ..
         cmake --build . --parallel --config Release
+        cpack
 
     - name: Packing
       run: |
         mkdir release
         mv build\Release\sane-break.exe .
+        mv build\sane-break-windows.exe release
         7z a release/sane-break-windows.zip sane-break.exe LICENSE
 
     - name: Attestation
@@ -347,7 +357,9 @@ jobs:
             <details>
             <summary>Windows</summary>
 
-            Download the `sane-break-windows.zip` extract it. Put the `.exe` executable anywhere you like. x86 version of Windows 10 or newer is supported. Older versions may be supported too.
+            x86 version of Windows 10 or newer is supported. Older versions may be supported too.
+            - **Portable version:** Download the `sane-break-windows.zip` extract it. Put the `.exe` executable anywhere you like.
+            - **Installer verions:** Download the `sane-break-windows.exe` and run it.
 
             </details>
 

@@ -153,6 +153,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     unset(LINUX_DIST)
   endif()
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+  add_subdirectory(${CMAKE_SOURCE_DIR}/packaging/windows ${CMAKE_BINARY_DIR}/packaging)
   target_sources(
     sane-break-app PRIVATE "${CMAKE_SOURCE_DIR}/packaging/windows/resources.rc"
   )
