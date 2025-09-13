@@ -56,6 +56,25 @@
   </screenshots>
 
   <releases>
+  <release version="0.9.3" date="2025-09-13">
+    <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.9.3</url>
+    <description>
+      <p>Bug fixes</p>
+      <ul>
+        <li>Improve sleep handling and avoid exiting pauses</li>
+        <li>Fix false positive postpone confirm after pause</li>
+        <li>Fix incorrect initial time on break window when user is idle</li>
+        <li>Fix exit force break button remains after clicking</li>
+        <li>Show buttons when previewing break windows</li>
+        <li>Fix save button not shown in general tab</li>
+        <li>Hide buttons on BreakPhasePost since can't click</li>
+        <li>Fix `qt_add_plugin` for x11 with old Qt versions</li>
+        <li>Fix preference window icon</li>
+        <li>Do not make window transparent for inputs on X11</li>
+        <li>Smaller clock size with countdown and remove seconds</li>
+      </ul>
+    </description>
+  </release>
   <release version="0.9.2" date="2025-08-14">
     <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.9.2</url>
     <description>
