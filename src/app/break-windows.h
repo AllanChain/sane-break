@@ -38,6 +38,9 @@ class BreakWindows : public AbstractBreakWindows {
  private:
   QList<BreakWindow *> m_windows;
   SoundPlayer *soundPlayer;
+  QTimer *clockUpdateTimer;
+  void updateClocks();
+
 #ifdef Q_OS_LINUX
   LayerShellInterface *layerShell = nullptr;
 #endif
