@@ -1,10 +1,15 @@
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/msix-template.xml.in ${CMAKE_BINARY_DIR}/msix-template.xml)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/AppxManifest.xml.in ${CMAKE_BINARY_DIR}/AppxManifest.xml)
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/msix-template.xml.in
+  ${CMAKE_BINARY_DIR}/msix-template.xml
+)
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/AppxManifest.xml.in ${CMAKE_BINARY_DIR}/AppxManifest.xml
+)
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/logo DESTINATION ${CMAKE_BINARY_DIR})
 
 option(SANE_BUILD_NSIS "Build NSIS package" OFF)
-if (SANE_BUILD_NSIS)
+if(SANE_BUILD_NSIS)
   set(CPACK_GENERATOR "NSIS")
   set(CPACK_PACKAGE_INSTALL_DIRECTORY "sane-break")
   set(CPACK_PACKAGE_EXECUTABLES "sane-break" "Sane Break")
@@ -43,6 +48,8 @@ if (SANE_BUILD_NSIS)
     \${EndIf}
   ]]
   )
-  set(CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "nsExec::Exec 'taskkill /IM sane-break.exe /F'")
+  set(CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS
+      "nsExec::Exec 'taskkill /IM sane-break.exe /F'"
+  )
   include(CPack)
 endif()
