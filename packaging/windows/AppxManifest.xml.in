@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
   xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities">
@@ -27,9 +28,20 @@
   <Applications>
     <Application Id="AllanChain.SaneBreak" Executable="sane-break.exe"
       EntryPoint="Windows.FullTrustApplication">
-    <uap:VisualElements DisplayName="Sane Break" Description="Gentle break reminder"
-         Square150x150Logo="logo\150x150.png"
-        Square44x44Logo="logo\44x44.png" BackgroundColor="#bbf7d0" />
+      <uap:VisualElements DisplayName="Sane Break" Description="Gentle break reminder"
+           Square150x150Logo="logo\150x150.png"
+          Square44x44Logo="logo\44x44.png" BackgroundColor="#bbf7d0" />
+      <Extensions>
+        <desktop:Extension
+          Category="windows.startupTask"
+          Executable="sane-break.exe"
+          EntryPoint="Windows.FullTrustApplication">
+          <desktop:StartupTask
+            TaskId="SaneBreak"
+            Enabled="false"
+            DisplayName="Sane Break" />
+        </desktop:Extension>
+      </Extensions>
     </Application>
   </Applications>
 </Package>
