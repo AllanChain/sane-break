@@ -538,3 +538,17 @@ void PreferenceWindow::openBreakWindowPreview() {
     });
   });
 }
+
+void PreferenceWindow::changeEvent(QEvent *event) {
+  if (event->type() == QEvent::ThemeChange) {
+    // Some buttons does not update their color automatically.
+    // We perform the update manually here.
+    auto buttons = findChildren<QPushButton *>();
+    for (auto button : buttons) {
+      button->style()->unpolish(button);
+      button->style()->polish(button);
+      button->update();
+    }
+  }
+  QMainWindow::changeEvent(event);
+}

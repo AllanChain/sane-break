@@ -248,4 +248,5 @@ class PreferenceWindow : public QMainWindow {
   void openBreakWindowPreview();
   void closeEvent(QCloseEvent *event);
   void showEvent(QShowEvent *event);
+  void changeEvent(QEvent *event);
 };
