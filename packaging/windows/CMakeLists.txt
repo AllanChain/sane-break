@@ -1,12 +1,40 @@
-configure_file(
-  ${CMAKE_CURRENT_SOURCE_DIR}/msix-template.xml.in
-  ${CMAKE_BINARY_DIR}/msix-template.xml
-)
-configure_file(
-  ${CMAKE_CURRENT_SOURCE_DIR}/AppxManifest.xml.in ${CMAKE_BINARY_DIR}/AppxManifest.xml
-)
-
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/logo DESTINATION ${CMAKE_BINARY_DIR})
+find_program(MAKEAPPX_EXECUTABLE makeappx)
+find_program(MAKEPRI_EXECUTABLE makepri)
+if(NOT MAKEAPPX_EXECUTABLE OR NOT MAKEPRI_EXECUTABLE)
+  message(WARNING "makeappx not found! Install Windows App SDK or packaging tools.")
+else()
+  set(MSIX_NAME "sane-break-windows.msix")
+  set(MSIX_OUTPUT_PATH "${CMAKE_BINARY_DIR}/${MSIX_NAME}")
+  set(MSIX_BUILD_NUMBER $ENV{GITHUB_RUN_NUMBER})
+  if(NOT MSIX_BUILD_NUMBER)
+    message(STATUS "GITHUB_RUN_NUMBER not found, default to debug build of MSIX")
+    set(MSIX_BUILD_NUMBER "0")
+    set(MSIX_DEBUG_PUBLISHER ", OID.2.25.311729368913984317654407730594956997722=1")
+  endif()
+  configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/AppxManifest.xml.in
+    ${CMAKE_BINARY_DIR}/AppxManifest.xml
+  )
+  add_custom_target(
+    msix
+    BYPRODUCTS ${MSIX_OUTPUT_PATH}
+    COMMAND ${CMAKE_COMMAND} -E remove_directory msix
+    COMMAND ${CMAKE_COMMAND} -E make_directory msix
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:sane-break-app> msix/sane-break.exe
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/AppxManifest.xml
+            msix/AppxManifest.xml
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/logo
+            msix/logo
+    COMMAND ${MAKEPRI_EXECUTABLE} createconfig /cf msix/priconfig.xml /dq en-US
+    COMMAND ${MAKEPRI_EXECUTABLE} new /pr msix /cf msix/priconfig.xml /of
+            msix/resources.pri
+    COMMAND ${MAKEAPPX_EXECUTABLE} pack /d msix /p ${MSIX_OUTPUT_PATH} /o
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMENT "Creating MSIX package: ${MSIX_OUTPUT_PATH}"
+    VERBATIM
+  )
+  add_dependencies(msix sane-break-app)
+endif()
 
 option(SANE_BUILD_NSIS "Build NSIS package" OFF)
 if(SANE_BUILD_NSIS)

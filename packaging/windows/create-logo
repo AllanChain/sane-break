@@ -1,0 +1,41 @@
+#!/usr/bin/python
+
+import subprocess
+import shutil
+from pathlib import Path
+
+
+OUTPUT_PATH = Path(__file__).parent / "logo"
+SOURCE_SVG = OUTPUT_PATH.parent.parent.parent / "resources" / "images" / "icon.svg"
+
+
+def export_png(width: int, *filenames: list[str]):
+    assert filenames, "Must have at least one export target"
+    subprocess.run(
+        [
+            "inkscape",
+            f"--export-width={width}",
+            f"--export-filename={OUTPUT_PATH / filenames[0]}",
+            str(SOURCE_SVG),
+        ]
+    )
+    for filename in filenames[1:]:
+        shutil.copyfile(OUTPUT_PATH / filenames[0], OUTPUT_PATH / filename)
+
+
+if OUTPUT_PATH.exists():
+    shutil.rmtree(OUTPUT_PATH)
+OUTPUT_PATH.mkdir()
+
+export_png(512, "Logo.png")
+export_png(44, "AppList.png")
+export_png(150, "Tile.png")
+for size in (16, 20, 24, 30, 32, 36, 40, 48, 60, 64, 72, 80, 96, 256):
+    export_png(
+        size,
+        f"AppList.targetsize-{size}.png",
+        f"AppList.targetsize-{size}_altform-unplated.png",
+    )
+for scale in (125, 150, 200, 400):
+    base_name = "Tile"
+    export_png(150 * scale // 100, f"Tile.scale-{scale}.png")

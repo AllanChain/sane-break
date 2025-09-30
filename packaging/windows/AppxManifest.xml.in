@@ -7,14 +7,14 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities">
   <Identity
     Name="AllanChain.SaneBreak"
-    Version="@CMAKE_PROJECT_VERSION@.0"
-    Publisher="CN=AD5F869F-F2F9-408C-A9D4-205141FDF313"
+    Version="@CMAKE_PROJECT_VERSION@.@MSIX_BUILD_NUMBER@"
+    Publisher="CN=AD5F869F-F2F9-408C-A9D4-205141FDF313@MSIX_DEBUG_PUBLISHER@"
     ProcessorArchitecture="x64" />
   <Properties>
     <DisplayName>Sane Break</DisplayName>
     <PublisherDisplayName>Allan Chain</PublisherDisplayName>
     <Description>A gentle break reminder that helps you avoid mindlessly skipping breaks</Description>
-    <Logo>logo\256x256.png</Logo>
+    <Logo>logo/Logo.png</Logo>
   </Properties>
   <Resources>
     <Resource Language="en-us" />
@@ -28,9 +28,12 @@
   <Applications>
     <Application Id="AllanChain.SaneBreak" Executable="sane-break.exe"
       EntryPoint="Windows.FullTrustApplication">
-      <uap:VisualElements DisplayName="Sane Break" Description="Gentle break reminder"
-           Square150x150Logo="logo\150x150.png"
-          Square44x44Logo="logo\44x44.png" BackgroundColor="#bbf7d0" />
+      <uap:VisualElements
+        DisplayName="Sane Break"
+        Description="Gentle break reminder"
+        Square150x150Logo="logo/Tile.png"
+        Square44x44Logo="logo/AppList.png"
+        BackgroundColor="transparent" />
       <Extensions>
         <desktop:Extension
           Category="windows.startupTask"

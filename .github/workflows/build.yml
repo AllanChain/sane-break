@@ -74,7 +74,7 @@ jobs:
         mkdir build
         cd build
         qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DSANE_BUILD_NSIS=1 ..
-        cmake --build . --parallel --config Release
+        cmake --build . --parallel --config Release --target msix
         cpack
 
     - name: Packing
@@ -82,15 +82,8 @@ jobs:
         mkdir release
         mv build\Release\sane-break.exe .
         7z a release/sane-break-windows.zip sane-break.exe LICENSE
+        mv build\sane-break-windows.msix release
         mv build\sane-break-windows.exe release
-
-    - name: Create MSIX
-      run: |
-        mkdir msix
-        mv build\AppxManifest.xml msix
-        mv sane-break.exe msix
-        cp -r packaging\windows\logo msix
-        makeappx pack /d msix /p release\sane-break-windows.msix /o
 
     - name: Attestation
       uses: actions/attest-build-provenance@v2
