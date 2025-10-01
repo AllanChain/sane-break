@@ -62,20 +62,13 @@ jobs:
     - uses: ilammy/msvc-dev-cmd@v1
 
     - name: Install NSIS
-      run: |
-        iwr -useb get.scoop.sh -outfile 'install.ps1'
-        .\install.ps1 -RunAsAdmin
-        scoop update
-        scoop bucket add extras
-        scoop install nsis
+      run: Install-ChocoPackage nsis -ArgumentList "--version", "3.11"
 
     - name: Build Project
       run: |
-        mkdir build
-        cd build
-        qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DSANE_BUILD_NSIS=1 ..
-        cmake --build . --parallel --config Release --target msix
-        cpack
+        qt-cmake -B build -DCMAKE_BUILD_TYPE=MinSizeRel -DSANE_BUILD_NSIS=1 ..
+        cmake --build build --parallel --config Release --target msix
+        cpack -B build
 
     - name: Packing
       run: |
