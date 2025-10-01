@@ -66,9 +66,11 @@ jobs:
 
     - name: Build Project
       run: |
-        qt-cmake -B build -DCMAKE_BUILD_TYPE=MinSizeRel -DSANE_BUILD_NSIS=1
-        cmake --build build --parallel --config Release --target msix
-        cpack -B build
+        mkdir build
+        cd build
+        qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DSANE_BUILD_NSIS=1 ..
+        cmake --build . --parallel --config Release --target msix
+        cpack
 
     - name: Packing
       run: |
