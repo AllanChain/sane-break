@@ -43,7 +43,7 @@ repos:
           - --use-current-year
       - id: insert-license
         name: insert license (Python)
-        files: \.py$
+        types: ["python"]
         args:
           - --license-filepath
           - .github/license_header.txt
