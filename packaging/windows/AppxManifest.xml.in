@@ -7,7 +7,7 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities">
   <Identity
     Name="AllanChain.SaneBreak"
-    Version="@CMAKE_PROJECT_VERSION@.@MSIX_BUILD_NUMBER@"
+    Version="@CMAKE_PROJECT_VERSION@.0"
     Publisher="CN=AD5F869F-F2F9-408C-A9D4-205141FDF313@MSIX_DEBUG_PUBLISHER@"
     ProcessorArchitecture="x64" />
   <Properties>
