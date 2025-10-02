@@ -1,3 +1,19 @@
+# Determine the type of Linux distribution. In code we handle Flatpak differently
+set(LINUX_DIST
+    "Default"
+    CACHE STRING "Linux distribution type"
+)
+set_property(CACHE LINUX_DIST PROPERTY STRINGS Flatpak Default)
+if(LINUX_DIST STREQUAL "Flatpak")
+  message(STATUS "Building for Flatpak")
+  set(LINUX_DIST_FLATPAK
+      ON
+      CACHE BOOL "Flatpak build"
+  )
+elseif(LINUX_DIST STREQUAL "Default")
+  unset(LINUX_DIST)
+endif()
+
 install(
   FILES ${CMAKE_SOURCE_DIR}/resources/images/icon.svg
   DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps
