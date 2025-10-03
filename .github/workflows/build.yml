@@ -20,11 +20,12 @@ permissions:
 
 jobs:
   test:
-    name: Test (Trixie)
+    name: Test
     if: |
       startsWith(github.ref, 'refs/tags/') ||
       !startsWith(github.event.head_commit.message, 'release')
-    runs-on: ubuntu-latest
+    # We keep the same OS version and Qt modules as the AppImage build to reuse cache
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v4
     - name: Install dependencies
@@ -37,7 +38,6 @@ jobs:
       with:
         version: 6.9.1
         dir: ..
-        # We keep the same set of modules as the AppImage build to reuse cache
         modules: qtmultimedia
         setup-python: false
         install-deps: false
