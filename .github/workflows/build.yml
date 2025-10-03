@@ -55,7 +55,15 @@ jobs:
   build-windows:
     name: Build (Windows)
     needs: test
-    runs-on: windows-latest
+    strategy:
+      matrix:
+        os: [windows-latest, windows-11-arm]
+        include:
+        - os: windows-latest
+          app-name: sane-break-windows
+        - os: windows-11-arm
+          app-name: sane-break-windows-arm
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
     - uses: AllanChain/install-qt-static@v6.9
@@ -76,9 +84,14 @@ jobs:
       run: |
         mkdir release
         mv build\Release\sane-break.exe .
-        7z a release/sane-break-windows.zip sane-break.exe LICENSE
-        mv build\sane-break-windows.msix release
-        mv build\sane-break-windows.exe release
+        7z a release/${{ matrix.app-name }}.zip sane-break.exe LICENSE
+        mv build\sane-break-windows.exe release\${{ matrix.app-name }}
+
+    - name: Upload MSIX
+      uses: actions/upload-artifact@v4
+      with:
+        name: _${{ matrix.app-name }}
+        path: build/sane-break-windows.msix
 
     - name: Attestation
       uses: actions/attest-build-provenance@v2
@@ -88,7 +101,7 @@ jobs:
     - name: Create Artifact
       uses: actions/upload-artifact@v4
       with:
-         name: "sane-break-windows"
+         name: ${{ matrix.app-name }}
          path: ./release/*
 
   build-macos:
