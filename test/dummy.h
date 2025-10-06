@@ -22,7 +22,7 @@
 #include "core/timer.h"
 #include "gmock/gmock.h"
 
-inline SanePreferences *tempPreferences() {
+inline SanePreferences* tempPreferences() {
   QTemporaryFile tempFile;
   return new SanePreferences(new QSettings(tempFile.fileName(), QSettings::IniFormat));
 }
@@ -49,14 +49,14 @@ class DummyBreakWindows : public AbstractBreakWindows {
   Q_OBJECT
  public:
   using AbstractBreakWindows::AbstractBreakWindows;
-  MOCK_METHOD(void, create, (BreakType, SanePreferences *), (override));
+  MOCK_METHOD(void, create, (BreakType, SanePreferences*), (override));
   MOCK_METHOD(void, destroy, (), ());
   MOCK_METHOD(void, setTime, (int), ());
   MOCK_METHOD(void, showFullScreen, (), ());
   MOCK_METHOD(void, showFlashPrompt, (), ());
   MOCK_METHOD(void, showButtons, (Buttons, bool), ());
-  MOCK_METHOD(void, playEnterSound, (BreakType, SanePreferences *), ());
-  MOCK_METHOD(void, playExitSound, (BreakType, SanePreferences *), ());
+  MOCK_METHOD(void, playEnterSound, (BreakType, SanePreferences*), ());
+  MOCK_METHOD(void, playExitSound, (BreakType, SanePreferences*), ());
 };
 
 class DummySystemMonitor : public AbstractSystemMonitor {
@@ -73,17 +73,17 @@ class DummySystemMonitor : public AbstractSystemMonitor {
 };
 
 struct DummyAppDependencies {
-  SanePreferences *preferences = nullptr;
-  AbstractTimer *countDownTimer = nullptr;
-  AbstractTimer *screenLockTimer = nullptr;
-  DummyIdleTime *idleTimer = nullptr;
-  DummySystemMonitor *systemMonitor = nullptr;
-  DummyBreakWindows *breakWindows = nullptr;
+  SanePreferences* preferences = nullptr;
+  AbstractTimer* countDownTimer = nullptr;
+  AbstractTimer* screenLockTimer = nullptr;
+  DummyIdleTime* idleTimer = nullptr;
+  DummySystemMonitor* systemMonitor = nullptr;
+  DummyBreakWindows* breakWindows = nullptr;
 };
 class DummyApp : public AbstractApp {
   Q_OBJECT
  public:
-  DummyApp(const DummyAppDependencies &deps, QObject *parent = nullptr)
+  DummyApp(const DummyAppDependencies& deps, QObject* parent = nullptr)
       : AbstractApp({deps.preferences, deps.countDownTimer, deps.screenLockTimer,
                      deps.idleTimer, deps.systemMonitor, deps.breakWindows},
                     parent) {

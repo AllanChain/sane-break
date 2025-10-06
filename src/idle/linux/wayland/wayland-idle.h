@@ -21,7 +21,7 @@ class IdleTimeWayland : public IdleTimeInterface {
   Q_PLUGIN_METADATA(IID IdleTimeInterface_iid)
   Q_INTERFACES(IdleTimeInterface)
  public:
-  IdleTimeWayland(QObject *parent = nullptr);
+  IdleTimeWayland(QObject* parent = nullptr);
   ~IdleTimeWayland();
   bool isSupported() { return idleNotifier != nullptr; };
   void startWatching() override;
@@ -30,20 +30,20 @@ class IdleTimeWayland : public IdleTimeInterface {
   void setMinIdleTime(int idleTime) override;
 
  private:
-  static void globalAdded(void *data, wl_registry *registry, uint32_t name,
-                          const char *interface, uint32_t version);
-  static void globalRemoved(void *data, wl_registry *registry, uint32_t name);
+  static void globalAdded(void* data, wl_registry* registry, uint32_t name,
+                          const char* interface, uint32_t version);
+  static void globalRemoved(void* data, wl_registry* registry, uint32_t name);
   const struct wl_registry_listener globalListener{globalAdded, globalRemoved};
-  static void idled(void *data, ext_idle_notification_v1 *object);
-  static void resumed(void *data, ext_idle_notification_v1 *object);
+  static void idled(void* data, ext_idle_notification_v1* object);
+  static void resumed(void* data, ext_idle_notification_v1* object);
   const struct ext_idle_notification_v1_listener idleListener{idled, resumed};
-  wl_seat *seat;
-  ext_idle_notifier_v1 *idleNotifier = nullptr;
-  ext_idle_notification_v1 *idleNotification = nullptr;
+  wl_seat* seat;
+  ext_idle_notifier_v1* idleNotifier = nullptr;
+  ext_idle_notification_v1* idleNotification = nullptr;
 
-  struct ext_idle_notification_v1 *(*get_idle_notification)(
-      struct ext_idle_notifier_v1 *ext_idle_notifier_v1, uint32_t timeout,
-      struct wl_seat *seat);
+  struct ext_idle_notification_v1* (*get_idle_notification)(
+      struct ext_idle_notifier_v1* ext_idle_notifier_v1, uint32_t timeout,
+      struct wl_seat* seat);
 
   bool isWatching = false;
 };

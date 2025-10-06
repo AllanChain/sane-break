@@ -14,15 +14,15 @@
 class ReadBasedIdleTime : public SystemIdleTime {
   Q_OBJECT
  public:
-  ReadBasedIdleTime(QObject *parent, std::function<int()> idleReader);
+  ReadBasedIdleTime(QObject* parent, std::function<int()> idleReader);
   void startWatching() override;
   void stopWatching() override;
   void setWatchAccuracy(int accuracy) override;
   void setMinIdleTime(int idleTime) override;
 
  private:
-  QTimer *m_timer;
-  QTimer *m_delay;
+  QTimer* m_timer;
+  QTimer* m_delay;
   std::function<int()> m_idleReader = nullptr;
   void tick();
 };

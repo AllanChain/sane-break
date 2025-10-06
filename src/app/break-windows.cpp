@@ -35,7 +35,7 @@
 #include "lib/linux/system-check.h"
 #endif
 
-BreakWindows::BreakWindows(QObject *parent) : AbstractBreakWindows(parent) {
+BreakWindows::BreakWindows(QObject* parent) : AbstractBreakWindows(parent) {
   soundPlayer = new SoundPlayer(this);
   clockUpdateTimer = new QTimer(this);
   connect(clockUpdateTimer, &QTimer::timeout, this, &BreakWindows::updateClocks);
@@ -47,7 +47,7 @@ BreakWindows::BreakWindows(QObject *parent) : AbstractBreakWindows(parent) {
       qWarning() << "Fail to load layer-shell plugin. Window layout may go wrong:"
                  << loader.errorString();
     } else {
-      layerShell = qobject_cast<LayerShellInterface *>(loader.instance());
+      layerShell = qobject_cast<LayerShellInterface*>(loader.instance());
       if (!layerShell) {
         qWarning("Fail to instantiate layer-shell plugin. Window layout may go wrong.");
       }
@@ -56,7 +56,7 @@ BreakWindows::BreakWindows(QObject *parent) : AbstractBreakWindows(parent) {
 #endif
 }
 
-void BreakWindows::create(BreakType type, SanePreferences *preferences) {
+void BreakWindows::create(BreakType type, SanePreferences* preferences) {
   QString promptMessage = type == BreakType::Big
                               ? preferences->bigMessages->defaultValue()[0]
                               : preferences->smallMessages->defaultValue()[0];
@@ -114,9 +114,9 @@ void BreakWindows::create(BreakType type, SanePreferences *preferences) {
             },
     };
   }
-  QList<QScreen *> screens = QApplication::screens();
-  for (QScreen *screen : std::as_const(screens)) {
-    BreakWindow *w = new BreakWindow(data);
+  QList<QScreen*> screens = QApplication::screens();
+  for (QScreen* screen : std::as_const(screens)) {
+    BreakWindow* w = new BreakWindow(data);
     m_windows.append(w);
     w->initSize(screen);
 #ifdef Q_OS_LINUX
@@ -147,12 +147,12 @@ void BreakWindows::destroy() {
   clockUpdateTimer->stop();
 }
 
-void BreakWindows::playEnterSound(BreakType type, SanePreferences *preferences) {
+void BreakWindows::playEnterSound(BreakType type, SanePreferences* preferences) {
   soundPlayer->play(type == BreakType::Small ? preferences->smallStartBell->get()
                                              : preferences->bigStartBell->get());
 }
 
-void BreakWindows::playExitSound(BreakType type, SanePreferences *preferences) {
+void BreakWindows::playExitSound(BreakType type, SanePreferences* preferences) {
   soundPlayer->play(type == BreakType::Small ? preferences->smallEndBell->get()
                                              : preferences->bigEndBell->get());
 }

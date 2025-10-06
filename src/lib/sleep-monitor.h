@@ -10,13 +10,13 @@
 class SleepMonitor : public QObject {
   Q_OBJECT
  public:
-  SleepMonitor(QObject *parent = nullptr);
+  SleepMonitor(QObject* parent = nullptr);
   int watchAccuracy = 5000;  // in ms
  signals:
   void sleepEnd(int sleptSeconds);
 
  private:
-  QTimer *timer;
+  QTimer* timer;
   int lastAwake;
   void tick();
 };

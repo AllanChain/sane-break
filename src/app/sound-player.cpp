@@ -9,7 +9,7 @@
 #include <QObject>
 #include <QUrl>
 
-void SoundPlayer::play(const QString &soundFile) {
+void SoundPlayer::play(const QString& soundFile) {
   if (soundFile.isEmpty()) return;
 
   // player and audioOutput should be lazy-initialized

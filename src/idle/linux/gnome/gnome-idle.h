@@ -19,5 +19,5 @@ class IdleTimeGNOME : public IdleTimeReaderInterface {
   int read();
 
  private:
-  QDBusInterface *iface = nullptr;
+  QDBusInterface* iface = nullptr;
 };

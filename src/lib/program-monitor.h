@@ -14,10 +14,10 @@ class RunningProgramsMonitor : public QObject {
   Q_OBJECT
 
  public:
-  RunningProgramsMonitor(QObject *parent = nullptr);
+  RunningProgramsMonitor(QObject* parent = nullptr);
   void startMonitoring();
   void stopMonitoring();
-  void setPrograms(const QStringList &programs);
+  void setPrograms(const QStringList& programs);
 
  signals:
   void programStarted();
@@ -29,7 +29,7 @@ class RunningProgramsMonitor : public QObject {
  private:
   const QStringList runningPrograms();
   const QRegularExpression validProgramFilter = QRegularExpression(".");
-  QTimer *monitorTimer;
+  QTimer* monitorTimer;
   QStringList programsToMonitor;
   bool previouslySeen = false;
 };

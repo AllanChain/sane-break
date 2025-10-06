@@ -13,7 +13,7 @@
 #include <QtContainerFwd>
 #include <utility>
 
-RunningProgramsMonitor::RunningProgramsMonitor(QObject *parent)
+RunningProgramsMonitor::RunningProgramsMonitor(QObject* parent)
     : QObject(parent), monitorTimer(new QTimer(this)) {
   connect(monitorTimer, &QTimer::timeout, this, &RunningProgramsMonitor::tick);
 }
@@ -21,7 +21,7 @@ RunningProgramsMonitor::RunningProgramsMonitor(QObject *parent)
 void RunningProgramsMonitor::startMonitoring() { monitorTimer->start(5000); }
 void RunningProgramsMonitor::stopMonitoring() { monitorTimer->stop(); }
 
-void RunningProgramsMonitor::setPrograms(const QStringList &programs) {
+void RunningProgramsMonitor::setPrograms(const QStringList& programs) {
   programsToMonitor = programs.filter(validProgramFilter);
   if (programsToMonitor.isEmpty() && previouslySeen) {
     // Clean up: if all programs are removed from the list, stop pausing
@@ -34,8 +34,8 @@ void RunningProgramsMonitor::tick() {
   if (programsToMonitor.isEmpty()) return;
 
   bool currentlySeen = false;
-  for (const QString &program : runningPrograms()) {
-    for (const QString &entry : std::as_const(programsToMonitor)) {
+  for (const QString& program : runningPrograms()) {
+    for (const QString& entry : std::as_const(programsToMonitor)) {
       if (program.contains(entry)) {
         currentlySeen = true;
         break;

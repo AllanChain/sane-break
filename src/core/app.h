@@ -16,12 +16,12 @@
 #include "core/timer.h"
 
 struct AppDependencies {
-  SanePreferences *preferences = nullptr;
-  AbstractTimer *countDownTimer = nullptr;
-  AbstractTimer *screenLockTimer = nullptr;
-  SystemIdleTime *idleTimer = nullptr;
-  AbstractSystemMonitor *systemMonitor = nullptr;
-  AbstractBreakWindows *breakWindows = nullptr;
+  SanePreferences* preferences = nullptr;
+  AbstractTimer* countDownTimer = nullptr;
+  AbstractTimer* screenLockTimer = nullptr;
+  SystemIdleTime* idleTimer = nullptr;
+  AbstractSystemMonitor* systemMonitor = nullptr;
+  AbstractBreakWindows* breakWindows = nullptr;
 };
 
 struct TrayData {
@@ -36,7 +36,7 @@ struct TrayData {
 class AbstractApp : public AppContext {
   Q_OBJECT
  public:
-  AbstractApp(const AppDependencies &deps, QObject *parent = nullptr);
+  AbstractApp(const AppDependencies& deps, QObject* parent = nullptr);
   ~AbstractApp() = default;
 
   virtual void start();
@@ -52,8 +52,8 @@ class AbstractApp : public AppContext {
   void trayDataUpdated(TrayData);
 
  protected:
-  AbstractTimer *m_countDownTimer;
-  AbstractSystemMonitor *m_systemMonitor;
+  AbstractTimer* m_countDownTimer;
+  AbstractSystemMonitor* m_systemMonitor;
 
   void onBatterySettingChange();
   void onSleepEnd(int sleptSeconds);

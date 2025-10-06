@@ -22,8 +22,8 @@
 class WrappedCheckBox : public QCheckBox {
   Q_OBJECT
  public:
-  WrappedCheckBox(QWidget *parent = nullptr) : WrappedCheckBox(QString(), parent) {}
-  WrappedCheckBox(const QString &text, QWidget *parent = nullptr);
+  WrappedCheckBox(QWidget* parent = nullptr) : WrappedCheckBox(QString(), parent) {}
+  WrappedCheckBox(const QString& text, QWidget* parent = nullptr);
   QSize minimumSizeHint() const override {
     return QSize(QCheckBox().minimumSizeHint().width(), sizeHint().height());
   }
@@ -32,5 +32,5 @@ class WrappedCheckBox : public QCheckBox {
   void wrapLines(int width);
 
  protected:
-  void resizeEvent(QResizeEvent *event) override;
+  void resizeEvent(QResizeEvent* event) override;
 };

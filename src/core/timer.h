@@ -9,7 +9,7 @@
 class AbstractTimer : public QObject {
   Q_OBJECT
  public:
-  AbstractTimer(QObject *parent = nullptr) : QObject(parent) {};
+  AbstractTimer(QObject* parent = nullptr) : QObject(parent) {};
   ~AbstractTimer() = default;
   virtual void start() { m_active = true; };
   virtual void start(int msec) { m_active = m_interval = msec; };

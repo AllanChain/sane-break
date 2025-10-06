@@ -36,7 +36,7 @@
 class PrefControllerBase : public QObject {
   Q_OBJECT
  public:
-  PrefControllerBase(QObject *parent = 0) : QObject(parent) {}
+  PrefControllerBase(QObject* parent = 0) : QObject(parent) {}
   bool isDirty = false;
   bool changeMeansDirty = true;
   void saveIfDirty();
@@ -60,9 +60,9 @@ class PrefControllerBase : public QObject {
 template <typename W, typename T>
 class PrefControllerTemplate : public PrefControllerBase {
  public:
-  W *widget;
-  Setting<T> *setting;
-  PrefControllerTemplate(W *parent, Setting<T> *setting)
+  W* widget;
+  Setting<T>* setting;
+  PrefControllerTemplate(W* parent, Setting<T>* setting)
       : widget(parent), setting(setting) {}
   virtual void setValue(T) = 0;
   void loadValue() override { setValue(setting->get()); }
@@ -75,7 +75,7 @@ class PrefController : public PrefControllerTemplate<W, T> {};
 template <>
 class PrefController<QCheckBox, bool> : public PrefControllerTemplate<QCheckBox, bool> {
  public:
-  PrefController(QCheckBox *parent, Setting<bool> *setting)
+  PrefController(QCheckBox* parent, Setting<bool>* setting)
       : PrefControllerTemplate(parent, setting) {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
     connect(widget, &QCheckBox::checkStateChanged, this, &PrefControllerBase::onChange);
@@ -91,7 +91,7 @@ template <>
 class PrefController<QSlider, int> : public PrefControllerTemplate<QSlider, int> {
  public:
   int multiplier;
-  PrefController(QSlider *parent, Setting<int> *setting, int multiplier = 1)
+  PrefController(QSlider* parent, Setting<int>* setting, int multiplier = 1)
       : PrefControllerTemplate(parent, setting), multiplier(multiplier) {
     connect(widget, &QSlider::valueChanged, this, &PrefControllerBase::onChange);
   };
@@ -103,7 +103,7 @@ template <>
 class PrefController<QSpinBox, int> : public PrefControllerTemplate<QSpinBox, int> {
  public:
   int multiplier;
-  PrefController(QSpinBox *parent, Setting<int> *setting, int multiplier = 1)
+  PrefController(QSpinBox* parent, Setting<int>* setting, int multiplier = 1)
       : PrefControllerTemplate(parent, setting), multiplier(multiplier) {
     connect(widget, &QSpinBox::valueChanged, this, &PrefControllerBase::onChange);
   };
@@ -115,7 +115,7 @@ template <>
 class PrefController<QPlainTextEdit, QStringList>
     : public PrefControllerTemplate<QPlainTextEdit, QStringList> {
  public:
-  PrefController(QPlainTextEdit *parent, Setting<QStringList> *setting)
+  PrefController(QPlainTextEdit* parent, Setting<QStringList>* setting)
       : PrefControllerTemplate(parent, setting) {
     connect(widget, &QPlainTextEdit::textChanged, this, &PrefControllerBase::onChange);
   };
@@ -129,7 +129,7 @@ template <>
 class PrefController<QLineEdit, QStringList>
     : public PrefControllerTemplate<QLineEdit, QStringList> {
  public:
-  PrefController(QLineEdit *parent, Setting<QStringList> *setting)
+  PrefController(QLineEdit* parent, Setting<QStringList>* setting)
       : PrefControllerTemplate(parent, setting) {
     connect(widget, &QLineEdit::textChanged, this, &PrefControllerBase::onChange);
   };
@@ -140,7 +140,7 @@ class PrefController<QLineEdit, QStringList>
 template <>
 class PrefController<QComboBox, int> : public PrefControllerTemplate<QComboBox, int> {
  public:
-  PrefController(QComboBox *parent, Setting<int> *setting)
+  PrefController(QComboBox* parent, Setting<int>* setting)
       : PrefControllerTemplate(parent, setting) {
     connect(widget, &QComboBox::currentIndexChanged, this,
             &PrefControllerBase::onChange);
@@ -153,7 +153,7 @@ template <>
 class PrefController<LanguageSelect, QString>
     : public PrefControllerTemplate<LanguageSelect, QString> {
  public:
-  PrefController(LanguageSelect *parent, Setting<QString> *setting)
+  PrefController(LanguageSelect* parent, Setting<QString>* setting)
       : PrefControllerTemplate(parent, setting) {
     connect(widget, &LanguageSelect::currentIndexChanged, this,
             &PrefControllerBase::onChange);
@@ -166,7 +166,7 @@ template <>
 class PrefController<QComboBox, QString>
     : public PrefControllerTemplate<QComboBox, QString> {
  public:
-  PrefController(QComboBox *parent, Setting<QString> *setting)
+  PrefController(QComboBox* parent, Setting<QString>* setting)
       : PrefControllerTemplate(parent, setting) {
     connect(widget, &QComboBox::currentIndexChanged, this,
             &PrefControllerBase::onChange);
@@ -181,7 +181,7 @@ template <>
 class PrefController<QLineEdit, QColor>
     : public PrefControllerTemplate<QLineEdit, QColor> {
  public:
-  PrefController(QLineEdit *parent, Setting<QColor> *setting)
+  PrefController(QLineEdit* parent, Setting<QColor>* setting)
       : PrefControllerTemplate(parent, setting) {
     connect(widget, &QLineEdit::textChanged, this, &PrefControllerBase::onChange);
   };
@@ -202,21 +202,21 @@ class ControllerHolder : public QObject {
   Q_OBJECT
 
  public:
-  ControllerHolder(QObject *parent = 0) : QObject(parent) {};
-  PrefControllerBase *add(PrefGroup, PrefControllerBase *);
+  ControllerHolder(QObject* parent = 0) : QObject(parent) {};
+  PrefControllerBase* add(PrefGroup, PrefControllerBase*);
   bool isDirty = false;
   void onDirtyChange();
   void load();
   void save();
   void reloadDirty();
   void setGroupToDefault(PrefGroup);
-  void forEach(std::function<void(PrefControllerBase *)>);
+  void forEach(std::function<void(PrefControllerBase*)>);
 
  signals:
   void dirtyChanged(bool dirty);
 
  private:
-  QMap<PrefGroup, QList<PrefControllerBase *>> m_controllers = {};
+  QMap<PrefGroup, QList<PrefControllerBase*>> m_controllers = {};
 };
 
 namespace Ui {
@@ -227,18 +227,18 @@ class PreferenceWindow : public QMainWindow {
   Q_OBJECT
 
  public:
-  PreferenceWindow(SanePreferences *preferences, QWidget *parent = nullptr);
+  PreferenceWindow(SanePreferences* preferences, QWidget* parent = nullptr);
   ~PreferenceWindow();
 
  private:
-  Ui::PrefWindow *ui;
-  SanePreferences *preferences;
-  QList<QPushButton *> tabButtons;
-  SoundPlayer *soundPlayer;
-  ControllerHolder *controllers;
-  AutoStart *autoStart;
-  TextWindow *openingTextWindow = nullptr;
-  BreakWindows *breakWindows;
+  Ui::PrefWindow* ui;
+  SanePreferences* preferences;
+  QList<QPushButton*> tabButtons;
+  SoundPlayer* soundPlayer;
+  ControllerHolder* controllers;
+  AutoStart* autoStart;
+  TextWindow* openingTextWindow = nullptr;
+  BreakWindows* breakWindows;
 
   bool confirmLeave();
   void setTab(int tabNum, int totalTabCount);
@@ -246,7 +246,7 @@ class PreferenceWindow : public QMainWindow {
   void openSourceCode();
   void openWeblate();
   void openBreakWindowPreview();
-  void closeEvent(QCloseEvent *event);
-  void showEvent(QShowEvent *event);
-  void changeEvent(QEvent *event);
+  void closeEvent(QCloseEvent* event);
+  void showEvent(QShowEvent* event);
+  void changeEvent(QEvent* event);
 };

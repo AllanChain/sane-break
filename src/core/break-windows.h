@@ -46,14 +46,14 @@ class AbstractBreakWindows : public QObject {
   using QObject::QObject;
   ~AbstractBreakWindows() = default;
   // static BreakWindowData breakData(BreakType, SanePreferences *);
-  virtual void create(BreakType, SanePreferences *) = 0;
+  virtual void create(BreakType, SanePreferences*) = 0;
   virtual void destroy() = 0;
   virtual void setTime(int remainingTime) = 0;
   virtual void showFullScreen() = 0;
   virtual void showFlashPrompt() = 0;
   virtual void showButtons(Buttons, bool show = true) = 0;
-  virtual void playEnterSound(BreakType, SanePreferences *) = 0;
-  virtual void playExitSound(BreakType, SanePreferences *) = 0;
+  virtual void playEnterSound(BreakType, SanePreferences*) = 0;
+  virtual void playExitSound(BreakType, SanePreferences*) = 0;
 
  signals:
   void lockScreenRequested();

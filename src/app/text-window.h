@@ -10,6 +10,6 @@
 class TextWindow : public QScrollArea {
   Q_OBJECT
  public:
-  TextWindow(const QString &text, QWidget *parent = nullptr);
+  TextWindow(const QString& text, QWidget* parent = nullptr);
   ~TextWindow() = default;
 };

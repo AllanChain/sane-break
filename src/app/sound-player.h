@@ -13,10 +13,10 @@ class SoundPlayer : public QObject {
   Q_OBJECT
 
  public:
-  SoundPlayer(QObject *parent = nullptr) : QObject(parent) {};
-  void play(const QString &soundFile);
+  SoundPlayer(QObject* parent = nullptr) : QObject(parent) {};
+  void play(const QString& soundFile);
 
  private:
-  QMediaPlayer *player = nullptr;
-  QAudioOutput *audioOutput = nullptr;
+  QMediaPlayer* player = nullptr;
+  QAudioOutput* audioOutput = nullptr;
 };

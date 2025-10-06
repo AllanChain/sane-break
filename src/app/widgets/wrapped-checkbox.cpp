@@ -23,7 +23,7 @@
 #include <QWidget>
 #include <Qt>
 
-WrappedCheckBox::WrappedCheckBox(const QString &text, QWidget *parent)
+WrappedCheckBox::WrappedCheckBox(const QString& text, QWidget* parent)
     : QCheckBox(text, parent) {
   QSizePolicy policy = sizePolicy();
   policy.setHorizontalPolicy(QSizePolicy::Preferred);
@@ -50,7 +50,7 @@ void WrappedCheckBox::wrapLines(int width) {
   setText(result.trimmed());
 }
 
-void WrappedCheckBox::resizeEvent(QResizeEvent *event) {
+void WrappedCheckBox::resizeEvent(QResizeEvent* event) {
   int controlElementWidth =
       sizeHint().width() -
       style()

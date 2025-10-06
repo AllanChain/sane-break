@@ -14,12 +14,12 @@ class DynamicLabel : public QLabel {
   using QLabel::QLabel;
   ~DynamicLabel() override = default;
 
-  void setText(const QString &text) {
+  void setText(const QString& text) {
     m_baseText = text;
     updateText();
   };
   const QVariantList args() { return m_args; };
-  void setArgs(const QVariantList &args) {
+  void setArgs(const QVariantList& args) {
     m_args = args;
     updateText();
   };
@@ -27,7 +27,7 @@ class DynamicLabel : public QLabel {
  public slots:
   void updateText() {
     QString formattedText = m_baseText;
-    for (const auto &arg : args()) {
+    for (const auto& arg : args()) {
       formattedText = formattedText.arg(arg.toString());
     }
     QLabel::setText(formattedText);

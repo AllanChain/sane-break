@@ -10,8 +10,8 @@
 #include <cstddef>
 
 int IdleTimeX11::read() {
-  Display *dpy = XOpenDisplay(NULL);
-  XScreenSaverInfo *ssi = XScreenSaverAllocInfo();
+  Display* dpy = XOpenDisplay(NULL);
+  XScreenSaverInfo* ssi = XScreenSaverAllocInfo();
   XScreenSaverQueryInfo(dpy, DefaultRootWindow(dpy), ssi);
   int idleTime = ssi->idle;
   XFree(ssi);

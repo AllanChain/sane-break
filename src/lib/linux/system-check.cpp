@@ -39,7 +39,7 @@ void LinuxSystemSupport::check() {
     qWarning() << loader.errorString();
     return;
   }
-  auto *waylandCheck = qobject_cast<WaylandCheckInterface *>(loader.instance());
+  auto* waylandCheck = qobject_cast<WaylandCheckInterface*>(loader.instance());
   if (!waylandCheck) return;
   LinuxSystemSupport::idleNotify = waylandCheck->supportsIdleNotify();
   LinuxSystemSupport::layerShell = waylandCheck->supportsLayerShell();

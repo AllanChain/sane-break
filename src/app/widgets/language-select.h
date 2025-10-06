@@ -14,8 +14,8 @@
 class LanguageSelect : public QComboBox {
   Q_OBJECT
  public:
-  static QList<QTranslator *> currentTranslators;
-  LanguageSelect(QWidget *parent = nullptr);
+  static QList<QTranslator*> currentTranslators;
+  LanguageSelect(QWidget* parent = nullptr);
   static void setLanguage(QString language);
   void setSelectedLanguage(QString language);
 

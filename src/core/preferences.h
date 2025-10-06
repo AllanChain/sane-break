@@ -14,7 +14,7 @@
 class SettingWithSignal : public QObject {
   Q_OBJECT
  public:
-  SettingWithSignal(QObject *parent = 0) : QObject(parent) {}
+  SettingWithSignal(QObject* parent = 0) : QObject(parent) {}
  signals:
   void changed();
 };
@@ -22,15 +22,15 @@ class SettingWithSignal : public QObject {
 template <typename T>
 class Setting : public SettingWithSignal {
  public:
-  Setting(QSettings *settings, const QString &key, const T &defaultValue,
-          QObject *parent = nullptr)
+  Setting(QSettings* settings, const QString& key, const T& defaultValue,
+          QObject* parent = nullptr)
       : SettingWithSignal(parent),
         m_settings(settings),
         m_key(key),
         m_defaultValue(defaultValue),
         m_defaultIsFunction(false) {}
-  Setting(QSettings *settings, const QString &key,
-          std::function<T()> defaultValueFunction, QObject *parent = nullptr)
+  Setting(QSettings* settings, const QString& key,
+          std::function<T()> defaultValueFunction, QObject* parent = nullptr)
       : SettingWithSignal(parent),
         m_settings(settings),
         m_key(key),
@@ -39,7 +39,7 @@ class Setting : public SettingWithSignal {
   T defaultValue() {
     return m_defaultIsFunction ? m_defaultValueFunction() : m_defaultValue;
   }
-  void set(const T &newValue) {
+  void set(const T& newValue) {
     if (get() != newValue) {
       m_value = newValue;
       m_settings->setValue(m_key, toFriendlyFormat(m_value));
@@ -53,7 +53,7 @@ class Setting : public SettingWithSignal {
     m_cached = true;
     return m_value;
   };
-  virtual QVariant toFriendlyFormat(const T &value) {
+  virtual QVariant toFriendlyFormat(const T& value) {
     return QVariant::fromValue(value);
   };
   virtual const T fromFriendlyFormat(QVariant value) {
@@ -61,7 +61,7 @@ class Setting : public SettingWithSignal {
   };
 
  private:
-  QSettings *m_settings;
+  QSettings* m_settings;
   QString m_key;
   T m_defaultValue;
   std::function<T()> m_defaultValueFunction;
@@ -71,7 +71,7 @@ class Setting : public SettingWithSignal {
 };
 
 template <>
-inline QVariant Setting<QColor>::toFriendlyFormat(const QColor &value) {
+inline QVariant Setting<QColor>::toFriendlyFormat(const QColor& value) {
   QString argb = value.name(QColor::HexArgb);
   return QVariant::fromValue(argb);
 }
@@ -84,57 +84,57 @@ inline const QColor Setting<QColor>::fromFriendlyFormat(QVariant value) {
 class SanePreferences : public QObject {
   Q_OBJECT
  public:
-  SanePreferences(QSettings *settings, QObject *parent = nullptr);
-  static SanePreferences *createDefault(QObject *parent = nullptr);
-  QSettings *settings;
+  SanePreferences(QSettings* settings, QObject* parent = nullptr);
+  static SanePreferences* createDefault(QObject* parent = nullptr);
+  QSettings* settings;
 
-  Setting<bool> *shownWelcome;
+  Setting<bool>* shownWelcome;
 
-  Setting<int> *smallEvery;
-  Setting<int> *smallFor;
-  Setting<int> *bigAfter;
-  Setting<int> *bigFor;
-  Setting<QStringList> *postponeMinutes;
+  Setting<int>* smallEvery;
+  Setting<int>* smallFor;
+  Setting<int>* bigAfter;
+  Setting<int>* bigFor;
+  Setting<QStringList>* postponeMinutes;
 
-  Setting<int> *flashFor;
-  Setting<int> *confirmAfter;
-  Setting<int> *maxForceBreakExits;
-  Setting<bool> *autoCloseWindowAfterSmallBreak;
-  Setting<bool> *autoCloseWindowAfterBigBreak;
+  Setting<int>* flashFor;
+  Setting<int>* confirmAfter;
+  Setting<int>* maxForceBreakExits;
+  Setting<bool>* autoCloseWindowAfterSmallBreak;
+  Setting<bool>* autoCloseWindowAfterBigBreak;
 
-  Setting<int> *flashSpeed;
-  Setting<QColor> *messageColor;
-  Setting<QColor> *countDownColor;
-  Setting<QColor> *backgroundColor;
-  Setting<QColor> *smallHighlightColor;
-  Setting<QColor> *bigHighlightColor;
-  Setting<QStringList> *smallMessages;
-  Setting<QStringList> *bigMessages;
+  Setting<int>* flashSpeed;
+  Setting<QColor>* messageColor;
+  Setting<QColor>* countDownColor;
+  Setting<QColor>* backgroundColor;
+  Setting<QColor>* smallHighlightColor;
+  Setting<QColor>* bigHighlightColor;
+  Setting<QStringList>* smallMessages;
+  Setting<QStringList>* bigMessages;
 
-  Setting<bool> *smallBreakShowProgressBar;
-  Setting<bool> *smallBreakShowCountdown;
-  Setting<bool> *smallBreakShowClock;
-  Setting<bool> *smallBreakShowEndTime;
-  Setting<bool> *smallBreakShowButtons;
-  Setting<bool> *bigBreakShowProgressBar;
-  Setting<bool> *bigBreakShowCountdown;
-  Setting<bool> *bigBreakShowClock;
-  Setting<bool> *bigBreakShowEndTime;
-  Setting<bool> *bigBreakShowButtons;
+  Setting<bool>* smallBreakShowProgressBar;
+  Setting<bool>* smallBreakShowCountdown;
+  Setting<bool>* smallBreakShowClock;
+  Setting<bool>* smallBreakShowEndTime;
+  Setting<bool>* smallBreakShowButtons;
+  Setting<bool>* bigBreakShowProgressBar;
+  Setting<bool>* bigBreakShowCountdown;
+  Setting<bool>* bigBreakShowClock;
+  Setting<bool>* bigBreakShowEndTime;
+  Setting<bool>* bigBreakShowButtons;
 
-  Setting<int> *pauseOnIdleFor;
-  Setting<int> *resetAfterPause;
-  Setting<int> *resetCycleAfterPause;
-  Setting<bool> *pauseOnBattery;
-  Setting<QStringList> *programsToMonitor;
+  Setting<int>* pauseOnIdleFor;
+  Setting<int>* resetAfterPause;
+  Setting<int>* resetCycleAfterPause;
+  Setting<bool>* pauseOnBattery;
+  Setting<QStringList>* programsToMonitor;
 
-  Setting<QString> *smallStartBell;
-  Setting<QString> *smallEndBell;
-  Setting<QString> *bigStartBell;
-  Setting<QString> *bigEndBell;
+  Setting<QString>* smallStartBell;
+  Setting<QString>* smallEndBell;
+  Setting<QString>* bigStartBell;
+  Setting<QString>* bigEndBell;
 
-  Setting<int> *autoScreenLock;
-  Setting<bool> *quickBreak;
-  Setting<QString> *language;
-  Setting<bool> *autoStart;
+  Setting<int>* autoScreenLock;
+  Setting<bool>* quickBreak;
+  Setting<QString>* language;
+  Setting<bool>* autoStart;
 };

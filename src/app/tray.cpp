@@ -22,14 +22,14 @@
 #include "core/preferences.h"
 #include "lib/utils.h"
 
-StatusTrayWindow *StatusTrayWindow::createTrayOrWindow(SanePreferences *preferences,
-                                                       QObject *parent) {
+StatusTrayWindow* StatusTrayWindow::createTrayOrWindow(SanePreferences* preferences,
+                                                       QObject* parent) {
   if (QSystemTrayIcon::isSystemTrayAvailable())
     return new StatusTray(preferences, parent);
   return new StatusWindow(preferences, parent);
 }
 
-StatusTrayWindow::StatusTrayWindow(SanePreferences *preferences, QObject *parent)
+StatusTrayWindow::StatusTrayWindow(SanePreferences* preferences, QObject* parent)
     : QObject(parent), preferences(preferences) {
   menu = new QMenu();
   nextBreakAction = new QAction(this);
@@ -50,7 +50,7 @@ StatusTrayWindow::StatusTrayWindow(SanePreferences *preferences, QObject *parent
   menu->addSeparator();
 
   postponeMenu = menu->addMenu(tr("Postpone"));
-  for (const QString &minuteString : preferences->postponeMinutes->get()) {
+  for (const QString& minuteString : preferences->postponeMinutes->get()) {
     int minute = minuteString.toInt();
     connect(postponeMenu->addAction(tr("%n min", "", minute)), &QAction::triggered,
             this, [this, minute]() { emit this->postponeRequested(minute * 60); });
@@ -136,14 +136,14 @@ QPixmap StatusTrayWindow::drawIcon(TrayData data) {
 
 void StatusTrayWindow::onPostponeMinutesChange() {
   postponeMenu->clear();
-  for (const QString &minuteString : preferences->postponeMinutes->get()) {
+  for (const QString& minuteString : preferences->postponeMinutes->get()) {
     int minute = minuteString.toInt();
     connect(postponeMenu->addAction(tr("%n min", "", minute)), &QAction::triggered,
             this, [this, minute]() { emit postponeRequested(minute * 60); });
   }
 }
 
-StatusTray::StatusTray(SanePreferences *preferences, QObject *parent)
+StatusTray::StatusTray(SanePreferences* preferences, QObject* parent)
     : StatusTrayWindow(preferences, parent) {
   icon = new QSystemTrayIcon();
   icon->setContextMenu(menu);
@@ -171,11 +171,11 @@ void StatusTray::update(TrayData data) {
 }
 void StatusTray::setTitle(QString str) { icon->setToolTip("Sane Break\n" + str); }
 
-StatusWindowWidget::StatusWindowWidget(QMenu *menu) : menu(menu) {
+StatusWindowWidget::StatusWindowWidget(QMenu* menu) : menu(menu) {
   setWindowIcon(QIcon(":/images/icon.png"));
   setWindowTitle("Sane Break");
   setWindowFlag(Qt::Dialog);
-  QVBoxLayout *layout = new QVBoxLayout();
+  QVBoxLayout* layout = new QVBoxLayout();
   layout->setSpacing(12);
   setLayout(layout);
 
@@ -190,10 +190,10 @@ StatusWindowWidget::StatusWindowWidget(QMenu *menu) : menu(menu) {
   layout->addWidget(info);
   layout->setAlignment(info, Qt::AlignHCenter);
 };
-void StatusWindowWidget::contextMenuEvent(QContextMenuEvent *event) {
+void StatusWindowWidget::contextMenuEvent(QContextMenuEvent* event) {
   menu->exec(event->globalPos());
 }
-StatusWindow::StatusWindow(SanePreferences *preferences, QObject *parent)
+StatusWindow::StatusWindow(SanePreferences* preferences, QObject* parent)
     : StatusTrayWindow(preferences, parent) {
   widget = new StatusWindowWidget(menu);
 }

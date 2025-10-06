@@ -15,5 +15,5 @@ class LayerShell : public LayerShellInterface {
   LayerShell() {};
   ~LayerShell() override = default;
   void init() override;
-  void layout(QWindow *window) override;
+  void layout(QWindow* window) override;
 };

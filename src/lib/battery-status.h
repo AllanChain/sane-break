@@ -10,16 +10,16 @@
 class BatteryStatus : public QObject {
   Q_OBJECT
  public:
-  BatteryStatus(QObject *parent = nullptr);
+  BatteryStatus(QObject* parent = nullptr);
   void startWatching();
   void stopWatching();
   virtual bool systemOnBattery() { return true; };
   int watchAccuracy = 5000;  // How often we watch idle time (ms)
-  static BatteryStatus *createWatcher(QObject *parent = nullptr);
+  static BatteryStatus* createWatcher(QObject* parent = nullptr);
   bool isOnBattery = false;
 
  private:
-  QTimer *timer;
+  QTimer* timer;
   void tick();
 
  signals:

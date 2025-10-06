@@ -13,4 +13,4 @@
 
 // Put a window on all workspaces on OS X (enables
 // NSWindowCollectionBehaviorCanJoinAllSpaces)
-void macSetAllWorkspaces(QWindow *window);
+void macSetAllWorkspaces(QWindow* window);

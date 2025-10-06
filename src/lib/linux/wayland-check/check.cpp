@@ -19,31 +19,31 @@
 #include <cstdint>
 #include <cstring>
 
-void registryHandler(void *data, wl_registry *, uint32_t, const char *interface,
+void registryHandler(void* data, wl_registry*, uint32_t, const char* interface,
                      uint32_t) {
-  WaylandCheck *self = static_cast<WaylandCheck *>(data);
+  WaylandCheck* self = static_cast<WaylandCheck*>(data);
   if (strcmp(interface, "zwlr_layer_shell_v1") == 0) self->m_layerShell = true;
   if (strcmp(interface, "ext_idle_notifier_v1") == 0) self->m_idleNotify = true;
 }
 
-void registryRemover(void *, wl_registry *, uint32_t) {}
+void registryRemover(void*, wl_registry*, uint32_t) {}
 
 const wl_registry_listener registryListener = {registryHandler, registryRemover};
 
 WaylandCheck::WaylandCheck() {
   if (QGuiApplication::platformName() == "wayland") {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
-    QNativeInterface::QWaylandApplication *waylandApp =
+    QNativeInterface::QWaylandApplication* waylandApp =
         qGuiApp->nativeInterface<QNativeInterface::QWaylandApplication>();
     if (!waylandApp) return;
-    wl_display *display = waylandApp->display();
+    wl_display* display = waylandApp->display();
 #else
-    QPlatformNativeInterface *nativeInterface = qGuiApp->platformNativeInterface();
+    QPlatformNativeInterface* nativeInterface = qGuiApp->platformNativeInterface();
     if (!nativeInterface) return;
-    wl_display *display = static_cast<wl_display *>(
+    wl_display* display = static_cast<wl_display*>(
         nativeInterface->nativeResourceForIntegration("display"));
 #endif
-    wl_registry *registry = wl_display_get_registry(display);
+    wl_registry* registry = wl_display_get_registry(display);
     wl_registry_add_listener(registry, &registryListener, this);
     wl_display_roundtrip(display);
     wl_registry_destroy(registry);

@@ -20,10 +20,10 @@
 
 #include "config.h"
 
-QList<QTranslator *> LanguageSelect::currentTranslators = {};
+QList<QTranslator*> LanguageSelect::currentTranslators = {};
 
 void LanguageSelect::setLanguage(QString language) {
-  QTranslator *translator = new QTranslator();
+  QTranslator* translator = new QTranslator();
   if ((language == "" && !translator->load(QLocale::system(), "", "", ":/i18n")) ||
       !translator->load(language, ":/i18n")) {
     if (language == "en") return;
@@ -31,8 +31,8 @@ void LanguageSelect::setLanguage(QString language) {
     return setLanguage("en");
   }
   if (!currentTranslators.isEmpty()) {
-    const QList<QTranslator *> translatorsToRemove = currentTranslators;
-    for (QTranslator *translatorToRemove : translatorsToRemove) {
+    const QList<QTranslator*> translatorsToRemove = currentTranslators;
+    for (QTranslator* translatorToRemove : translatorsToRemove) {
       qApp->removeTranslator(translatorToRemove);
     }
     currentTranslators.empty();
@@ -42,7 +42,7 @@ void LanguageSelect::setLanguage(QString language) {
 
   QLocale::setDefault(QLocale(language));
 
-  QTranslator *qtBaseTranslater = new QTranslator();
+  QTranslator* qtBaseTranslater = new QTranslator();
 #ifdef BUNDLE_QT_TRANSLATIONS
   if ((language == "" &&
        !qtBaseTranslater->load(QLocale::system(), "", "", ":/i18n-qtbase")) ||
@@ -63,7 +63,7 @@ void LanguageSelect::setLanguage(QString language) {
   currentTranslators.append(qtBaseTranslater);
 }
 
-LanguageSelect::LanguageSelect(QWidget *parent) : QComboBox(parent) {
+LanguageSelect::LanguageSelect(QWidget* parent) : QComboBox(parent) {
   addItem(tr("Default"), "");
   QDir dir(":/i18n");
   QStringList fileNames = dir.entryList(QStringList("*.qm"), QDir::Files, QDir::Name);

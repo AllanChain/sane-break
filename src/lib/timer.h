@@ -12,7 +12,7 @@
 class Timer : public AbstractTimer {
   Q_OBJECT
  public:
-  Timer(QObject *parent = nullptr) : AbstractTimer(parent) {
+  Timer(QObject* parent = nullptr) : AbstractTimer(parent) {
     timer = new QTimer();
     connect(timer, &QTimer::timeout, this, &AbstractTimer::timeout);
   };
@@ -27,5 +27,5 @@ class Timer : public AbstractTimer {
   bool isSingleShot() override { return timer->isSingleShot(); };
 
  private:
-  QTimer *timer;
+  QTimer* timer;
 };

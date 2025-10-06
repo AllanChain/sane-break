@@ -12,9 +12,9 @@
 class LinuxBatteryStatus : public BatteryStatus {
   Q_OBJECT
  public:
-  LinuxBatteryStatus(QObject *parent = nullptr);
+  LinuxBatteryStatus(QObject* parent = nullptr);
   bool systemOnBattery();
 
  private:
-  QDBusInterface *iface;
+  QDBusInterface* iface;
 };

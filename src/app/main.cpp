@@ -25,7 +25,7 @@
 #include "lib/linux/system-check.h"
 #endif
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
   QCoreApplication::setOrganizationName("SaneBreak");
   QCoreApplication::setApplicationName("SaneBreak");
   QSettings::setDefaultFormat(QSettings::IniFormat);
@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
   a.setApplicationDisplayName("Sane Break");
   if (QSystemTrayIcon::isSystemTrayAvailable()) a.setQuitOnLastWindowClosed(false);
 
-  SanePreferences *preferences = SanePreferences::createDefault();
+  SanePreferences* preferences = SanePreferences::createDefault();
 
 #ifdef WITH_TRANSLATIONS
   LanguageSelect::setLanguage(preferences->language->get());
@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
 #endif  // Q_OS_LINUX
 
   if (!QFile::exists(preferences->settings->fileName())) {
-    WelcomeWindow *welcome = new WelcomeWindow(preferences);
+    WelcomeWindow* welcome = new WelcomeWindow(preferences);
     if (welcome->exec() == QDialog::Rejected) {
       return 0;
     } else {
@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
     welcome->deleteLater();
   }
 
-  SaneBreakApp *app = SaneBreakApp::create(preferences, &a);
+  SaneBreakApp* app = SaneBreakApp::create(preferences, &a);
 
   app->start();
   return a.exec();

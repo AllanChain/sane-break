@@ -19,7 +19,7 @@ const QStringList RunningProgramsMonitor::runningPrograms() {
   QString output = process.readAllStandardOutput();
   if (output.isEmpty()) return {};
   QStringList lines = output.split('\n', Qt::SkipEmptyParts);
-  for (const QString &line : lines) {
+  for (const QString& line : lines) {
     QStringList parts = line.split(',', Qt::SkipEmptyParts);
     if (parts.size() > 0) {
       QString program = parts[0].trimmed();
