@@ -17,6 +17,7 @@
  */
 
 import { Extension } from "resource:///org/gnome/shell/extensions/extension.js";
+import Meta from "gi://Meta";
 
 const SANE_WINDOW_NAME = "Break reminder - Sane Break";
 
@@ -25,21 +26,28 @@ export default class SaneBreakGNOME extends Extension {
 
   enable() {
     this._windowAddedHandle = global.display.connect("window-created", (_, window) =>
-      window.get_compositor_private().connect("realize", () => this.onCreated(window)),
+      this.onCreated(window),
     );
   }
 
   disable() {
-    if (this._windowAddedHandle) global.display.disconnect(this._windowAddedHandle);
+    if (this._windowAddedHandle) {
+      global.display.disconnect(this._windowAddedHandle);
+      this._windowAddedHandle = null;
+    }
   }
 
-  onCreated(metaWindow) {
-    if (metaWindow.get_title() === SANE_WINDOW_NAME) {
-      metaWindow.stick();
-      metaWindow.raise_and_make_recent_on_workspace(metaWindow.get_workspace());
-      metaWindow.make_above();
-      const [w, h] = global.display.get_size();
-      metaWindow.move_resize_frame(false, 0, 0, w, h);
-    }
+  onCreated(window) {
+    window.connect("notify::title", () => {
+      if (window.get_title() !== SANE_WINDOW_NAME) return;
+      const laters = global.compositor.get_laters();
+      laters.add(Meta.LaterType.RESIZE, () => {
+        window.stick();
+        const [w, h] = global.display.get_size();
+        window.move_resize_frame(false, 0, 0, w, h);
+        window.raise_and_make_recent_on_workspace(window.get_workspace());
+        window.make_above();
+      });
+    });
   }
 }
