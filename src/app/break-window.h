@@ -27,7 +27,7 @@ class BreakWindow : public QMainWindow {
   Q_PROPERTY(QColor color MEMBER backgroundColor NOTIFY colorChanged)
 
  public:
-  BreakWindow(BreakWindowData data, QWidget *parent = nullptr);
+  BreakWindow(BreakWindowData data, QWidget* parent = nullptr);
   ~BreakWindow() = default;
   static const int SMALL_WINDOW_WIDTH;
   static const int SMALL_WINDOW_HEIGHT;
@@ -38,7 +38,7 @@ class BreakWindow : public QMainWindow {
   void showFlashPrompt();
   void showButtons(AbstractBreakWindows::Buttons buttons, bool show = true);
 
-  void initSize(QScreen *screen);
+  void initSize(QScreen* screen);
   void colorChanged();
 
  signals:
@@ -46,15 +46,15 @@ class BreakWindow : public QMainWindow {
   void exitForceBreakRequested();
 
  private:
-  Ui::BreakReminder *ui;
-  QWidget *mainWidget;
+  Ui::BreakReminder* ui;
+  QWidget* mainWidget;
   QColor backgroundColor;
   BreakWindowData m_data;
-  QPropertyAnimation *m_progressAnim;
-  QPropertyAnimation *m_bgAnim;
+  QPropertyAnimation* m_progressAnim;
+  QPropertyAnimation* m_bgAnim;
   bool m_waylandWorkaround = false;
   bool m_supportTransparentInput = true;
   int m_totalSeconds;
 
-  static void colorizeButton(QPushButton *button, QColor color);
+  static void colorizeButton(QPushButton* button, QColor color);
 };

@@ -11,7 +11,7 @@
 class AbstractSystemMonitor : public QObject {
   Q_OBJECT
  public:
-  AbstractSystemMonitor(QObject *parent = nullptr) : QObject(parent) {};
+  AbstractSystemMonitor(QObject* parent = nullptr) : QObject(parent) {};
   ~AbstractSystemMonitor() = default;
   virtual void start() = 0;
   virtual bool isOnBattery() = 0;

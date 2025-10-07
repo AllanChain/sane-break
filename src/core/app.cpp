@@ -16,7 +16,7 @@
 #include "core/system-monitor.h"
 #include "core/timer.h"
 
-AbstractApp::AbstractApp(const AppDependencies &deps, QObject *parent)
+AbstractApp::AbstractApp(const AppDependencies& deps, QObject* parent)
     : AppContext(parent) {
   data = new AppData(this, deps.preferences);
   preferences = deps.preferences;

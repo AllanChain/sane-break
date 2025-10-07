@@ -11,7 +11,7 @@
 
 void LayerShell::init() { LayerShellQt::Shell::useLayerShell(); }
 
-void LayerShell::layout(QWindow *window) {
+void LayerShell::layout(QWindow* window) {
   if (auto w = LayerShellQt::Window::get(window)) {
     using namespace LayerShellQt;
     w->setCloseOnDismissed(true);

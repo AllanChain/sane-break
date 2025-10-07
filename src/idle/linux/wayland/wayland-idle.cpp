@@ -20,23 +20,23 @@
 
 #include "wayland-ext-idle-notify-v1-client-protocol.h"
 
-IdleTimeWayland::IdleTimeWayland(QObject *parent) {
+IdleTimeWayland::IdleTimeWayland(QObject* parent) {
   setParent(parent);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
-  QNativeInterface::QWaylandApplication *waylandApp =
+  QNativeInterface::QWaylandApplication* waylandApp =
       qGuiApp->nativeInterface<QNativeInterface::QWaylandApplication>();
   if (!waylandApp) return;
-  wl_display *display = waylandApp->display();
+  wl_display* display = waylandApp->display();
   seat = waylandApp->seat();
 #else
-  QPlatformNativeInterface *nativeInterface = qGuiApp->platformNativeInterface();
+  QPlatformNativeInterface* nativeInterface = qGuiApp->platformNativeInterface();
   if (!nativeInterface) return;
-  wl_display *display = static_cast<wl_display *>(
+  wl_display* display = static_cast<wl_display*>(
       nativeInterface->nativeResourceForIntegration("display"));
   seat =
-      static_cast<wl_seat *>(nativeInterface->nativeResourceForIntegration("wl_seat"));
+      static_cast<wl_seat*>(nativeInterface->nativeResourceForIntegration("wl_seat"));
 #endif
-  wl_registry *registry = wl_display_get_registry(display);
+  wl_registry* registry = wl_display_get_registry(display);
   wl_registry_add_listener(registry, &globalListener, this);
   wl_display_roundtrip(display);
 
@@ -50,28 +50,28 @@ IdleTimeWayland::IdleTimeWayland(QObject *parent) {
   }
 }
 
-void IdleTimeWayland::globalAdded(void *data, wl_registry *registry, uint32_t name,
-                                  const char *interface, uint32_t version) {
-  IdleTimeWayland *self = static_cast<IdleTimeWayland *>(data);
+void IdleTimeWayland::globalAdded(void* data, wl_registry* registry, uint32_t name,
+                                  const char* interface, uint32_t version) {
+  IdleTimeWayland* self = static_cast<IdleTimeWayland*>(data);
   if (strcmp(interface, ext_idle_notifier_v1_interface.name) == 0) {
     if (self->idleNotifier != nullptr)  // Clear old notifier
       ext_idle_notifier_v1_destroy(self->idleNotifier);
-    self->idleNotifier = static_cast<struct ext_idle_notifier_v1 *>(
+    self->idleNotifier = static_cast<struct ext_idle_notifier_v1*>(
         wl_registry_bind(registry, name, &ext_idle_notifier_v1_interface, version));
   }
 }
 
-void IdleTimeWayland::globalRemoved(void *, wl_registry *, uint32_t) {};
+void IdleTimeWayland::globalRemoved(void*, wl_registry*, uint32_t) {};
 
-void IdleTimeWayland::idled(void *data, ext_idle_notification_v1 *) {
-  IdleTimeWayland *self = static_cast<IdleTimeWayland *>(data);
+void IdleTimeWayland::idled(void* data, ext_idle_notification_v1*) {
+  IdleTimeWayland* self = static_cast<IdleTimeWayland*>(data);
   if (!self->isWatching) return;
   self->m_isIdle = true;
   emit self->idleStart();
 };
 
-void IdleTimeWayland::resumed(void *data, ext_idle_notification_v1 *) {
-  IdleTimeWayland *self = static_cast<IdleTimeWayland *>(data);
+void IdleTimeWayland::resumed(void* data, ext_idle_notification_v1*) {
+  IdleTimeWayland* self = static_cast<IdleTimeWayland*>(data);
   if (!self->isWatching) return;
   self->m_isIdle = false;
   emit self->idleEnd();

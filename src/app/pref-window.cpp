@@ -78,17 +78,17 @@ void PrefControllerBase::onChange() {
   emit explictSync();
 }
 
-PrefControllerBase *ControllerHolder::add(PrefGroup group,
-                                          PrefControllerBase *controller) {
+PrefControllerBase* ControllerHolder::add(PrefGroup group,
+                                          PrefControllerBase* controller) {
   m_controllers[group].append(controller);
   connect(controller, &PrefControllerBase::dirtyChanged, this,
           &ControllerHolder::onDirtyChange);
   return controller;
 }
 
-void ControllerHolder::forEach(std::function<void(PrefControllerBase *)> func) {
-  for (const auto &controllerList : m_controllers) {
-    for (const auto &controller : controllerList) {
+void ControllerHolder::forEach(std::function<void(PrefControllerBase*)> func) {
+  for (const auto& controllerList : m_controllers) {
+    for (const auto& controller : controllerList) {
       func(controller);
     }
   }
@@ -96,7 +96,7 @@ void ControllerHolder::forEach(std::function<void(PrefControllerBase *)> func) {
 
 void ControllerHolder::onDirtyChange() {
   bool currentIsDirty = false;
-  forEach([&currentIsDirty](PrefControllerBase *controller) {
+  forEach([&currentIsDirty](PrefControllerBase* controller) {
     if (controller->isDirty) currentIsDirty = true;
   });
   if (isDirty != currentIsDirty) {
@@ -106,26 +106,26 @@ void ControllerHolder::onDirtyChange() {
 }
 
 void ControllerHolder::load() {
-  forEach([](PrefControllerBase *controller) { controller->load(); });
+  forEach([](PrefControllerBase* controller) { controller->load(); });
 }
 
 void ControllerHolder::reloadDirty() {
-  forEach([](PrefControllerBase *controller) {
+  forEach([](PrefControllerBase* controller) {
     if (controller->isDirty) controller->load();
   });
 }
 
 void ControllerHolder::save() {
-  forEach([](PrefControllerBase *controller) { controller->saveIfDirty(); });
+  forEach([](PrefControllerBase* controller) { controller->saveIfDirty(); });
 }
 
 void ControllerHolder::setGroupToDefault(PrefGroup group) {
-  for (auto &controller : m_controllers[group]) {
+  for (auto& controller : m_controllers[group]) {
     controller->setToDefault();
   }
 }
 
-PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent)
+PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent)
     : QMainWindow(parent), ui(new Ui::PrefWindow), preferences(preferences) {
   setWindowFlag(Qt::Dialog);
   setWindowIcon(QIcon(":/images/icon.png"));
@@ -325,11 +325,11 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
    ****************************************************************************/
   QStringList soundFiles = {"", "qrc:/sounds/chime.mp3", "qrc:/sounds/ding.mp3",
                             "qrc:/sounds/wood.mp3", "qrc:/sounds/bell.mp3"};
-  QList<QComboBox *> soundSelects = {ui->smallStartBellSelect, ui->smallEndBellSelect,
-                                     ui->bigStartBellSelect, ui->bigEndBellSelect};
-  QList<QPushButton *> soundPlayButtons = {ui->playSmallStart, ui->playSmallEnd,
-                                           ui->playBigStart, ui->playBigEnd};
-  QList<Setting<QString> *> soundSettings = {
+  QList<QComboBox*> soundSelects = {ui->smallStartBellSelect, ui->smallEndBellSelect,
+                                    ui->bigStartBellSelect, ui->bigEndBellSelect};
+  QList<QPushButton*> soundPlayButtons = {ui->playSmallStart, ui->playSmallEnd,
+                                          ui->playBigStart, ui->playBigEnd};
+  QList<Setting<QString>*> soundSettings = {
       preferences->smallStartBell, preferences->smallEndBell, preferences->bigStartBell,
       preferences->bigEndBell};
   for (int i = 0; i < soundSelects.length(); i++) {
@@ -454,12 +454,12 @@ PreferenceWindow::PreferenceWindow(SanePreferences *preferences, QWidget *parent
 
 PreferenceWindow::~PreferenceWindow() { delete ui; }
 
-void PreferenceWindow::closeEvent(QCloseEvent *event) {
+void PreferenceWindow::closeEvent(QCloseEvent* event) {
   if (!confirmLeave()) return event->ignore();
   QMainWindow::closeEvent(event);
 }
 
-void PreferenceWindow::showEvent(QShowEvent *) { controllers->load(); }
+void PreferenceWindow::showEvent(QShowEvent*) { controllers->load(); }
 
 void PreferenceWindow::setTab(int tabNum, int totalTabCount) {
   if (!confirmLeave()) {
@@ -539,11 +539,11 @@ void PreferenceWindow::openBreakWindowPreview() {
   });
 }
 
-void PreferenceWindow::changeEvent(QEvent *event) {
+void PreferenceWindow::changeEvent(QEvent* event) {
   if (event->type() == QEvent::ThemeChange) {
     // Some buttons does not update their color automatically.
     // We perform the update manually here.
-    auto buttons = findChildren<QPushButton *>();
+    auto buttons = findChildren<QPushButton*>();
     for (auto button : buttons) {
       button->style()->unpolish(button);
       button->style()->polish(button);

@@ -34,17 +34,17 @@
 #include "lib/linux/system-check.h"
 #endif
 
-WelcomeWindow::WelcomeWindow(SanePreferences *preferences, QWidget *parent)
+WelcomeWindow::WelcomeWindow(SanePreferences* preferences, QWidget* parent)
     : QDialog(parent), preferences(preferences) {
   setWindowIcon(QIcon(":/images/icon.png"));
   setFixedWidth(400);
   setContentsMargins(10, 20, 10, 10);
 
-  QVBoxLayout *layout = new QVBoxLayout(this);
+  QVBoxLayout* layout = new QVBoxLayout(this);
   setLayout(layout);
   layout->setContentsMargins(12, 0, 12, 0);
 
-  QLabel *icon = new QLabel(this);
+  QLabel* icon = new QLabel(this);
   icon->setPixmap(QPixmap(":/images/icon.png"));
   icon->setMargin(12);
   icon->setScaledContents(true);
@@ -59,7 +59,7 @@ WelcomeWindow::WelcomeWindow(SanePreferences *preferences, QWidget *parent)
   layout->addWidget(welcome);
 
 #ifdef WITH_TRANSLATIONS
-  QHBoxLayout *hlayout = new QHBoxLayout(this);
+  QHBoxLayout* hlayout = new QHBoxLayout(this);
   languageLabel = new QLabel(this);
   hlayout->addWidget(languageLabel);
   languageSelect = new LanguageSelect(this);
@@ -92,7 +92,7 @@ WelcomeWindow::WelcomeWindow(SanePreferences *preferences, QWidget *parent)
   if (hasWarning) layout->addWidget(warningLabel);
 
   layout->addSpacing(20);
-  QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
+  QDialogButtonBox* buttonBox = new QDialogButtonBox(this);
   docButton = buttonBox->addButton(tr("Read More"), QDialogButtonBox::HelpRole);
   if (hasError) {
     ignoreButton = buttonBox->addButton(tr("Ignore"), QDialogButtonBox::AcceptRole);
@@ -129,14 +129,14 @@ void WelcomeWindow::updateText() {
   if (okButton) okButton->setText(tr("OK"));
 #ifdef Q_OS_LINUX
   QString errorText = "";
-  for (auto &error : LinuxSystemSupport::errors()) {
+  for (auto& error : LinuxSystemSupport::errors()) {
     errorText += QString("<li>%1</li>").arg(error);
   }
   if (errorText.length() > 0) {
     errorLabel->setText(QString("<ul>%1</ul>").arg(errorText));
   }
   QString warningText = "";
-  for (auto &warning : LinuxSystemSupport::warnings()) {
+  for (auto& warning : LinuxSystemSupport::warnings()) {
     warningText += QString("<li>%1</li>").arg(warning);
   }
   if (warningText.length() > 0) {

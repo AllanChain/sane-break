@@ -28,7 +28,7 @@
 #include "lib/system-monitor.h"
 #include "lib/timer.h"
 
-SaneBreakApp::SaneBreakApp(const AppDependencies &deps, QObject *parent)
+SaneBreakApp::SaneBreakApp(const AppDependencies& deps, QObject* parent)
     : AbstractApp(deps, parent) {
   prefWindow = new PreferenceWindow(preferences);
   tray = StatusTrayWindow::createTrayOrWindow(preferences, this);
@@ -50,7 +50,7 @@ SaneBreakApp::SaneBreakApp(const AppDependencies &deps, QObject *parent)
   connect(this, &SaneBreakApp::quit, qApp, &QApplication::quit, Qt::QueuedConnection);
 }
 
-SaneBreakApp *SaneBreakApp::create(SanePreferences *preferences, QObject *parent) {
+SaneBreakApp* SaneBreakApp::create(SanePreferences* preferences, QObject* parent) {
   AppDependencies deps = {
       .preferences = preferences,
       .countDownTimer = new Timer(),
@@ -98,7 +98,7 @@ bool SaneBreakApp::confirmPostpone(int secondsToPostpone) {
 
 void SaneBreakApp::confirmQuit() {
   int largestMinutes = 0;
-  for (const QString &minuteString : preferences->postponeMinutes->get()) {
+  for (const QString& minuteString : preferences->postponeMinutes->get()) {
     int minute = minuteString.toInt();
     largestMinutes = largestMinutes > minute ? largestMinutes : minute;
   }

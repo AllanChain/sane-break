@@ -10,7 +10,7 @@
 #include "core/flags.h"
 #include "core/preferences.h"
 
-AppData::AppData(QObject *parent, SanePreferences *preferences)
+AppData::AppData(QObject* parent, SanePreferences* preferences)
     : QObject(parent), preferences(preferences) {
   m_secondsToNextBreak = preferences->smallEvery->get();
   breaks = std::make_unique<BreaksData>();

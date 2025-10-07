@@ -23,25 +23,25 @@ class BreakWindows : public AbstractBreakWindows {
   Q_OBJECT
 
  public:
-  BreakWindows(QObject *parent = nullptr);
+  BreakWindows(QObject* parent = nullptr);
   ~BreakWindows() = default;
 
-  void create(BreakType, SanePreferences *) override;
+  void create(BreakType, SanePreferences*) override;
   void destroy() override;
   void setTime(int remainingTime) override;
   void showFullScreen() override;
   void showFlashPrompt() override;
   void showButtons(Buttons, bool show = true) override;
-  void playEnterSound(BreakType, SanePreferences *) override;
-  void playExitSound(BreakType, SanePreferences *) override;
+  void playEnterSound(BreakType, SanePreferences*) override;
+  void playExitSound(BreakType, SanePreferences*) override;
 
  private:
-  QList<BreakWindow *> m_windows;
-  SoundPlayer *soundPlayer;
-  QTimer *clockUpdateTimer;
+  QList<BreakWindow*> m_windows;
+  SoundPlayer* soundPlayer;
+  QTimer* clockUpdateTimer;
   void updateClocks();
 
 #ifdef Q_OS_LINUX
-  LayerShellInterface *layerShell = nullptr;
+  LayerShellInterface* layerShell = nullptr;
 #endif
 };

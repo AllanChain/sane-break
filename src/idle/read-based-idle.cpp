@@ -10,7 +10,7 @@
 
 #include "core/idle-time.h"
 
-ReadBasedIdleTime::ReadBasedIdleTime(QObject *parent, std::function<int()> idleReader)
+ReadBasedIdleTime::ReadBasedIdleTime(QObject* parent, std::function<int()> idleReader)
     : SystemIdleTime(parent), m_idleReader(idleReader) {
   m_timer = new QTimer(this);
   m_delay = new QTimer(this);

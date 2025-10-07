@@ -13,15 +13,15 @@ class SteppedSlider : public QSlider {
   Q_OBJECT
 
  public:
-  SteppedSlider(QWidget *parent = nullptr);
+  SteppedSlider(QWidget* parent = nullptr);
 
  public slots:
   void setValueForce(int value);
 
  protected:
-  void mousePressEvent(QMouseEvent *event) override;
-  void mouseMoveEvent(QMouseEvent *event) override;
+  void mousePressEvent(QMouseEvent* event) override;
+  void mouseMoveEvent(QMouseEvent* event) override;
 
  private:
-  int calculateValueFromPosition(const QPoint &pos) const;
+  int calculateValueFromPosition(const QPoint& pos) const;
 };

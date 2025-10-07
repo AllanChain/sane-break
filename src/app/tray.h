@@ -17,9 +17,9 @@ class StatusTrayWindow : public QObject {
   Q_OBJECT
 
  public:
-  StatusTrayWindow(SanePreferences *preferences, QObject *parent = nullptr);
-  static StatusTrayWindow *createTrayOrWindow(SanePreferences *preferences,
-                                              QObject *parent = nullptr);
+  StatusTrayWindow(SanePreferences* preferences, QObject* parent = nullptr);
+  static StatusTrayWindow* createTrayOrWindow(SanePreferences* preferences,
+                                              QObject* parent = nullptr);
 
   virtual void show() = 0;
   virtual void setTitle(QString str) = 0;
@@ -38,21 +38,21 @@ class StatusTrayWindow : public QObject {
   void quitRequested();
 
  protected:
-  SanePreferences *preferences;
-  QMenu *menu;
-  QMenu *postponeMenu;
-  QAction *quitAction;
-  QAction *nextBreakAction;
-  QAction *bigBreakAction;
-  QAction *smallBreakInsteadAction;
-  QAction *enableBreak;
+  SanePreferences* preferences;
+  QMenu* menu;
+  QMenu* postponeMenu;
+  QAction* quitAction;
+  QAction* nextBreakAction;
+  QAction* bigBreakAction;
+  QAction* smallBreakInsteadAction;
+  QAction* enableBreak;
 };
 
 class StatusTray : public StatusTrayWindow {
   Q_OBJECT
 
  public:
-  StatusTray(SanePreferences *preferences, QObject *parent = nullptr);
+  StatusTray(SanePreferences* preferences, QObject* parent = nullptr);
 
   void show() override;
   void update(TrayData data) override;
@@ -60,29 +60,29 @@ class StatusTray : public StatusTrayWindow {
   void onIconTrigger(QSystemTrayIcon::ActivationReason reason);
 
  private:
-  QSystemTrayIcon *icon;
+  QSystemTrayIcon* icon;
 };
 
 class StatusWindowWidget : public QWidget {
   Q_OBJECT
 
  public:
-  StatusWindowWidget(QMenu *menu);
-  QLabel *icon;
-  QLabel *info;
+  StatusWindowWidget(QMenu* menu);
+  QLabel* icon;
+  QLabel* info;
 
  private:
-  QMenu *menu;
+  QMenu* menu;
 
  protected:
-  void contextMenuEvent(QContextMenuEvent *event);
+  void contextMenuEvent(QContextMenuEvent* event);
 };
 
 class StatusWindow : public StatusTrayWindow {
   Q_OBJECT
 
  public:
-  StatusWindow(SanePreferences *preferences, QObject *parent = nullptr);
+  StatusWindow(SanePreferences* preferences, QObject* parent = nullptr);
   ~StatusWindow();
 
   void show() override;
@@ -90,8 +90,8 @@ class StatusWindow : public StatusTrayWindow {
   void setTitle(QString str) override;
 
  private:
-  StatusWindowWidget *widget;
+  StatusWindowWidget* widget;
 
  protected:
-  void contextMenuEvent(QContextMenuEvent *event);
+  void contextMenuEvent(QContextMenuEvent* event);
 };

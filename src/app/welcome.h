@@ -18,21 +18,21 @@ class WelcomeWindow : public QDialog {
   Q_OBJECT
 
  public:
-  WelcomeWindow(SanePreferences *preferences, QWidget *parent = nullptr);
+  WelcomeWindow(SanePreferences* preferences, QWidget* parent = nullptr);
   ~WelcomeWindow();
 
  private:
-  SanePreferences *preferences;
+  SanePreferences* preferences;
   void updateText();
-  QLabel *welcome;
-  QLabel *warningLabel;
-  QLabel *errorLabel;
-  QPushButton *docButton;
-  QPushButton *ignoreButton = nullptr;
-  QPushButton *cancelButton = nullptr;
-  QPushButton *okButton = nullptr;
+  QLabel* welcome;
+  QLabel* warningLabel;
+  QLabel* errorLabel;
+  QPushButton* docButton;
+  QPushButton* ignoreButton = nullptr;
+  QPushButton* cancelButton = nullptr;
+  QPushButton* okButton = nullptr;
 #ifdef WITH_TRANSLATIONS
-  QLabel *languageLabel;
-  LanguageSelect *languageSelect;
+  QLabel* languageLabel;
+  LanguageSelect* languageSelect;
 #endif
 };

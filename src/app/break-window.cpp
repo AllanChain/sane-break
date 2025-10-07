@@ -39,7 +39,7 @@
 const int BreakWindow::SMALL_WINDOW_WIDTH = 400;
 const int BreakWindow::SMALL_WINDOW_HEIGHT = 120;
 
-BreakWindow::BreakWindow(BreakWindowData data, QWidget *parent)
+BreakWindow::BreakWindow(BreakWindowData data, QWidget* parent)
     : QMainWindow(parent), m_data(data) {
 #ifdef Q_OS_LINUX
   // Positioning windows on Wayland is nearly impossible without layer shell protol.
@@ -162,7 +162,7 @@ void BreakWindow::showFullScreen() {
   if (m_data.show.endTime) ui->breakEndTimeLabel->setVisible(true);
   if (m_data.show.buttons) ui->buttons->setVisible(true);
 
-  QPropertyAnimation *resizeAnim =
+  QPropertyAnimation* resizeAnim =
       new QPropertyAnimation(m_waylandWorkaround ? mainWidget : this, "geometry");
   resizeAnim->setStartValue(m_waylandWorkaround ? mainWidget->geometry() : geometry());
   resizeAnim->setEndValue(m_waylandWorkaround ? screen()->availableGeometry()
@@ -187,7 +187,7 @@ void BreakWindow::showFlashPrompt() {
   ui->breakEndTimeLabel->setVisible(false);
   ui->buttons->setVisible(false);
 
-  QPropertyAnimation *resizeAnim =
+  QPropertyAnimation* resizeAnim =
       new QPropertyAnimation(m_waylandWorkaround ? mainWidget : this, "geometry");
   QRect rect =
       m_waylandWorkaround ? screen()->availableGeometry() : screen()->geometry();
@@ -199,7 +199,7 @@ void BreakWindow::showFlashPrompt() {
   resizeAnim->start();
 }
 
-void BreakWindow::initSize(QScreen *screen) {
+void BreakWindow::initSize(QScreen* screen) {
   if (m_waylandWorkaround) {
     QRect rect = screen->availableGeometry();
     // Avoid using full height when initializing the main window. GNOME will refuse to
@@ -220,7 +220,7 @@ void BreakWindow::initSize(QScreen *screen) {
 #endif
 }
 
-void BreakWindow::colorizeButton(QPushButton *button, QColor color) {
+void BreakWindow::colorizeButton(QPushButton* button, QColor color) {
   auto pixmap = button->icon().pixmap(button->iconSize());
   auto mask = pixmap.mask();
   pixmap.fill(color);

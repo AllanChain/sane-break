@@ -15,9 +15,9 @@
 class SaneBreakApp : public AbstractApp {
   Q_OBJECT
  public:
-  SaneBreakApp(const AppDependencies &deps, QObject *parent = nullptr);
+  SaneBreakApp(const AppDependencies& deps, QObject* parent = nullptr);
   ~SaneBreakApp() = default;
-  static SaneBreakApp *create(SanePreferences *preferences, QObject *parent = nullptr);
+  static SaneBreakApp* create(SanePreferences* preferences, QObject* parent = nullptr);
 
   void start() override;
   void doLockScreen() override;
@@ -29,7 +29,7 @@ class SaneBreakApp : public AbstractApp {
   void quit();
 
  private:
-  PreferenceWindow *prefWindow;
-  StatusTrayWindow *tray;
+  PreferenceWindow* prefWindow;
+  StatusTrayWindow* tray;
   void confirmQuit();
 };

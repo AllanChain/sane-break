@@ -18,14 +18,14 @@
 class SystemMonitor : public AbstractSystemMonitor {
   Q_OBJECT
  public:
-  SystemMonitor(SanePreferences *preferences, QObject *parent = nullptr);
+  SystemMonitor(SanePreferences* preferences, QObject* parent = nullptr);
   ~SystemMonitor() = default;
   void start();
   bool isOnBattery();
 
  private:
-  SanePreferences *preferences;
-  SleepMonitor *sleepMonitor;
-  BatteryStatus *batteryWatcher;
-  RunningProgramsMonitor *runningProgramsMonitor;
+  SanePreferences* preferences;
+  SleepMonitor* sleepMonitor;
+  BatteryStatus* batteryWatcher;
+  RunningProgramsMonitor* runningProgramsMonitor;
 };

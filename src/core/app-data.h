@@ -42,7 +42,7 @@ class BreaksData {
 class AppData : public QObject {
   Q_OBJECT
  public:
-  AppData(QObject *parent, SanePreferences *preferences);
+  AppData(QObject* parent, SanePreferences* preferences);
   std::unique_ptr<BreaksData> breaks;
 
   BreakType breakType();
@@ -84,5 +84,5 @@ class AppData : public QObject {
   int m_secondsPaused = 0;
   PauseReasons m_pauseReasons = {};
 
-  SanePreferences *preferences;
+  SanePreferences* preferences;
 };

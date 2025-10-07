@@ -25,7 +25,7 @@
 class COREIDLE_EXPORT SystemIdleTime : public QObject {
   Q_OBJECT
  public:
-  SystemIdleTime(QObject *parent = nullptr) : QObject(parent) {}
+  SystemIdleTime(QObject* parent = nullptr) : QObject(parent) {}
   virtual void startWatching() = 0;
   virtual void stopWatching() = 0;
   int watchAccuracy() { return m_watchAccuracy; }

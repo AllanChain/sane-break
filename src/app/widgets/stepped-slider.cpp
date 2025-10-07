@@ -14,7 +14,7 @@
 #include <Qt>
 #include <QtContainerFwd>
 
-SteppedSlider::SteppedSlider(QWidget *parent) : QSlider(parent) {
+SteppedSlider::SteppedSlider(QWidget* parent) : QSlider(parent) {
   setTickPosition(QSlider::TicksBelow);
 }
 
@@ -30,7 +30,7 @@ void SteppedSlider::setValueForce(int value) {
   }
 }
 
-void SteppedSlider::mousePressEvent(QMouseEvent *event) {
+void SteppedSlider::mousePressEvent(QMouseEvent* event) {
   if (event->button() == Qt::LeftButton) {
     int value = calculateValueFromPosition(event->pos());
     setValue(value);
@@ -40,7 +40,7 @@ void SteppedSlider::mousePressEvent(QMouseEvent *event) {
   }
 }
 
-void SteppedSlider::mouseMoveEvent(QMouseEvent *event) {
+void SteppedSlider::mouseMoveEvent(QMouseEvent* event) {
   if (event->buttons() & Qt::LeftButton) {
     int value = calculateValueFromPosition(event->pos());
     setValue(value);
@@ -50,7 +50,7 @@ void SteppedSlider::mouseMoveEvent(QMouseEvent *event) {
   }
 }
 
-int SteppedSlider::calculateValueFromPosition(const QPoint &pos) const {
+int SteppedSlider::calculateValueFromPosition(const QPoint& pos) const {
   int min = minimum();
   int max = maximum();
   int step = singleStep();
