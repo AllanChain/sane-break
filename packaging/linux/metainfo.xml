@@ -56,6 +56,16 @@
   </screenshots>
 
   <releases>
+  <release version="0.9.4" date="2025-10-08">
+    <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.9.4</url>
+    <description>
+      <p>Bug fixes</p>
+      <ul>
+        <li>Fix clock update after break ends</li>
+        <li>Update preference button color after theme change</li>
+      </ul>
+    </description>
+  </release>
   <release version="0.9.3" date="2025-09-13">
     <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.9.3</url>
     <description>
