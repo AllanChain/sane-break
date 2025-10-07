@@ -6,3 +6,5 @@ cff843cfc87e302ae05395524b189e222079a143
 ea9f246b55d1f6c922f3c26bdad18315909665c0
 # code style change by changing max line width to 88
 14eff5edad64abc135568e5968f814d80ee56c7d
+# clang-format version update to 21.1.2
+3e638599f6450273cbbd25e628b177088bd9cf77
