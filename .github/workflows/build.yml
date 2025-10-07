@@ -94,7 +94,7 @@ jobs:
         path: build/sane-break-windows.msix
 
     - name: Attestation
-      uses: actions/attest-build-provenance@v2
+      uses: actions/attest-build-provenance@v3
       with:
         subject-path: ./release/*
 
@@ -123,7 +123,7 @@ jobs:
         qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_OSX_ARCHITECTURES=${{ matrix.arch }} ..
         cmake --build . --parallel
 
-    - uses: apple-actions/import-codesign-certs@v3
+    - uses: apple-actions/import-codesign-certs@v5
       id: certificate
       if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags')
       with:
@@ -173,7 +173,7 @@ jobs:
           "build/Sane Break.app"
 
     - name: Attestation
-      uses: actions/attest-build-provenance@v2
+      uses: actions/attest-build-provenance@v3
       with:
         subject-path: ./release/*
 
@@ -226,7 +226,7 @@ jobs:
         mv sane-break.deb ../release/sane-break-${{ matrix.tag }}.deb
 
     - name: Attestation
-      uses: actions/attest-build-provenance@v2
+      uses: actions/attest-build-provenance@v3
       with:
         subject-path: ./release/*
 
@@ -305,7 +305,7 @@ jobs:
         EXTRA_QT_MODULES: waylandcompositor
 
     - name: Attestation
-      uses: actions/attest-build-provenance@v2
+      uses: actions/attest-build-provenance@v3
       with:
         subject-path: ./release/*
 
@@ -344,7 +344,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v5
         with:
           path: release
           merge-multiple: true
