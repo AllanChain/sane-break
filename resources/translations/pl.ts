@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE TS><TS version="2.1" language="pl" sourcelanguage="en_US">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="pl" sourcelanguage="en_US">
 <context>
     <name>AutoStart</name>
     <message>
@@ -22,14 +24,30 @@
         <translation type="unfinished">Żądanie autostartu zostało anulowane</translation>
     </message>
     <message>
-        <location filename="../../src/lib/windows/auto-start.cpp" line="30"/>
+        <location filename="../../src/lib/windows/auto-start.cpp" line="45"/>
+        <location filename="../../src/lib/windows/auto-start.cpp" line="62"/>
+        <source>Disallowed by policy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/lib/windows/auto-start.cpp" line="48"/>
+        <source>Disallowed by user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/lib/windows/auto-start.cpp" line="82"/>
+        <source>Unknown error in MSIX autostart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/lib/windows/auto-start.cpp" line="102"/>
         <source>Permission denied</source>
         <extracomment>Error message when requesting autostart got permission denied</extracomment>
         <translation type="unfinished">Odmowa dostępu</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="44"/>
-        <location filename="../../src/lib/windows/auto-start.cpp" line="33"/>
+        <location filename="../../src/lib/windows/auto-start.cpp" line="105"/>
         <source>Unknown error</source>
         <extracomment>Error message when requesting autostart got unknown error</extracomment>
         <translation type="unfinished">Nieznany błąd</translation>
@@ -157,7 +175,7 @@
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="602"/>
-        <source>After idle for that long during break, Sane Break will keep full screen and there's no way back.</source>
+        <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
         <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
         <translation>Po długiej przerwie, Sane Break będzie trzymać pełny ekran i nie ma sposobu na powrót.</translation>
     </message>
@@ -300,7 +318,7 @@ Wszystkie kolory są w formacie &lt;code&gt;#AARRGGBB&lt;/code&gt;.</translation
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1457"/>
-        <source>Let's say you've configured it to 2 minutes. If the break is shorter than 2 minutes, the
+        <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
         <extracomment>Tooltip for &quot;Auto screen lock&quot; config</extracomment>
@@ -427,7 +445,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="535"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
-&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you're idle again or the timer ends.&lt;/p&gt;</source>
+&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Zachowanie przypomnienia&lt;/h3&gt;
 &lt;p&gt;Sane Break pokazuje małe powiadomienie przez &lt;b&gt;%1&lt;/b&gt; sekund. Jeśli zatrzymasz aktywność w tym czasie lub wybierzesz kontynuację do upływu timera, przejdzie ono do trybu pełnoekranowego. Podczas przerwy Sane Break blokuje tryb pełnoekranowy po &lt;b&gt;%2&lt;/b&gt; sekundach nieaktywności. Jeśli wznowisz aktywność przed zablokowaniem, powiadomienie zmniejszy się do małego okna na chwilę, ale ponownie rozszerzy się do trybu pełnoekranowego, gdy znów będziesz nieaktywny lub upłynie czas.&lt;/p&gt;</translation>
     </message>
@@ -667,7 +685,7 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="82"/>
-        <source>You haven't taken breaks for %1 minutes.</source>
+        <source>You haven&apos;t taken breaks for %1 minutes.</source>
         <translation type="unfinished">Nie brałeś przerw od %1 minut.</translation>
     </message>
     <message numerus="yes">

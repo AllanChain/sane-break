@@ -24,14 +24,30 @@
         <translation>自動啟動請求被拒絕</translation>
     </message>
     <message>
-        <location filename="../../src/lib/windows/auto-start.cpp" line="30"/>
+        <location filename="../../src/lib/windows/auto-start.cpp" line="45"/>
+        <location filename="../../src/lib/windows/auto-start.cpp" line="62"/>
+        <source>Disallowed by policy</source>
+        <translation>被系統策略禁止</translation>
+    </message>
+    <message>
+        <location filename="../../src/lib/windows/auto-start.cpp" line="48"/>
+        <source>Disallowed by user</source>
+        <translation>被用戶設置禁止</translation>
+    </message>
+    <message>
+        <location filename="../../src/lib/windows/auto-start.cpp" line="82"/>
+        <source>Unknown error in MSIX autostart</source>
+        <translation>MSIX 自啟動遇到未知錯誤</translation>
+    </message>
+    <message>
+        <location filename="../../src/lib/windows/auto-start.cpp" line="102"/>
         <source>Permission denied</source>
         <extracomment>Error message when requesting autostart got permission denied</extracomment>
         <translation>權限被拒絕</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="44"/>
-        <location filename="../../src/lib/windows/auto-start.cpp" line="33"/>
+        <location filename="../../src/lib/windows/auto-start.cpp" line="105"/>
         <source>Unknown error</source>
         <extracomment>Error message when requesting autostart got unknown error</extracomment>
         <translation>未知錯誤</translation>
