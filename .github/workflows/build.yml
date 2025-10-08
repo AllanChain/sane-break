@@ -85,7 +85,7 @@ jobs:
         mkdir release
         mv build\Release\sane-break.exe .
         7z a release/${{ matrix.app-name }}.zip sane-break.exe LICENSE
-        mv build\sane-break-windows.exe release\${{ matrix.app-name }}
+        mv build\sane-break-windows.exe release\${{ matrix.app-name }}-installer.exe
 
     - name: Upload MSIX
       uses: actions/upload-artifact@v4
@@ -347,6 +347,7 @@ jobs:
       - uses: actions/download-artifact@v5
         with:
           path: release
+          pattern: sane-break-*
           merge-multiple: true
       - uses: softprops/action-gh-release@v2
         with:
