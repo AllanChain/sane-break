@@ -90,8 +90,8 @@ jobs:
     - name: Upload MSIX
       uses: actions/upload-artifact@v4
       with:
-        name: _${{ matrix.app-name }}
-        path: build/sane-break-windows.msix
+        name: msix_${{ matrix.app-name }}
+        path: build/sane-break-*.msix
 
     - name: Attestation
       uses: actions/attest-build-provenance@v3

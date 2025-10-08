@@ -9,7 +9,7 @@
     Name="AllanChain.SaneBreak"
     Version="@CMAKE_PROJECT_VERSION@.0"
     Publisher="CN=AD5F869F-F2F9-408C-A9D4-205141FDF313@MSIX_DEBUG_PUBLISHER@"
-    ProcessorArchitecture="x64" />
+    ProcessorArchitecture="@MSIX_ARCH@" />
   <Properties>
     <DisplayName>Sane Break</DisplayName>
     <PublisherDisplayName>Allan Chain</PublisherDisplayName>
