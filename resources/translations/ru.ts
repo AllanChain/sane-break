@@ -27,17 +27,17 @@
         <location filename="../../src/lib/windows/auto-start.cpp" line="45"/>
         <location filename="../../src/lib/windows/auto-start.cpp" line="62"/>
         <source>Disallowed by policy</source>
-        <translation type="unfinished"></translation>
+        <translation>Запрещено политикой</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="48"/>
         <source>Disallowed by user</source>
-        <translation type="unfinished"></translation>
+        <translation>Запрещено пользователем</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="82"/>
         <source>Unknown error in MSIX autostart</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестная ошибка при запуске MSIX</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="102"/>
@@ -71,7 +71,7 @@
     <message>
         <location filename="../../src/app/break-window.cpp" line="126"/>
         <source>Break will end at: %1</source>
-        <translation>Перерыв закончится в:% 1</translation>
+        <translation>Перерыв закончится в: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/break-window.cpp" line="128"/>
@@ -116,13 +116,13 @@
         <location filename="../../src/app/pref-window.ui" line="1304"/>
         <location filename="../../src/app/pref-window.ui" line="1342"/>
         <source>Bell before breaks</source>
-        <translation type="unfinished">Звонок перед перерывами</translation>
+        <translation>Сигнал перед перерывами</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1273"/>
         <location filename="../../src/app/pref-window.ui" line="1370"/>
         <source>Bell after breaks</source>
-        <translation type="unfinished">Звонок после перерывов</translation>
+        <translation>Сигнал после перерывов</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="592"/>
@@ -171,18 +171,18 @@
     <message>
         <location filename="../../src/app/pref-window.ui" line="595"/>
         <source>Flash break prompt for</source>
-        <translation type="unfinished">Вспышка напоминания о перерыве на</translation>
+        <translation>Мигать напоминанием о перерыве</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="602"/>
         <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
         <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
-        <translation type="unfinished">После указанного периода бездействия во время перерыва, Sane Break будет удерживать полноэкранный режим, и вернуться назад будет невозможно.</translation>
+        <translation>После указанного периода бездействия во время перерыва, Sane Break будет удерживать полноэкранный режим, и прервать его будет невозможно.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="605"/>
         <source>Confirm break after</source>
-        <translation type="unfinished">Подтвердить перерыв после</translation>
+        <translation>Начать перерыв спустя</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="676"/>
@@ -197,7 +197,7 @@
     <message>
         <location filename="../../src/app/pref-window.ui" line="709"/>
         <source>Flash speed</source>
-        <translation type="unfinished">Скорость вспышки</translation>
+        <translation>Частота миганий</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="764"/>
@@ -235,7 +235,9 @@
         <source>&lt;h3&gt;Components to Show&lt;/h3&gt;
 
 &lt;p&gt;User interface components to show in the prompt and full-screen window.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h3&gt;Показывать компоненты&lt;/h3&gt;
+
+&lt;p&gt;Компоненты интерфейса для показа в запросе и на полном экране.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="831"/>
@@ -247,7 +249,7 @@
         <location filename="../../src/app/pref-window.ui" line="852"/>
         <location filename="../../src/app/pref-window.ui" line="898"/>
         <source>Countdown timer</source>
-        <translation>Время отсчета</translation>
+        <translation>Таймер отсчета</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="824"/>
@@ -307,7 +309,7 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1191"/>
         <source>Long pause threshold</source>
-        <translation type="unfinished">Порог длительной паузы</translation>
+        <translation>Порог длинной паузы</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1245"/>
@@ -320,7 +322,7 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
         <extracomment>Tooltip for &quot;Auto screen lock&quot; config</extracomment>
-        <translation type="unfinished">Предположим, вы настроили это на 2 минуты. Если перерыв короче 2 минут, экран заблокируется через 2 минуты после начала перерыва при условии отсутствия активности после перерыва. Если перерыв дольше 2 минут, экран будет заблокирован независимо от этого.</translation>
+        <translation>Предположим, вы настроили это на 2 минуты. Если перерыв короче 2 минут, экран заблокируется через 2 минуты после начала перерыва, при условии отсутствия активности после перерыва. Если перерыв дольше 2 минут, экран будет заблокирован независимо от этого.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1462"/>
@@ -345,7 +347,7 @@ v%1
 &lt;p&gt;Remind breaks without mindless skips. &lt;/p&gt;
 &lt;p&gt;2024-2025, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break developers&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
 &lt;/p&gt;</source>
-        <translation type="unfinished">&lt;div&gt;
+        <translation>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
 &lt;/div&gt;
@@ -357,23 +359,23 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="318"/>
         <source>Duration of small breaks (in seconds)</source>
         <extracomment>Tooltip for &quot;Break length&quot; config (small break)</extracomment>
-        <translation type="unfinished">Продолжительность коротких перерывов (в секундах)</translation>
+        <translation>Продолжительность коротких перерывов (в секундах)</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="482"/>
         <source>Duration of big breaks (in seconds)</source>
         <extracomment>Tooltip for &quot;Break length&quot; config (big break)</extracomment>
-        <translation type="unfinished">Продолжительность длинных перерывов (в секундах)</translation>
+        <translation>Продолжительность длинных перерывов (в секундах)</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="519"/>
         <source>Postpone minutes</source>
-        <translation type="unfinished">Отложить на %n минут</translation>
+        <translation>Отложить на %n минут</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="694"/>
         <source>&lt;h3&gt;Prompt Appearance&lt;/h3&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;Внешний вид напоминания&lt;/h3&gt;</translation>
+        <translation>&lt;h3&gt;Внешний вид напоминания&lt;/h3&gt;</translation>
     </message>
     <message>
         <source>Off</source>
@@ -399,7 +401,7 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="1270"/>
         <location filename="../../src/app/pref-window.ui" line="1301"/>
         <source>Try restart Sane Break if no sound</source>
-        <translation type="unfinished">Попробуйте перезапустить Sane Break, если нет звука</translation>
+        <translation>Попробуйте перезапустить Sane Break, если нет звука</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1287"/>
@@ -484,12 +486,12 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1014"/>
         <source>&lt;p&gt;To preview break windows, save all changes first. The preview begins with a 2-second flashing prompt, followed by a 4-second full-screen break. A small break window will appear first, then a big break window.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Чтобы просмотреть окна прерывания, сначала сохраните все изменения. Предварительный просмотр начинается с 2-секундного мигающего приглашения, за которым следует 4-секундный полноэкранный перерыв. Сначала появится маленькое окно перерыва, затем большое окно перерыва.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Чтобы просмотреть окна перерыва, сначала сохраните все изменения. Предварительный просмотр начинается с 2-секундного мигающего приглашения, за которым следует 4-секундный полноэкранный перерыв. Сначала появится окно короткого перерыва, затем окно большого перерыва.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1024"/>
         <source>Preview Break Windows</source>
-        <translation>Просмотр окон перерыва</translation>
+        <translation>Предпросмотр окон перерыва</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1109"/>
@@ -539,7 +541,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1632"/>
         <source>Help Us Translate!</source>
-        <translation type="unfinished"></translation>
+        <translation>Помогите нам с переводом!</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1665"/>
@@ -674,7 +676,7 @@ v%1
     <message>
         <location filename="../../src/app/main.cpp" line="55"/>
         <source>Another instance of Sane Break is running.</source>
-        <translation>Запущен ещё один экземпляр Sane Break.</translation>
+        <translation>Запущен другой экземпляр Sane Break.</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="56"/>
@@ -782,12 +784,12 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="94"/>
         <source>big break</source>
-        <translation>большой перерыв</translation>
+        <translation>длинный перерыв</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="94"/>
         <source>small break</source>
-        <translation>небольшой перерыв</translation>
+        <translation>короткий перерыв</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="74"/>
