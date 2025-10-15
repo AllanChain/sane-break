@@ -10,15 +10,20 @@
         <translation>無法獲取 Flatpak 回覆</translation>
     </message>
     <message>
-        <location filename="../../src/lib/linux/auto-start.cpp" line="74"/>
-        <location filename="../../src/lib/linux/auto-start.cpp" line="84"/>
-        <location filename="../../src/lib/linux/auto-start.cpp" line="90"/>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="63"/>
+        <source>Failed to read desktop entry packaged with app</source>
+        <translation>無法讀取應用自帶的自啟動文件</translation>
+    </message>
+    <message>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="77"/>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="87"/>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="93"/>
         <source>Autostart desktop entry not writable</source>
         <extracomment>Error message when failed to write Linux desktop entry for autostart</extracomment>
         <translation>自動啟動文件無法被寫入</translation>
     </message>
     <message>
-        <location filename="../../src/lib/linux/auto-start.cpp" line="108"/>
+        <location filename="../../src/lib/linux/auto-start.cpp" line="111"/>
         <source>The request to autostart was cancelled</source>
         <extracomment>Error message when requesting autostart in Flatpak got cancelled by user</extracomment>
         <translation>自動啟動請求被拒絕</translation>

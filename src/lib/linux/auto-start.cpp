@@ -59,7 +59,10 @@ void AutoStart::setEnabled(bool enabled) {
   QString autostartPath = configPath + "/autostart";
   QString desktopPath = autostartPath + "/sane-break.desktop";
   QFile desktopFile(":/sane-break.desktop");
-  desktopFile.open(QIODevice::ReadOnly | QIODevice::Text);
+  if (!desktopFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    emit operationResult(false, tr("Failed to read desktop entry packaged with app"));
+    return;
+  }
   QString contents = desktopFile.readAll() +
                      "X-GNOME-Autostart-enabled=true\n"
                      "X-GNOME-Autostart-Delay=2\n"

@@ -505,9 +505,10 @@ void PreferenceWindow::openNotice() {
     openingTextWindow->close();
   }
   QFile noticeFile(":/NOTICE.md");
-  noticeFile.open(QIODevice::ReadOnly | QIODevice::Text);
-  openingTextWindow = new TextWindow(noticeFile.readAll());
-  openingTextWindow->show();
+  if (noticeFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    openingTextWindow = new TextWindow(noticeFile.readAll());
+    openingTextWindow->show();
+  }
 }
 
 void PreferenceWindow::openSourceCode() {
