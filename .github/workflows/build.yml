@@ -301,7 +301,7 @@ jobs:
         mkdir ../release
         cp Sane_Break-x86_64.AppImage ../release/sane-break.AppImage
       env:
-        EXTRA_PLATFORM_PLUGINS: libqwayland-egl.so;libqwayland-generic.so
+        EXTRA_PLATFORM_PLUGINS: libqwayland.so
         EXTRA_QT_MODULES: waylandcompositor
 
     - name: Attestation
