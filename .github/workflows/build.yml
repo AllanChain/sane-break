@@ -88,7 +88,7 @@ jobs:
         mv build\sane-break-windows.exe release\${{ matrix.app-name }}-installer.exe
 
     - name: Upload MSIX
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: msix_${{ matrix.app-name }}
         path: build/sane-break-*.msix
@@ -99,7 +99,7 @@ jobs:
         subject-path: ./release/*
 
     - name: Create Artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
          name: ${{ matrix.app-name }}
          path: ./release/*
@@ -178,7 +178,7 @@ jobs:
         subject-path: ./release/*
 
     - name: Create Artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
          name: "sane-break-macos-${{ matrix.arch }}"
          path: ./release/*
@@ -231,7 +231,7 @@ jobs:
         subject-path: ./release/*
 
     - name: Create Artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
          name: "sane-break-${{ matrix.tag }}"
          path: ./release/*
@@ -310,7 +310,7 @@ jobs:
         subject-path: ./release/*
 
     - name: Create Artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
          name: "sane-break-appimage"
          path: ./release/*
@@ -330,7 +330,7 @@ jobs:
       run: zip -j -r sane-break-gnome-extension packaging/linux/gnome/sane-break@allanchain.github.io
 
     - name: Create Artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
          name: "sane-break-gnome-extension"
          path: ./sane-break-gnome-extension.zip
