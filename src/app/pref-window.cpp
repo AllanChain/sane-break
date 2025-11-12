@@ -459,7 +459,15 @@ void PreferenceWindow::closeEvent(QCloseEvent* event) {
   QMainWindow::closeEvent(event);
 }
 
-void PreferenceWindow::showEvent(QShowEvent*) { controllers->load(); }
+void PreferenceWindow::showEvent(QShowEvent*) {
+  controllers->load();
+  forceThemeUpdate();
+}
+
+void PreferenceWindow::changeEvent(QEvent* event) {
+  if (event->type() == QEvent::ThemeChange) forceThemeUpdate();
+  QMainWindow::changeEvent(event);
+}
 
 void PreferenceWindow::setTab(int tabNum, int totalTabCount) {
   if (!confirmLeave()) {
@@ -540,16 +548,13 @@ void PreferenceWindow::openBreakWindowPreview() {
   });
 }
 
-void PreferenceWindow::changeEvent(QEvent* event) {
-  if (event->type() == QEvent::ThemeChange) {
-    // Some buttons does not update their color automatically.
-    // We perform the update manually here.
-    auto buttons = findChildren<QPushButton*>();
-    for (auto button : buttons) {
-      button->style()->unpolish(button);
-      button->style()->polish(button);
-      button->update();
-    }
+void PreferenceWindow::forceThemeUpdate() {
+  // Some buttons does not update their color automatically.
+  // We perform the update manually here.
+  auto buttons = findChildren<QPushButton*>();
+  for (auto button : buttons) {
+    button->style()->unpolish(button);
+    button->style()->polish(button);
+    button->update();
   }
-  QMainWindow::changeEvent(event);
 }

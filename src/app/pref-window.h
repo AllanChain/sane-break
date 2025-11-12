@@ -242,6 +242,7 @@ class PreferenceWindow : public QMainWindow {
 
   bool confirmLeave();
   void setTab(int tabNum, int totalTabCount);
+  void forceThemeUpdate();
   void openNotice();
   void openSourceCode();
   void openWeblate();
