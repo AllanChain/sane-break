@@ -215,7 +215,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DSANE_MAKE_DEB=1 ..
+        cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_INSTALL_PREFIX=/usr -DSANE_MAKE_DEB=1 ..
         cmake --build . --parallel
 
     - name: Packing
