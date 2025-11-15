@@ -30,6 +30,10 @@
 #include "lib/system-monitor.h"
 #include "lib/timer.h"
 
+#if (defined(Q_OS_LINUX) or defined(Q_OS_MACOS))
+#include "app/signal-handler.h"
+#endif
+
 SaneBreakApp::SaneBreakApp(const AppDependencies& deps, QObject* parent)
     : AbstractApp(deps, parent) {
   prefWindow = new PreferenceWindow(preferences);
@@ -49,7 +53,14 @@ SaneBreakApp::SaneBreakApp(const AppDependencies& deps, QObject* parent)
   connect(tray, &StatusTrayWindow::quitRequested, this, &SaneBreakApp::confirmQuit);
   connect(preferences->language, &SettingWithSignal::changed, this,
           [this]() { LanguageSelect::setLanguage(preferences->language->get()); });
+
   connect(this, &SaneBreakApp::quit, qApp, &QApplication::quit, Qt::QueuedConnection);
+  connect(qApp, &QCoreApplication::aboutToQuit, this, &SaneBreakApp::onExit);
+#if (defined(Q_OS_LINUX) or defined(Q_OS_MACOS))
+  auto signalHandler = new SignalHandler(this);
+  signalHandler->setup();
+  connect(signalHandler, &SignalHandler::exitRequested, this, &QCoreApplication::quit);
+#endif
 }
 
 SaneBreakApp* SaneBreakApp::create(SanePreferences* preferences, QObject* parent) {

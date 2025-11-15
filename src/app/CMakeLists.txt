@@ -39,6 +39,7 @@ include(cmake/translation.cmake)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   add_subdirectory(layer-shell)
+  target_sources(sane-break-app PRIVATE signal-handler.h signal-handler.cpp)
   add_subdirectory(${CMAKE_SOURCE_DIR}/packaging/linux ${CMAKE_BINARY_DIR}/packaging)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   add_subdirectory(${CMAKE_SOURCE_DIR}/packaging/windows ${CMAKE_BINARY_DIR}/packaging)
@@ -46,6 +47,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     sane-break-app PRIVATE "${CMAKE_SOURCE_DIR}/packaging/windows/resources.rc"
   )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+  target_sources(sane-break-app PRIVATE signal-handler.h signal-handler.cpp)
   set(MACOSX_BUNDLE_ICON_FILE icon.icns)
   set(SANE_BREAK_ICON ${CMAKE_SOURCE_DIR}/packaging/macos/icon.icns)
   set_source_files_properties(
