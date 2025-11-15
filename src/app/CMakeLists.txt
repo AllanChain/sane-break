@@ -39,8 +39,12 @@ include(cmake/translation.cmake)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   add_subdirectory(layer-shell)
+  target_sources(sane-break-app PRIVATE unix/signal-handler.h unix/signal-handler.cpp)
   add_subdirectory(${CMAKE_SOURCE_DIR}/packaging/linux ${CMAKE_BINARY_DIR}/packaging)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+  target_sources(
+    sane-break-app PRIVATE windows/signal-handler.h windows/signal-handler.cpp
+  )
   add_subdirectory(${CMAKE_SOURCE_DIR}/packaging/windows ${CMAKE_BINARY_DIR}/packaging)
   target_sources(
     sane-break-app PRIVATE "${CMAKE_SOURCE_DIR}/packaging/windows/resources.rc"
@@ -48,7 +52,10 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
   set(SANE_BREAK_ICON_LEGACY ${CMAKE_SOURCE_DIR}/packaging/macos/icon.icns)
   set(SANE_BREAK_ICON_TAHOE ${CMAKE_SOURCE_DIR}/packaging/macos/Assets.car)
-  target_sources(sane-break-app PRIVATE ${SANE_BREAK_ICON} ${SANE_BREAK_ICON_TAHOE})
+  target_sources(
+    sane-break-app PRIVATE ${SANE_BREAK_ICON} ${SANE_BREAK_ICON_TAHOE}
+                           unix/signal-handler.h unix/signal-handler.cpp
+  )
   set_source_files_properties(
     ${SANE_BREAK_ICON_LEGACY} ${SANE_BREAK_ICON_TAHOE}
     PROPERTIES MACOSX_PACKAGE_LOCATION "Resources"
