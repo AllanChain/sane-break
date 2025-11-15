@@ -9,6 +9,7 @@
 
 #include "core/app-states.h"
 #include "core/break-windows.h"
+#include "core/db.h"
 #include "core/flags.h"
 #include "core/idle-time.h"
 #include "core/preferences.h"
@@ -17,6 +18,7 @@
 
 struct AppDependencies {
   SanePreferences* preferences = nullptr;
+  BreakDatabase* db = nullptr;
   AbstractTimer* countDownTimer = nullptr;
   AbstractTimer* screenLockTimer = nullptr;
   SystemIdleTime* idleTimer = nullptr;
@@ -57,6 +59,7 @@ class AbstractApp : public AppContext {
 
   void onBatterySettingChange();
   void onSleepEnd(int sleptSeconds);
+  void onExit();
   void updateTray();
 
   virtual void doLockScreen() = 0;

@@ -19,9 +19,12 @@ void AppContext::transitionTo(std::unique_ptr<AppState> state) {
   m_currentState->enter(this);
 }
 
+void AppContext::exitCurrentState() {
+  if (m_currentState) m_currentState->exit(this);
+}
+
 void AppStateBreak::transitionTo(AppContext* app, std::unique_ptr<BreakPhase> phase) {
-  // Break phases does not have exit handlers. It will makes things complicated when
-  // transiting to other AppState.
+  if (m_currentPhase) m_currentPhase->exit(app, this);
   m_currentPhase = std::move(phase);
   m_currentPhase->enter(app, this);
 }
@@ -42,10 +45,12 @@ void AppContext::onResumeRequest(PauseReasons reasons) {
 }
 
 void AppStateNormal::enter(AppContext* app) {
+  app->db->logEvent("normal::start");
   // Set up idle timer to detect idle pauses. Low accuracy is fine
   app->idleTimer->setWatchAccuracy(5000);
   app->idleTimer->setMinIdleTime(app->preferences->pauseOnIdleFor->get() * 1000);
 }
+void AppStateNormal::exit(AppContext* app) { app->db->logEvent("normal::end"); }
 void AppStateNormal::tick(AppContext* app) {
   // TODO: Check
   app->data->tickSecondsSinceLastBreak();
@@ -80,12 +85,14 @@ void AppStateNormal::onMenuAction(AppContext* app, MenuAction action) {
 // - For normal state to paused: low accuracy because the pause may be long
 // - For break state to paused: high accuracy because we want it to be instant
 // Moreover, setting idle interval will reset the event-based watchers.
+void AppStatePaused::enter(AppContext* app) { app->db->logEvent("pause::start"); }
 
 /* To avoid immediate breaks after break resume, we consider the user have already
  * taken the break if there shall be breaks during the pause. Of course, if the user
  * have configured `resetAfterPause`, we just reset it.
  */
 void AppStatePaused::exit(AppContext* app) {
+  app->db->logEvent("pause::end");
   int nextBreakDuration =
       (app->data->breakType() == BreakType::Big ? app->preferences->bigFor->get()
                                                 : app->preferences->smallFor->get());
@@ -130,6 +137,9 @@ void AppStatePaused::onMenuAction(AppContext* app, MenuAction action) {
 }
 
 void AppStateBreak::enter(AppContext* app) {
+  app->db->logEvent(
+      "break::start",
+      {{"type", app->data->breakType() == BreakType::Big ? "big" : "small"}});
   // Finer accuracy for idle detection
   app->idleTimer->setWatchAccuracy(500);
   app->idleTimer->setMinIdleTime(2000);
@@ -145,7 +155,12 @@ void AppStateBreak::enter(AppContext* app) {
     this->transitionTo(app, std::make_unique<BreakPhasePrompt>());
   }
 }
-void AppStateBreak::exit(AppContext* app) { app->breakWindows->destroy(); }
+void AppStateBreak::exit(AppContext* app) {
+  if (m_currentPhase) m_currentPhase->exit(app, this);
+  app->db->logEvent("break::end",
+                    {{"normal-exit", (app->data->breaks->remainingSeconds() <= 0)}});
+  app->breakWindows->destroy();
+}
 void AppStateBreak::tick(AppContext* app) { m_currentPhase->tick(app, this); }
 void AppStateBreak::onIdleStart(AppContext* app) {
   m_currentPhase->onIdleStart(app, this);
@@ -171,11 +186,13 @@ void AppStateBreak::onMenuAction(AppContext* app, MenuAction action) {
     case (MenuAction::SmallBreakInstead):
       this->exit(app);
       app->data->makeNextBreakLastSmallBeforeBig();
+      app->db->logEvent("break::small-instead");
       this->enter(app);
       break;
     case (MenuAction::ExitForceBreak):
       initBreakData(app);
       app->data->breaks->recordForceBreakExit();
+      app->db->logEvent("break::exit-force");
       this->transitionTo(app, std::make_unique<BreakPhasePrompt>());
       break;
     default:
@@ -184,12 +201,16 @@ void AppStateBreak::onMenuAction(AppContext* app, MenuAction action) {
 }
 
 void BreakPhasePrompt::enter(AppContext* app, AppStateBreak*) {
+  app->db->logEvent("break::flash::start");
   app->breakWindows->showFlashPrompt();
   app->breakWindows->showButtons(AbstractBreakWindows::Button::ExitForceBreak |
                                      AbstractBreakWindows::Button::LockScreen,
                                  false);
   // screenLockTimer should only be active in BreakPhaseFullScreen and AppStatePaused
   app->screenLockTimer->stop();
+}
+void BreakPhasePrompt::exit(AppContext* app, AppStateBreak*) {
+  app->db->logEvent("break::flash::end");
 }
 void BreakPhasePrompt::tick(AppContext* app, AppStateBreak* breakState) {
   app->data->breaks->tickSecondsToForceBreak();

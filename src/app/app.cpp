@@ -11,6 +11,7 @@
 #include <QDateTime>
 #include <QMessageBox>
 #include <QObject>
+#include <QSqlDatabase>
 #include <QString>
 #include <QStyleHints>
 #include <QTimer>
@@ -22,6 +23,7 @@
 #include "app/tray.h"
 #include "app/widgets/language-select.h"
 #include "core/app.h"
+#include "core/db.h"
 #include "core/preferences.h"
 #include "idle/factory.h"
 #include "lib/screen-lock.h"
@@ -53,6 +55,7 @@ SaneBreakApp::SaneBreakApp(const AppDependencies& deps, QObject* parent)
 SaneBreakApp* SaneBreakApp::create(SanePreferences* preferences, QObject* parent) {
   AppDependencies deps = {
       .preferences = preferences,
+      .db = new BreakDatabase(QSqlDatabase::addDatabase("QSQLITE")),
       .countDownTimer = new Timer(),
       .screenLockTimer = new Timer(),
       .idleTimer = createIdleTimer(parent),
