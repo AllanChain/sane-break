@@ -10,6 +10,7 @@
 
 #include "core/app-data.h"
 #include "core/break-windows.h"
+#include "core/db.h"
 #include "core/flags.h"
 #include "core/idle-time.h"
 #include "core/preferences.h"
@@ -50,8 +51,10 @@ class AppContext : public QObject {
   SystemIdleTime* idleTimer;
   AbstractTimer* screenLockTimer;
   AbstractBreakWindows* breakWindows;
+  BreakDatabase* db;
 
   void transitionTo(std::unique_ptr<AppState> state);
+  void exitCurrentState();
 
  protected:
   std::unique_ptr<AppState> m_currentState;
@@ -68,6 +71,7 @@ class AppStateNormal : public AppState {
  public:
   StateID getID() override { return Normal; };
   void enter(AppContext* app) override;
+  void exit(AppContext* app) override;
   void tick(AppContext* app) override;
   void onIdleStart(AppContext* app) override;
   void onMenuAction(AppContext* app, MenuAction action) override;
@@ -77,6 +81,7 @@ class AppStateNormal : public AppState {
 class AppStatePaused : public AppState {
  public:
   StateID getID() override { return Paused; };
+  void enter(AppContext* app) override;
   void exit(AppContext* app) override;
   void tick(AppContext* app) override;
   void onIdleStart(AppContext* app) override;
@@ -109,8 +114,7 @@ class AppStateBreak : public AppState {
 class BreakPhase {
  public:
   virtual void enter(AppContext*, AppStateBreak*) {};
-  // Break phases should not have exit handlers. It will makes things complicated when
-  // transiting to other AppState.
+  virtual void exit(AppContext*, AppStateBreak*) {};
   virtual void tick(AppContext*, AppStateBreak*) {};
   virtual void onIdleStart(AppContext*, AppStateBreak*) {};
   virtual void onIdleEnd(AppContext*, AppStateBreak*) {};
@@ -120,6 +124,7 @@ class BreakPhase {
 class BreakPhasePrompt : public BreakPhase {
  public:
   void enter(AppContext* app, AppStateBreak* breakState) override;
+  void exit(AppContext* app, AppStateBreak* breakState) override;
   void tick(AppContext* app, AppStateBreak* breakState) override;
   void onIdleStart(AppContext* app, AppStateBreak* breakState) override;
 };

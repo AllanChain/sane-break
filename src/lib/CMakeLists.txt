@@ -18,7 +18,7 @@ target_include_directories(sane-lib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 find_package(
   Qt6
-  COMPONENTS Widgets
+  COMPONENTS Widgets Sql
   REQUIRED
 )
 target_link_libraries(sane-lib PUBLIC Qt6::Widgets sane-core sane-idle)

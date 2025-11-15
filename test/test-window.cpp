@@ -19,8 +19,16 @@ using testing::NiceMock;
 
 class TestWindow : public QObject {
   Q_OBJECT
+ private:
+  QObject* depsParent;
+  DummyAppDependencies deps;
  private slots:
-  void init() { QTest::failOnWarning(); }
+  void init() {
+    QTest::failOnWarning();
+    depsParent = new QObject();
+    deps = DummyApp::makeDeps(depsParent);
+  }
+  void cleanup() { depsParent->deleteLater(); }
   // Data for `tick_with_force_break`
   void tick_with_force_break_data() {
     auto preferences = tempPreferences();
@@ -38,7 +46,6 @@ class TestWindow : public QObject {
    * We test this for both small and big breaks.
    */
   void tick_with_force_break() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -74,7 +81,6 @@ class TestWindow : public QObject {
   // Similar to `tick_with_force_break`, but this time we trigger the idle event so that
   // the window grows to full-screen and count down to zero.
   void tick_without_force_break() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -103,7 +109,6 @@ class TestWindow : public QObject {
    * test if the second break is successfully shown.
    */
   void idle_timer_is_reset() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -139,7 +144,6 @@ class TestWindow : public QObject {
   }
   // Similar to `tick_without_force_break`, but there's user activity after maximizing
   void activity_in_break() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -190,7 +194,6 @@ class TestWindow : public QObject {
    * breaks.
    */
   void confirm_break() {
-    auto deps = DummyApp::makeDeps();
     deps.preferences->confirmAfter->set(10);
     NiceMock<DummyApp> app(deps);
     app.start();
@@ -222,7 +225,6 @@ class TestWindow : public QObject {
    * menu.
    */
   void exit_force_break() {
-    auto deps = DummyApp::makeDeps();
     deps.preferences->confirmAfter->set(10);
     NiceMock<DummyApp> app(deps);
     app.start();

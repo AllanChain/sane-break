@@ -18,10 +18,17 @@ using testing::Mock, testing::Return, testing::NiceMock, testing::_;
 
 class TestApp : public QObject {
   Q_OBJECT
+ private:
+  QObject* depsParent;
+  DummyAppDependencies deps;
  private slots:
-  void init() { QTest::failOnWarning(); }
+  void init() {
+    QTest::failOnWarning();
+    depsParent = new QObject();
+    deps = DummyApp::makeDeps(depsParent);
+  }
+  void cleanup() { depsParent->deleteLater(); }
   void app_initial_state() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -31,7 +38,6 @@ class TestApp : public QObject {
              deps.preferences->bigAfter->get() - 1);
   }
   void tick() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -43,7 +49,6 @@ class TestApp : public QObject {
   }
   // Simple test if the break window shows after the countdown ends.
   void show_first_break() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -76,7 +81,6 @@ class TestApp : public QObject {
    * force break mechanism.
    */
   void break_tick() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -96,7 +100,6 @@ class TestApp : public QObject {
   }
   // Advance a full cycle of breaks and see if small and big breaks are shown correctly
   void show_big_break() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -117,7 +120,6 @@ class TestApp : public QObject {
    * is ticking.
    */
   void countdown_pause_if_idle_after_break() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
     app.advance(app.trayData.secondsToNextBreak);
@@ -140,7 +142,6 @@ class TestApp : public QObject {
   }
   // See `countdown_pause_if_idle_after_break`
   void countdown_resume_if_not_idle_after_break() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
     app.advance(app.trayData.secondsToNextBreak);
@@ -156,7 +157,6 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
   }
   void lock_screen_timer_running() {
-    auto deps = DummyApp::makeDeps();
     int autoScreenLockSeconds = 20;
     deps.preferences->autoScreenLock->set(autoScreenLockSeconds);
 
@@ -180,7 +180,6 @@ class TestApp : public QObject {
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
   void lock_screen_timer_not_run_if_not_configured() {
-    auto deps = DummyApp::makeDeps();
     int autoScreenLockSeconds = 0;
     deps.preferences->autoScreenLock->set(autoScreenLockSeconds);
 
@@ -196,7 +195,6 @@ class TestApp : public QObject {
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
   void lock_screen_timer_not_running_if_not_idle() {
-    auto deps = DummyApp::makeDeps();
     int autoScreenLockSeconds = 20;
     deps.preferences->autoScreenLock->set(autoScreenLockSeconds);
 
@@ -218,7 +216,6 @@ class TestApp : public QObject {
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
   void postpone_time() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -229,7 +226,6 @@ class TestApp : public QObject {
   }
   // During the pause, the count down should not change, and state should be reflected
   void pause_break_on_idle() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -253,7 +249,6 @@ class TestApp : public QObject {
     QTest::newRow("program") << PauseReason::AppOpen;
   };
   void pause_break_on_request() {
-    auto deps = DummyApp::makeDeps();
     deps.preferences->pauseOnBattery->set(true);
     NiceMock<DummyApp> app(deps);
     app.start();
@@ -274,7 +269,6 @@ class TestApp : public QObject {
   }
   // If paused for a long time, we consider the user has taken a break and reset timer.
   void reset_countdown_after_pause() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -302,7 +296,6 @@ class TestApp : public QObject {
   }
   // If paused for even longer, we also reset the break cycle
   void reset_cycle_after_pause() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -330,7 +323,6 @@ class TestApp : public QObject {
    * ended and starts the next cycle.
    */
   void avoid_immediate_break_after_pause() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -349,7 +341,6 @@ class TestApp : public QObject {
    * reset the break cycle.
    */
   void do_not_avoid_immediate_break_after_pause_too_short() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -367,7 +358,6 @@ class TestApp : public QObject {
    * break windows.
    */
   void take_small_break_instead() {
-    auto deps = DummyApp::makeDeps();
     deps.preferences->pauseOnBattery->set(true);
     NiceMock<DummyApp> app(deps);
     app.start();
@@ -393,7 +383,6 @@ class TestApp : public QObject {
   }
   // User should be able to postpone the break while its happening
   void postpone_while_break() {
-    auto deps = DummyApp::makeDeps();
     deps.preferences->pauseOnBattery->set(true);
     NiceMock<DummyApp> app(deps);
     app.start();
@@ -411,7 +400,6 @@ class TestApp : public QObject {
   }
   // We should end the break if the pause happens during the break
   void pause_while_break() {
-    auto deps = DummyApp::makeDeps();
     deps.preferences->pauseOnBattery->set(true);
     NiceMock<DummyApp> app(deps);
     app.start();
@@ -426,7 +414,6 @@ class TestApp : public QObject {
   }
   // Ignore pauses caused by idles during the break
   void idle_while_break() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -441,7 +428,6 @@ class TestApp : public QObject {
   // If the system went asleep during the break, after awaken, the break windows should
   // be closed.
   void sleep_end_while_break() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -454,7 +440,6 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
   }
   void short_sleep_does_nothing() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -464,7 +449,6 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get() - 1);
   }
   void long_sleep_resets_cycle() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -479,7 +463,6 @@ class TestApp : public QObject {
   }
   // Sleep end should not change the pause state
   void sleep_end_while_idle_paused() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -491,7 +474,6 @@ class TestApp : public QObject {
   }
   // Multiple pause reasons should work
   void more_than_one_pause_reasons() {
-    auto deps = DummyApp::makeDeps();
     deps.preferences->pauseOnBattery->set(true);
     NiceMock<DummyApp> app(deps);
     app.start();
@@ -532,7 +514,6 @@ class TestApp : public QObject {
    * postpone), we show this confirm window.
    */
   void confirm_postpone_if_long_time_since_last_break() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -558,7 +539,6 @@ class TestApp : public QObject {
    * should also reset time since last break when resetting the break countdown.
    */
   void no_confirm_postpone_if_countdown_reset() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -582,7 +562,6 @@ class TestApp : public QObject {
    * countdown in this case.
    */
   void pause_should_not_affect_postpone() {
-    auto deps = DummyApp::makeDeps();
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -598,5 +577,5 @@ class TestApp : public QObject {
   }
 };
 
-QTEST_APPLESS_MAIN(TestApp)
+QTEST_MAIN(TestApp)
 #include "test-app.moc"
