@@ -8,6 +8,7 @@
 
 #include <QObject>
 #include <QSettings>
+#include <QSqlDatabase>
 #include <QTemporaryFile>
 #include <QTest>
 #include <memory>
@@ -15,6 +16,7 @@
 #include "core/app-states.h"
 #include "core/app.h"
 #include "core/break-windows.h"
+#include "core/db.h"
 #include "core/flags.h"
 #include "core/idle-time.h"
 #include "core/preferences.h"
@@ -74,6 +76,7 @@ class DummySystemMonitor : public AbstractSystemMonitor {
 
 struct DummyAppDependencies {
   SanePreferences* preferences = nullptr;
+  BreakDatabase* db = nullptr;
   AbstractTimer* countDownTimer = nullptr;
   AbstractTimer* screenLockTimer = nullptr;
   DummyIdleTime* idleTimer = nullptr;
@@ -84,9 +87,10 @@ class DummyApp : public AbstractApp {
   Q_OBJECT
  public:
   DummyApp(const DummyAppDependencies& deps, QObject* parent = nullptr)
-      : AbstractApp({deps.preferences, deps.countDownTimer, deps.screenLockTimer,
-                     deps.idleTimer, deps.systemMonitor, deps.breakWindows},
-                    parent) {
+      : AbstractApp(
+            {deps.preferences, deps.db, deps.countDownTimer, deps.screenLockTimer,
+             deps.idleTimer, deps.systemMonitor, deps.breakWindows},
+            parent) {
     connect(this, &DummyApp::trayDataUpdated, this,
             [this](TrayData data) { trayData = data; });
   };
@@ -107,14 +111,20 @@ class DummyApp : public AbstractApp {
     while (!data->breaks->isForceBreak()) tick();
   }
   TrayData trayData;
-  static DummyAppDependencies makeDeps() {
+  static DummyAppDependencies makeDeps(QObject* parent = nullptr) {
+    for (auto& conn : QSqlDatabase::connectionNames()) {
+      QSqlDatabase::removeDatabase(conn);
+    }
+    auto db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(":memory:");
     return {
         .preferences = tempPreferences(),
-        .countDownTimer = new AbstractTimer(),
-        .screenLockTimer = new AbstractTimer(),
-        .idleTimer = new DummyIdleTime(),
-        .systemMonitor = new DummySystemMonitor(),
-        .breakWindows = new testing::NiceMock<DummyBreakWindows>(),
+        .db = new BreakDatabase(db, parent),
+        .countDownTimer = new AbstractTimer(parent),
+        .screenLockTimer = new AbstractTimer(parent),
+        .idleTimer = new DummyIdleTime(parent),
+        .systemMonitor = new DummySystemMonitor(parent),
+        .breakWindows = new testing::NiceMock<DummyBreakWindows>(parent),
     };
   };
 };

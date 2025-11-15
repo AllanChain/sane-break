@@ -1,4 +1,4 @@
-find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia)
+find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia Sql)
 qt_add_executable(
   sane-break-app
   MANUAL_FINALIZATION

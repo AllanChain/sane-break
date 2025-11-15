@@ -4,12 +4,14 @@
 
 #include "core/app.h"
 
+#include <QGuiApplication>
 #include <QObject>
 #include <memory>
 
 #include "break-windows.h"
 #include "core/app-data.h"
 #include "core/app-states.h"
+#include "core/db.h"
 #include "core/flags.h"
 #include "core/idle-time.h"
 #include "core/preferences.h"
@@ -20,6 +22,7 @@ AbstractApp::AbstractApp(const AppDependencies& deps, QObject* parent)
     : AppContext(parent) {
   data = new AppData(this, deps.preferences);
   preferences = deps.preferences;
+  db = deps.db;
 
   idleTimer = deps.idleTimer;
   if (!idleTimer->parent()) idleTimer->setParent(this);
@@ -59,9 +62,11 @@ AbstractApp::AbstractApp(const AppDependencies& deps, QObject* parent)
           &AbstractApp::onBatterySettingChange);
   connect(preferences->smallEvery, &SettingWithSignal::changed, this,
           [this]() { this->data->resetSecondsToNextBreak(); });
+  connect(qApp, &QCoreApplication::aboutToQuit, this, &AbstractApp::onExit);
 };
 
 void AbstractApp::start() {
+  db->logEvent("app::start");
   transitionTo(std::make_unique<AppStateNormal>());
   updateTray();
   idleTimer->startWatching();
@@ -103,6 +108,7 @@ void AbstractApp::postpone(int secs) {
   bool needsConfirm =
       data->secondsSinceLastBreak() > preferences->smallEvery->get() + 60;
   if (needsConfirm && !confirmPostpone(secs)) return;
+  db->logEvent("postpone", {{"seconds", secs}});
   data->addSecondsToNextBreak(secs);
   data->makeNextBreakBig();
   if (m_currentState->getID() == AppState::Break) {
@@ -123,4 +129,9 @@ void AbstractApp::onBatterySettingChange() {
     onResumeRequest(PauseReason::OnBattery);
   else if (m_systemMonitor->isOnBattery())
     onPauseRequest(PauseReason::OnBattery);
+}
+
+void AbstractApp::onExit() {
+  exitCurrentState();
+  db->logEvent("app:exit");
 }

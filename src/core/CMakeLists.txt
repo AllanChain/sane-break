@@ -1,4 +1,4 @@
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Widgets Sql)
 
 # core/idle-time.h is also used by sane-idle, so we are making it separate
 add_library(sane-core-idle STATIC idle-time.h)
@@ -16,9 +16,11 @@ add_library(
   app.h
   break-windows.h
   flags.h
+  db.h
+  db.cpp
   preferences.cpp
   preferences.h
   system-monitor.h
   timer.h
 )
-target_link_libraries(sane-core PUBLIC Qt6::Widgets sane-core-idle)
+target_link_libraries(sane-core PUBLIC Qt6::Widgets Qt6::Sql sane-core-idle)
