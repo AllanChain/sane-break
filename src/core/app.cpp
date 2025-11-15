@@ -62,7 +62,6 @@ AbstractApp::AbstractApp(const AppDependencies& deps, QObject* parent)
           &AbstractApp::onBatterySettingChange);
   connect(preferences->smallEvery, &SettingWithSignal::changed, this,
           [this]() { this->data->resetSecondsToNextBreak(); });
-  connect(qApp, &QCoreApplication::aboutToQuit, this, &AbstractApp::onExit);
 };
 
 void AbstractApp::start() {
