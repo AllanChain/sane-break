@@ -317,7 +317,7 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
         <translation>短时间暂停阈值</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1457"/>
+        <location filename="../../src/app/pref-window.ui" line="1476"/>
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
@@ -327,17 +327,17 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
 定。如果休息持续超过 2 分钟，则屏幕必然会自动锁定。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1462"/>
+        <location filename="../../src/app/pref-window.ui" line="1481"/>
         <source>Automatic screen lock after break start</source>
         <translation>休息开始一段时间后自动锁屏</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1440"/>
+        <location filename="../../src/app/pref-window.ui" line="1427"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;帮我们翻译！&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1579"/>
+        <location filename="../../src/app/pref-window.ui" line="1598"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -507,52 +507,57 @@ v%1
 &lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1408"/>
+        <location filename="../../src/app/pref-window.ui" line="1420"/>
         <source>Configuration file</source>
         <translation>配置文件</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1477"/>
+        <location filename="../../src/app/pref-window.ui" line="1450"/>
+        <source>Database file</source>
+        <translation>数据库文件</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1496"/>
         <source>Launch Sane Break at start up</source>
         <translation>开机自动启动 Sane Break</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1603"/>
+        <location filename="../../src/app/pref-window.ui" line="1622"/>
         <source>Get the Source Code</source>
         <translation>获取源代码</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1632"/>
+        <location filename="../../src/app/pref-window.ui" line="1651"/>
         <source>Help Us Translate!</source>
         <translation>帮助我们翻译！</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1665"/>
+        <location filename="../../src/app/pref-window.ui" line="1684"/>
         <source>Revert to Last Saved</source>
         <translation>恢复上次设置</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1401"/>
+        <location filename="../../src/app/pref-window.ui" line="1398"/>
         <source>Language</source>
         <translation>语言</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1427"/>
+        <location filename="../../src/app/pref-window.ui" line="1437"/>
         <source>Change of language will take effect after app restart.</source>
         <translation>改变语言将在重启应用后生效。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1623"/>
+        <location filename="../../src/app/pref-window.ui" line="1642"/>
         <source>Third-party Libraries Licenses</source>
         <translation>第三方库许可</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1672"/>
+        <location filename="../../src/app/pref-window.ui" line="1691"/>
         <source>Defaults</source>
         <translation>恢复默认</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1695"/>
+        <location filename="../../src/app/pref-window.ui" line="1714"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
@@ -560,71 +565,71 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="401"/>
-        <location filename="../../src/app/pref-window.cpp" line="402"/>
         <location filename="../../src/app/pref-window.cpp" line="403"/>
+        <location filename="../../src/app/pref-window.cpp" line="404"/>
+        <location filename="../../src/app/pref-window.cpp" line="405"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n 分钟</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="167"/>
-        <location filename="../../src/app/pref-window.cpp" line="178"/>
+        <location filename="../../src/app/pref-window.cpp" line="168"/>
+        <location filename="../../src/app/pref-window.cpp" line="179"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>每 %n 分钟</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="400"/>
+        <location filename="../../src/app/pref-window.cpp" line="402"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n 秒</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="399"/>
+        <location filename="../../src/app/pref-window.cpp" line="401"/>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="410"/>
+        <location filename="../../src/app/pref-window.cpp" line="412"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>在中键托盘图标后，立刻开始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="415"/>
+        <location filename="../../src/app/pref-window.cpp" line="417"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>在双击托盘图标后，立刻开始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="493"/>
+        <location filename="../../src/app/pref-window.cpp" line="495"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="494"/>
+        <location filename="../../src/app/pref-window.cpp" line="496"/>
         <source>Discard</source>
         <translation>放弃</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="495"/>
+        <location filename="../../src/app/pref-window.cpp" line="497"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="375"/>
+        <location filename="../../src/app/pref-window.cpp" line="377"/>
         <source>Setting autostart failed</source>
         <translation>设置开机自启失败</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="490"/>
+        <location filename="../../src/app/pref-window.cpp" line="492"/>
         <source>The preferences have been modified.</source>
         <translation>偏好设置已被修改。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="491"/>
+        <location filename="../../src/app/pref-window.cpp" line="493"/>
         <source>Do you want to save your changes?</source>
         <translation>是否保存修改？</translation>
     </message>
@@ -660,43 +665,43 @@ v%1
 <context>
     <name>SaneBreakApp</name>
     <message>
-        <location filename="../../src/app/app.cpp" line="106"/>
+        <location filename="../../src/app/app.cpp" line="125"/>
         <source>Are you sure to quit Sane Break?</source>
         <translation>确定退出 Sane Break？</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="107"/>
+        <location filename="../../src/app/app.cpp" line="126"/>
         <source>You can postpone the breaks instead.</source>
         <translation>你可以推迟休息而非退出。</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="85"/>
-        <location filename="../../src/app/app.cpp" line="109"/>
+        <location filename="../../src/app/app.cpp" line="104"/>
+        <location filename="../../src/app/app.cpp" line="128"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/app.cpp" line="81"/>
+        <location filename="../../src/app/app.cpp" line="100"/>
         <source>Are you sure to postpone for %n minute?</source>
         <translation>
             <numerusform>确定推迟 %n 分钟吗？</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="82"/>
+        <location filename="../../src/app/app.cpp" line="101"/>
         <source>You haven&apos;t taken breaks for %1 minutes.</source>
         <translation>您已经 %1 分钟没有休息了。</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/app.cpp" line="110"/>
+        <location filename="../../src/app/app.cpp" line="129"/>
         <source>Postpone %n min</source>
         <translation>
             <numerusform>推迟 %n 分钟</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="86"/>
-        <location filename="../../src/app/app.cpp" line="111"/>
+        <location filename="../../src/app/app.cpp" line="105"/>
+        <location filename="../../src/app/app.cpp" line="130"/>
         <source>Yes</source>
         <translation>是的</translation>
     </message>

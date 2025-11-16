@@ -16,7 +16,7 @@ class BreakDatabase : public QObject {
  public:
   BreakDatabase(QSqlDatabase, QObject* parent = nullptr);
   ~BreakDatabase();
-  QString dbPath();
+  static QString dbPath();
   QSqlError logEvent(const QString& eventType, const QJsonObject& eventData = {});
 
  protected:
