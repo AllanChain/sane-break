@@ -1392,20 +1392,10 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
            <layout class="QVBoxLayout" name="verticalLayout_7">
             <item>
              <layout class="QGridLayout" name="gridLayout_4">
-              <item row="1" column="1">
-               <widget class="LanguageSelect" name="languageSelect"/>
-              </item>
-              <item row="1" column="0">
+              <item row="2" column="0">
                <widget class="QLabel" name="languageLabel">
                 <property name="text">
                  <string>Language</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_18">
-                <property name="text">
-                 <string>Configuration file</string>
                 </property>
                </widget>
               </item>
@@ -1422,6 +1412,26 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                </widget>
               </item>
               <item row="2" column="1">
+               <widget class="LanguageSelect" name="languageSelect"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_18">
+                <property name="text">
+                 <string>Configuration file</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0" alignment="Qt::AlignmentFlag::AlignTop">
+               <widget class="QLabel" name="languageLink">
+                <property name="text">
+                 <string>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</string>
+                </property>
+                <property name="openExternalLinks">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
                <widget class="QLabel" name="languageHint">
                 <property name="text">
                  <string>Change of language will take effect after app restart.</string>
@@ -1434,12 +1444,21 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                 </property>
                </widget>
               </item>
-              <item row="2" column="0" alignment="Qt::AlignmentFlag::AlignTop">
-               <widget class="QLabel" name="languageLink">
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_31">
                 <property name="text">
-                 <string>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</string>
+                 <string>Database file</string>
                 </property>
-                <property name="openExternalLinks">
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="dbFile">
+                <property name="styleSheet">
+                 <string notr="true">QLineEdit {
+  background: transparent;
+}</string>
+                </property>
+                <property name="readOnly">
                  <bool>true</bool>
                 </property>
                </widget>

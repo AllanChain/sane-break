@@ -42,6 +42,7 @@
 #include "app/widgets/stepped-slider.h"
 #include "config.h"
 #include "core/break-windows.h"
+#include "core/db.h"
 #include "core/flags.h"
 #include "core/preferences.h"
 #include "lib/auto-start.h"
@@ -348,6 +349,7 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
    *                                                                         *
    ****************************************************************************/
   ui->configFile->setText(preferences->settings->fileName());
+  ui->dbFile->setText(BreakDatabase::dbPath());
 
   auto autoStartController = controllers->add(
       PrefGroup::General,
