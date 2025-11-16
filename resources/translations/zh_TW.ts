@@ -599,17 +599,17 @@ v%1
         <translation>在雙擊托盤圖標後，立刻開始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="485"/>
+        <location filename="../../src/app/pref-window.cpp" line="493"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="486"/>
+        <location filename="../../src/app/pref-window.cpp" line="494"/>
         <source>Discard</source>
         <translation>放棄</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="487"/>
+        <location filename="../../src/app/pref-window.cpp" line="495"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
@@ -619,12 +619,12 @@ v%1
         <translation>設置開機自啟失敗</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="482"/>
+        <location filename="../../src/app/pref-window.cpp" line="490"/>
         <source>The preferences have been modified.</source>
         <translation>偏好設置已被修改。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="483"/>
+        <location filename="../../src/app/pref-window.cpp" line="491"/>
         <source>Do you want to save your changes?</source>
         <translation>是否保存修改？</translation>
     </message>

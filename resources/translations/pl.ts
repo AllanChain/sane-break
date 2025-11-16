@@ -603,17 +603,17 @@ v%1
         <translation type="unfinished">Rozpocznij następną przerwę po podwójnym kliknięciu na ikonie zasobnika</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="485"/>
+        <location filename="../../src/app/pref-window.cpp" line="493"/>
         <source>Save</source>
         <translation type="unfinished">Zapisz</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="486"/>
+        <location filename="../../src/app/pref-window.cpp" line="494"/>
         <source>Discard</source>
         <translation type="unfinished">Odrzuć</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="487"/>
+        <location filename="../../src/app/pref-window.cpp" line="495"/>
         <source>Cancel</source>
         <translation type="unfinished">Anuluj</translation>
     </message>
@@ -623,12 +623,12 @@ v%1
         <translation type="unfinished">Ustawienie autostartu nie powiodło się</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="482"/>
+        <location filename="../../src/app/pref-window.cpp" line="490"/>
         <source>The preferences have been modified.</source>
         <translation type="unfinished">Preferencje zostały zmodyfikowane.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="483"/>
+        <location filename="../../src/app/pref-window.cpp" line="491"/>
         <source>Do you want to save your changes?</source>
         <translation type="unfinished">Czy chcesz zapisać zmiany?</translation>
     </message>
