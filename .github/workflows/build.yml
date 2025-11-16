@@ -304,6 +304,7 @@ jobs:
       env:
         EXTRA_PLATFORM_PLUGINS: libqwayland.so
         EXTRA_QT_MODULES: waylandcompositor
+        LINUXDEPLOY_EXCLUDED_LIBRARIES: libmysqlclient.so*;libqsqlmimer.so;libqsqlmysql.so;libqsqlodbc.so;libqsqlpsql.so;libqsqloci.so
 
     - name: Attestation
       uses: actions/attest-build-provenance@v3
