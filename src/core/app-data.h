@@ -10,6 +10,7 @@
 #include "core/flags.h"
 #include "core/preferences.h"
 
+// Manages application state data related to break scheduling and timing
 class AppData : public QObject {
   Q_OBJECT
  public:

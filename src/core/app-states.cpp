@@ -47,13 +47,12 @@ void AppContext::onResumeRequest(PauseReasons reasons) {
 
 void AppStateNormal::enter(AppContext* app) {
   app->db->logEvent("normal::start");
-  // Set up idle timer to detect idle pauses. Low accuracy is fine
+  // Use low accuracy (5s) for idle detection in normal state as it can last a long time
   app->idleTimer->setWatchAccuracy(5000);
   app->idleTimer->setMinIdleTime(app->preferences->pauseOnIdleFor->get() * 1000);
 }
 void AppStateNormal::exit(AppContext* app) { app->db->logEvent("normal::end"); }
 void AppStateNormal::tick(AppContext* app) {
-  // TODO: Check
   app->data->tickSecondsSinceLastBreak();
   app->data->tickSecondsToNextBreak();
   if (app->data->secondsToNextBreak() <= 0)
@@ -94,14 +93,20 @@ void AppStatePaused::enter(AppContext* app) { app->db->logEvent("pause::start");
  */
 void AppStatePaused::exit(AppContext* app) {
   app->db->logEvent("pause::end");
+  // Calculate the total duration of the next break to determine if breaks would have
+  // occurred during pause
   int nextBreakDuration =
       (app->data->breakType() == BreakType::Big ? app->preferences->bigFor->get()
                                                 : app->preferences->smallFor->get());
   int secondsToNextBreakEnd = app->data->secondsToNextBreak() + nextBreakDuration;
+  // If user was paused longer than the break duration or longer than resetAfterPause
+  // setting, refill the break timer to avoid immediate breaks
   if (app->data->secondsPaused() > secondsToNextBreakEnd ||
       app->data->secondsPaused() > app->preferences->resetAfterPause->get()) {
     app->data->refillSecondsToNextBreak();
   }
+  // If user was paused longer than resetCycleAfterPause setting, reset the entire break
+  // cycle
   if (app->data->secondsPaused() > app->preferences->resetCycleAfterPause->get()) {
     app->data->resetBreakCycle();
   }
@@ -142,12 +147,13 @@ void AppStateBreak::enter(AppContext* app) {
       "break::start",
       {{"type", app->data->breakType() == BreakType::Big ? "big" : "small"}});
   data = std::make_unique<BreaksData>(dataInit(app));
-  // Finer accuracy for idle detection
+  // Use high accuracy (500ms) for idle detection during breaks for responsive
+  // transitions
   app->idleTimer->setWatchAccuracy(500);
   app->idleTimer->setMinIdleTime(2000);
   app->breakWindows->create(app->data->breakType(), app->preferences);
-  // Ensure we set the time at least once. Sometimes there is no tick called to set the
-  // time if the user is idle.
+  // Ensure we set the time at least once to initialize the UI in case user is idle and
+  // no tick occurs
   app->breakWindows->setTime(data->remainingSeconds());
   app->breakWindows->playEnterSound(app->data->breakType(), app->preferences);
   if (app->idleTimer->isIdle()) {
@@ -167,8 +173,9 @@ void AppStateBreak::onIdleStart(AppContext* app) {
 }
 void AppStateBreak::onIdleEnd(AppContext* app) { m_currentPhase->onIdleEnd(app, this); }
 void AppStateBreak::onPauseRequest(AppContext* app, PauseReasons reasons) {
-  // We don't exit break if request pause on idle
+  // We don't exit break if request pause on idle - continue with break instead
   if (reasons != PauseReason::Idle) {
+    // For non-idle pause requests, finish current break and transition to paused state
     app->data->finishAndStartNextCycle();
     app->transitionTo(std::make_unique<AppStatePaused>());
   }
@@ -244,6 +251,7 @@ void BreakPhaseFullScreen::tick(AppContext* app, AppStateBreak* breakState) {
     auto breakType = app->data->breakType();
     app->data->finishAndStartNextCycle();
     if (app->idleTimer->isIdle()) {
+      // Check if window should auto-close based on preferences and break type
       bool shouldCloseWindow =
           (breakType == BreakType::Small &&
            app->preferences->autoCloseWindowAfterSmallBreak->get()) ||
@@ -271,7 +279,8 @@ void BreakPhaseFullScreen::onIdleEnd(AppContext* app, AppStateBreak* breakState)
 }
 bool BreakPhaseFullScreen::canExitOnActivity(AppContext* app,
                                              AppStateBreak* breakState) {
-  // Not in force break and not confirmed
+  // Allow exit full screen on user activity if: not in force break AND time elapsed is
+  // less than confirmAfter setting.
   return !breakState->data->isForceBreak() &&
          (breakState->data->totalSeconds() - breakState->data->remainingSeconds() <
           app->preferences->confirmAfter->get());
