@@ -5,7 +5,6 @@
 #include "core/app-data.h"
 
 #include <QObject>
-#include <memory>
 
 #include "core/flags.h"
 #include "core/preferences.h"
@@ -13,7 +12,6 @@
 AppData::AppData(QObject* parent, SanePreferences* preferences)
     : QObject(parent), preferences(preferences) {
   m_secondsToNextBreak = preferences->smallEvery->get();
-  breaks = std::make_unique<BreaksData>();
 }
 
 BreakType AppData::breakType() {
@@ -105,6 +103,7 @@ void AppData::clearPauseReasons() {
   emit changed();
 }
 
+BreaksData::BreaksData(BreaksDataInit data) { init(data); }
 void BreaksData::init(BreaksDataInit data) {
   m_remainingSeconds = m_totalSeconds = data.totalSeconds;
   m_secondsToForceBreak = data.flashFor;

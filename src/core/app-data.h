@@ -10,40 +10,10 @@
 #include "core/flags.h"
 #include "core/preferences.h"
 
-struct BreaksDataInit {
-  int totalSeconds;
-  int flashFor;
-};
-
-class BreaksData {
- public:
-  void init(BreaksDataInit data);
-
-  int totalSeconds();
-
-  bool isForceBreak();
-  void tickSecondsToForceBreak();
-  void resetSecondsToForceBreak();
-
-  int remainingSeconds();
-  void tickRemainingTime();
-  void resetRemainingTime();
-
-  int numberForceBreakExits();
-  void recordForceBreakExit();
-
- protected:
-  int m_totalSeconds;
-  int m_secondsToForceBreak;
-  int m_remainingSeconds;
-  int m_numberForceBreakExits = 0;
-};
-
 class AppData : public QObject {
   Q_OBJECT
  public:
   AppData(QObject* parent, SanePreferences* preferences);
-  std::unique_ptr<BreaksData> breaks;
 
   BreakType breakType();
   int smallBreaksBeforeBigBreak();
@@ -85,4 +55,34 @@ class AppData : public QObject {
   PauseReasons m_pauseReasons = {};
 
   SanePreferences* preferences;
+};
+
+struct BreaksDataInit {
+  int totalSeconds;
+  int flashFor;
+};
+
+class BreaksData {
+ public:
+  BreaksData(BreaksDataInit data);
+  void init(BreaksDataInit data);
+
+  int totalSeconds();
+
+  bool isForceBreak();
+  void tickSecondsToForceBreak();
+  void resetSecondsToForceBreak();
+
+  int remainingSeconds();
+  void tickRemainingTime();
+  void resetRemainingTime();
+
+  int numberForceBreakExits();
+  void recordForceBreakExit();
+
+ protected:
+  int m_totalSeconds;
+  int m_secondsToForceBreak;
+  int m_remainingSeconds;
+  int m_numberForceBreakExits = 0;
 };
