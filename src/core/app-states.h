@@ -16,16 +16,18 @@
 #include "core/preferences.h"
 #include "timer.h"
 
+// Actions that can be triggered from the application menu or UI
 enum class MenuAction {
-  BreakNow,
-  BigBreakNow,
-  SmallBreakInstead,
-  EnableBreaks,
-  ExitForceBreak,
+  BreakNow,           // Trigger a small break immediately
+  BigBreakNow,        // Trigger a big break immediately
+  SmallBreakInstead,  // Change the current big break to a small one
+  EnableBreaks,       // Clear all pauses and resume normal break schedule
+  ExitForceBreak,     // Exit the force break
 };
 
 class AppContext;
 
+// Base class for application states managing different modes of operation
 class AppState {
  public:
   enum StateID { Normal, Paused, Break };
@@ -67,6 +69,7 @@ class AppContext : public QObject {
   void onResumeRequest(PauseReasons reasons);
 };
 
+// Normal state: actively counting down time
 class AppStateNormal : public AppState {
  public:
   StateID getID() override { return Normal; };
@@ -78,6 +81,7 @@ class AppStateNormal : public AppState {
   void onPauseRequest(AppContext* app, PauseReasons reasons) override;
 };
 
+// Paused state: break schedule is temporarily suspended
 class AppStatePaused : public AppState {
  public:
   StateID getID() override { return Paused; };
@@ -92,6 +96,7 @@ class AppStatePaused : public AppState {
 
 class BreakPhase;
 
+// Break state: managing the active break with different phases
 class AppStateBreak : public AppState {
  public:
   void transitionTo(AppContext* app, std::unique_ptr<BreakPhase> phase);
@@ -112,6 +117,7 @@ class AppStateBreak : public AppState {
   std::unique_ptr<BreakPhase> m_currentPhase;
 };
 
+// Base class for break phases (prompt, fullscreen, post-break)
 class BreakPhase {
  public:
   virtual void enter(AppContext*, AppStateBreak*) {};
@@ -122,6 +128,7 @@ class BreakPhase {
   virtual ~BreakPhase() = default;
 };
 
+// Prompt phase: Shows a flash prompt to get user's attention before full screen
 class BreakPhasePrompt : public BreakPhase {
  public:
   void enter(AppContext* app, AppStateBreak* breakState) override;
@@ -130,6 +137,7 @@ class BreakPhasePrompt : public BreakPhase {
   void onIdleStart(AppContext* app, AppStateBreak* breakState) override;
 };
 
+// Fullscreen phase: Overlay until break is completed or exit for some reason
 class BreakPhaseFullScreen : public BreakPhase {
  public:
   void enter(AppContext* app, AppStateBreak* breakState) override;
@@ -139,6 +147,7 @@ class BreakPhaseFullScreen : public BreakPhase {
   void showWindowClickableWidgets(AppContext* app, AppStateBreak* breakState);
 };
 
+// Post-break phase: Keeps window open after break completion until user activity
 class BreakPhasePost : public BreakPhase {
  public:
   void enter(AppContext* app, AppStateBreak* breakState) override;

@@ -12,7 +12,10 @@ class AbstractTimer : public QObject {
   AbstractTimer(QObject* parent = nullptr) : QObject(parent) {};
   ~AbstractTimer() = default;
   virtual void start() { m_active = true; };
-  virtual void start(int msec) { m_active = m_interval = msec; };
+  virtual void start(int msec) {
+    m_active = true;
+    m_interval = msec;
+  };
   virtual void stop() { m_active = false; };
   virtual bool isActive() { return m_active; }
   virtual void setSingleShot(bool singleShot) { m_singleShot = singleShot; };
@@ -24,6 +27,6 @@ class AbstractTimer : public QObject {
 
  private:
   bool m_singleShot = false;
-  bool m_interval = 0;
+  int m_interval = 0;
   bool m_active = false;
 };
