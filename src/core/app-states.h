@@ -105,7 +105,8 @@ class AppStateBreak : public AppState {
   void onMenuAction(AppContext* app, MenuAction action) override;
   void onPauseRequest(AppContext* app, PauseReasons reasons) override;
 
-  void initBreakData(AppContext*);
+  BreaksDataInit dataInit(AppContext*);
+  std::unique_ptr<BreaksData> data;
 
  protected:
   std::unique_ptr<BreakPhase> m_currentPhase;
@@ -134,8 +135,8 @@ class BreakPhaseFullScreen : public BreakPhase {
   void enter(AppContext* app, AppStateBreak* breakState) override;
   void tick(AppContext* app, AppStateBreak* breakState) override;
   void onIdleEnd(AppContext* app, AppStateBreak* breakState) override;
-  bool canExitOnActivity(AppContext* app);
-  void showWindowClickableWidgets(AppContext* app);
+  bool canExitOnActivity(AppContext* app, AppStateBreak* breakState);
+  void showWindowClickableWidgets(AppContext* app, AppStateBreak* breakState);
 };
 
 class BreakPhasePost : public BreakPhase {

@@ -103,12 +103,12 @@ class DummyApp : public AbstractApp {
     for (int i = 0; i < secs; i++) tick();
   }
   void advanceToBreakEnd() {
-    QCOMPARE(currentState(), AppState::Break);
-    while (data->breaks->remainingSeconds() > 0) tick();
+    while (m_currentState->getID() == AppState::Break) tick();
   }
   void advanceToForceBreakStart() {
-    QCOMPARE(currentState(), AppState::Break);
-    while (!data->breaks->isForceBreak()) tick();
+    QCOMPARE(m_currentState->getID(), AppState::Break);
+    auto* breakState = dynamic_cast<AppStateBreak*>(m_currentState.get());
+    while (!breakState->data->isForceBreak()) tick();
   }
   TrayData trayData;
   static DummyAppDependencies makeDeps(QObject* parent = nullptr) {

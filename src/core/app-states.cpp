@@ -7,6 +7,7 @@
 #include <memory>
 #include <utility>
 
+#include "core/app-data.h"
 #include "core/break-windows.h"
 #include "core/flags.h"
 
@@ -140,14 +141,14 @@ void AppStateBreak::enter(AppContext* app) {
   app->db->logEvent(
       "break::start",
       {{"type", app->data->breakType() == BreakType::Big ? "big" : "small"}});
+  data = std::make_unique<BreaksData>(dataInit(app));
   // Finer accuracy for idle detection
   app->idleTimer->setWatchAccuracy(500);
   app->idleTimer->setMinIdleTime(2000);
-  initBreakData(app);
   app->breakWindows->create(app->data->breakType(), app->preferences);
   // Ensure we set the time at least once. Sometimes there is no tick called to set the
   // time if the user is idle.
-  app->breakWindows->setTime(app->data->breaks->remainingSeconds());
+  app->breakWindows->setTime(data->remainingSeconds());
   app->breakWindows->playEnterSound(app->data->breakType(), app->preferences);
   if (app->idleTimer->isIdle()) {
     this->transitionTo(app, std::make_unique<BreakPhaseFullScreen>());
@@ -157,8 +158,7 @@ void AppStateBreak::enter(AppContext* app) {
 }
 void AppStateBreak::exit(AppContext* app) {
   if (m_currentPhase) m_currentPhase->exit(app, this);
-  app->db->logEvent("break::end",
-                    {{"normal-exit", (app->data->breaks->remainingSeconds() <= 0)}});
+  app->db->logEvent("break::end", {{"normal-exit", (data->remainingSeconds() <= 0)}});
   app->breakWindows->destroy();
 }
 void AppStateBreak::tick(AppContext* app) { m_currentPhase->tick(app, this); }
@@ -173,13 +173,13 @@ void AppStateBreak::onPauseRequest(AppContext* app, PauseReasons reasons) {
     app->transitionTo(std::make_unique<AppStatePaused>());
   }
 }
-void AppStateBreak::initBreakData(AppContext* app) {
-  app->data->breaks->init({
+BreaksDataInit AppStateBreak::dataInit(AppContext* app) {
+  return {
       .totalSeconds = app->data->breakType() == BreakType::Big
                           ? app->preferences->bigFor->get()
                           : app->preferences->smallFor->get(),
       .flashFor = app->preferences->flashFor->get(),
-  });
+  };
 }
 void AppStateBreak::onMenuAction(AppContext* app, MenuAction action) {
   switch (action) {
@@ -190,8 +190,8 @@ void AppStateBreak::onMenuAction(AppContext* app, MenuAction action) {
       this->enter(app);
       break;
     case (MenuAction::ExitForceBreak):
-      initBreakData(app);
-      app->data->breaks->recordForceBreakExit();
+      data->init(dataInit(app));
+      data->recordForceBreakExit();
       app->db->logEvent("break::exit-force");
       this->transitionTo(app, std::make_unique<BreakPhasePrompt>());
       break;
@@ -213,9 +213,9 @@ void BreakPhasePrompt::exit(AppContext* app, AppStateBreak*) {
   app->db->logEvent("break::flash::end");
 }
 void BreakPhasePrompt::tick(AppContext* app, AppStateBreak* breakState) {
-  app->data->breaks->tickSecondsToForceBreak();
-  app->breakWindows->setTime(app->data->breaks->remainingSeconds());
-  if (app->data->breaks->isForceBreak()) {
+  breakState->data->tickSecondsToForceBreak();
+  app->breakWindows->setTime(breakState->data->remainingSeconds());
+  if (breakState->data->isForceBreak()) {
     breakState->transitionTo(app, std::make_unique<BreakPhaseFullScreen>());
   }
 }
@@ -223,22 +223,22 @@ void BreakPhasePrompt::onIdleStart(AppContext* app, AppStateBreak* breakState) {
   breakState->transitionTo(app, std::make_unique<BreakPhaseFullScreen>());
 }
 
-void BreakPhaseFullScreen::enter(AppContext* app, AppStateBreak*) {
+void BreakPhaseFullScreen::enter(AppContext* app, AppStateBreak* breakState) {
   app->breakWindows->showFullScreen();
-  if (!canExitOnActivity(app)) {
-    showWindowClickableWidgets(app);
+  if (!canExitOnActivity(app, breakState)) {
+    showWindowClickableWidgets(app, breakState);
   }
   if (int secs = app->preferences->autoScreenLock->get(); secs > 0) {
     app->screenLockTimer->start(secs * 1000);
   }
 }
 void BreakPhaseFullScreen::tick(AppContext* app, AppStateBreak* breakState) {
-  app->data->breaks->tickRemainingTime();
-  app->breakWindows->setTime(app->data->breaks->remainingSeconds());
-  if (!canExitOnActivity(app)) {
-    showWindowClickableWidgets(app);
+  breakState->data->tickRemainingTime();
+  app->breakWindows->setTime(breakState->data->remainingSeconds());
+  if (!canExitOnActivity(app, breakState)) {
+    showWindowClickableWidgets(app, breakState);
   }
-  if (app->data->breaks->remainingSeconds() <= 0) {
+  if (breakState->data->remainingSeconds() <= 0) {
     app->breakWindows->playExitSound(app->data->breakType(), app->preferences);
     // record break type before we start next cycle
     auto breakType = app->data->breakType();
@@ -264,20 +264,22 @@ void BreakPhaseFullScreen::tick(AppContext* app, AppStateBreak* breakState) {
   }
 }
 void BreakPhaseFullScreen::onIdleEnd(AppContext* app, AppStateBreak* breakState) {
-  if (canExitOnActivity(app)) {
-    app->data->breaks->resetRemainingTime();
+  if (canExitOnActivity(app, breakState)) {
+    breakState->data->resetRemainingTime();
     breakState->transitionTo(app, std::make_unique<BreakPhasePrompt>());
   }
 }
-bool BreakPhaseFullScreen::canExitOnActivity(AppContext* app) {
+bool BreakPhaseFullScreen::canExitOnActivity(AppContext* app,
+                                             AppStateBreak* breakState) {
   // Not in force break and not confirmed
-  return !app->data->breaks->isForceBreak() &&
-         (app->data->breaks->totalSeconds() - app->data->breaks->remainingSeconds() <
+  return !breakState->data->isForceBreak() &&
+         (breakState->data->totalSeconds() - breakState->data->remainingSeconds() <
           app->preferences->confirmAfter->get());
 }
-void BreakPhaseFullScreen::showWindowClickableWidgets(AppContext* app) {
+void BreakPhaseFullScreen::showWindowClickableWidgets(AppContext* app,
+                                                      AppStateBreak* breakState) {
   AbstractBreakWindows::Buttons buttons = AbstractBreakWindows::Button::LockScreen;
-  if (app->data->breaks->numberForceBreakExits() <
+  if (breakState->data->numberForceBreakExits() <
       app->preferences->maxForceBreakExits->get()) {
     buttons |= AbstractBreakWindows::Button::ExitForceBreak;
   }
