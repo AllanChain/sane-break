@@ -168,9 +168,8 @@
 &lt;p&gt;Sane Break affiche un petit panneau pendant&lt;b&gt;X&lt;/b&gt; secondes. Si vous arrêtez de travailler ou continuez d&apos;ignorer ce panneau tout ce temps, le panneau passera en plein écran. Après &lt;b&gt;X&lt;/b&gt; secondes d&apos;inactivité pendant la pause, les contrôles sont verrouillés jusqu&apos;à la fin du minuteur.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="595"/>
         <source>Flash break prompt for</source>
-        <translation>Faire clignoter le message de pause pendant</translation>
+        <translation type="vanished">Faire clignoter le message de pause pendant</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="602"/>
@@ -518,6 +517,11 @@ v%1
 &lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Comportement du Rappel&lt;/h3&gt;
 &lt;p&gt;Sane Break affiche un petit panneau pendant &lt;b&gt;%1&lt;/b&gt; secondes. Si vous arrêtez votre activité à ce moment, ou si vous la continuez jusqu&apos;à ce que le compte à rebours s&apos;écoule, le panneau passera en plein écran. Pendant la pause, Sane Break se bloque en mode plein-écran après &lt;b&gt;%2&lt;/b&gt; secondes d&apos;inactivité. Si vous reprenez votre activité avant que le blocage, le panneau rétrécira à nouveau en une petite fenêtre mais se ré-agrandira en plein-écran à la fin du compte à rebours ou si vous ne arrêtez toute activité.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="595"/>
+        <source>Show break prompt for</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="676"/>

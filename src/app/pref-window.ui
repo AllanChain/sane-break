@@ -592,7 +592,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
                  <string extracomment="Tooltip for &quot;Flash break prompt for&quot; config">Time in seconds before forcing break after work reminder appears.</string>
                 </property>
                 <property name="text">
-                 <string>Flash break prompt for</string>
+                 <string>Show break prompt for</string>
                 </property>
                </widget>
               </item>

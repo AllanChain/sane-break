@@ -174,9 +174,8 @@
         <translation>&lt;h3&gt;Отложить&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="595"/>
         <source>Flash break prompt for</source>
-        <translation>Мигать напоминанием о перерыве</translation>
+        <translation type="vanished">Мигать напоминанием о перерыве</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="602"/>
@@ -477,6 +476,11 @@ v%1
 &lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Поведение напоминания&lt;/h3&gt;
 &lt;p&gt;Sane Break показывает небольшое напоминание на &lt;b&gt;%1&lt;/b&gt; секунд. Если вы прекращаете свою деятельность в это время или выбираете продолжить до окончания таймера, оно переходит в полноэкранный режим. Во время перерыва Sane Break переходит в полноэкранный режим после &lt;b&gt;%2&lt;/b&gt; секунд бездействия. Если вы возобновляете деятельность до блокировки, напоминание временно уменьшается до маленького окна, но снова расширяется до полноэкранного режима, когда вы снова становитесь бездействующим или таймер заканчивается.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="595"/>
+        <source>Show break prompt for</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="815"/>

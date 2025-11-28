@@ -190,9 +190,8 @@
 &lt;p&gt;Sane Break toont een kleine &lt;b&gt;flitsherinnering gedurende&lt;/b&gt; seconden. Als u stopt met werken of de herinnering bewust negeert, dan wordt de herinnering schermvullend getoond. Na het &lt;b&gt;bevestigen van de pauze na&lt;/b&gt; seconden of inactiviteit, wordt de boel vergrendeld totdat de tijdklok afloopt.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="595"/>
         <source>Flash break prompt for</source>
-        <translation>Pauzeherinnering tonen, gedurende</translation>
+        <translation type="vanished">Pauzeherinnering tonen, gedurende</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="602"/>
@@ -578,6 +577,11 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <location filename="../../src/app/pref-window.ui" line="1401"/>
         <source>Language</source>
         <translation>Taal</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="595"/>
+        <source>Show break prompt for</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="676"/>

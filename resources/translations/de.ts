@@ -174,11 +174,6 @@
         <translation>&lt;h3&gt;Verschieben&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="595"/>
-        <source>Flash break prompt for</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../src/app/pref-window.ui" line="602"/>
         <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
         <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
@@ -442,6 +437,11 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="535"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
 &lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="595"/>
+        <source>Show break prompt for</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -802,7 +802,7 @@ v%1
         <location filename="../../src/app/welcome.cpp" line="99"/>
         <location filename="../../src/app/welcome.cpp" line="128"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Abbrechen</translation>
     </message>
     <message>
         <location filename="../../src/app/welcome.cpp" line="102"/>
@@ -813,7 +813,7 @@ v%1
     <message>
         <location filename="../../src/app/welcome.cpp" line="124"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sprache</translation>
     </message>
 </context>
 </TS>

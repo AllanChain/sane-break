@@ -174,9 +174,8 @@
         <translation>&lt;h3&gt;Opóźnij&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="595"/>
         <source>Flash break prompt for</source>
-        <translation>Pokaż powiadomienie o przerwie przez</translation>
+        <translation type="vanished">Pokaż powiadomienie o przerwie przez</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="602"/>
@@ -453,6 +452,11 @@ v%1
 &lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Zachowanie przypomnienia&lt;/h3&gt;
 &lt;p&gt;Sane Break pokazuje małe powiadomienie przez &lt;b&gt;%1&lt;/b&gt; sekund. Jeśli zatrzymasz aktywność w tym czasie lub wybierzesz kontynuację do upływu timera, przejdzie ono do trybu pełnoekranowego. Podczas przerwy Sane Break blokuje tryb pełnoekranowy po &lt;b&gt;%2&lt;/b&gt; sekundach nieaktywności. Jeśli wznowisz aktywność przed zablokowaniem, powiadomienie zmniejszy się do małego okna na chwilę, ale ponownie rozszerzy się do trybu pełnoekranowego, gdy znów będziesz nieaktywny lub upłynie czas.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="595"/>
+        <source>Show break prompt for</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="815"/>

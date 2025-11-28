@@ -174,9 +174,8 @@
         <translation type="unfinished">&lt;h3&gt;Odložit&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="595"/>
         <source>Flash break prompt for</source>
-        <translation type="unfinished">Zobrazit připomínku přestávky po dobu</translation>
+        <translation type="obsolete">Zobrazit připomínku přestávky po dobu</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="602"/>
@@ -453,6 +452,11 @@ v%1
 &lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Chování připomínky&lt;/h3&gt;
 &lt;p&gt;Sane Break zobrazí malou připomínku po dobu &lt;b&gt;%1&lt;/b&gt; sekund. Pokud přestanete s aktivitou během této doby nebo vyberete pokračování až do vypršení časovače, přepne se do celoobrazovkového režimu. Během přestávky se Sane Break zamkne do celoobrazovkového režimu po &lt;b&gt;%2&lt;/b&gt; sekundách nečinnosti. Pokud obnovíte aktivitu před zamknutím, připomínka se dočasně zmenší na malé okno, ale znovu se rozšíří na celou obrazovku, když opět přestanete být aktivní nebo vyprší časovač.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="595"/>
+        <source>Show break prompt for</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="815"/>
