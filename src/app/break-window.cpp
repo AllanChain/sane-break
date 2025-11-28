@@ -56,8 +56,13 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget* parent)
   setAttribute(Qt::WA_ShowWithoutActivating);    // avoid gaining keyboard focus
   setAttribute(Qt::WA_LayoutOnEntireRect);       // ignore safe zone on macOS
   setAttribute(Qt::WA_MacAlwaysShowToolWindow);  // always show window on macOS
-  setWindowFlags(Qt::Tool | Qt::WindowDoesNotAcceptFocus | Qt::FramelessWindowHint |
+  setWindowFlags(Qt::WindowDoesNotAcceptFocus | Qt::FramelessWindowHint |
                  Qt::WindowStaysOnTopHint);
+#ifdef Q_OS_MACOS  // Use Qt::ToolTip on macOS to display above menubars
+  setWindowFlag(Qt::ToolTip);
+#else  // Use Qt::Tool on other platforms to avoid glitches in #79
+  setWindowFlag(Qt::Tool);
+#endif
   if (m_supportTransparentInput) setWindowFlag(Qt::WindowTransparentForInput);
   setWindowTitle("Break reminder - Sane Break");
 
