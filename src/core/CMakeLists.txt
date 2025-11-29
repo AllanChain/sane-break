@@ -15,6 +15,7 @@ add_library(
   app.cpp
   app.h
   break-windows.h
+  meeting-prompt.h
   flags.h
   db.h
   db.cpp

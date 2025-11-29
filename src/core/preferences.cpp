@@ -1,11 +1,12 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "core/preferences.h"
 
 #include <QColor>
 #include <QCoreApplication>
+#include <QList>
 #include <QObject>
 #include <QSettings>
 #include <QString>
@@ -29,8 +30,13 @@ SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
   smallFor = new Setting<int>(settings, "break/small-for", 20);
   bigAfter = new Setting<int>(settings, "break/big-after", 3);
   bigFor = new Setting<int>(settings, "break/big-for", 60);
-  postponeMinutes = new Setting<QStringList>(settings, "break/postpone-minutes",
-                                             QStringList({"5", "10", "30", "60"}));
+
+  postponeMaxMinutePercent =
+      new Setting<int>(settings, "postpone/max-minute-ratio", 50);
+  postponeShrinkNextPercent =
+      new Setting<int>(settings, "postpone/shrink-next-session-ratio", 100);
+  postponeExtendBreakPercent =
+      new Setting<int>(settings, "postpone/extend-break-ratio", 100);
 
   flashFor = new Setting<int>(settings, "break/flash-for", 30);
   confirmAfter = new Setting<int>(settings, "break/confirm-after", 30);

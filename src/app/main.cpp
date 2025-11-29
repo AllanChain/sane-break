@@ -7,6 +7,7 @@
 #include <QDialog>
 #include <QDir>
 #include <QFile>
+#include <QFontDatabase>
 #include <QLockFile>
 #include <QMessageBox>
 #include <QSettings>
@@ -78,6 +79,8 @@ int main(int argc, char* argv[]) {
   a.addLibraryPath(appPath.filePath("sane-break"));
   LinuxSystemSupport::check();
 #endif  // Q_OS_LINUX
+
+  QFontDatabase::addApplicationFont(":/fonts/bootstrap-icons.ttf");
 
   if (!QFile::exists(preferences->settings->fileName())) {
     WelcomeWindow* welcome = new WelcomeWindow(preferences);

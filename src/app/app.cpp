@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "app.h"
@@ -29,6 +29,9 @@
 #include "lib/screen-lock.h"
 #include "lib/system-monitor.h"
 #include "lib/timer.h"
+#include "meeting-prompt.h"
+#include "meeting-window.h"
+#include "postpone-window.h"
 
 #if (defined(Q_OS_LINUX) or defined(Q_OS_MACOS))
 #include "app/unix/signal-handler.h"
@@ -47,7 +50,14 @@ SaneBreakApp::SaneBreakApp(const AppDependencies& deps, QObject* parent)
           &SaneBreakApp::bigBreakNow);
   connect(tray, &StatusTrayWindow::smallBreakInsteadRequested, this,
           &SaneBreakApp::smallBreakInstead);
-  connect(tray, &StatusTrayWindow::postponeRequested, this, &SaneBreakApp::postpone);
+  connect(tray, &StatusTrayWindow::postponeRequested, this,
+          &SaneBreakApp::openPostponeWindow);
+  connect(tray, &StatusTrayWindow::meetingRequested, this,
+          &SaneBreakApp::openMeetingWindow);
+  connect(tray, &StatusTrayWindow::endMeetingBreakNowRequested, this,
+          [this]() { endMeetingBreakSoon(0); });
+  connect(tray, &StatusTrayWindow::extendMeetingRequested, this,
+          &SaneBreakApp::extendMeeting);
   connect(tray, &StatusTrayWindow::preferenceWindowRequested, this,
           &SaneBreakApp::showPreferences);
   connect(tray, &StatusTrayWindow::enableBreakRequested, this,
@@ -77,6 +87,7 @@ SaneBreakApp* SaneBreakApp::create(SanePreferences* preferences, QObject* parent
       .idleTimer = createIdleTimer(parent),
       .systemMonitor = new SystemMonitor(preferences),
       .breakWindows = new BreakWindows(),
+      .meetingPrompt = new MeetingPrompt(),
   };
   return new SaneBreakApp(deps, parent);
 }
@@ -94,39 +105,51 @@ void SaneBreakApp::showPreferences() {
   prefWindow->windowHandle()->requestActivate();
 }
 
-bool SaneBreakApp::confirmPostpone(int secondsToPostpone) {
-  QMessageBox msgBox;
-  msgBox.setText(
-      tr("Are you sure to postpone for %n minute?", nullptr, secondsToPostpone / 60));
-  msgBox.setInformativeText(tr("You haven't taken breaks for %1 minutes.")
-                                .arg(data->secondsSinceLastBreak() / 60));
-  msgBox.setIcon(QMessageBox::Icon::Question);
-  msgBox.addButton(QMessageBox::Cancel)->setText(tr("Cancel"));
-  msgBox.addButton(QMessageBox::Yes)->setText(tr("Yes"));
-
-  msgBox.setDefaultButton(QMessageBox::Cancel);
-  switch (msgBox.exec()) {
-    case QMessageBox::Yes:
-      return true;
-    case QMessageBox::Cancel:
-      return false;
-    default:
-      return false;
+void SaneBreakApp::openPostponeWindow() {
+  if (data->isPostponing()) {
+    QMessageBox msgBox;
+    msgBox.setText(tr("You have already postponed once in this session."));
+    msgBox.setInformativeText(tr("No further postpones are allowed."));
+    msgBox.setIcon(QMessageBox::Icon::Warning);
+    msgBox.addButton(QMessageBox::Ok)->setText(tr("OK"));
+    msgBox.setDefaultButton(QMessageBox::Cancel);
+    msgBox.exec();
+    return;
   }
+  PostponeWindow* postponeWindow = new PostponeWindow(preferences, db);
+  connect(postponeWindow, &PostponeWindow::cancelled, this,
+          [=]() { postponeWindow->deleteLater(); });
+  connect(postponeWindow, &PostponeWindow::postponeRequested, this,
+          [this, postponeWindow](int seconds) {
+            postpone(seconds);
+            postponeWindow->deleteLater();
+          });
+  postponeWindow->show();
+}
+
+void SaneBreakApp::openMeetingWindow() {
+  if (m_currentState->getID() == AppState::Meeting || data->isPostponing()) return;
+  MeetingWindow* meetingWindow = new MeetingWindow(preferences, db);
+  connect(meetingWindow, &MeetingWindow::cancelled, this,
+          [=]() { meetingWindow->deleteLater(); });
+  connect(meetingWindow, &MeetingWindow::meetingRequested, this,
+          [this, meetingWindow](QTime endTime, QString reason) {
+            int seconds = QTime::currentTime().secsTo(endTime);
+            if (seconds > 0) {
+              startMeeting(seconds, reason);
+            }
+            meetingWindow->deleteLater();
+          });
+  meetingWindow->show();
 }
 
 void SaneBreakApp::confirmQuit() {
-  int largestMinutes = 0;
-  for (const QString& minuteString : preferences->postponeMinutes->get()) {
-    int minute = minuteString.toInt();
-    largestMinutes = largestMinutes > minute ? largestMinutes : minute;
-  }
   QMessageBox msgBox;
   msgBox.setText(tr("Are you sure to quit Sane Break?"));
   msgBox.setInformativeText(tr("You can postpone the breaks instead."));
   msgBox.setIcon(QMessageBox::Icon::Question);
   msgBox.addButton(QMessageBox::Cancel)->setText(tr("Cancel"));
-  msgBox.addButton(tr("Postpone %n min", "", largestMinutes), QMessageBox::NoRole);
+  msgBox.addButton(tr("Postpone"), QMessageBox::NoRole);
   msgBox.addButton(QMessageBox::Yes)->setText(tr("Yes"));
 
   msgBox.setDefaultButton(QMessageBox::Cancel);
@@ -137,7 +160,7 @@ void SaneBreakApp::confirmQuit() {
     case QMessageBox::Cancel:
       return;
     default:
-      postpone(largestMinutes * 60);
+      openPostponeWindow();
       return;
   }
 }

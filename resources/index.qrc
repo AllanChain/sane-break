@@ -8,6 +8,7 @@
     <file>sounds/ding.mp3</file>
     <file>sounds/bell.mp3</file>
     <file>sounds/wood.mp3</file>
+    <file>fonts/bootstrap-icons.ttf</file>
     <file>../NOTICE.md</file>
     <file alias="sane-break.desktop">../packaging/linux/sane-break.desktop</file>
   </qresource>

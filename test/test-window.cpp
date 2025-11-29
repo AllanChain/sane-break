@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <gmock/gmock.h>
@@ -28,7 +28,7 @@ class TestWindow : public QObject {
     depsParent = new QObject();
     deps = DummyApp::makeDeps(depsParent);
   }
-  void cleanup() { depsParent->deleteLater(); }
+  void cleanup() { delete depsParent; }
   // Data for `tick_with_force_break`
   void tick_with_force_break_data() {
     auto preferences = tempPreferences();

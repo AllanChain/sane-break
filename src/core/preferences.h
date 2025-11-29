@@ -1,15 +1,19 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
+
+#include <qobject.h>
 
 #include <QColor>
 #include <QFile>
 #include <QObject>
 #include <QSettings>
+#include <QString>
 #include <QtContainerFwd>
 #include <functional>
+#include <type_traits>
 
 class SettingWithSignal : public QObject {
   Q_OBJECT
@@ -40,27 +44,28 @@ class Setting : public SettingWithSignal {
     return m_defaultIsFunction ? m_defaultValueFunction() : m_defaultValue;
   }
   void set(const T& newValue) {
-    if (get() != newValue) {
-      m_value = newValue;
-      m_settings->setValue(m_key, toFriendlyFormat(m_value));
-      emit changed();
+    if (get() == newValue) return;
+    m_value = newValue;
+    if constexpr (std::is_same_v<T, QColor>) {
+      m_settings->setValue(m_key, m_value.name(QColor::HexArgb));
+    } else {
+      m_settings->setValue(m_key, m_value);
     }
+    emit changed();
   }
   const T get() {
     if (m_cached) return m_value;
-    m_value =
-        fromFriendlyFormat(m_settings->value(m_key, toFriendlyFormat(defaultValue())));
+    if constexpr (std::is_same_v<T, QColor>) {
+      m_value = QColor::fromString(
+          m_settings->value(m_key, defaultValue().name(QColor::HexArgb)).toString());
+    } else {
+      m_value = m_settings->value(m_key, defaultValue()).template value<T>();
+    }
     m_cached = true;
     return m_value;
   };
-  virtual QVariant toFriendlyFormat(const T& value) {
-    return QVariant::fromValue(value);
-  };
-  virtual const T fromFriendlyFormat(QVariant value) {
-    return value.template value<T>();
-  };
 
- private:
+ protected:
   QSettings* m_settings;
   QString m_key;
   T m_defaultValue;
@@ -69,17 +74,6 @@ class Setting : public SettingWithSignal {
   T m_value;
   bool m_cached = false;
 };
-
-template <>
-inline QVariant Setting<QColor>::toFriendlyFormat(const QColor& value) {
-  QString argb = value.name(QColor::HexArgb);
-  return QVariant::fromValue(argb);
-}
-
-template <>
-inline const QColor Setting<QColor>::fromFriendlyFormat(QVariant value) {
-  return QColor::fromString(value.toString());
-}
 
 class SanePreferences : public QObject {
   Q_OBJECT
@@ -94,7 +88,10 @@ class SanePreferences : public QObject {
   Setting<int>* smallFor;
   Setting<int>* bigAfter;
   Setting<int>* bigFor;
-  Setting<QStringList>* postponeMinutes;
+
+  Setting<int>* postponeMaxMinutePercent;
+  Setting<int>* postponeShrinkNextPercent;
+  Setting<int>* postponeExtendBreakPercent;
 
   Setting<int>* flashFor;
   Setting<int>* confirmAfter;

@@ -1,0 +1,69 @@
+// Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
+// Copyright (C) 2024-2026 Sane Break developers
+// SPDX-License-Identifier: GPL-3.0-or-later
+
+#include "meeting-prompt.h"
+
+#include <QDialog>
+#include <QTimer>
+#include <Qt>
+
+#include "ui_meeting-prompt.h"
+
+void MeetingPrompt::showEndPrompt() {
+  if (dialog) return;
+
+  dialog = new QDialog();
+  dialog->setAttribute(Qt::WA_DeleteOnClose);
+  ui = new Ui::MeetingPrompt();
+  ui->setupUi(dialog);
+
+  timeoutRemaining = 60;
+  updateBreakNowText();
+
+  timeoutTimer = new QTimer(dialog);
+  timeoutTimer->setInterval(1000);
+  connect(timeoutTimer, &QTimer::timeout, this, [this]() {
+    timeoutRemaining--;
+    if (timeoutRemaining <= 0) {
+      timeoutTimer->stop();
+      closeEndPrompt();
+      emit breakSoonRequested(0);
+      return;
+    }
+    updateBreakNowText();
+  });
+  timeoutTimer->start();
+
+  connect(ui->breakNow, &QPushButton::clicked, this, [this]() {
+    if (dialog) dialog->done(QDialog::Accepted);
+    emit breakNowRequested();
+  });
+  connect(ui->breakLater, &QPushButton::clicked, this, [this]() {
+    if (dialog) dialog->done(QDialog::Rejected);
+  });
+  connect(ui->notYet, &QPushButton::clicked, this, [this]() {
+    if (dialog) dialog->done(QDialog::Accepted);
+    emit extendRequested(1800);
+  });
+  connect(dialog, &QDialog::rejected, this, [this]() { emit breakSoonRequested(300); });
+
+  dialog->show();
+}
+
+void MeetingPrompt::closeEndPrompt() {
+  if (dialog) dialog->done(QDialog::Accepted);
+}
+
+void MeetingPrompt::resetTimeout() {
+  timeoutRemaining = 60;
+  if (ui) updateBreakNowText();
+}
+
+bool MeetingPrompt::isShowing() const { return dialog != nullptr; }
+
+void MeetingPrompt::updateBreakNowText() {
+  if (ui) {
+    ui->breakNow->setText(tr("Break now (%1s)").arg(timeoutRemaining));
+  }
+}
