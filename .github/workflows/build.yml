@@ -345,7 +345,7 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: actions/download-artifact@v6
+      - uses: actions/download-artifact@v7
         with:
           path: release
           pattern: sane-break-*
