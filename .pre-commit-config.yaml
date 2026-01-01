@@ -50,3 +50,4 @@ repos:
           - --use-current-year
 ci:
   autoupdate_schedule: quarterly
+  skip: [insert-license]
