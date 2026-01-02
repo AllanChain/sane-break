@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <QApplication>
@@ -12,6 +12,7 @@
 #include <QSettings>
 #include <QStandardPaths>
 #include <QSystemTrayIcon>
+#include <QThread>
 #include <QTranslator>
 #include <Qt>
 
@@ -25,6 +26,15 @@
 #include "lib/linux/system-check.h"
 #endif
 
+bool waitForTray() {
+  for (int attempt = 0; attempt < 5; attempt++) {
+    if (QSystemTrayIcon::isSystemTrayAvailable()) return true;
+    QThread::sleep(1);
+  }
+  qWarning() << "System tray not available.";
+  return false;
+}
+
 int main(int argc, char* argv[]) {
   QCoreApplication::setOrganizationName("SaneBreak");
   QCoreApplication::setApplicationName("SaneBreak");
@@ -32,7 +42,7 @@ int main(int argc, char* argv[]) {
   QApplication a(argc, argv);
 
   a.setApplicationDisplayName("Sane Break");
-  if (QSystemTrayIcon::isSystemTrayAvailable()) a.setQuitOnLastWindowClosed(false);
+  if (waitForTray()) a.setQuitOnLastWindowClosed(false);
 
   SanePreferences* preferences = SanePreferences::createDefault();
 
