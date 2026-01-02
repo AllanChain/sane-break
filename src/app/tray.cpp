@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "tray.h"
@@ -14,6 +14,7 @@
 #include <QPixmap>
 #include <QPushButton>
 #include <QSystemTrayIcon>
+#include <QTimer>
 #include <QVBoxLayout>
 #include <QWidget>
 
@@ -148,6 +149,13 @@ StatusTray::StatusTray(SanePreferences* preferences, QObject* parent)
   icon = new QSystemTrayIcon();
   icon->setContextMenu(menu);
   connect(icon, &QSystemTrayIcon::activated, this, &StatusTray::onIconTrigger);
+
+  emptyIconPixmap = QPixmap(32, 32);
+  emptyIconPixmap.fill(Qt::transparent);
+
+  flashTimer = new QTimer(this);
+  connect(flashTimer, &QTimer::timeout, this,
+          [this]() { icon->setIcon(emptyIconPixmap); });
 }
 void StatusTray::onIconTrigger(QSystemTrayIcon::ActivationReason reason) {
   switch (reason) {
@@ -168,6 +176,17 @@ void StatusTray::show() { icon->show(); }
 void StatusTray::update(TrayData data) {
   StatusTrayWindow::update(data);
   icon->setIcon(drawIcon(data));
+
+  if (data.secondsToNextBreak <= 10 && !data.pauseReasons && !data.isBreaking) {
+    if (!flashTimer->isActive()) {
+      QTimer::singleShot(500, [this]() {
+        icon->setIcon(emptyIconPixmap);
+        flashTimer->start(1000);
+      });
+    }
+  } else if (flashTimer->isActive()) {
+    flashTimer->stop();
+  }
 }
 void StatusTray::setTitle(QString str) { icon->setToolTip("Sane Break\n" + str); }
 

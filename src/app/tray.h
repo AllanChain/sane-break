@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
@@ -8,6 +8,7 @@
 #include <QMenu>
 #include <QObject>
 #include <QSystemTrayIcon>
+#include <QTimer>
 #include <QWidget>
 
 #include "core/app.h"
@@ -61,6 +62,8 @@ class StatusTray : public StatusTrayWindow {
 
  private:
   QSystemTrayIcon* icon;
+  QTimer* flashTimer;
+  QPixmap emptyIconPixmap;
 };
 
 class StatusWindowWidget : public QWidget {
