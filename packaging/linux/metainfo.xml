@@ -56,6 +56,25 @@
   </screenshots>
 
   <releases>
+  <release version="0.9.5" date="2026-01-03">
+    <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.9.5</url>
+    <description>
+      <p>Bug fixes</p>
+      <ul>
+        <li>fix preference window theme</li>
+        <li>try wait for tray before starting</li>
+      </ul>
+      <p>Changes</p>
+      <ul>
+        <li>flash tray icon 10 seconds before breaks</li>
+      </ul>
+      <p>Misc</p>
+      <ul>
+        <li>adopt Qt 6.10</li>
+        <li>translation update and add German translations</li>
+      </ul>
+    </description>
+  </release>
   <release version="0.9.4" date="2025-10-08">
     <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.9.4</url>
     <description>
