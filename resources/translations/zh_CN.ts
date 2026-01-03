@@ -74,12 +74,12 @@
 <context>
     <name>BreakWindow</name>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="126"/>
+        <location filename="../../src/app/break-window.cpp" line="131"/>
         <source>Break will end at: %1</source>
         <translation>休息将在 %1 结束</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="128"/>
+        <location filename="../../src/app/break-window.cpp" line="133"/>
         <source>Break has ended</source>
         <translation>休息已结束</translation>
     </message>
@@ -647,12 +647,12 @@ v%1
         <translation>如果你在使用 GNOME，那么需要安装对应的 shell 扩展，否则 Sane Break 不能正常使用</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="55"/>
+        <location filename="../../src/app/main.cpp" line="65"/>
         <source>Another instance of Sane Break is running.</source>
         <translation>另一个 Sane Break 实例正在运行。</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="56"/>
+        <location filename="../../src/app/main.cpp" line="66"/>
         <source>Please quit the old instance before starting a new one.</source>
         <translation>请先退出旧的实例，再运行新的。</translation>
     </message>
@@ -717,70 +717,70 @@ v%1
 <context>
     <name>StatusTrayWindow</name>
     <message>
-        <location filename="../../src/app/tray.cpp" line="52"/>
+        <location filename="../../src/app/tray.cpp" line="53"/>
         <source>Postpone</source>
         <translation>推迟</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/tray.cpp" line="55"/>
-        <location filename="../../src/app/tray.cpp" line="141"/>
+        <location filename="../../src/app/tray.cpp" line="56"/>
+        <location filename="../../src/app/tray.cpp" line="142"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n 分钟</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="58"/>
+        <location filename="../../src/app/tray.cpp" line="59"/>
         <source>Enable Break</source>
         <translation>启用休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="65"/>
+        <location filename="../../src/app/tray.cpp" line="66"/>
         <source>Preferences</source>
         <translation>偏好设置</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="68"/>
+        <location filename="../../src/app/tray.cpp" line="69"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="94"/>
+        <location filename="../../src/app/tray.cpp" line="95"/>
         <source>big break</source>
         <translation>大休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="94"/>
+        <location filename="../../src/app/tray.cpp" line="95"/>
         <source>small break</source>
         <translation>小休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="74"/>
+        <location filename="../../src/app/tray.cpp" line="75"/>
         <source>Next break after %1</source>
         <translation>%1 后休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="45"/>
+        <location filename="../../src/app/tray.cpp" line="46"/>
         <source>Take a small break instead</source>
         <translation>改为进行小休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="76"/>
+        <location filename="../../src/app/tray.cpp" line="77"/>
         <source>Next big break after %1</source>
         <translation>%1 后大休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="86"/>
+        <location filename="../../src/app/tray.cpp" line="87"/>
         <source>Paused on battery</source>
         <translation>因电池供电而暂停</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="88"/>
+        <location filename="../../src/app/tray.cpp" line="89"/>
         <source>Paused on app running</source>
         <translation>因特定应用运行而暂停</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="90"/>
+        <location filename="../../src/app/tray.cpp" line="91"/>
         <source>Paused on idle</source>
         <translation>因用户空闲而暂停</translation>
     </message>

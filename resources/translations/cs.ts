@@ -74,12 +74,12 @@
 <context>
     <name>BreakWindow</name>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="126"/>
+        <location filename="../../src/app/break-window.cpp" line="131"/>
         <source>Break will end at: %1</source>
         <translation type="unfinished">Přestávka skončí v: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="128"/>
+        <location filename="../../src/app/break-window.cpp" line="133"/>
         <source>Break has ended</source>
         <translation type="unfinished">Přestávka skončila</translation>
     </message>
@@ -655,12 +655,12 @@ v%1
         <translation type="unfinished">Musíte nainstalovat rozšíření shellu, pokud používáte GNOME. Jinak je Sane Break téměř nepoužitelný</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="55"/>
+        <location filename="../../src/app/main.cpp" line="65"/>
         <source>Another instance of Sane Break is running.</source>
         <translation type="unfinished">Další instance Sane Break běží.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="56"/>
+        <location filename="../../src/app/main.cpp" line="66"/>
         <source>Please quit the old instance before starting a new one.</source>
         <translation type="unfinished">Ukončete starou instanci před spuštěním nové.</translation>
     </message>
@@ -729,13 +729,13 @@ v%1
 <context>
     <name>StatusTrayWindow</name>
     <message>
-        <location filename="../../src/app/tray.cpp" line="52"/>
+        <location filename="../../src/app/tray.cpp" line="53"/>
         <source>Postpone</source>
         <translation type="unfinished">Odložit</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/tray.cpp" line="55"/>
-        <location filename="../../src/app/tray.cpp" line="141"/>
+        <location filename="../../src/app/tray.cpp" line="56"/>
+        <location filename="../../src/app/tray.cpp" line="142"/>
         <source>%n min</source>
         <translation type="unfinished">
             <numerusform>%n minuta</numerusform>
@@ -744,57 +744,57 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="58"/>
+        <location filename="../../src/app/tray.cpp" line="59"/>
         <source>Enable Break</source>
         <translation type="unfinished">Povolit přestávku</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="65"/>
+        <location filename="../../src/app/tray.cpp" line="66"/>
         <source>Preferences</source>
         <translation type="unfinished">Nastavení</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="68"/>
+        <location filename="../../src/app/tray.cpp" line="69"/>
         <source>Quit</source>
         <translation type="unfinished">Ukončit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="94"/>
+        <location filename="../../src/app/tray.cpp" line="95"/>
         <source>big break</source>
         <translation>velká přestávka</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="94"/>
+        <location filename="../../src/app/tray.cpp" line="95"/>
         <source>small break</source>
         <translation>malá přestávka</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="74"/>
+        <location filename="../../src/app/tray.cpp" line="75"/>
         <source>Next break after %1</source>
         <translation type="unfinished">Další přestávka po %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="45"/>
+        <location filename="../../src/app/tray.cpp" line="46"/>
         <source>Take a small break instead</source>
         <translation type="unfinished">Místo toho udělejte malou přestávku</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="76"/>
+        <location filename="../../src/app/tray.cpp" line="77"/>
         <source>Next big break after %1</source>
         <translation type="unfinished">Další velká přestávka po %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="86"/>
+        <location filename="../../src/app/tray.cpp" line="87"/>
         <source>Paused on battery</source>
         <translation type="unfinished">Pozastaveno kvůli baterii</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="88"/>
+        <location filename="../../src/app/tray.cpp" line="89"/>
         <source>Paused on app running</source>
         <translation type="unfinished">Pozastaveno kvůli běžící aplikaci</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="90"/>
+        <location filename="../../src/app/tray.cpp" line="91"/>
         <source>Paused on idle</source>
         <translation type="unfinished">Pozastaveno kvůli nečinnosti</translation>
     </message>

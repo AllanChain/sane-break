@@ -74,12 +74,12 @@
 <context>
     <name>BreakWindow</name>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="126"/>
+        <location filename="../../src/app/break-window.cpp" line="131"/>
         <source>Break will end at: %1</source>
         <translation>Перерыв закончится в: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="128"/>
+        <location filename="../../src/app/break-window.cpp" line="133"/>
         <source>Break has ended</source>
         <translation>Перерыв закончился</translation>
     </message>
@@ -683,12 +683,12 @@ v%1
         <translation type="unfinished">Вам нужно установить расширение оболочки, если вы используете GNOME. В противном случае, Sane Break почти непригоден для использования</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="55"/>
+        <location filename="../../src/app/main.cpp" line="65"/>
         <source>Another instance of Sane Break is running.</source>
         <translation>Запущен другой экземпляр Sane Break.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="56"/>
+        <location filename="../../src/app/main.cpp" line="66"/>
         <source>Please quit the old instance before starting a new one.</source>
         <translation>Пожалуйста, закройте другой экземпляр приложения, прежде чем запускать новый.</translation>
     </message>
@@ -761,13 +761,13 @@ v%1
 <context>
     <name>StatusTrayWindow</name>
     <message>
-        <location filename="../../src/app/tray.cpp" line="52"/>
+        <location filename="../../src/app/tray.cpp" line="53"/>
         <source>Postpone</source>
         <translation type="unfinished">Отложить</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/tray.cpp" line="55"/>
-        <location filename="../../src/app/tray.cpp" line="141"/>
+        <location filename="../../src/app/tray.cpp" line="56"/>
+        <location filename="../../src/app/tray.cpp" line="142"/>
         <source>%n min</source>
         <translation type="unfinished">
             <numerusform>%n мин</numerusform>
@@ -776,57 +776,57 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="58"/>
+        <location filename="../../src/app/tray.cpp" line="59"/>
         <source>Enable Break</source>
         <translation type="unfinished">Включить перерыв</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="65"/>
+        <location filename="../../src/app/tray.cpp" line="66"/>
         <source>Preferences</source>
         <translation type="unfinished">Настройки</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="68"/>
+        <location filename="../../src/app/tray.cpp" line="69"/>
         <source>Quit</source>
         <translation type="unfinished">Выйти</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="94"/>
+        <location filename="../../src/app/tray.cpp" line="95"/>
         <source>big break</source>
         <translation>длинный перерыв</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="94"/>
+        <location filename="../../src/app/tray.cpp" line="95"/>
         <source>small break</source>
         <translation>короткий перерыв</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="74"/>
+        <location filename="../../src/app/tray.cpp" line="75"/>
         <source>Next break after %1</source>
         <translation type="unfinished">Следующий перерыв через %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="45"/>
+        <location filename="../../src/app/tray.cpp" line="46"/>
         <source>Take a small break instead</source>
         <translation type="unfinished">Взять короткий перерыв вместо этого</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="76"/>
+        <location filename="../../src/app/tray.cpp" line="77"/>
         <source>Next big break after %1</source>
         <translation type="unfinished">Следующий длинный перерыв через %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="86"/>
+        <location filename="../../src/app/tray.cpp" line="87"/>
         <source>Paused on battery</source>
         <translation type="unfinished">Приостановлено на батарее</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="88"/>
+        <location filename="../../src/app/tray.cpp" line="89"/>
         <source>Paused on app running</source>
         <translation type="unfinished">Приостановлено при запуске приложения</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="90"/>
+        <location filename="../../src/app/tray.cpp" line="91"/>
         <source>Paused on idle</source>
         <translation type="unfinished">Приостановлено при бездействии</translation>
     </message>

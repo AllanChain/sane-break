@@ -86,12 +86,12 @@
         <translation type="vanished">Tijd voor een korte pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="126"/>
+        <location filename="../../src/app/break-window.cpp" line="131"/>
         <source>Break will end at: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="128"/>
+        <location filename="../../src/app/break-window.cpp" line="133"/>
         <source>Break has ended</source>
         <translation type="unfinished"></translation>
     </message>
@@ -736,12 +736,12 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation>Installeer de uitbreiding indien u gebruikmaakt van GNOME, anders zal Sane Break niet naar behoren werken.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="55"/>
+        <location filename="../../src/app/main.cpp" line="65"/>
         <source>Another instance of Sane Break is running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="56"/>
+        <location filename="../../src/app/main.cpp" line="66"/>
         <source>Please quit the old instance before starting a new one.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -875,13 +875,13 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
 <context>
     <name>StatusTrayWindow</name>
     <message>
-        <location filename="../../src/app/tray.cpp" line="52"/>
+        <location filename="../../src/app/tray.cpp" line="53"/>
         <source>Postpone</source>
         <translation>Uitstellen</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/tray.cpp" line="55"/>
-        <location filename="../../src/app/tray.cpp" line="141"/>
+        <location filename="../../src/app/tray.cpp" line="56"/>
+        <location filename="../../src/app/tray.cpp" line="142"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min.</numerusform>
@@ -889,57 +889,57 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="58"/>
+        <location filename="../../src/app/tray.cpp" line="59"/>
         <source>Enable Break</source>
         <translation>Pauze inschakelen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="65"/>
+        <location filename="../../src/app/tray.cpp" line="66"/>
         <source>Preferences</source>
         <translation>Instellingen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="68"/>
+        <location filename="../../src/app/tray.cpp" line="69"/>
         <source>Quit</source>
         <translation>Afsluiten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="94"/>
+        <location filename="../../src/app/tray.cpp" line="95"/>
         <source>big break</source>
         <translation>lange pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="94"/>
+        <location filename="../../src/app/tray.cpp" line="95"/>
         <source>small break</source>
         <translation>korte pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="74"/>
+        <location filename="../../src/app/tray.cpp" line="75"/>
         <source>Next break after %1</source>
         <translation>Volgende pauze over %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="45"/>
+        <location filename="../../src/app/tray.cpp" line="46"/>
         <source>Take a small break instead</source>
         <translation>Neem liever een korte pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="76"/>
+        <location filename="../../src/app/tray.cpp" line="77"/>
         <source>Next big break after %1</source>
         <translation>Volgende lange pauze over %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="86"/>
+        <location filename="../../src/app/tray.cpp" line="87"/>
         <source>Paused on battery</source>
         <translation>Opgeschort tijdens werken op accu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="88"/>
+        <location filename="../../src/app/tray.cpp" line="89"/>
         <source>Paused on app running</source>
         <translation>Opgeschort tijdens actief programma</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="90"/>
+        <location filename="../../src/app/tray.cpp" line="91"/>
         <source>Paused on idle</source>
         <translation>Opgeschort tijdens inactiviteit</translation>
     </message>

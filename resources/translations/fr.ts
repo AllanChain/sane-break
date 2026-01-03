@@ -86,12 +86,12 @@
         <translation type="vanished">Il est temps de faire une petite pause</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="126"/>
+        <location filename="../../src/app/break-window.cpp" line="131"/>
         <source>Break will end at: %1</source>
         <translation>La pause prendra fin à&#xa0;: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="128"/>
+        <location filename="../../src/app/break-window.cpp" line="133"/>
         <source>Break has ended</source>
         <translation>La pause est terminée</translation>
     </message>
@@ -721,12 +721,12 @@ v%1
         <translation>Si vous utilisez GNOME, vous devrez installer l&apos;extension &quot;shell&quot;, ou Sane Break sera presque inutilisable</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="55"/>
+        <location filename="../../src/app/main.cpp" line="65"/>
         <source>Another instance of Sane Break is running.</source>
         <translation>Une autre instance de Sane Break est en cours d’exécution.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="56"/>
+        <location filename="../../src/app/main.cpp" line="66"/>
         <source>Please quit the old instance before starting a new one.</source>
         <translation>Merci de quitter l&apos;ancienne instance avant d&apos;en démarrer une nouvelle.</translation>
     </message>
@@ -860,13 +860,13 @@ v%1
 <context>
     <name>StatusTrayWindow</name>
     <message>
-        <location filename="../../src/app/tray.cpp" line="52"/>
+        <location filename="../../src/app/tray.cpp" line="53"/>
         <source>Postpone</source>
         <translation>Retarder</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/tray.cpp" line="55"/>
-        <location filename="../../src/app/tray.cpp" line="141"/>
+        <location filename="../../src/app/tray.cpp" line="56"/>
+        <location filename="../../src/app/tray.cpp" line="142"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -874,57 +874,57 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="58"/>
+        <location filename="../../src/app/tray.cpp" line="59"/>
         <source>Enable Break</source>
         <translation>Activer pause</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="65"/>
+        <location filename="../../src/app/tray.cpp" line="66"/>
         <source>Preferences</source>
         <translation>Préférences</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="68"/>
+        <location filename="../../src/app/tray.cpp" line="69"/>
         <source>Quit</source>
         <translation>Quitter</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="94"/>
+        <location filename="../../src/app/tray.cpp" line="95"/>
         <source>big break</source>
         <translation>grosse pause</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="94"/>
+        <location filename="../../src/app/tray.cpp" line="95"/>
         <source>small break</source>
         <translation>petite pause</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="74"/>
+        <location filename="../../src/app/tray.cpp" line="75"/>
         <source>Next break after %1</source>
         <translation>Prochaine pause dans %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="45"/>
+        <location filename="../../src/app/tray.cpp" line="46"/>
         <source>Take a small break instead</source>
         <translation>Prendre une petite pause à la place</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="76"/>
+        <location filename="../../src/app/tray.cpp" line="77"/>
         <source>Next big break after %1</source>
         <translation>Grosse pause dans %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="86"/>
+        <location filename="../../src/app/tray.cpp" line="87"/>
         <source>Paused on battery</source>
         <translation>En pause sur batterie</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="88"/>
+        <location filename="../../src/app/tray.cpp" line="89"/>
         <source>Paused on app running</source>
         <translation>En pause lorsqu&apos;une application est lancée</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="90"/>
+        <location filename="../../src/app/tray.cpp" line="91"/>
         <source>Paused on idle</source>
         <translation>En pause en cas d&apos;inactivité</translation>
     </message>

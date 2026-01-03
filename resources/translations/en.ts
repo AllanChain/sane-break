@@ -53,8 +53,8 @@
 <context>
     <name>StatusTrayWindow</name>
     <message numerus="yes">
-        <location filename="../../../../src/app/tray.cpp" line="55"/>
-        <location filename="../../../../src/app/tray.cpp" line="141"/>
+        <location filename="../../../../src/app/tray.cpp" line="56"/>
+        <location filename="../../../../src/app/tray.cpp" line="142"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
