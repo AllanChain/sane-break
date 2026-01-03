@@ -46,12 +46,13 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     sane-break-app PRIVATE "${CMAKE_SOURCE_DIR}/packaging/windows/resources.rc"
   )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-  set(MACOSX_BUNDLE_ICON_FILE icon.icns)
-  set(SANE_BREAK_ICON ${CMAKE_SOURCE_DIR}/packaging/macos/icon.icns)
+  set(SANE_BREAK_ICON_LEGACY ${CMAKE_SOURCE_DIR}/packaging/macos/icon.icns)
+  set(SANE_BREAK_ICON_TAHOE ${CMAKE_SOURCE_DIR}/packaging/macos/Assets.car)
+  target_sources(sane-break-app PRIVATE ${SANE_BREAK_ICON} ${SANE_BREAK_ICON_TAHOE})
   set_source_files_properties(
-    ${SANE_BREAK_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources"
+    ${SANE_BREAK_ICON_LEGACY} ${SANE_BREAK_ICON_TAHOE}
+    PROPERTIES MACOSX_PACKAGE_LOCATION "Resources"
   )
-  target_sources(sane-break-app PRIVATE ${SANE_BREAK_ICON})
 
   set(MACOSX_BUNDLE_VERSION $ENV{GITHUB_RUN_NUMBER})
   if(NOT DEFINED MACOSX_BUNDLE_VERSION)
