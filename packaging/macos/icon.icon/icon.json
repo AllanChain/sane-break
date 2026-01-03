@@ -1,0 +1,120 @@
+{
+  "fill" : {
+    "linear-gradient" : [
+      "srgb:0.13333,0.77255,0.36863,1.00000",
+      "display-p3:0.08627,0.63922,0.29020,1.00000"
+    ],
+    "orientation" : {
+      "start" : {
+        "x" : 0.5,
+        "y" : 0
+      },
+      "stop" : {
+        "x" : 0.5,
+        "y" : 0.7
+      }
+    }
+  },
+  "groups" : [
+    {
+      "blur-material" : 0.5,
+      "layers" : [
+        {
+          "image-name" : "bow.svg",
+          "name" : "bow",
+          "position" : {
+            "scale" : 4,
+            "translation-in-points" : [
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "opacity" : 0.8,
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    },
+    {
+      "layers" : [
+        {
+          "image-name" : "b1.svg",
+          "name" : "b1",
+          "position" : {
+            "scale" : 4,
+            "translation-in-points" : [
+              -2.7559095178128246,
+              -0.59375
+            ]
+          }
+        },
+        {
+          "image-name" : "b2.svg",
+          "name" : "b2",
+          "position" : {
+            "scale" : 4,
+            "translation-in-points" : [
+              4.8387450797285965,
+              -1.3097910815480418
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    },
+    {
+      "blur-material" : null,
+      "layers" : [
+        {
+          "hidden" : false,
+          "image-name" : "p1.svg",
+          "name" : "p1",
+          "position" : {
+            "scale" : 4,
+            "translation-in-points" : [
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "hidden" : false,
+          "image-name" : "p2.svg",
+          "name" : "p2",
+          "position" : {
+            "scale" : 4,
+            "translation-in-points" : [
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "specular" : false,
+      "translucency" : {
+        "enabled" : false,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "squares" : "shared"
+  }
+}
