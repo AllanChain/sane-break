@@ -53,6 +53,6 @@ jobs:
         APPLE_PWD: ${{ secrets.PROD_MACOS_NOTARIZATION_PWD }}
       run: |
         set -xe
-        xcrun altool --validate-app --f release/sane-break.pkg -t macOS -u $APPLE_ID -p $APPLE_PWD --show-progress
-        xcrun altool --upload-app --f release/sane-break.pkg -t macOS -u $APPLE_ID -p $APPLE_PWD --show-progress
+        xcrun altool --validate-app --file release/sane-break.pkg -t macOS -u $APPLE_ID -p $APPLE_PWD --show-progress
+        xcrun altool --upload-app --file release/sane-break.pkg -t macOS -u $APPLE_ID -p $APPLE_PWD --show-progress
 
