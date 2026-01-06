@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: 'v21.1.2'
+    rev: 'v21.1.8'
     hooks:
       - id: clang-format
         types: ["c++"]
@@ -9,7 +9,7 @@ repos:
     hooks:
       - id: trailing-whitespace
   - repo: https://github.com/biomejs/pre-commit
-    rev: v2.2.5
+    rev: v2.3.10
     hooks:
       - id: biome-lint
         types_or: ["javascript", "css"]
@@ -22,7 +22,7 @@ repos:
     - id: cmake-format
       files: CMakeLists\.txt
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.13.3
+    rev: v0.14.10
     hooks:
       - id: ruff-check
         types: ["python"]
