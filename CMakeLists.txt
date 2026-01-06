@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.15)
 
 # Should be set before project call and be a cache variable
 set(CMAKE_OSX_DEPLOYMENT_TARGET
@@ -19,6 +19,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+cmake_policy(SET CMP0091 NEW)
 if(POLICY CMP0071)
   cmake_policy(SET CMP0071 NEW)
 endif()

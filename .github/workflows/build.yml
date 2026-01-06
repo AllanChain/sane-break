@@ -76,7 +76,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DSANE_BUILD_NSIS=1 ..
+        qt-cmake -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded -DSANE_BUILD_NSIS=1 ..
         cmake --build . --parallel --config Release --target msix
         cpack
 
