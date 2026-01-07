@@ -7,12 +7,12 @@
         <location filename="../../src/lib/linux/auto-start.cpp" line="54"/>
         <source>Failed to connect to Flatpak response</source>
         <extracomment>Error message when requesting autostart in Flatpak got no response</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Impossibile connettersi alla risposta di Flatpak</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="63"/>
         <source>Failed to read desktop entry packaged with app</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Impossibile leggere la voce del desktop inclusa nell&apos;app</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="77"/>
@@ -20,29 +20,29 @@
         <location filename="../../src/lib/linux/auto-start.cpp" line="93"/>
         <source>Autostart desktop entry not writable</source>
         <extracomment>Error message when failed to write Linux desktop entry for autostart</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">La voce del desktop per l&apos;avvio automatico non è scrivibile</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="111"/>
         <source>The request to autostart was cancelled</source>
         <extracomment>Error message when requesting autostart in Flatpak got cancelled by user</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">La richiesta di avvio automatico è stata annullata</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="45"/>
         <location filename="../../src/lib/windows/auto-start.cpp" line="62"/>
         <source>Disallowed by policy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Non consentito dalla politica</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="48"/>
         <source>Disallowed by user</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Non consentito dall&apos;utente</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="82"/>
         <source>Unknown error in MSIX autostart</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Errore sconosciuto nell&apos;avvio automatico MSIX</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="102"/>
@@ -63,12 +63,12 @@
     <message>
         <location filename="../../src/app/break-window.ui" line="210"/>
         <source>Lock Screen</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Blocca schermo</translation>
     </message>
     <message>
         <location filename="../../src/app/break-window.ui" line="264"/>
         <source>Exit Force Break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Esci dalla pausa forzata</translation>
     </message>
 </context>
 <context>
@@ -81,7 +81,7 @@
     <message>
         <location filename="../../src/app/break-window.cpp" line="133"/>
         <source>Break has ended</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">La pausa è terminata</translation>
     </message>
 </context>
 <context>
@@ -177,7 +177,7 @@
         <location filename="../../src/app/pref-window.ui" line="602"/>
         <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
         <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dopo essere stato inattivo per quel periodo durante la pausa, Sane Break rimarrà a schermo intero e non ci sarà modo di tornare indietro.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="605"/>
@@ -187,12 +187,12 @@
     <message>
         <location filename="../../src/app/pref-window.ui" line="676"/>
         <source>Close windows right after small break ends</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Chiudi le finestre subito dopo la fine della pausa breve</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="683"/>
         <source>Close windows right after big break ends</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Chiudi le finestre subito dopo la fine della pausa lunga</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="709"/>
@@ -218,7 +218,7 @@
     <message>
         <location filename="../../src/app/pref-window.ui" line="660"/>
         <source>Max number of force break exits</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Numero massimo di uscite dalla pausa forzata</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="110"/>
@@ -235,13 +235,15 @@
         <source>&lt;h3&gt;Components to Show&lt;/h3&gt;
 
 &lt;p&gt;User interface components to show in the prompt and full-screen window.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h3&gt;Componenti da mostrare&lt;/h3&gt;
+
+&lt;p&gt;Componenti dell&apos;interfaccia utente da mostrare nel prompt e nella finestra a schermo intero.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="831"/>
         <location filename="../../src/app/pref-window.ui" line="877"/>
         <source>Time when break ends</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Orario di fine pausa</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="852"/>
@@ -302,7 +304,7 @@ Tutti i colori sono in formato &lt;code&gt;#AARRGGBB&lt;/code&gt;.</translation>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1038"/>
         <source>&lt;h3&gt;Pause Conditions&lt;/h3&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h3&gt;Condizioni di pausa&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1191"/>
@@ -320,7 +322,9 @@ Tutti i colori sono in formato &lt;code&gt;#AARRGGBB&lt;/code&gt;.</translation>
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
         <extracomment>Tooltip for &quot;Auto screen lock&quot; config</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Supponiamo che tu l&apos;abbia configurato su 2 minuti. Se la pausa è più breve di 2 minuti,
+lo schermo si bloccherà 2 minuti dopo l&apos;inizio della pausa, a condizione che non ci sia attività dopo la
+pausa. Se la pausa è più lunga di 2 minuti, lo schermo verrà bloccato comunque.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1462"/>
@@ -341,7 +345,13 @@ v%1
 &lt;p&gt;Remind breaks without mindless skips. &lt;/p&gt;
 &lt;p&gt;2024-2025, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break developers&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
 &lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;div&gt;
+&lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
+v%1
+&lt;/div&gt;
+&lt;p&gt;Promemoria per pause senza salti inutili. &lt;/p&gt;
+&lt;p&gt;2024-2025, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;sviluppatori di Sane Break&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.it.html&quot;&gt;GPL 3.0&lt;/a&gt;)
+&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="318"/>
@@ -377,13 +387,13 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="1349"/>
         <location filename="../../src/app/pref-window.ui" line="1356"/>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Riproduci</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1047"/>
         <source>Sane Break will pause if it detects no activity for this many minutes</source>
         <extracomment>Tooltip for &quot;Pause if idle for&quot; config</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sane Break metterà in pausa se rileva nessuna attività per questo numero di minuti</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1050"/>
@@ -403,14 +413,14 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="1175"/>
         <location filename="../../src/app/pref-window.ui" line="1229"/>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">min</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="277"/>
         <location filename="../../src/app/pref-window.ui" line="551"/>
         <location filename="../../src/app/pref-window.ui" line="640"/>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sec</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="321"/>
@@ -421,7 +431,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1382"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: You can use local sound files with URLs like &lt;code&gt;file:/D:sound.mp3&lt;/code&gt;  (Windows) or &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;strong&gt;Suggerimento&lt;/strong&gt;: Puoi usare file audio locali con URL come &lt;code&gt;file:/D:sound.mp3&lt;/code&gt; (Windows) o &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="384"/>
@@ -438,17 +448,18 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="535"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
 &lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h3&gt;Comportamento del promemoria&lt;/h3&gt;
+&lt;p&gt;Sane Break mostra un piccolo prompt per &lt;b&gt;%1&lt;/b&gt; secondi. Se interrompi la tua attività durante quel tempo, o scegli di continuare fino allo scadere del timer, passa alla modalità a schermo intero. Durante la pausa, Sane Break si blocca in modalità schermo intero dopo &lt;b&gt;%2&lt;/b&gt; secondi di inattività. Se riprendi l&apos;attività prima del blocco, il prompt si riduce temporaneamente a una piccola finestra ma ritorna a schermo intero quando sei nuovamente inattivo o il timer termina.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="595"/>
         <source>Show break prompt for</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mostra il prompt della pausa per</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="815"/>
         <source>&lt;h4&gt;Small break&lt;/h4&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h4&gt;Pausa breve&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="861"/>
@@ -458,17 +469,17 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1014"/>
         <source>&lt;p&gt;To preview break windows, save all changes first. The preview begins with a 2-second flashing prompt, followed by a 4-second full-screen break. A small break window will appear first, then a big break window.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;p&gt;Per visualizzare in anteprima le finestre di pausa, salva prima tutte le modifiche. L&apos;anteprima inizia con un prompt lampeggiante di 2 secondi, seguito da una pausa a schermo intero di 4 secondi. Apparirà prima una finestra di pausa breve, poi una finestra di pausa lunga.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1024"/>
         <source>Preview Break Windows</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Anteprima finestre di pausa</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1109"/>
         <source>Pause on battery</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pausa su batteria</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1116"/>
@@ -478,7 +489,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1123"/>
         <source>(Write one program name per line)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(Scrivi un nome di programma per riga)</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1130"/>
@@ -488,7 +499,12 @@ v%1
   &lt;li&gt;If the pause is short, Sane Break will reset the time to the next break.&lt;/li&gt;
   &lt;li&gt;If it is longer, Sane Break will reset the entire break cycle, and the next break will be the first small break in the cycle.&lt;/li&gt;
 &lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h3&gt;Ripristina programma pause dopo pausa&lt;/h3&gt;
+&lt;p&gt;Sane Break regolerà il programma delle pause dopo una pausa:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Se la pausa è breve, Sane Break reimposterà il tempo per la prossima pausa.&lt;/li&gt;
+  &lt;li&gt;Se è più lunga, Sane Break reimposterà l&apos;intero ciclo di pause, e la prossima pausa sarà la prima pausa breve del ciclo.&lt;/li&gt;
+&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1408"/>
@@ -498,7 +514,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1477"/>
         <source>Launch Sane Break at start up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Avvia Sane Break all&apos;avvio</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1603"/>
@@ -513,7 +529,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1665"/>
         <source>Revert to Last Saved</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ripristina ultima impostazione salvata</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1401"/>
@@ -549,15 +565,15 @@ v%1
         <location filename="../../src/app/pref-window.cpp" line="403"/>
         <source>%n min</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n minuto</numerusform>
+            <numerusform>%n minuti</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/pref-window.cpp" line="167"/>
         <location filename="../../src/app/pref-window.cpp" line="178"/>
         <source>Every %n min</source>
-        <translation>
+        <translation type="unfinished">
             <numerusform>Ogni %n min</numerusform>
             <numerusform>Ogni %n min</numerusform>
         </translation>
@@ -566,8 +582,8 @@ v%1
         <location filename="../../src/app/pref-window.cpp" line="400"/>
         <source>%n sec</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n secondo</numerusform>
+            <numerusform>%n secondi</numerusform>
         </translation>
     </message>
     <message>
@@ -578,12 +594,12 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.cpp" line="410"/>
         <source>Start next break after middle clicking on tray icon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Inizia la prossima pausa dopo aver fatto clic col tasto centrale sull&apos;icona nella barra</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="415"/>
         <source>Start next break after double clicking on tray icon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Inizia la prossima pausa dopo aver fatto doppio clic sull&apos;icona nella barra</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="493"/>
@@ -603,7 +619,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.cpp" line="375"/>
         <source>Setting autostart failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Impostazione avvio automatico fallita</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="490"/>
@@ -621,17 +637,17 @@ v%1
     <message>
         <location filename="../../src/lib/linux/system-check.cpp" line="59"/>
         <source>Tray icon is not available, falling back to a normal window</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">L&apos;icona nella barra non è disponibile, ripiego su una normale finestra</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/system-check.cpp" line="63"/>
         <source>The compositor does not support layer shell, and window positioning will be bugged</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Il compositor non supporta layer shell e il posizionamento della finestra avrà problemi</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/system-check.cpp" line="66"/>
         <source>You need to install the shell extension if you are using GNOME. Otherwise, Sane break is almost unusable</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Devi installare l&apos;estensione shell se stai usando GNOME. Altrimenti, Sane Break è quasi inutilizzabile</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="65"/>
@@ -665,7 +681,7 @@ v%1
     <message numerus="yes">
         <location filename="../../src/app/app.cpp" line="81"/>
         <source>Are you sure to postpone for %n minute?</source>
-        <translation>
+        <translation type="unfinished">
             <numerusform>Vuoi rinviare per %n minuto?</numerusform>
             <numerusform>Vuoi rinviare per %n minuti?</numerusform>
         </translation>
@@ -678,7 +694,7 @@ v%1
     <message numerus="yes">
         <location filename="../../src/app/app.cpp" line="110"/>
         <source>Postpone %n min</source>
-        <translation>
+        <translation type="unfinished">
             <numerusform>Posponi %n min</numerusform>
             <numerusform>Posponi %n min</numerusform>
         </translation>
@@ -715,14 +731,14 @@ v%1
         <location filename="../../src/app/tray.cpp" line="142"/>
         <source>%n min</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n min</numerusform>
+            <numerusform>%n min</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="59"/>
         <source>Enable Break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Abilita pausa</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="66"/>
@@ -747,32 +763,32 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="75"/>
         <source>Next break after %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Prossima pausa dopo %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="46"/>
         <source>Take a small break instead</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fai una pausa breve invece</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="77"/>
         <source>Next big break after %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Prossima pausa lunga dopo %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="87"/>
         <source>Paused on battery</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">In pausa sulla batteria</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="89"/>
         <source>Paused on app running</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">In pausa perché un&apos;&apos;app è in esecuzione</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="91"/>
         <source>Paused on idle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">In pausa per inattività</translation>
     </message>
 </context>
 <context>
@@ -785,7 +801,7 @@ v%1
     <message>
         <location filename="../../src/app/welcome.cpp" line="117"/>
         <source>&lt;h3 align=center&gt;Welcome to Sane Break!&lt;/h3&gt;&lt;p&gt;Sane Break is a cross-platform break reminder designed to help you take meaningful breaks without disrupting your workflow. Sane Break will stay in the system tray and remind you to take breaks at regular intervals. To quit, go to &quot;Postpone&quot; in the tray menu.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h3 align=center&gt;Benvenuti a Sane Break!&lt;/h3&gt;&lt;p&gt;Sane Break è un promemoria per pause multipiattaforma progettato per aiutarti a fare pause significative senza interrompere il tuo flusso di lavoro. Sane Break rimarrà nella barra delle applicazioni e ti ricorderà di fare pause a intervalli regolari. Per uscire, vai su &quot;Posponi&quot; nel menu della barra.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/welcome.cpp" line="96"/>

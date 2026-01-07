@@ -564,7 +564,7 @@ v%1
         <location filename="../../src/app/pref-window.cpp" line="402"/>
         <location filename="../../src/app/pref-window.cpp" line="403"/>
         <source>%n min</source>
-        <translation>
+        <translation type="unfinished">
             <numerusform>%n min</numerusform>
             <numerusform>%n min</numerusform>
         </translation>
@@ -573,7 +573,7 @@ v%1
         <location filename="../../src/app/pref-window.cpp" line="167"/>
         <location filename="../../src/app/pref-window.cpp" line="178"/>
         <source>Every %n min</source>
-        <translation>
+        <translation type="unfinished">
             <numerusform>Varje %n min</numerusform>
             <numerusform>Varje %n min</numerusform>
         </translation>
@@ -581,7 +581,7 @@ v%1
     <message numerus="yes">
         <location filename="../../src/app/pref-window.cpp" line="400"/>
         <source>%n sec</source>
-        <translation>
+        <translation type="unfinished">
             <numerusform>%n s</numerusform>
             <numerusform>%n s</numerusform>
         </translation>
@@ -681,7 +681,7 @@ v%1
     <message numerus="yes">
         <location filename="../../src/app/app.cpp" line="81"/>
         <source>Are you sure to postpone for %n minute?</source>
-        <translation>
+        <translation type="unfinished">
             <numerusform>Är du säker på att du vill skjuta upp i %n minut?</numerusform>
             <numerusform>Är du säker på att du vill skjuta upp i %n minuter?</numerusform>
         </translation>
@@ -694,7 +694,7 @@ v%1
     <message numerus="yes">
         <location filename="../../src/app/app.cpp" line="110"/>
         <source>Postpone %n min</source>
-        <translation>
+        <translation type="unfinished">
             <numerusform>Skjut upp %n min</numerusform>
             <numerusform>Skjut upp %n min</numerusform>
         </translation>
@@ -730,7 +730,7 @@ v%1
         <location filename="../../src/app/tray.cpp" line="56"/>
         <location filename="../../src/app/tray.cpp" line="142"/>
         <source>%n min</source>
-        <translation>
+        <translation type="unfinished">
             <numerusform>%n min</numerusform>
             <numerusform>%n min</numerusform>
         </translation>
