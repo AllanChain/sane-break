@@ -429,18 +429,18 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1382"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: You can use local sound files with URLs like &lt;code&gt;file:/D:sound.mp3&lt;/code&gt;  (Windows) or &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</source>
-        <translation type="unfinished">&lt;strong&gt;Tipp&lt;/strong&gt;: Sie können lokale Sounddateien mit URLs wie &lt;code&gt;file:/D:sound.mp3&lt;/code&gt; (Windows) oder &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux) verwenden.</translation>
+        <translation>&lt;strong&gt;Tipp&lt;/strong&gt;: Lokale Sounddateien können mit URLs wie &lt;code&gt;file:/D:sound.mp3&lt;/code&gt; (Windows) oder &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux) verwendet werden.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="384"/>
         <location filename="../../src/app/pref-window.ui" line="1320"/>
         <source>&lt;h3&gt;Big Breaks&lt;/h3&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;Große Pausen&lt;/h3&gt;</translation>
+        <translation>&lt;h3&gt;Große Pausen&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="393"/>
         <source> breaks</source>
-        <translation type="unfinished">Pausen</translation>
+        <translation> Pausen</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="535"/>
@@ -477,7 +477,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1109"/>
         <source>Pause on battery</source>
-        <translation type="unfinished">Bei Akku pausieren</translation>
+        <translation type="unfinished">Bei Akkunutzung anhalten</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1116"/>

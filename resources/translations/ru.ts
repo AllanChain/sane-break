@@ -793,7 +793,7 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="95"/>
         <source>big break</source>
-        <translation>длинный перерыв</translation>
+        <translation>Noдлинный перерыв</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="95"/>
