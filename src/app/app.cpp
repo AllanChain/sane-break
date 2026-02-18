@@ -22,6 +22,7 @@
 #include "app/pref-window.h"
 #include "app/tray.h"
 #include "app/widgets/language-select.h"
+#include "core/app-states.h"
 #include "core/app.h"
 #include "core/db.h"
 #include "core/preferences.h"
@@ -117,28 +118,18 @@ void SaneBreakApp::openPostponeWindow() {
     return;
   }
   PostponeWindow* postponeWindow = new PostponeWindow(preferences, db);
-  connect(postponeWindow, &PostponeWindow::cancelled, this,
-          [=]() { postponeWindow->deleteLater(); });
   connect(postponeWindow, &PostponeWindow::postponeRequested, this,
-          [this, postponeWindow](int seconds) {
-            postpone(seconds);
-            postponeWindow->deleteLater();
-          });
+          &SaneBreakApp::postpone);
   postponeWindow->show();
 }
 
 void SaneBreakApp::openMeetingWindow() {
   if (m_currentState->getID() == AppState::Meeting || data->isPostponing()) return;
   MeetingWindow* meetingWindow = new MeetingWindow(preferences, db);
-  connect(meetingWindow, &MeetingWindow::cancelled, this,
-          [=]() { meetingWindow->deleteLater(); });
   connect(meetingWindow, &MeetingWindow::meetingRequested, this,
-          [this, meetingWindow](QTime endTime, QString reason) {
+          [this](QTime endTime, QString reason) {
             int seconds = QTime::currentTime().secsTo(endTime);
-            if (seconds > 0) {
-              startMeeting(seconds, reason);
-            }
-            meetingWindow->deleteLater();
+            if (seconds > 0) startMeeting(seconds, reason);
           });
   meetingWindow->show();
 }

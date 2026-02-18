@@ -15,6 +15,7 @@
 #include <QTimeEdit>
 #include <QTimer>
 #include <QWidget>
+#include <Qt>
 #include <cmath>
 
 #include "core/db.h"
@@ -25,15 +26,18 @@ PostponeWindow::PostponeWindow(SanePreferences* preferences, BreakDatabase* db,
                                QWidget* parent)
     : QWidget(parent), ui(new Ui::PostponeUI), preferences(preferences), db(db) {
   ui->setupUi(this);
+  setAttribute(Qt::WA_DeleteOnClose);
   ui->postponeMinutes->setMaximum(preferences->smallEvery->get() *
                                   preferences->postponeMaxMinutePercent->get() / 60 /
                                   100);
   onMinutesUpdate(0);
   connect(ui->postponeMinutes, &QSpinBox::valueChanged, this,
           &PostponeWindow::onMinutesUpdate);
-  connect(ui->cancelButton, &QPushButton::pressed, this, &PostponeWindow::cancelled);
-  connect(ui->postponeButton, &QPushButton::pressed, this,
-          [this]() { emit postponeRequested(ui->postponeMinutes->value() * 60); });
+  connect(ui->cancelButton, &QPushButton::pressed, this, &PostponeWindow::close);
+  connect(ui->postponeButton, &QPushButton::pressed, this, [this]() {
+    close();
+    emit postponeRequested(ui->postponeMinutes->value() * 60);
+  });
 }
 
 void PostponeWindow::onMinutesUpdate(int minutes) {

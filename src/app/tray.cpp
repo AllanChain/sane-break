@@ -144,7 +144,9 @@ void StatusTrayWindow::update(TrayData data) {
 TrayIconSpec trayIconSpec(TrayData data) {
   if (data.pauseReasons || data.isBreaking ||
       data.secondsToNextBreak > data.secondsFromLastBreakToNext)
-    return {.baseIcon = ":/images/icon-pause.png"};
+    return {.baseIcon = ":/images/icon-pause.png",
+            .arc = std::nullopt,
+            .dot = std::nullopt};
 
   if (data.isInMeeting) {
     float arcRatio =
@@ -154,6 +156,7 @@ TrayIconSpec trayIconSpec(TrayData data) {
     return {
         .baseIcon = ":/images/icon-pause.png",
         .arc = TrayArcSpec{QColor(8, 47, 73), QColor(224, 242, 254), arcRatio},
+        .dot = std::nullopt,
     };
   }
 

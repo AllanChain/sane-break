@@ -31,7 +31,6 @@ class MeetingWindow : public QWidget {
   ~MeetingWindow() = default;
 
  signals:
-  void cancelled();
   void meetingRequested(QTime endTime, QString reason);
 
  private:

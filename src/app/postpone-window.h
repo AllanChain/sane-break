@@ -31,7 +31,6 @@ class PostponeWindow : public QWidget {
   ~PostponeWindow() = default;
 
  signals:
-  void cancelled();
   void postponeRequested(int seconds);
 
  private:
