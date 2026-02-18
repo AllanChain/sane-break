@@ -317,7 +317,7 @@ Tutti i colori sono in formato &lt;code&gt;#AARRGGBB&lt;/code&gt;.</translation>
         <translation>Soglia pausa breve</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1457"/>
+        <location filename="../../src/app/pref-window.ui" line="1476"/>
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
@@ -327,17 +327,17 @@ lo schermo si bloccherà 2 minuti dopo l&apos;inizio della pausa, a condizione c
 pausa. Se la pausa è più lunga di 2 minuti, lo schermo verrà bloccato comunque.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1462"/>
+        <location filename="../../src/app/pref-window.ui" line="1481"/>
         <source>Automatic screen lock after break start</source>
         <translation>Blocco dello schermo automatico dopo l&apos;inizio della pausa</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1440"/>
+        <location filename="../../src/app/pref-window.ui" line="1427"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Aiutaci a tradurre!&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1579"/>
+        <location filename="../../src/app/pref-window.ui" line="1598"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -507,52 +507,57 @@ v%1
 &lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1408"/>
+        <location filename="../../src/app/pref-window.ui" line="1420"/>
         <source>Configuration file</source>
         <translation>File di configurazione</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1477"/>
+        <location filename="../../src/app/pref-window.ui" line="1450"/>
+        <source>Database file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1496"/>
         <source>Launch Sane Break at start up</source>
         <translation type="unfinished">Avvia Sane Break all&apos;avvio</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1603"/>
+        <location filename="../../src/app/pref-window.ui" line="1622"/>
         <source>Get the Source Code</source>
         <translation>Ottieni il codice sorgente</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1632"/>
+        <location filename="../../src/app/pref-window.ui" line="1651"/>
         <source>Help Us Translate!</source>
         <translation>Aiutaci a tradurre!</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1665"/>
+        <location filename="../../src/app/pref-window.ui" line="1684"/>
         <source>Revert to Last Saved</source>
         <translation type="unfinished">Ripristina ultima impostazione salvata</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1401"/>
+        <location filename="../../src/app/pref-window.ui" line="1398"/>
         <source>Language</source>
         <translation>Lingua</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1427"/>
+        <location filename="../../src/app/pref-window.ui" line="1437"/>
         <source>Change of language will take effect after app restart.</source>
         <translation>Il cambio della lingua avrà effetto dopo il riavvio dell&apos;app.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1623"/>
+        <location filename="../../src/app/pref-window.ui" line="1642"/>
         <source>Third-party Libraries Licenses</source>
         <translation>Licenze librerie di terze parti</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1672"/>
+        <location filename="../../src/app/pref-window.ui" line="1691"/>
         <source>Defaults</source>
         <translation>Predefiniti</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1695"/>
+        <location filename="../../src/app/pref-window.ui" line="1714"/>
         <source>Save</source>
         <translation>Salva</translation>
     </message>
@@ -560,9 +565,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="401"/>
-        <location filename="../../src/app/pref-window.cpp" line="402"/>
         <location filename="../../src/app/pref-window.cpp" line="403"/>
+        <location filename="../../src/app/pref-window.cpp" line="404"/>
+        <location filename="../../src/app/pref-window.cpp" line="405"/>
         <source>%n min</source>
         <translation type="unfinished">
             <numerusform>%n minuto</numerusform>
@@ -570,8 +575,8 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="167"/>
-        <location filename="../../src/app/pref-window.cpp" line="178"/>
+        <location filename="../../src/app/pref-window.cpp" line="168"/>
+        <location filename="../../src/app/pref-window.cpp" line="179"/>
         <source>Every %n min</source>
         <translation type="unfinished">
             <numerusform>Ogni %n min</numerusform>
@@ -579,7 +584,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="400"/>
+        <location filename="../../src/app/pref-window.cpp" line="402"/>
         <source>%n sec</source>
         <translation type="unfinished">
             <numerusform>%n secondo</numerusform>
@@ -587,47 +592,47 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="399"/>
+        <location filename="../../src/app/pref-window.cpp" line="401"/>
         <source>Disabled</source>
         <translation>Disattivato</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="410"/>
+        <location filename="../../src/app/pref-window.cpp" line="412"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation type="unfinished">Inizia la prossima pausa dopo aver fatto clic col tasto centrale sull&apos;icona nella barra</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="415"/>
+        <location filename="../../src/app/pref-window.cpp" line="417"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation type="unfinished">Inizia la prossima pausa dopo aver fatto doppio clic sull&apos;icona nella barra</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="493"/>
+        <location filename="../../src/app/pref-window.cpp" line="495"/>
         <source>Save</source>
         <translation>Salva</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="494"/>
+        <location filename="../../src/app/pref-window.cpp" line="496"/>
         <source>Discard</source>
         <translation>Scarta</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="495"/>
+        <location filename="../../src/app/pref-window.cpp" line="497"/>
         <source>Cancel</source>
         <translation>Annulla</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="375"/>
+        <location filename="../../src/app/pref-window.cpp" line="377"/>
         <source>Setting autostart failed</source>
         <translation type="unfinished">Impostazione avvio automatico fallita</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="490"/>
+        <location filename="../../src/app/pref-window.cpp" line="492"/>
         <source>The preferences have been modified.</source>
         <translation>Le impostazioni sono state modificate.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="491"/>
+        <location filename="../../src/app/pref-window.cpp" line="493"/>
         <source>Do you want to save your changes?</source>
         <translation>Vuoi salvare i tuoi cambiamenti?</translation>
     </message>
@@ -663,23 +668,23 @@ v%1
 <context>
     <name>SaneBreakApp</name>
     <message>
-        <location filename="../../src/app/app.cpp" line="106"/>
+        <location filename="../../src/app/app.cpp" line="125"/>
         <source>Are you sure to quit Sane Break?</source>
         <translation>Vuoi chiudere Sane Break?</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="107"/>
+        <location filename="../../src/app/app.cpp" line="126"/>
         <source>You can postpone the breaks instead.</source>
         <translation>Puoi rimandare le pause invece.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="85"/>
-        <location filename="../../src/app/app.cpp" line="109"/>
+        <location filename="../../src/app/app.cpp" line="104"/>
+        <location filename="../../src/app/app.cpp" line="128"/>
         <source>Cancel</source>
         <translation>Annulla</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/app.cpp" line="81"/>
+        <location filename="../../src/app/app.cpp" line="100"/>
         <source>Are you sure to postpone for %n minute?</source>
         <translation type="unfinished">
             <numerusform>Vuoi rinviare per %n minuto?</numerusform>
@@ -687,12 +692,12 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="82"/>
+        <location filename="../../src/app/app.cpp" line="101"/>
         <source>You haven&apos;t taken breaks for %1 minutes.</source>
         <translation>Non hai fatto pause per %1 minuti.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/app.cpp" line="110"/>
+        <location filename="../../src/app/app.cpp" line="129"/>
         <source>Postpone %n min</source>
         <translation type="unfinished">
             <numerusform>Posponi %n min</numerusform>
@@ -700,8 +705,8 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="86"/>
-        <location filename="../../src/app/app.cpp" line="111"/>
+        <location filename="../../src/app/app.cpp" line="105"/>
+        <location filename="../../src/app/app.cpp" line="130"/>
         <source>Yes</source>
         <translation>Sì</translation>
     </message>
