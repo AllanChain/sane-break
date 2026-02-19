@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StatsWindow</class>
+ <widget class="QWidget" name="StatsWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>424</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>420</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Statistics</string>
+  </property>
+  <layout class="QVBoxLayout" name="main">
+   <property name="spacing">
+    <number>16</number>
+   </property>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QGroupBox" name="todayGroup">
+       <property name="title">
+        <string>Today</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="DynamicLabel" name="todayBreaksLabel">
+          <property name="text">
+           <string>%1 breaks (%2 completed)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="DynamicLabel" name="todayTimeLabel">
+          <property name="text">
+           <string>Break time: %1</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="DynamicLabel" name="todayPostponeLabel">
+          <property name="text">
+           <string>%1 postponed</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="DynamicLabel" name="todayActiveLabel">
+          <property name="text">
+           <string>Active usage: %1</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="DynamicLabel" name="todayTotalLabel">
+          <property name="text">
+           <string>Total usage: %1</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="weekGroup">
+       <property name="title">
+        <string>Last 7 Days</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="DynamicLabel" name="weekBreaksLabel">
+          <property name="text">
+           <string>%1 breaks (%2 completed)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="DynamicLabel" name="weekTimeLabel">
+          <property name="text">
+           <string>Break time: %1</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="DynamicLabel" name="weekPostponeLabel">
+          <property name="text">
+           <string>%1 postponed</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="DynamicLabel" name="weekActiveLabel">
+          <property name="text">
+           <string>Active usage: %1</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="DynamicLabel" name="weekTotalLabel">
+          <property name="text">
+           <string>Total usage: %1</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item alignment="Qt::AlignmentFlag::AlignHCenter">
+    <widget class="QLabel" name="breakdownHeader">
+     <property name="text">
+      <string>&lt;h3&gt;Daily Breakdown&lt;/h3&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="TimelineGraphicsView" name="timelineView">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::NoFrame</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Orientation::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DynamicLabel</class>
+   <extends>QLabel</extends>
+   <header>widgets/dynamic-label.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TimelineGraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header>widgets/timeline-view.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

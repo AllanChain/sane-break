@@ -26,14 +26,15 @@
 #include "core/app.h"
 #include "core/db.h"
 #include "core/preferences.h"
+#include "focus-window.h"
 #include "idle/factory.h"
 #include "lib/screen-lock.h"
 #include "lib/system-monitor.h"
 #include "lib/timer.h"
 #include "meeting-prompt.h"
-#include "focus-window.h"
 #include "meeting-window.h"
 #include "postpone-window.h"
+#include "stats-window.h"
 
 #if (defined(Q_OS_LINUX) or defined(Q_OS_MACOS))
 #include "app/unix/signal-handler.h"
@@ -62,14 +63,15 @@ SaneBreakApp::SaneBreakApp(const AppDependencies& deps, QObject* parent)
           &SaneBreakApp::openMeetingWindow);
   connect(tray, &StatusTrayWindow::focusRequested, this,
           &SaneBreakApp::openFocusWindow);
-  connect(tray, &StatusTrayWindow::endFocusRequested, this,
-          &SaneBreakApp::endFocus);
+  connect(tray, &StatusTrayWindow::endFocusRequested, this, &SaneBreakApp::endFocus);
   connect(tray, &StatusTrayWindow::endMeetingBreakNowRequested, this,
           &SaneBreakApp::endMeetingBreakNow);
   connect(tray, &StatusTrayWindow::extendMeetingRequested, this,
           &SaneBreakApp::extendMeeting);
   connect(tray, &StatusTrayWindow::preferenceWindowRequested, this,
           &SaneBreakApp::showPreferences);
+  connect(tray, &StatusTrayWindow::statsRequested, this,
+          &SaneBreakApp::openStatsWindow);
   connect(tray, &StatusTrayWindow::enableBreakRequested, this,
           &SaneBreakApp::enableBreak);
   connect(tray, &StatusTrayWindow::quitRequested, this, &SaneBreakApp::confirmQuit);
@@ -120,14 +122,18 @@ static void showAndActivate(QWidget* window) {
 
 void SaneBreakApp::showPreferences() { showAndActivate(prefWindow); }
 
+void SaneBreakApp::openStatsWindow() {
+  if (!statsWindow) statsWindow = new StatsWindow(db);
+  showAndActivate(statsWindow);
+}
+
 void SaneBreakApp::openFocusWindow() {
   if (data->isFocusMode() || m_currentState->getID() == AppState::Meeting ||
       data->isPostponing())
     return;
   if (!focusWindow) {
     focusWindow = new FocusWindow(preferences);
-    connect(focusWindow, &FocusWindow::focusRequested, this,
-            &SaneBreakApp::startFocus);
+    connect(focusWindow, &FocusWindow::focusRequested, this, &SaneBreakApp::startFocus);
   }
   showAndActivate(focusWindow);
 }
@@ -136,8 +142,7 @@ void SaneBreakApp::openPostponeWindow() {
   if (data->isFocusMode()) {
     QMessageBox msgBox;
     msgBox.setText(tr("Cannot postpone during focus mode."));
-    msgBox.setInformativeText(
-        tr("End focus mode first if you want to postpone."));
+    msgBox.setInformativeText(tr("End focus mode first if you want to postpone."));
     msgBox.setIcon(QMessageBox::Icon::Warning);
     msgBox.addButton(QMessageBox::Ok)->setText(tr("OK"));
     msgBox.exec();

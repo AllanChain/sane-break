@@ -125,19 +125,24 @@ void MeetingData::clear() {
   isActive = false;
   secondsRemaining = 0;
   totalSeconds = 0;
+  reason.clear();
 }
 void FocusData::clear() {
   isActive = false;
   cyclesRemaining = 0;
   totalCycles = 0;
+  spanId = -1;
 }
 bool AppData::isInMeeting() const { return m_meetingData.isActive; }
 int AppData::meetingSecondsRemaining() const { return m_meetingData.secondsRemaining; }
 int AppData::meetingTotalSeconds() const { return m_meetingData.totalSeconds; }
-void AppData::setMeetingData(int secondsRemaining, int totalSeconds) {
+QString AppData::meetingReason() const { return m_meetingData.reason; }
+void AppData::setMeetingData(int secondsRemaining, int totalSeconds,
+                             const QString& reason) {
   m_meetingData.isActive = true;
   m_meetingData.secondsRemaining = secondsRemaining;
   m_meetingData.totalSeconds = totalSeconds;
+  m_meetingData.reason = reason;
   emit changed();
 }
 void AppData::clearMeetingData() {
@@ -175,6 +180,8 @@ void AppData::setFocusCyclesRemaining(int cycles) {
   m_focusData.cyclesRemaining = cycles;
   emit changed();
 }
+int AppData::focusSpanId() const { return m_focusData.spanId; }
+void AppData::setFocusSpanId(int id) { m_focusData.spanId = id; }
 
 int AppData::effectiveSmallEvery() {
   return m_focusData.isActive ? preferences->focusSmallEvery->get()

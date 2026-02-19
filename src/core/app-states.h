@@ -90,6 +90,12 @@ class AppContext : public QObject {
   AbstractMeetingPrompt* meetingPrompt;
   BreakDatabase* db;
 
+  int currentSpanId = -1;
+  int openCurrentSpan(const QString& type, const QJsonObject& data = {},
+                      const QDateTime& startTime = {});
+  void closeCurrentSpan(const QJsonObject& extraData = {},
+                        const QDateTime& endTime = {});
+
   void transitionTo(std::unique_ptr<AppState> state);
   void exitCurrentState();
   void checkBreakReadiness();
@@ -172,6 +178,9 @@ class BreakPhasePrompt : public BreakPhase {
   void exit(AppContext* app, AppStateBreak* breakState) override;
   void tick(AppContext* app, AppStateBreak* breakState) override;
   void onIdleStart(AppContext* app, AppStateBreak* breakState) override;
+
+ protected:
+  int m_spanId = -1;
 };
 
 // Fullscreen phase: Overlay until break is completed or exit for some reason

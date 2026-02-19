@@ -16,6 +16,7 @@
 #include "meeting-prompt.h"
 #include "meeting-window.h"
 #include "postpone-window.h"
+#include "stats-window.h"
 
 class SaneBreakApp : public AbstractApp {
   Q_OBJECT
@@ -31,6 +32,7 @@ class SaneBreakApp : public AbstractApp {
   void openFocusWindow();
 
   void showPreferences();
+  void openStatsWindow();
 
  signals:
   void quit();
@@ -41,5 +43,6 @@ class SaneBreakApp : public AbstractApp {
   QPointer<FocusWindow> focusWindow;
   QPointer<PostponeWindow> postponeWindow;
   QPointer<MeetingWindow> meetingWindow;
+  QPointer<StatsWindow> statsWindow;
   void confirmQuit();
 };

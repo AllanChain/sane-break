@@ -123,8 +123,8 @@ void AbstractApp::startFocus(int totalCycles, const QString& reason) {
   if (data->isFocusMode() || m_currentState->getID() == AppState::Meeting ||
       data->isPostponing())
     return;
-  db->logEvent("focus::start",
-               {{"totalCycles", totalCycles}, {"reason", reason}});
+  data->setFocusSpanId(
+      db->openSpan("focus", {{"totalCycles", totalCycles}, {"reason", reason}}));
   data->startFocusMode(totalCycles);
   data->earlyBreak();
   transitionTo(std::make_unique<AppStateBreak>());
@@ -135,11 +135,10 @@ void AbstractApp::endFocus() { onMenuAction(Action::EndFocus{}); }
 void AbstractApp::startMeeting(int seconds, const QString& reason) {
   if (m_currentState->getID() == AppState::Meeting || data->isPostponing()) return;
   if (data->isFocusMode()) {
-    db->logEvent("focus::end", {{"reason", "meeting"}});
+    db->closeSpan(data->focusSpanId(), {{"reason", "meeting"}});
     data->endFocusMode();
   }
-  db->logEvent("meeting::start", {{"seconds", seconds}, {"reason", reason}});
-  data->setMeetingData(seconds, seconds);
+  data->setMeetingData(seconds, seconds, reason);
   transitionTo(std::make_unique<AppStateMeeting>());
 }
 
@@ -174,5 +173,5 @@ void AbstractApp::onBatterySettingChange() {
 
 void AbstractApp::onExit() {
   exitCurrentState();
-  db->logEvent("app:exit");
+  db->logEvent("app::exit");
 }

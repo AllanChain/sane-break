@@ -28,12 +28,17 @@ qt_add_executable(
   postpone-window.ui
   sound-player.cpp
   sound-player.h
+  stats-window.cpp
+  stats-window.h
+  stats-window.ui
   text-window.cpp
   text-window.h
   tray.cpp
   tray.h
   welcome.cpp
   welcome.h
+  widgets/timeline-view.cpp
+  widgets/timeline-view.h
   widgets/color-edit.h
   widgets/dynamic-button.h
   widgets/dynamic-label.h

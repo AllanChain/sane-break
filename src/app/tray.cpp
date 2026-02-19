@@ -90,6 +90,8 @@ StatusTrayWindow::StatusTrayWindow(SanePreferences* preferences, QObject* parent
 
   connect(menu->addAction(tr("Preferences")), &QAction::triggered, this,
           &StatusTrayWindow::preferenceWindowRequested);
+  connect(menu->addAction(tr("Statistics")), &QAction::triggered, this,
+          &StatusTrayWindow::statsRequested);
 
   quitAction = menu->addAction(tr("Quit"));
   connect(quitAction, &QAction::triggered, this, &StatusTrayWindow::quitRequested);

@@ -57,6 +57,7 @@ class StatusTrayWindow : public QObject {
   void extendMeetingRequested(int seconds);
   void focusRequested();
   void endFocusRequested();
+  void statsRequested();
   void quitRequested();
 
  protected:

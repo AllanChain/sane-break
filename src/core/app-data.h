@@ -6,6 +6,7 @@
 
 #include <QDateTime>
 #include <QObject>
+#include <QString>
 
 #include "core/flags.h"
 #include "core/preferences.h"
@@ -24,6 +25,7 @@ struct MeetingData {
   bool isActive = false;
   int secondsRemaining = 0;
   int totalSeconds = 0;
+  QString reason;
   void clear();
 };
 
@@ -31,6 +33,7 @@ struct FocusData {
   bool isActive = false;
   int cyclesRemaining = 0;
   int totalCycles = 0;
+  int spanId = -1;
   void clear();
 };
 
@@ -62,7 +65,8 @@ class AppData : public QObject {
   bool isInMeeting() const;
   int meetingSecondsRemaining() const;
   int meetingTotalSeconds() const;
-  void setMeetingData(int secondsRemaining, int totalSeconds);
+  QString meetingReason() const;
+  void setMeetingData(int secondsRemaining, int totalSeconds, const QString& reason);
   void clearMeetingData();
   void tickMeetingRemaining();
   void subtractMeetingRemaining(int secs);
@@ -76,6 +80,8 @@ class AppData : public QObject {
   void startFocusMode(int totalCycles);
   void endFocusMode();
   void setFocusCyclesRemaining(int cycles);
+  int focusSpanId() const;
+  void setFocusSpanId(int id);
 
   int effectiveSmallEvery();
   int effectiveSmallFor();

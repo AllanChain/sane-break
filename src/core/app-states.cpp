@@ -4,6 +4,9 @@
 
 #include "core/app-states.h"
 
+#include <QDateTime>
+#include <QJsonObject>
+#include <QString>
 #include <memory>
 #include <utility>
 #include <variant>
@@ -37,7 +40,28 @@ void AppContext::onIdleEnd() { m_currentState->onIdleEnd(this); }
 void AppContext::onMenuAction(MenuAction action) {
   m_currentState->onMenuAction(this, action);
 }
+int AppContext::openCurrentSpan(const QString& type, const QJsonObject& data,
+                                const QDateTime& startTime) {
+  currentSpanId = db->openSpan(type, data, startTime);
+  return currentSpanId;
+}
+void AppContext::closeCurrentSpan(const QJsonObject& extraData,
+                                  const QDateTime& endTime) {
+  db->closeSpan(currentSpanId, extraData, endTime);
+  currentSpanId = -1;
+}
+
 void AppContext::onSleepEnd(int sleptSeconds) {
+  QDateTime now = QDateTime::currentDateTimeUtc();
+  QDateTime sleepStart = now.addSecs(-sleptSeconds);
+
+  // Close the current state's span at sleep boundary
+  closeCurrentSpan({}, sleepStart);
+
+  // Create a sleep span from sleepStart to now
+  int sleepId = db->openSpan("sleep", {}, sleepStart);
+  db->closeSpan(sleepId);
+
   if (m_currentState->onSleepEnd(this, sleptSeconds)) return;
   // Default: treat sleep as a pause/resume cycle
   onPauseRequest(PauseReason::Sleep);
@@ -54,12 +78,12 @@ void AppContext::onResumeRequest(PauseReasons reasons) {
 }
 
 void AppStateNormal::enter(AppContext* app) {
-  app->db->logEvent("normal::start");
+  app->openCurrentSpan("normal");
   // Use low accuracy (5s) for idle detection in normal state as it can last a long time
   app->idleTimer->setWatchAccuracy(5000);
   app->idleTimer->setMinIdleTime(app->preferences->pauseOnIdleFor->get() * 1000);
 }
-void AppStateNormal::exit(AppContext* app) { app->db->logEvent("normal::end"); }
+void AppStateNormal::exit(AppContext* app) { app->closeCurrentSpan(); }
 void AppStateNormal::tick(AppContext* app) {
   app->data->tickSecondsToNextBreak();
   if (app->data->secondsToNextBreak() <= 0)
@@ -95,14 +119,14 @@ void AppStateNormal::onMenuAction(AppContext* app, MenuAction action) {
 // - For normal state to paused: low accuracy because the pause may be long
 // - For break state to paused: high accuracy because we want it to be instant
 // Moreover, setting idle interval will reset the event-based watchers.
-void AppStatePaused::enter(AppContext* app) { app->db->logEvent("pause::start"); }
+void AppStatePaused::enter(AppContext* app) { app->openCurrentSpan("pause"); }
 
 /* To avoid immediate breaks after break resume, we consider the user have already
  * taken the break if there shall be breaks during the pause. Of course, if the user
  * have configured `resetAfterPause`, we just reset it.
  */
 void AppStatePaused::exit(AppContext* app) {
-  app->db->logEvent("pause::end");
+  app->closeCurrentSpan();
   // Calculate the total duration of the next break to determine if breaks would have
   // occurred during pause
   int nextBreakDuration =
@@ -154,9 +178,8 @@ void AppStatePaused::onMenuAction(AppContext* app, MenuAction action) {
 }
 
 void AppStateBreak::enter(AppContext* app) {
-  app->db->logEvent(
-      "break::start",
-      {{"type", app->data->breakType() == BreakType::Big ? "big" : "small"}});
+  app->openCurrentSpan(
+      "break", {{"type", app->data->breakType() == BreakType::Big ? "big" : "small"}});
   data = std::make_unique<BreaksData>(dataInit(app));
   // On focus entry break, exhaust force break exits so the exit button is hidden
   if (app->data->isFocusMode() &&
@@ -181,7 +204,7 @@ void AppStateBreak::enter(AppContext* app) {
 }
 void AppStateBreak::exit(AppContext* app) {
   if (m_currentPhase) m_currentPhase->exit(app, this);
-  app->db->logEvent("break::end", {{"normal-exit", (data->remainingSeconds() <= 0)}});
+  app->closeCurrentSpan({{"normal-exit", (data->remainingSeconds() <= 0)}});
   app->breakWindows->destroy();
 }
 void AppStateBreak::tick(AppContext* app) { m_currentPhase->tick(app, this); }
@@ -193,7 +216,10 @@ void AppStateBreak::onPauseRequest(AppContext* app, PauseReasons reasons) {
   // We don't exit break if request pause on idle - continue with break instead
   if (reasons != PauseReason::Idle) {
     // For non-idle pause requests, finish current break and transition to paused state
+    bool wasFocusMode = app->data->isFocusMode();
     app->data->finishAndStartNextCycle();
+    if (wasFocusMode && !app->data->isFocusMode())
+      app->db->closeSpan(app->data->focusSpanId(), {{"reason", "completed"}});
     app->transitionTo(std::make_unique<AppStatePaused>());
   }
 }
@@ -225,7 +251,7 @@ void AppStateBreak::onMenuAction(AppContext* app, MenuAction action) {
 }
 
 void BreakPhasePrompt::enter(AppContext* app, AppStateBreak*) {
-  app->db->logEvent("break::flash::start");
+  m_spanId = app->db->openSpan("flash");
   app->breakWindows->showFlashPrompt();
   app->breakWindows->showButtons(AbstractBreakWindows::Button::ExitForceBreak |
                                      AbstractBreakWindows::Button::LockScreen,
@@ -234,7 +260,7 @@ void BreakPhasePrompt::enter(AppContext* app, AppStateBreak*) {
   app->screenLockTimer->stop();
 }
 void BreakPhasePrompt::exit(AppContext* app, AppStateBreak*) {
-  app->db->logEvent("break::flash::end");
+  app->db->closeSpan(m_spanId);
 }
 void BreakPhasePrompt::tick(AppContext* app, AppStateBreak* breakState) {
   breakState->data->tickSecondsToForceBreak();
@@ -266,7 +292,10 @@ void BreakPhaseFullScreen::tick(AppContext* app, AppStateBreak* breakState) {
     app->breakWindows->playExitSound(app->data->breakType(), app->preferences);
     // record break type before we start next cycle
     auto breakType = app->data->breakType();
+    bool wasFocusMode = app->data->isFocusMode();
     app->data->finishAndStartNextCycle();
+    if (wasFocusMode && !app->data->isFocusMode())
+      app->db->closeSpan(app->data->focusSpanId(), {{"reason", "completed"}});
     if (app->idleTimer->isIdle()) {
       // Check if window should auto-close based on preferences and break type
       bool shouldCloseWindow =
@@ -323,14 +352,16 @@ void BreakPhasePost::onIdleEnd(AppContext* app, AppStateBreak*) {
 }
 
 void AppStateMeeting::enter(AppContext* app) {
-  app->db->logEvent("meeting::enter");
+  app->openCurrentSpan("meeting",
+                       {{"scheduledSeconds", app->data->meetingTotalSeconds()},
+                        {"reason", app->data->meetingReason()}});
   app->data->resetSecondsToNextBreak();
   app->idleTimer->setWatchAccuracy(5000);
   app->idleTimer->setMinIdleTime(app->preferences->pauseOnIdleFor->get() * 1000);
 }
 
 void AppStateMeeting::exit(AppContext* app) {
-  app->db->logEvent("meeting::exit");
+  app->closeCurrentSpan();
   app->data->clearMeetingData();
   app->meetingPrompt->closeEndPrompt();
 }
@@ -374,6 +405,10 @@ bool AppStateMeeting::onSleepEnd(AppContext* app, int sleptSeconds) {
     app->transitionTo(std::make_unique<AppStateNormal>());
     return true;
   }
+  // Short sleep: reopen meeting span at current time
+  app->openCurrentSpan("meeting",
+                       {{"scheduledSeconds", app->data->meetingTotalSeconds()},
+                        {"reason", app->data->meetingReason()}});
   if (!app->meetingPrompt->isShowing()) {
     app->data->subtractMeetingRemaining(sleptSeconds);
   } else {
