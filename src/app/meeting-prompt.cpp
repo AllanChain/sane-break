@@ -28,7 +28,7 @@ void MeetingPrompt::showEndPrompt() {
     if (timeoutRemaining <= 0) {
       timeoutTimer->stop();
       closeEndPrompt();
-      emit breakSoonRequested(0);
+      emit breakLaterRequested(0);
       return;
     }
     updateBreakNowText();
@@ -46,7 +46,8 @@ void MeetingPrompt::showEndPrompt() {
     if (dialog) dialog->done(QDialog::Accepted);
     emit extendRequested(1800);
   });
-  connect(dialog, &QDialog::rejected, this, [this]() { emit breakSoonRequested(300); });
+  connect(dialog, &QDialog::rejected, this,
+          [this]() { emit breakLaterRequested(300); });
 
   dialog->show();
 }

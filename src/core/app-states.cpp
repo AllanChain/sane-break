@@ -324,7 +324,7 @@ void AppStateMeeting::tick(AppContext* app) {
 }
 
 void AppStateMeeting::onMenuAction(AppContext* app, MenuAction action) {
-  if (auto* a = std::get_if<Action::EndMeetingBreakSoon>(&action)) {
+  if (auto* a = std::get_if<Action::EndMeetingBreakLater>(&action)) {
     app->db->logEvent("meeting::end", {{"next-break", a->seconds}});
     app->data->makeNextBreakBig();
     app->data->setSecondsToNextBreak(a->seconds);

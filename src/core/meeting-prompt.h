@@ -17,6 +17,6 @@ class AbstractMeetingPrompt : public QObject {
 
  signals:
   void breakNowRequested();
-  void breakSoonRequested(int seconds);
+  void breakLaterRequested(int seconds);
   void extendRequested(int seconds);
 };

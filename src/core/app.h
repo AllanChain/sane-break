@@ -57,7 +57,7 @@ class AbstractApp : public AppContext {
   void enableBreak();
 
   void startMeeting(int seconds, const QString& reason);
-  void endMeetingBreakSoon(int seconds = 0);
+  void endMeetingBreakLater(int seconds = 0);
   void extendMeeting(int seconds);
 
  signals:

@@ -29,7 +29,7 @@ struct BigBreakNow {};
 struct SmallBreakInstead {};
 struct EnableBreaks {};
 struct ExitForceBreak {};
-struct EndMeetingBreakSoon {
+struct EndMeetingBreakLater {
   int seconds = 0;
 };
 struct ExtendMeeting {
@@ -40,7 +40,7 @@ struct ExtendMeeting {
 using MenuAction =
     std::variant<Action::BreakNow, Action::BigBreakNow, Action::SmallBreakInstead,
                  Action::EnableBreaks, Action::ExitForceBreak,
-                 Action::EndMeetingBreakSoon, Action::ExtendMeeting>;
+                 Action::EndMeetingBreakLater, Action::ExtendMeeting>;
 
 class AppContext;
 

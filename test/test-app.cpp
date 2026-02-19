@@ -524,7 +524,7 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.meetingSecondsRemaining, 0);
     QVERIFY(app.trayData.isInMeeting);  // still active in awaiting state
   }
-  // Prompt's internal timeout fires breakSoonRequested(0), ending meeting
+  // Prompt's internal timeout fires breakLaterRequested(0), ending meeting
   void meeting_prompt_timeout() {
     NiceMock<DummyApp> app(deps);
     app.start();
@@ -535,7 +535,7 @@ class TestApp : public QObject {
     QVERIFY(Mock::VerifyAndClearExpectations(deps.meetingPrompt));
 
     // Simulate the prompt's internal timeout firing
-    emit deps.meetingPrompt->breakSoonRequested(0);
+    emit deps.meetingPrompt->breakLaterRequested(0);
     QVERIFY(!app.trayData.isInMeeting);
     QVERIFY(app.trayData.isBreaking);
   }
@@ -560,14 +560,14 @@ class TestApp : public QObject {
 
     QCOMPARE(app.currentState(), AppState::Meeting);
   }
-  // endMeetingBreakSoon sets 5min countdown and big break
+  // endMeetingBreakLater sets 5min countdown and big break
   void meeting_end_break_soon() {
     NiceMock<DummyApp> app(deps);
     app.start();
 
     app.startMeeting(5, "standup");
     app.advance(5);
-    app.endMeetingBreakSoon(300);
+    app.endMeetingBreakLater(300);
 
     QVERIFY(!app.trayData.isInMeeting);
     QCOMPARE(app.trayData.secondsToNextBreak, 300);
@@ -580,7 +580,7 @@ class TestApp : public QObject {
 
     app.startMeeting(5, "standup");
     app.advance(5);
-    app.endMeetingBreakSoon();
+    app.endMeetingBreakLater();
 
     QVERIFY(!app.trayData.isInMeeting);
     QVERIFY(app.trayData.isBreaking);
@@ -753,7 +753,7 @@ class TestApp : public QObject {
     QVERIFY(app.trayData.isInMeeting);
     QCOMPARE(app.trayData.meetingSecondsRemaining, 3000);
 
-    app.endMeetingBreakSoon(0);
+    app.endMeetingBreakLater(0);
     QVERIFY(!app.trayData.isInMeeting);
     QVERIFY(app.trayData.isBreaking);
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);  // big break
