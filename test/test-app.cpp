@@ -580,7 +580,7 @@ class TestApp : public QObject {
 
     app.startMeeting(5, "standup");
     app.advance(5);
-    app.endMeetingBreakLater();
+    app.endMeetingBreakNow();
 
     QVERIFY(!app.trayData.isInMeeting);
     QVERIFY(app.trayData.isBreaking);
@@ -691,7 +691,7 @@ class TestApp : public QObject {
 
     app.startMeeting(5, "standup");
     app.advance(5);
-    app.endMeetingBreakLater(0);
+    app.endMeetingBreakNow();
 
     QVERIFY(!app.trayData.isInMeeting);
     QVERIFY(app.trayData.isBreaking);
@@ -802,7 +802,7 @@ class TestApp : public QObject {
     QVERIFY(app.trayData.isInMeeting);
     QCOMPARE(app.trayData.meetingSecondsRemaining, 3000);
 
-    app.endMeetingBreakLater(0);
+    app.endMeetingBreakNow();
     QVERIFY(!app.trayData.isInMeeting);
     QVERIFY(app.trayData.isBreaking);
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);  // big break

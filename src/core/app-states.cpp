@@ -346,7 +346,12 @@ void AppStateMeeting::tick(AppContext* app) {
 }
 
 void AppStateMeeting::onMenuAction(AppContext* app, MenuAction action) {
-  if (auto* a = std::get_if<Action::EndMeetingBreakLater>(&action)) {
+  if (std::get_if<Action::EndMeetingBreakNow>(&action)) {
+    app->db->logEvent("meeting::end", {{"next-break", 0}});
+    if (app->data->effectiveBigBreakEnabled()) app->data->makeNextBreakBig();
+    app->data->earlyBreak();
+    app->transitionTo(std::make_unique<AppStateBreak>());
+  } else if (auto* a = std::get_if<Action::EndMeetingBreakLater>(&action)) {
     app->db->logEvent("meeting::end", {{"next-break", a->seconds}});
     if (app->data->effectiveBigBreakEnabled()) app->data->makeNextBreakBig();
     app->data->setSecondsToNextBreak(a->seconds);

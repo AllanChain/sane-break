@@ -61,7 +61,7 @@ SaneBreakApp::SaneBreakApp(const AppDependencies& deps, QObject* parent)
   connect(tray, &StatusTrayWindow::endFocusRequested, this,
           &SaneBreakApp::endFocus);
   connect(tray, &StatusTrayWindow::endMeetingBreakNowRequested, this,
-          [this]() { endMeetingBreakLater(0); });
+          &SaneBreakApp::endMeetingBreakNow);
   connect(tray, &StatusTrayWindow::extendMeetingRequested, this,
           &SaneBreakApp::extendMeeting);
   connect(tray, &StatusTrayWindow::preferenceWindowRequested, this,

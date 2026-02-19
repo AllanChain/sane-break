@@ -61,7 +61,8 @@ class AbstractApp : public AppContext {
   void enableBreak();
 
   void startMeeting(int seconds, const QString& reason);
-  void endMeetingBreakLater(int seconds = 0);
+  void endMeetingBreakNow();
+  void endMeetingBreakLater(int seconds);
   void extendMeeting(int seconds);
 
   void startFocus(int totalCycles, const QString& reason);
