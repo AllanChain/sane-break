@@ -124,9 +124,11 @@ void SaneBreakApp::openFocusWindow() {
   if (data->isFocusMode() || m_currentState->getID() == AppState::Meeting ||
       data->isPostponing())
     return;
-  FocusWindow* focusWindow = new FocusWindow(preferences);
-  connect(focusWindow, &FocusWindow::focusRequested, this,
-          &SaneBreakApp::startFocus);
+  if (!focusWindow) {
+    focusWindow = new FocusWindow(preferences);
+    connect(focusWindow, &FocusWindow::focusRequested, this,
+            &SaneBreakApp::startFocus);
+  }
   showAndActivate(focusWindow);
 }
 
@@ -151,20 +153,24 @@ void SaneBreakApp::openPostponeWindow() {
     msgBox.exec();
     return;
   }
-  PostponeWindow* postponeWindow = new PostponeWindow(preferences, db);
-  connect(postponeWindow, &PostponeWindow::postponeRequested, this,
-          &SaneBreakApp::postpone);
+  if (!postponeWindow) {
+    postponeWindow = new PostponeWindow(preferences, db);
+    connect(postponeWindow, &PostponeWindow::postponeRequested, this,
+            &SaneBreakApp::postpone);
+  }
   showAndActivate(postponeWindow);
 }
 
 void SaneBreakApp::openMeetingWindow() {
   if (m_currentState->getID() == AppState::Meeting || data->isPostponing()) return;
-  MeetingWindow* meetingWindow = new MeetingWindow(preferences, db);
-  connect(meetingWindow, &MeetingWindow::meetingRequested, this,
-          [this](QTime endTime, QString reason) {
-            int seconds = QTime::currentTime().secsTo(endTime);
-            if (seconds > 0) startMeeting(seconds, reason);
-          });
+  if (!meetingWindow) {
+    meetingWindow = new MeetingWindow(preferences, db);
+    connect(meetingWindow, &MeetingWindow::meetingRequested, this,
+            [this](QTime endTime, QString reason) {
+              int seconds = QTime::currentTime().secsTo(endTime);
+              if (seconds > 0) startMeeting(seconds, reason);
+            });
+  }
   showAndActivate(meetingWindow);
 }
 

@@ -5,12 +5,17 @@
 #pragma once
 
 #include <QObject>
+#include <QPointer>
 #include <QTimer>
 
 #include "app/pref-window.h"
 #include "app/tray.h"
 #include "core/app.h"
 #include "core/preferences.h"
+#include "focus-window.h"
+#include "meeting-prompt.h"
+#include "meeting-window.h"
+#include "postpone-window.h"
 
 class SaneBreakApp : public AbstractApp {
   Q_OBJECT
@@ -33,5 +38,8 @@ class SaneBreakApp : public AbstractApp {
  private:
   PreferenceWindow* prefWindow;
   StatusTrayWindow* tray;
+  QPointer<FocusWindow> focusWindow;
+  QPointer<PostponeWindow> postponeWindow;
+  QPointer<MeetingWindow> meetingWindow;
   void confirmQuit();
 };
