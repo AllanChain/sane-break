@@ -36,6 +36,7 @@ int SignalHandler::setup() {
   term.sa_flags |= SA_RESTART;
 
   if (sigaction(SIGTERM, &term, 0)) return 2;
+  if (sigaction(SIGINT, &term, 0)) return 3;
 
   return 0;
 }
