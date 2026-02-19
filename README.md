@@ -133,6 +133,26 @@ You can contribute to the package by submitting PR to https://github.com/AllanCh
 
 Starting from `v0.9.0`, Sane Break also provides an experimental AppImage binary. It has several known limitations such as doesn't respect system themes. We are open to contributions to improve the AppImage version.
 
+##### i3wm Configuration
+
+For i3 window manager users, add the following to your `~/.config/i3/config` to make Sane Break sticky across all workspaces:
+
+```
+for_window [instance="sane-break"] floating enable, sticky enable
+```
+
+To prevent accidentally hiding the break window, you may also want to:
+
+```
+# Prevent moving Sane Break to scratchpad
+bindsym $mod+x [floating instance="^(?!sane-break).*$"] move scratchpad
+
+# Optionally disable floating toggle to prevent other windows from popping up
+# bindsym $mod+Shift+space floating toggle
+```
+
+**Note:** There will always be ways to bypass the break reminder in i3wm, as global shortcuts cannot be captured by applications. These are recommended configurations, but you may need to customize based on your setup. For more discussion, see [#121](https://github.com/AllanChain/sane-break/issues/121).
+
 #### Compiling from source
 
 Assume all required packages described below is installed, you can use the following commands to compile and install Sane Break.
