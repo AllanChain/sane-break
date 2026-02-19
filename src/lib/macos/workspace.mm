@@ -26,3 +26,7 @@ void macSetAllWorkspaces(QWindow *window) {
   NSWindow *pNativeWindow = macGetNativeWindow(window);
   [pNativeWindow setCollectionBehavior:NSWindowCollectionBehaviorCanJoinAllSpaces];
 }
+
+void macForceActivation() {
+  [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+}

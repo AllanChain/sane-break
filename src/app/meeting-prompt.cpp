@@ -8,6 +8,10 @@
 #include <QTimer>
 #include <Qt>
 
+#ifdef Q_OS_MACOS
+#include "lib/macos/workspace.h"
+#endif
+
 #include "ui_meeting-prompt.h"
 
 void MeetingPrompt::showEndPrompt() {
@@ -50,6 +54,11 @@ void MeetingPrompt::showEndPrompt() {
           [this]() { emit breakLaterRequested(300); });
 
   dialog->show();
+  dialog->raise();
+  dialog->activateWindow();
+#ifdef Q_OS_MACOS
+  macForceActivation();
+#endif
 }
 
 void MeetingPrompt::closeEndPrompt() {

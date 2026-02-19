@@ -14,3 +14,7 @@
 // Put a window on all workspaces on OS X (enables
 // NSWindowCollectionBehaviorCanJoinAllSpaces)
 void macSetAllWorkspaces(QWindow* window);
+
+// Force the application to the foreground, even when another app is active.
+// Needed for windows opened from the system tray menu (QTBUG-28327).
+void macForceActivation();

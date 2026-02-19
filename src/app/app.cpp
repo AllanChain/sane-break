@@ -41,6 +41,10 @@
 #include "app/windows/signal-handler.h"
 #endif
 
+#ifdef Q_OS_MACOS
+#include "lib/macos/workspace.h"
+#endif
+
 SaneBreakApp::SaneBreakApp(const AppDependencies& deps, QObject* parent)
     : AbstractApp(deps, parent) {
   prefWindow = new PreferenceWindow(preferences);
@@ -105,11 +109,16 @@ void SaneBreakApp::start() {
 
 void SaneBreakApp::doLockScreen() { lockScreen(); }
 
-void SaneBreakApp::showPreferences() {
-  prefWindow->show();
-  prefWindow->windowHandle()->raise();
-  prefWindow->windowHandle()->requestActivate();
+static void showAndActivate(QWidget* window) {
+  window->show();
+  window->raise();
+  window->activateWindow();
+#ifdef Q_OS_MACOS
+  macForceActivation();
+#endif
 }
+
+void SaneBreakApp::showPreferences() { showAndActivate(prefWindow); }
 
 void SaneBreakApp::openFocusWindow() {
   if (data->isFocusMode() || m_currentState->getID() == AppState::Meeting ||
@@ -118,7 +127,7 @@ void SaneBreakApp::openFocusWindow() {
   FocusWindow* focusWindow = new FocusWindow(preferences);
   connect(focusWindow, &FocusWindow::focusRequested, this,
           &SaneBreakApp::startFocus);
-  focusWindow->show();
+  showAndActivate(focusWindow);
 }
 
 void SaneBreakApp::openPostponeWindow() {
@@ -145,7 +154,7 @@ void SaneBreakApp::openPostponeWindow() {
   PostponeWindow* postponeWindow = new PostponeWindow(preferences, db);
   connect(postponeWindow, &PostponeWindow::postponeRequested, this,
           &SaneBreakApp::postpone);
-  postponeWindow->show();
+  showAndActivate(postponeWindow);
 }
 
 void SaneBreakApp::openMeetingWindow() {
@@ -156,7 +165,7 @@ void SaneBreakApp::openMeetingWindow() {
             int seconds = QTime::currentTime().secsTo(endTime);
             if (seconds > 0) startMeeting(seconds, reason);
           });
-  meetingWindow->show();
+  showAndActivate(meetingWindow);
 }
 
 void SaneBreakApp::confirmQuit() {
