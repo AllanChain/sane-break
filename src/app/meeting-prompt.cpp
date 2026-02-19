@@ -65,6 +65,6 @@ bool MeetingPrompt::isShowing() const { return dialog != nullptr; }
 
 void MeetingPrompt::updateBreakNowText() {
   if (ui) {
-    ui->breakNow->setText(tr("Break now (%1s)").arg(timeoutRemaining));
+    ui->breakNow->setArgs({timeoutRemaining});
   }
 }

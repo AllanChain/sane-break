@@ -48,9 +48,9 @@
     </spacer>
    </item>
    <item>
-    <widget class="QPushButton" name="breakNow">
+    <widget class="DynamicButton" name="breakNow">
      <property name="text">
-      <string notr="true">Break now</string>
+      <string>Break now (%1s)</string>
      </property>
      <property name="default">
       <bool>true</bool>
@@ -73,6 +73,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DynamicButton</class>
+   <extends>QPushButton</extends>
+   <header>widgets/dynamic-button.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
