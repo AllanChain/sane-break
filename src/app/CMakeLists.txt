@@ -1,4 +1,5 @@
 find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia Sql)
+
 qt_add_executable(
   sane-break-app
   MANUAL_FINALIZATION
@@ -10,9 +11,18 @@ qt_add_executable(
   break-window.ui
   break-windows.cpp
   break-windows.h
+  meeting-prompt.cpp
+  meeting-prompt.h
+  meeting-prompt.ui
+  meeting-window.cpp
+  meeting-window.h
+  meeting-window.ui
   pref-window.cpp
   pref-window.h
   pref-window.ui
+  postpone-window.cpp
+  postpone-window.h
+  postpone-window.ui
   sound-player.cpp
   sound-player.h
   text-window.cpp

@@ -10,6 +10,11 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Noto Sans CJK SC</family>
+   </font>
+  </property>
   <property name="windowTitle">
    <string notr="true">Sane Break</string>
   </property>
@@ -243,9 +248,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
+         <y>-349</y>
          <width>659</width>
-         <height>878</height>
+         <height>975</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -496,27 +501,86 @@ QPushButton[flat=&quot;true&quot;]:checked {
              </widget>
             </item>
             <item>
+             <widget class="DynamicLabel" name="postponeSessionRatioLabel">
+              <property name="text">
+               <string>Maximum postpone time as a percentage of your work session (&lt;b&gt;%1&lt;/b&gt; min)</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
              <layout class="QGridLayout" name="gridLayout_3">
               <property name="verticalSpacing">
                <number>12</number>
               </property>
-              <item row="0" column="1" colspan="2">
-               <widget class="QLineEdit" name="postponeMinutes">
-                <property name="inputMask">
-                 <string notr="true"/>
+              <item row="0" column="0">
+               <widget class="QSlider" name="postponeMaxMinuteSlider">
+                <property name="minimum">
+                 <number>1</number>
                 </property>
-                <property name="text">
-                 <string notr="true">5,10,30,60</string>
-                </property>
-                <property name="maxLength">
-                 <number>30</number>
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
                 </property>
                </widget>
               </item>
+              <item row="0" column="1">
+               <widget class="QSpinBox" name="postponeMaxMinuteBox">
+                <property name="suffix">
+                 <string>%</string>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_81">
+              <property name="text">
+               <string>Postponing breaks adds extra time to your next long break, proportional to how much time you postponed. You can adjust the multiplier for how much extra time is added.</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayout_27">
+              <property name="verticalSpacing">
+               <number>12</number>
+              </property>
               <item row="0" column="0">
-               <widget class="QLabel" name="label_20">
-                <property name="text">
-                 <string>Postpone minutes</string>
+               <widget class="QSlider" name="postponeExtendBreakSlider">
+                <property name="minimum">
+                 <number>10</number>
+                </property>
+                <property name="maximum">
+                 <number>300</number>
+                </property>
+                <property name="value">
+                 <number>100</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QSpinBox" name="postponeExtendBreakBox">
+                <property name="suffix">
+                 <string>%</string>
+                </property>
+                <property name="minimum">
+                 <number>10</number>
+                </property>
+                <property name="maximum">
+                 <number>300</number>
+                </property>
+                <property name="value">
+                 <number>100</number>
                 </property>
                </widget>
               </item>
@@ -1767,11 +1831,11 @@ v%1
    <hints>
     <hint type="sourcelabel">
      <x>650</x>
-     <y>138</y>
+     <y>-205</y>
     </hint>
     <hint type="destinationlabel">
      <x>765</x>
-     <y>132</y>
+     <y>-199</y>
     </hint>
    </hints>
   </connection>
@@ -1783,11 +1847,11 @@ v%1
    <hints>
     <hint type="sourcelabel">
      <x>650</x>
-     <y>208</y>
+     <y>-161</y>
     </hint>
     <hint type="destinationlabel">
      <x>765</x>
-     <y>212</y>
+     <y>-155</y>
     </hint>
    </hints>
   </connection>
@@ -1799,11 +1863,11 @@ v%1
    <hints>
     <hint type="sourcelabel">
      <x>630</x>
-     <y>373</y>
+     <y>-16</y>
     </hint>
     <hint type="destinationlabel">
      <x>765</x>
-     <y>379</y>
+     <y>-10</y>
     </hint>
    </hints>
   </connection>
@@ -1815,11 +1879,11 @@ v%1
    <hints>
     <hint type="sourcelabel">
      <x>630</x>
-     <y>421</y>
+     <y>28</y>
     </hint>
     <hint type="destinationlabel">
      <x>765</x>
-     <y>427</y>
+     <y>34</y>
     </hint>
    </hints>
   </connection>
@@ -1831,11 +1895,11 @@ v%1
    <hints>
     <hint type="sourcelabel">
      <x>765</x>
-     <y>132</y>
+     <y>-199</y>
     </hint>
     <hint type="destinationlabel">
      <x>650</x>
-     <y>138</y>
+     <y>-205</y>
     </hint>
    </hints>
   </connection>
@@ -1847,11 +1911,11 @@ v%1
    <hints>
     <hint type="sourcelabel">
      <x>765</x>
-     <y>212</y>
+     <y>-155</y>
     </hint>
     <hint type="destinationlabel">
      <x>650</x>
-     <y>208</y>
+     <y>-161</y>
     </hint>
    </hints>
   </connection>
@@ -1863,11 +1927,11 @@ v%1
    <hints>
     <hint type="sourcelabel">
      <x>765</x>
-     <y>379</y>
+     <y>-10</y>
     </hint>
     <hint type="destinationlabel">
      <x>630</x>
-     <y>373</y>
+     <y>-16</y>
     </hint>
    </hints>
   </connection>
@@ -1879,11 +1943,11 @@ v%1
    <hints>
     <hint type="sourcelabel">
      <x>765</x>
-     <y>427</y>
+     <y>34</y>
     </hint>
     <hint type="destinationlabel">
      <x>630</x>
-     <y>421</y>
+     <y>28</y>
     </hint>
    </hints>
   </connection>
@@ -1894,12 +1958,12 @@ v%1
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>654</x>
-     <y>311</y>
+     <x>191</x>
+     <y>-326</y>
     </hint>
     <hint type="destinationlabel">
-     <x>765</x>
-     <y>312</y>
+     <x>224</x>
+     <y>-326</y>
     </hint>
    </hints>
   </connection>
@@ -1910,12 +1974,12 @@ v%1
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>654</x>
-     <y>401</y>
+     <x>191</x>
+     <y>-318</y>
     </hint>
     <hint type="destinationlabel">
-     <x>765</x>
-     <y>407</y>
+     <x>224</x>
+     <y>-318</y>
     </hint>
    </hints>
   </connection>
@@ -1926,12 +1990,12 @@ v%1
    <slot>setValueForce(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>765</x>
-     <y>312</y>
+     <x>224</x>
+     <y>-326</y>
     </hint>
     <hint type="destinationlabel">
-     <x>654</x>
-     <y>311</y>
+     <x>191</x>
+     <y>-326</y>
     </hint>
    </hints>
   </connection>
@@ -1942,12 +2006,12 @@ v%1
    <slot>setValueForce(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>765</x>
-     <y>407</y>
+     <x>224</x>
+     <y>-318</y>
     </hint>
     <hint type="destinationlabel">
-     <x>654</x>
-     <y>401</y>
+     <x>191</x>
+     <y>-318</y>
     </hint>
    </hints>
   </connection>
@@ -1958,12 +2022,12 @@ v%1
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>331</x>
-     <y>12</y>
+     <x>369</x>
+     <y>-325</y>
     </hint>
     <hint type="destinationlabel">
-     <x>231</x>
-     <y>12</y>
+     <x>224</x>
+     <y>-325</y>
     </hint>
    </hints>
   </connection>
@@ -1974,12 +2038,12 @@ v%1
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>331</x>
-     <y>12</y>
+     <x>369</x>
+     <y>-299</y>
     </hint>
     <hint type="destinationlabel">
-     <x>231</x>
-     <y>12</y>
+     <x>224</x>
+     <y>-299</y>
     </hint>
    </hints>
   </connection>
@@ -1990,12 +2054,12 @@ v%1
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>331</x>
-     <y>12</y>
+     <x>369</x>
+     <y>-295</y>
     </hint>
     <hint type="destinationlabel">
-     <x>231</x>
-     <y>12</y>
+     <x>224</x>
+     <y>-295</y>
     </hint>
    </hints>
   </connection>
@@ -2006,12 +2070,12 @@ v%1
    <slot>setValueForce(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>231</x>
-     <y>12</y>
+     <x>224</x>
+     <y>-325</y>
     </hint>
     <hint type="destinationlabel">
-     <x>331</x>
-     <y>12</y>
+     <x>369</x>
+     <y>-325</y>
     </hint>
    </hints>
   </connection>
@@ -2022,12 +2086,12 @@ v%1
    <slot>setValueForce(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>231</x>
-     <y>12</y>
+     <x>224</x>
+     <y>-299</y>
     </hint>
     <hint type="destinationlabel">
-     <x>331</x>
-     <y>12</y>
+     <x>369</x>
+     <y>-299</y>
     </hint>
    </hints>
   </connection>
@@ -2038,12 +2102,12 @@ v%1
    <slot>setValueForce(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>231</x>
-     <y>12</y>
+     <x>224</x>
+     <y>-295</y>
     </hint>
     <hint type="destinationlabel">
-     <x>331</x>
-     <y>12</y>
+     <x>369</x>
+     <y>-295</y>
     </hint>
    </hints>
   </connection>
@@ -2054,12 +2118,12 @@ v%1
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>609</x>
-     <y>73</y>
+     <x>191</x>
+     <y>-328</y>
     </hint>
     <hint type="destinationlabel">
-     <x>702</x>
-     <y>81</y>
+     <x>224</x>
+     <y>-328</y>
     </hint>
    </hints>
   </connection>
@@ -2070,12 +2134,76 @@ v%1
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>714</x>
-     <y>55</y>
+     <x>224</x>
+     <y>-328</y>
     </hint>
     <hint type="destinationlabel">
-     <x>597</x>
-     <y>70</y>
+     <x>191</x>
+     <y>-328</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>postponeMaxMinuteSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>postponeMaxMinuteBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>615</x>
+     <y>270</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>747</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>postponeMaxMinuteBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>postponeMaxMinuteSlider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>725</x>
+     <y>267</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>579</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>postponeExtendBreakSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>postponeExtendBreakBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>615</x>
+     <y>463</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>732</x>
+     <y>469</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>postponeExtendBreakBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>postponeExtendBreakSlider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>722</x>
+     <y>461</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>602</x>
+     <y>463</y>
     </hint>
    </hints>
   </connection>

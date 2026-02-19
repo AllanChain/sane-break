@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
@@ -45,7 +45,6 @@ class AbstractBreakWindows : public QObject {
   Q_DECLARE_FLAGS(Buttons, Button)
   using QObject::QObject;
   ~AbstractBreakWindows() = default;
-  // static BreakWindowData breakData(BreakType, SanePreferences *);
   virtual void create(BreakType, SanePreferences*) = 0;
   virtual void destroy() = 0;
   virtual void setTime(int remainingTime) = 0;

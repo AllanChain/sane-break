@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
@@ -12,6 +12,7 @@
 #include "core/db.h"
 #include "core/flags.h"
 #include "core/idle-time.h"
+#include "core/meeting-prompt.h"
 #include "core/preferences.h"
 #include "core/system-monitor.h"
 #include "core/timer.h"
@@ -24,6 +25,7 @@ struct AppDependencies {
   SystemIdleTime* idleTimer = nullptr;
   AbstractSystemMonitor* systemMonitor = nullptr;
   AbstractBreakWindows* breakWindows = nullptr;
+  AbstractMeetingPrompt* meetingPrompt = nullptr;
 };
 
 struct TrayData {
@@ -33,6 +35,10 @@ struct TrayData {
   int secondsFromLastBreakToNext;
   int smallBreaksBeforeBigBreak;
   PauseReasons pauseReasons;
+  bool isInMeeting;
+  int meetingSecondsRemaining;
+  int meetingTotalSeconds;
+  bool isPostponing;
 };
 
 class AbstractApp : public AppContext {
@@ -47,8 +53,12 @@ class AbstractApp : public AppContext {
   void bigBreakNow();
   // Take a small break when big break is on
   void smallBreakInstead();
-  void postpone(int secs);
+  void postpone(int seconds);
   void enableBreak();
+
+  void startMeeting(int seconds, const QString& reason);
+  void endMeetingBreakLater(int seconds = 0);
+  void extendMeeting(int seconds);
 
  signals:
   void trayDataUpdated(TrayData);
@@ -58,10 +68,8 @@ class AbstractApp : public AppContext {
   AbstractSystemMonitor* m_systemMonitor;
 
   void onBatterySettingChange();
-  void onSleepEnd(int sleptSeconds);
   void onExit();
   void updateTray();
 
   virtual void doLockScreen() = 0;
-  virtual bool confirmPostpone(int secondsToPostpone) = 0;
 };

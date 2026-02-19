@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "break-windows.h"
@@ -56,7 +56,7 @@ BreakWindows::BreakWindows(QObject* parent) : AbstractBreakWindows(parent) {
 #endif
 }
 
-void BreakWindows::create(BreakType type, SanePreferences* preferences) {
+BreakWindowData BreakWindows::createData(BreakType type, SanePreferences* preferences) {
   QString promptMessage = type == BreakType::Big
                               ? preferences->bigMessages->defaultValue()[0]
                               : preferences->smallMessages->defaultValue()[0];
@@ -68,10 +68,8 @@ void BreakWindows::create(BreakType type, SanePreferences* preferences) {
     int randomIndex = QRandomGenerator::global()->bounded(messagesToRoll.size());
     fullScreenMessage = messagesToRoll[randomIndex];
   }
-
-  BreakWindowData data;
   if (type == BreakType::Small) {
-    data = {
+    return {
         .totalSeconds = preferences->smallFor->get(),
         .message = {.prompt = promptMessage, .fullScreen = fullScreenMessage},
         .theme =
@@ -93,7 +91,7 @@ void BreakWindows::create(BreakType type, SanePreferences* preferences) {
     };
 
   } else {
-    data = {
+    return {
         .totalSeconds = preferences->bigFor->get(),
         .message = {.prompt = promptMessage, .fullScreen = fullScreenMessage},
         .theme =
@@ -114,6 +112,8 @@ void BreakWindows::create(BreakType type, SanePreferences* preferences) {
             },
     };
   }
+}
+void BreakWindows::create(BreakWindowData data) {
   QList<QScreen*> screens = QApplication::screens();
   for (QScreen* screen : std::as_const(screens)) {
     BreakWindow* w = new BreakWindow(data);
@@ -136,6 +136,9 @@ void BreakWindows::create(BreakType type, SanePreferences* preferences) {
   }
   updateClocks();  // Set the initial clock
   clockUpdateTimer->start(3000);
+}
+void BreakWindows::create(BreakType type, SanePreferences* preferences) {
+  create(createData(type, preferences));
 }
 
 void BreakWindows::destroy() {

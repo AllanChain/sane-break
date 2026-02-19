@@ -3,16 +3,35 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
+#include <QColor>
 #include <QContextMenuEvent>
 #include <QLabel>
 #include <QMenu>
 #include <QObject>
+#include <QPixmap>
 #include <QSystemTrayIcon>
 #include <QTimer>
+#include <QVector>
 #include <QWidget>
+#include <optional>
 
 #include "core/app.h"
 #include "core/preferences.h"
+
+struct TrayArcSpec {
+  QColor dark;
+  QColor light;
+  float ratio;
+};
+
+struct TrayIconSpec {
+  QString baseIcon;
+  std::optional<TrayArcSpec> arc;
+  std::optional<QColor> dot;
+};
+
+TrayIconSpec trayIconSpec(TrayData data);
+QPixmap renderTrayIcon(TrayIconSpec spec);
 
 class StatusTrayWindow : public QObject {
   Q_OBJECT
@@ -25,9 +44,6 @@ class StatusTrayWindow : public QObject {
   virtual void show() = 0;
   virtual void setTitle(QString str) = 0;
   virtual void update(TrayData data);
-  QPixmap drawIcon(TrayData data);
-
-  void onPostponeMinutesChange();
 
  signals:
   void nextBreakRequested();
@@ -35,13 +51,24 @@ class StatusTrayWindow : public QObject {
   void smallBreakInsteadRequested();
   void enableBreakRequested();
   void preferenceWindowRequested();
-  void postponeRequested(int secs);
+  void postponeRequested();
+  void meetingRequested();
+  void endMeetingBreakNowRequested();
+  void extendMeetingRequested(int seconds);
   void quitRequested();
 
  protected:
   SanePreferences* preferences;
   QMenu* menu;
-  QMenu* postponeMenu;
+  QAction* postponeMenu;
+  QAction* meetingAction;
+  QAction* endMeetingAction;
+  QMenu* extendMeetingMenu;
+  struct ExtendOption {
+    QAction* action;
+    int seconds;
+  };
+  QVector<ExtendOption> extendOptions;
   QAction* quitAction;
   QAction* nextBreakAction;
   QAction* bigBreakAction;

@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "pref-window.h"
@@ -22,7 +22,6 @@
 #include <QPlainTextEdit>
 #include <QProcess>
 #include <QPushButton>
-#include <QRegularExpressionValidator>
 #include <QSettings>
 #include <QSlider>
 #include <QSpinBox>
@@ -166,6 +165,7 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
             int value = ui->smallBreakEveryBox->value();
             ui->bigBreakAfterBox->setToolTip(
                 tr("Every %n min", "", value * ui->bigBreakAfterBox->value()));
+            ui->postponeSessionRatioLabel->setArgs({value});
           });
   controllers->add(
       PrefGroup::Schedule,
@@ -181,12 +181,12 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
   controllers->add(
       PrefGroup::Schedule,
       new PrefController<QSpinBox, int>(ui->bigBreakForBox, preferences->bigFor, 60));
-
-  QRegularExpression re("^\\d+(,\\d+)*$");
-  ui->postponeMinutes->setValidator(new QRegularExpressionValidator(re, this));
-  controllers->add(PrefGroup::Schedule,
-                   new PrefController<QLineEdit, QStringList>(
-                       ui->postponeMinutes, preferences->postponeMinutes));
+  controllers->add(PrefGroup::Schedule, new PrefController<QSpinBox, int>(
+                                            ui->postponeMaxMinuteBox,
+                                            preferences->postponeMaxMinutePercent));
+  controllers->add(PrefGroup::Schedule, new PrefController<QSpinBox, int>(
+                                            ui->postponeExtendBreakBox,
+                                            preferences->postponeExtendBreakPercent));
 
   /***************************************************************************
    *                                                                         *

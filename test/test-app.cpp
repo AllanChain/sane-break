@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <gmock/gmock.h>
@@ -14,7 +14,7 @@
 #include "dummy.h"
 #include "gmock/gmock.h"
 
-using testing::Mock, testing::Return, testing::NiceMock, testing::_;
+using testing::Mock, testing::NiceMock, testing::_;
 
 class TestApp : public QObject {
   Q_OBJECT
@@ -27,7 +27,7 @@ class TestApp : public QObject {
     depsParent = new QObject();
     deps = DummyApp::makeDeps(depsParent);
   }
-  void cleanup() { depsParent->deleteLater(); }
+  void cleanup() { delete depsParent; }
   void app_initial_state() {
     NiceMock<DummyApp> app(deps);
     app.start();
@@ -222,7 +222,42 @@ class TestApp : public QObject {
     int secondsToNextBreak = app.trayData.secondsToNextBreak;
     app.postpone(100);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak + 100);
-    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
+
+    app.advance(app.trayData.secondsToNextBreak);
+    app.advanceToForceBreakStart();
+    app.advance(deps.preferences->smallFor->get() + 1);
+    // Break time is extended
+    QVERIFY(app.trayData.isBreaking);
+
+    app.advance(app.trayData.secondsToNextBreak);
+    app.advanceToBreakEnd();
+    // Next work session is shortened
+    QCOMPARE(app.trayData.secondsToNextBreak,
+             deps.preferences->smallEvery->get() - 100);
+  }
+  // We disallow postponing twice in the same work session
+  void cannot_postpone_twice() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    int secondsToNextBreak = app.trayData.secondsToNextBreak;
+    app.postpone(100);
+    app.postpone(100);
+    QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak + 100);
+  }
+  // We allow postponing across different work sessions
+  void postpone_again_after_break() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    int secondsToNextBreak = app.trayData.secondsToNextBreak;
+    app.postpone(100);
+
+    app.advance(app.trayData.secondsToNextBreak);
+    app.advanceToBreakEnd();
+    QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 100);
+    app.postpone(300);
+    QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak + 200);
   }
   // During the pause, the count down should not change, and state should be reflected
   void pause_break_on_idle() {
@@ -394,9 +429,7 @@ class TestApp : public QObject {
     EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
     app.postpone(100);
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
-    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
     QCOMPARE(app.trayData.secondsToNextBreak, 100);
-    QCOMPARE(app.trayData.secondsToNextBigBreak, 100);
   }
   // We should end the break if the pause happens during the break
   void pause_while_break() {
@@ -461,6 +494,197 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
              deps.preferences->bigAfter->get() - 1);
   }
+  // Meeting mode: break countdown frozen during meeting
+  void meeting_freezes_break_countdown() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    int secondsToNextBreak = app.trayData.secondsToNextBreak;
+    app.startMeeting(3600, "standup");
+    QVERIFY(app.trayData.isInMeeting);
+
+    app.advance(10);
+    // Break countdown should not change
+    QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
+  }
+  // Meeting countdown ticks and shows end prompt at 0
+  void meeting_countdown_ticks() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startMeeting(5, "standup");
+    QCOMPARE(app.trayData.meetingSecondsRemaining, 5);
+
+    app.advance(3);
+    QCOMPARE(app.trayData.meetingSecondsRemaining, 2);
+
+    EXPECT_CALL(*deps.meetingPrompt, showEndPrompt()).Times(1);
+    app.advance(2);
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.meetingPrompt));
+    QCOMPARE(app.trayData.meetingSecondsRemaining, 0);
+    QVERIFY(app.trayData.isInMeeting);  // still active in awaiting state
+  }
+  // Prompt's internal timeout fires breakLaterRequested(0), ending meeting
+  void meeting_prompt_timeout() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startMeeting(5, "standup");
+    EXPECT_CALL(*deps.meetingPrompt, showEndPrompt()).Times(1);
+    app.advance(5);  // countdown ends
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.meetingPrompt));
+
+    // Simulate the prompt's internal timeout firing
+    emit deps.meetingPrompt->breakLaterRequested(0);
+    QVERIFY(!app.trayData.isInMeeting);
+    QVERIFY(app.trayData.isBreaking);
+  }
+  // Idle during meeting stays in Normal
+  void meeting_blocks_idle_pause() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startMeeting(3600, "standup");
+    deps.idleTimer->setIdle(true);
+
+    QCOMPARE(app.currentState(), AppState::Meeting);
+    QVERIFY(!app.trayData.pauseReasons);
+  }
+  // System pause during meeting stays in Meeting
+  void meeting_blocks_system_pause() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startMeeting(3600, "standup");
+    emit deps.systemMonitor->pauseRequested(PauseReason::OnBattery);
+
+    QCOMPARE(app.currentState(), AppState::Meeting);
+  }
+  // endMeetingBreakLater sets 5min countdown and big break
+  void meeting_end_break_soon() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startMeeting(5, "standup");
+    app.advance(5);
+    app.endMeetingBreakLater(300);
+
+    QVERIFY(!app.trayData.isInMeeting);
+    QCOMPARE(app.trayData.secondsToNextBreak, 300);
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);  // next is big
+  }
+  // endMeetingBreakNow triggers immediate big break
+  void meeting_end_break_now() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startMeeting(5, "standup");
+    app.advance(5);
+    app.endMeetingBreakLater();
+
+    QVERIFY(!app.trayData.isInMeeting);
+    QVERIFY(app.trayData.isBreaking);
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);  // big break
+  }
+  // Extend meeting resets awaiting state
+  void meeting_extend() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startMeeting(5, "standup");
+    EXPECT_CALL(*deps.meetingPrompt, showEndPrompt()).Times(1);
+    app.advance(5);
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.meetingPrompt));
+
+    app.extendMeeting(1800);
+    QCOMPARE(app.trayData.meetingSecondsRemaining, 1800);
+    QVERIFY(app.trayData.isInMeeting);
+  }
+  // Sleep during meeting adjusts countdown
+  void sleep_during_meeting_adjusts() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startMeeting(3600, "standup");
+    emit deps.systemMonitor->sleepEnded(600);
+
+    QCOMPARE(app.trayData.meetingSecondsRemaining, 3000);
+    QVERIFY(app.trayData.isInMeeting);
+  }
+  // Sleep past meeting end resets cycle
+  void sleep_past_meeting_resets_cycle() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startMeeting(600, "standup");
+    emit deps.systemMonitor->sleepEnded(1200);
+
+    QVERIFY(!app.trayData.isInMeeting);
+    QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
+             deps.preferences->bigAfter->get() - 1);
+  }
+  // Short sleep during awaiting resets prompt timeout
+  void sleep_during_awaiting_short() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startMeeting(5, "standup");
+    app.advance(5);  // enter awaiting
+
+    EXPECT_CALL(*deps.meetingPrompt, resetTimeout()).Times(1);
+    emit deps.systemMonitor->sleepEnded(10);  // < bigFor
+    QVERIFY(app.trayData.isInMeeting);
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.meetingPrompt));
+  }
+  // Long sleep during awaiting ends meeting
+  void sleep_during_awaiting_long() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startMeeting(5, "standup");
+    app.advance(5);
+
+    emit deps.systemMonitor->sleepEnded(deps.preferences->bigFor->get());
+    QVERIFY(!app.trayData.isInMeeting);
+    QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
+  }
+  // Meeting blocked during postpone
+  void meeting_blocked_during_postpone() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.postpone(100);
+    app.startMeeting(3600, "standup");
+    QVERIFY(!app.trayData.isInMeeting);
+  }
+  // Meeting during break exits break
+  void meeting_during_break_exits_break() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.breakNow();
+    QVERIFY(app.trayData.isBreaking);
+
+    app.startMeeting(3600, "standup");
+    QVERIFY(app.trayData.isInMeeting);
+    QVERIFY(!app.trayData.isBreaking);
+  }
+  // TrayData reflects meeting state
+  void meeting_tray_data() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    QVERIFY(!app.trayData.isInMeeting);
+    QCOMPARE(app.trayData.meetingSecondsRemaining, 0);
+
+    app.startMeeting(100, "standup");
+    QVERIFY(app.trayData.isInMeeting);
+    QCOMPARE(app.trayData.meetingSecondsRemaining, 100);
+
+    app.advance(50);
+    QCOMPARE(app.trayData.meetingSecondsRemaining, 50);
+  }
   // Sleep end should not change the pause state
   void sleep_end_while_idle_paused() {
     NiceMock<DummyApp> app(deps);
@@ -501,67 +725,11 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
     QVERIFY(!app.trayData.pauseReasons);
   }
-  /* If the user has postponed the breaks for at least one time, when the user want to
-   * postpone again, we are showing a confirmation window telling the user to think
-   * twice before postponing the breaks.
-   *
-   * Note that we should avoid showing the confirmation window if the user clicked
-   * postpone right after the previous postpone. In this case, the user is actually
-   * postponing once. He/she clicked twice just because the preset durations are not
-   * suitable for the current postpone. Therefore, we are determining whether to show
-   * the window based one the time since last break. If it is longer than the break
-   * schdule, and the user is postponing again (obviously there was at least one
-   * postpone), we show this confirm window.
+  /* We disallow pausing duing postponing because:
+   * 1. this will almost not happen, so we can simplify things.
+   * 2. if this happens, postponing should mean continuous working.
    */
-  void confirm_postpone_if_long_time_since_last_break() {
-    NiceMock<DummyApp> app(deps);
-    app.start();
-
-    int smallEvery = deps.preferences->smallEvery->get();
-    app.advance(smallEvery - 1);
-
-    // First postpone should not trigger confirmation
-    EXPECT_CALL(app, confirmPostpone).Times(0);
-    app.postpone(100);
-    QCOMPARE(app.trayData.secondsToNextBreak, 101);
-    app.advance(100);
-    QVERIFY(Mock::VerifyAndClearExpectations(&app));
-
-    // Second postpone triggers confirmation and the break is postponed
-    EXPECT_CALL(app, confirmPostpone).WillOnce(Return(true));
-    app.postpone(100);
-    QVERIFY(Mock::VerifyAndClearExpectations(&app));
-    QCOMPARE(app.trayData.secondsToNextBreak, 101);
-  }
-  /* In addition to `confirm_postpone_if_long_time_since_last_break`, if we have reset
-   * the countdown after the last break, also time since last break is longer than the
-   * break schedule, we should not show the confirmation window. In other words, we
-   * should also reset time since last break when resetting the break countdown.
-   */
-  void no_confirm_postpone_if_countdown_reset() {
-    NiceMock<DummyApp> app(deps);
-    app.start();
-
-    int smallEvery = deps.preferences->smallEvery->get();
-    app.advance(smallEvery - 1);
-
-    emit deps.systemMonitor->sleepEnded(deps.preferences->resetAfterPause->get());
-    QCOMPARE(app.trayData.secondsToNextBreak, smallEvery);
-    app.advance(smallEvery - 1);
-
-    // Postpone should not trigger confirmation
-    EXPECT_CALL(app, confirmPostpone).Times(0);
-    app.postpone(100);
-    QCOMPARE(app.trayData.secondsToNextBreak, 101);
-    QVERIFY(Mock::VerifyAndClearExpectations(&app));
-  }
-  /* We reset the countdown timer if the user is idle for sufficiently long time.
-   * However, if the user is postponing the breaks and the current countdown time is
-   * longer than a break cycle, then resetting the countdown actually makes break
-   * happening earlier instead of later. Therefore, we should avoid resetting the
-   * countdown in this case.
-   */
-  void pause_should_not_affect_postpone() {
+  void no_pause_during_break() {
     NiceMock<DummyApp> app(deps);
     app.start();
 
@@ -569,11 +737,41 @@ class TestApp : public QObject {
     app.postpone(1000);
 
     deps.idleTimer->setIdle(true);
-    app.advance(deps.preferences->resetAfterPause->get() + 1);
+    app.advance(10);
     deps.idleTimer->setIdle(false);
     app.advance(1);
 
-    QCOMPARE(app.trayData.secondsToNextBreak, smallEvery + 999);
+    QCOMPARE(app.trayData.secondsToNextBreak, smallEvery + 989);
+  }
+  // End meeting early with immediate break
+  void meeting_end_early_break_now() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startMeeting(3600, "standup");
+    app.advance(600);  // 10 minutes in
+    QVERIFY(app.trayData.isInMeeting);
+    QCOMPARE(app.trayData.meetingSecondsRemaining, 3000);
+
+    app.endMeetingBreakLater(0);
+    QVERIFY(!app.trayData.isInMeeting);
+    QVERIFY(app.trayData.isBreaking);
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);  // big break
+  }
+  // Extend meeting before it ends
+  void meeting_extend_before_end() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startMeeting(600, "standup");
+    app.advance(100);
+    QCOMPARE(app.trayData.meetingSecondsRemaining, 500);
+
+    EXPECT_CALL(*deps.meetingPrompt, showEndPrompt()).Times(0);
+    app.extendMeeting(900);  // +15 min
+    QCOMPARE(app.trayData.meetingSecondsRemaining, 1400);
+    QVERIFY(app.trayData.isInMeeting);
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.meetingPrompt));
   }
 };
 

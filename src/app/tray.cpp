@@ -7,6 +7,7 @@
 #include <qnamespace.h>
 
 #include <QLabel>
+#include <QLocale>
 #include <QMessageBox>
 #include <QObject>
 #include <QPainter>
@@ -14,9 +15,11 @@
 #include <QPixmap>
 #include <QPushButton>
 #include <QSystemTrayIcon>
+#include <QTime>
 #include <QTimer>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <optional>
 
 #include "core/app.h"
 #include "core/flags.h"
@@ -50,12 +53,27 @@ StatusTrayWindow::StatusTrayWindow(SanePreferences* preferences, QObject* parent
 
   menu->addSeparator();
 
-  postponeMenu = menu->addMenu(tr("Postpone"));
-  for (const QString& minuteString : preferences->postponeMinutes->get()) {
-    int minute = minuteString.toInt();
-    connect(postponeMenu->addAction(tr("%n min", "", minute)), &QAction::triggered,
-            this, [this, minute]() { emit this->postponeRequested(minute * 60); });
-  }
+  postponeMenu = menu->addAction(tr("Postpone"));
+  connect(postponeMenu, &QAction::triggered, this,
+          &StatusTrayWindow::postponeRequested);
+  meetingAction = menu->addAction(tr("Meeting Mode"));
+  connect(meetingAction, &QAction::triggered, this,
+          &StatusTrayWindow::meetingRequested);
+  endMeetingAction = menu->addAction(tr("End Meeting && Break Now"));
+  endMeetingAction->setVisible(false);
+  connect(endMeetingAction, &QAction::triggered, this,
+          &StatusTrayWindow::endMeetingBreakNowRequested);
+  extendMeetingMenu = menu->addMenu(tr("Extend Meeting"));
+  extendMeetingMenu->menuAction()->setVisible(false);
+  auto addExtendOpt = [this](const QString& label, int secs) {
+    QAction* action = extendMeetingMenu->addAction(label);
+    extendOptions.append({action, secs});
+    connect(action, &QAction::triggered, this,
+            [this, secs]() { emit extendMeetingRequested(secs); });
+  };
+  addExtendOpt(tr("+15 min"), 15 * 60);
+  addExtendOpt(tr("+30 min"), 30 * 60);
+  addExtendOpt(tr("+1 hour"), 60 * 60);
   enableBreak = menu->addAction(tr("Enable Break"));
   enableBreak->setVisible(false);
   connect(enableBreak, &QAction::triggered, this,
@@ -77,12 +95,38 @@ void StatusTrayWindow::update(TrayData data) {
       tr("Next big break after %1").arg(formatTime(data.secondsToNextBigBreak)));
 
   enableBreak->setVisible(data.pauseReasons);
-  nextBreakAction->setVisible(!data.isBreaking && !data.pauseReasons);
-  bigBreakAction->setVisible(!data.isBreaking && !data.pauseReasons);
+  nextBreakAction->setVisible(!data.isBreaking && !data.pauseReasons &&
+                              !data.isInMeeting);
+  bigBreakAction->setVisible(!data.isBreaking && !data.pauseReasons &&
+                             !data.isInMeeting);
   smallBreakInsteadAction->setVisible(data.isBreaking &&
                                       data.smallBreaksBeforeBigBreak == 0);
+  postponeMenu->setVisible(!data.isInMeeting && !data.pauseReasons);
+  meetingAction->setVisible(!data.isBreaking && !data.isInMeeting &&
+                            !data.pauseReasons && !data.isPostponing);
+  endMeetingAction->setVisible(data.isInMeeting);
+  extendMeetingMenu->menuAction()->setVisible(data.isInMeeting);
 
-  if (data.pauseReasons) {
+  if (data.isInMeeting) {
+    QTime meetingEndTime = QTime::currentTime().addSecs(data.meetingSecondsRemaining);
+    QString endTimeStr = QLocale().toString(meetingEndTime, QLocale::ShortFormat);
+
+    if (data.meetingSecondsRemaining > 0) {
+      endMeetingAction->setText(tr("Meeting until %1").arg(endTimeStr));
+      setTitle(tr("Meeting mode — until %1 (%2 left)")
+                   .arg(endTimeStr, formatTime(data.meetingSecondsRemaining)));
+    } else {
+      endMeetingAction->setText(tr("End Meeting && Break Now"));
+      setTitle(tr("Meeting ended — waiting"));
+    }
+    for (const auto& opt : extendOptions) {
+      QTime newEndTime =
+          QTime::currentTime().addSecs(data.meetingSecondsRemaining + opt.seconds);
+      QString newEndTimeStr = QLocale().toString(newEndTime, QLocale::ShortFormat);
+      opt.action->setText(
+          tr("+%1 (until %2)").arg(formatTime(opt.seconds), newEndTimeStr));
+    }
+  } else if (data.pauseReasons) {
     if (data.pauseReasons.testFlag(PauseReason::OnBattery)) {
       setTitle(tr("Paused on battery"));
     } else if (data.pauseReasons.testFlag(PauseReason::AppOpen)) {
@@ -97,51 +141,68 @@ void StatusTrayWindow::update(TrayData data) {
   }
 }
 
-QPixmap StatusTrayWindow::drawIcon(TrayData data) {
+TrayIconSpec trayIconSpec(TrayData data) {
   if (data.pauseReasons || data.isBreaking ||
       data.secondsToNextBreak > data.secondsFromLastBreakToNext)
-    return QPixmap(":/images/icon-pause.png");
+    return {.baseIcon = ":/images/icon-pause.png",
+            .arc = std::nullopt,
+            .dot = std::nullopt};
 
-  QPixmap pixmap(":/images/icon.png");
-  QPen pen(QColor(5, 46, 22, 255));
+  if (data.isInMeeting) {
+    float arcRatio =
+        data.meetingTotalSeconds > 0
+            ? float(data.meetingSecondsRemaining) / data.meetingTotalSeconds
+            : 0;
+    return {
+        .baseIcon = ":/images/icon-pause.png",
+        .arc = TrayArcSpec{QColor(8, 47, 73), QColor(224, 242, 254), arcRatio},
+        .dot = std::nullopt,
+    };
+  }
+
+  float arcRatio = float(data.secondsToNextBreak) / data.secondsFromLastBreakToNext;
+  return {
+      .baseIcon = ":/images/icon.png",
+      .arc = TrayArcSpec{QColor(5, 46, 22), QColor(220, 252, 231), arcRatio},
+      .dot = data.smallBreaksBeforeBigBreak == 0 ? std::optional(QColor(202, 138, 4))
+                                                 : std::nullopt,
+  };
+}
+
+QPixmap renderTrayIcon(TrayIconSpec spec) {
+  QPixmap pixmap(spec.baseIcon);
+  if (!spec.arc && !spec.dot) return pixmap;
+
   QPainter painter(&pixmap);
-
   painter.setRenderHint(QPainter::Antialiasing, true);
-  pen.setWidth(16);
-  painter.setPen(pen);
+
   QRect rect = pixmap.rect();
   rect.setSize(QSize(rect.width() - 8, rect.height() - 8));
   rect.setTopLeft(QPoint(8, 8));
-  // Draw dark circle background
-  painter.drawArc(rect, 0, 360 * 16);  // angles are in 1/16th of a degree
 
-  // Draw light tracks
-  pen.setColor(QColor(220, 252, 231, 255));
-  painter.setPen(pen);
-  float arcRatio = float(data.secondsToNextBreak) / data.secondsFromLastBreakToNext;
-  int spanAngle = 360 * 16 * arcRatio;
-  painter.drawArc(rect, 90 * 16, spanAngle);
+  if (spec.arc) {
+    QPen pen(spec.arc->dark);
+    pen.setWidth(16);
+    painter.setPen(pen);
+    painter.drawArc(rect, 0, 360 * 16);
 
-  if (data.smallBreaksBeforeBigBreak == 0) {
+    pen.setColor(spec.arc->light);
+    painter.setPen(pen);
+    int spanAngle = 360 * 16 * spec.arc->ratio;
+    painter.drawArc(rect, 90 * 16, spanAngle);
+  }
+
+  if (spec.dot) {
     int dotSize = 64;
-    QRect smallRect(pixmap.width() - 12 - dotSize, 12, dotSize, dotSize);
-    QBrush brush(QColor(202, 138, 4, 255));
-    painter.setBrush(brush);
+    QRect dotRect(pixmap.width() - 12 - dotSize, 12, dotSize, dotSize);
+    painter.setBrush(QBrush(*spec.dot));
+    QPen pen;
     pen.setWidth(0);
     painter.setPen(pen);
-    painter.drawEllipse(smallRect);
+    painter.drawEllipse(dotRect);
   }
 
   return pixmap;
-}
-
-void StatusTrayWindow::onPostponeMinutesChange() {
-  postponeMenu->clear();
-  for (const QString& minuteString : preferences->postponeMinutes->get()) {
-    int minute = minuteString.toInt();
-    connect(postponeMenu->addAction(tr("%n min", "", minute)), &QAction::triggered,
-            this, [this, minute]() { emit postponeRequested(minute * 60); });
-  }
 }
 
 StatusTray::StatusTray(SanePreferences* preferences, QObject* parent)
@@ -175,7 +236,7 @@ void StatusTray::onIconTrigger(QSystemTrayIcon::ActivationReason reason) {
 void StatusTray::show() { icon->show(); }
 void StatusTray::update(TrayData data) {
   StatusTrayWindow::update(data);
-  icon->setIcon(drawIcon(data));
+  icon->setIcon(renderTrayIcon(trayIconSpec(data)));
 
   if (data.secondsToNextBreak <= 10 && !data.pauseReasons && !data.isBreaking) {
     if (!flashTimer->isActive()) {
@@ -220,6 +281,6 @@ StatusWindow::~StatusWindow() { widget->deleteLater(); }
 void StatusWindow::show() { widget->show(); }
 void StatusWindow::update(TrayData data) {
   StatusTrayWindow::update(data);
-  widget->icon->setPixmap(drawIcon(data));
+  widget->icon->setPixmap(renderTrayIcon(trayIconSpec(data)));
 }
 void StatusWindow::setTitle(QString str) { widget->info->setText(str); }

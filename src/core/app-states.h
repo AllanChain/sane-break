@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
@@ -7,39 +7,70 @@
 #include <QFlags>
 #include <QObject>
 #include <memory>
+#include <variant>
 
 #include "core/app-data.h"
 #include "core/break-windows.h"
 #include "core/db.h"
 #include "core/flags.h"
 #include "core/idle-time.h"
+#include "core/meeting-prompt.h"
 #include "core/preferences.h"
 #include "timer.h"
 
-// Actions that can be triggered from the application menu or UI
-enum class MenuAction {
-  BreakNow,           // Trigger a small break immediately
-  BigBreakNow,        // Trigger a big break immediately
-  SmallBreakInstead,  // Change the current big break to a small one
-  EnableBreaks,       // Clear all pauses and resume normal break schedule
-  ExitForceBreak,     // Exit the force break
+// User-initiated commands dispatched as pure pass-through to the current state via
+// onMenuAction. Add new actions here when they originate from UI and need no
+// framework-level handling in AppContext. For system/platform events that require
+// pre/post-dispatch logic in AppContext (e.g. updating data before delegating), add a
+// virtual method to AppState instead.
+namespace Action {
+struct BreakNow {};
+struct BigBreakNow {};
+struct SmallBreakInstead {};
+struct EnableBreaks {};
+struct ExitForceBreak {};
+struct EndMeetingBreakLater {
+  int seconds = 0;
 };
+struct ExtendMeeting {
+  int seconds;
+};
+}  // namespace Action
+
+using MenuAction =
+    std::variant<Action::BreakNow, Action::BigBreakNow, Action::SmallBreakInstead,
+                 Action::EnableBreaks, Action::ExitForceBreak,
+                 Action::EndMeetingBreakLater, Action::ExtendMeeting>;
 
 class AppContext;
 
-// Base class for application states managing different modes of operation
+// Base class for application states managing different modes of operation.
+//
+// Two event dispatch mechanisms:
+// - onMenuAction(MenuAction): for user-initiated commands. AppContext is a pure
+// pass-through;
+//   states receive the variant directly. Add new user actions as structs in the Action
+//   namespace.
+// - Virtual methods (onIdleStart, onPauseRequest, etc.): for system/platform events
+// where
+//   AppContext needs framework-level logic around the dispatch (e.g. onPauseRequest
+//   adds pause reasons before delegating, onSleepEnd applies a default fallback). Add
+//   new system events as virtual methods here.
 class AppState {
  public:
-  enum StateID { Normal, Paused, Break };
+  enum StateID { Normal, Paused, Break, Meeting };
   virtual StateID getID() = 0;
   virtual void enter(AppContext*) {};
   virtual void exit(AppContext*) {};
   virtual void tick(AppContext*) {};
   virtual void onIdleStart(AppContext*) {};
   virtual void onIdleEnd(AppContext*) {};
+  // Returns true if the state fully handled the sleep event, false to apply the default
+  // behavior (pause → add slept seconds → resume).
+  virtual bool onSleepEnd(AppContext*, int) { return false; };
   virtual void onMenuAction(AppContext*, MenuAction) {};
   virtual void onPauseRequest(AppContext*, PauseReasons) {};
-  virtual void OnResumeRequest(AppContext*, PauseReasons) {};
+  virtual void onResumeRequest(AppContext*, PauseReasons) {};
   virtual ~AppState() = default;
 };
 
@@ -53,10 +84,12 @@ class AppContext : public QObject {
   SystemIdleTime* idleTimer;
   AbstractTimer* screenLockTimer;
   AbstractBreakWindows* breakWindows;
+  AbstractMeetingPrompt* meetingPrompt;
   BreakDatabase* db;
 
   void transitionTo(std::unique_ptr<AppState> state);
   void exitCurrentState();
+  void checkBreakReadiness();
 
  protected:
   std::unique_ptr<AppState> m_currentState;
@@ -65,6 +98,7 @@ class AppContext : public QObject {
   void onIdleStart();
   void onIdleEnd();
   void onMenuAction(MenuAction action);
+  void onSleepEnd(int sleptSeconds);
   void onPauseRequest(PauseReasons reasons);
   void onResumeRequest(PauseReasons reasons);
 };
@@ -91,7 +125,7 @@ class AppStatePaused : public AppState {
   void onIdleStart(AppContext* app) override;
   void onIdleEnd(AppContext* app) override;
   void onMenuAction(AppContext* app, MenuAction action) override;
-  void OnResumeRequest(AppContext* app, PauseReasons reasons) override;
+  void onResumeRequest(AppContext* app, PauseReasons reasons) override;
 };
 
 class BreakPhase;
@@ -152,4 +186,15 @@ class BreakPhasePost : public BreakPhase {
  public:
   void enter(AppContext* app, AppStateBreak* breakState) override;
   void onIdleEnd(AppContext* app, AppStateBreak* breakState) override;
+};
+
+// Meeting state: break schedule suspended during a meeting/presentation
+class AppStateMeeting : public AppState {
+ public:
+  StateID getID() override { return Meeting; }
+  void enter(AppContext* app) override;
+  void exit(AppContext* app) override;
+  void tick(AppContext* app) override;
+  bool onSleepEnd(AppContext* app, int sleptSeconds) override;
+  void onMenuAction(AppContext* app, MenuAction action) override;
 };

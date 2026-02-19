@@ -1,10 +1,11 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "core/app.h"
 
 #include <QGuiApplication>
+#include <QJsonArray>
 #include <QObject>
 #include <memory>
 
@@ -14,6 +15,7 @@
 #include "core/db.h"
 #include "core/flags.h"
 #include "core/idle-time.h"
+#include "core/meeting-prompt.h"
 #include "core/preferences.h"
 #include "core/system-monitor.h"
 #include "core/timer.h"
@@ -33,6 +35,9 @@ AbstractApp::AbstractApp(const AppDependencies& deps, QObject* parent)
 
   breakWindows = deps.breakWindows;
   if (!breakWindows->parent()) breakWindows->setParent(this);
+
+  meetingPrompt = deps.meetingPrompt;
+  if (!meetingPrompt->parent()) meetingPrompt->setParent(this);
 
   m_countDownTimer = deps.countDownTimer;
   m_countDownTimer->setInterval(1000);
@@ -56,12 +61,19 @@ AbstractApp::AbstractApp(const AppDependencies& deps, QObject* parent)
   connect(breakWindows, &AbstractBreakWindows::lockScreenRequested, this,
           &AbstractApp::doLockScreen);
   connect(breakWindows, &AbstractBreakWindows::exitForceBreakRequested, this,
-          [this]() { onMenuAction(MenuAction::ExitForceBreak); });
+          [this]() { onMenuAction(Action::ExitForceBreak{}); });
 
   connect(preferences->pauseOnBattery, &SettingWithSignal::changed, this,
           &AbstractApp::onBatterySettingChange);
   connect(preferences->smallEvery, &SettingWithSignal::changed, this,
           [this]() { this->data->resetSecondsToNextBreak(); });
+
+  connect(meetingPrompt, &AbstractMeetingPrompt::breakNowRequested, this,
+          [this]() { endMeetingBreakLater(0); });
+  connect(meetingPrompt, &AbstractMeetingPrompt::breakLaterRequested, this,
+          &AbstractApp::endMeetingBreakLater);
+  connect(meetingPrompt, &AbstractMeetingPrompt::extendRequested, this,
+          &AbstractApp::extendMeeting);
 };
 
 void AbstractApp::start() {
@@ -80,46 +92,46 @@ void AbstractApp::updateTray() {
       data->smallBreaksBeforeBigBreak() * secondsFromLastBreakToNext;
   TrayData trayData = {
       .isBreaking = data->secondsToNextBreak() == 0,
-      // .isBreaking = m_currentState->getID() == AppState::Break,
       .secondsToNextBreak = data->secondsToNextBreak(),
       .secondsToNextBigBreak = secondsToNextBigBreak,
       .secondsFromLastBreakToNext = secondsFromLastBreakToNext,
       .smallBreaksBeforeBigBreak = data->smallBreaksBeforeBigBreak(),
       .pauseReasons = data->pauseReasons(),
+      .isInMeeting = data->isInMeeting(),
+      .meetingSecondsRemaining = data->meetingSecondsRemaining(),
+      .meetingTotalSeconds = data->meetingTotalSeconds(),
+      .isPostponing = data->isPostponing(),
   };
   emit trayDataUpdated(trayData);
 }
 
-void AbstractApp::breakNow() {
-  m_currentState->onMenuAction(this, MenuAction::BreakNow);
-}
-void AbstractApp::bigBreakNow() {
-  m_currentState->onMenuAction(this, MenuAction::BigBreakNow);
-}
-void AbstractApp::enableBreak() {
-  m_currentState->onMenuAction(this, MenuAction::EnableBreaks);
-}
-void AbstractApp::smallBreakInstead() {
-  m_currentState->onMenuAction(this, MenuAction::SmallBreakInstead);
+void AbstractApp::breakNow() { onMenuAction(Action::BreakNow{}); }
+void AbstractApp::bigBreakNow() { onMenuAction(Action::BigBreakNow{}); }
+void AbstractApp::enableBreak() { onMenuAction(Action::EnableBreaks{}); }
+void AbstractApp::smallBreakInstead() { onMenuAction(Action::SmallBreakInstead{}); }
+
+void AbstractApp::startMeeting(int seconds, const QString& reason) {
+  if (m_currentState->getID() == AppState::Meeting || data->isPostponing()) return;
+  db->logEvent("meeting::start", {{"seconds", seconds}, {"reason", reason}});
+  data->setMeetingData(seconds, seconds);
+  transitionTo(std::make_unique<AppStateMeeting>());
 }
 
-void AbstractApp::postpone(int secs) {
-  bool needsConfirm =
-      data->secondsSinceLastBreak() > preferences->smallEvery->get() + 60;
-  if (needsConfirm && !confirmPostpone(secs)) return;
-  db->logEvent("postpone", {{"seconds", secs}});
-  data->addSecondsToNextBreak(secs);
-  data->makeNextBreakBig();
-  if (m_currentState->getID() == AppState::Break) {
-    transitionTo(std::make_unique<AppStateNormal>());
-  }
+void AbstractApp::endMeetingBreakLater(int seconds) {
+  onMenuAction(Action::EndMeetingBreakLater{seconds});
 }
 
-void AbstractApp::onSleepEnd(int sleptSeconds) {
-  onPauseRequest(PauseReason::Sleep);
-  // Timers does not tick during sleep, therefore we need to add them back.
-  data->addSecondsPaused(sleptSeconds);
-  onResumeRequest(PauseReason::Sleep);
+void AbstractApp::extendMeeting(int seconds) {
+  onMenuAction(Action::ExtendMeeting{seconds});
+}
+
+void AbstractApp::postpone(int seconds) {
+  // This is defensive. This should already be handled by App.
+  if (data->isPostponing()) return;
+  db->logEvent("postpone", {{"seconds", seconds}});
+  // Exit current break if we are postponing breaks
+  transitionTo(std::make_unique<AppStateNormal>());
+  data->postpone(seconds);
 }
 
 void AbstractApp::onBatterySettingChange() {

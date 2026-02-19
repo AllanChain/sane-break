@@ -1,11 +1,12 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "core/app-states.h"
 
 #include <memory>
 #include <utility>
+#include <variant>
 
 #include "core/app-data.h"
 #include "core/break-windows.h"
@@ -36,13 +37,20 @@ void AppContext::onIdleEnd() { m_currentState->onIdleEnd(this); }
 void AppContext::onMenuAction(MenuAction action) {
   m_currentState->onMenuAction(this, action);
 }
+void AppContext::onSleepEnd(int sleptSeconds) {
+  if (m_currentState->onSleepEnd(this, sleptSeconds)) return;
+  // Default: treat sleep as a pause/resume cycle
+  onPauseRequest(PauseReason::Sleep);
+  data->addSecondsPaused(sleptSeconds);
+  onResumeRequest(PauseReason::Sleep);
+}
 void AppContext::onPauseRequest(PauseReasons reasons) {
   data->addPauseReasons(reasons);
   m_currentState->onPauseRequest(this, reasons);
 }
 void AppContext::onResumeRequest(PauseReasons reasons) {
   data->removePauseReasons(reasons);
-  m_currentState->OnResumeRequest(this, reasons);
+  m_currentState->onResumeRequest(this, reasons);
 }
 
 void AppStateNormal::enter(AppContext* app) {
@@ -53,31 +61,29 @@ void AppStateNormal::enter(AppContext* app) {
 }
 void AppStateNormal::exit(AppContext* app) { app->db->logEvent("normal::end"); }
 void AppStateNormal::tick(AppContext* app) {
-  app->data->tickSecondsSinceLastBreak();
   app->data->tickSecondsToNextBreak();
   if (app->data->secondsToNextBreak() <= 0)
     app->transitionTo(std::make_unique<AppStateBreak>());
 }
 void AppStateNormal::onIdleStart(AppContext* app) {
+  // When in postpone mode, disable pausing
+  if (app->data->isPostponing()) return;
   app->data->addPauseReasons(PauseReason::Idle);
   app->transitionTo(std::make_unique<AppStatePaused>());
 }
 void AppStateNormal::onPauseRequest(AppContext* app, PauseReasons) {
+  // When in postpone mode, disable pausing
+  if (app->data->isPostponing()) return;
   app->transitionTo(std::make_unique<AppStatePaused>());
 }
 void AppStateNormal::onMenuAction(AppContext* app, MenuAction action) {
-  switch (action) {
-    case (MenuAction::BreakNow):
-      app->data->zeroSecondsToNextBreak();
-      app->transitionTo(std::make_unique<AppStateBreak>());
-      break;
-    case (MenuAction::BigBreakNow):
-      app->data->zeroSecondsToNextBreak();
-      app->data->makeNextBreakBig();
-      app->transitionTo(std::make_unique<AppStateBreak>());
-      break;
-    default:
-      break;
+  if (std::get_if<Action::BreakNow>(&action)) {
+    app->data->earlyBreak();
+    app->transitionTo(std::make_unique<AppStateBreak>());
+  } else if (std::get_if<Action::BigBreakNow>(&action)) {
+    app->data->earlyBreak();
+    app->data->makeNextBreakBig();
+    app->transitionTo(std::make_unique<AppStateBreak>());
   }
 }
 
@@ -126,19 +132,15 @@ void AppStatePaused::onIdleEnd(AppContext* app) {
     app->transitionTo(std::make_unique<AppStateNormal>());
   }
 }
-void AppStatePaused::OnResumeRequest(AppContext* app, PauseReasons) {
+void AppStatePaused::onResumeRequest(AppContext* app, PauseReasons) {
   if (!app->data->pauseReasons()) {
     app->transitionTo(std::make_unique<AppStateNormal>());
   }
 }
 void AppStatePaused::onMenuAction(AppContext* app, MenuAction action) {
-  switch (action) {
-    case (MenuAction::EnableBreaks):
-      app->data->clearPauseReasons();
-      app->transitionTo(std::make_unique<AppStateNormal>());
-      break;
-    default:
-      break;
+  if (std::get_if<Action::EnableBreaks>(&action)) {
+    app->data->clearPauseReasons();
+    app->transitionTo(std::make_unique<AppStateNormal>());
   }
 }
 
@@ -182,28 +184,21 @@ void AppStateBreak::onPauseRequest(AppContext* app, PauseReasons reasons) {
 }
 BreaksDataInit AppStateBreak::dataInit(AppContext* app) {
   return {
-      .totalSeconds = app->data->breakType() == BreakType::Big
-                          ? app->preferences->bigFor->get()
-                          : app->preferences->smallFor->get(),
+      .totalSeconds = app->data->breakDuration(),
       .flashFor = app->preferences->flashFor->get(),
   };
 }
 void AppStateBreak::onMenuAction(AppContext* app, MenuAction action) {
-  switch (action) {
-    case (MenuAction::SmallBreakInstead):
-      this->exit(app);
-      app->data->makeNextBreakLastSmallBeforeBig();
-      app->db->logEvent("break::small-instead");
-      this->enter(app);
-      break;
-    case (MenuAction::ExitForceBreak):
-      data->init(dataInit(app));
-      data->recordForceBreakExit();
-      app->db->logEvent("break::exit-force");
-      this->transitionTo(app, std::make_unique<BreakPhasePrompt>());
-      break;
-    default:
-      break;
+  if (std::get_if<Action::SmallBreakInstead>(&action)) {
+    this->exit(app);
+    app->data->makeNextBreakLastSmallBeforeBig();
+    app->db->logEvent("break::small-instead");
+    this->enter(app);
+  } else if (std::get_if<Action::ExitForceBreak>(&action)) {
+    data->init(dataInit(app));
+    data->recordForceBreakExit();
+    app->db->logEvent("break::exit-force");
+    this->transitionTo(app, std::make_unique<BreakPhasePrompt>());
   }
 }
 
@@ -303,4 +298,57 @@ void BreakPhasePost::enter(AppContext* app, AppStateBreak*) {
 void BreakPhasePost::onIdleEnd(AppContext* app, AppStateBreak*) {
   app->screenLockTimer->stop();
   app->transitionTo(std::make_unique<AppStateNormal>());
+}
+
+void AppStateMeeting::enter(AppContext* app) {
+  app->db->logEvent("meeting::enter");
+  app->data->resetSecondsToNextBreak();
+  app->idleTimer->setWatchAccuracy(5000);
+  app->idleTimer->setMinIdleTime(app->preferences->pauseOnIdleFor->get() * 1000);
+}
+
+void AppStateMeeting::exit(AppContext* app) {
+  app->db->logEvent("meeting::exit");
+  app->data->clearMeetingData();
+  app->meetingPrompt->closeEndPrompt();
+}
+
+void AppStateMeeting::tick(AppContext* app) {
+  if (app->data->meetingSecondsRemaining() > 0) {
+    app->data->tickMeetingRemaining();
+    if (app->data->meetingSecondsRemaining() <= 0) {
+      app->meetingPrompt->showEndPrompt();
+      return;
+    }
+  }
+}
+
+void AppStateMeeting::onMenuAction(AppContext* app, MenuAction action) {
+  if (auto* a = std::get_if<Action::EndMeetingBreakLater>(&action)) {
+    app->db->logEvent("meeting::end", {{"next-break", a->seconds}});
+    app->data->makeNextBreakBig();
+    app->data->setSecondsToNextBreak(a->seconds);
+    app->transitionTo(std::make_unique<AppStateNormal>());
+  } else if (auto* a = std::get_if<Action::ExtendMeeting>(&action)) {
+    app->db->logEvent("meeting::extend", {{"seconds", a->seconds}});
+    app->data->extendMeeting(a->seconds);
+  }
+}
+bool AppStateMeeting::onSleepEnd(AppContext* app, int sleptSeconds) {
+  int skipIfSleptFor =
+      app->data->meetingSecondsRemaining() + app->preferences->bigFor->get();
+  if (sleptSeconds >= skipIfSleptFor) {
+    app->db->logEvent("meeting::end", {{"next-break", -1}});
+    app->data->resetBreakCycle();
+    app->data->resetSecondsToNextBreak();
+    app->meetingPrompt->closeEndPrompt();
+    app->transitionTo(std::make_unique<AppStateNormal>());
+    return true;
+  }
+  if (!app->meetingPrompt->isShowing()) {
+    app->data->subtractMeetingRemaining(sleptSeconds);
+  } else {
+    app->meetingPrompt->resetTimeout();
+  }
+  return true;
 }

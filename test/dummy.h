@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
@@ -19,6 +19,7 @@
 #include "core/db.h"
 #include "core/flags.h"
 #include "core/idle-time.h"
+#include "core/meeting-prompt.h"
 #include "core/preferences.h"
 #include "core/system-monitor.h"
 #include "core/timer.h"
@@ -26,6 +27,7 @@
 
 inline SanePreferences* tempPreferences() {
   QTemporaryFile tempFile;
+  (void)tempFile.open();
   return new SanePreferences(new QSettings(tempFile.fileName(), QSettings::IniFormat));
 }
 
@@ -74,6 +76,21 @@ class DummySystemMonitor : public AbstractSystemMonitor {
   bool m_battery = false;
 };
 
+class DummyMeetingPrompt : public AbstractMeetingPrompt {
+  Q_OBJECT
+ public:
+  explicit DummyMeetingPrompt(QObject* parent = nullptr)
+      : AbstractMeetingPrompt(parent) {
+    ON_CALL(*this, showEndPrompt()).WillByDefault([this]() { m_showing = true; });
+    ON_CALL(*this, closeEndPrompt()).WillByDefault([this]() { m_showing = false; });
+  }
+  MOCK_METHOD(void, showEndPrompt, (), (override));
+  MOCK_METHOD(void, closeEndPrompt, (), (override));
+  MOCK_METHOD(void, resetTimeout, (), (override));
+  bool isShowing() const override { return m_showing; }
+  bool m_showing = false;
+};
+
 struct DummyAppDependencies {
   SanePreferences* preferences = nullptr;
   BreakDatabase* db = nullptr;
@@ -82,6 +99,7 @@ struct DummyAppDependencies {
   DummyIdleTime* idleTimer = nullptr;
   DummySystemMonitor* systemMonitor = nullptr;
   DummyBreakWindows* breakWindows = nullptr;
+  DummyMeetingPrompt* meetingPrompt = nullptr;
 };
 class DummyApp : public AbstractApp {
   Q_OBJECT
@@ -89,13 +107,12 @@ class DummyApp : public AbstractApp {
   DummyApp(const DummyAppDependencies& deps, QObject* parent = nullptr)
       : AbstractApp(
             {deps.preferences, deps.db, deps.countDownTimer, deps.screenLockTimer,
-             deps.idleTimer, deps.systemMonitor, deps.breakWindows},
+             deps.idleTimer, deps.systemMonitor, deps.breakWindows, deps.meetingPrompt},
             parent) {
     connect(this, &DummyApp::trayDataUpdated, this,
             [this](TrayData data) { trayData = data; });
   };
   MOCK_METHOD(void, doLockScreen, (), (override));
-  MOCK_METHOD(bool, confirmPostpone, (int), (override));
   AppState::StateID currentState() { return m_currentState->getID(); }
   void advance(int secs) {
     QVERIFY2(m_countDownTimer->isActive(),
@@ -125,6 +142,7 @@ class DummyApp : public AbstractApp {
         .idleTimer = new DummyIdleTime(parent),
         .systemMonitor = new DummySystemMonitor(parent),
         .breakWindows = new testing::NiceMock<DummyBreakWindows>(parent),
+        .meetingPrompt = new testing::NiceMock<DummyMeetingPrompt>(parent),
     };
   };
 };
