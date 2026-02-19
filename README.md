@@ -200,6 +200,19 @@ Yes, Sane Break will automatically pause and stop prompting breaks if there is n
 
 **Note for Wayland** (and possibly other platforms): Some applications, such as mpv, simulate user inputs to prevent the computer from sleeping automatically. Sane Break cannot distinguish between simulated and real inputs, so it will treat these simulations as active use. This means breaks can still occur while watching videos.
 
+### Why doesn't autostart work?
+
+Autostart via the in-app setting may fail on some desktop environments that don't provide the D-Bus portal interface (`org.freedesktop.portal.Background`) required for Flatpak applications. This is known to affect COSMIC desktop and potentially other environments. If you encounter this issue, you can manually create a desktop file at `~/.config/autostart/io.github.AllanChain.sane-break.desktop` with the following content:
+
+```desktop
+[Desktop Entry]
+Type=Application
+Name=io.github.AllanChain.sane-break
+X-XDP-Autostart=io.github.AllanChain.sane-break
+Exec=flatpak run --command=sane-break io.github.AllanChain.sane-break
+X-Flatpak=io.github.AllanChain.sane-break
+```
+
 ### Where are settings stored?
 
 The default locations for settings are:
