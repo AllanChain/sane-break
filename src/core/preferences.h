@@ -86,6 +86,7 @@ class SanePreferences : public QObject {
 
   Setting<int>* smallEvery;
   Setting<int>* smallFor;
+  Setting<bool>* bigBreakEnabled;
   Setting<int>* bigAfter;
   Setting<int>* bigFor;
 

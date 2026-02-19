@@ -86,16 +86,21 @@ void AbstractApp::start() {
 }
 
 void AbstractApp::updateTray() {
+  bool bigEnabled = preferences->bigBreakEnabled->get();
   int secondsFromLastBreakToNext = preferences->smallEvery->get();
-  int secondsToNextBigBreak =
-      data->secondsToNextBreak() +
-      data->smallBreaksBeforeBigBreak() * secondsFromLastBreakToNext;
+  int secondsToNextBigBreak = 0;
+  if (bigEnabled) {
+    secondsToNextBigBreak =
+        data->secondsToNextBreak() +
+        data->smallBreaksBeforeBigBreak() * secondsFromLastBreakToNext;
+  }
   TrayData trayData = {
       .isBreaking = data->secondsToNextBreak() == 0,
       .secondsToNextBreak = data->secondsToNextBreak(),
       .secondsToNextBigBreak = secondsToNextBigBreak,
       .secondsFromLastBreakToNext = secondsFromLastBreakToNext,
       .smallBreaksBeforeBigBreak = data->smallBreaksBeforeBigBreak(),
+      .bigBreakEnabled = bigEnabled,
       .pauseReasons = data->pauseReasons(),
       .isInMeeting = data->isInMeeting(),
       .meetingSecondsRemaining = data->meetingSecondsRemaining(),

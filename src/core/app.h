@@ -34,6 +34,7 @@ struct TrayData {
   int secondsToNextBigBreak;
   int secondsFromLastBreakToNext;
   int smallBreaksBeforeBigBreak;
+  bool bigBreakEnabled;
   PauseReasons pauseReasons;
   bool isInMeeting;
   int meetingSecondsRemaining;

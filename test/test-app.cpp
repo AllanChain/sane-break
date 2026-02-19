@@ -649,6 +649,55 @@ class TestApp : public QObject {
     QVERIFY(!app.trayData.isInMeeting);
     QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
   }
+  // When big breaks are disabled, all breaks should be small
+  void big_break_disabled_all_breaks_small() {
+    deps.preferences->bigBreakEnabled->set(false);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    int numberOfBreaks = deps.preferences->bigAfter->get();
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(numberOfBreaks);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Big, _)).Times(0);
+    for (int j = 0; j < numberOfBreaks; j++) {
+      app.advance(app.trayData.secondsToNextBreak);
+      app.advanceToBreakEnd();
+    }
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+  }
+  // When big breaks are disabled, tray should not show big break info
+  void big_break_disabled_tray_info() {
+    deps.preferences->bigBreakEnabled->set(false);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    QVERIFY(!app.trayData.bigBreakEnabled);
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, -1);
+  }
+  // When big breaks are disabled, bigBreakNow should trigger a small break
+  void big_break_disabled_big_break_now() {
+    deps.preferences->bigBreakEnabled->set(false);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
+    app.bigBreakNow();
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+  }
+  // When big breaks are disabled, meeting end should not force a big break
+  void big_break_disabled_meeting_end() {
+    deps.preferences->bigBreakEnabled->set(false);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startMeeting(5, "standup");
+    app.advance(5);
+    app.endMeetingBreakLater(0);
+
+    QVERIFY(!app.trayData.isInMeeting);
+    QVERIFY(app.trayData.isBreaking);
+    // Should NOT be a big break since big breaks are disabled
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, -1);
+  }
   // Meeting blocked during postpone
   void meeting_blocked_during_postpone() {
     NiceMock<DummyApp> app(deps);

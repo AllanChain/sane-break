@@ -170,6 +170,34 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
   controllers->add(
       PrefGroup::Schedule,
       new PrefController<QSpinBox, int>(ui->smallBreakForBox, preferences->smallFor));
+  auto syncBigBreakEnabled = [this]() {
+    bool enabled = ui->bigBreakEnabled->isChecked();
+    // Schedule tab
+    ui->bigBreakAfterBox->setEnabled(enabled);
+    ui->bigBreakAfterSlider->setEnabled(enabled);
+    ui->bigBreakForBox->setEnabled(enabled);
+    ui->bigBreakForSlider->setEnabled(enabled);
+    // Reminder tab
+    ui->autoCloseWindowAfterBigBreak->setEnabled(enabled);
+    // Interface tab
+    ui->bigBreakMessages->setEnabled(enabled);
+    ui->bigHighlight->setEnabled(enabled);
+    ui->bigBreakShowProgressBar->setEnabled(enabled);
+    ui->bigBreakShowCountdown->setEnabled(enabled);
+    ui->bigBreakShowClock->setEnabled(enabled);
+    ui->bigBreakShowEndTime->setEnabled(enabled);
+    ui->bigBreakShowButtons->setEnabled(enabled);
+    // Sound tab
+    ui->bigStartBellSelect->setEnabled(enabled);
+    ui->bigEndBellSelect->setEnabled(enabled);
+    ui->playBigStart->setEnabled(enabled);
+    ui->playBigEnd->setEnabled(enabled);
+  };
+  connect(
+      controllers->add(PrefGroup::Schedule,
+                       new PrefController<QCheckBox, bool>(ui->bigBreakEnabled,
+                                                           preferences->bigBreakEnabled)),
+      &PrefControllerBase::explictSync, this, syncBigBreakEnabled);
   connect(controllers->add(PrefGroup::Schedule,
                            new PrefController<QSpinBox, int>(ui->bigBreakAfterBox,
                                                              preferences->bigAfter)),
@@ -538,6 +566,7 @@ void PreferenceWindow::openBreakWindowPreview() {
                               AbstractBreakWindows::Button::ExitForceBreak);
     QTimer::singleShot(4000, [this]() {
       breakWindows->destroy();
+      if (!preferences->bigBreakEnabled->get()) return;
       breakWindows->create(BreakType::Big, preferences);
       breakWindows->showFlashPrompt();
       QTimer::singleShot(2000, [this]() {

@@ -82,7 +82,7 @@ void AppStateNormal::onMenuAction(AppContext* app, MenuAction action) {
     app->transitionTo(std::make_unique<AppStateBreak>());
   } else if (std::get_if<Action::BigBreakNow>(&action)) {
     app->data->earlyBreak();
-    app->data->makeNextBreakBig();
+    if (app->preferences->bigBreakEnabled->get()) app->data->makeNextBreakBig();
     app->transitionTo(std::make_unique<AppStateBreak>());
   }
 }
@@ -326,7 +326,7 @@ void AppStateMeeting::tick(AppContext* app) {
 void AppStateMeeting::onMenuAction(AppContext* app, MenuAction action) {
   if (auto* a = std::get_if<Action::EndMeetingBreakLater>(&action)) {
     app->db->logEvent("meeting::end", {{"next-break", a->seconds}});
-    app->data->makeNextBreakBig();
+    if (app->preferences->bigBreakEnabled->get()) app->data->makeNextBreakBig();
     app->data->setSecondsToNextBreak(a->seconds);
     app->transitionTo(std::make_unique<AppStateNormal>());
   } else if (auto* a = std::get_if<Action::ExtendMeeting>(&action)) {
@@ -335,8 +335,10 @@ void AppStateMeeting::onMenuAction(AppContext* app, MenuAction action) {
   }
 }
 bool AppStateMeeting::onSleepEnd(AppContext* app, int sleptSeconds) {
-  int skipIfSleptFor =
-      app->data->meetingSecondsRemaining() + app->preferences->bigFor->get();
+  int breakDuration = app->preferences->bigBreakEnabled->get()
+                          ? app->preferences->bigFor->get()
+                          : app->preferences->smallFor->get();
+  int skipIfSleptFor = app->data->meetingSecondsRemaining() + breakDuration;
   if (sleptSeconds >= skipIfSleptFor) {
     app->db->logEvent("meeting::end", {{"next-break", -1}});
     app->data->resetBreakCycle();

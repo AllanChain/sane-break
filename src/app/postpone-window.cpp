@@ -16,7 +16,6 @@
 #include <QTimer>
 #include <QWidget>
 #include <Qt>
-#include <cmath>
 
 #include "core/db.h"
 #include "core/preferences.h"
@@ -45,8 +44,11 @@ void PostponeWindow::onMinutesUpdate(int minutes) {
   ui->totalMinutesLabel->setArgs({minutes});
   int shrinkNextMinutes = minutes * preferences->postponeShrinkNextPercent->get() / 100;
   ui->nextSessionLabel->setArgs({shrinkNextMinutes});
+  int breakForReference = preferences->bigBreakEnabled->get()
+                              ? preferences->bigFor->get()
+                              : preferences->smallFor->get();
   int breakExtensionSeconds = preferences->postponeExtendBreakPercent->get() * minutes *
-                              60 * preferences->bigFor->get() /
+                              60 * breakForReference /
                               preferences->smallEvery->get() / 100;
   ui->breakExtensionLabel->setArgs({breakExtensionSeconds});
 }

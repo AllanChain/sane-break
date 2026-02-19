@@ -17,10 +17,12 @@ AppData::AppData(QObject* parent, SanePreferences* preferences)
 }
 
 BreakType AppData::breakType() {
+  if (!preferences->bigBreakEnabled->get()) return BreakType::Small;
   return smallBreaksBeforeBigBreak() == 0 ? BreakType::Big : BreakType::Small;
 };
 
 int AppData::smallBreaksBeforeBigBreak() {
+  if (!preferences->bigBreakEnabled->get()) return -1;
   int breakEvery = preferences->bigAfter->get();
   m_breakCycleCount %= breakEvery;
   return (breakEvery - m_breakCycleCount) % breakEvery;
@@ -37,8 +39,11 @@ int AppData::breakDuration() {
   int totalSeconds = breakType() == BreakType::Big ? preferences->bigFor->get()
                                                    : preferences->smallFor->get();
   // If postponed, calculate extra seconds. Add zero otherwise.
+  int breakForReference = preferences->bigBreakEnabled->get()
+                              ? preferences->bigFor->get()
+                              : preferences->smallFor->get();
   totalSeconds += preferences->postponeExtendBreakPercent->get() *
-                  m_postponeData.secondsPostponed() * preferences->bigFor->get() /
+                  m_postponeData.secondsPostponed() * breakForReference /
                   preferences->smallEvery->get() / 100;
   return totalSeconds;
 }

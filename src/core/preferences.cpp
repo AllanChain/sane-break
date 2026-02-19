@@ -28,6 +28,7 @@ SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
 
   smallEvery = new Setting<int>(settings, "break/small-every", 1200);
   smallFor = new Setting<int>(settings, "break/small-for", 20);
+  bigBreakEnabled = new Setting<bool>(settings, "break/big-enabled", true);
   bigAfter = new Setting<int>(settings, "break/big-after", 3);
   bigFor = new Setting<int>(settings, "break/big-for", 60);
 

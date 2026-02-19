@@ -97,9 +97,9 @@ void StatusTrayWindow::update(TrayData data) {
   enableBreak->setVisible(data.pauseReasons);
   nextBreakAction->setVisible(!data.isBreaking && !data.pauseReasons &&
                               !data.isInMeeting);
-  bigBreakAction->setVisible(!data.isBreaking && !data.pauseReasons &&
-                             !data.isInMeeting);
-  smallBreakInsteadAction->setVisible(data.isBreaking &&
+  bigBreakAction->setVisible(data.bigBreakEnabled && !data.isBreaking &&
+                             !data.pauseReasons && !data.isInMeeting);
+  smallBreakInsteadAction->setVisible(data.bigBreakEnabled && data.isBreaking &&
                                       data.smallBreaksBeforeBigBreak == 0);
   postponeMenu->setVisible(!data.isInMeeting && !data.pauseReasons);
   meetingAction->setVisible(!data.isBreaking && !data.isInMeeting &&
@@ -134,10 +134,12 @@ void StatusTrayWindow::update(TrayData data) {
     } else if (data.pauseReasons.testFlag(PauseReason::Idle)) {
       setTitle(tr("Paused on idle"));
     }
-  } else {
+  } else if (data.bigBreakEnabled) {
     setTitle(QString("%1 %2").arg(
         data.smallBreaksBeforeBigBreak == 0 ? tr("big break") : tr("small break"),
         formatTime(data.secondsToNextBreak)));
+  } else {
+    setTitle(QString("%1 %2").arg(tr("break"), formatTime(data.secondsToNextBreak)));
   }
 }
 
@@ -164,8 +166,9 @@ TrayIconSpec trayIconSpec(TrayData data) {
   return {
       .baseIcon = ":/images/icon.png",
       .arc = TrayArcSpec{QColor(5, 46, 22), QColor(220, 252, 231), arcRatio},
-      .dot = data.smallBreaksBeforeBigBreak == 0 ? std::optional(QColor(202, 138, 4))
-                                                 : std::nullopt,
+      .dot = data.bigBreakEnabled && data.smallBreaksBeforeBigBreak == 0
+                 ? std::optional(QColor(202, 138, 4))
+                 : std::nullopt,
   };
 }
 

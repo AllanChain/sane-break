@@ -248,9 +248,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-349</y>
-         <width>659</width>
-         <height>975</height>
+         <y>0</y>
+         <width>661</width>
+         <height>851</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -387,6 +387,16 @@ QPushButton[flat=&quot;true&quot;]:checked {
              <widget class="QLabel" name="label_22">
               <property name="text">
                <string>&lt;h3&gt;Big Breaks&lt;/h3&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="bigBreakEnabled">
+              <property name="text">
+               <string>Enabled</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
