@@ -27,6 +27,13 @@ struct MeetingData {
   void clear();
 };
 
+struct FocusData {
+  bool isActive = false;
+  int cyclesRemaining = 0;
+  int totalCycles = 0;
+  void clear();
+};
+
 // Manages application state data related to break scheduling and timing
 class AppData : public QObject {
   Q_OBJECT
@@ -63,6 +70,19 @@ class AppData : public QObject {
 
   void setSecondsToNextBreak(int secs);
 
+  bool isFocusMode() const;
+  int focusCyclesRemaining() const;
+  int focusTotalCycles() const;
+  void startFocusMode(int totalCycles);
+  void endFocusMode();
+  void setFocusCyclesRemaining(int cycles);
+
+  int effectiveSmallEvery();
+  int effectiveSmallFor();
+  bool effectiveBigBreakEnabled();
+  int effectiveBigAfter();
+  int effectiveBigFor();
+
   int secondsPaused();
   void tickSecondsPaused();
   void addSecondsPaused(int secs);
@@ -83,6 +103,7 @@ class AppData : public QObject {
   PauseReasons m_pauseReasons = {};
   PostponeData m_postponeData;
   MeetingData m_meetingData;
+  FocusData m_focusData;
 
   SanePreferences* preferences;
 };

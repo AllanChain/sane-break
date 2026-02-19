@@ -23,6 +23,7 @@ class SaneBreakApp : public AbstractApp {
   void doLockScreen() override;
   void openPostponeWindow();
   void openMeetingWindow();
+  void openFocusWindow();
 
   void showPreferences();
 

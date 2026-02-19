@@ -807,6 +807,164 @@ class TestApp : public QObject {
     QVERIFY(app.trayData.isBreaking);
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);  // big break
   }
+  // Focus mode entry break forces full-screen (flashFor=0)
+  void focus_mode_entry_break() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    // Set focus schedule
+    deps.preferences->focusSmallEvery->set(600);
+    deps.preferences->focusSmallFor->set(10);
+
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
+    app.startFocus(4, "deep work");
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+    QVERIFY(app.trayData.isBreaking);
+    QVERIFY(app.trayData.isFocusMode);
+
+    // Entry break should be force break immediately (flashFor=0),
+    // so full screen should show without any ticks
+    EXPECT_CALL(*deps.breakWindows, showFullScreen()).Times(1);
+    app.advance(1);
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+  }
+  // Each break decrements cycles and uses effective schedule
+  void focus_mode_cycles_decrement() {
+    deps.preferences->focusSmallEvery->set(600);
+    deps.preferences->focusSmallFor->set(10);
+    deps.preferences->focusBigBreakEnabled->set(false);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startFocus(3, "deep work");
+    QVERIFY(app.trayData.isFocusMode);
+    QCOMPARE(app.trayData.focusCyclesRemaining, 3);
+
+    // Finish entry break
+    app.advanceToBreakEnd();
+    QCOMPARE(app.trayData.focusCyclesRemaining, 2);
+    // Uses focus schedule (600s not default 1200s)
+    QCOMPARE(app.trayData.secondsToNextBreak, 600);
+  }
+  // Focus deactivates when cycles reach 0, normal schedule resumes
+  void focus_mode_exit_on_last_break() {
+    deps.preferences->focusSmallEvery->set(600);
+    deps.preferences->focusSmallFor->set(10);
+    deps.preferences->focusBigBreakEnabled->set(false);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startFocus(2, "deep work");
+    // Entry break
+    app.advanceToBreakEnd();
+    QCOMPARE(app.trayData.focusCyclesRemaining, 1);
+    QVERIFY(app.trayData.isFocusMode);
+
+    // Second break
+    app.advance(app.trayData.secondsToNextBreak);
+    app.advanceToBreakEnd();
+    // Focus mode should now be deactivated
+    QVERIFY(!app.trayData.isFocusMode);
+    // Normal schedule resumes
+    QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
+  }
+  // EndFocus sets cycles=1, triggers break, exits focus
+  void focus_mode_early_exit() {
+    deps.preferences->focusSmallEvery->set(600);
+    deps.preferences->focusSmallFor->set(10);
+    deps.preferences->focusBigBreakEnabled->set(false);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startFocus(4, "deep work");
+    app.advanceToBreakEnd();
+    QVERIFY(app.trayData.isFocusMode);
+    QCOMPARE(app.trayData.focusCyclesRemaining, 3);
+
+    // End focus early
+    app.endFocus();
+    QVERIFY(app.trayData.isBreaking);
+    // Finish the exit break
+    app.advanceToBreakEnd();
+    QVERIFY(!app.trayData.isFocusMode);
+    QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
+  }
+  // Postpone blocked during focus
+  void focus_mode_no_postpone() {
+    deps.preferences->focusSmallEvery->set(600);
+    deps.preferences->focusSmallFor->set(10);
+    deps.preferences->focusBigBreakEnabled->set(false);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startFocus(3, "deep work");
+    app.advanceToBreakEnd();
+    int secondsToNextBreak = app.trayData.secondsToNextBreak;
+
+    app.postpone(100);
+    // Postpone should be blocked
+    QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
+  }
+  // Starting meeting clears focus
+  void focus_mode_meeting_ends_focus() {
+    deps.preferences->focusSmallEvery->set(600);
+    deps.preferences->focusSmallFor->set(10);
+    deps.preferences->focusBigBreakEnabled->set(false);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startFocus(3, "deep work");
+    app.advanceToBreakEnd();
+    QVERIFY(app.trayData.isFocusMode);
+
+    app.startMeeting(3600, "standup");
+    QVERIFY(!app.trayData.isFocusMode);
+    QVERIFY(app.trayData.isInMeeting);
+  }
+  // breakCycleCount increments during focus and carries over after focus ends
+  void focus_mode_shared_cycle() {
+    deps.preferences->focusSmallEvery->set(600);
+    deps.preferences->focusSmallFor->set(10);
+    deps.preferences->focusBigBreakEnabled->set(false);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    // Start at cycle 1 with bigAfter=3, so 2 small breaks before big
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
+             deps.preferences->bigAfter->get() - 1);
+
+    app.startFocus(2, "deep work");
+    // Entry break (cycle 1→2)
+    app.advanceToBreakEnd();
+    // Second focus break (cycle 2→3)
+    app.advance(app.trayData.secondsToNextBreak);
+    app.advanceToBreakEnd();
+    // Focus ended, back to normal schedule
+    QVERIFY(!app.trayData.isFocusMode);
+    // After 2 breaks from cycle 1 with bigAfter=3, next break is big
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
+  }
+  // Tray data reflects focus state
+  void focus_mode_tray_info() {
+    deps.preferences->focusSmallEvery->set(600);
+    deps.preferences->focusSmallFor->set(10);
+    deps.preferences->focusBigBreakEnabled->set(false);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    QVERIFY(!app.trayData.isFocusMode);
+    QCOMPARE(app.trayData.focusCyclesRemaining, 0);
+    QCOMPARE(app.trayData.focusTotalCycles, 0);
+
+    app.startFocus(4, "deep work");
+    QVERIFY(app.trayData.isFocusMode);
+    QCOMPARE(app.trayData.focusCyclesRemaining, 4);
+    QCOMPARE(app.trayData.focusTotalCycles, 4);
+
+    app.advanceToBreakEnd();
+    QCOMPARE(app.trayData.focusCyclesRemaining, 3);
+    QCOMPARE(app.trayData.focusTotalCycles, 4);
+  }
   // Extend meeting before it ends
   void meeting_extend_before_end() {
     NiceMock<DummyApp> app(deps);

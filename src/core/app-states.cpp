@@ -82,7 +82,11 @@ void AppStateNormal::onMenuAction(AppContext* app, MenuAction action) {
     app->transitionTo(std::make_unique<AppStateBreak>());
   } else if (std::get_if<Action::BigBreakNow>(&action)) {
     app->data->earlyBreak();
-    if (app->preferences->bigBreakEnabled->get()) app->data->makeNextBreakBig();
+    if (app->data->effectiveBigBreakEnabled()) app->data->makeNextBreakBig();
+    app->transitionTo(std::make_unique<AppStateBreak>());
+  } else if (std::get_if<Action::EndFocus>(&action)) {
+    app->data->setFocusCyclesRemaining(1);
+    app->data->earlyBreak();
     app->transitionTo(std::make_unique<AppStateBreak>());
   }
 }
@@ -102,8 +106,8 @@ void AppStatePaused::exit(AppContext* app) {
   // Calculate the total duration of the next break to determine if breaks would have
   // occurred during pause
   int nextBreakDuration =
-      (app->data->breakType() == BreakType::Big ? app->preferences->bigFor->get()
-                                                : app->preferences->smallFor->get());
+      (app->data->breakType() == BreakType::Big ? app->data->effectiveBigFor()
+                                                : app->data->effectiveSmallFor());
   int secondsToNextBreakEnd = app->data->secondsToNextBreak() + nextBreakDuration;
   // If user was paused longer than the break duration or longer than resetAfterPause
   // setting, refill the break timer to avoid immediate breaks
@@ -141,6 +145,11 @@ void AppStatePaused::onMenuAction(AppContext* app, MenuAction action) {
   if (std::get_if<Action::EnableBreaks>(&action)) {
     app->data->clearPauseReasons();
     app->transitionTo(std::make_unique<AppStateNormal>());
+  } else if (std::get_if<Action::EndFocus>(&action)) {
+    app->data->clearPauseReasons();
+    app->data->setFocusCyclesRemaining(1);
+    app->data->earlyBreak();
+    app->transitionTo(std::make_unique<AppStateBreak>());
   }
 }
 
@@ -149,6 +158,12 @@ void AppStateBreak::enter(AppContext* app) {
       "break::start",
       {{"type", app->data->breakType() == BreakType::Big ? "big" : "small"}});
   data = std::make_unique<BreaksData>(dataInit(app));
+  // On focus entry break, exhaust force break exits so the exit button is hidden
+  if (app->data->isFocusMode() &&
+      app->data->focusCyclesRemaining() == app->data->focusTotalCycles()) {
+    for (int i = 0; i < app->preferences->maxForceBreakExits->get(); i++)
+      data->recordForceBreakExit();
+  }
   // Use high accuracy (500ms) for idle detection during breaks for responsive
   // transitions
   app->idleTimer->setWatchAccuracy(500);
@@ -183,9 +198,16 @@ void AppStateBreak::onPauseRequest(AppContext* app, PauseReasons reasons) {
   }
 }
 BreaksDataInit AppStateBreak::dataInit(AppContext* app) {
+  int flashFor = app->preferences->flashFor->get();
+  // On focus entry break (first break when entering focus mode), force immediate
+  // full-screen by setting flashFor to 0
+  if (app->data->isFocusMode() &&
+      app->data->focusCyclesRemaining() == app->data->focusTotalCycles()) {
+    flashFor = 0;
+  }
   return {
       .totalSeconds = app->data->breakDuration(),
-      .flashFor = app->preferences->flashFor->get(),
+      .flashFor = flashFor,
   };
 }
 void AppStateBreak::onMenuAction(AppContext* app, MenuAction action) {
@@ -326,7 +348,7 @@ void AppStateMeeting::tick(AppContext* app) {
 void AppStateMeeting::onMenuAction(AppContext* app, MenuAction action) {
   if (auto* a = std::get_if<Action::EndMeetingBreakLater>(&action)) {
     app->db->logEvent("meeting::end", {{"next-break", a->seconds}});
-    if (app->preferences->bigBreakEnabled->get()) app->data->makeNextBreakBig();
+    if (app->data->effectiveBigBreakEnabled()) app->data->makeNextBreakBig();
     app->data->setSecondsToNextBreak(a->seconds);
     app->transitionTo(std::make_unique<AppStateNormal>());
   } else if (auto* a = std::get_if<Action::ExtendMeeting>(&action)) {
@@ -335,9 +357,9 @@ void AppStateMeeting::onMenuAction(AppContext* app, MenuAction action) {
   }
 }
 bool AppStateMeeting::onSleepEnd(AppContext* app, int sleptSeconds) {
-  int breakDuration = app->preferences->bigBreakEnabled->get()
-                          ? app->preferences->bigFor->get()
-                          : app->preferences->smallFor->get();
+  int breakDuration = app->data->effectiveBigBreakEnabled()
+                          ? app->data->effectiveBigFor()
+                          : app->data->effectiveSmallFor();
   int skipIfSleptFor = app->data->meetingSecondsRemaining() + breakDuration;
   if (sleptSeconds >= skipIfSleptFor) {
     app->db->logEvent("meeting::end", {{"next-break", -1}});

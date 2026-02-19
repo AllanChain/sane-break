@@ -14,6 +14,9 @@ qt_add_executable(
   meeting-prompt.cpp
   meeting-prompt.h
   meeting-prompt.ui
+  focus-window.cpp
+  focus-window.h
+  focus-window.ui
   meeting-window.cpp
   meeting-window.h
   meeting-window.ui
@@ -32,6 +35,7 @@ qt_add_executable(
   welcome.cpp
   welcome.h
   widgets/color-edit.h
+  widgets/dynamic-button.h
   widgets/dynamic-label.h
   widgets/stepped-slider.cpp
   widgets/stepped-slider.h

@@ -55,6 +55,8 @@ class StatusTrayWindow : public QObject {
   void meetingRequested();
   void endMeetingBreakNowRequested();
   void extendMeetingRequested(int seconds);
+  void focusRequested();
+  void endFocusRequested();
   void quitRequested();
 
  protected:
@@ -69,6 +71,8 @@ class StatusTrayWindow : public QObject {
     int seconds;
   };
   QVector<ExtendOption> extendOptions;
+  QAction* focusAction;
+  QAction* endFocusAction;
   QAction* quitAction;
   QAction* nextBreakAction;
   QAction* bigBreakAction;

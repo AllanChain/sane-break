@@ -40,6 +40,9 @@ struct TrayData {
   int meetingSecondsRemaining;
   int meetingTotalSeconds;
   bool isPostponing;
+  bool isFocusMode;
+  int focusCyclesRemaining;
+  int focusTotalCycles;
 };
 
 class AbstractApp : public AppContext {
@@ -60,6 +63,9 @@ class AbstractApp : public AppContext {
   void startMeeting(int seconds, const QString& reason);
   void endMeetingBreakLater(int seconds = 0);
   void extendMeeting(int seconds);
+
+  void startFocus(int totalCycles, const QString& reason);
+  void endFocus();
 
  signals:
   void trayDataUpdated(TrayData);

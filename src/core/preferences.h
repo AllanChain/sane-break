@@ -90,6 +90,12 @@ class SanePreferences : public QObject {
   Setting<int>* bigAfter;
   Setting<int>* bigFor;
 
+  Setting<int>* focusSmallEvery;
+  Setting<int>* focusSmallFor;
+  Setting<bool>* focusBigBreakEnabled;
+  Setting<int>* focusBigAfter;
+  Setting<int>* focusBigFor;
+
   Setting<int>* postponeMaxMinutePercent;
   Setting<int>* postponeShrinkNextPercent;
   Setting<int>* postponeExtendBreakPercent;

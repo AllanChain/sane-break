@@ -59,6 +59,13 @@ StatusTrayWindow::StatusTrayWindow(SanePreferences* preferences, QObject* parent
   meetingAction = menu->addAction(tr("Meeting Mode"));
   connect(meetingAction, &QAction::triggered, this,
           &StatusTrayWindow::meetingRequested);
+  focusAction = menu->addAction(tr("Focus Mode"));
+  connect(focusAction, &QAction::triggered, this,
+          &StatusTrayWindow::focusRequested);
+  endFocusAction = menu->addAction(tr("End Focus && Break"));
+  endFocusAction->setVisible(false);
+  connect(endFocusAction, &QAction::triggered, this,
+          &StatusTrayWindow::endFocusRequested);
   endMeetingAction = menu->addAction(tr("End Meeting && Break Now"));
   endMeetingAction->setVisible(false);
   connect(endMeetingAction, &QAction::triggered, this,
@@ -101,13 +108,27 @@ void StatusTrayWindow::update(TrayData data) {
                              !data.pauseReasons && !data.isInMeeting);
   smallBreakInsteadAction->setVisible(data.bigBreakEnabled && data.isBreaking &&
                                       data.smallBreaksBeforeBigBreak == 0);
-  postponeMenu->setVisible(!data.isInMeeting && !data.pauseReasons);
+  postponeMenu->setVisible(!data.isInMeeting && !data.pauseReasons &&
+                           !data.isFocusMode);
   meetingAction->setVisible(!data.isBreaking && !data.isInMeeting &&
-                            !data.pauseReasons && !data.isPostponing);
+                            !data.pauseReasons && !data.isPostponing &&
+                            !data.isFocusMode);
+  focusAction->setVisible(!data.isBreaking && !data.isInMeeting &&
+                          !data.pauseReasons && !data.isPostponing &&
+                          !data.isFocusMode);
+  endFocusAction->setVisible(data.isFocusMode && !data.isBreaking);
   endMeetingAction->setVisible(data.isInMeeting);
   extendMeetingMenu->menuAction()->setVisible(data.isInMeeting);
 
-  if (data.isInMeeting) {
+  if (data.isFocusMode && !data.isInMeeting) {
+    int cyclesDone = data.focusTotalCycles - data.focusCyclesRemaining;
+    setTitle(tr("focus: %1 %2 (%3/%4)")
+                 .arg(data.smallBreaksBeforeBigBreak == 0 ? tr("big break")
+                                                          : tr("break"),
+                      formatTime(data.secondsToNextBreak))
+                 .arg(cyclesDone)
+                 .arg(data.focusTotalCycles));
+  } else if (data.isInMeeting) {
     QTime meetingEndTime = QTime::currentTime().addSecs(data.meetingSecondsRemaining);
     QString endTimeStr = QLocale().toString(meetingEndTime, QLocale::ShortFormat);
 
@@ -156,13 +177,22 @@ TrayIconSpec trayIconSpec(TrayData data) {
             ? float(data.meetingSecondsRemaining) / data.meetingTotalSeconds
             : 0;
     return {
-        .baseIcon = ":/images/icon-pause.png",
+        .baseIcon = ":/images/icon-meeting.png",
         .arc = TrayArcSpec{QColor(8, 47, 73), QColor(224, 242, 254), arcRatio},
         .dot = std::nullopt,
     };
   }
 
   float arcRatio = float(data.secondsToNextBreak) / data.secondsFromLastBreakToNext;
+
+  if (data.isFocusMode) {
+    return {
+        .baseIcon = ":/images/icon-focus.png",
+        .arc = TrayArcSpec{QColor(0x58, 0x1c, 0x87), QColor(0xf3, 0xe8, 0xff), arcRatio},
+        .dot = std::nullopt,
+    };
+  }
+
   return {
       .baseIcon = ":/images/icon.png",
       .arc = TrayArcSpec{QColor(5, 46, 22), QColor(220, 252, 231), arcRatio},

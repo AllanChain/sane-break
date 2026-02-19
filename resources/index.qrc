@@ -2,6 +2,8 @@
   <qresource prefix="/">
     <file>images/icon.png</file>
     <file>images/icon-pause.png</file>
+    <file>images/icon-focus.png</file>
+    <file>images/icon-meeting.png</file>
     <file>images/lock.png</file>
     <file>images/restart.png</file>
     <file>sounds/chime.mp3</file>

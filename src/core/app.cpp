@@ -65,8 +65,9 @@ AbstractApp::AbstractApp(const AppDependencies& deps, QObject* parent)
 
   connect(preferences->pauseOnBattery, &SettingWithSignal::changed, this,
           &AbstractApp::onBatterySettingChange);
-  connect(preferences->smallEvery, &SettingWithSignal::changed, this,
-          [this]() { this->data->resetSecondsToNextBreak(); });
+  connect(preferences->smallEvery, &SettingWithSignal::changed, this, [this]() {
+    if (!this->data->isFocusMode()) this->data->resetSecondsToNextBreak();
+  });
 
   connect(meetingPrompt, &AbstractMeetingPrompt::breakNowRequested, this,
           [this]() { endMeetingBreakLater(0); });
@@ -86,8 +87,8 @@ void AbstractApp::start() {
 }
 
 void AbstractApp::updateTray() {
-  bool bigEnabled = preferences->bigBreakEnabled->get();
-  int secondsFromLastBreakToNext = preferences->smallEvery->get();
+  bool bigEnabled = data->effectiveBigBreakEnabled();
+  int secondsFromLastBreakToNext = data->effectiveSmallEvery();
   int secondsToNextBigBreak = 0;
   if (bigEnabled) {
     secondsToNextBigBreak =
@@ -106,6 +107,9 @@ void AbstractApp::updateTray() {
       .meetingSecondsRemaining = data->meetingSecondsRemaining(),
       .meetingTotalSeconds = data->meetingTotalSeconds(),
       .isPostponing = data->isPostponing(),
+      .isFocusMode = data->isFocusMode(),
+      .focusCyclesRemaining = data->focusCyclesRemaining(),
+      .focusTotalCycles = data->focusTotalCycles(),
   };
   emit trayDataUpdated(trayData);
 }
@@ -115,8 +119,25 @@ void AbstractApp::bigBreakNow() { onMenuAction(Action::BigBreakNow{}); }
 void AbstractApp::enableBreak() { onMenuAction(Action::EnableBreaks{}); }
 void AbstractApp::smallBreakInstead() { onMenuAction(Action::SmallBreakInstead{}); }
 
+void AbstractApp::startFocus(int totalCycles, const QString& reason) {
+  if (data->isFocusMode() || m_currentState->getID() == AppState::Meeting ||
+      data->isPostponing())
+    return;
+  db->logEvent("focus::start",
+               {{"totalCycles", totalCycles}, {"reason", reason}});
+  data->startFocusMode(totalCycles);
+  data->earlyBreak();
+  transitionTo(std::make_unique<AppStateBreak>());
+}
+
+void AbstractApp::endFocus() { onMenuAction(Action::EndFocus{}); }
+
 void AbstractApp::startMeeting(int seconds, const QString& reason) {
   if (m_currentState->getID() == AppState::Meeting || data->isPostponing()) return;
+  if (data->isFocusMode()) {
+    db->logEvent("focus::end", {{"reason", "meeting"}});
+    data->endFocusMode();
+  }
   db->logEvent("meeting::start", {{"seconds", seconds}, {"reason", reason}});
   data->setMeetingData(seconds, seconds);
   transitionTo(std::make_unique<AppStateMeeting>());
@@ -132,7 +153,7 @@ void AbstractApp::extendMeeting(int seconds) {
 
 void AbstractApp::postpone(int seconds) {
   // This is defensive. This should already be handled by App.
-  if (data->isPostponing()) return;
+  if (data->isPostponing() || data->isFocusMode()) return;
   db->logEvent("postpone", {{"seconds", seconds}});
   // Exit current break if we are postponing breaks
   transitionTo(std::make_unique<AppStateNormal>());

@@ -17,34 +17,39 @@ AppData::AppData(QObject* parent, SanePreferences* preferences)
 }
 
 BreakType AppData::breakType() {
-  if (!preferences->bigBreakEnabled->get()) return BreakType::Small;
+  if (!effectiveBigBreakEnabled()) return BreakType::Small;
   return smallBreaksBeforeBigBreak() == 0 ? BreakType::Big : BreakType::Small;
 };
 
 int AppData::smallBreaksBeforeBigBreak() {
-  if (!preferences->bigBreakEnabled->get()) return -1;
-  int breakEvery = preferences->bigAfter->get();
+  if (!effectiveBigBreakEnabled()) return -1;
+  int breakEvery = effectiveBigAfter();
   m_breakCycleCount %= breakEvery;
   return (breakEvery - m_breakCycleCount) % breakEvery;
 };
 void AppData::finishAndStartNextCycle() {
   m_breakCycleCount++;
-  m_secondsToNextBreak = preferences->smallEvery->get();
+  if (m_focusData.isActive) {
+    m_focusData.cyclesRemaining--;
+    if (m_focusData.cyclesRemaining <= 0) m_focusData.clear();
+  }
+  // Must come after focus clear: if focus just ended, effectiveSmallEvery()
+  // returns the normal interval instead of the focus interval.
+  m_secondsToNextBreak = effectiveSmallEvery();
   m_secondsToNextBreak -= m_postponeData.secondsPostponed() *
                           preferences->postponeShrinkNextPercent->get() / 100;
   m_postponeData.reset();
   emit changed();
 };
 int AppData::breakDuration() {
-  int totalSeconds = breakType() == BreakType::Big ? preferences->bigFor->get()
-                                                   : preferences->smallFor->get();
+  int totalSeconds = breakType() == BreakType::Big ? effectiveBigFor()
+                                                   : effectiveSmallFor();
   // If postponed, calculate extra seconds. Add zero otherwise.
-  int breakForReference = preferences->bigBreakEnabled->get()
-                              ? preferences->bigFor->get()
-                              : preferences->smallFor->get();
+  int breakForReference = effectiveBigBreakEnabled() ? effectiveBigFor()
+                                                     : effectiveSmallFor();
   totalSeconds += preferences->postponeExtendBreakPercent->get() *
                   m_postponeData.secondsPostponed() * breakForReference /
-                  preferences->smallEvery->get() / 100;
+                  effectiveSmallEvery() / 100;
   return totalSeconds;
 }
 void AppData::resetBreakCycle() {
@@ -66,7 +71,7 @@ void AppData::tickSecondsToNextBreak() {
   emit changed();
 };
 void AppData::resetSecondsToNextBreak() {
-  m_secondsToNextBreak = preferences->smallEvery->get();
+  m_secondsToNextBreak = effectiveSmallEvery();
   emit changed();
 };
 void AppData::setSecondsToNextBreak(int secs) {
@@ -74,8 +79,8 @@ void AppData::setSecondsToNextBreak(int secs) {
   emit changed();
 };
 void AppData::refillSecondsToNextBreak() {
-  if (m_secondsToNextBreak < preferences->smallEvery->get()) {
-    m_secondsToNextBreak = preferences->smallEvery->get();
+  if (m_secondsToNextBreak < effectiveSmallEvery()) {
+    m_secondsToNextBreak = effectiveSmallEvery();
     emit changed();
   }
 };
@@ -121,6 +126,11 @@ void MeetingData::clear() {
   secondsRemaining = 0;
   totalSeconds = 0;
 }
+void FocusData::clear() {
+  isActive = false;
+  cyclesRemaining = 0;
+  totalCycles = 0;
+}
 bool AppData::isInMeeting() const { return m_meetingData.isActive; }
 int AppData::meetingSecondsRemaining() const { return m_meetingData.secondsRemaining; }
 int AppData::meetingTotalSeconds() const { return m_meetingData.totalSeconds; }
@@ -146,6 +156,45 @@ void AppData::extendMeeting(int secs) {
   m_meetingData.secondsRemaining += secs;
   m_meetingData.totalSeconds += secs;
   emit changed();
+}
+
+bool AppData::isFocusMode() const { return m_focusData.isActive; }
+int AppData::focusCyclesRemaining() const { return m_focusData.cyclesRemaining; }
+int AppData::focusTotalCycles() const { return m_focusData.totalCycles; }
+void AppData::startFocusMode(int totalCycles) {
+  m_focusData.isActive = true;
+  m_focusData.cyclesRemaining = totalCycles;
+  m_focusData.totalCycles = totalCycles;
+  emit changed();
+}
+void AppData::endFocusMode() {
+  m_focusData.clear();
+  emit changed();
+}
+void AppData::setFocusCyclesRemaining(int cycles) {
+  m_focusData.cyclesRemaining = cycles;
+  emit changed();
+}
+
+int AppData::effectiveSmallEvery() {
+  return m_focusData.isActive ? preferences->focusSmallEvery->get()
+                              : preferences->smallEvery->get();
+}
+int AppData::effectiveSmallFor() {
+  return m_focusData.isActive ? preferences->focusSmallFor->get()
+                              : preferences->smallFor->get();
+}
+bool AppData::effectiveBigBreakEnabled() {
+  return m_focusData.isActive ? preferences->focusBigBreakEnabled->get()
+                              : preferences->bigBreakEnabled->get();
+}
+int AppData::effectiveBigAfter() {
+  return m_focusData.isActive ? preferences->focusBigAfter->get()
+                              : preferences->bigAfter->get();
+}
+int AppData::effectiveBigFor() {
+  return m_focusData.isActive ? preferences->focusBigFor->get()
+                              : preferences->bigFor->get();
 }
 
 bool PostponeData::isPostponing() {

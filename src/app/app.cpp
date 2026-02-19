@@ -31,6 +31,7 @@
 #include "lib/system-monitor.h"
 #include "lib/timer.h"
 #include "meeting-prompt.h"
+#include "focus-window.h"
 #include "meeting-window.h"
 #include "postpone-window.h"
 
@@ -55,6 +56,10 @@ SaneBreakApp::SaneBreakApp(const AppDependencies& deps, QObject* parent)
           &SaneBreakApp::openPostponeWindow);
   connect(tray, &StatusTrayWindow::meetingRequested, this,
           &SaneBreakApp::openMeetingWindow);
+  connect(tray, &StatusTrayWindow::focusRequested, this,
+          &SaneBreakApp::openFocusWindow);
+  connect(tray, &StatusTrayWindow::endFocusRequested, this,
+          &SaneBreakApp::endFocus);
   connect(tray, &StatusTrayWindow::endMeetingBreakNowRequested, this,
           [this]() { endMeetingBreakLater(0); });
   connect(tray, &StatusTrayWindow::extendMeetingRequested, this,
@@ -106,7 +111,27 @@ void SaneBreakApp::showPreferences() {
   prefWindow->windowHandle()->requestActivate();
 }
 
+void SaneBreakApp::openFocusWindow() {
+  if (data->isFocusMode() || m_currentState->getID() == AppState::Meeting ||
+      data->isPostponing())
+    return;
+  FocusWindow* focusWindow = new FocusWindow(preferences);
+  connect(focusWindow, &FocusWindow::focusRequested, this,
+          &SaneBreakApp::startFocus);
+  focusWindow->show();
+}
+
 void SaneBreakApp::openPostponeWindow() {
+  if (data->isFocusMode()) {
+    QMessageBox msgBox;
+    msgBox.setText(tr("Cannot postpone during focus mode."));
+    msgBox.setInformativeText(
+        tr("End focus mode first if you want to postpone."));
+    msgBox.setIcon(QMessageBox::Icon::Warning);
+    msgBox.addButton(QMessageBox::Ok)->setText(tr("OK"));
+    msgBox.exec();
+    return;
+  }
   if (data->isPostponing()) {
     QMessageBox msgBox;
     msgBox.setText(tr("You have already postponed once in this session."));

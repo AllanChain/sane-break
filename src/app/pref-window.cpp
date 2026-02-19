@@ -216,6 +216,32 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
                                             ui->postponeExtendBreakBox,
                                             preferences->postponeExtendBreakPercent));
 
+  // Focus schedule
+  controllers->add(PrefGroup::Schedule,
+                   new PrefController<QSpinBox, int>(
+                       ui->focusSmallBreakEveryBox, preferences->focusSmallEvery, 60));
+  controllers->add(PrefGroup::Schedule,
+                   new PrefController<QSpinBox, int>(ui->focusSmallBreakForBox,
+                                                     preferences->focusSmallFor));
+  auto syncFocusBigBreakEnabled = [this]() {
+    bool enabled = ui->focusBigBreakEnabled->isChecked();
+    ui->focusBigBreakAfterBox->setEnabled(enabled);
+    ui->focusBigBreakAfterSlider->setEnabled(enabled);
+    ui->focusBigBreakForBox->setEnabled(enabled);
+    ui->focusBigBreakForSlider->setEnabled(enabled);
+  };
+  connect(controllers->add(PrefGroup::Schedule,
+                           new PrefController<QCheckBox, bool>(
+                               ui->focusBigBreakEnabled,
+                               preferences->focusBigBreakEnabled)),
+          &PrefControllerBase::explictSync, this, syncFocusBigBreakEnabled);
+  controllers->add(PrefGroup::Schedule,
+                   new PrefController<QSpinBox, int>(ui->focusBigBreakAfterBox,
+                                                     preferences->focusBigAfter));
+  controllers->add(PrefGroup::Schedule,
+                   new PrefController<QSpinBox, int>(
+                       ui->focusBigBreakForBox, preferences->focusBigFor, 60));
+
   /***************************************************************************
    *                                                                         *
    *                              Reminder tab                               *

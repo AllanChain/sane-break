@@ -32,6 +32,12 @@ SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
   bigAfter = new Setting<int>(settings, "break/big-after", 3);
   bigFor = new Setting<int>(settings, "break/big-for", 60);
 
+  focusSmallEvery = new Setting<int>(settings, "focus/small-every", 1200);
+  focusSmallFor = new Setting<int>(settings, "focus/small-for", 20);
+  focusBigBreakEnabled = new Setting<bool>(settings, "focus/big-enabled", false);
+  focusBigAfter = new Setting<int>(settings, "focus/big-after", 3);
+  focusBigFor = new Setting<int>(settings, "focus/big-for", 60);
+
   postponeMaxMinutePercent =
       new Setting<int>(settings, "postpone/max-minute-ratio", 50);
   postponeShrinkNextPercent =

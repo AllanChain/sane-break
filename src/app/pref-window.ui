@@ -10,11 +10,6 @@
     <height>600</height>
    </rect>
   </property>
-  <property name="font">
-   <font>
-    <family>Noto Sans CJK SC</family>
-   </font>
-  </property>
   <property name="windowTitle">
    <string notr="true">Sane Break</string>
   </property>
@@ -248,9 +243,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
+         <y>-180</y>
          <width>661</width>
-         <height>851</height>
+         <height>870</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -267,6 +262,13 @@ QPushButton[flat=&quot;true&quot;]:checked {
           </property>
           <widget class="QWidget" name="breakPage">
            <layout class="QVBoxLayout" name="verticalLayout_1">
+            <item>
+             <widget class="QLabel" name="label_20">
+              <property name="text">
+               <string>&lt;h2&gt;Normal Schedule&lt;/h2&gt;</string>
+              </property>
+             </widget>
+            </item>
             <item>
              <widget class="QLabel" name="label_21">
               <property name="text">
@@ -504,9 +506,255 @@ QPushButton[flat=&quot;true&quot;]:checked {
              </layout>
             </item>
             <item>
+             <widget class="QLabel" name="label_32">
+              <property name="text">
+               <string>&lt;h2&gt;Focus Schedule&lt;/h2&gt;When you activate Focus Mode from the tray, breaks will follow this schedule instead. Use it for shorter breaks when you need to stay  focused.</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_36">
+              <property name="text">
+               <string>&lt;h3&gt;Small Breaks&lt;/h3&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayout_13">
+              <item row="1" column="2">
+               <widget class="QSpinBox" name="focusSmallBreakForBox">
+                <property name="suffix">
+                 <string> sec</string>
+                </property>
+                <property name="minimum">
+                 <number>5</number>
+                </property>
+                <property name="maximum">
+                 <number>65535</number>
+                </property>
+                <property name="value">
+                 <number>20</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="SteppedSlider" name="focusSmallBreakForSlider">
+                <property name="minimum">
+                 <number>5</number>
+                </property>
+                <property name="maximum">
+                 <number>60</number>
+                </property>
+                <property name="singleStep">
+                 <number>5</number>
+                </property>
+                <property name="pageStep">
+                 <number>5</number>
+                </property>
+                <property name="value">
+                 <number>20</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="tickPosition">
+                 <enum>QSlider::TickPosition::TicksBelow</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_39">
+                <property name="toolTip">
+                 <string extracomment="Tooltip for &quot;Break length&quot; config (small break)">Duration of small breaks (in seconds)</string>
+                </property>
+                <property name="text">
+                 <string>Break length</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QSpinBox" name="focusSmallBreakEveryBox">
+                <property name="suffix">
+                 <string> min</string>
+                </property>
+                <property name="minimum">
+                 <number>5</number>
+                </property>
+                <property name="maximum">
+                 <number>65535</number>
+                </property>
+                <property name="value">
+                 <number>20</number>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="SteppedSlider" name="focusSmallBreakEverySlider">
+                <property name="minimum">
+                 <number>5</number>
+                </property>
+                <property name="maximum">
+                 <number>60</number>
+                </property>
+                <property name="singleStep">
+                 <number>5</number>
+                </property>
+                <property name="pageStep">
+                 <number>5</number>
+                </property>
+                <property name="value">
+                 <number>20</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="tickPosition">
+                 <enum>QSlider::TickPosition::TicksBelow</enum>
+                </property>
+                <property name="tickInterval">
+                 <number>0</number>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_40">
+                <property name="toolTip">
+                 <string extracomment="Tooltip for &quot;Break every&quot; config (small break)">Length of work time between breaks</string>
+                </property>
+                <property name="text">
+                 <string>Break every</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_45">
+              <property name="text">
+               <string>&lt;h3&gt;Big Breaks&lt;/h3&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="focusBigBreakEnabled">
+              <property name="text">
+               <string>Enabled</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayout_14">
+              <item row="0" column="2">
+               <widget class="QSpinBox" name="focusBigBreakAfterBox">
+                <property name="suffix">
+                 <string> breaks</string>
+                </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>65535</number>
+                </property>
+                <property name="value">
+                 <number>3</number>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_46">
+                <property name="toolTip">
+                 <string extracomment="Tooltip for &quot;Break every&quot; config (big break)">Every so many breaks will be a big break</string>
+                </property>
+                <property name="text">
+                 <string>Break every</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <widget class="QSpinBox" name="focusBigBreakForBox">
+                <property name="suffix">
+                 <string> min</string>
+                </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>65535</number>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="SteppedSlider" name="focusBigBreakAfterSlider">
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>6</number>
+                </property>
+                <property name="pageStep">
+                 <number>1</number>
+                </property>
+                <property name="value">
+                 <number>3</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="tickPosition">
+                 <enum>QSlider::TickPosition::TicksBelow</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="SteppedSlider" name="focusBigBreakForSlider">
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>30</number>
+                </property>
+                <property name="singleStep">
+                 <number>1</number>
+                </property>
+                <property name="pageStep">
+                 <number>1</number>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="tickPosition">
+                 <enum>QSlider::TickPosition::TicksBelow</enum>
+                </property>
+                <property name="tickInterval">
+                 <number>5</number>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_47">
+                <property name="toolTip">
+                 <string extracomment="Tooltip for &quot;Break length&quot; config (big break)">Duration of big breaks (in seconds)</string>
+                </property>
+                <property name="text">
+                 <string>Break length</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
              <widget class="QLabel" name="label_23">
               <property name="text">
-               <string>&lt;h3&gt;Postpone&lt;/h3&gt;</string>
+               <string>&lt;h2&gt;Postpone&lt;/h2&gt;</string>
               </property>
              </widget>
             </item>
