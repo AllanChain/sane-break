@@ -6,7 +6,6 @@
 
 #include <QDialog>
 #include <QPointer>
-#include <QTimer>
 
 #include "core/meeting-prompt.h"
 
@@ -20,14 +19,9 @@ class MeetingPrompt : public AbstractMeetingPrompt {
   using AbstractMeetingPrompt::AbstractMeetingPrompt;
   void showEndPrompt() override;
   void closeEndPrompt() override;
-  void resetTimeout() override;
-  bool isShowing() const override;
+  void setTime(int seconds) override;
 
  private:
   QPointer<QDialog> dialog;
   Ui::MeetingPrompt* ui = nullptr;
-  QTimer* timeoutTimer = nullptr;
-  int timeoutRemaining = 60;
-
-  void updateBreakNowText();
 };

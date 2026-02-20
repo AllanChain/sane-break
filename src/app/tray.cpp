@@ -134,14 +134,9 @@ void StatusTrayWindow::update(TrayData data) {
     QTime meetingEndTime = QTime::currentTime().addSecs(data.meetingSecondsRemaining);
     QString endTimeStr = QLocale().toString(meetingEndTime, QLocale::ShortFormat);
 
-    if (data.meetingSecondsRemaining > 0) {
-      endMeetingAction->setText(tr("Meeting until %1").arg(endTimeStr));
-      setTitle(tr("Meeting mode — until %1 (%2 left)")
-                   .arg(endTimeStr, formatTime(data.meetingSecondsRemaining)));
-    } else {
-      endMeetingAction->setText(tr("End Meeting && Break Now"));
-      setTitle(tr("Meeting ended — waiting"));
-    }
+    endMeetingAction->setText(tr("Meeting until %1").arg(endTimeStr));
+    setTitle(tr("Meeting mode — until %1 (%2 left)")
+                 .arg(endTimeStr, formatTime(data.meetingSecondsRemaining)));
   } else if (data.pauseReasons) {
     if (data.pauseReasons.testFlag(PauseReason::OnBattery)) {
       setTitle(tr("Paused on battery"));

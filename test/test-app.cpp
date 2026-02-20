@@ -507,37 +507,42 @@ class TestApp : public QObject {
     // Break countdown should not change
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
   }
-  // Meeting countdown ticks and shows end prompt at 0
+  // Meeting countdown ticks and shows end prompt at 60s remaining
   void meeting_countdown_ticks() {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    app.startMeeting(5, "standup");
-    QCOMPARE(app.trayData.meetingSecondsRemaining, 5);
+    app.startMeeting(65, "standup");
+    QCOMPARE(app.trayData.meetingSecondsRemaining, 65);
 
     app.advance(3);
-    QCOMPARE(app.trayData.meetingSecondsRemaining, 2);
+    QCOMPARE(app.trayData.meetingSecondsRemaining, 62);
 
-    EXPECT_CALL(*deps.meetingPrompt, showEndPrompt()).Times(1);
-    app.advance(2);
+    // No prompt yet (remaining > 60)
+    EXPECT_CALL(*deps.meetingPrompt, showEndPrompt()).Times(0);
+    app.advance(1);
     QVERIFY(Mock::VerifyAndClearExpectations(deps.meetingPrompt));
-    QCOMPARE(app.trayData.meetingSecondsRemaining, 0);
-    QVERIFY(app.trayData.isInMeeting);  // still active in awaiting state
+
+    // Prompt appears when remaining <= 60
+    EXPECT_CALL(*deps.meetingPrompt, showEndPrompt()).Times(1);
+    app.advance(1);
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.meetingPrompt));
+    QCOMPARE(app.trayData.meetingSecondsRemaining, 60);
+    QVERIFY(app.trayData.isInMeeting);
   }
-  // Prompt's internal timeout fires breakLaterRequested(0), ending meeting
+  // Meeting auto-exits to break when time runs out
   void meeting_prompt_timeout() {
     NiceMock<DummyApp> app(deps);
     app.start();
 
     app.startMeeting(5, "standup");
-    EXPECT_CALL(*deps.meetingPrompt, showEndPrompt()).Times(1);
-    app.advance(5);  // countdown ends
-    QVERIFY(Mock::VerifyAndClearExpectations(deps.meetingPrompt));
+    app.advance(4);  // remaining = 1, prompt showing
+    QVERIFY(app.trayData.isInMeeting);
 
-    // Simulate the prompt's internal timeout firing
-    emit deps.meetingPrompt->breakLaterRequested(0);
+    app.advance(1);  // remaining = 0, auto-exit to break
     QVERIFY(!app.trayData.isInMeeting);
     QVERIFY(app.trayData.isBreaking);
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);  // big break
   }
   // Idle during meeting stays in Normal
   void meeting_blocks_idle_pause() {
@@ -566,7 +571,7 @@ class TestApp : public QObject {
     app.start();
 
     app.startMeeting(5, "standup");
-    app.advance(5);
+    app.advance(4);  // remaining = 1, prompt showing
     app.endMeetingBreakLater(300);
 
     QVERIFY(!app.trayData.isInMeeting);
@@ -579,25 +584,25 @@ class TestApp : public QObject {
     app.start();
 
     app.startMeeting(5, "standup");
-    app.advance(5);
+    app.advance(4);  // remaining = 1, prompt showing
     app.endMeetingBreakNow();
 
     QVERIFY(!app.trayData.isInMeeting);
     QVERIFY(app.trayData.isBreaking);
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);  // big break
   }
-  // Extend meeting resets awaiting state
+  // Extend meeting during prompt closes prompt and resets
   void meeting_extend() {
     NiceMock<DummyApp> app(deps);
     app.start();
 
     app.startMeeting(5, "standup");
-    EXPECT_CALL(*deps.meetingPrompt, showEndPrompt()).Times(1);
-    app.advance(5);
-    QVERIFY(Mock::VerifyAndClearExpectations(deps.meetingPrompt));
+    app.advance(4);  // remaining = 1, prompt showing
 
+    EXPECT_CALL(*deps.meetingPrompt, closeEndPrompt()).Times(1);
     app.extendMeeting(1800);
-    QCOMPARE(app.trayData.meetingSecondsRemaining, 1800);
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.meetingPrompt));
+    QCOMPARE(app.trayData.meetingSecondsRemaining, 1801);  // 1 + 1800
     QVERIFY(app.trayData.isInMeeting);
   }
   // Sleep during meeting adjusts countdown
@@ -624,28 +629,27 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
              deps.preferences->bigAfter->get() - 1);
   }
-  // Short sleep during awaiting resets prompt timeout
+  // Short sleep during prompt phase subtracts from remaining
   void sleep_during_awaiting_short() {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    app.startMeeting(5, "standup");
-    app.advance(5);  // enter awaiting
+    app.startMeeting(30, "standup");
+    app.advance(1);  // remaining = 29, prompt showing
 
-    EXPECT_CALL(*deps.meetingPrompt, resetTimeout()).Times(1);
-    emit deps.systemMonitor->sleepEnded(10);  // < bigFor
+    emit deps.systemMonitor->sleepEnded(10);
+    QCOMPARE(app.trayData.meetingSecondsRemaining, 19);  // 29 - 10
     QVERIFY(app.trayData.isInMeeting);
-    QVERIFY(Mock::VerifyAndClearExpectations(deps.meetingPrompt));
   }
-  // Long sleep during awaiting ends meeting
+  // Long sleep during prompt phase ends meeting
   void sleep_during_awaiting_long() {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    app.startMeeting(5, "standup");
-    app.advance(5);
+    app.startMeeting(30, "standup");
+    app.advance(1);  // remaining = 29
 
-    emit deps.systemMonitor->sleepEnded(deps.preferences->bigFor->get());
+    emit deps.systemMonitor->sleepEnded(29 + deps.preferences->bigFor->get());
     QVERIFY(!app.trayData.isInMeeting);
     QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
   }
@@ -690,7 +694,7 @@ class TestApp : public QObject {
     app.start();
 
     app.startMeeting(5, "standup");
-    app.advance(5);
+    app.advance(4);  // remaining = 1, prompt showing
     app.endMeetingBreakNow();
 
     QVERIFY(!app.trayData.isInMeeting);

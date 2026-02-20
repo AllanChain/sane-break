@@ -12,8 +12,7 @@ class AbstractMeetingPrompt : public QObject {
   using QObject::QObject;
   virtual void showEndPrompt() = 0;
   virtual void closeEndPrompt() = 0;
-  virtual void resetTimeout() = 0;
-  virtual bool isShowing() const = 0;
+  virtual void setTime(int seconds) = 0;
 
  signals:
   void breakNowRequested();

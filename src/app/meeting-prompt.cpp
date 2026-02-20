@@ -5,7 +5,6 @@
 #include "meeting-prompt.h"
 
 #include <QDialog>
-#include <QTimer>
 #include <Qt>
 
 #ifdef Q_OS_MACOS
@@ -21,23 +20,6 @@ void MeetingPrompt::showEndPrompt() {
   dialog->setAttribute(Qt::WA_DeleteOnClose);
   ui = new Ui::MeetingPrompt();
   ui->setupUi(dialog);
-
-  timeoutRemaining = 60;
-  updateBreakNowText();
-
-  timeoutTimer = new QTimer(dialog);
-  timeoutTimer->setInterval(1000);
-  connect(timeoutTimer, &QTimer::timeout, this, [this]() {
-    timeoutRemaining--;
-    if (timeoutRemaining <= 0) {
-      timeoutTimer->stop();
-      closeEndPrompt();
-      emit breakLaterRequested(0);
-      return;
-    }
-    updateBreakNowText();
-  });
-  timeoutTimer->start();
 
   connect(ui->breakNow, &QPushButton::clicked, this, [this]() {
     if (dialog) dialog->done(QDialog::Accepted);
@@ -65,15 +47,6 @@ void MeetingPrompt::closeEndPrompt() {
   if (dialog) dialog->done(QDialog::Accepted);
 }
 
-void MeetingPrompt::resetTimeout() {
-  timeoutRemaining = 60;
-  if (ui) updateBreakNowText();
-}
-
-bool MeetingPrompt::isShowing() const { return dialog != nullptr; }
-
-void MeetingPrompt::updateBreakNowText() {
-  if (ui) {
-    ui->breakNow->setArgs({timeoutRemaining});
-  }
+void MeetingPrompt::setTime(int seconds) {
+  if (ui) ui->breakNow->setArgs({seconds});
 }

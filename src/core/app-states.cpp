@@ -367,12 +367,16 @@ void AppStateMeeting::exit(AppContext* app) {
 }
 
 void AppStateMeeting::tick(AppContext* app) {
-  if (app->data->meetingSecondsRemaining() > 0) {
-    app->data->tickMeetingRemaining();
-    if (app->data->meetingSecondsRemaining() <= 0) {
-      app->meetingPrompt->showEndPrompt();
-      return;
-    }
+  if (app->data->meetingSecondsRemaining() > 0) app->data->tickMeetingRemaining();
+  int remaining = app->data->meetingSecondsRemaining();
+  if (remaining > 0 && remaining <= 60) {
+    app->meetingPrompt->showEndPrompt();
+    app->meetingPrompt->setTime(remaining);
+  } else if (remaining <= 0) {
+    app->db->logEvent("meeting::end", {{"next-break", 0}});
+    if (app->data->effectiveBigBreakEnabled()) app->data->makeNextBreakBig();
+    app->data->earlyBreak();
+    app->transitionTo(std::make_unique<AppStateBreak>());
   }
 }
 
@@ -390,6 +394,7 @@ void AppStateMeeting::onMenuAction(AppContext* app, MenuAction action) {
   } else if (auto* a = std::get_if<Action::ExtendMeeting>(&action)) {
     app->db->logEvent("meeting::extend", {{"seconds", a->seconds}});
     app->data->extendMeeting(a->seconds);
+    app->meetingPrompt->closeEndPrompt();
   }
 }
 bool AppStateMeeting::onSleepEnd(AppContext* app, int sleptSeconds) {
@@ -401,7 +406,6 @@ bool AppStateMeeting::onSleepEnd(AppContext* app, int sleptSeconds) {
     app->db->logEvent("meeting::end", {{"next-break", -1}});
     app->data->resetBreakCycle();
     app->data->resetSecondsToNextBreak();
-    app->meetingPrompt->closeEndPrompt();
     app->transitionTo(std::make_unique<AppStateNormal>());
     return true;
   }
@@ -409,10 +413,6 @@ bool AppStateMeeting::onSleepEnd(AppContext* app, int sleptSeconds) {
   app->openCurrentSpan("meeting",
                        {{"scheduledSeconds", app->data->meetingTotalSeconds()},
                         {"reason", app->data->meetingReason()}});
-  if (!app->meetingPrompt->isShowing()) {
-    app->data->subtractMeetingRemaining(sleptSeconds);
-  } else {
-    app->meetingPrompt->resetTimeout();
-  }
+  app->data->subtractMeetingRemaining(sleptSeconds);
   return true;
 }

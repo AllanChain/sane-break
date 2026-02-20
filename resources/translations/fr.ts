@@ -1238,13 +1238,13 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="127"/>
-        <location filename="../../src/app/tray.cpp" line="155"/>
+        <location filename="../../src/app/tray.cpp" line="150"/>
         <source>big break</source>
         <translation>grosse pause</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="128"/>
-        <location filename="../../src/app/tray.cpp" line="155"/>
+        <location filename="../../src/app/tray.cpp" line="150"/>
         <source>small break</source>
         <translation>petite pause</translation>
     </message>
@@ -1275,7 +1275,6 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="68"/>
-        <location filename="../../src/app/tray.cpp" line="142"/>
         <source>End Meeting &amp;&amp; Break Now</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1317,32 +1316,27 @@ v%1
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="138"/>
+        <location filename="../../src/app/tray.cpp" line="137"/>
         <source>Meeting until %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="139"/>
+        <location filename="../../src/app/tray.cpp" line="138"/>
         <source>Meeting mode — until %1 (%2 left)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="143"/>
-        <source>Meeting ended — waiting</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/tray.cpp" line="147"/>
+        <location filename="../../src/app/tray.cpp" line="142"/>
         <source>Paused on battery</source>
         <translation>En pause sur batterie</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="149"/>
+        <location filename="../../src/app/tray.cpp" line="144"/>
         <source>Paused on app running</source>
         <translation>En pause lorsqu&apos;une application est lancée</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="151"/>
+        <location filename="../../src/app/tray.cpp" line="146"/>
         <source>Paused on idle</source>
         <translation>En pause en cas d&apos;inactivité</translation>
     </message>

@@ -79,16 +79,10 @@ class DummySystemMonitor : public AbstractSystemMonitor {
 class DummyMeetingPrompt : public AbstractMeetingPrompt {
   Q_OBJECT
  public:
-  explicit DummyMeetingPrompt(QObject* parent = nullptr)
-      : AbstractMeetingPrompt(parent) {
-    ON_CALL(*this, showEndPrompt()).WillByDefault([this]() { m_showing = true; });
-    ON_CALL(*this, closeEndPrompt()).WillByDefault([this]() { m_showing = false; });
-  }
+  using AbstractMeetingPrompt::AbstractMeetingPrompt;
   MOCK_METHOD(void, showEndPrompt, (), (override));
   MOCK_METHOD(void, closeEndPrompt, (), (override));
-  MOCK_METHOD(void, resetTimeout, (), (override));
-  bool isShowing() const override { return m_showing; }
-  bool m_showing = false;
+  MOCK_METHOD(void, setTime, (int seconds), (override));
 };
 
 struct DummyAppDependencies {
