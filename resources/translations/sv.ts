@@ -87,29 +87,34 @@
 <context>
     <name>DayTimelineWidget</name>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="138"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="48"/>
         <source>Active</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aktiv</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="140"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="49"/>
         <source>Break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rast</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="142"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
         <source>Pause</source>
         <translation type="unfinished">Pausa</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="144"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="52"/>
         <source>Meeting</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Möte</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="146"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="53"/>
         <source>Focus</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fokus</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="55"/>
+        <source>Postpone</source>
+        <translation type="unfinished">Skjut upp</translation>
     </message>
 </context>
 <context>
@@ -117,17 +122,17 @@
     <message>
         <location filename="../../src/app/focus-window.ui" line="14"/>
         <source>Focus Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fokusläge</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="20"/>
         <source>&lt;h2&gt;Focus Mode&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Fokusläge&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="55"/>
         <source>Focus duration</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fokustid</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="62"/>
@@ -137,17 +142,17 @@
     <message>
         <location filename="../../src/app/focus-window.ui" line="125"/>
         <source>The break schedule will be temporarily switched to:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rastschemat kommer tillfälligt att ändras till:</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="142"/>
         <source>A &lt;b&gt;%1&lt;/b&gt; seconds small break every &lt;b&gt;%2&lt;/b&gt; minutes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">En &lt;b&gt;%1&lt;/b&gt; sekunder lång kort rast varje &lt;b&gt;%2&lt;/b&gt; minuter</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="159"/>
         <source>1 in every &lt;b&gt;%2&lt;/b&gt; breaks is a &lt;b&gt;%1&lt;/b&gt; seconds big break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">1 av varje &lt;b&gt;%2&lt;/b&gt; raster är en &lt;b&gt;%1&lt;/b&gt; sekunder lång lång rast</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="188"/>
@@ -157,7 +162,7 @@
     <message>
         <location filename="../../src/app/focus-window.ui" line="201"/>
         <source>Take a %1 second break to enter focus mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ta en %1 sekunder lång rast för att aktivera fokusläget</translation>
     </message>
 </context>
 <context>
@@ -181,32 +186,32 @@
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="14"/>
         <source>Meeting Mode Ended</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mötesläget avslutat</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="20"/>
         <source>&lt;h2&gt;Meeting Mode Ended&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Mötesläget avslutat&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="30"/>
         <source>Your meeting/presentation mode has ended. Would you like to take a break?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ditt mötes-/presentationsläge har avslutats. Vill du ta en rast?</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="63"/>
         <source>Break in 5 min</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rast om 5 min</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="70"/>
         <source>Not yet (+30 min)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Inte än (+30 min)</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="53"/>
         <source>Break now (%1s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rast nu (%1 s)</translation>
     </message>
 </context>
 <context>
@@ -214,27 +219,27 @@
     <message>
         <location filename="../../src/app/meeting-window.ui" line="14"/>
         <source>Meeting Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mötesläge</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="20"/>
         <source>&lt;h2&gt;Meeting/Presentation Mode&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Mötes-/presentationsläge&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="55"/>
         <source>It will end at</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Det avslutas klockan</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="116"/>
         <source>No break reminders will show before &lt;b&gt;%1&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ingen rastpåminnelse visas före &lt;b&gt;%1&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="151"/>
         <source>We&apos;ll check in with you before showing a break reminder.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vi kontrollerar med dig innan vi visar en rastpåminnelse.</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="178"/>
@@ -244,7 +249,7 @@
     <message>
         <location filename="../../src/app/meeting-window.ui" line="191"/>
         <source>Enter Meeting/Presentation Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aktivera mötes-/presentationsläge</translation>
     </message>
 </context>
 <context>
@@ -257,27 +262,27 @@
     <message>
         <location filename="../../src/app/postpone-window.ui" line="20"/>
         <source>&lt;h2&gt;Postponing this break&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Skjuter upp denna rast&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="27"/>
         <source>Postponing this break by &lt;b&gt;%1&lt;/b&gt; minutes will:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Att skjuta upp denna rast med &lt;b&gt;%1&lt;/b&gt; minuter kommer att:</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="57"/>
         <source>Shorten your next work session by &lt;b&gt;%1&lt;/b&gt; minutes;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Förkorta din nästa arbetsperiod med &lt;b&gt;%1&lt;/b&gt; minuter;</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="92"/>
         <source>Extend the break by &lt;b&gt;%1&lt;/b&gt; seconds.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Förlänga rasten med &lt;b&gt;%1&lt;/b&gt; sekunder.</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="122"/>
         <source>Postpone by</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Skjut upp med</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="129"/>
@@ -287,22 +292,22 @@
     <message>
         <location filename="../../src/app/postpone-window.ui" line="187"/>
         <source>You won&apos;t be able to postpone this break again. It will start automatically at the scheduled time.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Du kan inte skjuta upp denna rast igen. Den startar automatiskt vid den schemalagda tiden.</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="222"/>
         <source>You can still start the break early. If you do, the adjustments above will be recalculated based on the actual time.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Du kan fortfarande starta rasten tidigare. Om du gör det kommer ovanstående justeringar att omräknas utifrån den faktiska tiden.</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="249"/>
         <source>Keep original schedule</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Behåll ursprungligt schema</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="262"/>
         <source>Do the adjustments</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Gör justeringarna</translation>
     </message>
 </context>
 <context>
@@ -658,13 +663,13 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="268"/>
         <source>&lt;h2&gt;Normal Schedule&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Normalt schema&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="398"/>
         <location filename="../../src/app/pref-window.ui" line="644"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aktiverad</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="410"/>
@@ -675,22 +680,22 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="511"/>
         <source>&lt;h2&gt;Focus Schedule&lt;/h2&gt;When you activate Focus Mode from the tray, breaks will follow this schedule instead. Use it for shorter breaks when you need to stay  focused.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Fokus-schema&lt;/h2&gt;När du aktiverar fokusläget från aktivitetsfältet följer raster istället detta schema. Använd det för kortare raster när du behöver hålla fokus.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="757"/>
         <source>&lt;h2&gt;Postpone&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Skjut upp&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="764"/>
         <source>Maximum postpone time as a percentage of your work session (&lt;b&gt;%1&lt;/b&gt; min)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Maximal uppskjutningstid som en procentandel av din arbetsperiod (&lt;b&gt;%1&lt;/b&gt; min)</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="801"/>
         <source>Postponing breaks adds extra time to your next long break, proportional to how much time you postponed. You can adjust the multiplier for how much extra time is added.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Att skjuta upp raster lägger till extra tid på din nästa långa rast, i proportion till hur mycket tid du skjutit upp. Du kan justera multiplikatorn för hur mycket extra tid som läggs till.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="857"/>
@@ -762,7 +767,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1772"/>
         <source>Database file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Databasfil</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1818"/>
@@ -918,7 +923,7 @@ v%1
     <message>
         <location filename="../../src/app/app.cpp" line="154"/>
         <source>No further postpones are allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Inga fler uppskjutningar tillåts.</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="147"/>
@@ -929,17 +934,17 @@ v%1
     <message>
         <location filename="../../src/app/app.cpp" line="144"/>
         <source>Cannot postpone during focus mode.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kan inte skjuta upp under fokusläge.</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="145"/>
         <source>End focus mode first if you want to postpone.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Avsluta fokusläget först om du vill skjuta upp.</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="153"/>
         <source>You have already postponed this break once.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Du har redan skjutit upp denna rast en gång.</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="184"/>
@@ -1003,74 +1008,74 @@ v%1
     <message>
         <location filename="../../src/app/stats-window.ui" line="20"/>
         <source>Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Statistik</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="31"/>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Idag</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="37"/>
         <location filename="../../src/app/stats-window.ui" line="81"/>
         <source>%1 breaks (%2 completed)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 raster (%2 slutförda)</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="44"/>
         <location filename="../../src/app/stats-window.ui" line="88"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="319"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="326"/>
         <source>Break time: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rasttid: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="51"/>
         <location filename="../../src/app/stats-window.ui" line="95"/>
         <source>%1 postponed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 skjutna upp</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="58"/>
         <location filename="../../src/app/stats-window.ui" line="102"/>
         <source>Active usage: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aktiv användning: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="65"/>
         <location filename="../../src/app/stats-window.ui" line="109"/>
         <source>Total usage: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Total användning: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="75"/>
         <source>Last 7 Days</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Senaste 7 dagarna</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="121"/>
         <source>&lt;h3&gt;Daily Breakdown&lt;/h3&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h3&gt;Daglig uppdelning&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="26"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="320"/>
+        <location filename="../../src/app/stats-window.cpp" line="30"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="327"/>
         <source>%1h %2m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="27"/>
+        <location filename="../../src/app/stats-window.cpp" line="31"/>
         <source>%1m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="315"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="322"/>
         <source>Breaks: %1 (%2 completed)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Raster: %1 (%2 slutförda)</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="324"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="331"/>
         <source>Postpones: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Uppskjutningar: %1</translation>
     </message>
 </context>
 <context>
@@ -1127,49 +1132,49 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="59"/>
         <source>Meeting Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mötesläge</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="62"/>
         <source>Focus Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fokusläge</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="64"/>
         <source>End Focus &amp;&amp; Break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Avsluta fokus &amp;&amp; rast</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="68"/>
         <source>End Meeting &amp;&amp; Break Now</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Avsluta möte &amp;&amp; rast nu</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="72"/>
         <source>Extend Meeting</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Förläng möte</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/tray.cpp" line="80"/>
         <location filename="../../src/app/tray.cpp" line="81"/>
         <source>%n more minutes</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n minut till</numerusform>
+            <numerusform>%n minuter till</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/tray.cpp" line="82"/>
         <source>%n more hour</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n timme till</numerusform>
+            <numerusform>%n timmar till</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="92"/>
         <source>Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Statistik</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="103"/>
@@ -1179,17 +1184,17 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="125"/>
         <source>focus: %1 %2 (%3/%4)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">fokus: %1 %2 (%3/%4)</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="137"/>
         <source>Meeting until %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Möte tills %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="138"/>
         <source>Meeting mode — until %1 (%2 left)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mötesläge — tills %1 (%2 kvar)</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="142"/>

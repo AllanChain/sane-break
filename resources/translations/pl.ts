@@ -12,7 +12,7 @@
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="63"/>
         <source>Failed to read desktop entry packaged with app</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nie udało się odczytać wpisu pulpitu dołączonego do aplikacji</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="77"/>
@@ -32,17 +32,17 @@
         <location filename="../../src/lib/windows/auto-start.cpp" line="45"/>
         <location filename="../../src/lib/windows/auto-start.cpp" line="62"/>
         <source>Disallowed by policy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zablokowane przez zasady</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="48"/>
         <source>Disallowed by user</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zablokowane przez użytkownika</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="82"/>
         <source>Unknown error in MSIX autostart</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nieznany błąd w autostarcie MSIX</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="102"/>
@@ -87,29 +87,34 @@
 <context>
     <name>DayTimelineWidget</name>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="138"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="48"/>
         <source>Active</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aktywne</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="140"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="49"/>
         <source>Break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Przerwa</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="142"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
         <source>Pause</source>
         <translation type="unfinished">Pauza</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="144"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="52"/>
         <source>Meeting</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Spotkanie</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="146"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="53"/>
         <source>Focus</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Skupienie</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="55"/>
+        <source>Postpone</source>
+        <translation type="unfinished">Opóźnij</translation>
     </message>
 </context>
 <context>
@@ -117,17 +122,17 @@
     <message>
         <location filename="../../src/app/focus-window.ui" line="14"/>
         <source>Focus Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tryb skupienia</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="20"/>
         <source>&lt;h2&gt;Focus Mode&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Tryb skupienia&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="55"/>
         <source>Focus duration</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Czas trwania trybu skupienia</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="62"/>
@@ -137,17 +142,17 @@
     <message>
         <location filename="../../src/app/focus-window.ui" line="125"/>
         <source>The break schedule will be temporarily switched to:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Harmonogram przerw zostanie tymczasowo przełączony na:</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="142"/>
         <source>A &lt;b&gt;%1&lt;/b&gt; seconds small break every &lt;b&gt;%2&lt;/b&gt; minutes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Krótką przerwę (&lt;b&gt;%1&lt;/b&gt; sekund) co &lt;b&gt;%2&lt;/b&gt; minut</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="159"/>
         <source>1 in every &lt;b&gt;%2&lt;/b&gt; breaks is a &lt;b&gt;%1&lt;/b&gt; seconds big break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Co &lt;b&gt;%2&lt;/b&gt; przerw jedna będzie długą przerwą (&lt;b&gt;%1&lt;/b&gt; sekund)</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="188"/>
@@ -157,7 +162,7 @@
     <message>
         <location filename="../../src/app/focus-window.ui" line="201"/>
         <source>Take a %1 second break to enter focus mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Weź przerwę %1 sekund, aby wejść w tryb skupienia</translation>
     </message>
 </context>
 <context>
@@ -181,32 +186,32 @@
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="14"/>
         <source>Meeting Mode Ended</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tryb spotkania zakończony</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="20"/>
         <source>&lt;h2&gt;Meeting Mode Ended&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Tryb spotkania zakończony&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="30"/>
         <source>Your meeting/presentation mode has ended. Would you like to take a break?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Twój tryb spotkania/prezentacji zakończył się. Czy chcesz zrobić przerwę?</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="63"/>
         <source>Break in 5 min</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Przerwa za 5 min</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="70"/>
         <source>Not yet (+30 min)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Jeszcze nie (za +30 min)</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="53"/>
         <source>Break now (%1s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Przerwa teraz (%1 s)</translation>
     </message>
 </context>
 <context>
@@ -214,27 +219,27 @@
     <message>
         <location filename="../../src/app/meeting-window.ui" line="14"/>
         <source>Meeting Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tryb spotkania</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="20"/>
         <source>&lt;h2&gt;Meeting/Presentation Mode&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Tryb spotkania/prezentacji&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="55"/>
         <source>It will end at</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zakończy się o</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="116"/>
         <source>No break reminders will show before &lt;b&gt;%1&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Przypomnienia o przerwach nie pojawią się przed &lt;b&gt;%1&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="151"/>
         <source>We&apos;ll check in with you before showing a break reminder.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sprawdzimy, czy nadal jesteś aktywny, zanim pokażemy przypomnienie o przerwie.</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="178"/>
@@ -244,7 +249,7 @@
     <message>
         <location filename="../../src/app/meeting-window.ui" line="191"/>
         <source>Enter Meeting/Presentation Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Włącz tryb spotkania/prezentacji</translation>
     </message>
 </context>
 <context>
@@ -257,27 +262,27 @@
     <message>
         <location filename="../../src/app/postpone-window.ui" line="20"/>
         <source>&lt;h2&gt;Postponing this break&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Opóźnianie tej przerwy&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="27"/>
         <source>Postponing this break by &lt;b&gt;%1&lt;/b&gt; minutes will:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Opóźnienie tej przerwy o &lt;b&gt;%1&lt;/b&gt; minut spowoduje:</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="57"/>
         <source>Shorten your next work session by &lt;b&gt;%1&lt;/b&gt; minutes;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Skrócenie Twojej następnej sesji pracy o &lt;b&gt;%1&lt;/b&gt; minut;</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="92"/>
         <source>Extend the break by &lt;b&gt;%1&lt;/b&gt; seconds.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wydłużenie przerwy o &lt;b&gt;%1&lt;/b&gt; sekund.</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="122"/>
         <source>Postpone by</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Opóźnij o</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="129"/>
@@ -287,22 +292,22 @@
     <message>
         <location filename="../../src/app/postpone-window.ui" line="187"/>
         <source>You won&apos;t be able to postpone this break again. It will start automatically at the scheduled time.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nie będziesz mógł ponownie opóźnić tej przerwy. Rozpocznie się ona automatycznie w zaplanowanym czasie.</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="222"/>
         <source>You can still start the break early. If you do, the adjustments above will be recalculated based on the actual time.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nadal możesz rozpocząć przerwę wcześniej. W takim przypadku powyższe dostosowania zostaną przeliczone na podstawie rzeczywistego czasu.</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="249"/>
         <source>Keep original schedule</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zachowaj oryginalny harmonogram</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="262"/>
         <source>Do the adjustments</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zastosuj dostosowania</translation>
     </message>
 </context>
 <context>
@@ -660,13 +665,13 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="268"/>
         <source>&lt;h2&gt;Normal Schedule&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Normalny harmonogram&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="398"/>
         <location filename="../../src/app/pref-window.ui" line="644"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Włączone</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="410"/>
@@ -677,22 +682,22 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="511"/>
         <source>&lt;h2&gt;Focus Schedule&lt;/h2&gt;When you activate Focus Mode from the tray, breaks will follow this schedule instead. Use it for shorter breaks when you need to stay  focused.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Harmonogram trybu skupienia&lt;/h2&gt; Po włączeniu trybu skupienia z ikony w zasobniku przerwy będą odbywać się zgodnie z tym harmonogramem. Użyj go do krótszych przerw, gdy musisz zachować skupienie.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="757"/>
         <source>&lt;h2&gt;Postpone&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Opóźnij&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="764"/>
         <source>Maximum postpone time as a percentage of your work session (&lt;b&gt;%1&lt;/b&gt; min)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Maksymalny czas opóźnienia jako procent Twojej sesji pracy (&lt;b&gt;%1&lt;/b&gt; min)</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="801"/>
         <source>Postponing breaks adds extra time to your next long break, proportional to how much time you postponed. You can adjust the multiplier for how much extra time is added.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Opóźnianie przerw dodaje dodatkowy czas do Twojej następnej długiej przerwy w sposób proporcjonalny do czasu opóźnienia. Możesz dostosować mnożnik określający, ile dodatkowego czasu zostanie dodane.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="857"/>
@@ -704,7 +709,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="917"/>
         <source>Show break prompt for</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pokaż powiadomienie o przerwie przez</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1137"/>
@@ -764,7 +769,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1772"/>
         <source>Database file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Plik bazy danych</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1818"/>
@@ -923,7 +928,7 @@ v%1
     <message>
         <location filename="../../src/app/app.cpp" line="154"/>
         <source>No further postpones are allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nie można już więcej opóźniać.</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="147"/>
@@ -934,17 +939,17 @@ v%1
     <message>
         <location filename="../../src/app/app.cpp" line="144"/>
         <source>Cannot postpone during focus mode.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nie można opóźnić w trybie skupienia.</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="145"/>
         <source>End focus mode first if you want to postpone.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aby opóźnić, najpierw zakończ tryb skupienia.</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="153"/>
         <source>You have already postponed this break once.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Już raz opóźniłeś tę przerwę.</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="184"/>
@@ -1010,74 +1015,74 @@ v%1
     <message>
         <location filename="../../src/app/stats-window.ui" line="20"/>
         <source>Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Statystyki</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="31"/>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dziś</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="37"/>
         <location filename="../../src/app/stats-window.ui" line="81"/>
         <source>%1 breaks (%2 completed)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 przerw (%2 ukończonych)</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="44"/>
         <location filename="../../src/app/stats-window.ui" line="88"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="319"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="326"/>
         <source>Break time: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Czas przerw: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="51"/>
         <location filename="../../src/app/stats-window.ui" line="95"/>
         <source>%1 postponed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 opóźnionych</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="58"/>
         <location filename="../../src/app/stats-window.ui" line="102"/>
         <source>Active usage: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aktywne korzystanie: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="65"/>
         <location filename="../../src/app/stats-window.ui" line="109"/>
         <source>Total usage: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Łączne korzystanie: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="75"/>
         <source>Last 7 Days</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ostatnie 7 dni</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="121"/>
         <source>&lt;h3&gt;Daily Breakdown&lt;/h3&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h3&gt;Podział dzienny&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="26"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="320"/>
+        <location filename="../../src/app/stats-window.cpp" line="30"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="327"/>
         <source>%1h %2m</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 godz. %2 min</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="27"/>
+        <location filename="../../src/app/stats-window.cpp" line="31"/>
         <source>%1m</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 min</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="315"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="322"/>
         <source>Breaks: %1 (%2 completed)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Przerwy: %1 (%2 ukończonych)</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="324"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="331"/>
         <source>Postpones: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Opóźnienia: %1</translation>
     </message>
 </context>
 <context>
@@ -1135,27 +1140,27 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="59"/>
         <source>Meeting Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tryb spotkania</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="62"/>
         <source>Focus Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tryb skupienia</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="64"/>
         <source>End Focus &amp;&amp; Break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zakończ tryb skupienia i rozpocznij przerwę</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="68"/>
         <source>End Meeting &amp;&amp; Break Now</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zakończ spotkanie i rozpocznij teraz przerwę</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="72"/>
         <source>Extend Meeting</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Przedłuż spotkanie</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/tray.cpp" line="80"/>
@@ -1179,7 +1184,7 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="92"/>
         <source>Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Statystyki</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="103"/>
@@ -1189,17 +1194,17 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="125"/>
         <source>focus: %1 %2 (%3/%4)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">skupienie: %1 %2 (%3/%4)</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="137"/>
         <source>Meeting until %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Spotkanie do %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="138"/>
         <source>Meeting mode — until %1 (%2 left)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tryb spotkania — do %1 (%2 pozostało)</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="142"/>

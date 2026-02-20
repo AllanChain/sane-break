@@ -12,7 +12,7 @@
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="63"/>
         <source>Failed to read desktop entry packaged with app</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">נכשל בקריאת רשומת שולחן המופצת עם האפליקציה</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="77"/>
@@ -32,17 +32,17 @@
         <location filename="../../src/lib/windows/auto-start.cpp" line="45"/>
         <location filename="../../src/lib/windows/auto-start.cpp" line="62"/>
         <source>Disallowed by policy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">אסור על פי מדיניות</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="48"/>
         <source>Disallowed by user</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">אסור על ידי המשתמש</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="82"/>
         <source>Unknown error in MSIX autostart</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">שגיאה לא ידועה בהפעלה אוטומטית של MSIX</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="102"/>
@@ -76,40 +76,45 @@
     <message>
         <location filename="../../src/app/break-window.cpp" line="131"/>
         <source>Break will end at: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ההפסקה תסתיים ב: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/break-window.cpp" line="133"/>
         <source>Break has ended</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ההפסקה הסתיימה</translation>
     </message>
 </context>
 <context>
     <name>DayTimelineWidget</name>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="138"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="48"/>
         <source>Active</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">פעיל</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="140"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="49"/>
         <source>Break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">הפסקה</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="142"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
         <source>Pause</source>
         <translation type="unfinished">הפסקות</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="144"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="52"/>
         <source>Meeting</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">פגישה</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="146"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="53"/>
         <source>Focus</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ריכוז</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="55"/>
+        <source>Postpone</source>
+        <translation type="unfinished">דחה</translation>
     </message>
 </context>
 <context>
@@ -117,17 +122,17 @@
     <message>
         <location filename="../../src/app/focus-window.ui" line="14"/>
         <source>Focus Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">מצב ריכוז</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="20"/>
         <source>&lt;h2&gt;Focus Mode&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;מצב ריכוז&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="55"/>
         <source>Focus duration</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">משך זמן הריכוז</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="62"/>
@@ -137,17 +142,17 @@
     <message>
         <location filename="../../src/app/focus-window.ui" line="125"/>
         <source>The break schedule will be temporarily switched to:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">לוח הזמנים להפסקות ישתנה באופן זמני ל:</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="142"/>
         <source>A &lt;b&gt;%1&lt;/b&gt; seconds small break every &lt;b&gt;%2&lt;/b&gt; minutes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">הפסקה קטנה של &lt;b&gt;%1&lt;/b&gt; שניות כל &lt;b&gt;%2&lt;/b&gt; דקות</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="159"/>
         <source>1 in every &lt;b&gt;%2&lt;/b&gt; breaks is a &lt;b&gt;%1&lt;/b&gt; seconds big break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">אחת מכל &lt;b&gt;%2&lt;/b&gt; הפסקות היא הפסקה גדולה של &lt;b&gt;%1&lt;/b&gt; שניות</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="188"/>
@@ -157,7 +162,7 @@
     <message>
         <location filename="../../src/app/focus-window.ui" line="201"/>
         <source>Take a %1 second break to enter focus mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">קח הפסקה של %1 שניות כדי להיכנס למצב ריכוז</translation>
     </message>
 </context>
 <context>
@@ -181,32 +186,32 @@
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="14"/>
         <source>Meeting Mode Ended</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">מצב הפגישה הסתיים</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="20"/>
         <source>&lt;h2&gt;Meeting Mode Ended&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;מצב הפגישה הסתיים&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="30"/>
         <source>Your meeting/presentation mode has ended. Would you like to take a break?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">מצב הפגישה/ההצגה שלך הסתיים. האם ברצונך לקחת הפסקה?</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="63"/>
         <source>Break in 5 min</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">הפסקה בעוד 5 דקות</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="70"/>
         <source>Not yet (+30 min)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">לא עדיין (+30 דקות)</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="53"/>
         <source>Break now (%1s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">הפסקה עכשיו (%1 שניות)</translation>
     </message>
 </context>
 <context>
@@ -214,27 +219,27 @@
     <message>
         <location filename="../../src/app/meeting-window.ui" line="14"/>
         <source>Meeting Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">מצב פגישה</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="20"/>
         <source>&lt;h2&gt;Meeting/Presentation Mode&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;מצב פגישה/הצגה&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="55"/>
         <source>It will end at</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">הוא יסתיים ב</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="116"/>
         <source>No break reminders will show before &lt;b&gt;%1&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">אין תזכורות להפסקות שיופיעו לפני &lt;b&gt;%1&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="151"/>
         <source>We&apos;ll check in with you before showing a break reminder.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">נבדוק את מצבך לפני הצגת תזכורת להפסקה.</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="178"/>
@@ -244,7 +249,7 @@
     <message>
         <location filename="../../src/app/meeting-window.ui" line="191"/>
         <source>Enter Meeting/Presentation Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">הכנס למצב פגישה/הצגה</translation>
     </message>
 </context>
 <context>
@@ -257,27 +262,27 @@
     <message>
         <location filename="../../src/app/postpone-window.ui" line="20"/>
         <source>&lt;h2&gt;Postponing this break&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;דחיית ההפסקה הזו&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="27"/>
         <source>Postponing this break by &lt;b&gt;%1&lt;/b&gt; minutes will:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">דחיית ההפסקה הזו ב&lt;b&gt;%1&lt;/b&gt; דקות תגרום ל:</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="57"/>
         <source>Shorten your next work session by &lt;b&gt;%1&lt;/b&gt; minutes;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">קיצור מושב העבודה הבא שלך ב&lt;b&gt;%1&lt;/b&gt; דקות;</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="92"/>
         <source>Extend the break by &lt;b&gt;%1&lt;/b&gt; seconds.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">אורך ההפסקה יגדל ב&lt;b&gt;%1&lt;/b&gt; שניות.</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="122"/>
         <source>Postpone by</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">דחה ב</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="129"/>
@@ -287,22 +292,22 @@
     <message>
         <location filename="../../src/app/postpone-window.ui" line="187"/>
         <source>You won&apos;t be able to postpone this break again. It will start automatically at the scheduled time.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">לא תוכל לדחות את ההפסקה הזו שוב. היא תתחיל אוטומטית בזמן המתוכנן.</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="222"/>
         <source>You can still start the break early. If you do, the adjustments above will be recalculated based on the actual time.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">עדיין תוכל להתחיל את ההפסקה מוקדם יותר. אם תעשה זאת, התאמות לעיל יחושבו מחדש על סמך הזמן האמיתי.</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="249"/>
         <source>Keep original schedule</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">שמור את לוח הזמנים המקורי</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="262"/>
         <source>Do the adjustments</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">בצע את התאמות</translation>
     </message>
 </context>
 <context>
@@ -399,12 +404,12 @@
     <message>
         <location filename="../../src/app/pref-window.ui" line="998"/>
         <source>Close windows right after small break ends</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">סגור חלונות מיד לאחר סיום ההפסקה הקטנה</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1005"/>
         <source>Close windows right after big break ends</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">סגור חלונות מיד לאחר סיום ההפסקה הגדולה</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1031"/>
@@ -430,54 +435,56 @@
     <message>
         <location filename="../../src/app/pref-window.ui" line="982"/>
         <source>Max number of force break exits</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">מספר מקסימלי של יציאות מהפסקה מאלצת</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="110"/>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ממשק משתמש</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="989"/>
         <source> times</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">פעמים</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1128"/>
         <source>&lt;h3&gt;Components to Show&lt;/h3&gt;
 
 &lt;p&gt;User interface components to show in the prompt and full-screen window.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h3&gt;רכיבים להצגה&lt;/h3&gt;
+
+&lt;p&gt;רכיבי ממשק המשתמש להצגה בתזכורת ובחלון במסך מלא.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1153"/>
         <location filename="../../src/app/pref-window.ui" line="1199"/>
         <source>Time when break ends</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">הזמן שבו מסתיימת ההפסקה</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1174"/>
         <location filename="../../src/app/pref-window.ui" line="1220"/>
         <source>Countdown timer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">טיימר ספירה לאחור</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1146"/>
         <location filename="../../src/app/pref-window.ui" line="1192"/>
         <source>Progress bar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">סרגל התקדמות</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1160"/>
         <location filename="../../src/app/pref-window.ui" line="1206"/>
         <source>Clock</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">שעון</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1167"/>
         <location filename="../../src/app/pref-window.ui" line="1213"/>
         <source>Buttons</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">כפתורים</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1229"/>
@@ -684,13 +691,13 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="268"/>
         <source>&lt;h2&gt;Normal Schedule&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;לוח זמנים רגיל&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="398"/>
         <location filename="../../src/app/pref-window.ui" line="644"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">מופעל</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="410"/>
@@ -701,22 +708,22 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="511"/>
         <source>&lt;h2&gt;Focus Schedule&lt;/h2&gt;When you activate Focus Mode from the tray, breaks will follow this schedule instead. Use it for shorter breaks when you need to stay  focused.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;לוח זמנים לריכוז&lt;/h2&gt;כאשר תפעיל את מצב הריכוז מהמקלדת, ההפסקות יתנהלו לפי לוח זה במקום. השתמש בו לפסקות קצרות כשאתה צריך לשמור על ריכוז.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="757"/>
         <source>&lt;h2&gt;Postpone&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;דחייה&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="764"/>
         <source>Maximum postpone time as a percentage of your work session (&lt;b&gt;%1&lt;/b&gt; min)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">הזמן המרבי להדחה כאחוז ממושב העבודה שלך (&lt;b&gt;%1&lt;/b&gt; דקות)</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="801"/>
         <source>Postponing breaks adds extra time to your next long break, proportional to how much time you postponed. You can adjust the multiplier for how much extra time is added.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">דחיית הפסקות מוסיפה זמן נוסף להפסקה הארוכה הבאה שלך, באופן פרופורציונלי לכמה זמן דחתה. ניתן להתאים את המקדם עבור כמות הזמן הנוספת שהמתווספת.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="857"/>
@@ -728,27 +735,27 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="917"/>
         <source>Show break prompt for</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">הצג תזכורת להפסקה למשך</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1137"/>
         <source>&lt;h4&gt;Small break&lt;/h4&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h4&gt;הפסקה קטנה&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1183"/>
         <source>&lt;h4&gt;Big break&lt;/h4&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h4&gt;הפסקה גדולה&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1336"/>
         <source>&lt;p&gt;To preview break windows, save all changes first. The preview begins with a 2-second flashing prompt, followed by a 4-second full-screen break. A small break window will appear first, then a big break window.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;p&gt;כדי לצפות מראש בחלונות ההפסקות, יש לשמור קודם לכן את כל השינויים. התצוגה הראשונית מתחילה בתזכורת מבזקת של שנייה אחת, ולאחר מכן הפסקה במסך מלא של ארבע שניות. ראשית יופיע חלון הפסקה הקטנה, ואחר כך חלון הפסקה הגדולה.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1346"/>
         <source>Preview Break Windows</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">תצוגה מקדימה של חלונות ההפסקות</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1431"/>
@@ -788,7 +795,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1772"/>
         <source>Database file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">קובץ מסד נתונים</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1818"/>
@@ -798,12 +805,12 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1944"/>
         <source>Get the Source Code</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">קבל את קוד המקור</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1973"/>
         <source>Help Us Translate!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">עזרו לנו לתרגם!</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="2006"/>
@@ -823,12 +830,12 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1964"/>
         <source>Third-party Libraries Licenses</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">רישיונות ספריות צד ג&apos;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="2013"/>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ברירות מחדל</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="2036"/>
@@ -935,12 +942,12 @@ v%1
     <message>
         <location filename="../../src/app/main.cpp" line="66"/>
         <source>Another instance of Sane Break is running.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">מופע נוסף של Sane Break פועל כרגע.</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="67"/>
         <source>Please quit the old instance before starting a new one.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">אנא צא מהמופע הישן לפני שתרוץ מופע חדש.</translation>
     </message>
 </context>
 <context>
@@ -948,7 +955,7 @@ v%1
     <message>
         <location filename="../../src/app/app.cpp" line="154"/>
         <source>No further postpones are allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">אסור לדחות שוב.</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="147"/>
@@ -959,17 +966,17 @@ v%1
     <message>
         <location filename="../../src/app/app.cpp" line="144"/>
         <source>Cannot postpone during focus mode.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">אסור לדחות במצב ריכוז.</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="145"/>
         <source>End focus mode first if you want to postpone.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">סיים קודם את מצב הריכוז אם ברצונך לדחות.</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="153"/>
         <source>You have already postponed this break once.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">כבר דחתה את ההפסקה הזו פעם אחת.</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="184"/>
@@ -1033,74 +1040,74 @@ v%1
     <message>
         <location filename="../../src/app/stats-window.ui" line="20"/>
         <source>Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">סטטיסטיקות</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="31"/>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">היום</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="37"/>
         <location filename="../../src/app/stats-window.ui" line="81"/>
         <source>%1 breaks (%2 completed)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 הפסקות (%2 הושלמו)</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="44"/>
         <location filename="../../src/app/stats-window.ui" line="88"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="319"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="326"/>
         <source>Break time: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">זמן הפסקות: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="51"/>
         <location filename="../../src/app/stats-window.ui" line="95"/>
         <source>%1 postponed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 נדחו</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="58"/>
         <location filename="../../src/app/stats-window.ui" line="102"/>
         <source>Active usage: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">שימוש פעיל: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="65"/>
         <location filename="../../src/app/stats-window.ui" line="109"/>
         <source>Total usage: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">הישתמש הכללי: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="75"/>
         <source>Last 7 Days</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ב-7 הימים האחרונים</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="121"/>
         <source>&lt;h3&gt;Daily Breakdown&lt;/h3&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h3&gt;פירוט יומי&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="26"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="320"/>
+        <location filename="../../src/app/stats-window.cpp" line="30"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="327"/>
         <source>%1h %2m</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 שעות %2 דקות</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="27"/>
+        <location filename="../../src/app/stats-window.cpp" line="31"/>
         <source>%1m</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 דקות</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="315"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="322"/>
         <source>Breaks: %1 (%2 completed)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">הפסקות: %1 (%2 הושלמו)</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="324"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="331"/>
         <source>Postpones: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">דחיות: %1</translation>
     </message>
 </context>
 <context>
@@ -1157,49 +1164,49 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="59"/>
         <source>Meeting Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">מצב פגישה</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="62"/>
         <source>Focus Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">מצב ריכוז</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="64"/>
         <source>End Focus &amp;&amp; Break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">סיים ריכוז &amp;&amp; קח הפסקה</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="68"/>
         <source>End Meeting &amp;&amp; Break Now</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">סיים פגישה &amp;&amp; קח הפסקה עכשיו</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="72"/>
         <source>Extend Meeting</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">הארך פגישה</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/tray.cpp" line="80"/>
         <location filename="../../src/app/tray.cpp" line="81"/>
         <source>%n more minutes</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n דקה נוספת</numerusform>
+            <numerusform>%n דקות נוספות</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/tray.cpp" line="82"/>
         <source>%n more hour</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n שעה נוספת</numerusform>
+            <numerusform>%n שעות נוספות</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="92"/>
         <source>Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">סטטיסטיקות</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="103"/>
@@ -1209,17 +1216,17 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="125"/>
         <source>focus: %1 %2 (%3/%4)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ריכוז: %1 %2 (%3/%4)</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="137"/>
         <source>Meeting until %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">פגישה עד %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="138"/>
         <source>Meeting mode — until %1 (%2 left)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">מצב פגישה — עד %1 (%2 נותרים)</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="142"/>
