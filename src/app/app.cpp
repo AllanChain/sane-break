@@ -64,8 +64,8 @@ SaneBreakApp::SaneBreakApp(const AppDependencies& deps, QObject* parent)
   connect(tray, &StatusTrayWindow::focusRequested, this,
           &SaneBreakApp::openFocusWindow);
   connect(tray, &StatusTrayWindow::endFocusRequested, this, &SaneBreakApp::endFocus);
-  connect(tray, &StatusTrayWindow::endMeetingBreakNowRequested, this,
-          &SaneBreakApp::endMeetingBreakNow);
+  connect(tray, &StatusTrayWindow::endMeetingRequested, this,
+          [this]() { endMeetingBreakLater(preferences->smallEvery->get()); });
   connect(tray, &StatusTrayWindow::extendMeetingRequested, this,
           &SaneBreakApp::extendMeeting);
   connect(tray, &StatusTrayWindow::preferenceWindowRequested, this,
@@ -99,7 +99,7 @@ SaneBreakApp* SaneBreakApp::create(SanePreferences* preferences, QObject* parent
       .idleTimer = createIdleTimer(parent),
       .systemMonitor = new SystemMonitor(preferences),
       .breakWindows = new BreakWindows(),
-      .meetingPrompt = new MeetingPrompt(),
+      .meetingPrompt = new MeetingPrompt(parent, preferences),
   };
   return new SaneBreakApp(deps, parent);
 }

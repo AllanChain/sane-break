@@ -65,10 +65,10 @@ StatusTrayWindow::StatusTrayWindow(SanePreferences* preferences, QObject* parent
   endFocusAction->setVisible(false);
   connect(endFocusAction, &QAction::triggered, this,
           &StatusTrayWindow::endFocusRequested);
-  endMeetingAction = menu->addAction(tr("End Meeting && Break Now"));
+  endMeetingAction = menu->addAction("");  // Text is set later
   endMeetingAction->setVisible(false);
   connect(endMeetingAction, &QAction::triggered, this,
-          &StatusTrayWindow::endMeetingBreakNowRequested);
+          &StatusTrayWindow::endMeetingRequested);
   extendMeetingMenu = menu->addMenu(tr("Extend Meeting"));
   extendMeetingMenu->menuAction()->setVisible(false);
   auto addExtendOpt = [this](const QString& label, int secs) {
@@ -134,7 +134,7 @@ void StatusTrayWindow::update(TrayData data) {
     QTime meetingEndTime = QTime::currentTime().addSecs(data.meetingSecondsRemaining);
     QString endTimeStr = QLocale().toString(meetingEndTime, QLocale::ShortFormat);
 
-    endMeetingAction->setText(tr("Meeting until %1").arg(endTimeStr));
+    endMeetingAction->setText(tr("Exit meeting (%1)").arg(endTimeStr));
     setTitle(tr("Meeting mode — until %1 (%2 left)")
                  .arg(endTimeStr, formatTime(data.meetingSecondsRemaining)));
   } else if (data.pauseReasons) {

@@ -87,32 +87,32 @@
 <context>
     <name>DayTimelineWidget</name>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="48"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="49"/>
         <source>Active</source>
         <translation type="unfinished">Aktiv</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="49"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
         <source>Break</source>
         <translation type="unfinished">Pause</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="51"/>
         <source>Pause</source>
         <translation type="unfinished">Pause</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="52"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="53"/>
         <source>Meeting</source>
         <translation type="unfinished">Besprechung</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="53"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="54"/>
         <source>Focus</source>
         <translation type="unfinished">Fokus</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="55"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="56"/>
         <source>Postpone</source>
         <translation type="unfinished">Verschieben</translation>
     </message>
@@ -200,13 +200,21 @@
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="63"/>
-        <source>Break in 5 min</source>
-        <translation type="unfinished">Pause in 5 Min</translation>
+        <source>Break in %1 minutes</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="70"/>
+        <source>Not yet (extend %1 minutes)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Break in 5 min</source>
+        <translation type="obsolete">Pause in 5 Min</translation>
+    </message>
+    <message>
         <source>Not yet (+30 min)</source>
-        <translation type="unfinished">Noch nicht (+30 Min)</translation>
+        <translation type="obsolete">Noch nicht (+30 Min)</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="53"/>
@@ -1022,7 +1030,7 @@ v%1
     <message>
         <location filename="../../src/app/stats-window.ui" line="44"/>
         <location filename="../../src/app/stats-window.ui" line="88"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="326"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="330"/>
         <source>Break time: %1</source>
         <translation type="unfinished">Pausenzeit: %1</translation>
     </message>
@@ -1056,7 +1064,7 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/stats-window.cpp" line="30"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="327"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="331"/>
         <source>%1h %2m</source>
         <translation type="unfinished">%1 h %2 m</translation>
     </message>
@@ -1066,12 +1074,12 @@ v%1
         <translation type="unfinished">%1 m</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="322"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="326"/>
         <source>Breaks: %1 (%2 completed)</source>
         <translation type="unfinished">Pausen: %1 (%2 abgeschlossen)</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="331"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="335"/>
         <source>Postpones: %1</source>
         <translation type="unfinished">Verschiebungen: %1</translation>
     </message>
@@ -1143,9 +1151,8 @@ v%1
         <translation type="unfinished">Fokusmodus beenden &amp;&amp; Pause</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="68"/>
         <source>End Meeting &amp;&amp; Break Now</source>
-        <translation type="unfinished">Besprechungsmodus beenden &amp;&amp; Jetzt Pause</translation>
+        <translation type="obsolete">Besprechungsmodus beenden &amp;&amp; Jetzt Pause</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="72"/>
@@ -1186,8 +1193,12 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="137"/>
+        <source>Exit meeting (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Meeting until %1</source>
-        <translation type="unfinished">Besprechung bis %1</translation>
+        <translation type="obsolete">Besprechung bis %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="138"/>

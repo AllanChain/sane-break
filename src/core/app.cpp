@@ -72,7 +72,7 @@ AbstractApp::AbstractApp(const AppDependencies& deps, QObject* parent)
   connect(meetingPrompt, &AbstractMeetingPrompt::breakNowRequested, this,
           &AbstractApp::endMeetingBreakNow);
   connect(meetingPrompt, &AbstractMeetingPrompt::breakLaterRequested, this,
-          &AbstractApp::endMeetingBreakLater);
+          [this]() { endMeetingBreakLater(preferences->smallEvery->get()); });
   connect(meetingPrompt, &AbstractMeetingPrompt::extendRequested, this,
           &AbstractApp::extendMeeting);
 };
@@ -142,9 +142,7 @@ void AbstractApp::startMeeting(int seconds, const QString& reason) {
   transitionTo(std::make_unique<AppStateMeeting>());
 }
 
-void AbstractApp::endMeetingBreakNow() {
-  onMenuAction(Action::EndMeetingBreakNow{});
-}
+void AbstractApp::endMeetingBreakNow() { onMenuAction(Action::EndMeetingBreakNow{}); }
 
 void AbstractApp::endMeetingBreakLater(int seconds) {
   onMenuAction(Action::EndMeetingBreakLater{seconds});

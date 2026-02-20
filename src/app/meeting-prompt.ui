@@ -58,16 +58,16 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="breakLater">
+    <widget class="DynamicButton" name="breakLater">
      <property name="text">
-      <string>Break in 5 min</string>
+      <string>Break in %1 minutes</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="notYet">
+    <widget class="DynamicButton" name="notYet">
      <property name="text">
-      <string>Not yet (+30 min)</string>
+      <string>Not yet (extend %1 minutes)</string>
      </property>
     </widget>
    </item>

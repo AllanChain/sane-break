@@ -87,32 +87,32 @@
 <context>
     <name>DayTimelineWidget</name>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="48"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="49"/>
         <source>Active</source>
         <translation>活躍</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="49"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
         <source>Break</source>
         <translation>休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="51"/>
         <source>Pause</source>
         <translation>暫停</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="52"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="53"/>
         <source>Meeting</source>
         <translation>會議</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="53"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="54"/>
         <source>Focus</source>
         <translation>專注</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="55"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="56"/>
         <source>Postpone</source>
         <translation>推遲</translation>
     </message>
@@ -200,13 +200,13 @@
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="63"/>
-        <source>Break in 5 min</source>
-        <translation>5 分鐘後休息</translation>
+        <source>Break in %1 minutes</source>
+        <translation>%1 分鐘後休息</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="70"/>
-        <source>Not yet (+30 min)</source>
-        <translation>不是現在（+30 分鐘）</translation>
+        <source>Not yet (extend %1 minutes)</source>
+        <translation>不是現在（延長 %1 分鐘）</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="53"/>
@@ -995,7 +995,7 @@ v%1
     <message>
         <location filename="../../src/app/stats-window.ui" line="44"/>
         <location filename="../../src/app/stats-window.ui" line="88"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="326"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="330"/>
         <source>Break time: %1</source>
         <translation>休息時間：%1</translation>
     </message>
@@ -1029,7 +1029,7 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/stats-window.cpp" line="30"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="327"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="331"/>
         <source>%1h %2m</source>
         <translation>%1 小時 %2 分鐘</translation>
     </message>
@@ -1039,12 +1039,12 @@ v%1
         <translation>%1 分鐘</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="322"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="326"/>
         <source>Breaks: %1 (%2 completed)</source>
         <translation>%1 次休息（%2 次完成）</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="331"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="335"/>
         <source>Postpones: %1</source>
         <translation>%1 次推遲</translation>
     </message>
@@ -1099,6 +1099,11 @@ v%1
         <translation>小休息</translation>
     </message>
     <message>
+        <location filename="../../src/app/tray.cpp" line="137"/>
+        <source>Exit meeting (%1)</source>
+        <translation>退出會議（%1）</translation>
+    </message>
+    <message>
         <location filename="../../src/app/tray.cpp" line="101"/>
         <source>Next break after %1</source>
         <translation>%1 後休息</translation>
@@ -1124,11 +1129,6 @@ v%1
         <translation>退出專注模式並休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="68"/>
-        <source>End Meeting &amp;&amp; Break Now</source>
-        <translation>退出會議模式並休息</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tray.cpp" line="72"/>
         <source>Extend Meeting</source>
         <translation>延長會議</translation>
@@ -1147,11 +1147,6 @@ v%1
         <location filename="../../src/app/tray.cpp" line="125"/>
         <source>focus: %1 %2 (%3/%4)</source>
         <translation>專注：%1 %2 (%3/%4)</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/tray.cpp" line="137"/>
-        <source>Meeting until %1</source>
-        <translation>會議持續到 %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="138"/>

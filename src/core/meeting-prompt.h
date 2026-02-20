@@ -6,10 +6,13 @@
 
 #include <QObject>
 
+#include "core/preferences.h"
+
 class AbstractMeetingPrompt : public QObject {
   Q_OBJECT
  public:
-  using QObject::QObject;
+  AbstractMeetingPrompt(QObject* parent, SanePreferences* preferences)
+      : QObject(parent), preferences(preferences) {};
   virtual void showEndPrompt() = 0;
   virtual void closeEndPrompt() = 0;
   virtual void setTime(int seconds) = 0;
@@ -18,4 +21,7 @@ class AbstractMeetingPrompt : public QObject {
   void breakNowRequested();
   void breakLaterRequested(int seconds);
   void extendRequested(int seconds);
+
+ protected:
+  SanePreferences* preferences;
 };

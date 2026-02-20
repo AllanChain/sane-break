@@ -21,6 +21,9 @@ void MeetingPrompt::showEndPrompt() {
   ui = new Ui::MeetingPrompt();
   ui->setupUi(dialog);
 
+  ui->breakLater->setArgs({preferences->smallEvery->get() / 60});
+  ui->notYet->setArgs({30});
+
   connect(ui->breakNow, &QPushButton::clicked, this, [this]() {
     if (dialog) dialog->done(QDialog::Accepted);
     emit breakNowRequested();

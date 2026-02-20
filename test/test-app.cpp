@@ -530,7 +530,7 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.meetingSecondsRemaining, 60);
     QVERIFY(app.trayData.isInMeeting);
   }
-  // Meeting auto-exits to break when time runs out
+  // Meeting auto-exits to normal when time runs out
   void meeting_prompt_timeout() {
     NiceMock<DummyApp> app(deps);
     app.start();
@@ -539,10 +539,11 @@ class TestApp : public QObject {
     app.advance(4);  // remaining = 1, prompt showing
     QVERIFY(app.trayData.isInMeeting);
 
-    app.advance(1);  // remaining = 0, auto-exit to break
+    app.advance(1);  // remaining = 0, auto-exit to normal
     QVERIFY(!app.trayData.isInMeeting);
-    QVERIFY(app.trayData.isBreaking);
-    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);  // big break
+    QVERIFY(!app.trayData.isBreaking);
+    QCOMPARE(app.currentState(), AppState::Normal);
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);  // next break is big
   }
   // Idle during meeting stays in Normal
   void meeting_blocks_idle_pause() {

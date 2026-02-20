@@ -128,15 +128,16 @@ class DummyApp : public AbstractApp {
     }
     auto db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(":memory:");
+    auto preferences = tempPreferences();
     return {
-        .preferences = tempPreferences(),
+        .preferences = preferences,
         .db = new BreakDatabase(db, parent),
         .countDownTimer = new AbstractTimer(parent),
         .screenLockTimer = new AbstractTimer(parent),
         .idleTimer = new DummyIdleTime(parent),
         .systemMonitor = new DummySystemMonitor(parent),
         .breakWindows = new testing::NiceMock<DummyBreakWindows>(parent),
-        .meetingPrompt = new testing::NiceMock<DummyMeetingPrompt>(parent),
+        .meetingPrompt = new testing::NiceMock<DummyMeetingPrompt>(parent, preferences),
     };
   };
 };

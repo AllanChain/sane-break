@@ -375,8 +375,7 @@ void AppStateMeeting::tick(AppContext* app) {
   } else if (remaining <= 0) {
     app->db->logEvent("meeting::end", {{"next-break", 0}});
     if (app->data->effectiveBigBreakEnabled()) app->data->makeNextBreakBig();
-    app->data->earlyBreak();
-    app->transitionTo(std::make_unique<AppStateBreak>());
+    app->transitionTo(std::make_unique<AppStateNormal>());
   }
 }
 
