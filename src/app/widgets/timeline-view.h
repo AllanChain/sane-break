@@ -4,16 +4,25 @@
 
 #pragma once
 
+#include <QColor>
 #include <QCoreApplication>
 #include <QDate>
+#include <QEvent>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QList>
 #include <QMap>
+#include <QObject>
+#include <QPair>
+#include <QResizeEvent>
 #include <QString>
+#include <QWheelEvent>
+#include <QWidget>
 
 #include "core/db.h"
+
+QList<QPair<QColor, QString>> timelineLegendItems();
 
 class TimeAxisItem : public QGraphicsItem {
  public:
@@ -52,8 +61,6 @@ class DayTimelineItem : public QGraphicsItem {
 
   qreal timeToX(int secondOfDay) const;
   int xToTime(qreal x) const;
-  QColor colorForType(const QString& type) const;
-  QString labelForType(const QString& type) const;
 };
 
 class TimelineGraphicsView : public QGraphicsView {

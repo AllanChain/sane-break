@@ -11,3 +11,4 @@ Diagnostics:
     - qminmax\.h
     - qtversionchecks\.h
     - qcontainerfwd\.h
+    - qtypes\.h

@@ -6,7 +6,11 @@
 
 #include <QDate>
 #include <QEvent>
+#include <QFrame>
+#include <QGridLayout>
+#include <QHBoxLayout>
 #include <QIcon>
+#include <QLabel>
 #include <QList>
 #include <QLocale>
 #include <QMap>
@@ -32,6 +36,31 @@ StatsWindow::StatsWindow(BreakDatabase* db, QWidget* parent)
   ui->setupUi(this);
   setAttribute(Qt::WA_DeleteOnClose);
   setWindowIcon(QIcon(":/images/icon.png"));
+
+  // Build legend below the timeline (2 rows, 3 per row)
+  auto* legendGrid = new QGridLayout();
+  legendGrid->setHorizontalSpacing(12);
+  legendGrid->setVerticalSpacing(4);
+  auto items = timelineLegendItems();
+  for (int i = 0; i < items.size(); i++) {
+    int row = i / 3;
+    int col = (i % 3) * 2;  // each item takes 2 columns (swatch + label)
+    auto* swatch = new QFrame();
+    swatch->setFixedSize(10, 10);
+    swatch->setStyleSheet(
+        QString("background-color: %1; border-radius: 2px;")
+            .arg(items[i].first.name()));
+    auto* text = new QLabel(items[i].second);
+    legendGrid->addWidget(swatch, row, col, Qt::AlignRight | Qt::AlignVCenter);
+    legendGrid->addWidget(text, row, col + 1, Qt::AlignLeft | Qt::AlignVCenter);
+  }
+  auto* legendWrapper = new QHBoxLayout();
+  legendWrapper->addStretch();
+  legendWrapper->addLayout(legendGrid);
+  legendWrapper->addStretch();
+  // Insert after timelineView (index 3 in main layout)
+  ui->main->insertLayout(3, legendWrapper);
+
   refreshData();
 }
 

@@ -9,13 +9,17 @@
 #include <QDate>
 #include <QEvent>
 #include <QFontMetrics>
+#include <QFrame>
 #include <QGestureEvent>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QHelpEvent>
+#include <QList>
 #include <QLocale>
+#include <QMap>
 #include <QPainter>
+#include <QPalette>
 #include <QPen>
 #include <QResizeEvent>
 #include <QScrollBar>
@@ -23,23 +27,53 @@
 #include <QToolTip>
 #include <QTransform>
 #include <QWheelEvent>
+#include <QWidget>
+#include <Qt>
 #include <algorithm>
 
 #include "core/db.h"
 
+static QColor colorForType(const QString& type) {
+  if (type == "normal") return QColor("#4ade80");    // green-400
+  if (type == "break") return QColor("#facc15");     // yellow-400
+  if (type == "pause") return QColor("#9ca3af");     // gray-400
+  if (type == "meeting") return QColor("#60a5fa");   // blue-400
+  if (type == "focus") return QColor("#a78bfa");     // violet-400
+  if (type == "postpone") return QColor("#f87171");  // red-400
+  return QColor("#d1d5db");                          // gray-300
+}
+
+static QString labelForType(const QString& type) {
+  if (type == "normal")
+    return QCoreApplication::translate("DayTimelineWidget", "Active");
+  if (type == "break") return QCoreApplication::translate("DayTimelineWidget", "Break");
+  if (type == "pause") return QCoreApplication::translate("DayTimelineWidget", "Pause");
+  if (type == "meeting")
+    return QCoreApplication::translate("DayTimelineWidget", "Meeting");
+  if (type == "focus") return QCoreApplication::translate("DayTimelineWidget", "Focus");
+  if (type == "postpone")
+    return QCoreApplication::translate("DayTimelineWidget", "Postpone");
+  return type;
+}
+
+static const QList<QString> kLegendTypes = {"normal",  "break", "pause",
+                                            "meeting", "focus", "postpone"};
+
+QList<QPair<QColor, QString>> timelineLegendItems() {
+  QList<QPair<QColor, QString>> items;
+  for (const auto& type : kLegendTypes)
+    items.append({colorForType(type), labelForType(type)});
+  return items;
+}
+
 // --- TimeAxisItem ---
 
 TimeAxisItem::TimeAxisItem(int startSecond, int endSecond, qreal baseWidth)
-    : m_rangeStart(startSecond),
-      m_rangeEnd(endSecond),
-      m_baseWidth(baseWidth) {}
+    : m_rangeStart(startSecond), m_rangeEnd(endSecond), m_baseWidth(baseWidth) {}
 
-QRectF TimeAxisItem::boundingRect() const {
-  return QRectF(0, 0, m_baseWidth, kHeight);
-}
+QRectF TimeAxisItem::boundingRect() const { return QRectF(0, 0, m_baseWidth, kHeight); }
 
-void TimeAxisItem::paint(QPainter* painter,
-                         const QStyleOptionGraphicsItem* /*option*/,
+void TimeAxisItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* /*option*/,
                          QWidget* /*widget*/) {
   painter->setRenderHint(QPainter::Antialiasing, false);
 
@@ -114,37 +148,13 @@ QRectF DayTimelineItem::boundingRect() const {
 
 qreal DayTimelineItem::timeToX(int secondOfDay) const {
   if (m_rangeEnd <= m_rangeStart) return 0;
-  return static_cast<qreal>(secondOfDay - m_rangeStart) /
-         (m_rangeEnd - m_rangeStart) * m_baseWidth;
+  return static_cast<qreal>(secondOfDay - m_rangeStart) / (m_rangeEnd - m_rangeStart) *
+         m_baseWidth;
 }
 
 int DayTimelineItem::xToTime(qreal x) const {
   if (m_baseWidth <= 0 || m_rangeEnd <= m_rangeStart) return m_rangeStart;
-  return m_rangeStart +
-         static_cast<int>(x / m_baseWidth * (m_rangeEnd - m_rangeStart));
-}
-
-QColor DayTimelineItem::colorForType(const QString& type) const {
-  if (type == "normal") return QColor("#4ade80");
-  if (type == "break") return QColor("#facc15");
-  if (type == "pause") return QColor("#9ca3af");
-  if (type == "meeting") return QColor("#60a5fa");
-  if (type == "focus") return QColor("#a78bfa");
-  return QColor("#d1d5db");
-}
-
-QString DayTimelineItem::labelForType(const QString& type) const {
-  if (type == "normal")
-    return QCoreApplication::translate("DayTimelineWidget", "Active");
-  if (type == "break")
-    return QCoreApplication::translate("DayTimelineWidget", "Break");
-  if (type == "pause")
-    return QCoreApplication::translate("DayTimelineWidget", "Pause");
-  if (type == "meeting")
-    return QCoreApplication::translate("DayTimelineWidget", "Meeting");
-  if (type == "focus")
-    return QCoreApplication::translate("DayTimelineWidget", "Focus");
-  return type;
+  return m_rangeStart + static_cast<int>(x / m_baseWidth * (m_rangeEnd - m_rangeStart));
 }
 
 static int spanSecond(const TimelineSpan& span, bool start) {
@@ -217,7 +227,7 @@ void DayTimelineItem::paint(QPainter* painter,
   }
 
   // Postpone tick marks
-  QPen tickPen(QColor("#ef4444"));
+  QPen tickPen(colorForType("postpone"));
   tickPen.setWidthF(2);
   tickPen.setCosmetic(true);
   painter->setPen(tickPen);
@@ -230,8 +240,7 @@ void DayTimelineItem::paint(QPainter* painter,
 
 // --- TimelineGraphicsView ---
 
-TimelineGraphicsView::TimelineGraphicsView(QWidget* parent)
-    : QGraphicsView(parent) {
+TimelineGraphicsView::TimelineGraphicsView(QWidget* parent) : QGraphicsView(parent) {
   setViewportUpdateMode(FullViewportUpdate);
   setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
   setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -266,14 +275,12 @@ void TimelineGraphicsView::applyZoom() {
 }
 
 void TimelineGraphicsView::updateFixedHeight() {
-  setFixedHeight(m_contentHeight +
-                 horizontalScrollBar()->sizeHint().height());
+  setFixedHeight(m_contentHeight + horizontalScrollBar()->sizeHint().height());
 }
 
-void TimelineGraphicsView::populate(
-    const QList<DayTimelineData>& timelines,
-    const QMap<QDate, DailyBreakStats>& statsMap, int rangeStart,
-    int rangeEnd) {
+void TimelineGraphicsView::populate(const QList<DayTimelineData>& timelines,
+                                    const QMap<QDate, DailyBreakStats>& statsMap,
+                                    int rangeStart, int rangeEnd) {
   m_rows.clear();
   m_zoomFactor = 1.0;
 
@@ -347,19 +354,22 @@ void TimelineGraphicsView::resizeEvent(QResizeEvent* event) {
 }
 
 void TimelineGraphicsView::wheelEvent(QWheelEvent* event) {
-  // Zoom centered on mouse position
-  QPointF scenePos = mapToScene(event->position().toPoint());
-  qreal factor = 1.0 + event->angleDelta().y() / 600.0;
-  m_zoomFactor = std::clamp(m_zoomFactor * factor, kMinZoom, kMaxZoom);
+  // Mouse wheel (no phase) zooms; trackpad two-finger scroll (has phase) pans
+  if (event->phase() == Qt::NoScrollPhase) {
+    QPointF scenePos = mapToScene(event->position().toPoint());
+    qreal factor = 1.0 + event->angleDelta().y() / 600.0;
+    m_zoomFactor = std::clamp(m_zoomFactor * factor, kMinZoom, kMaxZoom);
 
-  applyZoom();
+    applyZoom();
 
-  // Re-center on the point under the mouse
-  QPointF newViewportPos = mapFromScene(scenePos);
-  QPointF delta = newViewportPos - event->position();
-  horizontalScrollBar()->setValue(horizontalScrollBar()->value() +
-                                 static_cast<int>(delta.x()));
-  event->accept();
+    QPointF newViewportPos = mapFromScene(scenePos);
+    QPointF delta = newViewportPos - event->position();
+    horizontalScrollBar()->setValue(horizontalScrollBar()->value() +
+                                    static_cast<int>(delta.x()));
+    event->accept();
+  } else {
+    QGraphicsView::wheelEvent(event);
+  }
 }
 
 bool TimelineGraphicsView::event(QEvent* event) {
@@ -375,7 +385,7 @@ bool TimelineGraphicsView::event(QEvent* event) {
       QPointF newViewportPos = mapFromScene(scenePos);
       QPointF delta = newViewportPos - gesture->position();
       horizontalScrollBar()->setValue(horizontalScrollBar()->value() +
-                                     static_cast<int>(delta.x()));
+                                      static_cast<int>(delta.x()));
       return true;
     }
   }
