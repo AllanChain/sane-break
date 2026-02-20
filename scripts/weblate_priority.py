@@ -2,6 +2,12 @@
 # Copyright (C) 2024-2025 Sane Break developers
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+# /// script
+# dependencies = [
+#   "requests",
+# ]
+# ///
+
 import os
 
 import requests
