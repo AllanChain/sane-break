@@ -73,6 +73,7 @@ class TimelineGraphicsView : public QGraphicsView {
 
  protected:
   void resizeEvent(QResizeEvent* event) override;
+  void changeEvent(QEvent* event) override;
   void wheelEvent(QWheelEvent* event) override;
   bool event(QEvent* event) override;
   bool viewportEvent(QEvent* event) override;
@@ -95,5 +96,6 @@ class TimelineGraphicsView : public QGraphicsView {
 
   void applyZoom();
   void updateFixedHeight();
+  void updateSceneBackground();
   qreal baseScale() const;
 };

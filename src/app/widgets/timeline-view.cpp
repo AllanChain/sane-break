@@ -24,6 +24,7 @@
 #include <QResizeEvent>
 #include <QScrollBar>
 #include <QString>
+#include <QStyleOptionGraphicsItem>
 #include <QToolTip>
 #include <QTransform>
 #include <QWheelEvent>
@@ -40,7 +41,7 @@ static QColor colorForType(const QString& type) {
   if (type == "meeting") return QColor("#60a5fa");   // blue-400
   if (type == "focus") return QColor("#a78bfa");     // violet-400
   if (type == "postpone") return QColor("#f87171");  // red-400
-  return QColor("#d1d5db");                          // gray-300
+  return QColor(128, 128, 128, 80);                   // semi-transparent gray
 }
 
 static QString labelForType(const QString& type) {
@@ -74,8 +75,11 @@ TimeAxisItem::TimeAxisItem(int startSecond, int endSecond, qreal baseWidth)
 QRectF TimeAxisItem::boundingRect() const { return QRectF(0, 0, m_baseWidth, kHeight); }
 
 void TimeAxisItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* /*option*/,
-                         QWidget* /*widget*/) {
+                         QWidget* widget) {
   painter->setRenderHint(QPainter::Antialiasing, false);
+
+  QColor textColor = widget ? widget->palette().color(QPalette::WindowText)
+                            : QColor("#6b7280");
 
   // The painter's transform includes the view scale; extract it so we can
   // counter-scale text and adapt tick density to actual pixel width.
@@ -102,7 +106,7 @@ void TimeAxisItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* /*op
   else
     stepHours = 4;
 
-  QPen tickPen(QColor("#6b7280"));
+  QPen tickPen(textColor);
   tickPen.setCosmetic(true);
   painter->setPen(tickPen);
 
@@ -198,8 +202,8 @@ void DayTimelineItem::paint(QPainter* painter,
   qreal w = m_baseWidth;
   int h = kTrackHeight;
 
-  // Light gray background
-  painter->fillRect(QRectF(0, 0, w, h), QColor("#e5e7eb"));
+  // Semi-transparent gray background — adapts to both light and dark themes
+  painter->fillRect(QRectF(0, 0, w, h), QColor(128, 128, 128, 40));
 
   // Base track spans
   for (const auto& span : m_data.spans) {
@@ -342,15 +346,28 @@ void TimelineGraphicsView::populate(const QList<DayTimelineData>& timelines,
 
   sc->setSceneRect(0, 0, kSceneBaseWidth, yPos);
   setScene(sc);
+  updateSceneBackground();
 
   m_contentHeight = static_cast<int>(yPos);
   applyZoom();
+}
+
+void TimelineGraphicsView::updateSceneBackground() {
+  if (scene()) scene()->setBackgroundBrush(palette().color(QPalette::Window));
 }
 
 void TimelineGraphicsView::resizeEvent(QResizeEvent* event) {
   QGraphicsView::resizeEvent(event);
   m_labelArea->setFixedSize(kLabelWidth, height());
   applyZoom();
+}
+
+void TimelineGraphicsView::changeEvent(QEvent* event) {
+  QGraphicsView::changeEvent(event);
+  if (event->type() == QEvent::PaletteChange) {
+    updateSceneBackground();
+    viewport()->update();
+  }
 }
 
 void TimelineGraphicsView::wheelEvent(QWheelEvent* event) {
