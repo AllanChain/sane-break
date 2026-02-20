@@ -14,7 +14,7 @@
 #include <QTime>
 #include <QTimeEdit>
 #include <QTimer>
-#include <QWidget>
+#include <QDialog>
 #include <Qt>
 
 #include "core/db.h"
@@ -23,7 +23,7 @@
 
 PostponeWindow::PostponeWindow(SanePreferences* preferences, BreakDatabase* db,
                                QWidget* parent)
-    : QWidget(parent), ui(new Ui::PostponeUI), preferences(preferences), db(db) {
+    : QDialog(parent), ui(new Ui::PostponeUI), preferences(preferences), db(db) {
   ui->setupUi(this);
   setAttribute(Qt::WA_DeleteOnClose);
   ui->postponeMinutes->setMaximum(preferences->smallEvery->get() *
@@ -32,10 +32,9 @@ PostponeWindow::PostponeWindow(SanePreferences* preferences, BreakDatabase* db,
   onMinutesUpdate(0);
   connect(ui->postponeMinutes, &QSpinBox::valueChanged, this,
           &PostponeWindow::onMinutesUpdate);
-  connect(ui->cancelButton, &QPushButton::pressed, this, &PostponeWindow::close);
   connect(ui->postponeButton, &QPushButton::pressed, this, [this]() {
-    close();
     emit postponeRequested(ui->postponeMinutes->value() * 60);
+    accept();
   });
 }
 

@@ -11,7 +11,7 @@
 #include <QTime>
 #include <QTimeEdit>
 #include <QTimer>
-#include <QWidget>
+#include <QDialog>
 #include <Qt>
 
 #include "core/db.h"
@@ -20,15 +20,14 @@
 
 MeetingWindow::MeetingWindow(SanePreferences* preferences, BreakDatabase* db,
                              QWidget* parent)
-    : QWidget(parent), ui(new Ui::MeetingUI), preferences(preferences), db(db) {
+    : QDialog(parent), ui(new Ui::MeetingUI), preferences(preferences), db(db) {
   ui->setupUi(this);
   setAttribute(Qt::WA_DeleteOnClose);
   connect(ui->endTime, &QTimeEdit::timeChanged, this, &MeetingWindow::onInputUpdate);
   connect(ui->reasonEdit, &QLineEdit::textChanged, this, &MeetingWindow::onInputUpdate);
-  connect(ui->cancelButton, &QPushButton::pressed, this, &MeetingWindow::close);
   connect(ui->confirmButton, &QPushButton::pressed, this, [this]() {
-    close();
     emit meetingRequested(ui->endTime->time(), ui->reasonEdit->text());
+    accept();
   });
   QTime now = QTime::currentTime();
   ui->endTime->setTime(QTime(now.hour(), now.minute()));

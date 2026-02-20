@@ -13,7 +13,7 @@
 #include <QStringList>
 #include <QTime>
 #include <QTimer>
-#include <QWidget>
+#include <QDialog>
 
 #include "core/db.h"
 #include "core/preferences.h"
@@ -22,7 +22,7 @@ namespace Ui {
 class MeetingUI;
 }
 
-class MeetingWindow : public QWidget {
+class MeetingWindow : public QDialog {
   Q_OBJECT
 
  public:

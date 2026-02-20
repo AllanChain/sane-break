@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>PostponeUI</class>
- <widget class="QWidget" name="PostponeUI">
+ <widget class="QDialog" name="PostponeUI">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Postpone</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item alignment="Qt::AlignmentFlag::AlignHCenter">
@@ -41,7 +41,7 @@
         </font>
        </property>
        <property name="text">
-        <string>&amp;#xF293;</string>
+        <string notr="true">&amp;#xF293;</string>
        </property>
        <property name="textFormat">
         <enum>Qt::TextFormat::RichText</enum>
@@ -76,7 +76,7 @@
         </font>
        </property>
        <property name="text">
-        <string>&amp;#xF41F;</string>
+        <string notr="true">&amp;#xF41F;</string>
        </property>
        <property name="textFormat">
         <enum>Qt::TextFormat::RichText</enum>
@@ -171,7 +171,7 @@
         </font>
        </property>
        <property name="text">
-        <string>&amp;#xF33A;</string>
+        <string notr="true">&amp;#xF33A;</string>
        </property>
        <property name="textFormat">
         <enum>Qt::TextFormat::RichText</enum>
@@ -206,7 +206,7 @@
         </font>
        </property>
        <property name="text">
-        <string>&amp;#xF46B;</string>
+        <string notr="true">&amp;#xF46B;</string>
        </property>
        <property name="textFormat">
         <enum>Qt::TextFormat::RichText</enum>
@@ -271,11 +271,28 @@
   <customwidget>
    <class>DynamicLabel</class>
    <extends>QLabel</extends>
-   <header>app/widgets/dynamic-label.h</header>
+   <header>widgets/dynamic-label.h</header>
   </customwidget>
  </customwidgets>
  <resources>
   <include location="../../resources/index.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cancelButton</sender>
+   <signal>clicked()</signal>
+   <receiver>PostponeUI</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>242</x>
+     <y>470</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>242</x>
+     <y>254</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MeetingUI</class>
- <widget class="QWidget" name="MeetingUI">
+ <widget class="QDialog" name="MeetingUI">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Meeting Mode</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item alignment="Qt::AlignmentFlag::AlignHCenter">
@@ -100,7 +100,7 @@
         </font>
        </property>
        <property name="text">
-        <string>&amp;#xF293;</string>
+        <string notr="true">&amp;#xF293;</string>
        </property>
        <property name="textFormat">
         <enum>Qt::TextFormat::RichText</enum>
@@ -135,7 +135,7 @@
         </font>
        </property>
        <property name="text">
-        <string>&amp;#xF46B;</string>
+        <string notr="true">&amp;#xF46B;</string>
        </property>
        <property name="textFormat">
         <enum>Qt::TextFormat::RichText</enum>
@@ -206,5 +206,22 @@
  <resources>
   <include location="../../resources/index.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cancelButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MeetingUI</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>234</x>
+     <y>330</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>234</x>
+     <y>183</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

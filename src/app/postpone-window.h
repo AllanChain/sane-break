@@ -12,8 +12,7 @@
 #include <QString>
 #include <QStringList>
 #include <QTimer>
-#include <QWidget>
-#include <QWindow>
+#include <QDialog>
 
 #include "core/db.h"
 #include "core/preferences.h"
@@ -22,7 +21,7 @@ namespace Ui {
 class PostponeUI;
 }
 
-class PostponeWindow : public QWidget {
+class PostponeWindow : public QDialog {
   Q_OBJECT
 
  public:
