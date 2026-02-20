@@ -786,7 +786,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
               <item row="0" column="1">
                <widget class="QSpinBox" name="postponeMaxMinuteBox">
                 <property name="suffix">
-                 <string>%</string>
+                 <string notr="true">%</string>
                 </property>
                 <property name="value">
                  <number>1</number>
@@ -829,7 +829,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
               <item row="0" column="1">
                <widget class="QSpinBox" name="postponeExtendBreakBox">
                 <property name="suffix">
-                 <string>%</string>
+                 <string notr="true">%</string>
                 </property>
                 <property name="minimum">
                  <number>10</number>

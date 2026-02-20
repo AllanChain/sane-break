@@ -85,6 +85,82 @@
     </message>
 </context>
 <context>
+    <name>DayTimelineWidget</name>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="138"/>
+        <source>Active</source>
+        <translation>活跃</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="140"/>
+        <source>Break</source>
+        <translation>休息</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="142"/>
+        <source>Pause</source>
+        <translation>暂停</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="144"/>
+        <source>Meeting</source>
+        <translation>会议</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="146"/>
+        <source>Focus</source>
+        <translation>专注</translation>
+    </message>
+</context>
+<context>
+    <name>FocusUI</name>
+    <message>
+        <location filename="../../src/app/focus-window.ui" line="14"/>
+        <source>Focus Mode</source>
+        <translation>专注模式</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.ui" line="20"/>
+        <source>&lt;h2&gt;Focus Mode&lt;/h2&gt;</source>
+        <translation>&lt;h2&gt;专注模式&lt;/h2&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.ui" line="55"/>
+        <source>Focus duration</source>
+        <translation>专注时长</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.ui" line="62"/>
+        <source> min</source>
+        <translation> 分钟</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.ui" line="125"/>
+        <source>The break schedule will be temporarily switched to:</source>
+        <translation>休息计划会被暂时调整为：</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.ui" line="142"/>
+        <source>A &lt;b&gt;%1&lt;/b&gt; seconds small break every &lt;b&gt;%2&lt;/b&gt; minutes</source>
+        <translation>每 &lt;b&gt;%2&lt;/b&gt; 分钟一次 &lt;b&gt;%1&lt;/b&gt; 秒的小休息</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.ui" line="159"/>
+        <source>1 in every &lt;b&gt;%2&lt;/b&gt; breaks is a &lt;b&gt;%1&lt;/b&gt; seconds big break</source>
+        <translation>每 &lt;b&gt;%2&lt;/b&gt; 次休息是一次 &lt;b&gt;%1&lt;/b&gt; 秒的大休息</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.ui" line="188"/>
+        <source>Cancel</source>
+        <translation>取消</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.ui" line="201"/>
+        <source>Take a %1 second break to enter focus mode</source>
+        <translation>休息 %1 秒以进入专注模式</translation>
+    </message>
+</context>
+<context>
     <name>LanguageSelect</name>
     <message>
         <location filename="../../src/app/widgets/language-select.cpp" line="67"/>
@@ -104,288 +180,262 @@
     <name>MeetingPrompt</name>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="14"/>
-        <source>Meeting Ended</source>
-        <translation type="unfinished"></translation>
+        <source>Meeting Mode Ended</source>
+        <translation>会议模式结束</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="20"/>
-        <source>&lt;h2&gt;Meeting Ended&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>&lt;h2&gt;Meeting Mode Ended&lt;/h2&gt;</source>
+        <translation>&lt;h2&gt;会议模式结束&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="30"/>
-        <source>Your meeting/presentation has ended. Are you ready to take a break?</source>
-        <translation type="unfinished"></translation>
+        <source>Your meeting/presentation mode has ended. Would you like to take a break?</source>
+        <translation>您会议或演示模式已经结束。准备好休息一下了吗？</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="63"/>
         <source>Break in 5 min</source>
-        <translation type="unfinished"></translation>
+        <translation>5 分钟后休息</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="70"/>
         <source>Not yet (+30 min)</source>
-        <translation type="unfinished"></translation>
+        <translation>不是现在（+30 分钟）</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-prompt.cpp" line="67"/>
+        <location filename="../../src/app/meeting-prompt.ui" line="53"/>
         <source>Break now (%1s)</source>
-        <translation type="unfinished"></translation>
+        <translation>现在休息 (%1s)</translation>
     </message>
 </context>
 <context>
     <name>MeetingUI</name>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
+        <source>Meeting Mode</source>
+        <translation>会议模式</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="20"/>
         <source>&lt;h2&gt;Meeting/Presentation Mode&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;会议/演示 模式&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="55"/>
         <source>It will end at</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/meeting-window.ui" line="103"/>
-        <source>&amp;#xF293;</source>
-        <translation type="unfinished"></translation>
+        <translation>预计结束于</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="116"/>
         <source>No break reminders will show before &lt;b&gt;%1&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/meeting-window.ui" line="138"/>
-        <source>&amp;#xF46B;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt; 之前不会有休息提示</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="151"/>
         <source>We&apos;ll check in with you before showing a break reminder.</source>
-        <translation type="unfinished"></translation>
+        <translation>在显示休息提示前，我们会先与您确认。</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="178"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="191"/>
         <source>Enter Meeting/Presentation Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>进入会议/演示模式</translation>
     </message>
 </context>
 <context>
     <name>PostponeUI</name>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
+        <source>Postpone</source>
+        <translation>推迟</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="20"/>
         <source>&lt;h2&gt;Postponing this break&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;推迟此次休息&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/postpone-window.ui" line="44"/>
-        <source>&amp;#xF293;</source>
-        <translation type="unfinished"></translation>
+        <location filename="../../src/app/postpone-window.ui" line="27"/>
+        <source>Postponing this break by &lt;b&gt;%1&lt;/b&gt; minutes will:</source>
+        <translation>推迟此次休息 &lt;b&gt;%1&lt;/b&gt; 分钟将：</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="57"/>
         <source>Shorten your next work session by &lt;b&gt;%1&lt;/b&gt; minutes;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/postpone-window.ui" line="79"/>
-        <source>&amp;#xF41F;</source>
-        <translation type="unfinished"></translation>
+        <translation>缩短下次工作时段&lt;b&gt;%1&lt;/b&gt;分钟；</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="92"/>
         <source>Extend the break by &lt;b&gt;%1&lt;/b&gt; seconds.</source>
-        <translation type="unfinished"></translation>
+        <translation>延长 &lt;b&gt;%1&lt;/b&gt; 秒休息时间。</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="122"/>
         <source>Postpone by</source>
-        <translation type="unfinished"></translation>
+        <translation>推迟时长</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="129"/>
         <source> min</source>
-        <translation type="unfinished"> 分钟</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/postpone-window.ui" line="174"/>
-        <source>&amp;#xF33A;</source>
-        <translation type="unfinished"></translation>
+        <translation> 分钟</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="187"/>
         <source>You won&apos;t be able to postpone this break again. It will start automatically at the scheduled time.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/postpone-window.ui" line="209"/>
-        <source>&amp;#xF46B;</source>
-        <translation type="unfinished"></translation>
+        <translation>你将无法再次推迟这次休息。它将在预定时间自动开始。</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="222"/>
         <source>You can still start the break early. If you do, the adjustments above will be recalculated based on the actual time.</source>
-        <translation type="unfinished"></translation>
+        <translation>你仍可提前开始休息。若提前开始，上述调整将根据实际时间重新计算。</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="249"/>
         <source>Keep original schedule</source>
-        <translation type="unfinished"></translation>
+        <translation>保持原计划</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="262"/>
         <source>Do the adjustments</source>
-        <translation type="unfinished"></translation>
+        <translation>应用修改</translation>
     </message>
 </context>
 <context>
     <name>PrefWindow</name>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="131"/>
+        <location filename="../../src/app/pref-window.ui" line="126"/>
         <source>Pause</source>
         <translation>暂停</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="166"/>
+        <location filename="../../src/app/pref-window.ui" line="161"/>
         <source>General</source>
         <translation>通用</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="188"/>
+        <location filename="../../src/app/pref-window.ui" line="183"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1368"/>
-        <location filename="../../src/app/pref-window.ui" line="1406"/>
+        <location filename="../../src/app/pref-window.ui" line="1626"/>
+        <location filename="../../src/app/pref-window.ui" line="1664"/>
         <source>Bell before breaks</source>
         <translation>休息前提示音</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1337"/>
-        <location filename="../../src/app/pref-window.ui" line="1434"/>
+        <location filename="../../src/app/pref-window.ui" line="1595"/>
+        <location filename="../../src/app/pref-window.ui" line="1692"/>
         <source>Bell after breaks</source>
         <translation>休息后提示音</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="656"/>
+        <location filename="../../src/app/pref-window.ui" line="914"/>
         <source>Time in seconds before forcing break after work reminder appears.</source>
         <extracomment>Tooltip for &quot;Flash break prompt for&quot; config</extracomment>
         <translation>休息提醒弹出后允许继续工作的时长（秒），超时则强制休息。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="80"/>
+        <location filename="../../src/app/pref-window.ui" line="75"/>
         <source>Schedule</source>
         <translation>休息计划</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="99"/>
+        <location filename="../../src/app/pref-window.ui" line="94"/>
         <source>Reminder</source>
         <translation>提示窗口</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="147"/>
+        <location filename="../../src/app/pref-window.ui" line="142"/>
         <source>Sound</source>
         <translation>声音</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="377"/>
+        <location filename="../../src/app/pref-window.ui" line="379"/>
+        <location filename="../../src/app/pref-window.ui" line="625"/>
         <source>Length of work time between breaks</source>
         <extracomment>Tooltip for &quot;Break every&quot; config (small break)</extracomment>
         <translation>两次休息之间的工作时间</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="380"/>
-        <location filename="../../src/app/pref-window.ui" line="417"/>
+        <location filename="../../src/app/pref-window.ui" line="382"/>
+        <location filename="../../src/app/pref-window.ui" line="429"/>
+        <location filename="../../src/app/pref-window.ui" line="628"/>
+        <location filename="../../src/app/pref-window.ui" line="675"/>
         <source>Break every</source>
         <translation>休息提示间隔</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="414"/>
+        <location filename="../../src/app/pref-window.ui" line="426"/>
+        <location filename="../../src/app/pref-window.ui" line="672"/>
         <source>Every so many breaks will be a big break</source>
         <extracomment>Tooltip for &quot;Break every&quot; config (big break)</extracomment>
         <translation>每这么多次休息开始大休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="499"/>
-        <source>&lt;h3&gt;Postpone&lt;/h3&gt;</source>
-        <translation>&lt;h3&gt;推迟&lt;/h3&gt;</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/pref-window.ui" line="666"/>
+        <location filename="../../src/app/pref-window.ui" line="924"/>
         <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
         <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
         <translation>休息提示开始后，在给定时间内持续处于空闲状态，则将自动进入强制休息状态，不会因为用户输入而重新计时。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="669"/>
+        <location filename="../../src/app/pref-window.ui" line="927"/>
         <source>Confirm break after</source>
         <translation>确认休息时间</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="740"/>
+        <location filename="../../src/app/pref-window.ui" line="998"/>
         <source>Close windows right after small break ends</source>
         <translation>小休息结束后立即关闭窗口</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="747"/>
+        <location filename="../../src/app/pref-window.ui" line="1005"/>
         <source>Close windows right after big break ends</source>
         <translation>大休息结束后立即关闭窗口</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="773"/>
+        <location filename="../../src/app/pref-window.ui" line="1031"/>
         <source>Flash speed</source>
         <translation>闪烁速度</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="828"/>
-        <location filename="../../src/app/pref-window.ui" line="861"/>
+        <location filename="../../src/app/pref-window.ui" line="1086"/>
+        <location filename="../../src/app/pref-window.ui" line="1119"/>
         <source>(One line per message)</source>
         <translation>（每行一条提示文本）</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="835"/>
+        <location filename="../../src/app/pref-window.ui" line="1093"/>
         <source>Big break prompt messages:</source>
         <translation>大休息提示文本：</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="845"/>
+        <location filename="../../src/app/pref-window.ui" line="1103"/>
         <source>Small break prompt messages:</source>
         <translation>小休息提示文本：</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="724"/>
+        <location filename="../../src/app/pref-window.ui" line="982"/>
         <source>Max number of force break exits</source>
         <translation>退出强制休息次数上限</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="115"/>
+        <location filename="../../src/app/pref-window.ui" line="110"/>
         <source>Interface</source>
         <translation>界面</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="731"/>
+        <location filename="../../src/app/pref-window.ui" line="989"/>
         <source> times</source>
         <translation> 次</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="870"/>
+        <location filename="../../src/app/pref-window.ui" line="1128"/>
         <source>&lt;h3&gt;Components to Show&lt;/h3&gt;
 
 &lt;p&gt;User interface components to show in the prompt and full-screen window.&lt;/p&gt;</source>
@@ -394,84 +444,84 @@
 &lt;p&gt;在提示小窗和全屏窗口中显示的用户界面组件。&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="895"/>
-        <location filename="../../src/app/pref-window.ui" line="941"/>
+        <location filename="../../src/app/pref-window.ui" line="1153"/>
+        <location filename="../../src/app/pref-window.ui" line="1199"/>
         <source>Time when break ends</source>
         <translation>休息结束时间</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="916"/>
-        <location filename="../../src/app/pref-window.ui" line="962"/>
+        <location filename="../../src/app/pref-window.ui" line="1174"/>
+        <location filename="../../src/app/pref-window.ui" line="1220"/>
         <source>Countdown timer</source>
         <translation>倒计时</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="888"/>
-        <location filename="../../src/app/pref-window.ui" line="934"/>
+        <location filename="../../src/app/pref-window.ui" line="1146"/>
+        <location filename="../../src/app/pref-window.ui" line="1192"/>
         <source>Progress bar</source>
         <translation>进度条</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="902"/>
-        <location filename="../../src/app/pref-window.ui" line="948"/>
+        <location filename="../../src/app/pref-window.ui" line="1160"/>
+        <location filename="../../src/app/pref-window.ui" line="1206"/>
         <source>Clock</source>
         <translation>时钟</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="909"/>
-        <location filename="../../src/app/pref-window.ui" line="955"/>
+        <location filename="../../src/app/pref-window.ui" line="1167"/>
+        <location filename="../../src/app/pref-window.ui" line="1213"/>
         <source>Buttons</source>
         <translation>按钮</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="971"/>
+        <location filename="../../src/app/pref-window.ui" line="1229"/>
         <source>&lt;h3&gt;Color Theme&lt;/h3&gt;
 All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
         <translation>&lt;h3&gt;颜色主题&lt;/h3&gt;
 所有颜色的格式均为 &lt;code&gt;#AARRGGBB&lt;/code&gt;。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1055"/>
+        <location filename="../../src/app/pref-window.ui" line="1313"/>
         <source>Big break</source>
         <translation>大休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1024"/>
+        <location filename="../../src/app/pref-window.ui" line="1282"/>
         <source>Message</source>
         <translation>提示文本</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1062"/>
+        <location filename="../../src/app/pref-window.ui" line="1320"/>
         <source>Small break</source>
         <translation>小休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1031"/>
+        <location filename="../../src/app/pref-window.ui" line="1289"/>
         <source>Background</source>
         <translation>背景</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1038"/>
+        <location filename="../../src/app/pref-window.ui" line="1296"/>
         <source>Count down</source>
         <translation>倒计时</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1102"/>
+        <location filename="../../src/app/pref-window.ui" line="1360"/>
         <source>&lt;h3&gt;Pause Conditions&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;暂停条件&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1255"/>
+        <location filename="../../src/app/pref-window.ui" line="1513"/>
         <source>Long pause threshold</source>
         <translation>长时间暂停阈值</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1309"/>
+        <location filename="../../src/app/pref-window.ui" line="1567"/>
         <source>Short pause threshold</source>
         <translation>短时间暂停阈值</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1540"/>
+        <location filename="../../src/app/pref-window.ui" line="1798"/>
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
@@ -481,17 +531,17 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
 定。如果休息持续超过 2 分钟，则屏幕必然会自动锁定。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1545"/>
+        <location filename="../../src/app/pref-window.ui" line="1803"/>
         <source>Automatic screen lock after break start</source>
         <translation>休息开始一段时间后自动锁屏</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1491"/>
+        <location filename="../../src/app/pref-window.ui" line="1749"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;帮我们翻译！&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1662"/>
+        <location filename="../../src/app/pref-window.ui" line="1920"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -508,156 +558,181 @@ v%1
 &lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="323"/>
+        <location filename="../../src/app/pref-window.ui" line="325"/>
+        <location filename="../../src/app/pref-window.ui" line="571"/>
         <source>Duration of small breaks (in seconds)</source>
         <extracomment>Tooltip for &quot;Break length&quot; config (small break)</extracomment>
         <translation>小休息持续多少秒</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="487"/>
+        <location filename="../../src/app/pref-window.ui" line="499"/>
+        <location filename="../../src/app/pref-window.ui" line="745"/>
         <source>Duration of big breaks (in seconds)</source>
         <extracomment>Tooltip for &quot;Break length&quot; config (big break)</extracomment>
         <translation>大休息持续多少秒</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="758"/>
+        <location filename="../../src/app/pref-window.ui" line="1016"/>
         <source>&lt;h3&gt;Prompt Appearance&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;提示小窗外观&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1334"/>
-        <location filename="../../src/app/pref-window.ui" line="1365"/>
+        <location filename="../../src/app/pref-window.ui" line="1592"/>
+        <location filename="../../src/app/pref-window.ui" line="1623"/>
         <source>Try restart Sane Break if no sound</source>
         <translation>如果没有声音，请尝试重启 Sane Break</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1351"/>
-        <location filename="../../src/app/pref-window.ui" line="1358"/>
-        <location filename="../../src/app/pref-window.ui" line="1413"/>
-        <location filename="../../src/app/pref-window.ui" line="1420"/>
+        <location filename="../../src/app/pref-window.ui" line="1609"/>
+        <location filename="../../src/app/pref-window.ui" line="1616"/>
+        <location filename="../../src/app/pref-window.ui" line="1671"/>
+        <location filename="../../src/app/pref-window.ui" line="1678"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1111"/>
+        <location filename="../../src/app/pref-window.ui" line="1369"/>
         <source>Sane Break will pause if it detects no activity for this many minutes</source>
         <extracomment>Tooltip for &quot;Pause if idle for&quot; config</extracomment>
         <translation>在这么多时间内没有活动，Sane Break 将暂停计时</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1114"/>
+        <location filename="../../src/app/pref-window.ui" line="1372"/>
         <source>Pause if idle for</source>
         <translation>空闲一段时间后暂停</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="273"/>
-        <location filename="../../src/app/pref-window.ui" line="1325"/>
+        <location filename="../../src/app/pref-window.ui" line="275"/>
+        <location filename="../../src/app/pref-window.ui" line="521"/>
+        <location filename="../../src/app/pref-window.ui" line="1583"/>
         <source>&lt;h3&gt;Small Breaks&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;小休息&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="333"/>
-        <location filename="../../src/app/pref-window.ui" line="424"/>
-        <location filename="../../src/app/pref-window.ui" line="1155"/>
-        <location filename="../../src/app/pref-window.ui" line="1239"/>
-        <location filename="../../src/app/pref-window.ui" line="1293"/>
+        <location filename="../../src/app/pref-window.ui" line="335"/>
+        <location filename="../../src/app/pref-window.ui" line="436"/>
+        <location filename="../../src/app/pref-window.ui" line="581"/>
+        <location filename="../../src/app/pref-window.ui" line="682"/>
+        <location filename="../../src/app/pref-window.ui" line="1413"/>
+        <location filename="../../src/app/pref-window.ui" line="1497"/>
+        <location filename="../../src/app/pref-window.ui" line="1551"/>
         <source> min</source>
         <translation> 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="282"/>
-        <location filename="../../src/app/pref-window.ui" line="615"/>
-        <location filename="../../src/app/pref-window.ui" line="704"/>
+        <location filename="../../src/app/pref-window.ui" line="284"/>
+        <location filename="../../src/app/pref-window.ui" line="530"/>
+        <location filename="../../src/app/pref-window.ui" line="873"/>
+        <location filename="../../src/app/pref-window.ui" line="962"/>
         <source> sec</source>
         <translation> 秒钟</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="326"/>
-        <location filename="../../src/app/pref-window.ui" line="490"/>
+        <location filename="../../src/app/pref-window.ui" line="328"/>
+        <location filename="../../src/app/pref-window.ui" line="502"/>
+        <location filename="../../src/app/pref-window.ui" line="574"/>
+        <location filename="../../src/app/pref-window.ui" line="748"/>
         <source>Break length</source>
         <translation>休息时长</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1446"/>
+        <location filename="../../src/app/pref-window.ui" line="1704"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: You can use local sound files with URLs like &lt;code&gt;file:/D:sound.mp3&lt;/code&gt;  (Windows) or &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</source>
         <translation>&lt;strong&gt;提示&lt;/strong&gt;：你可以这样使用本地文件 &lt;code&gt;file:/D:\sound.mp3&lt;/code&gt;  (Windows) 或 &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux)。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="389"/>
-        <location filename="../../src/app/pref-window.ui" line="1384"/>
+        <location filename="../../src/app/pref-window.ui" line="391"/>
+        <location filename="../../src/app/pref-window.ui" line="637"/>
+        <location filename="../../src/app/pref-window.ui" line="1642"/>
         <source>&lt;h3&gt;Big Breaks&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;大休息&lt;/h3&gt;</translation>
     </message>
     <message>
+        <location filename="../../src/app/pref-window.ui" line="268"/>
+        <source>&lt;h2&gt;Normal Schedule&lt;/h2&gt;</source>
+        <translation>&lt;h2&gt;正常休息计划&lt;/h2&gt;</translation>
+    </message>
+    <message>
         <location filename="../../src/app/pref-window.ui" line="398"/>
+        <location filename="../../src/app/pref-window.ui" line="644"/>
+        <source>Enabled</source>
+        <translation>启用</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="410"/>
+        <location filename="../../src/app/pref-window.ui" line="656"/>
         <source> breaks</source>
         <translation> 次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="506"/>
+        <location filename="../../src/app/pref-window.ui" line="511"/>
+        <source>&lt;h2&gt;Focus Schedule&lt;/h2&gt;When you activate Focus Mode from the tray, breaks will follow this schedule instead. Use it for shorter breaks when you need to stay  focused.</source>
+        <translation>&lt;h2&gt;专注休息计划&lt;/h2&gt;在托盘中启用专注模式将按此计划进行休息。您可以用它来减少休息时长以保持专注。</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="757"/>
+        <source>&lt;h2&gt;Postpone&lt;/h2&gt;</source>
+        <translation>&lt;h2&gt;推迟&lt;/h2&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="764"/>
         <source>Maximum postpone time as a percentage of your work session (&lt;b&gt;%1&lt;/b&gt; min)</source>
-        <translation type="unfinished"></translation>
+        <translation>最大延迟时间占工作时段的百分比（&lt;b&gt;%1&lt;/b&gt; 分钟）</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="531"/>
-        <location filename="../../src/app/pref-window.ui" line="574"/>
-        <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/pref-window.ui" line="543"/>
+        <location filename="../../src/app/pref-window.ui" line="801"/>
         <source>Postponing breaks adds extra time to your next long break, proportional to how much time you postponed. You can adjust the multiplier for how much extra time is added.</source>
-        <translation type="unfinished"></translation>
+        <translation>推迟休息时间会为下次长休息增加额外时长，该时长与推迟的时长成正比。您可以调整系数数来控制额外增加的时长。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="599"/>
+        <location filename="../../src/app/pref-window.ui" line="857"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
 &lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;提醒行为&lt;/h3&gt;
 &lt;p&gt;Sane Break 会显示一个持续 &lt;b&gt;%1&lt;/b&gt; 秒的小型提示窗。若您在此期间停止活动，或选择继续超过这个时间，界面将转换至全屏模式。休息期间，若持续 &lt;b&gt;%2&lt;/b&gt; 秒无操作，Sane Break 会锁定全屏状态。若在锁定前恢复活动，提示窗会暂时缩成小窗口，但当再次无操作或到时间后，界面将重新转换至全屏。&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="659"/>
+        <location filename="../../src/app/pref-window.ui" line="917"/>
         <source>Show break prompt for</source>
         <translation>提示窗口显示时间</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="879"/>
+        <location filename="../../src/app/pref-window.ui" line="1137"/>
         <source>&lt;h4&gt;Small break&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;小休息&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="925"/>
+        <location filename="../../src/app/pref-window.ui" line="1183"/>
         <source>&lt;h4&gt;Big break&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;大休息&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1078"/>
+        <location filename="../../src/app/pref-window.ui" line="1336"/>
         <source>&lt;p&gt;To preview break windows, save all changes first. The preview begins with a 2-second flashing prompt, followed by a 4-second full-screen break. A small break window will appear first, then a big break window.&lt;/p&gt;</source>
         <translation>&lt;p&gt;预览休息窗口前，请先保存所有设置。预览时，会先显示2秒提示小窗，随后进入4秒全屏窗口。先显示小休息窗口，再显示大休息窗口。&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1088"/>
+        <location filename="../../src/app/pref-window.ui" line="1346"/>
         <source>Preview Break Windows</source>
         <translation>预览休息窗口</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1173"/>
+        <location filename="../../src/app/pref-window.ui" line="1431"/>
         <source>Pause on battery</source>
         <translation>电池供电时暂停</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1180"/>
+        <location filename="../../src/app/pref-window.ui" line="1438"/>
         <source>Pause breaks when any of the following program is running:</source>
         <translation>当以下程序运行时暂停休息提示：</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1187"/>
+        <location filename="../../src/app/pref-window.ui" line="1445"/>
         <source>(Write one program name per line)</source>
         <translation>（每一行写一个程序名）</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1194"/>
+        <location filename="../../src/app/pref-window.ui" line="1452"/>
         <source>&lt;h3&gt;Reset Break Schedule After Pause&lt;/h3&gt;
 &lt;p&gt;Sane Break will adjust the break schedule after pausing:&lt;/p&gt;
 &lt;ul&gt;
@@ -672,57 +747,57 @@ v%1
 &lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1484"/>
+        <location filename="../../src/app/pref-window.ui" line="1742"/>
         <source>Configuration file</source>
         <translation>配置文件</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1514"/>
+        <location filename="../../src/app/pref-window.ui" line="1772"/>
         <source>Database file</source>
         <translation>数据库文件</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1560"/>
+        <location filename="../../src/app/pref-window.ui" line="1818"/>
         <source>Launch Sane Break at start up</source>
         <translation>开机自动启动 Sane Break</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1686"/>
+        <location filename="../../src/app/pref-window.ui" line="1944"/>
         <source>Get the Source Code</source>
         <translation>获取源代码</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1715"/>
+        <location filename="../../src/app/pref-window.ui" line="1973"/>
         <source>Help Us Translate!</source>
         <translation>帮助我们翻译！</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1748"/>
+        <location filename="../../src/app/pref-window.ui" line="2006"/>
         <source>Revert to Last Saved</source>
         <translation>恢复上次设置</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1462"/>
+        <location filename="../../src/app/pref-window.ui" line="1720"/>
         <source>Language</source>
         <translation>语言</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1501"/>
+        <location filename="../../src/app/pref-window.ui" line="1759"/>
         <source>Change of language will take effect after app restart.</source>
         <translation>改变语言将在重启应用后生效。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1706"/>
+        <location filename="../../src/app/pref-window.ui" line="1964"/>
         <source>Third-party Libraries Licenses</source>
         <translation>第三方库许可</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1755"/>
+        <location filename="../../src/app/pref-window.ui" line="2013"/>
         <source>Defaults</source>
         <translation>恢复默认</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1778"/>
+        <location filename="../../src/app/pref-window.ui" line="2036"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
@@ -730,9 +805,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="403"/>
-        <location filename="../../src/app/pref-window.cpp" line="404"/>
-        <location filename="../../src/app/pref-window.cpp" line="405"/>
+        <location filename="../../src/app/pref-window.cpp" line="457"/>
+        <location filename="../../src/app/pref-window.cpp" line="458"/>
+        <location filename="../../src/app/pref-window.cpp" line="459"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n 分钟</numerusform>
@@ -740,61 +815,61 @@ v%1
     </message>
     <message numerus="yes">
         <location filename="../../src/app/pref-window.cpp" line="167"/>
-        <location filename="../../src/app/pref-window.cpp" line="179"/>
+        <location filename="../../src/app/pref-window.cpp" line="207"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>每 %n 分钟</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="402"/>
+        <location filename="../../src/app/pref-window.cpp" line="456"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n 秒</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="401"/>
+        <location filename="../../src/app/pref-window.cpp" line="455"/>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="412"/>
+        <location filename="../../src/app/pref-window.cpp" line="466"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>在中键托盘图标后，立刻开始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="417"/>
+        <location filename="../../src/app/pref-window.cpp" line="471"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>在双击托盘图标后，立刻开始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="495"/>
+        <location filename="../../src/app/pref-window.cpp" line="549"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="496"/>
+        <location filename="../../src/app/pref-window.cpp" line="550"/>
         <source>Discard</source>
         <translation>放弃</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="497"/>
+        <location filename="../../src/app/pref-window.cpp" line="551"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="377"/>
+        <location filename="../../src/app/pref-window.cpp" line="431"/>
         <source>Setting autostart failed</source>
         <translation>设置开机自启失败</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="492"/>
+        <location filename="../../src/app/pref-window.cpp" line="546"/>
         <source>The preferences have been modified.</source>
         <translation>偏好设置已被修改。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="493"/>
+        <location filename="../../src/app/pref-window.cpp" line="547"/>
         <source>Do you want to save your changes?</source>
         <translation>是否保存修改？</translation>
     </message>
@@ -830,42 +905,53 @@ v%1
 <context>
     <name>SaneBreakApp</name>
     <message>
-        <location filename="../../src/app/app.cpp" line="111"/>
-        <source>You have already postponed once in this session.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/app.cpp" line="112"/>
+        <location filename="../../src/app/app.cpp" line="154"/>
         <source>No further postpones are allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>不能再次推迟。</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="114"/>
+        <location filename="../../src/app/app.cpp" line="147"/>
+        <location filename="../../src/app/app.cpp" line="156"/>
         <source>OK</source>
-        <translation type="unfinished">好的</translation>
+        <translation>好的</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="148"/>
+        <location filename="../../src/app/app.cpp" line="144"/>
+        <source>Cannot postpone during focus mode.</source>
+        <translation>专注模式不允许推迟休息。</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/app.cpp" line="145"/>
+        <source>End focus mode first if you want to postpone.</source>
+        <translation>如需推迟，先退出专注模式。</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/app.cpp" line="153"/>
+        <source>You have already postponed this break once.</source>
+        <translation>这次休息您已经推迟过一次了。</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/app.cpp" line="184"/>
         <source>Are you sure to quit Sane Break?</source>
         <translation>确定退出 Sane Break？</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="149"/>
+        <location filename="../../src/app/app.cpp" line="185"/>
         <source>You can postpone the breaks instead.</source>
         <translation>你可以推迟休息而非退出。</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="151"/>
+        <location filename="../../src/app/app.cpp" line="187"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="152"/>
+        <location filename="../../src/app/app.cpp" line="188"/>
         <source>Postpone</source>
-        <translation type="unfinished">推迟</translation>
+        <translation>推迟</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="153"/>
+        <location filename="../../src/app/app.cpp" line="189"/>
         <source>Yes</source>
         <translation>是的</translation>
     </message>
@@ -873,14 +959,89 @@ v%1
 <context>
     <name>SanePreferences</name>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="55"/>
+        <location filename="../../src/core/preferences.cpp" line="62"/>
         <source>Time for a small break</source>
         <translation>小休息时间</translation>
     </message>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="58"/>
+        <location filename="../../src/core/preferences.cpp" line="65"/>
         <source>Time for a big break</source>
         <translation>大休息时间</translation>
+    </message>
+</context>
+<context>
+    <name>StatsWindow</name>
+    <message>
+        <location filename="../../src/app/stats-window.ui" line="20"/>
+        <source>Statistics</source>
+        <translation>统计</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/stats-window.ui" line="31"/>
+        <source>Today</source>
+        <translation>今天</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/stats-window.ui" line="37"/>
+        <location filename="../../src/app/stats-window.ui" line="81"/>
+        <source>%1 breaks (%2 completed)</source>
+        <translation>休息 %1 次（完成 %2 次）</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/stats-window.ui" line="44"/>
+        <location filename="../../src/app/stats-window.ui" line="88"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="319"/>
+        <source>Break time: %1</source>
+        <translation>休息时间：%1</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/stats-window.ui" line="51"/>
+        <location filename="../../src/app/stats-window.ui" line="95"/>
+        <source>%1 postponed</source>
+        <translation>推迟 %1 次</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/stats-window.ui" line="58"/>
+        <location filename="../../src/app/stats-window.ui" line="102"/>
+        <source>Active usage: %1</source>
+        <translation>活跃使用时长：%1</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/stats-window.ui" line="65"/>
+        <location filename="../../src/app/stats-window.ui" line="109"/>
+        <source>Total usage: %1</source>
+        <translation>总计使用时长：%1</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/stats-window.ui" line="75"/>
+        <source>Last 7 Days</source>
+        <translation>最近 7 天</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/stats-window.ui" line="121"/>
+        <source>&lt;h3&gt;Daily Breakdown&lt;/h3&gt;</source>
+        <translation>&lt;h3&gt;每日详情&lt;/h3&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/stats-window.cpp" line="26"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="320"/>
+        <source>%1h %2m</source>
+        <translation>%1 小时 %2 分钟</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/stats-window.cpp" line="27"/>
+        <source>%1m</source>
+        <translation>%1 分钟</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="315"/>
+        <source>Breaks: %1 (%2 completed)</source>
+        <translation>%1 次休息（%2 次完成）</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="324"/>
+        <source>Postpones: %1</source>
+        <translation>%1 次推迟</translation>
     </message>
 </context>
 <context>
@@ -890,33 +1051,50 @@ v%1
         <source>Postpone</source>
         <translation>推迟</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../../src/app/tray.cpp" line="80"/>
+        <location filename="../../src/app/tray.cpp" line="81"/>
+        <source>%n more minutes</source>
+        <translation>
+            <numerusform>再加 %n 分钟</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/app/tray.cpp" line="82"/>
+        <source>%n more hour</source>
+        <translation>
+            <numerusform>再加 %n 小时</numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="77"/>
+        <location filename="../../src/app/tray.cpp" line="83"/>
         <source>Enable Break</source>
         <translation>启用休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="84"/>
+        <location filename="../../src/app/tray.cpp" line="90"/>
         <source>Preferences</source>
         <translation>偏好设置</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="87"/>
+        <location filename="../../src/app/tray.cpp" line="95"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="139"/>
+        <location filename="../../src/app/tray.cpp" line="127"/>
+        <location filename="../../src/app/tray.cpp" line="155"/>
         <source>big break</source>
         <translation>大休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="139"/>
+        <location filename="../../src/app/tray.cpp" line="128"/>
+        <location filename="../../src/app/tray.cpp" line="155"/>
         <source>small break</source>
         <translation>小休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="93"/>
+        <location filename="../../src/app/tray.cpp" line="101"/>
         <source>Next break after %1</source>
         <translation>%1 后休息</translation>
     </message>
@@ -928,71 +1106,71 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="59"/>
         <source>Meeting Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>会议模式</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="62"/>
-        <location filename="../../src/app/tray.cpp" line="119"/>
+        <source>Focus Mode</source>
+        <translation>专注模式</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tray.cpp" line="64"/>
+        <source>End Focus &amp;&amp; Break</source>
+        <translation>退出专注模式并休息</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tray.cpp" line="68"/>
+        <location filename="../../src/app/tray.cpp" line="142"/>
         <source>End Meeting &amp;&amp; Break Now</source>
-        <translation type="unfinished"></translation>
+        <translation>退出会议模式并休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="66"/>
+        <location filename="../../src/app/tray.cpp" line="72"/>
         <source>Extend Meeting</source>
-        <translation type="unfinished"></translation>
+        <translation>延长会议</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="74"/>
-        <source>+15 min</source>
-        <translation type="unfinished"></translation>
+        <location filename="../../src/app/tray.cpp" line="92"/>
+        <source>Statistics</source>
+        <translation>统计</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="75"/>
-        <source>+30 min</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/tray.cpp" line="76"/>
-        <source>+1 hour</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/tray.cpp" line="95"/>
+        <location filename="../../src/app/tray.cpp" line="103"/>
         <source>Next big break after %1</source>
         <translation>%1 后大休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="115"/>
+        <location filename="../../src/app/tray.cpp" line="125"/>
+        <source>focus: %1 %2 (%3/%4)</source>
+        <translation>专注：%1 %2 (%3/%4)</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tray.cpp" line="138"/>
         <source>Meeting until %1</source>
-        <translation type="unfinished"></translation>
+        <translation>会议持续到 %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="116"/>
+        <location filename="../../src/app/tray.cpp" line="139"/>
         <source>Meeting mode — until %1 (%2 left)</source>
-        <translation type="unfinished"></translation>
+        <translation>会议模式持续到 %1 (剩余 %2)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="120"/>
+        <location filename="../../src/app/tray.cpp" line="143"/>
         <source>Meeting ended — waiting</source>
-        <translation type="unfinished"></translation>
+        <translation>会议模式结束，等待中</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="127"/>
-        <source>+%1 (until %2)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/app/tray.cpp" line="131"/>
+        <location filename="../../src/app/tray.cpp" line="147"/>
         <source>Paused on battery</source>
         <translation>因电池供电而暂停</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="133"/>
+        <location filename="../../src/app/tray.cpp" line="149"/>
         <source>Paused on app running</source>
         <translation>因特定应用运行而暂停</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="135"/>
+        <location filename="../../src/app/tray.cpp" line="151"/>
         <source>Paused on idle</source>
         <translation>因用户空闲而暂停</translation>
     </message>

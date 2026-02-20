@@ -4,9 +4,9 @@
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../../../src/app/pref-window.cpp" line="403"/>
-        <location filename="../../../../src/app/pref-window.cpp" line="404"/>
-        <location filename="../../../../src/app/pref-window.cpp" line="405"/>
+        <location filename="../../../../src/app/pref-window.cpp" line="457"/>
+        <location filename="../../../../src/app/pref-window.cpp" line="458"/>
+        <location filename="../../../../src/app/pref-window.cpp" line="459"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -15,7 +15,7 @@
     </message>
     <message numerus="yes">
         <location filename="../../../../src/app/pref-window.cpp" line="167"/>
-        <location filename="../../../../src/app/pref-window.cpp" line="179"/>
+        <location filename="../../../../src/app/pref-window.cpp" line="207"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>Every %n min</numerusform>
@@ -23,11 +23,31 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../../../src/app/pref-window.cpp" line="402"/>
+        <location filename="../../../../src/app/pref-window.cpp" line="456"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec</numerusform>
             <numerusform>%n sec</numerusform>
+        </translation>
+    </message>
+</context>
+<context>
+    <name>StatusTrayWindow</name>
+    <message numerus="yes">
+        <location filename="../../../../src/app/tray.cpp" line="80"/>
+        <location filename="../../../../src/app/tray.cpp" line="81"/>
+        <source>%n more minutes</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../../../src/app/tray.cpp" line="82"/>
+        <source>%n more hour</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
 </context>

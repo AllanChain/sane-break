@@ -135,7 +135,7 @@ QColor DayTimelineItem::colorForType(const QString& type) const {
 
 QString DayTimelineItem::labelForType(const QString& type) const {
   if (type == "normal")
-    return QCoreApplication::translate("DayTimelineWidget", "Normal");
+    return QCoreApplication::translate("DayTimelineWidget", "Active");
   if (type == "break")
     return QCoreApplication::translate("DayTimelineWidget", "Break");
   if (type == "pause")

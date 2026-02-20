@@ -24,7 +24,7 @@
    <item>
     <widget class="DynamicLabel" name="totalMinutesLabel">
      <property name="text">
-      <string notr="true">Postponing this break by &lt;b&gt;%1&lt;/b&gt; minutes will:</string>
+      <string>Postponing this break by &lt;b&gt;%1&lt;/b&gt; minutes will:</string>
      </property>
     </widget>
    </item>

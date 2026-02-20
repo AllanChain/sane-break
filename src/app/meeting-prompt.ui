@@ -11,13 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Meeting Ended</string>
+   <string>Meeting Mode Ended</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item alignment="Qt::AlignmentFlag::AlignHCenter">
     <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>&lt;h2&gt;Meeting Ended&lt;/h2&gt;</string>
+      <string>&lt;h2&gt;Meeting Mode Ended&lt;/h2&gt;</string>
      </property>
      <property name="margin">
       <number>6</number>
@@ -27,7 +27,7 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Your meeting/presentation has ended. Are you ready to take a break?</string>
+      <string>Your meeting/presentation mode has ended. Would you like to take a break?</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>

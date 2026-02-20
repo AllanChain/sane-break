@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Focus Mode</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item alignment="Qt::AlignmentFlag::AlignHCenter">
@@ -109,7 +109,7 @@
           </font>
          </property>
          <property name="text">
-          <string>&amp;#xF293;</string>
+          <string notr="true">&amp;#xF293;</string>
          </property>
          <property name="textFormat">
           <enum>Qt::TextFormat::RichText</enum>
@@ -156,7 +156,7 @@
        <item>
         <widget class="DynamicLabel" name="bigScheduleLabel">
          <property name="text">
-          <string>A &lt;b&gt;%1&lt;/b&gt; seconds big break every &lt;b&gt;%2&lt;/b&gt; small breaks</string>
+          <string>1 in every &lt;b&gt;%2&lt;/b&gt; breaks is a &lt;b&gt;%1&lt;/b&gt; seconds big break</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>
