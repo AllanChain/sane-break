@@ -1,17 +1,17 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2026 Sane Break developers
+// Copyright (C) 2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "app/meeting-window.h"
 
 #include <QButtonGroup>
+#include <QDialog>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QTime>
 #include <QTimeEdit>
 #include <QTimer>
-#include <QDialog>
 #include <Qt>
 
 #include "core/db.h"

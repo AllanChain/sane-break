@@ -193,11 +193,10 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
     ui->playBigStart->setEnabled(enabled);
     ui->playBigEnd->setEnabled(enabled);
   };
-  connect(
-      controllers->add(PrefGroup::Schedule,
-                       new PrefController<QCheckBox, bool>(ui->bigBreakEnabled,
-                                                           preferences->bigBreakEnabled)),
-      &PrefControllerBase::explictSync, this, syncBigBreakEnabled);
+  connect(controllers->add(PrefGroup::Schedule,
+                           new PrefController<QCheckBox, bool>(
+                               ui->bigBreakEnabled, preferences->bigBreakEnabled)),
+          &PrefControllerBase::explictSync, this, syncBigBreakEnabled);
   connect(controllers->add(PrefGroup::Schedule,
                            new PrefController<QSpinBox, int>(ui->bigBreakAfterBox,
                                                              preferences->bigAfter)),
@@ -218,8 +217,8 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
 
   // Focus schedule
   controllers->add(PrefGroup::Schedule,
-                   new PrefController<QSpinBox, int>(
-                       ui->focusSmallBreakEveryBox, preferences->focusSmallEvery, 60));
+                   new PrefController<QSpinBox, int>(ui->focusSmallBreakEveryBox,
+                                                     preferences->focusSmallEvery, 60));
   controllers->add(PrefGroup::Schedule,
                    new PrefController<QSpinBox, int>(ui->focusSmallBreakForBox,
                                                      preferences->focusSmallFor));
@@ -230,17 +229,16 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
     ui->focusBigBreakForBox->setEnabled(enabled);
     ui->focusBigBreakForSlider->setEnabled(enabled);
   };
-  connect(controllers->add(PrefGroup::Schedule,
-                           new PrefController<QCheckBox, bool>(
-                               ui->focusBigBreakEnabled,
-                               preferences->focusBigBreakEnabled)),
+  connect(controllers->add(PrefGroup::Schedule, new PrefController<QCheckBox, bool>(
+                                                    ui->focusBigBreakEnabled,
+                                                    preferences->focusBigBreakEnabled)),
           &PrefControllerBase::explictSync, this, syncFocusBigBreakEnabled);
   controllers->add(PrefGroup::Schedule,
                    new PrefController<QSpinBox, int>(ui->focusBigBreakAfterBox,
                                                      preferences->focusBigAfter));
   controllers->add(PrefGroup::Schedule,
-                   new PrefController<QSpinBox, int>(
-                       ui->focusBigBreakForBox, preferences->focusBigFor, 60));
+                   new PrefController<QSpinBox, int>(ui->focusBigBreakForBox,
+                                                     preferences->focusBigFor, 60));
 
   /***************************************************************************
    *                                                                         *

@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2025-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "core/db.h"
@@ -136,8 +136,7 @@ int BreakDatabase::openSpan(const QString& type, const QJsonObject& data,
 
   QSqlQuery query(m_db);
   if (startTime.isValid()) {
-    query.prepare(
-        "INSERT INTO spans (type, started_at, data) VALUES (?, ?, ?)");
+    query.prepare("INSERT INTO spans (type, started_at, data) VALUES (?, ?, ?)");
     query.addBindValue(type);
     query.addBindValue(startTime.toUTC().toString(Qt::ISODate));
     query.addBindValue(QJsonDocument(data).toJson(QJsonDocument::Compact));
@@ -170,29 +169,26 @@ void BreakDatabase::closeSpan(int spanId, const QJsonObject& extraData,
       endTime.isValid() ? endTime.toUTC().toString(Qt::ISODate) : QString();
 
   if (extraData.isEmpty()) {
-    query.prepare(
-        "UPDATE spans SET ended_at = COALESCE(ended_at, ?) WHERE id = ?");
+    query.prepare("UPDATE spans SET ended_at = COALESCE(ended_at, ?) WHERE id = ?");
     query.addBindValue(
-        endTimeStr.isEmpty() ? QVariant(QDateTime::currentDateTimeUtc().toString(
-                                   Qt::ISODate))
-                             : QVariant(endTimeStr));
+        endTimeStr.isEmpty()
+            ? QVariant(QDateTime::currentDateTimeUtc().toString(Qt::ISODate))
+            : QVariant(endTimeStr));
     query.addBindValue(spanId);
   } else {
     query.prepare(
         "UPDATE spans SET ended_at = COALESCE(ended_at, ?), "
         "data = json_patch(data, ?) WHERE id = ?");
     query.addBindValue(
-        endTimeStr.isEmpty() ? QVariant(QDateTime::currentDateTimeUtc().toString(
-                                   Qt::ISODate))
-                             : QVariant(endTimeStr));
-    query.addBindValue(
-        QJsonDocument(extraData).toJson(QJsonDocument::Compact));
+        endTimeStr.isEmpty()
+            ? QVariant(QDateTime::currentDateTimeUtc().toString(Qt::ISODate))
+            : QVariant(endTimeStr));
+    query.addBindValue(QJsonDocument(extraData).toJson(QJsonDocument::Compact));
     query.addBindValue(spanId);
   }
 
   if (!query.exec()) {
-    qWarning() << "Failed to close span:" << spanId
-               << query.lastError().text();
+    qWarning() << "Failed to close span:" << spanId << query.lastError().text();
   }
 }
 
@@ -386,10 +382,8 @@ QList<DayTimelineData> BreakDatabase::queryDailyTimelines(QDate from, QDate to) 
 
   if (query.exec()) {
     while (query.next()) {
-      QDateTime start =
-          QDateTime::fromString(query.value(0).toString(), Qt::ISODate);
-      QDateTime end =
-          QDateTime::fromString(query.value(1).toString(), Qt::ISODate);
+      QDateTime start = QDateTime::fromString(query.value(0).toString(), Qt::ISODate);
+      QDateTime end = QDateTime::fromString(query.value(1).toString(), Qt::ISODate);
       QString type = query.value(2).toString();
       QString reason = query.value(3).toString();
       if (!start.isValid() || !end.isValid() || start >= end) continue;
@@ -433,18 +427,15 @@ QList<DayTimelineData> BreakDatabase::queryDailyTimelines(QDate from, QDate to) 
 
   // Sort spans within each day by start time
   for (auto& day : dayMap) {
-    std::sort(day.spans.begin(), day.spans.end(),
-              [](const TimelineSpan& a, const TimelineSpan& b) {
-                return a.start < b.start;
-              });
-    std::sort(day.focusSpans.begin(), day.focusSpans.end(),
-              [](const TimelineSpan& a, const TimelineSpan& b) {
-                return a.start < b.start;
-              });
-    std::sort(day.events.begin(), day.events.end(),
-              [](const TimelineEvent& a, const TimelineEvent& b) {
-                return a.time < b.time;
-              });
+    std::sort(
+        day.spans.begin(), day.spans.end(),
+        [](const TimelineSpan& a, const TimelineSpan& b) { return a.start < b.start; });
+    std::sort(
+        day.focusSpans.begin(), day.focusSpans.end(),
+        [](const TimelineSpan& a, const TimelineSpan& b) { return a.start < b.start; });
+    std::sort(
+        day.events.begin(), day.events.end(),
+        [](const TimelineEvent& a, const TimelineEvent& b) { return a.time < b.time; });
   }
 
   for (auto it = dayMap.constBegin(); it != dayMap.constEnd(); ++it) {
@@ -452,4 +443,3 @@ QList<DayTimelineData> BreakDatabase::queryDailyTimelines(QDate from, QDate to) 
   }
   return results;
 }
-

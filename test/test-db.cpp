@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2026 Sane Break developers
+// Copyright (C) 2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <QDate>
@@ -8,13 +8,15 @@
 #include <QObject>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QString>
 #include <QTest>
+#include <Qt>
 
 #include "core/db.h"
 
 // Helper to insert an event with a specific UTC timestamp
-static void insertEvent(QSqlDatabase& db, const QString& timestamp,
-                        const QString& type, const QString& data = "{}") {
+static void insertEvent(QSqlDatabase& db, const QString& timestamp, const QString& type,
+                        const QString& data = "{}") {
   QSqlQuery query(db);
   query.prepare("INSERT INTO events (created_at, type, data) VALUES (?, ?, ?)");
   query.addBindValue(timestamp);
@@ -24,13 +26,11 @@ static void insertEvent(QSqlDatabase& db, const QString& timestamp,
 }
 
 // Helper to insert a span with specific UTC timestamps
-static void insertSpan(QSqlDatabase& db, const QString& type,
-                       const QString& startedAt, const QString& endedAt = {},
-                       const QString& data = "{}") {
+static void insertSpan(QSqlDatabase& db, const QString& type, const QString& startedAt,
+                       const QString& endedAt = {}, const QString& data = "{}") {
   QSqlQuery query(db);
   if (endedAt.isEmpty()) {
-    query.prepare(
-        "INSERT INTO spans (type, started_at, data) VALUES (?, ?, ?)");
+    query.prepare("INSERT INTO spans (type, started_at, data) VALUES (?, ?, ?)");
     query.addBindValue(type);
     query.addBindValue(startedAt);
     query.addBindValue(data);
@@ -76,12 +76,9 @@ class TestDb : public QObject {
     QString ts = day.toString(Qt::ISODate) + " 12:00:00";
 
     // 2 small breaks, 1 big break, 2 completed (normal-exit = true)
-    insertSpan(sqlDb, "break", ts, ts,
-               R"({"type":"small","normal-exit":true})");
-    insertSpan(sqlDb, "break", ts, ts,
-               R"({"type":"small","normal-exit":false})");
-    insertSpan(sqlDb, "break", ts, ts,
-               R"({"type":"big","normal-exit":true})");
+    insertSpan(sqlDb, "break", ts, ts, R"({"type":"small","normal-exit":true})");
+    insertSpan(sqlDb, "break", ts, ts, R"({"type":"small","normal-exit":false})");
+    insertSpan(sqlDb, "break", ts, ts, R"({"type":"big","normal-exit":true})");
 
     QDateTime utcNoon(day, QTime(12, 0, 0), QTimeZone::UTC);
     QDate localDate = utcNoon.toLocalTime().date();

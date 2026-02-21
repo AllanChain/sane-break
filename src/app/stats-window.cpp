@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2026 Sane Break developers
+// Copyright (C) 2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "stats-window.h"
@@ -14,8 +14,8 @@
 #include <QList>
 #include <QLocale>
 #include <QMap>
-#include <QString>
 #include <QPushButton>
+#include <QString>
 #include <QWidget>
 #include <Qt>
 #include <algorithm>
@@ -27,8 +27,7 @@
 static QString formatDuration(int totalSeconds) {
   int hours = totalSeconds / 3600;
   int minutes = (totalSeconds % 3600) / 60;
-  if (hours > 0)
-    return StatsWindow::tr("%1h %2m").arg(hours).arg(minutes);
+  if (hours > 0) return StatsWindow::tr("%1h %2m").arg(hours).arg(minutes);
   return StatsWindow::tr("%1m").arg(minutes);
 }
 
@@ -65,9 +64,8 @@ StatsWindow::StatsWindow(BreakDatabase* db, QWidget* parent)
     int col = (i % 3) * 2;  // each item takes 2 columns (swatch + label)
     auto* swatch = new QFrame();
     swatch->setFixedSize(10, 10);
-    swatch->setStyleSheet(
-        QString("background-color: %1; border-radius: 2px;")
-            .arg(items[i].first.name()));
+    swatch->setStyleSheet(QString("background-color: %1; border-radius: 2px;")
+                              .arg(items[i].first.name()));
     auto* text = new QLabel(items[i].second);
     legendGrid->addWidget(swatch, row, col, Qt::AlignRight | Qt::AlignVCenter);
     legendGrid->addWidget(text, row, col + 1, Qt::AlignLeft | Qt::AlignVCenter);
@@ -143,9 +141,8 @@ void StatsWindow::updateWeekLabel() {
                          locale.toString(weekEnd, "MMM d"));
 }
 
-void StatsWindow::populateDailyBreakdown(
-    const QList<DayTimelineData>& timelines,
-    const QList<DailyBreakStats>& allStats) {
+void StatsWindow::populateDailyBreakdown(const QList<DayTimelineData>& timelines,
+                                         const QList<DailyBreakStats>& allStats) {
   // Build lookup map
   QMap<QDate, DailyBreakStats> statsMap;
   for (const auto& s : allStats) statsMap[s.date] = s;
@@ -172,14 +169,13 @@ void StatsWindow::populateDailyBreakdown(
 
   // Fallback or round to hour boundaries
   if (rangeStart >= rangeEnd) {
-    rangeStart = 8 * 3600;   // 08:00
-    rangeEnd = 18 * 3600;    // 18:00
+    rangeStart = 8 * 3600;  // 08:00
+    rangeEnd = 18 * 3600;   // 18:00
   } else {
-    rangeStart = (rangeStart / 3600) * 3600;          // round down to hour
-    rangeEnd = ((rangeEnd + 3599) / 3600) * 3600;     // round up to hour
+    rangeStart = (rangeStart / 3600) * 3600;       // round down to hour
+    rangeEnd = ((rangeEnd + 3599) / 3600) * 3600;  // round up to hour
     rangeEnd = std::min(rangeEnd, 86400);
   }
 
-  ui->timelineView->populate(timelines, statsMap, rangeStart, rangeEnd,
-                              m_weekStart);
+  ui->timelineView->populate(timelines, statsMap, rangeStart, rangeEnd, m_weekStart);
 }

@@ -1,10 +1,11 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2026 Sane Break developers
+// Copyright (C) 2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
 
 #include <QColor>
+#include <QDialog>
 #include <QLabel>
 #include <QLineEdit>
 #include <QList>
@@ -12,7 +13,6 @@
 #include <QString>
 #include <QStringList>
 #include <QTimer>
-#include <QDialog>
 
 #include "core/db.h"
 #include "core/preferences.h"

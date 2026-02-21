@@ -12,3 +12,4 @@ Diagnostics:
     - qtversionchecks\.h
     - qcontainerfwd\.h
     - qtypes\.h
+    - qtestcase\.h

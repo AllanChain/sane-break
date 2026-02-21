@@ -1,10 +1,11 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2026 Sane Break developers
+// Copyright (C) 2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "app/postpone-window.h"
 
 #include <QButtonGroup>
+#include <QDialog>
 #include <QLabel>
 #include <QLineEdit>
 #include <QList>
@@ -14,7 +15,6 @@
 #include <QTime>
 #include <QTimeEdit>
 #include <QTimer>
-#include <QDialog>
 #include <Qt>
 
 #include "core/db.h"
@@ -47,7 +47,7 @@ void PostponeWindow::onMinutesUpdate(int minutes) {
                               ? preferences->bigFor->get()
                               : preferences->smallFor->get();
   int breakExtensionSeconds = preferences->postponeExtendBreakPercent->get() * minutes *
-                              60 * breakForReference /
-                              preferences->smallEvery->get() / 100;
+                              60 * breakForReference / preferences->smallEvery->get() /
+                              100;
   ui->breakExtensionLabel->setArgs({breakExtensionSeconds});
 }

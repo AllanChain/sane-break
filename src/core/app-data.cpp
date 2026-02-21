@@ -42,11 +42,11 @@ void AppData::finishAndStartNextCycle() {
   emit changed();
 };
 int AppData::breakDuration() {
-  int totalSeconds = breakType() == BreakType::Big ? effectiveBigFor()
-                                                   : effectiveSmallFor();
+  int totalSeconds =
+      breakType() == BreakType::Big ? effectiveBigFor() : effectiveSmallFor();
   // If postponed, calculate extra seconds. Add zero otherwise.
-  int breakForReference = effectiveBigBreakEnabled() ? effectiveBigFor()
-                                                     : effectiveSmallFor();
+  int breakForReference =
+      effectiveBigBreakEnabled() ? effectiveBigFor() : effectiveSmallFor();
   totalSeconds += preferences->postponeExtendBreakPercent->get() *
                   m_postponeData.secondsPostponed() * breakForReference /
                   effectiveSmallEvery() / 100;

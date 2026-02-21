@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2026 Sane Break developers
+// Copyright (C) 2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "widgets/timeline-view.h"
@@ -41,7 +41,7 @@ static QColor colorForType(const QString& type) {
   if (type == "meeting") return QColor("#60a5fa");   // blue-400
   if (type == "focus") return QColor("#a78bfa");     // violet-400
   if (type == "postpone") return QColor("#f87171");  // red-400
-  return QColor(128, 128, 128, 80);                   // semi-transparent gray
+  return QColor(128, 128, 128, 80);                  // semi-transparent gray
 }
 
 static QString labelForType(const QString& type) {
@@ -78,8 +78,8 @@ void TimeAxisItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* /*op
                          QWidget* widget) {
   painter->setRenderHint(QPainter::Antialiasing, false);
 
-  QColor textColor = widget ? widget->palette().color(QPalette::WindowText)
-                            : QColor("#6b7280");
+  QColor textColor =
+      widget ? widget->palette().color(QPalette::WindowText) : QColor("#6b7280");
 
   // The painter's transform includes the view scale; extract it so we can
   // counter-scale text and adapt tick density to actual pixel width.
@@ -286,8 +286,7 @@ void TimelineGraphicsView::updateFixedHeight() {
 
 void TimelineGraphicsView::populate(const QList<DayTimelineData>& timelines,
                                     const QMap<QDate, DailyBreakStats>& statsMap,
-                                    int rangeStart, int rangeEnd,
-                                    QDate weekStart) {
+                                    int rangeStart, int rangeEnd, QDate weekStart) {
   m_rows.clear();
   m_zoomFactor = 1.0;
   m_lastHoveredDate = QDate();
