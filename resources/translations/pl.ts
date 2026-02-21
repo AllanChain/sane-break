@@ -130,6 +130,11 @@
         <translation type="unfinished">&lt;h2&gt;Tryb skupienia&lt;/h2&gt;</translation>
     </message>
     <message>
+        <location filename="../../src/app/focus-window.ui" line="27"/>
+        <source>Briefly describe what are you working on:</source>
+        <translation type="unfinished">Krótko opisz, nad czym pracujesz:</translation>
+    </message>
+    <message>
         <location filename="../../src/app/focus-window.ui" line="55"/>
         <source>Focus duration</source>
         <translation type="unfinished">Czas trwania trybu skupienia</translation>
@@ -201,12 +206,12 @@
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="63"/>
         <source>Break in %1 minutes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Przerwa za %1 minut</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="70"/>
         <source>Not yet (extend %1 minutes)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Jeszcze nie (przedłuż o %1 minut)</translation>
     </message>
     <message>
         <source>Break in 5 min</source>
@@ -233,6 +238,11 @@
         <location filename="../../src/app/meeting-window.ui" line="20"/>
         <source>&lt;h2&gt;Meeting/Presentation Mode&lt;/h2&gt;</source>
         <translation type="unfinished">&lt;h2&gt;Tryb spotkania/prezentacji&lt;/h2&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.ui" line="27"/>
+        <source>Briefly describe this meeting/presentation:</source>
+        <translation type="unfinished">Krótko opisz to spotkanie/prezentację:</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="55"/>
@@ -1166,18 +1176,18 @@ v%1
         <location filename="../../src/app/tray.cpp" line="81"/>
         <source>%n more minutes</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n minutę więcej</numerusform>
+            <numerusform>%n minuty więcej</numerusform>
+            <numerusform>%n minut więcej</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/tray.cpp" line="82"/>
         <source>%n more hour</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n godzinę więcej</numerusform>
+            <numerusform>%n godziny więcej</numerusform>
+            <numerusform>%n godzin więcej</numerusform>
         </translation>
     </message>
     <message>
@@ -1198,7 +1208,7 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="137"/>
         <source>Exit meeting (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zakończ spotkanie (%1)</translation>
     </message>
     <message>
         <source>Meeting until %1</source>

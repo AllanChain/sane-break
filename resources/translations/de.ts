@@ -130,6 +130,11 @@
         <translation type="unfinished">&lt;h2&gt;Fokusmodus&lt;/h2&gt;</translation>
     </message>
     <message>
+        <location filename="../../src/app/focus-window.ui" line="27"/>
+        <source>Briefly describe what are you working on:</source>
+        <translation type="unfinished">Beschreiben Sie kurz, woran Sie arbeiten:</translation>
+    </message>
+    <message>
         <location filename="../../src/app/focus-window.ui" line="55"/>
         <source>Focus duration</source>
         <translation type="unfinished">Fokussierungs-Dauer</translation>
@@ -201,12 +206,12 @@
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="63"/>
         <source>Break in %1 minutes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pause in %1 Minuten</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="70"/>
         <source>Not yet (extend %1 minutes)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Noch nicht (um %1 Minuten verlängern)</translation>
     </message>
     <message>
         <source>Break in 5 min</source>
@@ -233,6 +238,11 @@
         <location filename="../../src/app/meeting-window.ui" line="20"/>
         <source>&lt;h2&gt;Meeting/Presentation Mode&lt;/h2&gt;</source>
         <translation type="unfinished">&lt;h2&gt;Besprechungs-/Präsentationsmodus&lt;/h2&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.ui" line="27"/>
+        <source>Briefly describe this meeting/presentation:</source>
+        <translation type="unfinished">Beschreiben Sie kurz diese Besprechung/Präsentation:</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="55"/>
@@ -1186,7 +1196,7 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="137"/>
         <source>Exit meeting (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Besprechung beenden (%1)</translation>
     </message>
     <message>
         <source>Meeting until %1</source>

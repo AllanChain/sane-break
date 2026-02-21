@@ -130,6 +130,11 @@
         <translation type="unfinished">&lt;h2&gt;Режим фокуса&lt;/h2&gt;</translation>
     </message>
     <message>
+        <location filename="../../src/app/focus-window.ui" line="27"/>
+        <source>Briefly describe what are you working on:</source>
+        <translation type="unfinished">Кратко опишите, над чем вы работаете:</translation>
+    </message>
+    <message>
         <location filename="../../src/app/focus-window.ui" line="55"/>
         <source>Focus duration</source>
         <translation type="unfinished">Продолжительность режима фокуса</translation>
@@ -201,12 +206,12 @@
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="63"/>
         <source>Break in %1 minutes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Перерыв через %1 минут</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="70"/>
         <source>Not yet (extend %1 minutes)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ещё нет (продлить на %1 минуту)</translation>
     </message>
     <message>
         <source>Break in 5 min</source>
@@ -233,6 +238,11 @@
         <location filename="../../src/app/meeting-window.ui" line="20"/>
         <source>&lt;h2&gt;Meeting/Presentation Mode&lt;/h2&gt;</source>
         <translation type="unfinished">&lt;h2&gt;Режим встречи/презентации&lt;/h2&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.ui" line="27"/>
+        <source>Briefly describe this meeting/presentation:</source>
+        <translation type="unfinished">Кратко опишите эту встречу/презентацию:</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="55"/>
@@ -1099,12 +1109,12 @@ v%1
         <location filename="../../src/app/stats-window.cpp" line="31"/>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="334"/>
         <source>%1h %2m</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 ч %2 мин</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.cpp" line="32"/>
         <source>%1m</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 мин</translation>
     </message>
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="329"/>
@@ -1198,18 +1208,18 @@ v%1
         <location filename="../../src/app/tray.cpp" line="81"/>
         <source>%n more minutes</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n ещё минуту</numerusform>
+            <numerusform>%n ещё минуты</numerusform>
+            <numerusform>%n ещё минут</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/tray.cpp" line="82"/>
         <source>%n more hour</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n ещё час</numerusform>
+            <numerusform>%n ещё часа</numerusform>
+            <numerusform>%n ещё часов</numerusform>
         </translation>
     </message>
     <message>
@@ -1230,7 +1240,7 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="137"/>
         <source>Exit meeting (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Выйти из встречи (%1)</translation>
     </message>
     <message>
         <source>Meeting until %1</source>

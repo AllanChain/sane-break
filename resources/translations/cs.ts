@@ -130,6 +130,11 @@
         <translation type="unfinished">&lt;h2&gt;Režim zaměření&lt;/h2&gt;</translation>
     </message>
     <message>
+        <location filename="../../src/app/focus-window.ui" line="27"/>
+        <source>Briefly describe what are you working on:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/app/focus-window.ui" line="55"/>
         <source>Focus duration</source>
         <translation type="unfinished">Délka režimu zaměření</translation>
@@ -233,6 +238,11 @@
         <location filename="../../src/app/meeting-window.ui" line="20"/>
         <source>&lt;h2&gt;Meeting/Presentation Mode&lt;/h2&gt;</source>
         <translation type="unfinished">&lt;h2&gt;Režim schůzky/přednášky&lt;/h2&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.ui" line="27"/>
+        <source>Briefly describe this meeting/presentation:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="55"/>

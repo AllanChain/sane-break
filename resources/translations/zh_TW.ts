@@ -130,6 +130,11 @@
         <translation>&lt;h2&gt;專注模式&lt;/h2&gt;</translation>
     </message>
     <message>
+        <location filename="../../src/app/focus-window.ui" line="27"/>
+        <source>Briefly describe what are you working on:</source>
+        <translation>簡要說明正在進行的工作：</translation>
+    </message>
+    <message>
         <location filename="../../src/app/focus-window.ui" line="55"/>
         <source>Focus duration</source>
         <translation>專注時長</translation>
@@ -225,6 +230,11 @@
         <location filename="../../src/app/meeting-window.ui" line="20"/>
         <source>&lt;h2&gt;Meeting/Presentation Mode&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;會議/演示 模式&lt;/h2&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.ui" line="27"/>
+        <source>Briefly describe this meeting/presentation:</source>
+        <translation>簡要說明這次會議/演示的內容：</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="55"/>
@@ -982,10 +992,6 @@ v%1
         <translation>統計</translation>
     </message>
     <message>
-        <source>Today</source>
-        <translation type="vanished">今天</translation>
-    </message>
-    <message>
         <location filename="../../src/app/stats-window.ui" line="32"/>
         <source>%1 breaks (%2 completed)</source>
         <translation>休息 %1 次（完成 %2 次）</translation>
@@ -1010,14 +1016,6 @@ v%1
         <location filename="../../src/app/stats-window.ui" line="60"/>
         <source>Total usage: %1</source>
         <translation>總計使用時長：%1</translation>
-    </message>
-    <message>
-        <source>Last 7 Days</source>
-        <translation type="vanished">最近 7 天</translation>
-    </message>
-    <message>
-        <source>&lt;h3&gt;Daily Breakdown&lt;/h3&gt;</source>
-        <translation type="vanished">&lt;h3&gt;每日詳情&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.cpp" line="31"/>

@@ -142,6 +142,11 @@
         <translation type="unfinished">&lt;h2&gt;Mode concentration&lt;/h2&gt;</translation>
     </message>
     <message>
+        <location filename="../../src/app/focus-window.ui" line="27"/>
+        <source>Briefly describe what are you working on:</source>
+        <translation type="unfinished">Décrivez brièvement ce sur quoi vous travaillez :</translation>
+    </message>
+    <message>
         <location filename="../../src/app/focus-window.ui" line="55"/>
         <source>Focus duration</source>
         <translation type="unfinished">Durée du mode concentration</translation>
@@ -213,12 +218,12 @@
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="63"/>
         <source>Break in %1 minutes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pause dans %1 minutes</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="70"/>
         <source>Not yet (extend %1 minutes)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pas encore (prolonger de %1 minutes)</translation>
     </message>
     <message>
         <source>Break in 5 min</source>
@@ -245,6 +250,11 @@
         <location filename="../../src/app/meeting-window.ui" line="20"/>
         <source>&lt;h2&gt;Meeting/Presentation Mode&lt;/h2&gt;</source>
         <translation type="unfinished">&lt;h2&gt;Mode réunion/présentation&lt;/h2&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.ui" line="27"/>
+        <source>Briefly describe this meeting/presentation:</source>
+        <translation type="unfinished">Décrivez brièvement cette réunion/présentation :</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="55"/>
@@ -1322,7 +1332,7 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="137"/>
         <source>Exit meeting (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Quitter la réunion (%1)</translation>
     </message>
     <message>
         <source>Meeting until %1</source>

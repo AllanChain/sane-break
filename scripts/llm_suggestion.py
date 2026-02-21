@@ -208,15 +208,16 @@ def translate_ts_file(ts_file: Path):
                     file=sys.stderr,
                 )
                 continue
-            if len(translation["translation"]) != 2:
+            numerus_elements = translation_element.getElementsByTagName("numerusform")
+            if len(translation["translation"]) != len(numerus_elements):
                 print(
-                    f"Skip (expected 2 numerus forms, got {len(translation['translation'])}): {source}",
+                    f"Skip (expected {len(numerus_elements)} numerus forms. "
+                    f"Got {len(translation['translation'])}): {source}",
                     file=sys.stderr,
                 )
                 continue
             for numerus_element, numerus_form in zip(
-                translation_element.getElementsByTagName("numerusform"),
-                translation["translation"],
+                numerus_elements, translation["translation"]
             ):
                 set_text(numerus_element, numerus_form)
         else:

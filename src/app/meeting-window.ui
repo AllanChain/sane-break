@@ -24,7 +24,7 @@
    <item>
     <widget class="QLabel" name="label_1">
      <property name="text">
-      <string notr="true">Briefly describe this meeting/presentation:</string>
+      <string>Briefly describe this meeting/presentation:</string>
      </property>
     </widget>
    </item>

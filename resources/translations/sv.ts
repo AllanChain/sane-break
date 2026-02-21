@@ -130,6 +130,11 @@
         <translation type="unfinished">&lt;h2&gt;Fokusläge&lt;/h2&gt;</translation>
     </message>
     <message>
+        <location filename="../../src/app/focus-window.ui" line="27"/>
+        <source>Briefly describe what are you working on:</source>
+        <translation type="unfinished">Beskriv kort vad du arbetar med:</translation>
+    </message>
+    <message>
         <location filename="../../src/app/focus-window.ui" line="55"/>
         <source>Focus duration</source>
         <translation type="unfinished">Fokustid</translation>
@@ -201,12 +206,12 @@
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="63"/>
         <source>Break in %1 minutes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rast om %1 minuter</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="70"/>
         <source>Not yet (extend %1 minutes)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Inte än (förläng %1 minuter)</translation>
     </message>
     <message>
         <source>Break in 5 min</source>
@@ -233,6 +238,11 @@
         <location filename="../../src/app/meeting-window.ui" line="20"/>
         <source>&lt;h2&gt;Meeting/Presentation Mode&lt;/h2&gt;</source>
         <translation type="unfinished">&lt;h2&gt;Mötes-/presentationsläge&lt;/h2&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.ui" line="27"/>
+        <source>Briefly describe this meeting/presentation:</source>
+        <translation type="unfinished">Beskriv kort detta möte/presentation:</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="55"/>
@@ -1060,12 +1070,12 @@ v%1
         <location filename="../../src/app/stats-window.cpp" line="31"/>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="334"/>
         <source>%1h %2m</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 tim %2 min</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.cpp" line="32"/>
         <source>%1m</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 min</translation>
     </message>
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="329"/>
@@ -1188,7 +1198,7 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="137"/>
         <source>Exit meeting (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Avsluta möte (%1)</translation>
     </message>
     <message>
         <source>Meeting until %1</source>

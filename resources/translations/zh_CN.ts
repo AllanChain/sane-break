@@ -130,6 +130,11 @@
         <translation>&lt;h2&gt;专注模式&lt;/h2&gt;</translation>
     </message>
     <message>
+        <location filename="../../src/app/focus-window.ui" line="27"/>
+        <source>Briefly describe what are you working on:</source>
+        <translation>简要说明正在进行的工作：</translation>
+    </message>
+    <message>
         <location filename="../../src/app/focus-window.ui" line="55"/>
         <source>Focus duration</source>
         <translation>专注时长</translation>
@@ -225,6 +230,11 @@
         <location filename="../../src/app/meeting-window.ui" line="20"/>
         <source>&lt;h2&gt;Meeting/Presentation Mode&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;会议/演示 模式&lt;/h2&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.ui" line="27"/>
+        <source>Briefly describe this meeting/presentation:</source>
+        <translation>简要说明这次会议/演示的内容：</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="55"/>
