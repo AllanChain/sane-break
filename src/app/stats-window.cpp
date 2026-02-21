@@ -15,6 +15,7 @@
 #include <QLocale>
 #include <QMap>
 #include <QString>
+#include <QPushButton>
 #include <QWidget>
 #include <Qt>
 #include <algorithm>
@@ -31,11 +32,28 @@ static QString formatDuration(int totalSeconds) {
   return StatsWindow::tr("%1m").arg(minutes);
 }
 
+QDate StatsWindow::weekStartForDate(QDate date) {
+  int dow = date.dayOfWeek();  // 1=Mon .. 7=Sun
+  int first = QLocale().firstDayOfWeek();
+  int diff = (dow - first + 7) % 7;
+  return date.addDays(-diff);
+}
+
 StatsWindow::StatsWindow(BreakDatabase* db, QWidget* parent)
     : QWidget(parent), ui(new Ui::StatsWindow), m_db(db) {
   ui->setupUi(this);
   setAttribute(Qt::WA_DeleteOnClose);
   setWindowIcon(QIcon(":/images/icon.png"));
+
+  m_weekStart = weekStartForDate(QDate::currentDate());
+  m_displayedDate = QDate::currentDate();
+
+  connect(ui->prevWeekButton, &QPushButton::clicked, this,
+          [this]() { navigateWeek(-1); });
+  connect(ui->nextWeekButton, &QPushButton::clicked, this,
+          [this]() { navigateWeek(1); });
+  connect(ui->timelineView, &TimelineGraphicsView::dayHovered, this,
+          &StatsWindow::updateDayDetail);
 
   // Build legend below the timeline (2 rows, 3 per row)
   auto* legendGrid = new QGridLayout();
@@ -54,12 +72,9 @@ StatsWindow::StatsWindow(BreakDatabase* db, QWidget* parent)
     legendGrid->addWidget(swatch, row, col, Qt::AlignRight | Qt::AlignVCenter);
     legendGrid->addWidget(text, row, col + 1, Qt::AlignLeft | Qt::AlignVCenter);
   }
-  auto* legendWrapper = new QHBoxLayout();
-  legendWrapper->addStretch();
-  legendWrapper->addLayout(legendGrid);
-  legendWrapper->addStretch();
-  // Insert after timelineView (index 3 in main layout)
-  ui->main->insertLayout(3, legendWrapper);
+  ui->legendLayout->addStretch();
+  ui->legendLayout->addLayout(legendGrid);
+  ui->legendLayout->addStretch();
 
   refreshData();
 }
@@ -70,62 +85,62 @@ bool StatsWindow::event(QEvent* event) {
 }
 
 void StatsWindow::refreshData() {
-  QDate today = QDate::currentDate();
-  QDate weekAgo = today.addDays(-6);
-  auto breakStats = m_db->queryDailyBreakStats(weekAgo, today);
-  auto usageStats = m_db->queryDailyUsageStats(weekAgo, today);
-  auto timelines = m_db->queryDailyTimelines(weekAgo, today);
+  QDate weekEnd = m_weekStart.addDays(6);
+  auto breakStats = m_db->queryDailyBreakStats(m_weekStart, weekEnd);
+  auto usageStats = m_db->queryDailyUsageStats(m_weekStart, weekEnd);
+  auto timelines = m_db->queryDailyTimelines(m_weekStart, weekEnd);
 
-  populateSummaryCards(breakStats, usageStats);
+  // Cache for hover lookup
+  m_breakStatsMap.clear();
+  for (const auto& s : breakStats) m_breakStatsMap[s.date] = s;
+  m_usageStatsMap.clear();
+  for (const auto& s : usageStats) m_usageStatsMap[s.date] = s;
+
   populateDailyBreakdown(timelines, breakStats);
+  updateDayDetail(m_displayedDate);
+  updateWeekLabel();
+
+  // Disable next button when viewing the current week
+  QDate currentWeekStart = weekStartForDate(QDate::currentDate());
+  ui->nextWeekButton->setEnabled(m_weekStart < currentWeekStart);
 }
 
 StatsWindow::~StatsWindow() { delete ui; }
 
-void StatsWindow::populateSummaryCards(const QList<DailyBreakStats>& allStats,
-                                       const QList<DailyUsageStats>& usageStats) {
+void StatsWindow::navigateWeek(int delta) {
+  m_weekStart = m_weekStart.addDays(delta * 7);
   QDate today = QDate::currentDate();
-
-  DailyBreakStats todayStats;
-  todayStats.date = today;
-  DailyBreakStats weekStats;
-
-  for (const auto& day : allStats) {
-    weekStats.smallBreaks += day.smallBreaks;
-    weekStats.bigBreaks += day.bigBreaks;
-    weekStats.completedBreaks += day.completedBreaks;
-    weekStats.totalBreakSeconds += day.totalBreakSeconds;
-    weekStats.postponeCount += day.postponeCount;
-    if (day.date == today) {
-      todayStats = day;
-    }
+  QDate weekEnd = m_weekStart.addDays(6);
+  if (today >= m_weekStart && today <= weekEnd) {
+    m_displayedDate = today;
+  } else {
+    m_displayedDate = weekEnd;
   }
+  refreshData();
+}
 
-  int todayTotal = todayStats.smallBreaks + todayStats.bigBreaks;
-  ui->todayBreaksLabel->setArgs({todayTotal, todayStats.completedBreaks});
-  ui->todayTimeLabel->setArgs({formatDuration(todayStats.totalBreakSeconds)});
-  ui->todayPostponeLabel->setArgs({todayStats.postponeCount});
+void StatsWindow::updateDayDetail(QDate date) {
+  m_displayedDate = date;
 
-  int weekTotal = weekStats.smallBreaks + weekStats.bigBreaks;
-  ui->weekBreaksLabel->setArgs({weekTotal, weekStats.completedBreaks});
-  ui->weekTimeLabel->setArgs({formatDuration(weekStats.totalBreakSeconds)});
-  ui->weekPostponeLabel->setArgs({weekStats.postponeCount});
+  QLocale locale;
+  ui->dayDetailGroup->setTitle(locale.toString(date, "dddd, MMM d"));
 
-  // Usage stats
-  DailyUsageStats todayUsage;
-  DailyUsageStats weekUsage;
-  for (const auto& day : usageStats) {
-    weekUsage.activeSeconds += day.activeSeconds;
-    weekUsage.totalSeconds += day.totalSeconds;
-    if (day.date == today) {
-      todayUsage = day;
-    }
-  }
+  DailyBreakStats stats = m_breakStatsMap.value(date);
+  int totalBreaks = stats.smallBreaks + stats.bigBreaks;
+  ui->dayBreaksLabel->setArgs({totalBreaks, stats.completedBreaks});
+  ui->dayTimeLabel->setArgs({formatDuration(stats.totalBreakSeconds)});
+  ui->dayPostponeLabel->setArgs({stats.postponeCount});
 
-  ui->todayActiveLabel->setArgs({formatDuration(todayUsage.activeSeconds)});
-  ui->todayTotalLabel->setArgs({formatDuration(todayUsage.totalSeconds)});
-  ui->weekActiveLabel->setArgs({formatDuration(weekUsage.activeSeconds)});
-  ui->weekTotalLabel->setArgs({formatDuration(weekUsage.totalSeconds)});
+  DailyUsageStats usage = m_usageStatsMap.value(date);
+  ui->dayActiveLabel->setArgs({formatDuration(usage.activeSeconds)});
+  ui->dayTotalLabel->setArgs({formatDuration(usage.totalSeconds)});
+}
+
+void StatsWindow::updateWeekLabel() {
+  QLocale locale;
+  QDate weekEnd = m_weekStart.addDays(6);
+  ui->weekLabel->setText(locale.toString(m_weekStart, "MMM d") + " – " +
+                         locale.toString(weekEnd, "MMM d"));
 }
 
 void StatsWindow::populateDailyBreakdown(
@@ -165,6 +180,6 @@ void StatsWindow::populateDailyBreakdown(
     rangeEnd = std::min(rangeEnd, 86400);
   }
 
-  ui->timelineView->populate(timelines, statsMap, rangeStart, rangeEnd);
+  ui->timelineView->populate(timelines, statsMap, rangeStart, rangeEnd,
+                              m_weekStart);
 }
-

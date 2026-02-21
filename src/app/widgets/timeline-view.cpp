@@ -246,7 +246,7 @@ void DayTimelineItem::paint(QPainter* painter,
 
 TimelineGraphicsView::TimelineGraphicsView(QWidget* parent) : QGraphicsView(parent) {
   setViewportUpdateMode(FullViewportUpdate);
-  setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+  setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   setFrameShape(QFrame::NoFrame);
   setRenderHint(QPainter::Antialiasing, false);
@@ -258,6 +258,8 @@ TimelineGraphicsView::TimelineGraphicsView(QWidget* parent) : QGraphicsView(pare
   m_labelArea->setAttribute(Qt::WA_TransparentForMouseEvents);
   m_labelArea->installEventFilter(this);
   m_labelArea->raise();
+
+  viewport()->setMouseTracking(true);
 }
 
 qreal TimelineGraphicsView::baseScale() const {
@@ -284,9 +286,11 @@ void TimelineGraphicsView::updateFixedHeight() {
 
 void TimelineGraphicsView::populate(const QList<DayTimelineData>& timelines,
                                     const QMap<QDate, DailyBreakStats>& statsMap,
-                                    int rangeStart, int rangeEnd) {
+                                    int rangeStart, int rangeEnd,
+                                    QDate weekStart) {
   m_rows.clear();
   m_zoomFactor = 1.0;
+  m_lastHoveredDate = QDate();
 
   auto* sc = new QGraphicsScene(this);
 
@@ -300,9 +304,8 @@ void TimelineGraphicsView::populate(const QList<DayTimelineData>& timelines,
 
   // Day rows
   QLocale locale;
-  QDate weekAgo = QDate::currentDate().addDays(-6);
   for (int i = 0; i < 7; i++) {
-    QDate day = weekAgo.addDays(i);
+    QDate day = weekStart.addDays(i);
 
     // Find matching timeline
     DayTimelineData timeline;
@@ -340,7 +343,7 @@ void TimelineGraphicsView::populate(const QList<DayTimelineData>& timelines,
     sc->addItem(item);
 
     QString label = locale.toString(day, "ddd");
-    m_rows.append({label, item});
+    m_rows.append({label, day, item});
     yPos += kTrackHeight + kRowSpacing;
   }
 
@@ -389,6 +392,21 @@ void TimelineGraphicsView::wheelEvent(QWheelEvent* event) {
   }
 }
 
+void TimelineGraphicsView::mouseMoveEvent(QMouseEvent* event) {
+  QGraphicsView::mouseMoveEvent(event);
+  QPointF scenePos = mapToScene(event->pos());
+  for (const auto& [label, date, item] : m_rows) {
+    QRectF itemRect = item->sceneBoundingRect();
+    if (scenePos.y() >= itemRect.top() && scenePos.y() < itemRect.bottom()) {
+      if (date != m_lastHoveredDate) {
+        m_lastHoveredDate = date;
+        emit dayHovered(date);
+      }
+      return;
+    }
+  }
+}
+
 bool TimelineGraphicsView::event(QEvent* event) {
   if (event->type() == QEvent::NativeGesture) {
     auto* gesture = static_cast<QNativeGestureEvent*>(event);
@@ -432,7 +450,7 @@ bool TimelineGraphicsView::viewportEvent(QEvent* event) {
     }
 
     // Find which row item we're hovering
-    for (const auto& [label, item] : m_rows) {
+    for (const auto& [label, date, item] : m_rows) {
       QRectF itemRect = item->sceneBoundingRect();
       if (scenePos.y() >= itemRect.top() && scenePos.y() < itemRect.bottom()) {
         QString tip = item->tooltipAtSceneX(scenePos.x());
@@ -457,7 +475,7 @@ bool TimelineGraphicsView::eventFilter(QObject* obj, QEvent* event) {
     painter.fillRect(m_labelArea->rect(), palette().color(QPalette::Window));
     painter.setPen(palette().color(QPalette::WindowText));
 
-    for (const auto& [label, item] : m_rows) {
+    for (const auto& [label, date, item] : m_rows) {
       QPointF viewPos = mapFromScene(item->pos());
       qreal y = viewPos.y();
       QRectF labelRect(0, y, kLabelWidth - 4, kTrackHeight);

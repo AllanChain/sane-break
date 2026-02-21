@@ -1058,69 +1058,61 @@ v%1
         <translation type="unfinished">Статистика</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="31"/>
         <source>Today</source>
-        <translation type="unfinished">Сегодня</translation>
+        <translation type="obsolete">Сегодня</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="37"/>
-        <location filename="../../src/app/stats-window.ui" line="81"/>
+        <location filename="../../src/app/stats-window.ui" line="32"/>
         <source>%1 breaks (%2 completed)</source>
         <translation type="unfinished">%1 перерывов (%2 завершено)</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="44"/>
-        <location filename="../../src/app/stats-window.ui" line="88"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="330"/>
+        <location filename="../../src/app/stats-window.ui" line="39"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="333"/>
         <source>Break time: %1</source>
         <translation type="unfinished">Время перерывов: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="51"/>
-        <location filename="../../src/app/stats-window.ui" line="95"/>
+        <location filename="../../src/app/stats-window.ui" line="46"/>
         <source>%1 postponed</source>
         <translation type="unfinished">%1 отложено</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="58"/>
-        <location filename="../../src/app/stats-window.ui" line="102"/>
+        <location filename="../../src/app/stats-window.ui" line="53"/>
         <source>Active usage: %1</source>
         <translation type="unfinished">Активное использование: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="65"/>
-        <location filename="../../src/app/stats-window.ui" line="109"/>
+        <location filename="../../src/app/stats-window.ui" line="60"/>
         <source>Total usage: %1</source>
         <translation type="unfinished">Общее использование: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="75"/>
         <source>Last 7 Days</source>
-        <translation type="unfinished">Последние 7 дней</translation>
+        <translation type="obsolete">Последние 7 дней</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="121"/>
         <source>&lt;h3&gt;Daily Breakdown&lt;/h3&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;Ежедневная статистика&lt;/h3&gt;</translation>
+        <translation type="obsolete">&lt;h3&gt;Ежедневная статистика&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="30"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="331"/>
+        <location filename="../../src/app/stats-window.cpp" line="31"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="334"/>
         <source>%1h %2m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="31"/>
+        <location filename="../../src/app/stats-window.cpp" line="32"/>
         <source>%1m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="326"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="329"/>
         <source>Breaks: %1 (%2 completed)</source>
         <translation type="unfinished">Перерывы: %1 (%2 завершено)</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="335"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="338"/>
         <source>Postpones: %1</source>
         <translation type="unfinished">Отложено: %1</translation>
     </message>

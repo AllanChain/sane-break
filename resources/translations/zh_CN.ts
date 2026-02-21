@@ -982,69 +982,49 @@ v%1
         <translation>统计</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="31"/>
-        <source>Today</source>
-        <translation>今天</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/stats-window.ui" line="37"/>
-        <location filename="../../src/app/stats-window.ui" line="81"/>
+        <location filename="../../src/app/stats-window.ui" line="32"/>
         <source>%1 breaks (%2 completed)</source>
         <translation>休息 %1 次（完成 %2 次）</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="44"/>
-        <location filename="../../src/app/stats-window.ui" line="88"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="330"/>
+        <location filename="../../src/app/stats-window.ui" line="39"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="333"/>
         <source>Break time: %1</source>
         <translation>休息时间：%1</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="51"/>
-        <location filename="../../src/app/stats-window.ui" line="95"/>
+        <location filename="../../src/app/stats-window.ui" line="46"/>
         <source>%1 postponed</source>
         <translation>推迟 %1 次</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="58"/>
-        <location filename="../../src/app/stats-window.ui" line="102"/>
+        <location filename="../../src/app/stats-window.ui" line="53"/>
         <source>Active usage: %1</source>
         <translation>活跃使用时长：%1</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="65"/>
-        <location filename="../../src/app/stats-window.ui" line="109"/>
+        <location filename="../../src/app/stats-window.ui" line="60"/>
         <source>Total usage: %1</source>
         <translation>总计使用时长：%1</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="75"/>
-        <source>Last 7 Days</source>
-        <translation>最近 7 天</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/stats-window.ui" line="121"/>
-        <source>&lt;h3&gt;Daily Breakdown&lt;/h3&gt;</source>
-        <translation>&lt;h3&gt;每日详情&lt;/h3&gt;</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/stats-window.cpp" line="30"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="331"/>
+        <location filename="../../src/app/stats-window.cpp" line="31"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="334"/>
         <source>%1h %2m</source>
         <translation>%1 小时 %2 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="31"/>
+        <location filename="../../src/app/stats-window.cpp" line="32"/>
         <source>%1m</source>
         <translation>%1 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="326"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="329"/>
         <source>Breaks: %1 (%2 completed)</source>
         <translation>%1 次休息（%2 次完成）</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="335"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="338"/>
         <source>Postpones: %1</source>
         <translation>%1 次推迟</translation>
     </message>

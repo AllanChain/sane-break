@@ -24,103 +24,70 @@
     <number>16</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <widget class="QGroupBox" name="dayDetailGroup">
+     <layout class="QVBoxLayout" name="dayDetailLayout">
+      <item>
+       <widget class="DynamicLabel" name="dayBreaksLabel">
+        <property name="text">
+         <string>%1 breaks (%2 completed)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="DynamicLabel" name="dayTimeLabel">
+        <property name="text">
+         <string>Break time: %1</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="DynamicLabel" name="dayPostponeLabel">
+        <property name="text">
+         <string>%1 postponed</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="DynamicLabel" name="dayActiveLabel">
+        <property name="text">
+         <string>Active usage: %1</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="DynamicLabel" name="dayTotalLabel">
+        <property name="text">
+         <string>Total usage: %1</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="weekNavLayout" stretch="0,1,0">
      <item>
-      <widget class="QGroupBox" name="todayGroup">
-       <property name="title">
-        <string>Today</string>
+      <widget class="QPushButton" name="prevWeekButton">
+       <property name="text">
+        <string notr="true">&lt;</string>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <item>
-         <widget class="DynamicLabel" name="todayBreaksLabel">
-          <property name="text">
-           <string>%1 breaks (%2 completed)</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="DynamicLabel" name="todayTimeLabel">
-          <property name="text">
-           <string>Break time: %1</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="DynamicLabel" name="todayPostponeLabel">
-          <property name="text">
-           <string>%1 postponed</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="DynamicLabel" name="todayActiveLabel">
-          <property name="text">
-           <string>Active usage: %1</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="DynamicLabel" name="todayTotalLabel">
-          <property name="text">
-           <string>Total usage: %1</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
       </widget>
      </item>
      <item>
-      <widget class="QGroupBox" name="weekGroup">
-       <property name="title">
-        <string>Last 7 Days</string>
+      <widget class="QLabel" name="weekLabel">
+       <property name="alignment">
+        <set>Qt::AlignmentFlag::AlignCenter</set>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item>
-         <widget class="DynamicLabel" name="weekBreaksLabel">
-          <property name="text">
-           <string>%1 breaks (%2 completed)</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="DynamicLabel" name="weekTimeLabel">
-          <property name="text">
-           <string>Break time: %1</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="DynamicLabel" name="weekPostponeLabel">
-          <property name="text">
-           <string>%1 postponed</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="DynamicLabel" name="weekActiveLabel">
-          <property name="text">
-           <string>Active usage: %1</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="DynamicLabel" name="weekTotalLabel">
-          <property name="text">
-           <string>Total usage: %1</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="nextWeekButton">
+       <property name="text">
+        <string notr="true">&gt;</string>
+       </property>
       </widget>
      </item>
     </layout>
-   </item>
-   <item alignment="Qt::AlignmentFlag::AlignHCenter">
-    <widget class="QLabel" name="breakdownHeader">
-     <property name="text">
-      <string>&lt;h3&gt;Daily Breakdown&lt;/h3&gt;</string>
-     </property>
-    </widget>
    </item>
    <item>
     <widget class="TimelineGraphicsView" name="timelineView">
@@ -134,6 +101,9 @@
       <enum>QFrame::Shape::NoFrame</enum>
      </property>
     </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="legendLayout"/>
    </item>
    <item>
     <spacer name="verticalSpacer">

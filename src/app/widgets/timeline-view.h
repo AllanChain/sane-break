@@ -9,6 +9,7 @@
 #include <QDate>
 #include <QEvent>
 #include <QGraphicsItem>
+#include <QMouseEvent>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QList>
@@ -69,17 +70,27 @@ class TimelineGraphicsView : public QGraphicsView {
   explicit TimelineGraphicsView(QWidget* parent = nullptr);
   void populate(const QList<DayTimelineData>& timelines,
                 const QMap<QDate, DailyBreakStats>& statsMap, int rangeStart,
-                int rangeEnd);
+                int rangeEnd, QDate weekStart);
+
+ signals:
+  void dayHovered(QDate date);
 
  protected:
   void resizeEvent(QResizeEvent* event) override;
   void changeEvent(QEvent* event) override;
   void wheelEvent(QWheelEvent* event) override;
+  void mouseMoveEvent(QMouseEvent* event) override;
   bool event(QEvent* event) override;
   bool viewportEvent(QEvent* event) override;
   bool eventFilter(QObject* obj, QEvent* event) override;
 
  private:
+  struct RowInfo {
+    QString label;
+    QDate date;
+    DayTimelineItem* item;
+  };
+
   static constexpr int kLabelWidth = 36;
   static constexpr int kRowSpacing = 4;
   static constexpr int kTimeAxisHeight = 20;
@@ -92,7 +103,8 @@ class TimelineGraphicsView : public QGraphicsView {
   qreal m_zoomFactor = 1.0;
   int m_contentHeight = 0;
   QWidget* m_labelArea = nullptr;
-  QList<QPair<QString, DayTimelineItem*>> m_rows;  // label, item
+  QList<RowInfo> m_rows;
+  QDate m_lastHoveredDate;
 
   void applyZoom();
   void updateFixedHeight();

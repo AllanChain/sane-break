@@ -1170,69 +1170,61 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation type="unfinished">Statistieken</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="31"/>
         <source>Today</source>
-        <translation type="unfinished">Vandaag</translation>
+        <translation type="obsolete">Vandaag</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="37"/>
-        <location filename="../../src/app/stats-window.ui" line="81"/>
+        <location filename="../../src/app/stats-window.ui" line="32"/>
         <source>%1 breaks (%2 completed)</source>
         <translation type="unfinished">%1 pauzes (%2 voltooid)</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="44"/>
-        <location filename="../../src/app/stats-window.ui" line="88"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="330"/>
+        <location filename="../../src/app/stats-window.ui" line="39"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="333"/>
         <source>Break time: %1</source>
         <translation type="unfinished">Pauzetijd: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="51"/>
-        <location filename="../../src/app/stats-window.ui" line="95"/>
+        <location filename="../../src/app/stats-window.ui" line="46"/>
         <source>%1 postponed</source>
         <translation type="unfinished">%1 uitgesteld</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="58"/>
-        <location filename="../../src/app/stats-window.ui" line="102"/>
+        <location filename="../../src/app/stats-window.ui" line="53"/>
         <source>Active usage: %1</source>
         <translation type="unfinished">Actief gebruik: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="65"/>
-        <location filename="../../src/app/stats-window.ui" line="109"/>
+        <location filename="../../src/app/stats-window.ui" line="60"/>
         <source>Total usage: %1</source>
         <translation type="unfinished">Totaal gebruik: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="75"/>
         <source>Last 7 Days</source>
-        <translation type="unfinished">Laatste 7 dagen</translation>
+        <translation type="obsolete">Laatste 7 dagen</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="121"/>
         <source>&lt;h3&gt;Daily Breakdown&lt;/h3&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;Dagelijkse opdeling&lt;/h3&gt;</translation>
+        <translation type="obsolete">&lt;h3&gt;Dagelijkse opdeling&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="30"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="331"/>
+        <location filename="../../src/app/stats-window.cpp" line="31"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="334"/>
         <source>%1h %2m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="31"/>
+        <location filename="../../src/app/stats-window.cpp" line="32"/>
         <source>%1m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="326"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="329"/>
         <source>Breaks: %1 (%2 completed)</source>
         <translation type="unfinished">Pauzes: %1 (%2 voltooid)</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="335"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="338"/>
         <source>Postpones: %1</source>
         <translation type="unfinished">Uitstellingen: %1</translation>
     </message>

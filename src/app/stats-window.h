@@ -4,8 +4,10 @@
 
 #pragma once
 
+#include <QDate>
 #include <QEvent>
 #include <QList>
+#include <QMap>
 #include <QWidget>
 
 #include "core/db.h"
@@ -28,9 +30,16 @@ class StatsWindow : public QWidget {
   Ui::StatsWindow* ui;
   BreakDatabase* m_db;
 
+  QDate m_weekStart;
+  QDate m_displayedDate;
+  QMap<QDate, DailyBreakStats> m_breakStatsMap;
+  QMap<QDate, DailyUsageStats> m_usageStatsMap;
+
   void refreshData();
-  void populateSummaryCards(const QList<DailyBreakStats>& stats,
-                            const QList<DailyUsageStats>& usageStats);
+  void navigateWeek(int delta);
+  void updateDayDetail(QDate date);
+  void updateWeekLabel();
   void populateDailyBreakdown(const QList<DayTimelineData>& timelines,
                               const QList<DailyBreakStats>& breakStats);
+  static QDate weekStartForDate(QDate date);
 };
