@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "layer-shell.h"
@@ -9,7 +9,11 @@
 
 #include <QWindow>
 
-void LayerShell::init() { LayerShellQt::Shell::useLayerShell(); }
+void LayerShell::init() {
+#if QT_VERSION < QT_VERSION_CHECK(6, 5, 0)
+  LayerShellQt::Shell::useLayerShell();
+#endif
+}
 
 void LayerShell::layout(QWindow* window) {
   if (auto w = LayerShellQt::Window::get(window)) {
