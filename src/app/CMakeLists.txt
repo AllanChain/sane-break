@@ -1,11 +1,9 @@
 find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia Sql)
 
-qt_add_executable(
-  sane-break-app
-  MANUAL_FINALIZATION
+add_library(
+  sane-gui STATIC
   app.cpp
   app.h
-  main.cpp
   break-window.cpp
   break-window.h
   break-window.ui
@@ -51,19 +49,26 @@ qt_add_executable(
   ${CMAKE_SOURCE_DIR}/resources/index.qrc
 )
 
-target_include_directories(sane-break-app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(sane-break-app PRIVATE Qt6::Widgets Qt6::Multimedia sane-lib)
+target_include_directories(
+  sane-gui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_BINARY_DIR}
+)
+target_link_libraries(sane-gui PUBLIC Qt6::Widgets Qt6::Multimedia sane-lib)
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+  target_sources(sane-gui PRIVATE unix/signal-handler.h unix/signal-handler.cpp)
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+  target_sources(sane-gui PRIVATE windows/signal-handler.h windows/signal-handler.cpp)
+endif()
+
+qt_add_executable(sane-break-app MANUAL_FINALIZATION main.cpp)
+target_link_libraries(sane-break-app PRIVATE sane-gui)
 
 include(cmake/translation.cmake)
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   add_subdirectory(layer-shell)
-  target_sources(sane-break-app PRIVATE unix/signal-handler.h unix/signal-handler.cpp)
   add_subdirectory(${CMAKE_SOURCE_DIR}/packaging/linux ${CMAKE_BINARY_DIR}/packaging)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-  target_sources(
-    sane-break-app PRIVATE windows/signal-handler.h windows/signal-handler.cpp
-  )
   add_subdirectory(${CMAKE_SOURCE_DIR}/packaging/windows ${CMAKE_BINARY_DIR}/packaging)
   target_sources(
     sane-break-app PRIVATE "${CMAKE_SOURCE_DIR}/packaging/windows/resources.rc"
@@ -71,10 +76,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
   set(SANE_BREAK_ICON_LEGACY ${CMAKE_SOURCE_DIR}/packaging/macos/icon.icns)
   set(SANE_BREAK_ICON_TAHOE ${CMAKE_SOURCE_DIR}/packaging/macos/Assets.car)
-  target_sources(
-    sane-break-app PRIVATE ${SANE_BREAK_ICON} ${SANE_BREAK_ICON_TAHOE}
-                           unix/signal-handler.h unix/signal-handler.cpp
-  )
+  target_sources(sane-break-app PRIVATE ${SANE_BREAK_ICON} ${SANE_BREAK_ICON_TAHOE})
   set_source_files_properties(
     ${SANE_BREAK_ICON_LEGACY} ${SANE_BREAK_ICON_TAHOE}
     PROPERTIES MACOSX_PACKAGE_LOCATION "Resources"
