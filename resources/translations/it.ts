@@ -183,7 +183,7 @@
         <source>English</source>
         <comment>current language</comment>
         <extracomment>This is the name of the current language in the current language</extracomment>
-        <translation>Inglese</translation>
+        <translation>Italiana</translation>
     </message>
 </context>
 <context>
