@@ -22,3 +22,15 @@ foreach(TEST_FILE ${TEST_FILES})
 
   add_dependencies(check "${TEST_FILE_NAME}")
 endforeach()
+
+# Screenshot harness (not part of check target)
+add_executable(test-screenshot test-screenshot.cpp)
+target_link_libraries(test-screenshot PRIVATE Qt::Test sane-gui)
+
+add_custom_target(
+  screenshot
+  COMMAND
+    ${CMAKE_COMMAND} -E env "QT_QPA_PLATFORM=offscreen:size=1920x1080"
+    "SCREENSHOT_DIR=${CMAKE_SOURCE_DIR}/screenshots" $<TARGET_FILE:test-screenshot>
+  DEPENDS test-screenshot
+)
