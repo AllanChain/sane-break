@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <QAbstractItemModel>
 #include <QCheckBox>
 #include <QCloseEvent>
 #include <QColor>
@@ -12,6 +13,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QList>
+#include <QListWidget>
 #include <QMainWindow>
 #include <QMap>
 #include <QPlainTextEdit>
@@ -122,6 +124,33 @@ class PrefController<QPlainTextEdit, QStringList>
   void setValue(QStringList value) { widget->setPlainText(value.join("\n")); }
   void saveValue() {
     setting->set(widget->toPlainText().split("\n", Qt::SkipEmptyParts));
+  }
+};
+
+template <>
+class PrefController<QListWidget, QStringList>
+    : public PrefControllerTemplate<QListWidget, QStringList> {
+ public:
+  PrefController(QListWidget* parent, Setting<QStringList>* setting)
+      : PrefControllerTemplate(parent, setting) {
+    auto* model = widget->model();
+    connect(model, &QAbstractItemModel::rowsInserted, this,
+            &PrefControllerBase::onChange);
+    connect(model, &QAbstractItemModel::rowsRemoved, this,
+            &PrefControllerBase::onChange);
+    connect(model, &QAbstractItemModel::dataChanged, this,
+            &PrefControllerBase::onChange);
+  };
+  void setValue(QStringList value) {
+    widget->clear();
+    widget->addItems(value);
+  }
+  void saveValue() {
+    QStringList items;
+    for (int i = 0; i < widget->count(); ++i) {
+      items.append(widget->item(i)->text());
+    }
+    setting->set(items);
   }
 };
 

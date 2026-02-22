@@ -6,6 +6,8 @@ add_library(
   program-monitor.cpp
   program-monitor.h
   screen-lock.h
+  screen-monitor.cpp
+  screen-monitor.h
   sleep-monitor.cpp
   sleep-monitor.h
   system-monitor.cpp

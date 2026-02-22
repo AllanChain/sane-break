@@ -74,12 +74,12 @@
 <context>
     <name>BreakWindow</name>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="134"/>
+        <location filename="../../src/app/break-window.cpp" line="149"/>
         <source>Break will end at: %1</source>
         <translation type="unfinished">Přestávka skončí v: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="136"/>
+        <location filename="../../src/app/break-window.cpp" line="151"/>
         <source>Break has ended</source>
         <translation type="unfinished">Přestávka skončila</translation>
     </message>
@@ -346,14 +346,14 @@
         <translation>O této aplikaci</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1705"/>
-        <location filename="../../src/app/pref-window.ui" line="1743"/>
+        <location filename="../../src/app/pref-window.ui" line="1763"/>
+        <location filename="../../src/app/pref-window.ui" line="1801"/>
         <source>Bell before breaks</source>
         <translation>Zvonek před přestávkami</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1660"/>
-        <location filename="../../src/app/pref-window.ui" line="1785"/>
+        <location filename="../../src/app/pref-window.ui" line="1718"/>
+        <location filename="../../src/app/pref-window.ui" line="1843"/>
         <source>Bell after breaks</source>
         <translation>Zvonek po přestávkách</translation>
     </message>
@@ -542,17 +542,17 @@ Všechny barvy jsou ve formátu &lt;code&gt;#AARRGGBB&lt;/code&gt;.</translation
         <translation type="unfinished">&lt;h3&gt;Podmínky pozastavení&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1578"/>
+        <location filename="../../src/app/pref-window.ui" line="1636"/>
         <source>Long pause threshold</source>
         <translation type="unfinished">Hranice dlouhého pozastavení</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1632"/>
+        <location filename="../../src/app/pref-window.ui" line="1690"/>
         <source>Short pause threshold</source>
         <translation type="unfinished">Hranice krátkého pozastavení</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1891"/>
+        <location filename="../../src/app/pref-window.ui" line="1949"/>
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
@@ -560,17 +560,17 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
         <translation type="unfinished">Řekněme, že jste nastavili na 2 minuty. Pokud je přestávka kratší než 2 minuty, obrazovka se zamkne 2 minuty po zahájení přestávky, pokud po ní není žádná aktivita. Pokud je přestávka delší než 2 minuty, obrazovka se zamkne bez ohledu na aktivitu.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1896"/>
+        <location filename="../../src/app/pref-window.ui" line="1954"/>
         <source>Automatic screen lock after break start</source>
         <translation type="unfinished">Automatické zamknutí obrazovky po zahájení přestávky</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1842"/>
+        <location filename="../../src/app/pref-window.ui" line="1900"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
         <translation type="unfinished">&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Pomozte přeložit!&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2013"/>
+        <location filename="../../src/app/pref-window.ui" line="2071"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -610,16 +610,16 @@ v%1
         <translation type="unfinished">&lt;h3&gt;Vzhled připomínky&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1657"/>
-        <location filename="../../src/app/pref-window.ui" line="1702"/>
+        <location filename="../../src/app/pref-window.ui" line="1715"/>
+        <location filename="../../src/app/pref-window.ui" line="1760"/>
         <source>Try restart Sane Break if no sound</source>
         <translation type="unfinished">Zkuste restartovat Sane Break, pokud nejsou žádné zvuky</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1674"/>
-        <location filename="../../src/app/pref-window.ui" line="1688"/>
-        <location filename="../../src/app/pref-window.ui" line="1750"/>
-        <location filename="../../src/app/pref-window.ui" line="1764"/>
+        <location filename="../../src/app/pref-window.ui" line="1732"/>
+        <location filename="../../src/app/pref-window.ui" line="1746"/>
+        <location filename="../../src/app/pref-window.ui" line="1808"/>
+        <location filename="../../src/app/pref-window.ui" line="1822"/>
         <source>Play</source>
         <translation type="unfinished">Přehrát</translation>
     </message>
@@ -637,7 +637,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="275"/>
         <location filename="../../src/app/pref-window.ui" line="521"/>
-        <location filename="../../src/app/pref-window.ui" line="1648"/>
+        <location filename="../../src/app/pref-window.ui" line="1706"/>
         <source>&lt;h3&gt;Small Breaks&lt;/h3&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Malé přestávky&lt;/h3&gt;</translation>
     </message>
@@ -647,8 +647,8 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="581"/>
         <location filename="../../src/app/pref-window.ui" line="682"/>
         <location filename="../../src/app/pref-window.ui" line="1478"/>
-        <location filename="../../src/app/pref-window.ui" line="1562"/>
-        <location filename="../../src/app/pref-window.ui" line="1616"/>
+        <location filename="../../src/app/pref-window.ui" line="1620"/>
+        <location filename="../../src/app/pref-window.ui" line="1674"/>
         <source> min</source>
         <translation type="unfinished">min</translation>
     </message>
@@ -676,7 +676,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="391"/>
         <location filename="../../src/app/pref-window.ui" line="637"/>
-        <location filename="../../src/app/pref-window.ui" line="1721"/>
+        <location filename="../../src/app/pref-window.ui" line="1779"/>
         <source>&lt;h3&gt;Big Breaks&lt;/h3&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Velké přestávky&lt;/h3&gt;</translation>
     </message>
@@ -787,6 +787,26 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1517"/>
+        <source>&lt;h3&gt;External Monitors&lt;/h3&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1524"/>
+        <source>Pause when unknown monitor is connected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1546"/>
+        <source>Mark currently connected monitors as known</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1566"/>
+        <source>Remove selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1575"/>
         <source>&lt;h3&gt;Reset Break Schedule After Pause&lt;/h3&gt;
 &lt;p&gt;Sane Break will adjust the break schedule after pausing:&lt;/p&gt;
 &lt;ul&gt;
@@ -802,70 +822,70 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1378"/>
-        <location filename="../../src/app/pref-window.ui" line="1681"/>
-        <location filename="../../src/app/pref-window.ui" line="1695"/>
-        <location filename="../../src/app/pref-window.ui" line="1757"/>
-        <location filename="../../src/app/pref-window.ui" line="1771"/>
+        <location filename="../../src/app/pref-window.ui" line="1739"/>
+        <location filename="../../src/app/pref-window.ui" line="1753"/>
+        <location filename="../../src/app/pref-window.ui" line="1815"/>
+        <location filename="../../src/app/pref-window.ui" line="1829"/>
         <source>Browse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1797"/>
+        <location filename="../../src/app/pref-window.ui" line="1855"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: Use &lt;i&gt;Browse&lt;/i&gt; to select a custom sound file. A copy of the file will be saved so it can always be played.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1835"/>
+        <location filename="../../src/app/pref-window.ui" line="1893"/>
         <source>Configuration file</source>
         <translation type="unfinished">Konfigurační soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1865"/>
+        <location filename="../../src/app/pref-window.ui" line="1923"/>
         <source>Database file</source>
         <translation type="unfinished">Soubor databáze</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1911"/>
+        <location filename="../../src/app/pref-window.ui" line="1969"/>
         <source>Launch Sane Break at start up</source>
         <translation type="unfinished">Spustit Sane Break při spuštění</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2037"/>
+        <location filename="../../src/app/pref-window.ui" line="2095"/>
         <source>Get the Source Code</source>
         <translation type="unfinished">Získat zdrojový kód</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2066"/>
+        <location filename="../../src/app/pref-window.ui" line="2124"/>
         <source>Help Us Translate!</source>
         <translation type="unfinished">Pomozte nám přeložit!</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2099"/>
+        <location filename="../../src/app/pref-window.ui" line="2157"/>
         <source>Revert to Last Saved</source>
         <translation type="unfinished">Vrátit se na poslední uložené</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1813"/>
+        <location filename="../../src/app/pref-window.ui" line="1871"/>
         <source>Language</source>
         <translation type="unfinished">Jazyk</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1852"/>
+        <location filename="../../src/app/pref-window.ui" line="1910"/>
         <source>Change of language will take effect after app restart.</source>
         <translation type="unfinished">Změna jazyka se projeví po restartu aplikace.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2057"/>
+        <location filename="../../src/app/pref-window.ui" line="2115"/>
         <source>Third-party Libraries Licenses</source>
         <translation type="unfinished">Licence třetích stran</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2106"/>
+        <location filename="../../src/app/pref-window.ui" line="2164"/>
         <source>Defaults</source>
         <translation type="unfinished">Výchozí hodnoty</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2129"/>
+        <location filename="../../src/app/pref-window.ui" line="2187"/>
         <source>Save</source>
         <translation type="unfinished">Uložit</translation>
     </message>
@@ -873,9 +893,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="478"/>
-        <location filename="../../src/app/pref-window.cpp" line="479"/>
-        <location filename="../../src/app/pref-window.cpp" line="480"/>
+        <location filename="../../src/app/pref-window.cpp" line="509"/>
+        <location filename="../../src/app/pref-window.cpp" line="510"/>
+        <location filename="../../src/app/pref-window.cpp" line="511"/>
         <source>%n min</source>
         <translation type="unfinished">
             <numerusform>%n minuta</numerusform>
@@ -884,8 +904,8 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="172"/>
-        <location filename="../../src/app/pref-window.cpp" line="214"/>
+        <location filename="../../src/app/pref-window.cpp" line="174"/>
+        <location filename="../../src/app/pref-window.cpp" line="216"/>
         <source>Every %n min</source>
         <translation type="unfinished">
             <numerusform>Každou %n minutu</numerusform>
@@ -894,7 +914,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="477"/>
+        <location filename="../../src/app/pref-window.cpp" line="508"/>
         <source>%n sec</source>
         <translation type="unfinished">
             <numerusform>%n sekunda</numerusform>
@@ -903,83 +923,83 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="476"/>
+        <location filename="../../src/app/pref-window.cpp" line="507"/>
         <source>Disabled</source>
         <translation type="unfinished">Vypnuto</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="487"/>
+        <location filename="../../src/app/pref-window.cpp" line="518"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation type="unfinished">Začít další přestávku po stisku prostředního tlačítka na ikoně v panelu</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="492"/>
+        <location filename="../../src/app/pref-window.cpp" line="523"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation type="unfinished">Začít další přestávku po dvojitém kliknutí na ikonu v panelu</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="570"/>
+        <location filename="../../src/app/pref-window.cpp" line="601"/>
         <source>Save</source>
         <translation type="unfinished">Uložit</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="571"/>
+        <location filename="../../src/app/pref-window.cpp" line="602"/>
         <source>Discard</source>
         <translation type="unfinished">Zahodit</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="572"/>
+        <location filename="../../src/app/pref-window.cpp" line="603"/>
         <source>Cancel</source>
         <translation type="unfinished">Zrušit</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="609"/>
+        <location filename="../../src/app/pref-window.cpp" line="640"/>
         <source>Select Sound File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="610"/>
+        <location filename="../../src/app/pref-window.cpp" line="641"/>
         <source>Sound Files (*.mp3 *.wav *.ogg *.flac *.m4a)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="620"/>
-        <location filename="../../src/app/pref-window.cpp" line="641"/>
+        <location filename="../../src/app/pref-window.cpp" line="651"/>
+        <location filename="../../src/app/pref-window.cpp" line="672"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="621"/>
+        <location filename="../../src/app/pref-window.cpp" line="652"/>
         <source>Failed to save a copy of the selected sound file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="630"/>
+        <location filename="../../src/app/pref-window.cpp" line="661"/>
         <source>Select Background Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="631"/>
+        <location filename="../../src/app/pref-window.cpp" line="662"/>
         <source>Image Files (*.png *.jpg *.jpeg *.bmp *.webp)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="642"/>
+        <location filename="../../src/app/pref-window.cpp" line="673"/>
         <source>Failed to save a copy of the selected image file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="452"/>
+        <location filename="../../src/app/pref-window.cpp" line="483"/>
         <source>Setting autostart failed</source>
         <translation type="unfinished">Nastavení automatického spuštění selhalo</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="567"/>
+        <location filename="../../src/app/pref-window.cpp" line="598"/>
         <source>The preferences have been modified.</source>
         <translation type="unfinished">Nastavení bylo změněno.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="568"/>
+        <location filename="../../src/app/pref-window.cpp" line="599"/>
         <source>Do you want to save your changes?</source>
         <translation type="unfinished">Chcete uložit své změny?</translation>
     </message>

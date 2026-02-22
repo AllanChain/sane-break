@@ -96,6 +96,10 @@ SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
   pauseOnBattery = new Setting<bool>(settings, "pause/on-battery", false);
   programsToMonitor =
       new Setting<QStringList>(settings, "pause/programs-to-monitor", QStringList());
+  pauseOnUnknownMonitor =
+      new Setting<bool>(settings, "pause/on-unknown-monitor", false);
+  knownMonitors =
+      new Setting<QStringList>(settings, "pause/known-monitors", QStringList());
 
   smallStartBell = new Setting<QString>(settings, "bell/small-start", "");
   smallEndBell = new Setting<QString>(settings, "bell/small-end", "");

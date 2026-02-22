@@ -13,3 +13,4 @@ Diagnostics:
     - qcontainerfwd\.h
     - qtypes\.h
     - qtestcase\.h
+    - qalgorithms\.h

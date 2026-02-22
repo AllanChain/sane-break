@@ -19,6 +19,7 @@
 #include <QIcon>
 #include <QLabel>
 #include <QLineEdit>
+#include <QListWidget>
 #include <QMainWindow>
 #include <QMediaPlayer>
 #include <QMessageBox>
@@ -50,6 +51,7 @@
 #include "core/flags.h"
 #include "core/preferences.h"
 #include "lib/auto-start.h"
+#include "lib/screen-monitor.h"
 #include "ui_pref-window.h"
 
 void PrefControllerBase::saveIfDirty() {
@@ -389,6 +391,35 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
                    new PrefController<QPlainTextEdit, QStringList>(
                        ui->programList, preferences->programsToMonitor));
 #endif
+
+  auto pauseOnUnknownMonitorController = controllers->add(
+      PrefGroup::Pause,
+      new PrefController<QCheckBox, bool>(ui->pauseOnUnknownMonitorCheck,
+                                          preferences->pauseOnUnknownMonitor));
+  controllers->add(PrefGroup::Pause,
+                   new PrefController<QListWidget, QStringList>(
+                       ui->knownMonitorsList, preferences->knownMonitors));
+  auto syncMonitorWidgets = [this]() {
+    bool enabled = ui->pauseOnUnknownMonitorCheck->isChecked();
+    ui->knownMonitorsList->setEnabled(enabled);
+    ui->markKnownMonitorsButton->setEnabled(enabled);
+    ui->removeKnownMonitorButton->setEnabled(
+        enabled && !ui->knownMonitorsList->selectedItems().isEmpty());
+  };
+  connect(pauseOnUnknownMonitorController, &PrefControllerBase::explictSync, this,
+          syncMonitorWidgets);
+  connect(ui->knownMonitorsList, &QListWidget::itemSelectionChanged, this,
+          syncMonitorWidgets);
+  connect(ui->markKnownMonitorsButton, &QPushButton::pressed, this, [this]() {
+    QStringList existing;
+    for (int i = 0; i < ui->knownMonitorsList->count(); ++i)
+      existing.append(ui->knownMonitorsList->item(i)->text());
+    for (const QString& id : ScreenMonitor::connectedScreenIds()) {
+      if (!existing.contains(id)) ui->knownMonitorsList->addItem(id);
+    }
+  });
+  connect(ui->removeKnownMonitorButton, &QPushButton::pressed, this,
+          [this]() { qDeleteAll(ui->knownMonitorsList->selectedItems()); });
 
   /***************************************************************************
    *                                                                         *

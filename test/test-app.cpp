@@ -970,6 +970,38 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.focusCyclesRemaining, 3);
     QCOMPARE(app.trayData.focusTotalCycles, 4);
   }
+  // Unknown monitor triggers pause via system monitor
+  void unknown_monitor_pauses() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    emit deps.systemMonitor->pauseRequested(PauseReason::UnknownMonitor);
+    QCOMPARE(app.trayData.pauseReasons, PauseReason::UnknownMonitor);
+    // Countdown stopped
+    int secondsToNextBreak = app.trayData.secondsToNextBreak;
+    app.advance(1);
+    QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
+
+    emit deps.systemMonitor->resumeRequested(PauseReason::UnknownMonitor);
+    QVERIFY(!app.trayData.pauseReasons);
+    // Countdown resumed
+    app.advance(1);
+    QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
+  }
+  // Unknown monitor during break should exit break (non-idle pause)
+  void unknown_monitor_during_break() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
+    app.breakNow();
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+
+    EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
+    emit deps.systemMonitor->pauseRequested(PauseReason::UnknownMonitor);
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+    QVERIFY(!app.trayData.isBreaking);
+  }
   // Extend meeting before it ends
   void meeting_extend_before_end() {
     NiceMock<DummyApp> app(deps);

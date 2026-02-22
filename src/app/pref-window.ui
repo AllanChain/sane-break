@@ -245,7 +245,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
          <x>0</x>
          <y>0</y>
          <width>661</width>
-         <height>870</height>
+         <height>894</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1510,6 +1510,64 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                <string>(Write one program name per line)</string>
               </property>
              </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="externalMonitorsLabel">
+              <property name="text">
+               <string>&lt;h3&gt;External Monitors&lt;/h3&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="pauseOnUnknownMonitorCheck">
+              <property name="text">
+               <string>Pause when unknown monitor is connected</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QListWidget" name="knownMonitorsList">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>80</height>
+               </size>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::SelectionMode::ExtendedSelection</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="markKnownMonitorsLayout">
+              <item>
+               <widget class="QPushButton" name="markKnownMonitorsButton">
+                <property name="text">
+                 <string>Mark currently connected monitors as known</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="markKnownMonitorsSpacer">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="removeKnownMonitorButton">
+                <property name="text">
+                 <string>Remove selected</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
             <item>
              <widget class="QLabel" name="label_24">

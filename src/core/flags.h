@@ -10,6 +10,7 @@ enum class PauseReason {
   OnBattery = 1 << 1,
   AppOpen = 1 << 2,
   Sleep = 1 << 3,
+  UnknownMonitor = 1 << 4,
 };
 Q_DECLARE_FLAGS(PauseReasons, PauseReason)
 Q_DECLARE_OPERATORS_FOR_FLAGS(PauseReasons)
