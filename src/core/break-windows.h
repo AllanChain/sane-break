@@ -25,6 +25,7 @@ struct BreakWindowData {
     QColor messageColor;
     QColor countDownColor;
     int flashAnimationDuration;
+    QString backgroundImage;
   } theme;
   struct {
     bool prograssBar;

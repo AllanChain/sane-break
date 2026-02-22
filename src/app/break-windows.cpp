@@ -79,6 +79,7 @@ BreakWindowData BreakWindows::createData(BreakType type, SanePreferences* prefer
                 .messageColor = preferences->messageColor->get(),
                 .countDownColor = preferences->countDownColor->get(),
                 .flashAnimationDuration = 60000 / preferences->flashSpeed->get(),
+                .backgroundImage = preferences->backgroundImage->get(),
             },
         .show =
             {
@@ -101,6 +102,7 @@ BreakWindowData BreakWindows::createData(BreakType type, SanePreferences* prefer
                 .messageColor = preferences->messageColor->get(),
                 .countDownColor = preferences->countDownColor->get(),
                 .flashAnimationDuration = 60000 / preferences->flashSpeed->get(),
+                .backgroundImage = preferences->backgroundImage->get(),
             },
         .show =
             {

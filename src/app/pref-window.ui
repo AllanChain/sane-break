@@ -1324,6 +1324,41 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
              </layout>
             </item>
             <item>
+             <layout class="QHBoxLayout" name="backgroundImageLayout">
+              <item>
+               <widget class="QLabel" name="backgroundImageLabel">
+                <property name="text">
+                 <string>Background image</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="backgroundImagePath">
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+                <property name="placeholderText">
+                 <string notr="true">None</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="browseBackgroundImage">
+                <property name="text">
+                 <string>Browse</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="clearBackgroundImage">
+                <property name="text">
+                 <string>Clear</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
              <widget class="Line" name="line">
               <property name="orientation">
                <enum>Qt::Orientation::Horizontal</enum>

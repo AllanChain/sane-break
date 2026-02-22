@@ -58,6 +58,7 @@ SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
       new Setting<QColor>(settings, "theme/small-bg", QColor(235, 203, 139, 100));
   bigHighlightColor =
       new Setting<QColor>(settings, "theme/big-bg", QColor(180, 142, 173, 100));
+  backgroundImage = new Setting<QString>(settings, "theme/background-image", "");
   smallMessages = new Setting<QStringList>(settings, "break/small-msg", []() {
     return QStringList({tr("Time for a small break")});
   });

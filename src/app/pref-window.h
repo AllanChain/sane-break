@@ -178,6 +178,18 @@ class PrefController<QComboBox, QString>
 };
 
 template <>
+class PrefController<QLineEdit, QString>
+    : public PrefControllerTemplate<QLineEdit, QString> {
+ public:
+  PrefController(QLineEdit* parent, Setting<QString>* setting)
+      : PrefControllerTemplate(parent, setting) {
+    connect(widget, &QLineEdit::textChanged, this, &PrefControllerBase::onChange);
+  };
+  void setValue(QString value) { widget->setText(value); }
+  void saveValue() { setting->set(widget->text()); }
+};
+
+template <>
 class PrefController<QLineEdit, QColor>
     : public PrefControllerTemplate<QLineEdit, QColor> {
  public:
@@ -247,6 +259,7 @@ class PreferenceWindow : public QMainWindow {
   void openSourceCode();
   void openWeblate();
   void browseForSound(QComboBox* comboBox);
+  void browseForBackgroundImage();
   void openBreakWindowPreview();
   void closeEvent(QCloseEvent* event);
   void showEvent(QShowEvent* event);

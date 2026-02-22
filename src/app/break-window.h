@@ -1,10 +1,11 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
 
 #include <QColor>
+#include <QGraphicsOpacityEffect>
 #include <QLabel>
 #include <QList>
 #include <QMainWindow>
@@ -52,6 +53,8 @@ class BreakWindow : public QMainWindow {
   BreakWindowData m_data;
   QPropertyAnimation* m_progressAnim;
   QPropertyAnimation* m_bgAnim;
+  QLabel* m_bgImageLabel = nullptr;
+  QGraphicsOpacityEffect* m_bgImageOpacity = nullptr;
   bool m_waylandWorkaround = false;
   bool m_supportTransparentInput = true;
   int m_totalSeconds;

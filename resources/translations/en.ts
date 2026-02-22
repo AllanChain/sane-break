@@ -4,9 +4,9 @@
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../../../src/app/pref-window.cpp" line="466"/>
-        <location filename="../../../../src/app/pref-window.cpp" line="467"/>
-        <location filename="../../../../src/app/pref-window.cpp" line="468"/>
+        <location filename="../../../../src/app/pref-window.cpp" line="474"/>
+        <location filename="../../../../src/app/pref-window.cpp" line="475"/>
+        <location filename="../../../../src/app/pref-window.cpp" line="476"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -23,7 +23,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../../../src/app/pref-window.cpp" line="465"/>
+        <location filename="../../../../src/app/pref-window.cpp" line="473"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec</numerusform>

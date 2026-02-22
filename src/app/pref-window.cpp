@@ -343,6 +343,14 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
                    new PrefController<QCheckBox, bool>(
                        ui->bigBreakShowButtons, preferences->bigBreakShowButtons));
 
+  controllers->add(PrefGroup::Interface,
+                   new PrefController<QLineEdit, QString>(
+                       ui->backgroundImagePath, preferences->backgroundImage));
+  connect(ui->browseBackgroundImage, &QPushButton::pressed, this,
+          &PreferenceWindow::browseForBackgroundImage);
+  connect(ui->clearBackgroundImage, &QPushButton::pressed, this,
+          [this]() { ui->backgroundImagePath->setText(""); });
+
   /***************************************************************************
    *                                                                         *
    *                                Pause tab                                *
@@ -611,6 +619,27 @@ void PreferenceWindow::browseForSound(QComboBox* comboBox) {
   }
 
   comboBox->setEditText(QUrl::fromLocalFile(destPath).toString());
+}
+
+void PreferenceWindow::browseForBackgroundImage() {
+  QString file =
+      QFileDialog::getOpenFileName(this, tr("Select Background Image"), QString(),
+                                   tr("Image Files (*.png *.jpg *.jpeg *.bmp *.webp)"));
+  if (file.isEmpty()) return;
+
+  QString imageDir =
+      QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/images";
+  QDir().mkpath(imageDir);
+
+  QString destPath = imageDir + "/" + QFileInfo(file).fileName();
+  if (QFile::exists(destPath)) QFile::remove(destPath);
+  if (!QFile::copy(file, destPath)) {
+    QMessageBox::warning(this, tr("Error"),
+                         tr("Failed to save a copy of the selected image file."));
+    return;
+  }
+
+  ui->backgroundImagePath->setText(QUrl::fromLocalFile(destPath).toString());
 }
 
 void PreferenceWindow::openBreakWindowPreview() {

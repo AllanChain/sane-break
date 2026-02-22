@@ -125,6 +125,7 @@ class SanePreferences : public QObject {
   Setting<bool>* bigBreakShowClock;
   Setting<bool>* bigBreakShowEndTime;
   Setting<bool>* bigBreakShowButtons;
+  Setting<QString>* backgroundImage;
 
   Setting<int>* pauseOnIdleFor;
   Setting<int>* resetAfterPause;

@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "break-window.h"
@@ -12,13 +12,16 @@
 #include <QIODevice>
 #include <QLabel>
 #include <QMainWindow>
+#include <QPixmap>
 #include <QProgressBar>
 #include <QPropertyAnimation>
 #include <QPushButton>
 #include <QRect>
 #include <QScreen>
+#include <QSize>
 #include <QString>
 #include <QTimer>
+#include <QUrl>
 #include <QVBoxLayout>
 #include <QWidget>
 #include <QWindow>
@@ -174,12 +177,29 @@ void BreakWindow::showFullScreen() {
                                               : screen()->geometry());
   resizeAnim->setDuration(300);
   resizeAnim->start();
+
+  if (m_bgImageLabel) {
+    m_bgImageLabel->show();
+    auto* fadeIn = new QPropertyAnimation(m_bgImageOpacity, "opacity");
+    fadeIn->setStartValue(0.0);
+    fadeIn->setEndValue(1.0);
+    fadeIn->setDuration(300);
+    fadeIn->start(QAbstractAnimation::DeleteWhenStopped);
+  }
 }
 
 void BreakWindow::showFlashPrompt() {
   mainWidget->setProperty("isFullScreen", false);
   if (m_supportTransparentInput) {
     windowHandle()->setFlag(Qt::WindowTransparentForInput, true);
+  }
+  if (m_bgImageLabel) {
+    auto* fadeOut = new QPropertyAnimation(m_bgImageOpacity, "opacity");
+    fadeOut->setStartValue(1.0);
+    fadeOut->setEndValue(0.0);
+    fadeOut->setDuration(100);
+    fadeOut->start(QAbstractAnimation::DeleteWhenStopped);
+    connect(fadeOut, &QPropertyAnimation::finished, m_bgImageLabel, &QLabel::hide);
   }
   m_bgAnim->start();
 
@@ -223,6 +243,31 @@ void BreakWindow::initSize(QScreen* screen) {
 #ifdef Q_OS_MACOS
   macSetAllWorkspaces(windowHandle());
 #endif
+
+  if (!m_data.theme.backgroundImage.isEmpty()) {
+    QUrl url(m_data.theme.backgroundImage);
+    QString path = url.isLocalFile() ? url.toLocalFile() : m_data.theme.backgroundImage;
+    QPixmap original(path);
+    if (!original.isNull()) {
+      QSize targetSize = m_waylandWorkaround ? screen->availableGeometry().size()
+                                             : screen->geometry().size();
+      QPixmap scaled = original.scaled(targetSize, Qt::KeepAspectRatioByExpanding,
+                                       Qt::SmoothTransformation);
+      int x = (scaled.width() - targetSize.width()) / 2;
+      int y = (scaled.height() - targetSize.height()) / 2;
+
+      m_bgImageLabel = new QLabel(mainWidget);
+      m_bgImageLabel->setPixmap(
+          scaled.copy(x, y, targetSize.width(), targetSize.height()));
+      m_bgImageLabel->setGeometry(0, 0, targetSize.width(), targetSize.height());
+      m_bgImageLabel->lower();
+
+      m_bgImageOpacity = new QGraphicsOpacityEffect(m_bgImageLabel);
+      m_bgImageOpacity->setOpacity(0);
+      m_bgImageLabel->setGraphicsEffect(m_bgImageOpacity);
+      m_bgImageLabel->hide();
+    }
+  }
 }
 
 void BreakWindow::colorizeButton(QPushButton* button, QColor color) {
