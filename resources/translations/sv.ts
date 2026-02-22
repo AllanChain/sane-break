@@ -574,14 +574,14 @@ aktivitet efter rasten. Om rasten är längre än 2 minuter låses skärmen oavs
 v%1
 &lt;/div&gt;
 &lt;p&gt;Remind breaks without mindless skips. &lt;/p&gt;
-&lt;p&gt;2024-2025, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break developers&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
+&lt;p&gt;2024-2026, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break developers&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
 &lt;/p&gt;</source>
         <translation>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane&lt;/span&gt;Break
 v%1
 &lt;/div&gt;
 &lt;p&gt;Påminn om raster utan meningslösa ursäkter. &lt;/p&gt;
-&lt;p&gt;2024-2025, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break-utvecklarna&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
+&lt;p&gt;2024-2026, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break-utvecklarna&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
 &lt;/p&gt;</translation>
     </message>
     <message>
@@ -836,9 +836,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
+        <location filename="../../src/app/pref-window.cpp" line="455"/>
+        <location filename="../../src/app/pref-window.cpp" line="456"/>
         <location filename="../../src/app/pref-window.cpp" line="457"/>
-        <location filename="../../src/app/pref-window.cpp" line="458"/>
-        <location filename="../../src/app/pref-window.cpp" line="459"/>
         <source>%n min</source>
         <translation type="unfinished">
             <numerusform>%n min</numerusform>
@@ -847,7 +847,7 @@ v%1
     </message>
     <message numerus="yes">
         <location filename="../../src/app/pref-window.cpp" line="167"/>
-        <location filename="../../src/app/pref-window.cpp" line="207"/>
+        <location filename="../../src/app/pref-window.cpp" line="206"/>
         <source>Every %n min</source>
         <translation type="unfinished">
             <numerusform>Varje %n min</numerusform>
@@ -855,7 +855,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="456"/>
+        <location filename="../../src/app/pref-window.cpp" line="454"/>
         <source>%n sec</source>
         <translation type="unfinished">
             <numerusform>%n s</numerusform>
@@ -863,47 +863,47 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="455"/>
+        <location filename="../../src/app/pref-window.cpp" line="453"/>
         <source>Disabled</source>
         <translation>Inaktiverad</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="466"/>
+        <location filename="../../src/app/pref-window.cpp" line="464"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>Starta nästa rast efter att ha klickat med mittknappen på ikonen i aktivitetsfältet</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="471"/>
+        <location filename="../../src/app/pref-window.cpp" line="469"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>Starta nästa rast efter att ha dubbelklickat på ikonen i aktivitetsfältet</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="549"/>
+        <location filename="../../src/app/pref-window.cpp" line="547"/>
         <source>Save</source>
         <translation>Spara</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="550"/>
+        <location filename="../../src/app/pref-window.cpp" line="548"/>
         <source>Discard</source>
         <translation>Förkasta</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="551"/>
+        <location filename="../../src/app/pref-window.cpp" line="549"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="431"/>
+        <location filename="../../src/app/pref-window.cpp" line="429"/>
         <source>Setting autostart failed</source>
         <translation>Inställning av autostart misslyckades</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="546"/>
+        <location filename="../../src/app/pref-window.cpp" line="544"/>
         <source>The preferences have been modified.</source>
         <translation>Inställningarna har ändrats.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="547"/>
+        <location filename="../../src/app/pref-window.cpp" line="545"/>
         <source>Do you want to save your changes?</source>
         <translation>Vill du spara dina ändringar?</translation>
     </message>
@@ -1039,7 +1039,7 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="39"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="333"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="332"/>
         <source>Break time: %1</source>
         <translation type="unfinished">Rasttid: %1</translation>
     </message>
@@ -1067,23 +1067,23 @@ v%1
         <translation type="obsolete">&lt;h3&gt;Daglig uppdelning&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="31"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="334"/>
+        <location filename="../../src/app/stats-window.cpp" line="30"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="333"/>
         <source>%1h %2m</source>
         <translation type="unfinished">%1 tim %2 min</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="32"/>
+        <location filename="../../src/app/stats-window.cpp" line="31"/>
         <source>%1m</source>
         <translation type="unfinished">%1 min</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="329"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="328"/>
         <source>Breaks: %1 (%2 completed)</source>
         <translation type="unfinished">Raster: %1 (%2 slutförda)</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="338"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="337"/>
         <source>Postpones: %1</source>
         <translation type="unfinished">Uppskjutningar: %1</translation>
     </message>

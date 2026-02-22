@@ -243,9 +243,9 @@ QPushButton[flat=&quot;true&quot;]:checked {
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
-         <width>659</width>
-         <height>992</height>
+         <y>-180</y>
+         <width>661</width>
+         <height>870</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1917,7 +1917,13 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:26px; font-weight:700;&quot;&gt;Sane Break&lt;/span&gt; v%1 &lt;/p&gt;&lt;p&gt;Remind breaks without mindless skips. &lt;/p&gt;&lt;p&gt;2024-2026, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#2980b9;&quot;&gt;Sane Break developers&lt;/span&gt;&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#2980b9;&quot;&gt;GPL 3.0&lt;/span&gt;&lt;/a&gt;) &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;div&gt;
+&lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
+v%1
+&lt;/div&gt;
+&lt;p&gt;Remind breaks without mindless skips. &lt;/p&gt;
+&lt;p&gt;2024-2026, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break developers&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
+&lt;/p&gt;</string>
                  </property>
                  <property name="textFormat">
                   <enum>Qt::TextFormat::RichText</enum>

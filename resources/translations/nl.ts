@@ -509,14 +509,14 @@ dan 2 minuten duurt, zal het scherm sowieso worden vergrendeld.</translation>
 v%1
 &lt;/div&gt;
 &lt;p&gt;Remind breaks without mindless skips. &lt;/p&gt;
-&lt;p&gt;2024-2025, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break developers&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
+&lt;p&gt;2024-2026, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break developers&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
 &lt;/p&gt;</source>
         <translation>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
 &lt;/div&gt;
 &lt;p&gt;Voor pauzes die niet kunnen worden overgeslagen. &lt;/p&gt;
-&lt;p&gt;2024-2025, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break-ontwikkelaars&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
+&lt;p&gt;2024-2026, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break-ontwikkelaars&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
 &lt;/p&gt;</translation>
     </message>
     <message>
@@ -920,9 +920,9 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
+        <location filename="../../src/app/pref-window.cpp" line="455"/>
+        <location filename="../../src/app/pref-window.cpp" line="456"/>
         <location filename="../../src/app/pref-window.cpp" line="457"/>
-        <location filename="../../src/app/pref-window.cpp" line="458"/>
-        <location filename="../../src/app/pref-window.cpp" line="459"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min.</numerusform>
@@ -931,7 +931,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/pref-window.cpp" line="167"/>
-        <location filename="../../src/app/pref-window.cpp" line="207"/>
+        <location filename="../../src/app/pref-window.cpp" line="206"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>Iedere %n min.</numerusform>
@@ -939,7 +939,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="456"/>
+        <location filename="../../src/app/pref-window.cpp" line="454"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec.</numerusform>
@@ -947,47 +947,47 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="455"/>
+        <location filename="../../src/app/pref-window.cpp" line="453"/>
         <source>Disabled</source>
         <translation>Uitgeschakeld</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="466"/>
+        <location filename="../../src/app/pref-window.cpp" line="464"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>Volgende pauze starten na middelklikken op systeemvakpictogram</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="471"/>
+        <location filename="../../src/app/pref-window.cpp" line="469"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>Volgende pauze starten na dubbelklikken op systeemvakpictogram</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="549"/>
+        <location filename="../../src/app/pref-window.cpp" line="547"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="550"/>
+        <location filename="../../src/app/pref-window.cpp" line="548"/>
         <source>Discard</source>
         <translation>Verwerpen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="551"/>
+        <location filename="../../src/app/pref-window.cpp" line="549"/>
         <source>Cancel</source>
         <translation>Annuleren</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="431"/>
+        <location filename="../../src/app/pref-window.cpp" line="429"/>
         <source>Setting autostart failed</source>
         <translation>Automatisch opstarten is niet mogelijk</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="546"/>
+        <location filename="../../src/app/pref-window.cpp" line="544"/>
         <source>The preferences have been modified.</source>
         <translation>De instellingen zijn aangepast.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="547"/>
+        <location filename="../../src/app/pref-window.cpp" line="545"/>
         <source>Do you want to save your changes?</source>
         <translation>Wilt u de instellingen opslaan?</translation>
     </message>
@@ -1190,7 +1190,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="39"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="333"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="332"/>
         <source>Break time: %1</source>
         <translation type="unfinished">Pauzetijd: %1</translation>
     </message>
@@ -1218,23 +1218,23 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation type="obsolete">&lt;h3&gt;Dagelijkse opdeling&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="31"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="334"/>
+        <location filename="../../src/app/stats-window.cpp" line="30"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="333"/>
         <source>%1h %2m</source>
         <translation type="unfinished">%1 u %2 m</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="32"/>
+        <location filename="../../src/app/stats-window.cpp" line="31"/>
         <source>%1m</source>
         <translation type="unfinished">%1 m</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="329"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="328"/>
         <source>Breaks: %1 (%2 completed)</source>
         <translation type="unfinished">Pauzes: %1 (%2 voltooid)</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="338"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="337"/>
         <source>Postpones: %1</source>
         <translation type="unfinished">Uitstellingen: %1</translation>
     </message>

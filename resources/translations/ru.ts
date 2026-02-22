@@ -580,14 +580,14 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
 v%1
 &lt;/div&gt;
 &lt;p&gt;Remind breaks without mindless skips. &lt;/p&gt;
-&lt;p&gt;2024-2025, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break developers&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
+&lt;p&gt;2024-2026, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break developers&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
 &lt;/p&gt;</source>
         <translation>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
 &lt;/div&gt;
 &lt;p&gt;Напомнить о перерывах без бессмысленного пропуска.&lt;/p&gt;
-&lt;p&gt;2024-2025, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;разработчики Sane Break&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.ru.html&quot;&gt;GPL 3.0&lt;/a&gt;)
+&lt;p&gt;2024-2026, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;разработчики Sane Break&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.ru.html&quot;&gt;GPL 3.0&lt;/a&gt;)
 &lt;/p&gt;</translation>
     </message>
     <message>
@@ -862,9 +862,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
+        <location filename="../../src/app/pref-window.cpp" line="455"/>
+        <location filename="../../src/app/pref-window.cpp" line="456"/>
         <location filename="../../src/app/pref-window.cpp" line="457"/>
-        <location filename="../../src/app/pref-window.cpp" line="458"/>
-        <location filename="../../src/app/pref-window.cpp" line="459"/>
         <source>%n min</source>
         <translation type="unfinished">
             <numerusform>%n мин</numerusform>
@@ -874,7 +874,7 @@ v%1
     </message>
     <message numerus="yes">
         <location filename="../../src/app/pref-window.cpp" line="167"/>
-        <location filename="../../src/app/pref-window.cpp" line="207"/>
+        <location filename="../../src/app/pref-window.cpp" line="206"/>
         <source>Every %n min</source>
         <translation type="unfinished">
             <numerusform>Каждые %n мин</numerusform>
@@ -883,7 +883,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="456"/>
+        <location filename="../../src/app/pref-window.cpp" line="454"/>
         <source>%n sec</source>
         <translation type="unfinished">
             <numerusform>%n сек</numerusform>
@@ -892,47 +892,47 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="455"/>
+        <location filename="../../src/app/pref-window.cpp" line="453"/>
         <source>Disabled</source>
         <translation type="unfinished">Отключено</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="431"/>
+        <location filename="../../src/app/pref-window.cpp" line="429"/>
         <source>Setting autostart failed</source>
         <translation type="unfinished">Настройка автозапуска не удалась</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="466"/>
+        <location filename="../../src/app/pref-window.cpp" line="464"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation type="unfinished">Начать следующий перерыв после среднего клика на значке в трее</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="471"/>
+        <location filename="../../src/app/pref-window.cpp" line="469"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation type="unfinished">Начать следующий перерыв после двойного клика на значке в трее</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="549"/>
+        <location filename="../../src/app/pref-window.cpp" line="547"/>
         <source>Save</source>
         <translation type="unfinished">Сохранить</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="550"/>
+        <location filename="../../src/app/pref-window.cpp" line="548"/>
         <source>Discard</source>
         <translation type="unfinished">Отменить</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="551"/>
+        <location filename="../../src/app/pref-window.cpp" line="549"/>
         <source>Cancel</source>
         <translation type="unfinished">Отмена</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="546"/>
+        <location filename="../../src/app/pref-window.cpp" line="544"/>
         <source>The preferences have been modified.</source>
         <translation type="unfinished">Настройки были изменены.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="547"/>
+        <location filename="../../src/app/pref-window.cpp" line="545"/>
         <source>Do you want to save your changes?</source>
         <translation type="unfinished">Хотите сохранить изменения?</translation>
     </message>
@@ -1078,7 +1078,7 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="39"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="333"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="332"/>
         <source>Break time: %1</source>
         <translation type="unfinished">Время перерывов: %1</translation>
     </message>
@@ -1106,23 +1106,23 @@ v%1
         <translation type="obsolete">&lt;h3&gt;Ежедневная статистика&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="31"/>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="334"/>
+        <location filename="../../src/app/stats-window.cpp" line="30"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="333"/>
         <source>%1h %2m</source>
         <translation type="unfinished">%1 ч %2 мин</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="32"/>
+        <location filename="../../src/app/stats-window.cpp" line="31"/>
         <source>%1m</source>
         <translation type="unfinished">%1 мин</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="329"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="328"/>
         <source>Breaks: %1 (%2 completed)</source>
         <translation type="unfinished">Перерывы: %1 (%2 завершено)</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="338"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="337"/>
         <source>Postpones: %1</source>
         <translation type="unfinished">Отложено: %1</translation>
     </message>
