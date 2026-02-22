@@ -11,7 +11,10 @@
 #include <QColor>
 #include <QComboBox>
 #include <QDesktopServices>
+#include <QDir>
 #include <QEvent>
+#include <QFileDialog>
+#include <QFileInfo>
 #include <QGridLayout>
 #include <QIcon>
 #include <QLabel>
@@ -25,9 +28,11 @@
 #include <QSettings>
 #include <QSlider>
 #include <QSpinBox>
+#include <QStandardPaths>
 #include <QString>
 #include <QStringList>
 #include <QTimer>
+#include <QUrl>
 #include <QVBoxLayout>
 #include <QWidget>
 #include <Qt>
@@ -192,6 +197,8 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
     ui->bigEndBellSelect->setEnabled(enabled);
     ui->playBigStart->setEnabled(enabled);
     ui->playBigEnd->setEnabled(enabled);
+    ui->browseBigStart->setEnabled(enabled);
+    ui->browseBigEnd->setEnabled(enabled);
   };
   connect(controllers->add(PrefGroup::Schedule,
                            new PrefController<QCheckBox, bool>(
@@ -385,12 +392,16 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
   QList<Setting<QString>*> soundSettings = {
       preferences->smallStartBell, preferences->smallEndBell, preferences->bigStartBell,
       preferences->bigEndBell};
+  QList<QPushButton*> soundBrowseButtons = {ui->browseSmallStart, ui->browseSmallEnd,
+                                            ui->browseBigStart, ui->browseBigEnd};
   for (int i = 0; i < soundSelects.length(); i++) {
     soundSelects[i]->addItems(soundFiles);
     connect(soundPlayButtons[i], &QPushButton::pressed, soundPlayer,
             [this, soundSelects, i]() {
               soundPlayer->play(soundSelects[i]->currentText());
             });
+    connect(soundBrowseButtons[i], &QPushButton::pressed, this,
+            [this, soundSelects, i]() { browseForSound(soundSelects[i]); });
     controllers->add(PrefGroup::Sound, new PrefController<QComboBox, QString>(
                                            soundSelects[i], soundSettings[i]));
   }
@@ -579,6 +590,27 @@ void PreferenceWindow::openSourceCode() {
 
 void PreferenceWindow::openWeblate() {
   QDesktopServices::openUrl(QUrl("https://hosted.weblate.org/engage/sane-break/"));
+}
+
+void PreferenceWindow::browseForSound(QComboBox* comboBox) {
+  QString file =
+      QFileDialog::getOpenFileName(this, tr("Select Sound File"), QString(),
+                                   tr("Sound Files (*.mp3 *.wav *.ogg *.flac *.m4a)"));
+  if (file.isEmpty()) return;
+
+  QString soundDir =
+      QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/sounds";
+  QDir().mkpath(soundDir);
+
+  QString destPath = soundDir + "/" + QFileInfo(file).fileName();
+  if (QFile::exists(destPath)) QFile::remove(destPath);
+  if (!QFile::copy(file, destPath)) {
+    QMessageBox::warning(this, tr("Error"),
+                         tr("Failed to save a copy of the selected sound file."));
+    return;
+  }
+
+  comboBox->setEditText(QUrl::fromLocalFile(destPath).toString());
 }
 
 void PreferenceWindow::openBreakWindowPreview() {

@@ -243,7 +243,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-180</y>
+         <y>0</y>
          <width>661</width>
          <height>870</height>
         </rect>
@@ -1585,7 +1585,7 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
              </widget>
             </item>
             <item>
-             <layout class="QGridLayout" name="gridLayout_6" columnstretch="0,1,0">
+             <layout class="QGridLayout" name="gridLayout_6" columnstretch="0,1,0,0">
               <item row="1" column="0">
                <widget class="QLabel" name="label_28">
                 <property name="toolTip">
@@ -1610,10 +1610,24 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                 </property>
                </widget>
               </item>
+              <item row="1" column="3">
+               <widget class="QPushButton" name="browseSmallEnd">
+                <property name="text">
+                 <string>Browse</string>
+                </property>
+               </widget>
+              </item>
               <item row="0" column="2">
                <widget class="QPushButton" name="playSmallStart">
                 <property name="text">
                  <string>Play</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QPushButton" name="browseSmallStart">
+                <property name="text">
+                 <string>Browse</string>
                 </property>
                </widget>
               </item>
@@ -1644,7 +1658,7 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
              </widget>
             </item>
             <item>
-             <layout class="QGridLayout" name="gridLayout_8" columnstretch="0,1,0">
+             <layout class="QGridLayout" name="gridLayout_8" columnstretch="0,1,0,0">
               <item row="0" column="1">
                <widget class="QComboBox" name="bigStartBellSelect">
                 <property name="sizePolicy">
@@ -1672,10 +1686,24 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                 </property>
                </widget>
               </item>
+              <item row="0" column="3">
+               <widget class="QPushButton" name="browseBigStart">
+                <property name="text">
+                 <string>Browse</string>
+                </property>
+               </widget>
+              </item>
               <item row="1" column="2">
                <widget class="QPushButton" name="playBigEnd">
                 <property name="text">
                  <string>Play</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="3">
+               <widget class="QPushButton" name="browseBigEnd">
+                <property name="text">
+                 <string>Browse</string>
                 </property>
                </widget>
               </item>
@@ -1701,7 +1729,7 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                <bool>true</bool>
               </property>
               <property name="text">
-               <string>&lt;strong&gt;Tip&lt;/strong&gt;: You can use local sound files with URLs like &lt;code&gt;file:/D:sound.mp3&lt;/code&gt;  (Windows) or &lt;code&gt;file:/home/name/sound.mp3&lt;/code&gt; (Linux).</string>
+               <string>&lt;strong&gt;Tip&lt;/strong&gt;: Use &lt;i&gt;Browse&lt;/i&gt; to select a custom sound file. A copy of the file will be saved so it can always be played.</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
