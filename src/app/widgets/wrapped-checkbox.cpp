@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 // This file contains code derived from a StackOverflow post, licensed under the
@@ -17,9 +17,11 @@
 #include <QCheckBox>
 #include <QFontMetrics>
 #include <QResizeEvent>
+#include <QSize>
 #include <QSizePolicy>
 #include <QString>
 #include <QStyle>
+#include <QStyleOptionButton>
 #include <QWidget>
 #include <Qt>
 
@@ -48,6 +50,17 @@ void WrappedCheckBox::wrapLines(int width) {
   }
   result += line.trimmed();
   setText(result.trimmed());
+}
+
+QSize WrappedCheckBox::minimumSizeHint() const {
+  // Return the width of a checkbox with no text content, so the layout can
+  // shrink us narrow enough for text wrapping to kick in.
+  QStyleOptionButton opt;
+  initStyleOption(&opt);
+  opt.text = QString();
+  int width =
+      style()->sizeFromContents(QStyle::CT_CheckBox, &opt, QSize(), this).width();
+  return QSize(width, sizeHint().height());
 }
 
 void WrappedCheckBox::resizeEvent(QResizeEvent* event) {

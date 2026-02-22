@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 // This file contains code derived from a StackOverflow post, licensed under the
@@ -24,9 +24,7 @@ class WrappedCheckBox : public QCheckBox {
  public:
   WrappedCheckBox(QWidget* parent = nullptr) : WrappedCheckBox(QString(), parent) {}
   WrappedCheckBox(const QString& text, QWidget* parent = nullptr);
-  QSize minimumSizeHint() const override {
-    return QSize(QCheckBox().minimumSizeHint().width(), sizeHint().height());
-  }
+  QSize minimumSizeHint() const override;
 
  private:
   void wrapLines(int width);
