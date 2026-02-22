@@ -171,6 +171,7 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
             ui->bigBreakAfterBox->setToolTip(
                 tr("Every %n min", "", value * ui->bigBreakAfterBox->value()));
             ui->postponeSessionRatioLabel->setArgs({value});
+            ui->flashTrayForBox->setMaximum(value * 60);
           });
   controllers->add(
       PrefGroup::Schedule,
@@ -268,6 +269,9 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
             ui->reminderBehaviorLabel->setArgs(
                 {ui->flashForBox->value(), ui->confirmAfterBox->value()});
           });
+  controllers->add(PrefGroup::Reminder,
+                   new PrefController<QSpinBox, int>(ui->flashTrayForBox,
+                                                     preferences->flashTrayFor));
   controllers->add(PrefGroup::Reminder,
                    new PrefController<QSpinBox, int>(ui->maxForceBreakExits,
                                                      preferences->maxForceBreakExits));

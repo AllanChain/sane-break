@@ -102,6 +102,7 @@ class SanePreferences : public QObject {
 
   Setting<int>* flashFor;
   Setting<int>* confirmAfter;
+  Setting<int>* flashTrayFor;
   Setting<int>* maxForceBreakExits;
   Setting<bool>* autoCloseWindowAfterSmallBreak;
   Setting<bool>* autoCloseWindowAfterBigBreak;

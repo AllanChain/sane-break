@@ -975,6 +975,36 @@ QPushButton[flat=&quot;true&quot;]:checked {
              </layout>
             </item>
             <item>
+             <layout class="QHBoxLayout" name="flashTrayLayout" stretch="2,1">
+              <item>
+               <widget class="QLabel" name="flashTrayLabel">
+                <property name="toolTip">
+                 <string extracomment="Tooltip for &quot;Flash tray icon before break&quot; config">Tray icon will start flashing this many seconds before the break. Set to 0 to disable.</string>
+                </property>
+                <property name="text">
+                 <string>Flash tray icon before break</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="flashTrayForBox">
+                <property name="suffix">
+                 <string> sec</string>
+                </property>
+                <property name="minimum">
+                 <number>0</number>
+                </property>
+                <property name="maximum">
+                 <number>60</number>
+                </property>
+                <property name="value">
+                 <number>10</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
              <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="2,1">
               <item>
                <widget class="QLabel" name="label_12">

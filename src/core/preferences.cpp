@@ -47,6 +47,7 @@ SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
 
   flashFor = new Setting<int>(settings, "break/flash-for", 30);
   confirmAfter = new Setting<int>(settings, "break/confirm-after", 30);
+  flashTrayFor = new Setting<int>(settings, "break/flash-tray-for", 10);
   flashSpeed = new Setting<int>(settings, "break/flash-speed", 120);
   countDownColor =
       new Setting<QColor>(settings, "theme/count-down", QColor(236, 239, 244, 255));

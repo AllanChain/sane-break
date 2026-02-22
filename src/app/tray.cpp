@@ -262,7 +262,9 @@ void StatusTray::update(TrayData data) {
   StatusTrayWindow::update(data);
   icon->setIcon(renderTrayIcon(trayIconSpec(data)));
 
-  if (data.secondsToNextBreak <= 10 && !data.pauseReasons && !data.isBreaking) {
+  int flashTrayFor = preferences->flashTrayFor->get();
+  if (flashTrayFor > 0 && data.secondsToNextBreak <= flashTrayFor &&
+      !data.pauseReasons && !data.isBreaking) {
     if (!flashTimer->isActive()) {
       QTimer::singleShot(500, [this]() {
         icon->setIcon(emptyIconPixmap);
