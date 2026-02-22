@@ -9,6 +9,7 @@
 #include <QApplication>
 #include <QColor>
 #include <QFile>
+#include <QGraphicsOpacityEffect>
 #include <QIODevice>
 #include <QLabel>
 #include <QMainWindow>
@@ -18,6 +19,7 @@
 #include <QPushButton>
 #include <QRect>
 #include <QScreen>
+#include <QSequentialAnimationGroup>
 #include <QSize>
 #include <QString>
 #include <QTimer>
@@ -26,6 +28,7 @@
 #include <QWidget>
 #include <QWindow>
 #include <Qt>
+#include <algorithm>
 
 #include "config.h"
 #include "core/break-windows.h"
@@ -106,11 +109,23 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget* parent)
   m_progressAnim->setDuration(m_totalSeconds * 1000);
   m_progressAnim->start();
 
-  m_bgAnim = new QPropertyAnimation(this, "color");
-  m_bgAnim->setStartValue(data.theme.highlightBackground);
-  m_bgAnim->setEndValue(data.theme.mainBackground);
-  m_bgAnim->setDuration(data.theme.flashAnimationDuration);
-  m_bgAnim->setLoopCount(-1);
+  auto* bgAnimGroup = new QSequentialAnimationGroup(this);
+  int baseDuration = data.theme.flashAnimationDuration;
+  int fastCount = std::max({2, 10000 / baseDuration});
+  int slowCount = std::max({1, fastCount / 4});
+  auto addFlashes = [&](int count, int duration) {
+    for (int i = 0; i < count; ++i) {
+      auto* flash = new QPropertyAnimation(this, "color");
+      flash->setStartValue(data.theme.highlightBackground);
+      flash->setEndValue(data.theme.mainBackground);
+      flash->setDuration(duration);
+      bgAnimGroup->addAnimation(flash);
+    }
+  };
+  addFlashes(fastCount, baseDuration);
+  addFlashes(slowCount, baseDuration * 4);
+  bgAnimGroup->setLoopCount(-1);
+  m_bgAnim = bgAnimGroup;
   m_bgAnim->start();
 }
 
@@ -157,7 +172,7 @@ void BreakWindow::showFullScreen() {
     windowHandle()->setFlag(Qt::WindowTransparentForInput, false);
   }
   m_bgAnim->stop();
-  setProperty("color", m_bgAnim->endValue());
+  setProperty("color", m_data.theme.mainBackground);
 
   ui->breakLabel->setText(m_data.message.fullScreen);
   if (m_data.show.countdown) ui->countDownLabel->setVisible(true);
@@ -184,7 +199,7 @@ void BreakWindow::showFullScreen() {
     fadeIn->setStartValue(0.0);
     fadeIn->setEndValue(1.0);
     fadeIn->setDuration(300);
-    fadeIn->start(QAbstractAnimation::DeleteWhenStopped);
+    fadeIn->start(QPropertyAnimation::DeleteWhenStopped);
   }
 }
 
@@ -198,7 +213,7 @@ void BreakWindow::showFlashPrompt() {
     fadeOut->setStartValue(1.0);
     fadeOut->setEndValue(0.0);
     fadeOut->setDuration(100);
-    fadeOut->start(QAbstractAnimation::DeleteWhenStopped);
+    fadeOut->start(QPropertyAnimation::DeleteWhenStopped);
     connect(fadeOut, &QPropertyAnimation::finished, m_bgImageLabel, &QLabel::hide);
   }
   m_bgAnim->start();

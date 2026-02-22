@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <QAbstractAnimation>
 #include <QColor>
 #include <QGraphicsOpacityEffect>
 #include <QLabel>
@@ -12,6 +13,7 @@
 #include <QProgressBar>
 #include <QPropertyAnimation>
 #include <QPushButton>
+#include <QSequentialAnimationGroup>
 #include <QString>
 #include <QTimer>
 #include <QWidget>
@@ -52,7 +54,7 @@ class BreakWindow : public QMainWindow {
   QColor backgroundColor;
   BreakWindowData m_data;
   QPropertyAnimation* m_progressAnim;
-  QPropertyAnimation* m_bgAnim;
+  QAbstractAnimation* m_bgAnim;
   QLabel* m_bgImageLabel = nullptr;
   QGraphicsOpacityEffect* m_bgImageOpacity = nullptr;
   bool m_waylandWorkaround = false;
