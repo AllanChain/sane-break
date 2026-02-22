@@ -46,7 +46,6 @@ add_library(
   widgets/language-select.h
   widgets/wrapped-checkbox.cpp
   widgets/wrapped-checkbox.h
-  ${CMAKE_SOURCE_DIR}/resources/index.qrc
 )
 
 target_include_directories(
@@ -60,7 +59,9 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   target_sources(sane-gui PRIVATE windows/signal-handler.h windows/signal-handler.cpp)
 endif()
 
-qt_add_executable(sane-break-app MANUAL_FINALIZATION main.cpp)
+qt_add_executable(
+  sane-break-app MANUAL_FINALIZATION main.cpp ${CMAKE_SOURCE_DIR}/resources/index.qrc
+)
 target_link_libraries(sane-break-app PRIVATE sane-gui)
 
 include(cmake/translation.cmake)
