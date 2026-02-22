@@ -12,6 +12,7 @@
 #include <QTime>
 #include <QTimeEdit>
 #include <QTimer>
+#include <QWidget>
 #include <Qt>
 
 #include "core/db.h"
@@ -30,7 +31,7 @@ MeetingWindow::MeetingWindow(SanePreferences* preferences, BreakDatabase* db,
     accept();
   });
   QTime now = QTime::currentTime();
-  ui->endTime->setTime(QTime(now.hour(), now.minute()));
+  ui->endTime->setTime(QTime(now.hour(), now.minute()).addSecs(1800));
 }
 
 void MeetingWindow::onInputUpdate() {
