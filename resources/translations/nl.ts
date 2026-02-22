@@ -368,14 +368,14 @@
 &lt;p&gt;Sane Break toont een kleine &lt;b&gt;flitsherinnering gedurende&lt;/b&gt; seconden. Als u stopt met werken of de herinnering bewust negeert, dan wordt de herinnering schermvullend getoond. Na het &lt;b&gt;bevestigen van de pauze na&lt;/b&gt; seconden of inactiviteit, wordt de boel vergrendeld totdat de tijdklok afloopt.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="914"/>
+        <location filename="../../src/app/pref-window.ui" line="924"/>
         <source>Time in seconds before forcing break after work reminder appears.</source>
         <extracomment>Tooltip for &quot;Flash break prompt for&quot; config</extracomment>
         <translation>De duur - in seconden - alvorens een pauzeherinnering wordt getoond.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="379"/>
-        <location filename="../../src/app/pref-window.ui" line="625"/>
+        <location filename="../../src/app/pref-window.ui" line="635"/>
         <source>Length of work time between breaks</source>
         <extracomment>Tooltip for &quot;Break every&quot; config (small break)</extracomment>
         <translation>De werktijd tussen pauzes</translation>
@@ -398,14 +398,14 @@
     <message>
         <location filename="../../src/app/pref-window.ui" line="382"/>
         <location filename="../../src/app/pref-window.ui" line="429"/>
-        <location filename="../../src/app/pref-window.ui" line="628"/>
-        <location filename="../../src/app/pref-window.ui" line="675"/>
+        <location filename="../../src/app/pref-window.ui" line="638"/>
+        <location filename="../../src/app/pref-window.ui" line="685"/>
         <source>Break every</source>
         <translation>Pauzeren, iedere</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="426"/>
-        <location filename="../../src/app/pref-window.ui" line="672"/>
+        <location filename="../../src/app/pref-window.ui" line="682"/>
         <source>Every so many breaks will be a big break</source>
         <extracomment>Tooltip for &quot;Break every&quot; config (big break)</extracomment>
         <translation>Ieder x-aantal pauzes zal een lange zijn</translation>
@@ -425,13 +425,13 @@
         <translation type="vanished">Pauzeherinnering tonen, gedurende</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="924"/>
+        <location filename="../../src/app/pref-window.ui" line="934"/>
         <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
         <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
         <translation>Na een bepaalde mate van inactiviteit tijdens een pauze, zal Sane Break een schermvullende melding tonen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="927"/>
+        <location filename="../../src/app/pref-window.ui" line="937"/>
         <source>Confirm break after</source>
         <translation>Pauze automatisch bevestigen na</translation>
     </message>
@@ -440,7 +440,7 @@
         <translation type="vanished">&lt;h3&gt;Vormgeving van herinnering&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1061"/>
+        <location filename="../../src/app/pref-window.ui" line="1071"/>
         <source>Flash speed</source>
         <translation>Flitssnelheid</translation>
     </message>
@@ -449,12 +449,12 @@
         <translation type="vanished">Tekstdoorzichtigheid</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1425"/>
+        <location filename="../../src/app/pref-window.ui" line="1435"/>
         <source>&lt;h3&gt;Pause Conditions&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;Pauzevoorwaarden&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1575"/>
+        <location filename="../../src/app/pref-window.ui" line="1585"/>
         <source>&lt;h3&gt;Reset Break Schedule After Pause&lt;/h3&gt;
 &lt;p&gt;Sane Break will adjust the break schedule after pausing:&lt;/p&gt;
 &lt;ul&gt;
@@ -469,17 +469,17 @@
 &lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1636"/>
+        <location filename="../../src/app/pref-window.ui" line="1646"/>
         <source>Long pause threshold</source>
         <translation>Drempelwaarde van lange pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1690"/>
+        <location filename="../../src/app/pref-window.ui" line="1700"/>
         <source>Short pause threshold</source>
         <translation>Drempelwaarde van korte pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1949"/>
+        <location filename="../../src/app/pref-window.ui" line="1959"/>
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
@@ -489,7 +489,7 @@ tot vergrendeling van het scherm, 2 minuten nadat de pauze is begonnen. Als de p
 dan 2 minuten duurt, zal het scherm sowieso worden vergrendeld.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1954"/>
+        <location filename="../../src/app/pref-window.ui" line="1964"/>
         <source>Automatic screen lock after break start</source>
         <translation>Scherm automatisch vergrendelen tijdens pauze</translation>
     </message>
@@ -498,12 +498,12 @@ dan 2 minuten duurt, zal het scherm sowieso worden vergrendeld.</translation>
         <translation type="vanished">Verleen toegang tot de toegankelijkheidsinstellingen en herstart het programma</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1900"/>
+        <location filename="../../src/app/pref-window.ui" line="1910"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Helpen met vertalen!&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2071"/>
+        <location filename="../../src/app/pref-window.ui" line="2081"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -521,14 +521,14 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="325"/>
-        <location filename="../../src/app/pref-window.ui" line="571"/>
+        <location filename="../../src/app/pref-window.ui" line="581"/>
         <source>Duration of small breaks (in seconds)</source>
         <extracomment>Tooltip for &quot;Break length&quot; config (small break)</extracomment>
         <translation>De duur van korte pauzes (in seconden)</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="499"/>
-        <location filename="../../src/app/pref-window.ui" line="745"/>
+        <location filename="../../src/app/pref-window.ui" line="755"/>
         <source>Duration of big breaks (in seconds)</source>
         <extracomment>Tooltip for &quot;Break length&quot; config (big break)</extracomment>
         <translation>De duur van lange pauzes (in seconden)</translation>
@@ -538,14 +538,14 @@ v%1
         <translation type="vanished">Uitstellen, gedurende</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="857"/>
+        <location filename="../../src/app/pref-window.ui" line="867"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
 &lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Gedrag van herinnering&lt;/h3&gt;
 &lt;p&gt;Sane Break toont een kleine melding gedurende &lt;b&gt;%1&lt;/b&gt; seconden. Als u stopt met werken of ervoor kiest om door te gaan tot de tijd is verlopen, dan wordt het venster schermvullend weergegeven. Tijdens de pauze wordt het scherm vergrendeld na &lt;b&gt;%2&lt;/b&gt; seconden van inactiviteit. Indien u weer actief bent vóór het vergrendelen, dan krimpt de melding tijdelijk naar een klein venster, maar zodra u weer inactief bent of de tijd is verstreken, wordt het opnieuw schermvullend getoond.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1046"/>
+        <location filename="../../src/app/pref-window.ui" line="1056"/>
         <source>&lt;h3&gt;Prompt Appearance&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;Herinneringssnelheid&lt;/h3&gt;</translation>
     </message>
@@ -578,16 +578,16 @@ v%1
         <translation type="vanished">Doorzichtigheid van aftelklok</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1715"/>
-        <location filename="../../src/app/pref-window.ui" line="1760"/>
+        <location filename="../../src/app/pref-window.ui" line="1725"/>
+        <location filename="../../src/app/pref-window.ui" line="1770"/>
         <source>Try restart Sane Break if no sound</source>
         <translation>Herstart Sane Break als er geen geluid wordt afgespeeld</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1732"/>
-        <location filename="../../src/app/pref-window.ui" line="1746"/>
-        <location filename="../../src/app/pref-window.ui" line="1808"/>
-        <location filename="../../src/app/pref-window.ui" line="1822"/>
+        <location filename="../../src/app/pref-window.ui" line="1742"/>
+        <location filename="../../src/app/pref-window.ui" line="1756"/>
+        <location filename="../../src/app/pref-window.ui" line="1818"/>
+        <location filename="../../src/app/pref-window.ui" line="1832"/>
         <source>Play</source>
         <translation>Afspelen</translation>
     </message>
@@ -596,13 +596,13 @@ v%1
         <translation type="vanished">Opschorten indien gepauzeerd gedurende</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1434"/>
+        <location filename="../../src/app/pref-window.ui" line="1444"/>
         <source>Sane Break will pause if it detects no activity for this many minutes</source>
         <extracomment>Tooltip for &quot;Pause if idle for&quot; config</extracomment>
         <translation>Sane Break zal de pauze opschorten als er geen activiteit wordt waargenomen gedurende het opgegeven aantal minuten</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1437"/>
+        <location filename="../../src/app/pref-window.ui" line="1447"/>
         <source>Pause if idle for</source>
         <translation>Opschorten indien inactief gedurende</translation>
     </message>
@@ -612,63 +612,63 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="275"/>
-        <location filename="../../src/app/pref-window.ui" line="521"/>
-        <location filename="../../src/app/pref-window.ui" line="1706"/>
+        <location filename="../../src/app/pref-window.ui" line="531"/>
+        <location filename="../../src/app/pref-window.ui" line="1716"/>
         <source>&lt;h3&gt;Small Breaks&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;Korte pauzes&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="335"/>
         <location filename="../../src/app/pref-window.ui" line="436"/>
-        <location filename="../../src/app/pref-window.ui" line="581"/>
-        <location filename="../../src/app/pref-window.ui" line="682"/>
-        <location filename="../../src/app/pref-window.ui" line="1478"/>
-        <location filename="../../src/app/pref-window.ui" line="1620"/>
-        <location filename="../../src/app/pref-window.ui" line="1674"/>
+        <location filename="../../src/app/pref-window.ui" line="591"/>
+        <location filename="../../src/app/pref-window.ui" line="692"/>
+        <location filename="../../src/app/pref-window.ui" line="1488"/>
+        <location filename="../../src/app/pref-window.ui" line="1630"/>
+        <location filename="../../src/app/pref-window.ui" line="1684"/>
         <source> min</source>
         <translation> min.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1763"/>
-        <location filename="../../src/app/pref-window.ui" line="1801"/>
+        <location filename="../../src/app/pref-window.ui" line="1773"/>
+        <location filename="../../src/app/pref-window.ui" line="1811"/>
         <source>Bell before breaks</source>
         <translation>Bel vóór pauzes</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="284"/>
-        <location filename="../../src/app/pref-window.ui" line="530"/>
-        <location filename="../../src/app/pref-window.ui" line="873"/>
-        <location filename="../../src/app/pref-window.ui" line="962"/>
-        <location filename="../../src/app/pref-window.ui" line="992"/>
+        <location filename="../../src/app/pref-window.ui" line="540"/>
+        <location filename="../../src/app/pref-window.ui" line="883"/>
+        <location filename="../../src/app/pref-window.ui" line="972"/>
+        <location filename="../../src/app/pref-window.ui" line="1002"/>
         <source> sec</source>
         <translation> sec.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="328"/>
         <location filename="../../src/app/pref-window.ui" line="502"/>
-        <location filename="../../src/app/pref-window.ui" line="574"/>
-        <location filename="../../src/app/pref-window.ui" line="748"/>
+        <location filename="../../src/app/pref-window.ui" line="584"/>
+        <location filename="../../src/app/pref-window.ui" line="758"/>
         <source>Break length</source>
         <translation>Pauzeduur</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1116"/>
-        <location filename="../../src/app/pref-window.ui" line="1149"/>
+        <location filename="../../src/app/pref-window.ui" line="1126"/>
+        <location filename="../../src/app/pref-window.ui" line="1159"/>
         <source>(One line per message)</source>
         <translation>(Eén regel per bericht)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1123"/>
+        <location filename="../../src/app/pref-window.ui" line="1133"/>
         <source>Big break prompt messages:</source>
         <translation>Berichten voor lange pauze:</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1133"/>
+        <location filename="../../src/app/pref-window.ui" line="1143"/>
         <source>Small break prompt messages:</source>
         <translation>Berichten voor korte pauze:</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1012"/>
+        <location filename="../../src/app/pref-window.ui" line="1022"/>
         <source>Max number of force break exits</source>
         <translation type="unfinished">Maximum aantal keer dat gedwongen pauze kan worden afgebroken</translation>
     </message>
@@ -678,12 +678,12 @@ v%1
         <translation type="unfinished">Interface</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1019"/>
+        <location filename="../../src/app/pref-window.ui" line="1029"/>
         <source> times</source>
         <translation type="unfinished">keer</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1158"/>
+        <location filename="../../src/app/pref-window.ui" line="1168"/>
         <source>&lt;h3&gt;Components to Show&lt;/h3&gt;
 
 &lt;p&gt;User interface components to show in the prompt and full-screen window.&lt;/p&gt;</source>
@@ -692,70 +692,70 @@ v%1
 &lt;p&gt;Onderdelen van de gebruikersinterface die worden getoond in de herinnering en het schermvullende venster.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1183"/>
-        <location filename="../../src/app/pref-window.ui" line="1229"/>
+        <location filename="../../src/app/pref-window.ui" line="1193"/>
+        <location filename="../../src/app/pref-window.ui" line="1239"/>
         <source>Time when break ends</source>
         <translation type="unfinished">Tijd waarop de pauze eindigt</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1204"/>
-        <location filename="../../src/app/pref-window.ui" line="1250"/>
+        <location filename="../../src/app/pref-window.ui" line="1214"/>
+        <location filename="../../src/app/pref-window.ui" line="1260"/>
         <source>Countdown timer</source>
         <translation type="unfinished">Afteltimer</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1176"/>
-        <location filename="../../src/app/pref-window.ui" line="1222"/>
+        <location filename="../../src/app/pref-window.ui" line="1186"/>
+        <location filename="../../src/app/pref-window.ui" line="1232"/>
         <source>Progress bar</source>
         <translation type="unfinished">Voortgangsbalk</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1190"/>
-        <location filename="../../src/app/pref-window.ui" line="1236"/>
+        <location filename="../../src/app/pref-window.ui" line="1200"/>
+        <location filename="../../src/app/pref-window.ui" line="1246"/>
         <source>Clock</source>
         <translation type="unfinished">Klok</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1197"/>
-        <location filename="../../src/app/pref-window.ui" line="1243"/>
+        <location filename="../../src/app/pref-window.ui" line="1207"/>
+        <location filename="../../src/app/pref-window.ui" line="1253"/>
         <source>Buttons</source>
         <translation type="unfinished">Knoppen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1259"/>
+        <location filename="../../src/app/pref-window.ui" line="1269"/>
         <source>&lt;h3&gt;Color Theme&lt;/h3&gt;
 All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
         <translation>&lt;h3&gt;Kleurenschema&lt;/h3&gt;
 Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1343"/>
+        <location filename="../../src/app/pref-window.ui" line="1353"/>
         <source>Big break</source>
         <translation>Lange pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1312"/>
+        <location filename="../../src/app/pref-window.ui" line="1322"/>
         <source>Message</source>
         <translation>Bericht</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1350"/>
+        <location filename="../../src/app/pref-window.ui" line="1360"/>
         <source>Small break</source>
         <translation>Korte pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1319"/>
+        <location filename="../../src/app/pref-window.ui" line="1329"/>
         <source>Background</source>
         <translation>Achtergrond</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1326"/>
+        <location filename="../../src/app/pref-window.ui" line="1336"/>
         <source>Count down</source>
         <translation>Aftellen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1718"/>
-        <location filename="../../src/app/pref-window.ui" line="1843"/>
+        <location filename="../../src/app/pref-window.ui" line="1728"/>
+        <location filename="../../src/app/pref-window.ui" line="1853"/>
         <source>Bell after breaks</source>
         <translation>Bel ná pauzes</translation>
     </message>
@@ -765,14 +765,14 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="391"/>
-        <location filename="../../src/app/pref-window.ui" line="637"/>
-        <location filename="../../src/app/pref-window.ui" line="1779"/>
+        <location filename="../../src/app/pref-window.ui" line="647"/>
+        <location filename="../../src/app/pref-window.ui" line="1789"/>
         <source>&lt;h3&gt;Big Breaks&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;Lange pauzes&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="410"/>
-        <location filename="../../src/app/pref-window.ui" line="656"/>
+        <location filename="../../src/app/pref-window.ui" line="666"/>
         <source> breaks</source>
         <translation> pauzes</translation>
     </message>
@@ -781,42 +781,42 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation type="vanished">&lt;h3&gt;Gedeelde opties&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1496"/>
+        <location filename="../../src/app/pref-window.ui" line="1506"/>
         <source>Pause on battery</source>
         <translation>Opschorten tijdens werken op accu</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1503"/>
+        <location filename="../../src/app/pref-window.ui" line="1513"/>
         <source>Pause breaks when any of the following program is running:</source>
         <translation>Pauzes opschorten indien een van deze programma&apos;s actief is:</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1510"/>
+        <location filename="../../src/app/pref-window.ui" line="1520"/>
         <source>(Write one program name per line)</source>
         <translation>(Eén programma per regel)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1893"/>
+        <location filename="../../src/app/pref-window.ui" line="1903"/>
         <source>Configuration file</source>
         <translation>Configuratiebestand</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1969"/>
+        <location filename="../../src/app/pref-window.ui" line="1979"/>
         <source>Launch Sane Break at start up</source>
         <translation>Sane Break automatisch opstarten</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2095"/>
+        <location filename="../../src/app/pref-window.ui" line="2105"/>
         <source>Get the Source Code</source>
         <translation>Broncode bekijken</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2157"/>
+        <location filename="../../src/app/pref-window.ui" line="2167"/>
         <source>Revert to Last Saved</source>
         <translation>Vorig bewaard bestand terugzetten</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1871"/>
+        <location filename="../../src/app/pref-window.ui" line="1881"/>
         <source>Language</source>
         <translation>Taal</translation>
     </message>
@@ -827,147 +827,161 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="398"/>
-        <location filename="../../src/app/pref-window.ui" line="644"/>
+        <location filename="../../src/app/pref-window.ui" line="654"/>
         <source>Enabled</source>
         <translation type="unfinished">Ingeschakeld</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="511"/>
-        <source>&lt;h2&gt;Focus Schedule&lt;/h2&gt;When you activate Focus Mode from the tray, breaks will follow this schedule instead. Use it for shorter breaks when you need to stay  focused.</source>
-        <translation type="unfinished">&lt;h2&gt;Concentratieschema&lt;/h2&gt;Wanneer u de concentratiemodus activeert via het systeemvak, worden pauzes volgens dit schema ingepland. Gebruik dit voor kortere pauzes wanneer u geconcentreerd moet blijven.</translation>
+        <source>&lt;h2&gt;Focus Schedule&lt;/h2&gt;When you activate Focus Mode from the tray, breaks will follow this schedule instead. Use it for shorter breaks when you need to stay focused.</source>
+        <translation type="obsolete">&lt;h2&gt;Concentratieschema&lt;/h2&gt;Wanneer u de concentratiemodus activeert via het systeemvak, worden pauzes volgens dit schema ingepland. Gebruik dit voor kortere pauzes wanneer u geconcentreerd moet blijven.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="757"/>
+        <location filename="../../src/app/pref-window.ui" line="767"/>
         <source>&lt;h2&gt;Postpone&lt;/h2&gt;</source>
         <translation type="unfinished">&lt;h2&gt;Uitstellen&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="764"/>
+        <location filename="../../src/app/pref-window.ui" line="774"/>
         <source>Maximum postpone time as a percentage of your work session (&lt;b&gt;%1&lt;/b&gt; min)</source>
         <translation type="unfinished">Maximale uitsteltijd als percentage van uw werksessie (&lt;b&gt;%1&lt;/b&gt; min)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="801"/>
+        <location filename="../../src/app/pref-window.ui" line="811"/>
         <source>Postponing breaks adds extra time to your next long break, proportional to how much time you postponed. You can adjust the multiplier for how much extra time is added.</source>
         <translation type="unfinished">Het uitstellen van pauzes voegt extra tijd toe aan uw volgende lange pauze, evenredig aan de uitgestelde tijd. U kunt de vermenigvuldiger aanpassen waarmee deze extra tijd wordt berekend.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="917"/>
+        <location filename="../../src/app/pref-window.ui" line="927"/>
         <source>Show break prompt for</source>
         <translation type="unfinished">Herinnering tonen gedurende</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="982"/>
+        <location filename="../../src/app/pref-window.ui" line="992"/>
         <source>Tray icon will start flashing this many seconds before the break. Set to 0 to disable.</source>
         <extracomment>Tooltip for &quot;Flash tray icon before break&quot; config</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Het systeemvakpictogram begint deze seconden voor de pauze te flitsen. Stel in op 0 om uit te schakelen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="985"/>
+        <location filename="../../src/app/pref-window.ui" line="995"/>
         <source>Flash tray icon before break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Systeemvakpictogram laten flitsen vóór pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1028"/>
+        <location filename="../../src/app/pref-window.ui" line="1038"/>
         <source>Close windows right after small break ends</source>
         <translation type="unfinished">Vensters sluiten direct na het einde van een korte pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1035"/>
+        <location filename="../../src/app/pref-window.ui" line="1045"/>
         <source>Close windows right after big break ends</source>
         <translation type="unfinished">Vensters sluiten direct na het einde van een lange pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1167"/>
+        <location filename="../../src/app/pref-window.ui" line="1177"/>
         <source>&lt;h4&gt;Small break&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;Korte pauze&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1213"/>
+        <location filename="../../src/app/pref-window.ui" line="1223"/>
         <source>&lt;h4&gt;Big break&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;Lange pauze&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1361"/>
+        <location filename="../../src/app/pref-window.ui" line="1371"/>
         <source>Background image</source>
+        <translation type="unfinished">Achtergrondafbeelding</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1381"/>
+        <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1385"/>
+        <location filename="../../src/app/pref-window.ui" line="1395"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wissen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1401"/>
+        <location filename="../../src/app/pref-window.ui" line="1411"/>
         <source>&lt;p&gt;To preview break windows, save all changes first. The preview begins with a 2-second flashing prompt, followed by a 4-second full-screen break. A small break window will appear first, then a big break window.&lt;/p&gt;</source>
         <translation type="unfinished">&lt;p&gt;Om een voorbeeld van de pauzevensters te bekijken, slaat u eerst alle wijzigingen op. Het voorbeeld begint met een flitsende herinnering van 2 seconden, gevolgd door een schermvullende pauze van 4 seconden. Eerst verschijnt een venster voor een korte pauze, daarna een venster voor een lange pauze.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1411"/>
+        <location filename="../../src/app/pref-window.ui" line="1421"/>
         <source>Preview Break Windows</source>
         <translation type="unfinished">Voorbeeld van pauzevensters</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1378"/>
-        <location filename="../../src/app/pref-window.ui" line="1739"/>
-        <location filename="../../src/app/pref-window.ui" line="1753"/>
-        <location filename="../../src/app/pref-window.ui" line="1815"/>
-        <location filename="../../src/app/pref-window.ui" line="1829"/>
+        <location filename="../../src/app/pref-window.ui" line="1388"/>
+        <location filename="../../src/app/pref-window.ui" line="1749"/>
+        <location filename="../../src/app/pref-window.ui" line="1763"/>
+        <location filename="../../src/app/pref-window.ui" line="1825"/>
+        <location filename="../../src/app/pref-window.ui" line="1839"/>
         <source>Browse</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bladeren</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1517"/>
+        <location filename="../../src/app/pref-window.ui" line="511"/>
+        <source>&lt;h2&gt;Focus Schedule&lt;/h2&gt;</source>
+        <translation type="unfinished">&lt;h2&gt;Concentratieschema&lt;/h2&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="521"/>
+        <source>When you activate Focus Mode from the tray, breaks will follow this schedule instead. Use it for shorter breaks when you need to stay focused.</source>
+        <translation type="unfinished">Wanneer u de concentratiemodus activeert via het systeemvak, worden pauzes volgens dit schema ingepland. Gebruik dit voor kortere pauzes wanneer u geconcentreerd moet blijven.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1527"/>
         <source>&lt;h3&gt;External Monitors&lt;/h3&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h3&gt;Externe monitoren&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1524"/>
+        <location filename="../../src/app/pref-window.ui" line="1534"/>
         <source>Pause when unknown monitor is connected</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pauzeren wanneer een onbekende monitor wordt aangesloten</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1546"/>
+        <location filename="../../src/app/pref-window.ui" line="1556"/>
         <source>Mark currently connected monitors as known</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Momenteel aangesloten monitoren markeren als bekend</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1566"/>
+        <location filename="../../src/app/pref-window.ui" line="1576"/>
         <source>Remove selected</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Geselecteerde verwijderen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1855"/>
+        <location filename="../../src/app/pref-window.ui" line="1865"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: Use &lt;i&gt;Browse&lt;/i&gt; to select a custom sound file. A copy of the file will be saved so it can always be played.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;strong&gt;Tip&lt;/strong&gt;: Gebruik &lt;i&gt;Bladeren&lt;/i&gt; om een aangepast geluidsbestand te selecteren. Een kopie van het bestand wordt opgeslagen, zodat het altijd kan worden afgespeeld.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1910"/>
+        <location filename="../../src/app/pref-window.ui" line="1920"/>
         <source>Change of language will take effect after app restart.</source>
         <translation>Herstart het programma om de wijziging toe te passen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1923"/>
+        <location filename="../../src/app/pref-window.ui" line="1933"/>
         <source>Database file</source>
         <translation type="unfinished">Databasebestand</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2115"/>
+        <location filename="../../src/app/pref-window.ui" line="2125"/>
         <source>Third-party Libraries Licenses</source>
         <translation>Licenties van externe bibliotheken</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2124"/>
+        <location filename="../../src/app/pref-window.ui" line="2134"/>
         <source>Help Us Translate!</source>
         <translation type="unfinished">Help ons vertalen!</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2164"/>
+        <location filename="../../src/app/pref-window.ui" line="2174"/>
         <source>Defaults</source>
         <translation type="unfinished">Standaardwaarden</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2187"/>
+        <location filename="../../src/app/pref-window.ui" line="2197"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
@@ -1034,38 +1048,38 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="640"/>
         <source>Select Sound File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Geluidsbestand selecteren</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="641"/>
         <source>Sound Files (*.mp3 *.wav *.ogg *.flac *.m4a)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Geluidsbestanden (*.mp3 *.wav *.ogg *.flac *.m4a)</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="651"/>
         <location filename="../../src/app/pref-window.cpp" line="672"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fout</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="652"/>
         <source>Failed to save a copy of the selected sound file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kan geen kopie van het geselecteerde geluidsbestand opslaan.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="661"/>
         <source>Select Background Image</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Achtergrondafbeelding selecteren</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="662"/>
         <source>Image Files (*.png *.jpg *.jpeg *.bmp *.webp)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Afbeeldingsbestanden (*.png *.jpg *.jpeg *.bmp *.webp)</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="673"/>
         <source>Failed to save a copy of the selected image file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kan geen kopie van het geselecteerde afbeeldingsbestand opslaan.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="483"/>
@@ -1412,7 +1426,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/tray.cpp" line="82"/>
-        <source>%n more hour</source>
+        <source>%n more hours</source>
         <translation type="unfinished">
             <numerusform>%n uur meer</numerusform>
             <numerusform>%n uren meer</numerusform>

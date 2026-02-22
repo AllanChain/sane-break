@@ -244,8 +244,8 @@ QPushButton[flat=&quot;true&quot;]:checked {
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>661</width>
-         <height>894</height>
+         <width>659</width>
+         <height>1021</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -508,7 +508,17 @@ QPushButton[flat=&quot;true&quot;]:checked {
             <item>
              <widget class="QLabel" name="label_32">
               <property name="text">
-               <string>&lt;h2&gt;Focus Schedule&lt;/h2&gt;When you activate Focus Mode from the tray, breaks will follow this schedule instead. Use it for shorter breaks when you need to stay  focused.</string>
+               <string>&lt;h2&gt;Focus Schedule&lt;/h2&gt;</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_48">
+              <property name="text">
+               <string>When you activate Focus Mode from the tray, breaks will follow this schedule instead. Use it for shorter breaks when you need to stay focused.</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
@@ -1368,7 +1378,7 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                  <bool>true</bool>
                 </property>
                 <property name="placeholderText">
-                 <string notr="true">None</string>
+                 <string>None</string>
                 </property>
                </widget>
               </item>

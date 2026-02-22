@@ -79,7 +79,7 @@ StatusTrayWindow::StatusTrayWindow(SanePreferences* preferences, QObject* parent
   };
   addExtendOpt(tr("%n more minutes", "", 15), 15 * 60);
   addExtendOpt(tr("%n more minutes", "", 30), 30 * 60);
-  addExtendOpt(tr("%n more hour", "", 1), 60 * 60);
+  addExtendOpt(tr("%n more hours", "", 1), 60 * 60);
   enableBreak = menu->addAction(tr("Enable Break"));
   enableBreak->setVisible(false);
   connect(enableBreak, &QAction::triggered, this,

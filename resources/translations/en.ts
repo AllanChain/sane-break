@@ -37,17 +37,17 @@
         <location filename="../../../../src/app/tray.cpp" line="80"/>
         <location filename="../../../../src/app/tray.cpp" line="81"/>
         <source>%n more minutes</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n more minute</numerusform>
+            <numerusform>%n more minutes</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../../../src/app/tray.cpp" line="82"/>
-        <source>%n more hour</source>
+        <source>%n more hours</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n more hour</numerusform>
+            <numerusform>%n more hours</numerusform>
         </translation>
     </message>
 </context>
