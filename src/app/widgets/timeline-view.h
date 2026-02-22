@@ -68,9 +68,8 @@ class TimelineGraphicsView : public QGraphicsView {
   Q_OBJECT
  public:
   explicit TimelineGraphicsView(QWidget* parent = nullptr);
-  void populate(const QList<DayTimelineData>& timelines,
-                const QMap<QDate, DailyBreakStats>& statsMap, int rangeStart,
-                int rangeEnd, QDate weekStart);
+  void populate(const QList<DayTimelineData>& timelines, int rangeStart, int rangeEnd,
+                QDate weekStart);
 
  signals:
   void dayHovered(QDate date);
@@ -80,6 +79,7 @@ class TimelineGraphicsView : public QGraphicsView {
   void changeEvent(QEvent* event) override;
   void wheelEvent(QWheelEvent* event) override;
   void mouseMoveEvent(QMouseEvent* event) override;
+  void mouseReleaseEvent(QMouseEvent* event) override;
   bool event(QEvent* event) override;
   bool viewportEvent(QEvent* event) override;
   bool eventFilter(QObject* obj, QEvent* event) override;

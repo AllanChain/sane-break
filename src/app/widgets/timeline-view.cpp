@@ -169,9 +169,10 @@ static int spanSecond(const TimelineSpan& span, bool start) {
 }
 
 static QString spanTooltip(const QString& label, const TimelineSpan& span) {
-  QString tip = label + "\n" + span.start.time().toString("H:mm") + " - " +
-                span.end.time().toString("H:mm");
+  QString tip = label;
   if (!span.reason.isEmpty()) tip += "\n" + span.reason;
+  tip += "\n" + span.start.time().toString("H:mm") + " - " +
+         span.end.time().toString("H:mm");
   return tip;
 }
 
@@ -202,8 +203,9 @@ void DayTimelineItem::paint(QPainter* painter,
   qreal w = m_baseWidth;
   int h = kTrackHeight;
 
-  // Semi-transparent gray background — adapts to both light and dark themes
-  painter->fillRect(QRectF(0, 0, w, h), QColor(128, 128, 128, 40));
+  // Semi-transparent gray background — lighter for future days
+  bool isFuture = m_data.date > QDate::currentDate();
+  painter->fillRect(QRectF(0, 0, w, h), QColor(128, 128, 128, isFuture ? 10 : 40));
 
   // Base track spans
   for (const auto& span : m_data.spans) {
@@ -251,6 +253,7 @@ TimelineGraphicsView::TimelineGraphicsView(QWidget* parent) : QGraphicsView(pare
   setFrameShape(QFrame::NoFrame);
   setRenderHint(QPainter::Antialiasing, false);
   setDragMode(ScrollHandDrag);
+  viewport()->setCursor(Qt::ArrowCursor);
   setViewportMargins(kLabelWidth, 0, 0, 0);
   grabGesture(Qt::PinchGesture);
 
@@ -285,7 +288,6 @@ void TimelineGraphicsView::updateFixedHeight() {
 }
 
 void TimelineGraphicsView::populate(const QList<DayTimelineData>& timelines,
-                                    const QMap<QDate, DailyBreakStats>& statsMap,
                                     int rangeStart, int rangeEnd, QDate weekStart) {
   m_rows.clear();
   m_zoomFactor = 1.0;
@@ -319,25 +321,6 @@ void TimelineGraphicsView::populate(const QList<DayTimelineData>& timelines,
     auto* item = new DayTimelineItem(kSceneBaseWidth);
     item->setTimeRange(rangeStart, rangeEnd);
     item->setData(timeline);
-
-    // Build tooltip
-    DailyBreakStats stats = statsMap.value(day);
-    int totalBreaks = stats.smallBreaks + stats.bigBreaks;
-    QString tooltip =
-        locale.toString(day, QLocale::ShortFormat) + "\n" +
-        QCoreApplication::translate("StatsWindow", "Breaks: %1 (%2 completed)")
-            .arg(totalBreaks)
-            .arg(stats.completedBreaks) +
-        "\n" +
-        QCoreApplication::translate("StatsWindow", "Break time: %1")
-            .arg(QCoreApplication::translate("StatsWindow", "%1h %2m")
-                     .arg(stats.totalBreakSeconds / 3600)
-                     .arg((stats.totalBreakSeconds % 3600) / 60)) +
-        "\n" +
-        QCoreApplication::translate("StatsWindow", "Postpones: %1")
-            .arg(stats.postponeCount);
-    item->setTooltipText(tooltip);
-
     item->setPos(0, yPos);
     sc->addItem(item);
 
@@ -404,6 +387,11 @@ void TimelineGraphicsView::mouseMoveEvent(QMouseEvent* event) {
       return;
     }
   }
+}
+
+void TimelineGraphicsView::mouseReleaseEvent(QMouseEvent* event) {
+  QGraphicsView::mouseReleaseEvent(event);
+  viewport()->setCursor(Qt::ArrowCursor);
 }
 
 bool TimelineGraphicsView::event(QEvent* event) {
@@ -478,6 +466,9 @@ bool TimelineGraphicsView::eventFilter(QObject* obj, QEvent* event) {
       QPointF viewPos = mapFromScene(item->pos());
       qreal y = viewPos.y();
       QRectF labelRect(0, y, kLabelWidth - 4, kTrackHeight);
+      painter.setPen(date > QDate::currentDate()
+                         ? palette().color(QPalette::PlaceholderText)
+                         : palette().color(QPalette::WindowText));
       painter.drawText(labelRect, Qt::AlignRight | Qt::AlignVCenter, label);
     }
     return true;

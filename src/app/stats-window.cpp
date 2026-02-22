@@ -177,5 +177,5 @@ void StatsWindow::populateDailyBreakdown(const QList<DayTimelineData>& timelines
     rangeEnd = std::min(rangeEnd, 86400);
   }
 
-  ui->timelineView->populate(timelines, statsMap, rangeStart, rangeEnd, m_weekStart);
+  ui->timelineView->populate(timelines, rangeStart, rangeEnd, m_weekStart);
 }
