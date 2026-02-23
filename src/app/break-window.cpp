@@ -198,7 +198,7 @@ void BreakWindow::showFullScreen() {
     auto* fadeIn = new QPropertyAnimation(m_bgImageOpacity, "opacity");
     fadeIn->setStartValue(0.0);
     fadeIn->setEndValue(1.0);
-    fadeIn->setDuration(300);
+    fadeIn->setDuration(800);
     fadeIn->start(QPropertyAnimation::DeleteWhenStopped);
   }
 }
