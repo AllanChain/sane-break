@@ -126,12 +126,12 @@ void StatsWindow::updateDayDetail(QDate date) {
   DailyBreakStats stats = m_breakStatsMap.value(date);
   int totalBreaks = stats.smallBreaks + stats.bigBreaks;
   ui->dayBreaksLabel->setArgs({totalBreaks, stats.completedBreaks});
-  ui->dayTimeLabel->setArgs({formatDuration(stats.totalBreakSeconds)});
-  ui->dayPostponeLabel->setArgs({stats.postponeCount});
+  ui->dayTimeLabel->setArgs(
+      {formatDuration(stats.totalBreakSeconds), tr("%1s").arg(stats.avgFlashSeconds)});
+  ui->dayPostponeLabel->setArgs({stats.postponeCount, stats.forceBreakExits});
 
   DailyUsageStats usage = m_usageStatsMap.value(date);
-  ui->dayActiveLabel->setArgs({formatDuration(usage.activeSeconds)});
-  ui->dayTotalLabel->setArgs({formatDuration(usage.totalSeconds)});
+  ui->dayUsageLabel->setArgs({formatDuration(usage.activeSeconds)});
 }
 
 void StatsWindow::updateWeekLabel() {

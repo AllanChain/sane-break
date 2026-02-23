@@ -36,28 +36,21 @@
       <item>
        <widget class="DynamicLabel" name="dayTimeLabel">
         <property name="text">
-         <string>Break time: %1</string>
+         <string>Break time: %1 · Avg flash: %2</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="DynamicLabel" name="dayPostponeLabel">
         <property name="text">
-         <string>%1 postponed</string>
+         <string>%1 postponed · %2 force break exits</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="DynamicLabel" name="dayActiveLabel">
+       <widget class="DynamicLabel" name="dayUsageLabel">
         <property name="text">
          <string>Active usage: %1</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="DynamicLabel" name="dayTotalLabel">
-        <property name="text">
-         <string>Total usage: %1</string>
         </property>
        </widget>
       </item>

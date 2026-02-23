@@ -1095,23 +1095,18 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="39"/>
-        <source>Break time: %1</source>
-        <translation>休息时间：%1</translation>
+        <source>Break time: %1 · Avg flash: %2</source>
+        <translation>休息时间：%1 · 平均闪烁：%2</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="46"/>
-        <source>%1 postponed</source>
-        <translation>推迟 %1 次</translation>
+        <source>%1 postponed · %2 force break exits</source>
+        <translation>%1 次推迟 · %2 次退出强制休息</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="53"/>
         <source>Active usage: %1</source>
         <translation>活跃使用时长：%1</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/stats-window.ui" line="60"/>
-        <source>Total usage: %1</source>
-        <translation>总计使用时长：%1</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.cpp" line="30"/>
@@ -1122,6 +1117,11 @@ v%1
         <location filename="../../src/app/stats-window.cpp" line="31"/>
         <source>%1m</source>
         <translation>%1 分钟</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/stats-window.cpp" line="130"/>
+        <source>%1s</source>
+        <translation>%1 秒钟</translation>
     </message>
 </context>
 <context>

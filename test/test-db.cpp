@@ -237,6 +237,35 @@ class TestDb : public QObject {
     QVERIFY(totalActive > 0);
   }
 
+  void force_break_exits() {
+    QDate day = QDate(2024, 6, 15);
+    QString ts = day.toString(Qt::ISODate) + " 12:00:00";
+
+    insertEvent(sqlDb, ts, "break::exit-force");
+    insertEvent(sqlDb, ts, "break::exit-force");
+    insertEvent(sqlDb, ts, "break::exit-force");
+
+    QDateTime utcNoon(day, QTime(12, 0, 0), QTimeZone::UTC);
+    QDate localDate = utcNoon.toLocalTime().date();
+
+    auto stats = db->queryDailyBreakStats(localDate, localDate);
+    QCOMPARE(stats.size(), 1);
+    QCOMPARE(stats[0].forceBreakExits, 3);
+  }
+
+  void avg_flash_seconds() {
+    // Flash 1: 20 seconds, Flash 2: 40 seconds → avg = 30
+    insertSpan(sqlDb, "flash", "2024-06-15 12:00:00", "2024-06-15 12:00:20");
+    insertSpan(sqlDb, "flash", "2024-06-15 12:10:00", "2024-06-15 12:10:40");
+
+    QDateTime utcNoon(QDate(2024, 6, 15), QTime(12, 0, 0), QTimeZone::UTC);
+    QDate localDate = utcNoon.toLocalTime().date();
+
+    auto stats = db->queryDailyBreakStats(localDate, localDate);
+    QCOMPARE(stats.size(), 1);
+    QCOMPARE(stats[0].avgFlashSeconds, 30);
+  }
+
   void date_range_filtering() {
     // Span outside the query range should not appear
     insertSpan(sqlDb, "break", "2024-06-10 12:00:00", "2024-06-10 12:00:30",

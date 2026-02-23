@@ -1132,6 +1132,16 @@ v%1
         <translation type="unfinished">Statistik</translation>
     </message>
     <message>
+        <location filename="../../src/app/stats-window.ui" line="39"/>
+        <source>Break time: %1 · Avg flash: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/stats-window.ui" line="46"/>
+        <source>%1 postponed · %2 force break exits</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Today</source>
         <translation type="obsolete">Heute</translation>
     </message>
@@ -1141,14 +1151,12 @@ v%1
         <translation type="unfinished">%1 Pausen (%2 abgeschlossen)</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="39"/>
         <source>Break time: %1</source>
-        <translation type="unfinished">Pausenzeit: %1</translation>
+        <translation type="obsolete">Pausenzeit: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="46"/>
         <source>%1 postponed</source>
-        <translation type="unfinished">%1 verschoben</translation>
+        <translation type="obsolete">%1 verschoben</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="53"/>
@@ -1156,9 +1164,8 @@ v%1
         <translation type="unfinished">Aktive Nutzung: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="60"/>
         <source>Total usage: %1</source>
-        <translation type="unfinished">Gesamtnutzung: %1</translation>
+        <translation type="obsolete">Gesamtnutzung: %1</translation>
     </message>
     <message>
         <source>Last 7 Days</source>
@@ -1177,6 +1184,11 @@ v%1
         <location filename="../../src/app/stats-window.cpp" line="31"/>
         <source>%1m</source>
         <translation type="unfinished">%1 m</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/stats-window.cpp" line="130"/>
+        <source>%1s</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Breaks: %1 (%2 completed)</source>

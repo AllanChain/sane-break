@@ -40,6 +40,8 @@ struct DailyBreakStats {
   int completedBreaks = 0;
   int totalBreakSeconds = 0;
   int postponeCount = 0;
+  int forceBreakExits = 0;
+  int avgFlashSeconds = 0;
 };
 
 struct DailyUsageStats {

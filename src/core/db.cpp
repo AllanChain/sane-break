@@ -256,6 +256,47 @@ QList<DailyBreakStats> BreakDatabase::queryDailyBreakStats(QDate from, QDate to)
     }
   }
 
+  // Query force break exit counts from events
+  QSqlQuery forceExitQuery(m_db);
+  forceExitQuery.prepare(R"(
+    SELECT date(created_at, 'localtime') AS day, COUNT(*)
+    FROM events
+    WHERE type = 'break::exit-force'
+      AND date(created_at, 'localtime') BETWEEN ? AND ?
+    GROUP BY day
+  )");
+  forceExitQuery.addBindValue(from.toString(Qt::ISODate));
+  forceExitQuery.addBindValue(to.toString(Qt::ISODate));
+
+  if (forceExitQuery.exec()) {
+    while (forceExitQuery.next()) {
+      QDate day = QDate::fromString(forceExitQuery.value(0).toString(), Qt::ISODate);
+      statsMap[day].date = day;
+      statsMap[day].forceBreakExits = forceExitQuery.value(1).toInt();
+    }
+  }
+
+  // Query average flash (prompt) duration per day
+  QSqlQuery flashQuery(m_db);
+  flashQuery.prepare(R"(
+    SELECT date(started_at, 'localtime') AS day,
+      AVG(MAX(0, strftime('%s', ended_at) - strftime('%s', started_at)))
+    FROM spans
+    WHERE type = 'flash' AND ended_at IS NOT NULL
+      AND date(started_at, 'localtime') BETWEEN ? AND ?
+    GROUP BY day
+  )");
+  flashQuery.addBindValue(from.toString(Qt::ISODate));
+  flashQuery.addBindValue(to.toString(Qt::ISODate));
+
+  if (flashQuery.exec()) {
+    while (flashQuery.next()) {
+      QDate day = QDate::fromString(flashQuery.value(0).toString(), Qt::ISODate);
+      statsMap[day].date = day;
+      statsMap[day].avgFlashSeconds = flashQuery.value(1).toInt();
+    }
+  }
+
   for (auto it = statsMap.constBegin(); it != statsMap.constEnd(); ++it) {
     results.append(it.value());
   }
