@@ -678,7 +678,7 @@ void PreferenceWindow::browseForBackgroundImage() {
 }
 
 void PreferenceWindow::openBreakWindowPreview() {
-  breakWindows->create(BreakType::Small, preferences);
+  breakWindows->create(BreakType::Small, preferences, preferences->smallFor->get());
   breakWindows->showFlashPrompt();
   QTimer::singleShot(2000, [this]() {
     breakWindows->showFullScreen();
@@ -687,7 +687,7 @@ void PreferenceWindow::openBreakWindowPreview() {
     QTimer::singleShot(4000, [this]() {
       breakWindows->destroy();
       if (!preferences->bigBreakEnabled->get()) return;
-      breakWindows->create(BreakType::Big, preferences);
+      breakWindows->create(BreakType::Big, preferences, preferences->bigFor->get());
       breakWindows->showFlashPrompt();
       QTimer::singleShot(2000, [this]() {
         breakWindows->showFullScreen();

@@ -56,7 +56,8 @@ BreakWindows::BreakWindows(QObject* parent) : AbstractBreakWindows(parent) {
 #endif
 }
 
-BreakWindowData BreakWindows::createData(BreakType type, SanePreferences* preferences) {
+BreakWindowData BreakWindows::createData(BreakType type, SanePreferences* preferences,
+                                         int breakDuration) {
   QString promptMessage = type == BreakType::Big
                               ? preferences->bigMessages->defaultValue()[0]
                               : preferences->smallMessages->defaultValue()[0];
@@ -70,7 +71,7 @@ BreakWindowData BreakWindows::createData(BreakType type, SanePreferences* prefer
   }
   if (type == BreakType::Small) {
     return {
-        .totalSeconds = preferences->smallFor->get(),
+        .totalSeconds = breakDuration,
         .message = {.prompt = promptMessage, .fullScreen = fullScreenMessage},
         .theme =
             {
@@ -93,7 +94,7 @@ BreakWindowData BreakWindows::createData(BreakType type, SanePreferences* prefer
 
   } else {
     return {
-        .totalSeconds = preferences->bigFor->get(),
+        .totalSeconds = breakDuration,
         .message = {.prompt = promptMessage, .fullScreen = fullScreenMessage},
         .theme =
             {
@@ -139,8 +140,9 @@ void BreakWindows::create(BreakWindowData data) {
   updateClocks();  // Set the initial clock
   clockUpdateTimer->start(3000);
 }
-void BreakWindows::create(BreakType type, SanePreferences* preferences) {
-  create(createData(type, preferences));
+void BreakWindows::create(BreakType type, SanePreferences* preferences,
+                          int breakDuration) {
+  create(createData(type, preferences, breakDuration));
 }
 
 void BreakWindows::destroy() {

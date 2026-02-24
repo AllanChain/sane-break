@@ -53,7 +53,7 @@ class DummyBreakWindows : public AbstractBreakWindows {
   Q_OBJECT
  public:
   using AbstractBreakWindows::AbstractBreakWindows;
-  MOCK_METHOD(void, create, (BreakType, SanePreferences*), (override));
+  MOCK_METHOD(void, create, (BreakType, SanePreferences*, int), (override));
   MOCK_METHOD(void, destroy, (), ());
   MOCK_METHOD(void, setTime, (int), ());
   MOCK_METHOD(void, showFullScreen, (), ());

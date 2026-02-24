@@ -53,7 +53,7 @@ class TestApp : public QObject {
     app.start();
 
     // Break window will show
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _)).Times(1);
     app.advance(app.trayData.secondsToNextBreak);
     // Correctly advaces to next break
     QCOMPARE(app.trayData.secondsToNextBreak, 0);
@@ -104,9 +104,9 @@ class TestApp : public QObject {
     app.start();
 
     int numberOfBreaks = deps.preferences->bigAfter->get();
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _))
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _))
         .Times(numberOfBreaks - 1);
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Big, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Big, _, _)).Times(1);
     for (int j = 0; j < numberOfBreaks; j++) {
       QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, numberOfBreaks - j - 1);
       app.advance(app.trayData.secondsToNextBreak);
@@ -398,12 +398,12 @@ class TestApp : public QObject {
     app.start();
 
     // Verify we successfully triggered a big break
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Big, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Big, _, _)).Times(1);
     app.bigBreakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
     // Triggering small break instead is deleting previous windows and creating new ones
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _)).Times(1);
     EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
     app.smallBreakInstead();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
@@ -422,7 +422,7 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _)).Times(1);
     app.breakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
@@ -437,7 +437,7 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _)).Times(1);
     app.breakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
@@ -450,7 +450,7 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _)).Times(1);
     app.breakNow();
     EXPECT_CALL(*deps.breakWindows, destroy()).Times(0);
     deps.idleTimer->setIdle(true);
@@ -464,7 +464,7 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _)).Times(1);
     app.breakNow();
     EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
     emit deps.systemMonitor->sleepEnded(1);
@@ -661,8 +661,9 @@ class TestApp : public QObject {
     app.start();
 
     int numberOfBreaks = deps.preferences->bigAfter->get();
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(numberOfBreaks);
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Big, _)).Times(0);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _))
+        .Times(numberOfBreaks);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Big, _, _)).Times(0);
     for (int j = 0; j < numberOfBreaks; j++) {
       app.advance(app.trayData.secondsToNextBreak);
       app.advanceToBreakEnd();
@@ -684,7 +685,7 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _)).Times(1);
     app.bigBreakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
   }
@@ -821,7 +822,7 @@ class TestApp : public QObject {
     deps.preferences->focusSmallEvery->set(600);
     deps.preferences->focusSmallFor->set(10);
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _)).Times(1);
     app.startFocus(4, "deep work");
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
     QVERIFY(app.trayData.isBreaking);
@@ -993,7 +994,7 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _)).Times(1);
     app.breakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
