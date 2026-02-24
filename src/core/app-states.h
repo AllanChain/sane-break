@@ -37,13 +37,14 @@ struct ExtendMeeting {
   int seconds;
 };
 struct EndFocus {};
+struct ReenterBreak {};
 }  // namespace Action
 
 using MenuAction =
     std::variant<Action::BreakNow, Action::BigBreakNow, Action::SmallBreakInstead,
                  Action::EnableBreaks, Action::ExitForceBreak,
                  Action::EndMeetingBreakNow, Action::EndMeetingBreakLater,
-                 Action::ExtendMeeting, Action::EndFocus>;
+                 Action::ExtendMeeting, Action::EndFocus, Action::ReenterBreak>;
 
 class AppContext;
 

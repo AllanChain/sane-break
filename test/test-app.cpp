@@ -704,14 +704,23 @@ class TestApp : public QObject {
     // Should NOT be a big break since big breaks are disabled
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, -1);
   }
-  // Meeting blocked during postpone
-  void meeting_blocked_during_postpone() {
+  // Meeting allowed during postpone, clears postpone data
+  void meeting_allowed_during_postpone() {
     NiceMock<DummyApp> app(deps);
     app.start();
 
     app.postpone(100);
+    QVERIFY(app.trayData.isPostponing);
+
     app.startMeeting(3600, "standup");
+    QVERIFY(app.trayData.isInMeeting);
+    QVERIFY(!app.trayData.isPostponing);
+
+    // After meeting ends, no postpone penalties should apply
+    app.advance(3600);
     QVERIFY(!app.trayData.isInMeeting);
+    // Next break should use normal interval, no shrinkage from postpone
+    QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
   }
   // Meeting during break exits break
   void meeting_during_break_exits_break() {
@@ -970,6 +979,59 @@ class TestApp : public QObject {
     app.advanceToBreakEnd();
     QCOMPARE(app.trayData.focusCyclesRemaining, 3);
     QCOMPARE(app.trayData.focusTotalCycles, 4);
+  }
+  // Focus during break restarts break with focus duration
+  void focus_during_break_restarts_with_focus_duration() {
+    deps.preferences->focusSmallEvery->set(600);
+    deps.preferences->focusSmallFor->set(10);
+    deps.preferences->focusBigBreakEnabled->set(false);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    // Start a normal break
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _)).Times(1);
+    app.breakNow();
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+    QVERIFY(app.trayData.isBreaking);
+
+    // Enter focus mode during the break — break should restart
+    EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, 10)).Times(1);
+    app.startFocus(3, "deep work");
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+    QVERIFY(app.trayData.isBreaking);
+    QVERIFY(app.trayData.isFocusMode);
+
+    // Should behave like focus entry break: immediate full-screen (flashFor=0)
+    EXPECT_CALL(*deps.breakWindows, showFullScreen()).Times(1);
+    app.advance(1);
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+  }
+  // Focus during break after postpone should work and clear postpone data
+  void focus_during_break_after_postpone() {
+    deps.preferences->focusSmallEvery->set(600);
+    deps.preferences->focusSmallFor->set(10);
+    deps.preferences->focusBigBreakEnabled->set(false);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    // Postpone and let break come naturally
+    app.postpone(100);
+    QVERIFY(app.trayData.isPostponing);
+    app.advance(app.trayData.secondsToNextBreak);
+    QVERIFY(app.trayData.isBreaking);
+
+    // Enter focus during this break-after-postpone
+    EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, 10)).Times(1);
+    app.startFocus(3, "deep work");
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+    QVERIFY(app.trayData.isFocusMode);
+    QVERIFY(!app.trayData.isPostponing);
+
+    // Finish focus entry break, next session should not have postpone penalties
+    app.advanceToBreakEnd();
+    QCOMPARE(app.trayData.secondsToNextBreak, 600);
   }
   // Unknown monitor triggers pause via system monitor
   void unknown_monitor_pauses() {

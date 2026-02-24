@@ -90,6 +90,10 @@ void AppData::postpone(int secs) {
   emit changed();
 };
 bool AppData::isPostponing() { return m_postponeData.isPostponing(); }
+void AppData::resetPostpone() {
+  m_postponeData.reset();
+  emit changed();
+}
 void AppData::earlyBreak() {
   if (m_postponeData.isPostponing())
     m_postponeData.actualSecondsToNextBreakWhenBreak = m_secondsToNextBreak;

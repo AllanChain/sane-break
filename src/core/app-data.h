@@ -59,6 +59,7 @@ class AppData : public QObject {
 
   void postpone(int secs);
   bool isPostponing();
+  void resetPostpone();
   // set secondsToNextBreak to zero and record actual postponed seconds
   void earlyBreak();
 

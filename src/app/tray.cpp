@@ -112,9 +112,8 @@ void StatusTrayWindow::update(TrayData data) {
   postponeMenu->setVisible(!data.isInMeeting && !data.pauseReasons &&
                            !data.isFocusMode);
   meetingAction->setVisible(!data.isBreaking && !data.isInMeeting &&
-                            !data.pauseReasons && !data.isPostponing &&
-                            !data.isFocusMode);
-  focusAction->setVisible(!data.isBreaking && !data.isInMeeting && !data.pauseReasons &&
+                            !data.pauseReasons && !data.isFocusMode);
+  focusAction->setVisible(!data.isInMeeting && !data.pauseReasons &&
                           !data.isPostponing && !data.isFocusMode);
   endFocusAction->setVisible(data.isFocusMode && !data.isBreaking);
   endMeetingAction->setVisible(data.isInMeeting);

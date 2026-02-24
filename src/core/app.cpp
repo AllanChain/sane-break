@@ -120,20 +120,24 @@ void AbstractApp::enableBreak() { onMenuAction(Action::EnableBreaks{}); }
 void AbstractApp::smallBreakInstead() { onMenuAction(Action::SmallBreakInstead{}); }
 
 void AbstractApp::startFocus(int totalCycles, const QString& reason) {
-  if (data->isFocusMode() || m_currentState->getID() == AppState::Meeting ||
-      data->isPostponing())
-    return;
+  if (data->isFocusMode() || m_currentState->getID() == AppState::Meeting) return;
   data->setFocusSpanId(
       db->openSpan("focus", {{"totalCycles", totalCycles}, {"reason", reason}}));
   data->startFocusMode(totalCycles);
-  data->earlyBreak();
-  transitionTo(std::make_unique<AppStateBreak>());
+  data->resetPostpone();
+  if (m_currentState->getID() == AppState::Break) {
+    onMenuAction(Action::ReenterBreak{});
+  } else {
+    data->earlyBreak();
+    transitionTo(std::make_unique<AppStateBreak>());
+  }
 }
 
 void AbstractApp::endFocus() { onMenuAction(Action::EndFocus{}); }
 
 void AbstractApp::startMeeting(int seconds, const QString& reason) {
-  if (m_currentState->getID() == AppState::Meeting || data->isPostponing()) return;
+  if (m_currentState->getID() == AppState::Meeting) return;
+  data->resetPostpone();
   if (data->isFocusMode()) {
     db->closeSpan(data->focusSpanId(), {{"reason", "meeting"}});
     data->endFocusMode();
