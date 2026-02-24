@@ -143,6 +143,8 @@ void StatusTrayWindow::update(TrayData data) {
       setTitle(tr("Paused on app running"));
     } else if (data.pauseReasons.testFlag(PauseReason::Idle)) {
       setTitle(tr("Paused on idle"));
+    } else if (data.pauseReasons.testFlag(PauseReason::UnknownMonitor)) {
+      setTitle(tr("Paused on unknown monitor"));
     }
   } else if (data.bigBreakEnabled) {
     setTitle(QString("%1 %2").arg(

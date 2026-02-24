@@ -1283,14 +1283,14 @@ v%1
         <translation>Cerrar</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="127"/>
-        <location filename="../../src/app/tray.cpp" line="150"/>
+        <location filename="../../src/app/tray.cpp" line="126"/>
+        <location filename="../../src/app/tray.cpp" line="151"/>
         <source>big break</source>
         <translation>descanso largo</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="128"/>
-        <location filename="../../src/app/tray.cpp" line="150"/>
+        <location filename="../../src/app/tray.cpp" line="127"/>
+        <location filename="../../src/app/tray.cpp" line="151"/>
         <source>small break</source>
         <translation>descanso breve</translation>
     </message>
@@ -1356,36 +1356,41 @@ v%1
         <translation>Siguiente descanso largo en %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="125"/>
+        <location filename="../../src/app/tray.cpp" line="124"/>
         <source>focus: %1 %2 (%3/%4)</source>
         <translation type="unfinished">enfoque: %1 %2 (%3/%4)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="137"/>
+        <location filename="../../src/app/tray.cpp" line="136"/>
         <source>Exit meeting (%1)</source>
         <translation type="unfinished">Salir de la reunión (%1)</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tray.cpp" line="147"/>
+        <source>Paused on unknown monitor</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Meeting until %1</source>
         <translation type="obsolete">Reunión hasta las %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="138"/>
+        <location filename="../../src/app/tray.cpp" line="137"/>
         <source>Meeting mode — until %1 (%2 left)</source>
         <translation type="unfinished">Modo reunión — hasta las %1 (%2 restantes)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="142"/>
+        <location filename="../../src/app/tray.cpp" line="141"/>
         <source>Paused on battery</source>
         <translation>Pausado por uso de la batería</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="144"/>
+        <location filename="../../src/app/tray.cpp" line="143"/>
         <source>Paused on app running</source>
         <translation>Pausado por uso de una aplicación</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="146"/>
+        <location filename="../../src/app/tray.cpp" line="145"/>
         <source>Paused on idle</source>
         <translation>Pausado por inactividad</translation>
     </message>

@@ -1382,14 +1382,14 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation>Afsluiten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="127"/>
-        <location filename="../../src/app/tray.cpp" line="150"/>
+        <location filename="../../src/app/tray.cpp" line="126"/>
+        <location filename="../../src/app/tray.cpp" line="151"/>
         <source>big break</source>
         <translation>lange pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="128"/>
-        <location filename="../../src/app/tray.cpp" line="150"/>
+        <location filename="../../src/app/tray.cpp" line="127"/>
+        <location filename="../../src/app/tray.cpp" line="151"/>
         <source>small break</source>
         <translation>korte pauze</translation>
     </message>
@@ -1455,36 +1455,41 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation>Volgende lange pauze over %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="125"/>
+        <location filename="../../src/app/tray.cpp" line="124"/>
         <source>focus: %1 %2 (%3/%4)</source>
         <translation type="unfinished">concentratie: %1 %2 (%3/%4)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="137"/>
+        <location filename="../../src/app/tray.cpp" line="136"/>
         <source>Exit meeting (%1)</source>
         <translation type="unfinished">Vergadering beëindigen (%1)</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tray.cpp" line="147"/>
+        <source>Paused on unknown monitor</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Meeting until %1</source>
         <translation type="obsolete">Vergadering tot %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="138"/>
+        <location filename="../../src/app/tray.cpp" line="137"/>
         <source>Meeting mode — until %1 (%2 left)</source>
         <translation type="unfinished">Vergaderingsmodus — tot %1 (%2 resterend)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="142"/>
+        <location filename="../../src/app/tray.cpp" line="141"/>
         <source>Paused on battery</source>
         <translation>Opgeschort tijdens werken op accu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="144"/>
+        <location filename="../../src/app/tray.cpp" line="143"/>
         <source>Paused on app running</source>
         <translation>Opgeschort tijdens actief programma</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="146"/>
+        <location filename="../../src/app/tray.cpp" line="145"/>
         <source>Paused on idle</source>
         <translation>Opgeschort tijdens inactiviteit</translation>
     </message>

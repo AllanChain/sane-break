@@ -1239,14 +1239,14 @@ v%1
         <translation type="unfinished">Ukončit</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="127"/>
-        <location filename="../../src/app/tray.cpp" line="150"/>
+        <location filename="../../src/app/tray.cpp" line="126"/>
+        <location filename="../../src/app/tray.cpp" line="151"/>
         <source>big break</source>
         <translation>velká přestávka</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="128"/>
-        <location filename="../../src/app/tray.cpp" line="150"/>
+        <location filename="../../src/app/tray.cpp" line="127"/>
+        <location filename="../../src/app/tray.cpp" line="151"/>
         <source>small break</source>
         <translation>malá přestávka</translation>
     </message>
@@ -1314,13 +1314,18 @@ v%1
         <translation type="unfinished">Další velká přestávka po %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="125"/>
+        <location filename="../../src/app/tray.cpp" line="124"/>
         <source>focus: %1 %2 (%3/%4)</source>
         <translation type="unfinished">zaměření: %1 %2 (%3/%4)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="137"/>
+        <location filename="../../src/app/tray.cpp" line="136"/>
         <source>Exit meeting (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tray.cpp" line="147"/>
+        <source>Paused on unknown monitor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1328,22 +1333,22 @@ v%1
         <translation type="obsolete">Schůzka do %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="138"/>
+        <location filename="../../src/app/tray.cpp" line="137"/>
         <source>Meeting mode — until %1 (%2 left)</source>
         <translation type="unfinished">Režim schůzky — do %1 (%2 zbývá)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="142"/>
+        <location filename="../../src/app/tray.cpp" line="141"/>
         <source>Paused on battery</source>
         <translation type="unfinished">Pozastaveno kvůli baterii</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="144"/>
+        <location filename="../../src/app/tray.cpp" line="143"/>
         <source>Paused on app running</source>
         <translation type="unfinished">Pozastaveno kvůli běžící aplikaci</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="146"/>
+        <location filename="../../src/app/tray.cpp" line="145"/>
         <source>Paused on idle</source>
         <translation type="unfinished">Pozastaveno kvůli nečinnosti</translation>
     </message>

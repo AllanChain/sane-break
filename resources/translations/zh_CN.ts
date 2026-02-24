@@ -1162,19 +1162,19 @@ v%1
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="127"/>
-        <location filename="../../src/app/tray.cpp" line="150"/>
+        <location filename="../../src/app/tray.cpp" line="126"/>
+        <location filename="../../src/app/tray.cpp" line="151"/>
         <source>big break</source>
         <translation>大休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="128"/>
-        <location filename="../../src/app/tray.cpp" line="150"/>
+        <location filename="../../src/app/tray.cpp" line="127"/>
+        <location filename="../../src/app/tray.cpp" line="151"/>
         <source>small break</source>
         <translation>小休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="137"/>
+        <location filename="../../src/app/tray.cpp" line="136"/>
         <source>Exit meeting (%1)</source>
         <translation>退出会议（%1）</translation>
     </message>
@@ -1219,29 +1219,34 @@ v%1
         <translation>%1 后大休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="125"/>
+        <location filename="../../src/app/tray.cpp" line="124"/>
         <source>focus: %1 %2 (%3/%4)</source>
         <translation>专注：%1 %2 (%3/%4)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="138"/>
+        <location filename="../../src/app/tray.cpp" line="137"/>
         <source>Meeting mode — until %1 (%2 left)</source>
         <translation>会议模式持续到 %1 (剩余 %2)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="142"/>
+        <location filename="../../src/app/tray.cpp" line="141"/>
         <source>Paused on battery</source>
         <translation>因电池供电而暂停</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="144"/>
+        <location filename="../../src/app/tray.cpp" line="143"/>
         <source>Paused on app running</source>
         <translation>因特定应用运行而暂停</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="146"/>
+        <location filename="../../src/app/tray.cpp" line="145"/>
         <source>Paused on idle</source>
         <translation>因用户空闲而暂停</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tray.cpp" line="147"/>
+        <source>Paused on unknown monitor</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
