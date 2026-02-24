@@ -110,7 +110,7 @@ void StatusTrayWindow::update(TrayData data) {
   smallBreakInsteadAction->setVisible(data.bigBreakEnabled && data.isBreaking &&
                                       data.smallBreaksBeforeBigBreak == 0);
   postponeMenu->setVisible(!data.isInMeeting && !data.pauseReasons &&
-                           !data.isFocusMode);
+                           !data.isPostponing && !data.isFocusMode);
   meetingAction->setVisible(!data.isBreaking && !data.isInMeeting &&
                             !data.pauseReasons && !data.isFocusMode);
   focusAction->setVisible(!data.isInMeeting && !data.pauseReasons &&
