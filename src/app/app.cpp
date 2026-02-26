@@ -167,7 +167,7 @@ void SaneBreakApp::openPostponeWindow() {
 }
 
 void SaneBreakApp::openMeetingWindow() {
-  if (m_currentState->getID() == AppState::Meeting || data->isPostponing()) return;
+  if (m_currentState->getID() == AppState::Meeting) return;
   if (!meetingWindow) {
     meetingWindow = new MeetingWindow(preferences, db);
     connect(meetingWindow, &MeetingWindow::meetingRequested, this,
