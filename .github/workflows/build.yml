@@ -94,7 +94,7 @@ jobs:
         path: build/sane-break-*.msix
 
     - name: Attestation
-      uses: actions/attest-build-provenance@v3
+      uses: actions/attest-build-provenance@v4
       with:
         subject-path: ./release/*
 
@@ -173,7 +173,7 @@ jobs:
           "build/Sane Break.app"
 
     - name: Attestation
-      uses: actions/attest-build-provenance@v3
+      uses: actions/attest-build-provenance@v4
       with:
         subject-path: ./release/*
 
@@ -227,7 +227,7 @@ jobs:
         mv sane-break.deb ../release/sane-break-${{ matrix.tag }}.deb
 
     - name: Attestation
-      uses: actions/attest-build-provenance@v3
+      uses: actions/attest-build-provenance@v4
       with:
         subject-path: ./release/*
 
@@ -307,7 +307,7 @@ jobs:
         LINUXDEPLOY_EXCLUDED_LIBRARIES: libmysqlclient.so*;libqsqlmimer.so;libqsqlmysql.so;libqsqlodbc.so;libqsqlpsql.so;libqsqloci.so
 
     - name: Attestation
-      uses: actions/attest-build-provenance@v3
+      uses: actions/attest-build-provenance@v4
       with:
         subject-path: ./release/*
 
