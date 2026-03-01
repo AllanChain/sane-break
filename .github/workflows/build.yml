@@ -86,12 +86,13 @@ jobs:
         mv build\Release\sane-break.exe .
         7z a release/${{ matrix.app-name }}.zip sane-break.exe LICENSE
         mv build\sane-break-windows.exe release\${{ matrix.app-name }}-installer.exe
+        mv build\sane-break-*.msix release\msstore-${{ matrix.app-name }}.msix
 
     - name: Upload MSIX
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
-        name: msix_${{ matrix.app-name }}
-        path: build/sane-break-*.msix
+        path: release\msstore-${{ matrix.app-name }}.msix
+        archive: false
 
     - name: Attestation
       uses: actions/attest@v4
@@ -99,10 +100,16 @@ jobs:
         subject-path: ./release/*
 
     - name: Create Artifact
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
-         name: ${{ matrix.app-name }}
-         path: ./release/*
+         path: ./release/${{ matrix.app-name }}-installer.exe
+         archive: false
+
+    - name: Create Artifact
+      uses: actions/upload-artifact@v7
+      with:
+         path: ./release/${{ matrix.app-name }}.zip
+         archive: false
 
   build-macos:
     name: Build (macOS, ${{ matrix.arch }})
@@ -175,13 +182,13 @@ jobs:
     - name: Attestation
       uses: actions/attest@v4
       with:
-        subject-path: ./release/*
+        subject-path: ./release/sane-break-macos-${{ matrix.arch }}.dmg
 
     - name: Create Artifact
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
-         name: "sane-break-macos-${{ matrix.arch }}"
-         path: ./release/*
+         path: ./release/sane-break-macos-${{ matrix.arch }}.dmg
+         archive: false
 
   build-debian:
     name: Build (Linux, ${{ matrix.tag }})
@@ -229,13 +236,13 @@ jobs:
     - name: Attestation
       uses: actions/attest@v4
       with:
-        subject-path: ./release/*
+        subject-path: ./release/sane-break-${{ matrix.tag }}.deb
 
     - name: Create Artifact
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
-         name: "sane-break-${{ matrix.tag }}"
-         path: ./release/*
+         path: ./release/sane-break-${{ matrix.tag }}.deb
+         archive: false
 
   build-appimage:
     name: Build (Linux, AppImage)
@@ -312,10 +319,10 @@ jobs:
         subject-path: ./release/*
 
     - name: Create Artifact
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
-         name: "sane-break-appimage"
-         path: ./release/*
+         path: ./release/sane-break.AppImage
+         archive: false
 
   build-gnome:
     name: Build GNOME shell extension
@@ -332,10 +339,11 @@ jobs:
       run: zip -j -r sane-break-gnome-extension packaging/linux/gnome/sane-break@allanchain.github.io
 
     - name: Create Artifact
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
          name: "sane-break-gnome-extension"
          path: ./sane-break-gnome-extension.zip
+         archive: false
 
   release:
     name: Release
@@ -346,11 +354,12 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: actions/download-artifact@v7
+      - uses: actions/download-artifact@v8
         with:
           path: release
           pattern: sane-break-*
           merge-multiple: true
+          skip-decompress: true
       - uses: softprops/action-gh-release@v2
         with:
           files: release/*
