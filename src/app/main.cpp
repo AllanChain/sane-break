@@ -10,6 +10,7 @@
 #include <QFontDatabase>
 #include <QLockFile>
 #include <QMessageBox>
+#include <QPushButton>
 #include <QSettings>
 #include <QStandardPaths>
 #include <QSystemTrayIcon>
@@ -65,11 +66,25 @@ int main(int argc, char* argv[]) {
     QMessageBox msgBox;
     msgBox.setText(QCoreApplication::tr("Another instance of Sane Break is running."));
     msgBox.setInformativeText(QCoreApplication::tr(
-        "Please quit the old instance before starting a new one."));
+        "Please quit the old instance before starting a new one. "
+        "If the previous instance has already exited, you can start a new "
+        "one anyway."));
     msgBox.setIcon(QMessageBox::Icon::Question);
-    msgBox.addButton(QMessageBox::Ok);
+    msgBox.addButton(QCoreApplication::tr("Quit"), QMessageBox::RejectRole);
+    QPushButton* startBtn =
+        msgBox.addButton(QCoreApplication::tr("Start Anyway"), QMessageBox::AcceptRole);
     msgBox.exec();
-    return 1;
+    if (msgBox.clickedButton() != startBtn) return 1;
+    lock.removeStaleLockFile();
+    if (!lock.tryLock()) {
+      QMessageBox::critical(
+          nullptr, "Sane Break",
+          QCoreApplication::tr(
+              "Could not start because another instance is still running. "
+              "Please manually delete \"%1\" and try again.")
+              .arg(lockFilePath));
+      return 1;
+    }
   }
 
 #ifdef Q_OS_LINUX

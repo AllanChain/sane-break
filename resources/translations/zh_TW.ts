@@ -1004,14 +1004,33 @@ v%1
         <translation>如果你在使用 GNOME，那麼需要安裝對應的 shell 擴展，否則 Sane Break 不能正常使用</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="66"/>
+        <location filename="../../src/app/main.cpp" line="67"/>
         <source>Another instance of Sane Break is running.</source>
         <translation>另一個 Sane Break 實例正在運行。</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="67"/>
+        <location filename="../../src/app/main.cpp" line="68"/>
+        <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="73"/>
+        <source>Quit</source>
+        <translation type="unfinished">退出</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="75"/>
+        <source>Start Anyway</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="82"/>
+        <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Please quit the old instance before starting a new one.</source>
-        <translation>請先退出舊的實例，再運行新的。</translation>
+        <translation type="vanished">請先退出舊的實例，再運行新的。</translation>
     </message>
 </context>
 <context>

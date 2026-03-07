@@ -1064,14 +1064,33 @@ v%1
         <translation type="unfinished">Вам нужно установить расширение оболочки, если вы используете GNOME. В противном случае, Sane Break почти непригоден для использования</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="66"/>
+        <location filename="../../src/app/main.cpp" line="67"/>
         <source>Another instance of Sane Break is running.</source>
         <translation>Запущен другой экземпляр Sane Break.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="67"/>
+        <location filename="../../src/app/main.cpp" line="68"/>
+        <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="73"/>
+        <source>Quit</source>
+        <translation type="unfinished">Выйти</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="75"/>
+        <source>Start Anyway</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="82"/>
+        <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Please quit the old instance before starting a new one.</source>
-        <translation>Пожалуйста, закройте другой экземпляр приложения, прежде чем запускать новый.</translation>
+        <translation type="vanished">Пожалуйста, закройте другой экземпляр приложения, прежде чем запускать новый.</translation>
     </message>
     <message>
         <source>Do you want to start anyway?</source>

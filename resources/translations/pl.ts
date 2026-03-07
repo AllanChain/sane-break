@@ -1036,14 +1036,33 @@ v%1
         <translation type="unfinished">Musisz zainstalować rozszerzenie powłoki, jeśli używasz GNOME. W przeciwnym razie Sane Break jest niemal nieużywalny</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="66"/>
+        <location filename="../../src/app/main.cpp" line="67"/>
         <source>Another instance of Sane Break is running.</source>
         <translation type="unfinished">Inna instancja Sane Break jest uruchomiona.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="67"/>
+        <location filename="../../src/app/main.cpp" line="68"/>
+        <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="73"/>
+        <source>Quit</source>
+        <translation type="unfinished">Wyjdź</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="75"/>
+        <source>Start Anyway</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="82"/>
+        <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Please quit the old instance before starting a new one.</source>
-        <translation type="unfinished">Proszę zamknij starszą instancję przed uruchomieniem nowej.</translation>
+        <translation type="obsolete">Proszę zamknij starszą instancję przed uruchomieniem nowej.</translation>
     </message>
 </context>
 <context>

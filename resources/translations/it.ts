@@ -1031,14 +1031,33 @@ v%1
         <translation type="unfinished">Devi installare l&apos;estensione shell se stai usando GNOME. Altrimenti, Sane Break è quasi inutilizzabile</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="66"/>
+        <location filename="../../src/app/main.cpp" line="67"/>
         <source>Another instance of Sane Break is running.</source>
         <translation>Un&apos;altra istanza di Sane Break è in esecuzione.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="67"/>
+        <location filename="../../src/app/main.cpp" line="68"/>
+        <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="73"/>
+        <source>Quit</source>
+        <translation type="unfinished">Esci</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="75"/>
+        <source>Start Anyway</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="82"/>
+        <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Please quit the old instance before starting a new one.</source>
-        <translation>Si prega di chiudere la vecchia istanza prima di iniziarne una nuova.</translation>
+        <translation type="vanished">Si prega di chiudere la vecchia istanza prima di iniziarne una nuova.</translation>
     </message>
 </context>
 <context>

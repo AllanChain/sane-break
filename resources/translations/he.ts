@@ -1063,14 +1063,33 @@ v%1
         <translation type="unfinished">יש להתקין את הרחבת Shell אם אתה משתמש ב-GNOME. אחרת, Sane Break כמעט בלתי ניתן לשימוש</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="66"/>
+        <location filename="../../src/app/main.cpp" line="67"/>
         <source>Another instance of Sane Break is running.</source>
         <translation type="unfinished">מופע נוסף של Sane Break פועל כרגע.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="67"/>
+        <location filename="../../src/app/main.cpp" line="68"/>
+        <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="73"/>
+        <source>Quit</source>
+        <translation type="unfinished">צא</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="75"/>
+        <source>Start Anyway</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="82"/>
+        <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Please quit the old instance before starting a new one.</source>
-        <translation type="unfinished">אנא צא מהמופע הישן לפני שתרוץ מופע חדש.</translation>
+        <translation type="obsolete">אנא צא מהמופע הישן לפני שתרוץ מופע חדש.</translation>
     </message>
 </context>
 <context>
