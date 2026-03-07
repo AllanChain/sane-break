@@ -30,8 +30,12 @@ int AppData::smallBreaksBeforeBigBreak() {
 void AppData::finishAndStartNextCycle() {
   m_breakCycleCount++;
   if (m_focusData.isActive) {
-    m_focusData.cyclesRemaining--;
-    if (m_focusData.cyclesRemaining <= 0) m_focusData.clear();
+    if (m_focusData.entryBreakDone) {
+      m_focusData.cyclesRemaining--;
+      if (m_focusData.cyclesRemaining <= 0) m_focusData.clear();
+    } else {
+      m_focusData.entryBreakDone = true;
+    }
   }
   // Must come after focus clear: if focus just ended, effectiveSmallEvery()
   // returns the normal interval instead of the focus interval.
@@ -133,6 +137,7 @@ void MeetingData::clear() {
 }
 void FocusData::clear() {
   isActive = false;
+  entryBreakDone = false;
   cyclesRemaining = 0;
   totalCycles = 0;
   spanId = -1;
@@ -184,6 +189,7 @@ void AppData::setFocusCyclesRemaining(int cycles) {
   m_focusData.cyclesRemaining = cycles;
   emit changed();
 }
+bool AppData::focusEntryBreakDone() const { return m_focusData.entryBreakDone; }
 int AppData::focusSpanId() const { return m_focusData.spanId; }
 void AppData::setFocusSpanId(int id) { m_focusData.spanId = id; }
 

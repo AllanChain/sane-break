@@ -855,9 +855,9 @@ class TestApp : public QObject {
     QVERIFY(app.trayData.isFocusMode);
     QCOMPARE(app.trayData.focusCyclesRemaining, 3);
 
-    // Finish entry break
+    // Finish entry break — entry break does not decrement cycles
     app.advanceToBreakEnd();
-    QCOMPARE(app.trayData.focusCyclesRemaining, 2);
+    QCOMPARE(app.trayData.focusCyclesRemaining, 3);
     // Uses focus schedule (600s not default 1200s)
     QCOMPARE(app.trayData.secondsToNextBreak, 600);
   }
@@ -870,12 +870,18 @@ class TestApp : public QObject {
     app.start();
 
     app.startFocus(2, "deep work");
-    // Entry break
+    // Entry break — does not decrement cycles
+    app.advanceToBreakEnd();
+    QCOMPARE(app.trayData.focusCyclesRemaining, 2);
+    QVERIFY(app.trayData.isFocusMode);
+
+    // First real break
+    app.advance(app.trayData.secondsToNextBreak);
     app.advanceToBreakEnd();
     QCOMPARE(app.trayData.focusCyclesRemaining, 1);
     QVERIFY(app.trayData.isFocusMode);
 
-    // Second break
+    // Second real break
     app.advance(app.trayData.secondsToNextBreak);
     app.advanceToBreakEnd();
     // Focus mode should now be deactivated
@@ -892,9 +898,10 @@ class TestApp : public QObject {
     app.start();
 
     app.startFocus(4, "deep work");
+    // Entry break does not decrement
     app.advanceToBreakEnd();
     QVERIFY(app.trayData.isFocusMode);
-    QCOMPARE(app.trayData.focusCyclesRemaining, 3);
+    QCOMPARE(app.trayData.focusCyclesRemaining, 4);
 
     // End focus early
     app.endFocus();
@@ -949,15 +956,19 @@ class TestApp : public QObject {
              deps.preferences->bigAfter->get() - 1);
 
     app.startFocus(2, "deep work");
-    // Entry break (cycle 1→2)
+    // Entry break (no cycle decrement, but breakCycleCount increments)
     app.advanceToBreakEnd();
-    // Second focus break (cycle 2→3)
+    // First real focus break (cycle decrement: 2→1)
+    app.advance(app.trayData.secondsToNextBreak);
+    app.advanceToBreakEnd();
+    QVERIFY(app.trayData.isFocusMode);
+    // Second real focus break (cycle decrement: 1→0)
     app.advance(app.trayData.secondsToNextBreak);
     app.advanceToBreakEnd();
     // Focus ended, back to normal schedule
     QVERIFY(!app.trayData.isFocusMode);
-    // After 2 breaks from cycle 1 with bigAfter=3, next break is big
-    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
+    // After 3 breaks from cycle 1 with bigAfter=3, cycle wraps: 2 small before big
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 2);
   }
   // Tray data reflects focus state
   void focus_mode_tray_info() {
@@ -976,8 +987,9 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.focusCyclesRemaining, 4);
     QCOMPARE(app.trayData.focusTotalCycles, 4);
 
+    // Entry break does not decrement cycles
     app.advanceToBreakEnd();
-    QCOMPARE(app.trayData.focusCyclesRemaining, 3);
+    QCOMPARE(app.trayData.focusCyclesRemaining, 4);
     QCOMPARE(app.trayData.focusTotalCycles, 4);
   }
   // Focus during break restarts break with focus duration
@@ -1029,7 +1041,8 @@ class TestApp : public QObject {
     QVERIFY(app.trayData.isFocusMode);
     QVERIFY(!app.trayData.isPostponing);
 
-    // Finish focus entry break, next session should not have postpone penalties
+    // Finish focus entry break (no cycle decrement), next session should not have
+    // postpone penalties
     app.advanceToBreakEnd();
     QCOMPARE(app.trayData.secondsToNextBreak, 600);
   }

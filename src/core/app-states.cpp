@@ -182,8 +182,7 @@ void AppStateBreak::enter(AppContext* app) {
       "break", {{"type", app->data->breakType() == BreakType::Big ? "big" : "small"}});
   data = std::make_unique<BreaksData>(dataInit(app));
   // On focus entry break, exhaust force break exits so the exit button is hidden
-  if (app->data->isFocusMode() &&
-      app->data->focusCyclesRemaining() == app->data->focusTotalCycles()) {
+  if (app->data->isFocusMode() && !app->data->focusEntryBreakDone()) {
     for (int i = 0; i < app->preferences->maxForceBreakExits->get(); i++)
       data->recordForceBreakExit();
   }
@@ -228,8 +227,7 @@ BreaksDataInit AppStateBreak::dataInit(AppContext* app) {
   int flashFor = app->preferences->flashFor->get();
   // On focus entry break (first break when entering focus mode), force immediate
   // full-screen by setting flashFor to 0
-  if (app->data->isFocusMode() &&
-      app->data->focusCyclesRemaining() == app->data->focusTotalCycles()) {
+  if (app->data->isFocusMode() && !app->data->focusEntryBreakDone()) {
     flashFor = 0;
   }
   return {

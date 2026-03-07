@@ -31,6 +31,7 @@ struct MeetingData {
 
 struct FocusData {
   bool isActive = false;
+  bool entryBreakDone = false;
   int cyclesRemaining = 0;
   int totalCycles = 0;
   int spanId = -1;
@@ -81,6 +82,7 @@ class AppData : public QObject {
   void startFocusMode(int totalCycles);
   void endFocusMode();
   void setFocusCyclesRemaining(int cycles);
+  bool focusEntryBreakDone() const;
   int focusSpanId() const;
   void setFocusSpanId(int id);
 
