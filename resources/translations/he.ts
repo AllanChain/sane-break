@@ -783,7 +783,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1381"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ללא</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1395"/>
@@ -1070,7 +1070,7 @@ v%1
     <message>
         <location filename="../../src/app/main.cpp" line="68"/>
         <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">אנא צא מהמופע הישן לפני שתתחיל מופע חדש. אם המופע הקודם כבר יצא, באפשרותך להפעיל מופע חדש בכל מקרה.</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="73"/>
@@ -1080,12 +1080,12 @@ v%1
     <message>
         <location filename="../../src/app/main.cpp" line="75"/>
         <source>Start Anyway</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">התחל בכל זאת</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="82"/>
         <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">לא ניתן היה להתחיל כי מופע אחר עדיין פועל. אנא מחק ידנית את &quot;%1&quot; ונסה שוב.</translation>
     </message>
     <message>
         <source>Please quit the old instance before starting a new one.</source>
@@ -1187,12 +1187,12 @@ v%1
     <message>
         <location filename="../../src/app/stats-window.ui" line="39"/>
         <source>Break time: %1 · Avg flash: %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">זמן הפסקה: %1 · ממוצע הבזק: %2</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="46"/>
         <source>%1 postponed · %2 force break exits</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 נדחו · %2 יציאות מהפסקה מאלצת</translation>
     </message>
     <message>
         <source>Today</source>
@@ -1241,7 +1241,7 @@ v%1
     <message>
         <location filename="../../src/app/stats-window.cpp" line="130"/>
         <source>%1s</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 שנ&apos;</translation>
     </message>
     <message>
         <source>Breaks: %1 (%2 completed)</source>
@@ -1367,7 +1367,7 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="147"/>
         <source>Paused on unknown monitor</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">הושעה עקב מוניטור לא מוכר</translation>
     </message>
     <message>
         <source>Meeting until %1</source>

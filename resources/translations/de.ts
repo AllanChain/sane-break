@@ -753,7 +753,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1381"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Keine</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1395"/>
@@ -1036,7 +1036,7 @@ v%1
     <message>
         <location filename="../../src/app/main.cpp" line="68"/>
         <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Beenden Sie die alte Instanz, bevor Sie eine neue starten. Falls die vorherige Instanz bereits beendet wurde, können Sie trotzdem eine neue starten.</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="73"/>
@@ -1046,12 +1046,12 @@ v%1
     <message>
         <location filename="../../src/app/main.cpp" line="75"/>
         <source>Start Anyway</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Trotzdem starten</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="82"/>
         <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Konnte nicht starten, weil eine andere Instanz noch läuft. Bitte löschen Sie &quot;%1&quot; manuell und versuchen Sie es erneut.</translation>
     </message>
     <message>
         <source>Please quit the old instance before starting a new one.</source>
@@ -1153,12 +1153,12 @@ v%1
     <message>
         <location filename="../../src/app/stats-window.ui" line="39"/>
         <source>Break time: %1 · Avg flash: %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pausenzeit: %1 · Durchschn. Blinken: %2</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="46"/>
         <source>%1 postponed · %2 force break exits</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 verschoben · %2 erzwungene Pausen-Beendigungen</translation>
     </message>
     <message>
         <source>Today</source>
@@ -1207,7 +1207,7 @@ v%1
     <message>
         <location filename="../../src/app/stats-window.cpp" line="130"/>
         <source>%1s</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 s</translation>
     </message>
     <message>
         <source>Breaks: %1 (%2 completed)</source>
@@ -1333,7 +1333,7 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="147"/>
         <source>Paused on unknown monitor</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bei unbekanntem Monitor pausiert</translation>
     </message>
     <message>
         <source>Meeting until %1</source>

@@ -781,7 +781,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1381"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Нет</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1395"/>
@@ -1071,7 +1071,7 @@ v%1
     <message>
         <location filename="../../src/app/main.cpp" line="68"/>
         <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Пожалуйста, закройте другой экземпляр приложения перед запуском нового. Если предыдущий экземпляр уже завершил работу, вы всё равно можете запустить новый.</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="73"/>
@@ -1081,12 +1081,12 @@ v%1
     <message>
         <location filename="../../src/app/main.cpp" line="75"/>
         <source>Start Anyway</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Всё равно запустить</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="82"/>
         <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Не удалось запустить, так как другой экземпляр всё ещё работает. Пожалуйста, вручную удалите «%1» и попробуйте снова.</translation>
     </message>
     <message>
         <source>Please quit the old instance before starting a new one.</source>
@@ -1194,12 +1194,12 @@ v%1
     <message>
         <location filename="../../src/app/stats-window.ui" line="39"/>
         <source>Break time: %1 · Avg flash: %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Время перерывов: %1 · Ср. мигание: %2</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="46"/>
         <source>%1 postponed · %2 force break exits</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 отложено · %2 выходов с принудительным прерыванием</translation>
     </message>
     <message>
         <source>Today</source>
@@ -1248,7 +1248,7 @@ v%1
     <message>
         <location filename="../../src/app/stats-window.cpp" line="130"/>
         <source>%1s</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1с</translation>
     </message>
     <message>
         <source>Breaks: %1 (%2 completed)</source>
@@ -1377,7 +1377,7 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="147"/>
         <source>Paused on unknown monitor</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Приостановлено из-за неизвестного монитора</translation>
     </message>
     <message>
         <source>Meeting until %1</source>

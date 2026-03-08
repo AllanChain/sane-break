@@ -48,27 +48,21 @@ TRANSLATION_JSON_SCHEMA = {
     "name": "translations",
     "strict": True,
     "schema": {
-        "type": "object",
-        "properties": {
-            "translations": {
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "source": {"type": "string"},
-                        "translation": {
-                            "oneOf": [
-                                {"type": "string"},
-                                {"type": "array", "items": {"type": "string"}},
-                            ]
-                        },
-                    },
-                    "required": ["source", "translation"],
-                    "additionalProperties": False,
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "source": {"type": "string"},
+                "translation": {
+                    "oneOf": [
+                        {"type": "string"},
+                        {"type": "array", "items": {"type": "string"}},
+                    ]
                 },
-            }
+            },
+            "required": ["source", "translation"],
+            "additionalProperties": False,
         },
-        "required": ["translations"],
         "additionalProperties": False,
     },
 }
@@ -82,6 +76,7 @@ def ask_ai(language: str, prompt: str) -> list[dict]:
     response = client.chat.completions.create(
         model=os.getenv("OPENAI_API_MODEL"),
         messages=[{"role": "user", "content": prompt}],
+        extra_body={"enable_thinking": False},
         response_format={
             "type": "json_schema",
             "json_schema": TRANSLATION_JSON_SCHEMA,
@@ -95,8 +90,7 @@ def ask_ai(language: str, prompt: str) -> list[dict]:
             chunks.append(chunk_message)
             print(chunk_message, end="", flush=True)
     print()  # newline after streaming output
-    result = json.loads("".join(chunks))
-    return result["translations"]
+    return json.loads("".join(chunks))
 
 
 def is_translated(ts: TranslationString) -> bool:

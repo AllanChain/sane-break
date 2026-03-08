@@ -1011,22 +1011,22 @@ v%1
     <message>
         <location filename="../../src/app/main.cpp" line="68"/>
         <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
-        <translation type="unfinished"></translation>
+        <translation>启动新实例前，请先关闭旧实例。若前一个实例已退出，您可选择仍要启动。</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="73"/>
         <source>Quit</source>
-        <translation type="unfinished">退出</translation>
+        <translation>退出</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="75"/>
         <source>Start Anyway</source>
-        <translation type="unfinished"></translation>
+        <translation>仍要启动</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="82"/>
         <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法启动，因为另一个实例仍在运行。请手动删除 %1 并重试。</translation>
     </message>
 </context>
 <context>
@@ -1261,7 +1261,7 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="147"/>
         <source>Paused on unknown monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>因未知显示器而暂停</translation>
     </message>
 </context>
 <context>

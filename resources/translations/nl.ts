@@ -894,7 +894,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1381"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Geen</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1395"/>
@@ -1126,7 +1126,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     <message>
         <location filename="../../src/app/main.cpp" line="68"/>
         <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sluit de bestaande instantie voordat u een nieuwe start. Als de vorige instantie reeds is afgesloten, kunt u toch een nieuwe starten.</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="73"/>
@@ -1136,12 +1136,12 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     <message>
         <location filename="../../src/app/main.cpp" line="75"/>
         <source>Start Anyway</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Toch starten</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="82"/>
         <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kan niet starten omdat er nog een andere instantie actief is. Verwijder &quot;%1&quot; handmatig en probeer het opnieuw.</translation>
     </message>
     <message>
         <source>Please quit the old instance before starting a new one.</source>
@@ -1306,12 +1306,12 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     <message>
         <location filename="../../src/app/stats-window.ui" line="39"/>
         <source>Break time: %1 · Avg flash: %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pauzetijd: %1 · Gem. flits: %2</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="46"/>
         <source>%1 postponed · %2 force break exits</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 uitgesteld · %2 keer gedwongen pauze beëindigd</translation>
     </message>
     <message>
         <source>Today</source>
@@ -1360,7 +1360,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     <message>
         <location filename="../../src/app/stats-window.cpp" line="130"/>
         <source>%1s</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 s</translation>
     </message>
     <message>
         <source>Breaks: %1 (%2 completed)</source>
@@ -1486,7 +1486,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     <message>
         <location filename="../../src/app/tray.cpp" line="147"/>
         <source>Paused on unknown monitor</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Opgeschort vanwege onbekende monitor</translation>
     </message>
     <message>
         <source>Meeting until %1</source>
