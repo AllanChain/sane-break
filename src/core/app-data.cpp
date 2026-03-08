@@ -56,6 +56,9 @@ int AppData::breakDuration() {
                   effectiveSmallEvery() / 100;
   return totalSeconds;
 }
+bool AppData::isBreakExtendedByPostpone() {
+  return m_postponeData.secondsPostponed() > 0;
+}
 void AppData::resetBreakCycle() {
   m_breakCycleCount = 1;
   emit changed();

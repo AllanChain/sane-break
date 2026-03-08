@@ -48,6 +48,7 @@ class AppData : public QObject {
   int smallBreaksBeforeBigBreak();
   void finishAndStartNextCycle();
   int breakDuration();
+  bool isBreakExtendedByPostpone();
   void resetBreakCycle();
   void makeNextBreakBig();
   void makeNextBreakLastSmallBeforeBig();

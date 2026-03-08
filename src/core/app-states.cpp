@@ -191,7 +191,8 @@ void AppStateBreak::enter(AppContext* app) {
   app->idleTimer->setWatchAccuracy(500);
   app->idleTimer->setMinIdleTime(2000);
   app->breakWindows->create(app->data->breakType(), app->preferences,
-                            data->totalSeconds());
+                            data->totalSeconds(),
+                            app->data->isBreakExtendedByPostpone());
   // Ensure we set the time at least once to initialize the UI in case user is idle and
   // no tick occurs
   app->breakWindows->setTime(data->remainingSeconds());

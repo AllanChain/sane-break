@@ -15,6 +15,7 @@
 
 struct BreakWindowData {
   int totalSeconds;
+  bool isPostponed = false;
   struct {
     QString prompt;
     QString fullScreen;
@@ -46,7 +47,8 @@ class AbstractBreakWindows : public QObject {
   Q_DECLARE_FLAGS(Buttons, Button)
   using QObject::QObject;
   ~AbstractBreakWindows() = default;
-  virtual void create(BreakType, SanePreferences*, int breakDuration) = 0;
+  virtual void create(BreakType, SanePreferences*, int breakDuration,
+                      bool isPostponed = false) = 0;
   virtual void destroy() = 0;
   virtual void setTime(int remainingTime) = 0;
   virtual void showFullScreen() = 0;

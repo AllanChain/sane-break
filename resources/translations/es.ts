@@ -61,12 +61,17 @@
 <context>
     <name>BreakReminder</name>
     <message>
-        <location filename="../../src/app/break-window.ui" line="210"/>
+        <location filename="../../src/app/break-window.ui" line="91"/>
+        <source>Break extended to make up for postponing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/break-window.ui" line="224"/>
         <source>Lock Screen</source>
         <translation>Bloquear pantalla</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.ui" line="264"/>
+        <location filename="../../src/app/break-window.ui" line="278"/>
         <source>Exit Force Break</source>
         <translation>Salir del descanso forzoso</translation>
     </message>
@@ -90,12 +95,12 @@
         <translation type="vanished">&lt;p&gt;Pospón Sane Break pulsando &lt;code&gt;Win&lt;/code&gt; y haciendo clic derecho en el icono de Sane Break en la bandeja del sistema.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="149"/>
+        <location filename="../../src/app/break-window.cpp" line="151"/>
         <source>Break will end at: %1</source>
         <translation>El descanso finaliza a las: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="151"/>
+        <location filename="../../src/app/break-window.cpp" line="153"/>
         <source>Break has ended</source>
         <translation>El descanso ha terminado</translation>
     </message>

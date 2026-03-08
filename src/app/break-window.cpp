@@ -101,6 +101,8 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget* parent)
   connect(ui->exitForceBreak, &QPushButton::pressed, this,
           &BreakWindow::exitForceBreakRequested);
 
+  ui->postponeLabel->setVisible(false);
+
   m_progressAnim = new QPropertyAnimation(ui->progressBar, "value");
   m_progressAnim->setStartValue(ui->progressBar->maximum());
   m_progressAnim->setEndValue(0);
@@ -175,6 +177,7 @@ void BreakWindow::showFullScreen() {
   setProperty("color", m_data.theme.mainBackground);
 
   ui->breakLabel->setText(m_data.message.fullScreen);
+  if (m_data.isPostponed) ui->postponeLabel->setVisible(true);
   if (m_data.show.countdown) ui->countDownLabel->setVisible(true);
   if (m_data.show.clock) {
     ui->clock->setVisible(true);
@@ -222,6 +225,7 @@ void BreakWindow::showFlashPrompt() {
   if (!m_data.show.prograssBar) {
     ui->progressBar->setVisible(false);
   }
+  ui->postponeLabel->setVisible(false);
   ui->countDownLabel->setVisible(false);
   ui->clock->setVisible(false);
   ui->breakEndTimeLabel->setVisible(false);

@@ -79,6 +79,20 @@ QProgressBar::chunk {
        </widget>
       </item>
       <item alignment="Qt::AlignmentFlag::AlignHCenter">
+       <widget class="QLabel" name="postponeLabel">
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+  background: transparent;
+  font-size: 16px;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Break extended to make up for postponing</string>
+        </property>
+       </widget>
+      </item>
+      <item alignment="Qt::AlignmentFlag::AlignHCenter">
        <widget class="QLabel" name="countDownLabel">
         <property name="styleSheet">
          <string notr="true">QLabel {

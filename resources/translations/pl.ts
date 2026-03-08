@@ -61,12 +61,17 @@
 <context>
     <name>BreakReminder</name>
     <message>
-        <location filename="../../src/app/break-window.ui" line="210"/>
+        <location filename="../../src/app/break-window.ui" line="91"/>
+        <source>Break extended to make up for postponing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/break-window.ui" line="224"/>
         <source>Lock Screen</source>
         <translation type="unfinished">Zablokuj ekran</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.ui" line="264"/>
+        <location filename="../../src/app/break-window.ui" line="278"/>
         <source>Exit Force Break</source>
         <translation type="unfinished">Zakończ wymuszoną przerwę</translation>
     </message>
@@ -74,12 +79,12 @@
 <context>
     <name>BreakWindow</name>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="149"/>
+        <location filename="../../src/app/break-window.cpp" line="151"/>
         <source>Break will end at: %1</source>
         <translation type="unfinished">Przerwa zakończy się o: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="151"/>
+        <location filename="../../src/app/break-window.cpp" line="153"/>
         <source>Break has ended</source>
         <translation type="unfinished">Przerwa się zakończyła</translation>
     </message>
