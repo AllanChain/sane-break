@@ -13,6 +13,7 @@
 #include <QIODevice>
 #include <QLabel>
 #include <QMainWindow>
+#include <QPauseAnimation>
 #include <QPixmap>
 #include <QProgressBar>
 #include <QPropertyAnimation>
@@ -113,19 +114,36 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget* parent)
 
   auto* bgAnimGroup = new QSequentialAnimationGroup(this);
   int baseDuration = data.theme.flashAnimationDuration;
-  int fastCount = std::max({2, 10000 / baseDuration});
-  int slowCount = std::max({1, fastCount / 4});
-  auto addFlashes = [&](int count, int duration) {
-    for (int i = 0; i < count; ++i) {
-      auto* flash = new QPropertyAnimation(this, "color");
-      flash->setStartValue(data.theme.highlightBackground);
-      flash->setEndValue(data.theme.mainBackground);
-      flash->setDuration(duration);
-      bgAnimGroup->addAnimation(flash);
-    }
-  };
-  addFlashes(fastCount, baseDuration);
-  addFlashes(slowCount, baseDuration * 4);
+  int flashCount = std::max({2, 10000 / baseDuration});
+
+  // Flash burst
+  for (int i = 0; i < flashCount; ++i) {
+    auto* flash = new QPropertyAnimation(this, "color");
+    flash->setStartValue(data.theme.highlightBackground);
+    flash->setEndValue(data.theme.mainBackground);
+    flash->setDuration(baseDuration);
+    bgAnimGroup->addAnimation(flash);
+  }
+
+  // Fade to semi-transparent quiet state
+  QColor quietColor = data.theme.mainBackground;
+  quietColor.setAlphaF(quietColor.alphaF() * 0.5);
+  auto* fadeOut = new QPropertyAnimation(this, "color");
+  fadeOut->setStartValue(data.theme.mainBackground);
+  fadeOut->setEndValue(quietColor);
+  fadeOut->setDuration(500);
+  bgAnimGroup->addAnimation(fadeOut);
+
+  // Hold quiet state
+  bgAnimGroup->addAnimation(new QPauseAnimation(6000));
+
+  // Fade back to prepare for next flash burst
+  auto* fadeIn = new QPropertyAnimation(this, "color");
+  fadeIn->setStartValue(quietColor);
+  fadeIn->setEndValue(data.theme.mainBackground);
+  fadeIn->setDuration(300);
+  bgAnimGroup->addAnimation(fadeIn);
+
   bgAnimGroup->setLoopCount(-1);
   m_bgAnim = bgAnimGroup;
   m_bgAnim->start();
