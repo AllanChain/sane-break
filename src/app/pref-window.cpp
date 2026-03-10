@@ -274,6 +274,9 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
   controllers->add(PrefGroup::Reminder,
                    new PrefController<QSpinBox, int>(ui->flashTrayForBox,
                                                      preferences->flashTrayFor));
+  controllers->add(
+      PrefGroup::Reminder,
+      new PrefController<QSpinBox, int>(ui->headsUpForBox, preferences->headsUpFor));
   controllers->add(PrefGroup::Reminder,
                    new PrefController<QSpinBox, int>(ui->maxForceBreakExits,
                                                      preferences->maxForceBreakExits));

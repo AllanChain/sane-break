@@ -62,6 +62,8 @@ AbstractApp::AbstractApp(const AppDependencies& deps, QObject* parent)
           &AbstractApp::doLockScreen);
   connect(breakWindows, &AbstractBreakWindows::exitForceBreakRequested, this,
           [this]() { onMenuAction(Action::ExitForceBreak{}); });
+  connect(breakWindows, &AbstractBreakWindows::startBreakRequested, this,
+          &AbstractApp::breakNow);
 
   connect(preferences->pauseOnBattery, &SettingWithSignal::changed, this,
           &AbstractApp::onBatterySettingChange);

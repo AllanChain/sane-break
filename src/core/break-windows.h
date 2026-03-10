@@ -56,10 +56,14 @@ class AbstractBreakWindows : public QObject {
   virtual void showButtons(Buttons, bool show = true) = 0;
   virtual void playEnterSound(BreakType, SanePreferences*) = 0;
   virtual void playExitSound(BreakType, SanePreferences*) = 0;
+  virtual void showHeadsUp(int totalSeconds, BreakType breakType,
+                           SanePreferences* preferences) = 0;
+  virtual void hideHeadsUp() = 0;
 
  signals:
   void lockScreenRequested();
   void exitForceBreakRequested();
+  void startBreakRequested();
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(AbstractBreakWindows::Buttons)

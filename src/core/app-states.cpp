@@ -83,9 +83,18 @@ void AppStateNormal::enter(AppContext* app) {
   app->idleTimer->setWatchAccuracy(5000);
   app->idleTimer->setMinIdleTime(app->preferences->pauseOnIdleFor->get() * 1000);
 }
-void AppStateNormal::exit(AppContext* app) { app->closeCurrentSpan(); }
+void AppStateNormal::exit(AppContext* app) {
+  app->closeCurrentSpan();
+  app->breakWindows->hideHeadsUp();
+}
 void AppStateNormal::tick(AppContext* app) {
   app->data->tickSecondsToNextBreak();
+  int headsUpFor = app->preferences->headsUpFor->get();
+  if (headsUpFor > 0 && app->data->secondsToNextBreak() <= headsUpFor &&
+      app->data->secondsToNextBreak() > 0) {
+    app->breakWindows->showHeadsUp(app->data->secondsToNextBreak(),
+                                   app->data->breakType(), app->preferences);
+  }
   if (app->data->secondsToNextBreak() <= 0)
     app->transitionTo(std::make_unique<AppStateBreak>());
 }

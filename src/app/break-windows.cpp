@@ -27,6 +27,9 @@
 #include "core/preferences.h"
 #include "idle/factory.h"
 
+#ifdef Q_OS_MACOS
+#include "lib/macos/workspace.h"
+#endif
 #ifdef Q_OS_LINUX
 #include <QGuiApplication>
 #include <QPluginLoader>
@@ -192,4 +195,33 @@ void BreakWindows::showFlashPrompt() {
 }
 void BreakWindows::showButtons(Buttons buttons, bool show) {
   for (auto w : std::as_const(m_windows)) w->showButtons(buttons, show);
+}
+void BreakWindows::showHeadsUp(int totalSeconds, BreakType breakType,
+                               SanePreferences* preferences) {
+  if (!m_headsUpWindows.isEmpty()) return;
+  QList<QScreen*> screens = QApplication::screens();
+  for (QScreen* screen : std::as_const(screens)) {
+    auto* w = new HeadsUpWindow(totalSeconds, preferences->backgroundColor->get(),
+                                breakType == BreakType::Small
+                                    ? preferences->smallHighlightColor->get()
+                                    : preferences->bigHighlightColor->get(),
+                                preferences->messageColor->get());
+    m_headsUpWindows.append(w);
+    w->initSize(screen);
+#ifdef Q_OS_LINUX
+    if (layerShell) layerShell->layout(w->windowHandle());
+#endif
+    w->show();
+#ifdef Q_OS_MACOS
+    macSetAllWorkspaces(w->windowHandle());
+#endif
+    connect(w, &HeadsUpWindow::clicked, this, &BreakWindows::startBreakRequested);
+  }
+}
+void BreakWindows::hideHeadsUp() {
+  for (auto* w : std::as_const(m_headsUpWindows)) {
+    w->close();
+    w->deleteLater();
+  }
+  m_headsUpWindows.clear();
 }

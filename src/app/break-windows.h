@@ -11,6 +11,7 @@
 #include <QTimer>
 
 #include "app/break-window.h"
+#include "app/heads-up-window.h"
 #include "app/sound-player.h"
 #include "core/break-windows.h"
 #include "core/flags.h"
@@ -38,9 +39,13 @@ class BreakWindows : public AbstractBreakWindows {
   void showButtons(Buttons, bool show = true) override;
   void playEnterSound(BreakType, SanePreferences*) override;
   void playExitSound(BreakType, SanePreferences*) override;
+  void showHeadsUp(int totalSeconds, BreakType breakType,
+                   SanePreferences* preferences) override;
+  void hideHeadsUp() override;
 
  private:
   QList<BreakWindow*> m_windows;
+  QList<HeadsUpWindow*> m_headsUpWindows;
   SoundPlayer* soundPlayer;
   QTimer* clockUpdateTimer;
   void updateClocks();

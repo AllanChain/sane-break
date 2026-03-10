@@ -9,6 +9,8 @@ add_library(
   break-window.ui
   break-windows.cpp
   break-windows.h
+  heads-up-window.cpp
+  heads-up-window.h
   meeting-prompt.cpp
   meeting-prompt.h
   meeting-prompt.ui
