@@ -2656,5 +2656,133 @@ v%1
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>focusSmallBreakEverySlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>focusSmallBreakEveryBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>650</x>
+     <y>600</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>765</x>
+     <y>600</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>focusSmallBreakEveryBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>focusSmallBreakEverySlider</receiver>
+   <slot>setValueForce(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>765</x>
+     <y>600</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>650</x>
+     <y>600</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>focusSmallBreakForSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>focusSmallBreakForBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>650</x>
+     <y>640</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>765</x>
+     <y>640</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>focusSmallBreakForBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>focusSmallBreakForSlider</receiver>
+   <slot>setValueForce(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>765</x>
+     <y>640</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>650</x>
+     <y>640</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>focusBigBreakAfterSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>focusBigBreakAfterBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>650</x>
+     <y>720</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>765</x>
+     <y>720</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>focusBigBreakAfterBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>focusBigBreakAfterSlider</receiver>
+   <slot>setValueForce(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>765</x>
+     <y>720</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>650</x>
+     <y>720</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>focusBigBreakForSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>focusBigBreakForBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>650</x>
+     <y>760</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>765</x>
+     <y>760</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>focusBigBreakForBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>focusBigBreakForSlider</receiver>
+   <slot>setValueForce(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>765</x>
+     <y>760</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>650</x>
+     <y>760</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
 </ui>
