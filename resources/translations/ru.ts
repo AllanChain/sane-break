@@ -63,7 +63,7 @@
     <message>
         <location filename="../../src/app/break-window.ui" line="91"/>
         <source>Break extended to make up for postponing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Перерыв продлён, чтобы компенсировать отсрочку</translation>
     </message>
     <message>
         <location filename="../../src/app/break-window.ui" line="224"/>
@@ -178,14 +178,14 @@
 <context>
     <name>HeadsUpWindow</name>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="98"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="101"/>
         <source>Break soon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Скоро перерыв</translation>
     </message>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="107"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="110"/>
         <source>Click to start</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Нажмите, чтобы начать</translation>
     </message>
 </context>
 <context>
@@ -786,12 +786,12 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="1022"/>
         <source>Show a small notification this many seconds before the break starts. Click it to start the break early. Set to 0 to disable.</source>
         <extracomment>Tooltip for &quot;Show heads-up before break&quot; config</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Показывать небольшое уведомление за это количество секунд до начала перерыва. Нажмите на него, чтобы начать перерыв раньше. Установите значение 0, чтобы отключить функцию.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1025"/>
         <source>Show heads-up before break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Показывать предварительное уведомление перед перерывом</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1207"/>
@@ -961,9 +961,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="512"/>
-        <location filename="../../src/app/pref-window.cpp" line="513"/>
-        <location filename="../../src/app/pref-window.cpp" line="514"/>
+        <location filename="../../src/app/pref-window.cpp" line="516"/>
+        <location filename="../../src/app/pref-window.cpp" line="517"/>
+        <location filename="../../src/app/pref-window.cpp" line="518"/>
         <source>%n min</source>
         <translation type="unfinished">
             <numerusform>%n мин</numerusform>
@@ -972,8 +972,8 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="174"/>
-        <location filename="../../src/app/pref-window.cpp" line="216"/>
+        <location filename="../../src/app/pref-window.cpp" line="178"/>
+        <location filename="../../src/app/pref-window.cpp" line="220"/>
         <source>Every %n min</source>
         <translation type="unfinished">
             <numerusform>Каждые %n мин</numerusform>
@@ -982,7 +982,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="511"/>
+        <location filename="../../src/app/pref-window.cpp" line="515"/>
         <source>%n sec</source>
         <translation type="unfinished">
             <numerusform>%n сек</numerusform>
@@ -991,83 +991,83 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="510"/>
+        <location filename="../../src/app/pref-window.cpp" line="514"/>
         <source>Disabled</source>
         <translation type="unfinished">Отключено</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="486"/>
+        <location filename="../../src/app/pref-window.cpp" line="490"/>
         <source>Setting autostart failed</source>
         <translation type="unfinished">Настройка автозапуска не удалась</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="521"/>
+        <location filename="../../src/app/pref-window.cpp" line="525"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation type="unfinished">Начать следующий перерыв после среднего клика на значке в трее</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="526"/>
+        <location filename="../../src/app/pref-window.cpp" line="530"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation type="unfinished">Начать следующий перерыв после двойного клика на значке в трее</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="604"/>
+        <location filename="../../src/app/pref-window.cpp" line="608"/>
         <source>Save</source>
         <translation type="unfinished">Сохранить</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="605"/>
+        <location filename="../../src/app/pref-window.cpp" line="609"/>
         <source>Discard</source>
         <translation type="unfinished">Отменить</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="606"/>
+        <location filename="../../src/app/pref-window.cpp" line="610"/>
         <source>Cancel</source>
         <translation type="unfinished">Отмена</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="643"/>
+        <location filename="../../src/app/pref-window.cpp" line="647"/>
         <source>Select Sound File</source>
         <translation type="unfinished">Выбрать звуковой файл</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="644"/>
+        <location filename="../../src/app/pref-window.cpp" line="648"/>
         <source>Sound Files (*.mp3 *.wav *.ogg *.flac *.m4a)</source>
         <translation type="unfinished">Звуковые файлы (*.mp3 *.wav *.ogg *.flac *.m4a)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="654"/>
-        <location filename="../../src/app/pref-window.cpp" line="675"/>
+        <location filename="../../src/app/pref-window.cpp" line="658"/>
+        <location filename="../../src/app/pref-window.cpp" line="679"/>
         <source>Error</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="655"/>
+        <location filename="../../src/app/pref-window.cpp" line="659"/>
         <source>Failed to save a copy of the selected sound file.</source>
         <translation type="unfinished">Не удалось сохранить копию выбранного звукового файла.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="664"/>
+        <location filename="../../src/app/pref-window.cpp" line="668"/>
         <source>Select Background Image</source>
         <translation type="unfinished">Выбрать фоновое изображение</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="665"/>
+        <location filename="../../src/app/pref-window.cpp" line="669"/>
         <source>Image Files (*.png *.jpg *.jpeg *.bmp *.webp)</source>
         <translation type="unfinished">Файлы изображений (*.png *.jpg *.jpeg *.bmp *.webp)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="676"/>
+        <location filename="../../src/app/pref-window.cpp" line="680"/>
         <source>Failed to save a copy of the selected image file.</source>
         <translation type="unfinished">Не удалось сохранить копию выбранного изображения.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="601"/>
+        <location filename="../../src/app/pref-window.cpp" line="605"/>
         <source>The preferences have been modified.</source>
         <translation type="unfinished">Настройки были изменены.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="602"/>
+        <location filename="../../src/app/pref-window.cpp" line="606"/>
         <source>Do you want to save your changes?</source>
         <translation type="unfinished">Хотите сохранить изменения?</translation>
     </message>
@@ -1266,17 +1266,17 @@ v%1
         <translation type="obsolete">&lt;h3&gt;Ежедневная статистика&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="30"/>
+        <location filename="../../src/app/stats-window.cpp" line="32"/>
         <source>%1h %2m</source>
         <translation type="unfinished">%1 ч %2 мин</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="31"/>
+        <location filename="../../src/app/stats-window.cpp" line="33"/>
         <source>%1m</source>
         <translation type="unfinished">%1 мин</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="130"/>
+        <location filename="../../src/app/stats-window.cpp" line="134"/>
         <source>%1s</source>
         <translation type="unfinished">%1с</translation>
     </message>

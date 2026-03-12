@@ -67,7 +67,7 @@
     <message>
         <location filename="../../src/app/break-window.ui" line="91"/>
         <source>Break extended to make up for postponing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pauze verlengd om uitstel te compenseren</translation>
     </message>
     <message>
         <location filename="../../src/app/break-window.ui" line="224"/>
@@ -190,14 +190,14 @@
 <context>
     <name>HeadsUpWindow</name>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="98"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="101"/>
         <source>Break soon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Binnenkort pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="107"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="110"/>
         <source>Click to start</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Klik om te starten</translation>
     </message>
 </context>
 <context>
@@ -889,12 +889,12 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <location filename="../../src/app/pref-window.ui" line="1022"/>
         <source>Show a small notification this many seconds before the break starts. Click it to start the break early. Set to 0 to disable.</source>
         <extracomment>Tooltip for &quot;Show heads-up before break&quot; config</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Toont een kleine melding dit aantal seconden voordat de pauze begint. Klik erop om de pauze eerder te starten. Stel in op 0 om uit te schakelen.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1025"/>
         <source>Show heads-up before break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Melding tonen vóór pauze</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1068"/>
@@ -1019,9 +1019,9 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="512"/>
-        <location filename="../../src/app/pref-window.cpp" line="513"/>
-        <location filename="../../src/app/pref-window.cpp" line="514"/>
+        <location filename="../../src/app/pref-window.cpp" line="516"/>
+        <location filename="../../src/app/pref-window.cpp" line="517"/>
+        <location filename="../../src/app/pref-window.cpp" line="518"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min.</numerusform>
@@ -1029,8 +1029,8 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="174"/>
-        <location filename="../../src/app/pref-window.cpp" line="216"/>
+        <location filename="../../src/app/pref-window.cpp" line="178"/>
+        <location filename="../../src/app/pref-window.cpp" line="220"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>Iedere %n min.</numerusform>
@@ -1038,7 +1038,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="511"/>
+        <location filename="../../src/app/pref-window.cpp" line="515"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec.</numerusform>
@@ -1046,83 +1046,83 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="510"/>
+        <location filename="../../src/app/pref-window.cpp" line="514"/>
         <source>Disabled</source>
         <translation>Uitgeschakeld</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="521"/>
+        <location filename="../../src/app/pref-window.cpp" line="525"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>Volgende pauze starten na middelklikken op systeemvakpictogram</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="526"/>
+        <location filename="../../src/app/pref-window.cpp" line="530"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>Volgende pauze starten na dubbelklikken op systeemvakpictogram</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="604"/>
+        <location filename="../../src/app/pref-window.cpp" line="608"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="605"/>
+        <location filename="../../src/app/pref-window.cpp" line="609"/>
         <source>Discard</source>
         <translation>Verwerpen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="606"/>
+        <location filename="../../src/app/pref-window.cpp" line="610"/>
         <source>Cancel</source>
         <translation>Annuleren</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="643"/>
+        <location filename="../../src/app/pref-window.cpp" line="647"/>
         <source>Select Sound File</source>
         <translation type="unfinished">Geluidsbestand selecteren</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="644"/>
+        <location filename="../../src/app/pref-window.cpp" line="648"/>
         <source>Sound Files (*.mp3 *.wav *.ogg *.flac *.m4a)</source>
         <translation type="unfinished">Geluidsbestanden (*.mp3 *.wav *.ogg *.flac *.m4a)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="654"/>
-        <location filename="../../src/app/pref-window.cpp" line="675"/>
+        <location filename="../../src/app/pref-window.cpp" line="658"/>
+        <location filename="../../src/app/pref-window.cpp" line="679"/>
         <source>Error</source>
         <translation type="unfinished">Fout</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="655"/>
+        <location filename="../../src/app/pref-window.cpp" line="659"/>
         <source>Failed to save a copy of the selected sound file.</source>
         <translation type="unfinished">Kan geen kopie van het geselecteerde geluidsbestand opslaan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="664"/>
+        <location filename="../../src/app/pref-window.cpp" line="668"/>
         <source>Select Background Image</source>
         <translation type="unfinished">Achtergrondafbeelding selecteren</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="665"/>
+        <location filename="../../src/app/pref-window.cpp" line="669"/>
         <source>Image Files (*.png *.jpg *.jpeg *.bmp *.webp)</source>
         <translation type="unfinished">Afbeeldingsbestanden (*.png *.jpg *.jpeg *.bmp *.webp)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="676"/>
+        <location filename="../../src/app/pref-window.cpp" line="680"/>
         <source>Failed to save a copy of the selected image file.</source>
         <translation type="unfinished">Kan geen kopie van het geselecteerde afbeeldingsbestand opslaan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="486"/>
+        <location filename="../../src/app/pref-window.cpp" line="490"/>
         <source>Setting autostart failed</source>
         <translation>Automatisch opstarten is niet mogelijk</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="601"/>
+        <location filename="../../src/app/pref-window.cpp" line="605"/>
         <source>The preferences have been modified.</source>
         <translation>De instellingen zijn aangepast.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="602"/>
+        <location filename="../../src/app/pref-window.cpp" line="606"/>
         <source>Do you want to save your changes?</source>
         <translation>Wilt u de instellingen opslaan?</translation>
     </message>
@@ -1378,17 +1378,17 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation type="obsolete">&lt;h3&gt;Dagelijkse opdeling&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="30"/>
+        <location filename="../../src/app/stats-window.cpp" line="32"/>
         <source>%1h %2m</source>
         <translation type="unfinished">%1 u %2 m</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="31"/>
+        <location filename="../../src/app/stats-window.cpp" line="33"/>
         <source>%1m</source>
         <translation type="unfinished">%1 m</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="130"/>
+        <location filename="../../src/app/stats-window.cpp" line="134"/>
         <source>%1s</source>
         <translation type="unfinished">%1 s</translation>
     </message>

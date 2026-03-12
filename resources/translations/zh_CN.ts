@@ -63,7 +63,7 @@
     <message>
         <location filename="../../src/app/break-window.ui" line="91"/>
         <source>Break extended to make up for postponing</source>
-        <translation type="unfinished"></translation>
+        <translation>休息时间为弥补推迟而延长</translation>
     </message>
     <message>
         <location filename="../../src/app/break-window.ui" line="224"/>
@@ -178,14 +178,14 @@
 <context>
     <name>HeadsUpWindow</name>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="98"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="101"/>
         <source>Break soon</source>
-        <translation type="unfinished"></translation>
+        <translation>即将休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="107"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="110"/>
         <source>Click to start</source>
-        <translation type="unfinished"></translation>
+        <translation>点击开始</translation>
     </message>
 </context>
 <context>
@@ -751,12 +751,12 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="1022"/>
         <source>Show a small notification this many seconds before the break starts. Click it to start the break early. Set to 0 to disable.</source>
         <extracomment>Tooltip for &quot;Show heads-up before break&quot; config</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>在休息开始前这么多秒显示一个小通知。点击可提前开始休息。设为 0 以禁用。</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1025"/>
         <source>Show heads-up before break</source>
-        <translation type="unfinished"></translation>
+        <translation>休息前显示悬浮通知</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1207"/>
@@ -911,107 +911,107 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="512"/>
-        <location filename="../../src/app/pref-window.cpp" line="513"/>
-        <location filename="../../src/app/pref-window.cpp" line="514"/>
+        <location filename="../../src/app/pref-window.cpp" line="516"/>
+        <location filename="../../src/app/pref-window.cpp" line="517"/>
+        <location filename="../../src/app/pref-window.cpp" line="518"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n 分钟</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="174"/>
-        <location filename="../../src/app/pref-window.cpp" line="216"/>
+        <location filename="../../src/app/pref-window.cpp" line="178"/>
+        <location filename="../../src/app/pref-window.cpp" line="220"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>每 %n 分钟</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="511"/>
+        <location filename="../../src/app/pref-window.cpp" line="515"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n 秒</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="510"/>
+        <location filename="../../src/app/pref-window.cpp" line="514"/>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="521"/>
+        <location filename="../../src/app/pref-window.cpp" line="525"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>在中键托盘图标后，立刻开始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="526"/>
+        <location filename="../../src/app/pref-window.cpp" line="530"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>在双击托盘图标后，立刻开始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="604"/>
+        <location filename="../../src/app/pref-window.cpp" line="608"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="605"/>
+        <location filename="../../src/app/pref-window.cpp" line="609"/>
         <source>Discard</source>
         <translation>放弃</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="606"/>
+        <location filename="../../src/app/pref-window.cpp" line="610"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="643"/>
+        <location filename="../../src/app/pref-window.cpp" line="647"/>
         <source>Select Sound File</source>
         <translation>选取声音文件</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="644"/>
+        <location filename="../../src/app/pref-window.cpp" line="648"/>
         <source>Sound Files (*.mp3 *.wav *.ogg *.flac *.m4a)</source>
         <translation>声音文件 (*.mp3 *.wav *.ogg *.flac *.m4a)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="654"/>
-        <location filename="../../src/app/pref-window.cpp" line="675"/>
+        <location filename="../../src/app/pref-window.cpp" line="658"/>
+        <location filename="../../src/app/pref-window.cpp" line="679"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="655"/>
+        <location filename="../../src/app/pref-window.cpp" line="659"/>
         <source>Failed to save a copy of the selected sound file.</source>
         <translation>保存所选的声音文件失败。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="664"/>
+        <location filename="../../src/app/pref-window.cpp" line="668"/>
         <source>Select Background Image</source>
         <translation>选择背景图片</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="665"/>
+        <location filename="../../src/app/pref-window.cpp" line="669"/>
         <source>Image Files (*.png *.jpg *.jpeg *.bmp *.webp)</source>
         <translation>图片文件 (*.png *.jpg *.jpeg *.bmp *.webp)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="676"/>
+        <location filename="../../src/app/pref-window.cpp" line="680"/>
         <source>Failed to save a copy of the selected image file.</source>
         <translation>保存所选的图片文件失败。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="486"/>
+        <location filename="../../src/app/pref-window.cpp" line="490"/>
         <source>Setting autostart failed</source>
         <translation>设置开机自启失败</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="601"/>
+        <location filename="../../src/app/pref-window.cpp" line="605"/>
         <source>The preferences have been modified.</source>
         <translation>偏好设置已被修改。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="602"/>
+        <location filename="../../src/app/pref-window.cpp" line="606"/>
         <source>Do you want to save your changes?</source>
         <translation>是否保存修改？</translation>
     </message>
@@ -1154,17 +1154,17 @@ v%1
         <translation>活跃使用时长：%1</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="30"/>
+        <location filename="../../src/app/stats-window.cpp" line="32"/>
         <source>%1h %2m</source>
         <translation>%1 小时 %2 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="31"/>
+        <location filename="../../src/app/stats-window.cpp" line="33"/>
         <source>%1m</source>
         <translation>%1 分钟</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="130"/>
+        <location filename="../../src/app/stats-window.cpp" line="134"/>
         <source>%1s</source>
         <translation>%1 秒钟</translation>
     </message>
