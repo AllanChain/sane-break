@@ -10,11 +10,13 @@
 #include <QGridLayout>
 #include <QHBoxLayout>
 #include <QIcon>
+#include <QKeySequence>
 #include <QLabel>
 #include <QList>
 #include <QLocale>
 #include <QMap>
 #include <QPushButton>
+#include <QShortcut>
 #include <QString>
 #include <QWidget>
 #include <Qt>
@@ -43,6 +45,8 @@ StatsWindow::StatsWindow(BreakDatabase* db, QWidget* parent)
   ui->setupUi(this);
   setAttribute(Qt::WA_DeleteOnClose);
   setWindowIcon(QIcon(":/images/icon.png"));
+  connect(new QShortcut(QKeySequence::Close, this), &QShortcut::activated, this,
+          &QWidget::close);
 
   m_weekStart = weekStartForDate(QDate::currentDate());
   m_displayedDate = QDate::currentDate();

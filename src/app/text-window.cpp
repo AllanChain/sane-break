@@ -1,11 +1,13 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "text-window.h"
 
+#include <QKeySequence>
 #include <QLabel>
 #include <QScrollArea>
+#include <QShortcut>
 #include <QString>
 #include <QVBoxLayout>
 #include <QWidget>
@@ -14,6 +16,8 @@
 TextWindow::TextWindow(const QString& text, QWidget* parent) : QScrollArea(parent) {
   setFixedSize(500, 500);
   setWidgetResizable(true);
+  connect(new QShortcut(QKeySequence::Close, this), &QShortcut::activated, this,
+          &QWidget::close);
 
   QWidget* widget = new QWidget();
   setWidget(widget);

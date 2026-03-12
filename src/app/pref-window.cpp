@@ -17,6 +17,7 @@
 #include <QFileInfo>
 #include <QGridLayout>
 #include <QIcon>
+#include <QKeySequence>
 #include <QLabel>
 #include <QLineEdit>
 #include <QListWidget>
@@ -27,6 +28,7 @@
 #include <QProcess>
 #include <QPushButton>
 #include <QSettings>
+#include <QShortcut>
 #include <QSlider>
 #include <QSpinBox>
 #include <QStandardPaths>
@@ -136,6 +138,8 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
     : QMainWindow(parent), ui(new Ui::PrefWindow), preferences(preferences) {
   setWindowFlag(Qt::Dialog);
   setWindowIcon(QIcon(":/images/icon.png"));
+  connect(new QShortcut(QKeySequence::Close, this), &QShortcut::activated, this,
+          &QWidget::close);
 
   ui->setupUi(this);
   ui->stackedWidget->setFixedHeight(
