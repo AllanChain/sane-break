@@ -64,6 +64,7 @@ HeadsUpWindow::HeadsUpWindow(int totalSeconds, QColor bgColor, QColor highlightC
 void HeadsUpWindow::initSize(QScreen* screen) {
   QRect geo = screen->availableGeometry();
   move(geo.x() + (geo.width() - PILL_WIDTH) / 2, geo.y() + 16);
+  createWinId();
 }
 
 void HeadsUpWindow::paintEvent(QPaintEvent*) {

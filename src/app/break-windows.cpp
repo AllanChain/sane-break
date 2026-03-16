@@ -209,7 +209,7 @@ void BreakWindows::showHeadsUp(int totalSeconds, BreakType breakType,
     m_headsUpWindows.append(w);
     w->initSize(screen);
 #ifdef Q_OS_LINUX
-    if (layerShell) layerShell->layout(w->windowHandle());
+    if (layerShell) layerShell->layout(w->windowHandle(), QMargins(0, 16, 0, 0));
 #endif
     w->show();
 #ifdef Q_OS_MACOS

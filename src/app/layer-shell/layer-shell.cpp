@@ -7,6 +7,7 @@
 #include <LayerShellQt/shell.h>
 #include <LayerShellQt/window.h>
 
+#include <QMargins>
 #include <QWindow>
 
 void LayerShell::init() {
@@ -15,7 +16,7 @@ void LayerShell::init() {
 #endif
 }
 
-void LayerShell::layout(QWindow* window) {
+void LayerShell::layout(QWindow* window, QMargins margins) {
   if (auto w = LayerShellQt::Window::get(window)) {
     using namespace LayerShellQt;
     w->setCloseOnDismissed(true);
@@ -24,5 +25,6 @@ void LayerShell::layout(QWindow* window) {
     w->setAnchors(Window::AnchorTop);
     // We do not want to reserve space for widgets like taskbar (#19)
     w->setExclusiveZone(-1);
+    w->setMargins(margins);
   }
 }
