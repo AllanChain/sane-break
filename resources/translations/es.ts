@@ -63,7 +63,7 @@
     <message>
         <location filename="../../src/app/break-window.ui" line="91"/>
         <source>Break extended to make up for postponing</source>
-        <translation type="unfinished"></translation>
+        <translation>Descanso extendido para compensar su aplazamiento</translation>
     </message>
     <message>
         <location filename="../../src/app/break-window.ui" line="224"/>
@@ -110,17 +110,17 @@
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="49"/>
         <source>Active</source>
-        <translation type="unfinished">Activo</translation>
+        <translation>Actividad</translation>
     </message>
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
         <source>Break</source>
-        <translation type="unfinished">Descanso</translation>
+        <translation>Descanso</translation>
     </message>
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="51"/>
         <source>Pause</source>
-        <translation type="unfinished">Pausa</translation>
+        <translation>Pausa</translation>
     </message>
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="53"/>
@@ -130,7 +130,7 @@
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="54"/>
         <source>Focus</source>
-        <translation type="unfinished">Enfoque</translation>
+        <translation>Concentración</translation>
     </message>
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="56"/>
@@ -143,12 +143,12 @@
     <message>
         <location filename="../../src/app/focus-window.ui" line="14"/>
         <source>Focus Mode</source>
-        <translation type="unfinished">Modo de enfoque</translation>
+        <translation>Modo de concentración</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="20"/>
         <source>&lt;h2&gt;Focus Mode&lt;/h2&gt;</source>
-        <translation type="unfinished">&lt;h2&gt;Modo de enfoque&lt;/h2&gt;</translation>
+        <translation>&lt;h2&gt;Modo de concentración&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="27"/>
@@ -158,27 +158,27 @@
     <message>
         <location filename="../../src/app/focus-window.ui" line="55"/>
         <source>Focus duration</source>
-        <translation type="unfinished">Duración del modo de enfoque</translation>
+        <translation>Duración del modo concentración</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="62"/>
         <source> min</source>
-        <translation type="unfinished"> min</translation>
+        <translation> min</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="125"/>
         <source>The break schedule will be temporarily switched to:</source>
-        <translation type="unfinished">El horario de descansos cambiará temporalmente a:</translation>
+        <translation>El plan de descanso cambiará temporalmente a:</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="142"/>
         <source>A &lt;b&gt;%1&lt;/b&gt; seconds small break every &lt;b&gt;%2&lt;/b&gt; minutes</source>
-        <translation type="unfinished">Un descanso breve de &lt;b&gt;%1&lt;/b&gt; segundos cada &lt;b&gt;%2&lt;/b&gt; minutos</translation>
+        <translation>Un descanso breve de &lt;b&gt;%1&lt;/b&gt; segundos cada &lt;b&gt;%2&lt;/b&gt; minutos</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="159"/>
         <source>1 in every &lt;b&gt;%2&lt;/b&gt; breaks is a &lt;b&gt;%1&lt;/b&gt; seconds big break</source>
-        <translation type="unfinished">Cada &lt;b&gt;%2&lt;/b&gt; descansos, uno será un descanso largo de &lt;b&gt;%1&lt;/b&gt; segundos</translation>
+        <translation>Uno de cada &lt;b&gt;%2&lt;/b&gt; descansos es un descanso largo de &lt;b&gt;%1&lt;/b&gt; segundos</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="188"/>
@@ -188,7 +188,7 @@
     <message>
         <location filename="../../src/app/focus-window.ui" line="201"/>
         <source>Take a %1 second break to enter focus mode</source>
-        <translation type="unfinished">Realiza un descanso de %1 segundos para entrar en el modo de enfoque</translation>
+        <translation>Realiza un descanso de %1 segundos para entrar en el modo de concentración</translation>
     </message>
 </context>
 <context>
@@ -196,12 +196,12 @@
     <message>
         <location filename="../../src/app/heads-up-window.cpp" line="101"/>
         <source>Break soon</source>
-        <translation type="unfinished"></translation>
+        <translation>Se acerca el descanso</translation>
     </message>
     <message>
         <location filename="../../src/app/heads-up-window.cpp" line="110"/>
         <source>Click to start</source>
-        <translation type="unfinished"></translation>
+        <translation>Clica para empezar</translation>
     </message>
 </context>
 <context>
@@ -235,7 +235,7 @@
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="30"/>
         <source>Your meeting/presentation mode has ended. Would you like to take a break?</source>
-        <translation type="unfinished">Tu modo de reunión o presentación ha finalizado. ¿Quieres tomar un descanso?</translation>
+        <translation>Tu modo de reunión/presentación ha finalizado. ¿Quieres tomar un descanso?</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="63"/>
@@ -271,12 +271,12 @@
     <message>
         <location filename="../../src/app/meeting-window.ui" line="20"/>
         <source>&lt;h2&gt;Meeting/Presentation Mode&lt;/h2&gt;</source>
-        <translation type="unfinished">&lt;h2&gt;Modo de reunión o presentación&lt;/h2&gt;</translation>
+        <translation>&lt;h2&gt;Modo de reunión/presentación&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="27"/>
         <source>Briefly describe this meeting/presentation:</source>
-        <translation type="unfinished">Describe brevemente esta reunión o presentación:</translation>
+        <translation>Describe brevemente esta reunión/presentación:</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="55"/>
@@ -301,7 +301,7 @@
     <message>
         <location filename="../../src/app/meeting-window.ui" line="191"/>
         <source>Enter Meeting/Presentation Mode</source>
-        <translation type="unfinished">Activar modo de reunión o presentación</translation>
+        <translation>Activar modo de reunión/presentación</translation>
     </message>
 </context>
 <context>
@@ -319,22 +319,22 @@
     <message>
         <location filename="../../src/app/postpone-window.ui" line="27"/>
         <source>Postponing this break by &lt;b&gt;%1&lt;/b&gt; minutes will:</source>
-        <translation type="unfinished">Posponer este descanso &lt;b&gt;%1&lt;/b&gt; minutos provocará:</translation>
+        <translation>Posponer este descanso &lt;b&gt;%1&lt;/b&gt; minutos hará que:</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="57"/>
         <source>Shorten your next work session by &lt;b&gt;%1&lt;/b&gt; minutes;</source>
-        <translation type="unfinished">Acortar tu próxima sesión de trabajo &lt;b&gt;%1&lt;/b&gt; minutos;</translation>
+        <translation>Se acorte tu próxima sesión de trabajo &lt;b&gt;%1&lt;/b&gt; minutos;</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="92"/>
         <source>Extend the break by &lt;b&gt;%1&lt;/b&gt; seconds.</source>
-        <translation type="unfinished">Alargar el descanso &lt;b&gt;%1&lt;/b&gt; segundos.</translation>
+        <translation>Se alargue el descanso &lt;b&gt;%1&lt;/b&gt; segundos.</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="122"/>
         <source>Postpone by</source>
-        <translation type="unfinished">Posponer por</translation>
+        <translation>Posponer durante</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="129"/>
@@ -601,7 +601,7 @@ inactividad tras finalizar el descanso. Si el descanso dura más de 2 minutos, l
     <message>
         <location filename="../../src/app/pref-window.ui" line="1940"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
-        <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;¡Ayuda con la traducción!&lt;/a&gt;</translation>
+        <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;¡Ayuda en la traducción!&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="2111"/>
@@ -803,7 +803,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1025"/>
         <source>Show heads-up before break</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar aviso antes del descanso</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1068"/>
@@ -883,7 +883,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1606"/>
         <source>Remove selected</source>
-        <translation type="unfinished">Eliminar seleccionado</translation>
+        <translation>Eliminar seleccionados</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1615"/>
@@ -912,7 +912,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="511"/>
         <source>&lt;h2&gt;Focus Schedule&lt;/h2&gt;</source>
-        <translation type="unfinished">&lt;h2&gt;Horario de enfoque&lt;/h2&gt;</translation>
+        <translation>&lt;h2&gt;Plan de concentración&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="521"/>
@@ -1426,7 +1426,7 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="137"/>
         <source>Meeting mode — until %1 (%2 left)</source>
-        <translation type="unfinished">Modo reunión — hasta las %1 (%2 restantes)</translation>
+        <translation>Modo de reunión — hasta las %1 (%2 restantes)</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="141"/>
