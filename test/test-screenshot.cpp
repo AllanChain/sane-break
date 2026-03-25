@@ -23,6 +23,7 @@
 #include "app/break-window.h"
 #include "app/break-windows.h"
 #include "app/focus-window.h"
+#include "app/heads-up-window.h"
 #include "app/meeting-window.h"
 #include "app/postpone-window.h"
 #include "app/pref-window.h"
@@ -172,6 +173,17 @@ class TestScreenshot : public QObject {
     window->show();
     QApplication::processEvents();
     saveScreenshot(window, "focus-window");
+    delete window;
+  }
+
+  void headsUpWindow() {
+    auto* window = new HeadsUpWindow(30, prefs->backgroundColor->get(),
+                                     prefs->smallHighlightColor->get(),
+                                     prefs->messageColor->get());
+    window->setAttribute(Qt::WA_DeleteOnClose, false);
+    window->show();
+    QApplication::processEvents();
+    saveScreenshot(window, "heads-up-window");
     delete window;
   }
 
