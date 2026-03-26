@@ -47,6 +47,7 @@ AbstractApp::AbstractApp(const AppDependencies& deps, QObject* parent)
   if (!m_systemMonitor->parent()) m_systemMonitor->setParent(this);
 
   connect(data, &AppData::changed, this, &AbstractApp::updateTray);
+  connect(this, &AppContext::appStateChanged, this, &AbstractApp::updateTray);
   connect(m_systemMonitor, &AbstractSystemMonitor::sleepEnded, this,
           &AbstractApp::onSleepEnd);
   connect(m_systemMonitor, &AbstractSystemMonitor::pauseRequested, this,
@@ -82,7 +83,6 @@ AbstractApp::AbstractApp(const AppDependencies& deps, QObject* parent)
 void AbstractApp::start() {
   db->logEvent("app::start");
   transitionTo(std::make_unique<AppStateNormal>());
-  updateTray();
   idleTimer->startWatching();
   m_countDownTimer->start();
   m_systemMonitor->start();

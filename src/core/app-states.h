@@ -101,6 +101,9 @@ class AppContext : public QObject {
   void exitCurrentState();
   void checkBreakReadiness();
 
+ signals:
+  void appStateChanged();
+
  protected:
   std::unique_ptr<AppState> m_currentState;
 

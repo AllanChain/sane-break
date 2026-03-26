@@ -22,7 +22,7 @@ void AppContext::transitionTo(std::unique_ptr<AppState> state) {
   if (m_currentState) m_currentState->exit(this);
   m_currentState = std::move(state);
   m_currentState->enter(this);
-  QMetaObject::invokeMethod(data, "changed", Qt::DirectConnection);
+  emit appStateChanged();
 }
 
 void AppContext::exitCurrentState() {
