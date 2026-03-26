@@ -138,7 +138,7 @@ class AppData : public QObject {
   void changed();
 
  protected:
-  int m_breakCycleCount = 1;
+  int m_completedSmallBreaks = 0;
   int m_secondsToNextBreak;
   int m_secondsPaused = 0;
   PauseReasons m_pauseReasons = {};

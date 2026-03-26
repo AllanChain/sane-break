@@ -1093,7 +1093,32 @@ class TestApp : public QObject {
     app.advanceToBreakEnd();
     // Focus ended, back to normal schedule
     QVERIFY(!app.trayData.isFocusMode);
-    // After 3 breaks from cycle 1 with bigAfter=3, cycle wraps: 2 small before big
+    // Focus breaks still count as completed small breaks, so the next normal break is
+    // now big.
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
+  }
+  void reducing_big_after_keeps_completed_small_break_progress() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.advance(app.trayData.secondsToNextBreak);
+    app.advanceToBreakEnd();
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 1);
+
+    deps.preferences->bigAfter->set(2);
+
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
+  }
+  void increasing_big_after_keeps_completed_small_break_progress() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.advance(app.trayData.secondsToNextBreak);
+    app.advanceToBreakEnd();
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 1);
+
+    deps.preferences->bigAfter->set(4);
+
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 2);
   }
   // Tray data reflects focus state

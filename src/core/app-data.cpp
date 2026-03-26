@@ -14,6 +14,15 @@
 AppData::AppData(QObject* parent, SanePreferences* preferences)
     : QObject(parent), preferences(preferences) {
   m_secondsToNextBreak = preferences->smallEvery->get();
+  connect(preferences->bigBreakEnabled, &SettingWithSignal::changed, this,
+          &AppData::changed);
+  connect(preferences->bigAfter, &SettingWithSignal::changed, this, &AppData::changed);
+  connect(preferences->focusSmallEvery, &SettingWithSignal::changed, this,
+          &AppData::changed);
+  connect(preferences->focusBigBreakEnabled, &SettingWithSignal::changed, this,
+          &AppData::changed);
+  connect(preferences->focusBigAfter, &SettingWithSignal::changed, this,
+          &AppData::changed);
 }
 
 BreakType AppData::breakType() {
@@ -23,9 +32,7 @@ BreakType AppData::breakType() {
 
 int AppData::smallBreaksBeforeBigBreak() {
   if (!effectiveBigBreakEnabled()) return -1;
-  int breakEvery = effectiveBigAfter();
-  m_breakCycleCount %= breakEvery;
-  return (breakEvery - m_breakCycleCount) % breakEvery;
+  return std::max(0, effectiveBigAfter() - 1 - m_completedSmallBreaks);
 };
 BreakCompletion AppData::completeBreak() {
   m_pendingPostBreak.clear();
@@ -36,7 +43,11 @@ BreakCompletion AppData::completeBreak() {
       .cycleResetThresholdSeconds = cycleResetThresholdSeconds,
   };
 
-  m_breakCycleCount++;
+  if (completion.completedBreakType == BreakType::Big) {
+    m_completedSmallBreaks = 0;
+  } else {
+    m_completedSmallBreaks++;
+  }
   if (m_focusData.isActive) {
     if (m_focusData.entryBreakDone) {
       m_focusData.cyclesRemaining--;
@@ -75,15 +86,15 @@ bool AppData::isBreakExtendedByPostpone() {
   return m_postponeData.secondsPostponed() > 0;
 }
 void AppData::resetBreakCycle() {
-  m_breakCycleCount = 1;
+  m_completedSmallBreaks = 0;
   emit changed();
 };
 void AppData::makeNextBreakBig() {
-  m_breakCycleCount = 0;
+  m_completedSmallBreaks = std::max(0, effectiveBigAfter() - 1);
   emit changed();
 };
 void AppData::makeNextBreakLastSmallBeforeBig() {
-  m_breakCycleCount = -1;
+  m_completedSmallBreaks = std::max(0, effectiveBigAfter() - 2);
   emit changed();
 };
 
