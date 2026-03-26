@@ -22,6 +22,7 @@ void AppContext::transitionTo(std::unique_ptr<AppState> state) {
   if (m_currentState) m_currentState->exit(this);
   m_currentState = std::move(state);
   m_currentState->enter(this);
+  QMetaObject::invokeMethod(data, "changed", Qt::DirectConnection);
 }
 
 void AppContext::exitCurrentState() {
@@ -32,6 +33,14 @@ void AppStateBreak::transitionTo(AppContext* app, std::unique_ptr<BreakPhase> ph
   if (m_currentPhase) m_currentPhase->exit(app, this);
   m_currentPhase = std::move(phase);
   m_currentPhase->enter(app, this);
+}
+
+BreakCompletion AppStateBreak::completeBreak(AppContext* app) {
+  BreakCompletion completion = app->data->completeBreak();
+  if (completion.focusCompleted) {
+    app->db->closeSpan(app->data->focusSpanId(), {{"reason", "completed"}});
+  }
+  return completion;
 }
 
 void AppContext::tick() { m_currentState->tick(this); }
@@ -215,7 +224,8 @@ void AppStateBreak::enter(AppContext* app) {
 void AppStateBreak::exit(AppContext* app) {
   if (m_currentPhase) m_currentPhase->exit(app, this);
   app->closeCurrentSpan({{"normal-exit", (data->remainingSeconds() <= 0)}});
-  app->breakWindows->destroy();
+  if (!m_preserveBreakWindowsOnExit) app->breakWindows->destroy();
+  m_preserveBreakWindowsOnExit = false;
 }
 void AppStateBreak::tick(AppContext* app) { m_currentPhase->tick(app, this); }
 void AppStateBreak::onIdleStart(AppContext* app) {
@@ -226,10 +236,7 @@ void AppStateBreak::onPauseRequest(AppContext* app, PauseReasons reasons) {
   // We don't exit break if request pause on idle - continue with break instead
   if (reasons != PauseReason::Idle) {
     // For non-idle pause requests, finish current break and transition to paused state
-    bool wasFocusMode = app->data->isFocusMode();
-    app->data->finishAndStartNextCycle();
-    if (wasFocusMode && !app->data->isFocusMode())
-      app->db->closeSpan(app->data->focusSpanId(), {{"reason", "completed"}});
+    this->completeBreak(app);
     app->transitionTo(std::make_unique<AppStatePaused>());
   }
 }
@@ -302,27 +309,19 @@ void BreakPhaseFullScreen::tick(AppContext* app, AppStateBreak* breakState) {
   }
   if (breakState->data->remainingSeconds() <= 0) {
     app->breakWindows->playExitSound(app->data->breakType(), app->preferences);
-    // record break type before we start next cycle
+    // record break type before break completion mutates the cycle
     auto breakType = app->data->breakType();
-    bool wasFocusMode = app->data->isFocusMode();
-    app->data->finishAndStartNextCycle();
-    if (wasFocusMode && !app->data->isFocusMode())
-      app->db->closeSpan(app->data->focusSpanId(), {{"reason", "completed"}});
+    BreakCompletion completion = breakState->completeBreak(app);
     if (app->idleTimer->isIdle()) {
       // Check if window should auto-close based on preferences and break type
-      bool shouldCloseWindow =
+      bool keepWindowOpen =
           (breakType == BreakType::Small &&
-           app->preferences->autoCloseWindowAfterSmallBreak->get()) ||
+           !app->preferences->autoCloseWindowAfterSmallBreak->get()) ||
           (breakType == BreakType::Big &&
-           app->preferences->autoCloseWindowAfterBigBreak->get());
-      if (!shouldCloseWindow) {
-        // Leave break window open until user activities
-        breakState->transitionTo(app, std::make_unique<BreakPhasePost>());
-      } else {
-        // We don't count down immediately after break. We wait for user activities.
-        app->data->addPauseReasons(PauseReason::Idle);
-        app->transitionTo(std::make_unique<AppStatePaused>());
-      }
+           !app->preferences->autoCloseWindowAfterBigBreak->get());
+      app->data->setPendingPostBreak(completion);
+      breakState->preserveBreakWindowsOnExit(keepWindowOpen);
+      app->transitionTo(std::make_unique<AppStatePostBreakIdle>(keepWindowOpen));
     } else {
       app->screenLockTimer->stop();
       app->transitionTo(std::make_unique<AppStateNormal>());
@@ -353,14 +352,59 @@ void BreakPhaseFullScreen::showWindowClickableWidgets(AppContext* app,
   app->breakWindows->showButtons(buttons);
 }
 
-void BreakPhasePost::enter(AppContext* app, AppStateBreak*) {
-  app->breakWindows->showButtons(AbstractBreakWindows::Button::ExitForceBreak |
-                                     AbstractBreakWindows::Button::LockScreen,
-                                 false);
-}
-void BreakPhasePost::onIdleEnd(AppContext* app, AppStateBreak*) {
+void AppStatePostBreakIdle::enter(AppContext* app) {
+  app->openCurrentSpan("pause");
   app->screenLockTimer->stop();
-  app->transitionTo(std::make_unique<AppStateNormal>());
+  app->data->addPauseReasons(PauseReason::Idle);
+  if (m_keepWindowOpen) {
+    app->breakWindows->showButtons(AbstractBreakWindows::Button::ExitForceBreak |
+                                       AbstractBreakWindows::Button::LockScreen,
+                                   false);
+  }
+}
+
+void AppStatePostBreakIdle::exit(AppContext* app) {
+  app->closeCurrentSpan();
+  app->data->removePauseReasons(PauseReason::Idle);
+  app->data->clearPendingPostBreak();
+  if (m_keepWindowOpen) app->breakWindows->destroy();
+}
+
+void AppStatePostBreakIdle::tick(AppContext* app) {
+  app->data->tickPendingPostBreakIdle();
+}
+
+void AppStatePostBreakIdle::finalize(AppContext* app) {
+  int idleSeconds = app->data->pendingPostBreakIdleSeconds();
+  int cycleResetThreshold = app->data->pendingPostBreakCycleResetThresholdSeconds();
+  int undoPostponeShrinkThreshold = app->preferences->resetCycleAfterPause->get();
+  bool resetCycle = app->data->pendingPostBreakType() == BreakType::Small &&
+                    idleSeconds > cycleResetThreshold;
+  bool undoPostponeShrink = app->data->pendingPostBreakWasPostponed() &&
+                            idleSeconds > undoPostponeShrinkThreshold;
+
+  app->data->finalizePendingPostBreak(resetCycle, undoPostponeShrink);
+
+  PauseReasons remainingPauseReasons = app->data->pauseReasons();
+  remainingPauseReasons &= ~PauseReasons(PauseReason::Idle);
+  if (remainingPauseReasons) {
+    app->transitionTo(std::make_unique<AppStatePaused>());
+  } else {
+    app->transitionTo(std::make_unique<AppStateNormal>());
+  }
+}
+
+void AppStatePostBreakIdle::onIdleEnd(AppContext* app) {
+  app->screenLockTimer->stop();
+  finalize(app);
+}
+
+bool AppStatePostBreakIdle::onSleepEnd(AppContext* app, int sleptSeconds) {
+  // Sleep contributes to post-break inactivity, but this state should remain in the
+  // same deferred-finalization mode after wake.
+  app->openCurrentSpan("pause");
+  app->data->addPendingPostBreakIdleSeconds(sleptSeconds);
+  return true;
 }
 
 void AppStateMeeting::enter(AppContext* app) {

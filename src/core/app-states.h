@@ -62,7 +62,7 @@ class AppContext;
 //   new system events as virtual methods here.
 class AppState {
  public:
-  enum StateID { Normal, Paused, Break, Meeting };
+  enum StateID { Normal, Paused, Break, PostBreakIdle, Meeting };
   virtual StateID getID() = 0;
   virtual void enter(AppContext*) {};
   virtual void exit(AppContext*) {};
@@ -144,6 +144,10 @@ class BreakPhase;
 class AppStateBreak : public AppState {
  public:
   void transitionTo(AppContext* app, std::unique_ptr<BreakPhase> phase);
+  BreakCompletion completeBreak(AppContext* app);
+  void preserveBreakWindowsOnExit(bool preserve) {
+    m_preserveBreakWindowsOnExit = preserve;
+  }
 
   StateID getID() override { return Break; };
   void enter(AppContext* app) override;
@@ -159,6 +163,7 @@ class AppStateBreak : public AppState {
 
  protected:
   std::unique_ptr<BreakPhase> m_currentPhase;
+  bool m_preserveBreakWindowsOnExit = false;
 };
 
 // Base class for break phases (prompt, fullscreen, post-break)
@@ -194,11 +199,22 @@ class BreakPhaseFullScreen : public BreakPhase {
   void showWindowClickableWidgets(AppContext* app, AppStateBreak* breakState);
 };
 
-// Post-break phase: Keeps window open after break completion until user activity
-class BreakPhasePost : public BreakPhase {
+class AppStatePostBreakIdle : public AppState {
  public:
-  void enter(AppContext* app, AppStateBreak* breakState) override;
-  void onIdleEnd(AppContext* app, AppStateBreak* breakState) override;
+  explicit AppStatePostBreakIdle(bool keepWindowOpen = false)
+      : m_keepWindowOpen(keepWindowOpen) {}
+
+  StateID getID() override { return PostBreakIdle; }
+  void enter(AppContext* app) override;
+  void exit(AppContext* app) override;
+  void tick(AppContext* app) override;
+  void onIdleEnd(AppContext* app) override;
+  bool onSleepEnd(AppContext* app, int sleptSeconds) override;
+
+ protected:
+  void finalize(AppContext* app);
+
+  bool m_keepWindowOpen = false;
 };
 
 // Meeting state: break schedule suspended during a meeting/presentation

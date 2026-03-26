@@ -98,7 +98,7 @@ void AbstractApp::updateTray() {
         data->smallBreaksBeforeBigBreak() * secondsFromLastBreakToNext;
   }
   TrayData trayData = {
-      .isBreaking = data->secondsToNextBreak() == 0,
+      .isBreaking = m_currentState && m_currentState->getID() == AppState::Break,
       .secondsToNextBreak = data->secondsToNextBreak(),
       .secondsToNextBigBreak = secondsToNextBigBreak,
       .secondsFromLastBreakToNext = secondsFromLastBreakToNext,

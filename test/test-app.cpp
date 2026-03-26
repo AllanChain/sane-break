@@ -156,6 +156,114 @@ class TestApp : public QObject {
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
   }
+  void long_post_break_idle_resets_cycle_data() {
+    QTest::addColumn<bool>("autoCloseWindow");
+    QTest::newRow("auto-close") << true;
+    QTest::newRow("keep-window-open") << false;
+  }
+  void long_post_break_idle_resets_cycle() {
+    QFETCH(bool, autoCloseWindow);
+    deps.preferences->autoCloseWindowAfterSmallBreak->set(autoCloseWindow);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
+             deps.preferences->bigAfter->get() - 1);
+
+    app.breakNow();
+    deps.idleTimer->setIdle(true);
+    app.advanceToBreakEnd();
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
+             deps.preferences->bigAfter->get() - 2);
+
+    app.advance(deps.preferences->resetCycleAfterPause->get() + 1);
+    deps.idleTimer->setIdle(false);
+
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
+             deps.preferences->bigAfter->get() - 1);
+    QVERIFY(!app.trayData.pauseReasons);
+  }
+  void short_post_break_idle_does_not_reset_cycle_data() {
+    QTest::addColumn<bool>("autoCloseWindow");
+    QTest::newRow("auto-close") << true;
+    QTest::newRow("keep-window-open") << false;
+  }
+  void short_post_break_idle_does_not_reset_cycle() {
+    QFETCH(bool, autoCloseWindow);
+    deps.preferences->autoCloseWindowAfterSmallBreak->set(autoCloseWindow);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+    int threshold = deps.preferences->bigFor->get() - deps.preferences->smallFor->get();
+
+    app.breakNow();
+    deps.idleTimer->setIdle(true);
+    app.advanceToBreakEnd();
+    app.advance(threshold > 0 ? threshold - 1 : 0);
+    deps.idleTimer->setIdle(false);
+
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
+             deps.preferences->bigAfter->get() - 2);
+  }
+  void post_break_idle_cycle_reset_uses_big_minus_small() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    int threshold = deps.preferences->bigFor->get() - deps.preferences->smallFor->get();
+    QVERIFY(threshold < deps.preferences->resetCycleAfterPause->get());
+
+    app.breakNow();
+    deps.idleTimer->setIdle(true);
+    app.advanceToBreakEnd();
+    app.advance(threshold + 1);
+    deps.idleTimer->setIdle(false);
+
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
+             deps.preferences->bigAfter->get() - 1);
+  }
+  void long_post_break_idle_undoes_postpone_shrink_data() {
+    QTest::addColumn<bool>("autoCloseWindow");
+    QTest::newRow("auto-close") << true;
+    QTest::newRow("keep-window-open") << false;
+  }
+  void long_post_break_idle_undoes_postpone_shrink() {
+    QFETCH(bool, autoCloseWindow);
+    deps.preferences->autoCloseWindowAfterSmallBreak->set(autoCloseWindow);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    int smallEvery = deps.preferences->smallEvery->get();
+    app.postpone(100);
+    app.advance(app.trayData.secondsToNextBreak);
+    deps.idleTimer->setIdle(true);
+    app.advanceToBreakEnd();
+    QCOMPARE(app.trayData.secondsToNextBreak, smallEvery - 100);
+
+    app.advance(deps.preferences->resetCycleAfterPause->get() + 1);
+    deps.idleTimer->setIdle(false);
+
+    QCOMPARE(app.trayData.secondsToNextBreak, smallEvery);
+  }
+  void short_post_break_idle_keeps_postpone_shrink_data() {
+    QTest::addColumn<bool>("autoCloseWindow");
+    QTest::newRow("auto-close") << true;
+    QTest::newRow("keep-window-open") << false;
+  }
+  void short_post_break_idle_keeps_postpone_shrink() {
+    QFETCH(bool, autoCloseWindow);
+    deps.preferences->autoCloseWindowAfterSmallBreak->set(autoCloseWindow);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    int smallEvery = deps.preferences->smallEvery->get();
+    app.postpone(100);
+    app.advance(app.trayData.secondsToNextBreak);
+    deps.idleTimer->setIdle(true);
+    app.advanceToBreakEnd();
+    app.advance(deps.preferences->resetCycleAfterPause->get() - 1);
+    deps.idleTimer->setIdle(false);
+
+    QCOMPARE(app.trayData.secondsToNextBreak, smallEvery - 100);
+  }
   void lock_screen_timer_running() {
     int autoScreenLockSeconds = 20;
     deps.preferences->autoScreenLock->set(autoScreenLockSeconds);
@@ -759,6 +867,24 @@ class TestApp : public QObject {
 
     // Should remain paused
     QCOMPARE(app.trayData.pauseReasons, PauseReason::Idle);
+  }
+  void sleep_during_post_break_idle_counts_as_inactivity() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    int smallEvery = deps.preferences->smallEvery->get();
+    app.postpone(100);
+    app.advance(app.trayData.secondsToNextBreak);
+    deps.idleTimer->setIdle(true);
+    app.advanceToBreakEnd();
+
+    emit deps.systemMonitor->sleepEnded(deps.preferences->resetCycleAfterPause->get() +
+                                        1);
+    deps.idleTimer->setIdle(false);
+
+    QCOMPARE(app.trayData.secondsToNextBreak, smallEvery);
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
+             deps.preferences->bigAfter->get() - 1);
   }
   // Multiple pause reasons should work
   void more_than_one_pause_reasons() {

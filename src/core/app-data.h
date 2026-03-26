@@ -38,6 +38,26 @@ struct FocusData {
   void clear();
 };
 
+struct BreakCompletion {
+  BreakType completedBreakType;
+  bool focusCompleted = false;
+  bool wasPostponed = false;
+  int cycleResetThresholdSeconds = 0;
+  int nextSessionBaseSeconds = 0;
+  int nextSessionAdjustedSeconds = 0;
+};
+
+struct PendingPostBreakData {
+  bool isActive = false;
+  BreakType completedBreakType = BreakType::Small;
+  bool wasPostponed = false;
+  int cycleResetThresholdSeconds = 0;
+  int nextSessionBaseSeconds = 0;
+  int nextSessionAdjustedSeconds = 0;
+  int idleSeconds = 0;
+  void clear();
+};
+
 // Manages application state data related to break scheduling and timing
 class AppData : public QObject {
   Q_OBJECT
@@ -46,7 +66,7 @@ class AppData : public QObject {
 
   BreakType breakType();
   int smallBreaksBeforeBigBreak();
-  void finishAndStartNextCycle();
+  BreakCompletion completeBreak();
   int breakDuration();
   bool isBreakExtendedByPostpone();
   void resetBreakCycle();
@@ -103,6 +123,17 @@ class AppData : public QObject {
   void removePauseReasons(PauseReasons);
   void clearPauseReasons();
 
+  void setPendingPostBreak(const BreakCompletion& completion);
+  bool hasPendingPostBreak() const;
+  BreakType pendingPostBreakType() const;
+  bool pendingPostBreakWasPostponed() const;
+  int pendingPostBreakCycleResetThresholdSeconds() const;
+  int pendingPostBreakIdleSeconds() const;
+  void tickPendingPostBreakIdle();
+  void addPendingPostBreakIdleSeconds(int secs);
+  void finalizePendingPostBreak(bool resetCycle, bool undoPostponeShrink);
+  void clearPendingPostBreak();
+
  signals:
   void changed();
 
@@ -114,6 +145,7 @@ class AppData : public QObject {
   PostponeData m_postponeData;
   MeetingData m_meetingData;
   FocusData m_focusData;
+  PendingPostBreakData m_pendingPostBreak;
 
   SanePreferences* preferences;
 };

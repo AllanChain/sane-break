@@ -27,23 +27,38 @@ int AppData::smallBreaksBeforeBigBreak() {
   m_breakCycleCount %= breakEvery;
   return (breakEvery - m_breakCycleCount) % breakEvery;
 };
-void AppData::finishAndStartNextCycle() {
+BreakCompletion AppData::completeBreak() {
+  m_pendingPostBreak.clear();
+  int cycleResetThresholdSeconds = std::max(0, effectiveBigFor() - effectiveSmallFor());
+  BreakCompletion completion = {
+      .completedBreakType = breakType(),
+      .wasPostponed = m_postponeData.secondsPostponed() > 0,
+      .cycleResetThresholdSeconds = cycleResetThresholdSeconds,
+  };
+
   m_breakCycleCount++;
   if (m_focusData.isActive) {
     if (m_focusData.entryBreakDone) {
       m_focusData.cyclesRemaining--;
-      if (m_focusData.cyclesRemaining <= 0) m_focusData.clear();
+      if (m_focusData.cyclesRemaining <= 0) {
+        m_focusData.clear();
+        completion.focusCompleted = true;
+      }
     } else {
       m_focusData.entryBreakDone = true;
     }
   }
   // Must come after focus clear: if focus just ended, effectiveSmallEvery()
   // returns the normal interval instead of the focus interval.
-  m_secondsToNextBreak = effectiveSmallEvery();
-  m_secondsToNextBreak -= m_postponeData.secondsPostponed() *
-                          preferences->postponeShrinkNextPercent->get() / 100;
+  completion.nextSessionBaseSeconds = effectiveSmallEvery();
+  completion.nextSessionAdjustedSeconds =
+      completion.nextSessionBaseSeconds -
+      m_postponeData.secondsPostponed() *
+          preferences->postponeShrinkNextPercent->get() / 100;
+  m_secondsToNextBreak = completion.nextSessionAdjustedSeconds;
   m_postponeData.reset();
   emit changed();
+  return completion;
 };
 int AppData::breakDuration() {
   int totalSeconds =
@@ -145,6 +160,15 @@ void FocusData::clear() {
   totalCycles = 0;
   spanId = -1;
 }
+void PendingPostBreakData::clear() {
+  isActive = false;
+  completedBreakType = BreakType::Small;
+  wasPostponed = false;
+  cycleResetThresholdSeconds = 0;
+  nextSessionBaseSeconds = 0;
+  nextSessionAdjustedSeconds = 0;
+  idleSeconds = 0;
+}
 bool AppData::isInMeeting() const { return m_meetingData.isActive; }
 int AppData::meetingSecondsRemaining() const { return m_meetingData.secondsRemaining; }
 int AppData::meetingTotalSeconds() const { return m_meetingData.totalSeconds; }
@@ -216,6 +240,50 @@ int AppData::effectiveBigFor() {
   return m_focusData.isActive ? preferences->focusBigFor->get()
                               : preferences->bigFor->get();
 }
+
+void AppData::setPendingPostBreak(const BreakCompletion& completion) {
+  m_pendingPostBreak = {
+      .isActive = true,
+      .completedBreakType = completion.completedBreakType,
+      .wasPostponed = completion.wasPostponed,
+      .cycleResetThresholdSeconds = completion.cycleResetThresholdSeconds,
+      .nextSessionBaseSeconds = completion.nextSessionBaseSeconds,
+      .nextSessionAdjustedSeconds = completion.nextSessionAdjustedSeconds,
+      .idleSeconds = 0,
+  };
+}
+bool AppData::hasPendingPostBreak() const { return m_pendingPostBreak.isActive; }
+BreakType AppData::pendingPostBreakType() const {
+  return m_pendingPostBreak.completedBreakType;
+}
+bool AppData::pendingPostBreakWasPostponed() const {
+  return m_pendingPostBreak.wasPostponed;
+}
+int AppData::pendingPostBreakCycleResetThresholdSeconds() const {
+  return m_pendingPostBreak.cycleResetThresholdSeconds;
+}
+int AppData::pendingPostBreakIdleSeconds() const {
+  return m_pendingPostBreak.idleSeconds;
+}
+void AppData::tickPendingPostBreakIdle() { addPendingPostBreakIdleSeconds(1); }
+void AppData::addPendingPostBreakIdleSeconds(int secs) {
+  if (!m_pendingPostBreak.isActive) return;
+  m_pendingPostBreak.idleSeconds += secs;
+}
+void AppData::finalizePendingPostBreak(bool resetCycle, bool undoPostponeShrink) {
+  if (!m_pendingPostBreak.isActive) return;
+
+  if (resetCycle) resetBreakCycle();
+
+  int nextSeconds = undoPostponeShrink ? m_pendingPostBreak.nextSessionBaseSeconds
+                                       : m_pendingPostBreak.nextSessionAdjustedSeconds;
+  if (m_secondsToNextBreak != nextSeconds) {
+    m_secondsToNextBreak = nextSeconds;
+    emit changed();
+  }
+  clearPendingPostBreak();
+}
+void AppData::clearPendingPostBreak() { m_pendingPostBreak.clear(); }
 
 bool PostponeData::isPostponing() {
   return plannedSecondsToPostpone - actualSecondsToNextBreakWhenBreak;
