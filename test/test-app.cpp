@@ -6,6 +6,7 @@
 #include <qtestcase.h>
 
 #include <QObject>
+#include <QSignalSpy>
 #include <QTest>
 #include <QTimer>
 
@@ -263,6 +264,28 @@ class TestApp : public QObject {
     deps.idleTimer->setIdle(false);
 
     QCOMPARE(app.trayData.secondsToNextBreak, smallEvery - 100);
+  }
+  void finalize_pending_post_break_emits_once() {
+    AppData data(nullptr, deps.preferences);
+    data.makeNextBreakBig();
+    data.setSecondsToNextBreak(123);
+    data.setPendingPostBreak({
+        .completedBreakType = BreakType::Small,
+        .wasPostponed = true,
+        .cycleResetThresholdSeconds = 0,
+        .nextSessionBaseSeconds = 500,
+        .nextSessionAdjustedSeconds = 400,
+    });
+
+    QSignalSpy spy(&data, &AppData::changed);
+    spy.clear();
+
+    data.finalizePendingPostBreak(true, false);
+
+    QCOMPARE(spy.count(), 1);
+    QCOMPARE(data.secondsToNextBreak(), 400);
+    QCOMPARE(data.smallBreaksBeforeBigBreak(), deps.preferences->bigAfter->get() - 1);
+    QVERIFY(!data.hasPendingPostBreak());
   }
   void lock_screen_timer_running() {
     int autoScreenLockSeconds = 20;

@@ -284,15 +284,22 @@ void AppData::addPendingPostBreakIdleSeconds(int secs) {
 void AppData::finalizePendingPostBreak(bool resetCycle, bool undoPostponeShrink) {
   if (!m_pendingPostBreak.isActive) return;
 
-  if (resetCycle) resetBreakCycle();
+  bool changedState = false;
+
+  if (resetCycle && m_completedSmallBreaks != 0) {
+    m_completedSmallBreaks = 0;
+    changedState = true;
+  }
 
   int nextSeconds = undoPostponeShrink ? m_pendingPostBreak.nextSessionBaseSeconds
                                        : m_pendingPostBreak.nextSessionAdjustedSeconds;
   if (m_secondsToNextBreak != nextSeconds) {
     m_secondsToNextBreak = nextSeconds;
-    emit changed();
+    changedState = true;
   }
-  clearPendingPostBreak();
+  m_pendingPostBreak.clear();
+
+  if (changedState) emit changed();
 }
 void AppData::clearPendingPostBreak() { m_pendingPostBreak.clear(); }
 
