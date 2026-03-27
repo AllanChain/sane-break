@@ -367,6 +367,18 @@ class TestApp : public QObject {
     app.postpone(300);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak + 200);
   }
+  void early_break_clears_effective_postpone() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.postpone(100);
+    QVERIFY(app.trayData.isPostponing);
+
+    app.breakNow();
+
+    QVERIFY(app.trayData.isBreaking);
+    QVERIFY(!app.trayData.isPostponing);
+  }
   // During the pause, the count down should not change, and state should be reflected
   void pause_break_on_idle() {
     NiceMock<DummyApp> app(deps);

@@ -296,9 +296,7 @@ void AppData::finalizePendingPostBreak(bool resetCycle, bool undoPostponeShrink)
 }
 void AppData::clearPendingPostBreak() { m_pendingPostBreak.clear(); }
 
-bool PostponeData::isPostponing() {
-  return plannedSecondsToPostpone - actualSecondsToNextBreakWhenBreak;
-}
+bool PostponeData::isPostponing() { return secondsPostponed() > 0; }
 void PostponeData::reset() {
   plannedSecondsToPostpone = actualSecondsToNextBreakWhenBreak = 0;
 }
