@@ -128,8 +128,8 @@ void SaneBreakApp::openStatsWindow() {
 }
 
 void SaneBreakApp::openFocusWindow() {
-  if (data->isFocusMode() || m_currentState->getID() == AppState::Meeting ||
-      data->isPostponing())
+  if (data->focus().isActive() || m_currentState->getID() == AppState::Meeting ||
+      data->schedule().isPostponing())
     return;
   if (!focusWindow) {
     focusWindow = new FocusWindow(preferences);
@@ -139,7 +139,7 @@ void SaneBreakApp::openFocusWindow() {
 }
 
 void SaneBreakApp::openPostponeWindow() {
-  if (data->isFocusMode()) {
+  if (data->focus().isActive()) {
     QMessageBox msgBox;
     msgBox.setText(tr("Cannot postpone during focus mode."));
     msgBox.setInformativeText(tr("End focus mode first if you want to postpone."));
@@ -148,7 +148,7 @@ void SaneBreakApp::openPostponeWindow() {
     msgBox.exec();
     return;
   }
-  if (data->isPostponing()) {
+  if (data->schedule().isPostponing()) {
     QMessageBox msgBox;
     msgBox.setText(tr("You have already postponed this break once."));
     msgBox.setInformativeText(tr("No further postpones are allowed."));

@@ -268,8 +268,8 @@ class TestApp : public QObject {
   void finalize_pending_post_break_emits_once() {
     AppData data(nullptr, deps.preferences);
     data.makeNextBreakBig();
-    data.setSecondsToNextBreak(123);
-    data.setPendingPostBreak({
+    data.schedule().setSecondsToNextBreak(123);
+    data.postBreak().setPending({
         .completedBreakType = BreakType::Small,
         .wasPostponed = true,
         .cycleResetThresholdSeconds = 0,
@@ -283,9 +283,9 @@ class TestApp : public QObject {
     data.finalizePendingPostBreak(true, false);
 
     QCOMPARE(spy.count(), 1);
-    QCOMPARE(data.secondsToNextBreak(), 400);
+    QCOMPARE(data.schedule().secondsToNextBreak(), 400);
     QCOMPARE(data.smallBreaksBeforeBigBreak(), deps.preferences->bigAfter->get() - 1);
-    QVERIFY(!data.hasPendingPostBreak());
+    QVERIFY(!data.postBreak().isActive());
   }
   void lock_screen_timer_running() {
     int autoScreenLockSeconds = 20;
@@ -1104,7 +1104,7 @@ class TestApp : public QObject {
     QVERIFY(!app.trayData.isFocusMode);
     QVERIFY(app.trayData.isInMeeting);
   }
-  // breakCycleCount increments during focus and carries over after focus ends
+  // Focus keeps a separate cycle; normal-cycle progress resumes unchanged after focus
   void focus_mode_shared_cycle() {
     deps.preferences->focusSmallEvery->set(600);
     deps.preferences->focusSmallFor->set(10);
@@ -1117,7 +1117,7 @@ class TestApp : public QObject {
              deps.preferences->bigAfter->get() - 1);
 
     app.startFocus(2, "deep work");
-    // Entry break (no cycle decrement, but breakCycleCount increments)
+    // Entry break advances focus cycle, not normal cycle
     app.advanceToBreakEnd();
     // First real focus break (cycle decrement: 2→1)
     app.advance(app.trayData.secondsToNextBreak);
@@ -1128,9 +1128,36 @@ class TestApp : public QObject {
     app.advanceToBreakEnd();
     // Focus ended, back to normal schedule
     QVERIFY(!app.trayData.isFocusMode);
-    // Focus breaks still count as completed small breaks, so the next normal break is
-    // now big.
+    // Normal cycle progress resumes where it was before focus started.
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak,
+             deps.preferences->bigAfter->get() - 1);
+  }
+  void focus_mode_big_break_cycle_is_independent() {
+    deps.preferences->focusSmallEvery->set(600);
+    deps.preferences->focusSmallFor->set(10);
+    deps.preferences->focusBigBreakEnabled->set(true);
+    deps.preferences->focusBigAfter->set(2);
+    deps.preferences->focusBigFor->set(20);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    int normalSmallBreaksBeforeBig = app.trayData.smallBreaksBeforeBigBreak;
+
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
+    app.startFocus(1, "deep work");
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+    app.advanceToBreakEnd();
+
+    // Focus entry break advances the focus-only cycle, so the next focus break is big.
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
+
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Big, _, _, _)).Times(1);
+    app.advance(app.trayData.secondsToNextBreak);
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+    app.advanceToBreakEnd();
+
+    QVERIFY(!app.trayData.isFocusMode);
+    QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, normalSmallBreaksBeforeBig);
   }
   void reducing_big_after_keeps_completed_small_break_progress() {
     NiceMock<DummyApp> app(deps);

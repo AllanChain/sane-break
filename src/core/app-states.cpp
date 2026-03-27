@@ -36,9 +36,10 @@ void AppStateBreak::transitionTo(AppContext* app, std::unique_ptr<BreakPhase> ph
 }
 
 BreakCompletion AppStateBreak::completeBreak(AppContext* app) {
+  int focusSpanId = app->data->focus().spanId();
   BreakCompletion completion = app->data->completeBreak();
   if (completion.focusCompleted) {
-    app->db->closeSpan(app->data->focusSpanId(), {{"reason", "completed"}});
+    app->db->closeSpan(focusSpanId, {{"reason", "completed"}});
   }
   return completion;
 }
@@ -74,15 +75,15 @@ void AppContext::onSleepEnd(int sleptSeconds) {
   if (m_currentState->onSleepEnd(this, sleptSeconds)) return;
   // Default: treat sleep as a pause/resume cycle
   onPauseRequest(PauseReason::Sleep);
-  data->addSecondsPaused(sleptSeconds);
+  data->pause().addSecondsPaused(sleptSeconds);
   onResumeRequest(PauseReason::Sleep);
 }
 void AppContext::onPauseRequest(PauseReasons reasons) {
-  data->addPauseReasons(reasons);
+  data->pause().addReasons(reasons);
   m_currentState->onPauseRequest(this, reasons);
 }
 void AppContext::onResumeRequest(PauseReasons reasons) {
-  data->removePauseReasons(reasons);
+  data->pause().removeReasons(reasons);
   m_currentState->onResumeRequest(this, reasons);
 }
 
@@ -97,38 +98,38 @@ void AppStateNormal::exit(AppContext* app) {
   app->breakWindows->hideHeadsUp();
 }
 void AppStateNormal::tick(AppContext* app) {
-  app->data->tickSecondsToNextBreak();
+  app->data->schedule().tickSecondsToNextBreak();
   int headsUpFor = app->preferences->headsUpFor->get();
-  if (headsUpFor > 0 && app->data->secondsToNextBreak() <= headsUpFor &&
-      app->data->secondsToNextBreak() > 0) {
-    app->breakWindows->showHeadsUp(app->data->secondsToNextBreak(),
+  if (headsUpFor > 0 && app->data->schedule().secondsToNextBreak() <= headsUpFor &&
+      app->data->schedule().secondsToNextBreak() > 0) {
+    app->breakWindows->showHeadsUp(app->data->schedule().secondsToNextBreak(),
                                    app->data->breakType(), app->preferences);
   }
-  if (app->data->secondsToNextBreak() <= 0)
+  if (app->data->schedule().secondsToNextBreak() <= 0)
     app->transitionTo(std::make_unique<AppStateBreak>());
 }
 void AppStateNormal::onIdleStart(AppContext* app) {
   // When in postpone mode, disable pausing
-  if (app->data->isPostponing()) return;
-  app->data->addPauseReasons(PauseReason::Idle);
+  if (app->data->schedule().isPostponing()) return;
+  app->data->pause().addReasons(PauseReason::Idle);
   app->transitionTo(std::make_unique<AppStatePaused>());
 }
 void AppStateNormal::onPauseRequest(AppContext* app, PauseReasons) {
   // When in postpone mode, disable pausing
-  if (app->data->isPostponing()) return;
+  if (app->data->schedule().isPostponing()) return;
   app->transitionTo(std::make_unique<AppStatePaused>());
 }
 void AppStateNormal::onMenuAction(AppContext* app, MenuAction action) {
   if (std::get_if<Action::BreakNow>(&action)) {
-    app->data->earlyBreak();
+    app->data->schedule().earlyBreak();
     app->transitionTo(std::make_unique<AppStateBreak>());
   } else if (std::get_if<Action::BigBreakNow>(&action)) {
-    app->data->earlyBreak();
-    if (app->data->effectiveBigBreakEnabled()) app->data->makeNextBreakBig();
+    app->data->schedule().earlyBreak();
+    if (app->data->currentBreakConfig().bigEnabled) app->data->makeNextBreakBig();
     app->transitionTo(std::make_unique<AppStateBreak>());
   } else if (std::get_if<Action::EndFocus>(&action)) {
-    app->data->setFocusCyclesRemaining(1);
-    app->data->earlyBreak();
+    app->data->focus().setCyclesRemaining(1);
+    app->data->schedule().earlyBreak();
     app->transitionTo(std::make_unique<AppStateBreak>());
   }
 }
@@ -145,52 +146,54 @@ void AppStatePaused::enter(AppContext* app) { app->openCurrentSpan("pause"); }
  */
 void AppStatePaused::exit(AppContext* app) {
   app->closeCurrentSpan();
+  BreakConfig config = app->data->currentBreakConfig();
   // Calculate the total duration of the next break to determine if breaks would have
   // occurred during pause
   int nextBreakDuration =
-      (app->data->breakType() == BreakType::Big ? app->data->effectiveBigFor()
-                                                : app->data->effectiveSmallFor());
-  int secondsToNextBreakEnd = app->data->secondsToNextBreak() + nextBreakDuration;
+      (app->data->breakType() == BreakType::Big ? config.bigFor : config.smallFor);
+  int secondsToNextBreakEnd =
+      app->data->schedule().secondsToNextBreak() + nextBreakDuration;
   // If user was paused longer than the break duration or longer than resetAfterPause
   // setting, refill the break timer to avoid immediate breaks
-  if (app->data->secondsPaused() > secondsToNextBreakEnd ||
-      app->data->secondsPaused() > app->preferences->resetAfterPause->get()) {
-    app->data->refillSecondsToNextBreak();
+  if (app->data->pause().secondsPaused() > secondsToNextBreakEnd ||
+      app->data->pause().secondsPaused() > app->preferences->resetAfterPause->get()) {
+    app->data->schedule().refillSecondsToNextBreak(config);
   }
   // If user was paused longer than resetCycleAfterPause setting, reset the entire break
   // cycle
-  if (app->data->secondsPaused() > app->preferences->resetCycleAfterPause->get()) {
+  if (app->data->pause().secondsPaused() >
+      app->preferences->resetCycleAfterPause->get()) {
     app->data->resetBreakCycle();
   }
-  app->data->resetSecondsPaused();
+  app->data->pause().resetSecondsPaused();
   // Ensure pause reasons are cleared on exit
-  app->data->clearPauseReasons();
+  app->data->pause().clearReasons();
 }
-void AppStatePaused::tick(AppContext* app) { app->data->tickSecondsPaused(); }
+void AppStatePaused::tick(AppContext* app) { app->data->pause().tickSecondsPaused(); }
 void AppStatePaused::onIdleStart(AppContext* app) {
-  app->data->addPauseReasons(PauseReason::Idle);
+  app->data->pause().addReasons(PauseReason::Idle);
 }
 void AppStatePaused::onIdleEnd(AppContext* app) {
   // We need to clear screenLockTimer when going through break -> paused -> idleEnd
   app->screenLockTimer->stop();
-  app->data->removePauseReasons(PauseReason::Idle);
-  if (!app->data->pauseReasons()) {
+  app->data->pause().removeReasons(PauseReason::Idle);
+  if (!app->data->pause().reasons()) {
     app->transitionTo(std::make_unique<AppStateNormal>());
   }
 }
 void AppStatePaused::onResumeRequest(AppContext* app, PauseReasons) {
-  if (!app->data->pauseReasons()) {
+  if (!app->data->pause().reasons()) {
     app->transitionTo(std::make_unique<AppStateNormal>());
   }
 }
 void AppStatePaused::onMenuAction(AppContext* app, MenuAction action) {
   if (std::get_if<Action::EnableBreaks>(&action)) {
-    app->data->clearPauseReasons();
+    app->data->pause().clearReasons();
     app->transitionTo(std::make_unique<AppStateNormal>());
   } else if (std::get_if<Action::EndFocus>(&action)) {
-    app->data->clearPauseReasons();
-    app->data->setFocusCyclesRemaining(1);
-    app->data->earlyBreak();
+    app->data->pause().clearReasons();
+    app->data->focus().setCyclesRemaining(1);
+    app->data->schedule().earlyBreak();
     app->transitionTo(std::make_unique<AppStateBreak>());
   }
 }
@@ -200,7 +203,7 @@ void AppStateBreak::enter(AppContext* app) {
       "break", {{"type", app->data->breakType() == BreakType::Big ? "big" : "small"}});
   data = std::make_unique<BreaksData>(dataInit(app));
   // On focus entry break, exhaust force break exits so the exit button is hidden
-  if (app->data->isFocusMode() && !app->data->focusEntryBreakDone()) {
+  if (app->data->focus().isActive() && !app->data->focus().entryBreakDone()) {
     for (int i = 0; i < app->preferences->maxForceBreakExits->get(); i++)
       data->recordForceBreakExit();
   }
@@ -210,7 +213,7 @@ void AppStateBreak::enter(AppContext* app) {
   app->idleTimer->setMinIdleTime(2000);
   app->breakWindows->create(app->data->breakType(), app->preferences,
                             data->totalSeconds(),
-                            app->data->isBreakExtendedByPostpone());
+                            app->data->schedule().isBreakExtendedByPostpone());
   // Ensure we set the time at least once to initialize the UI in case user is idle and
   // no tick occurs
   app->breakWindows->setTime(data->remainingSeconds());
@@ -244,7 +247,7 @@ BreaksDataInit AppStateBreak::dataInit(AppContext* app) {
   int flashFor = app->preferences->flashFor->get();
   // On focus entry break (first break when entering focus mode), force immediate
   // full-screen by setting flashFor to 0
-  if (app->data->isFocusMode() && !app->data->focusEntryBreakDone()) {
+  if (app->data->focus().isActive() && !app->data->focus().entryBreakDone()) {
     flashFor = 0;
   }
   return {
@@ -319,7 +322,7 @@ void BreakPhaseFullScreen::tick(AppContext* app, AppStateBreak* breakState) {
            !app->preferences->autoCloseWindowAfterSmallBreak->get()) ||
           (breakType == BreakType::Big &&
            !app->preferences->autoCloseWindowAfterBigBreak->get());
-      app->data->setPendingPostBreak(completion);
+      app->data->postBreak().setPending(completion);
       breakState->preserveBreakWindowsOnExit(keepWindowOpen);
       app->transitionTo(std::make_unique<AppStatePostBreakIdle>(keepWindowOpen));
     } else {
@@ -355,7 +358,7 @@ void BreakPhaseFullScreen::showWindowClickableWidgets(AppContext* app,
 void AppStatePostBreakIdle::enter(AppContext* app) {
   app->openCurrentSpan("pause");
   app->screenLockTimer->stop();
-  app->data->addPauseReasons(PauseReason::Idle);
+  app->data->pause().addReasons(PauseReason::Idle);
   if (m_keepWindowOpen) {
     app->breakWindows->showButtons(AbstractBreakWindows::Button::ExitForceBreak |
                                        AbstractBreakWindows::Button::LockScreen,
@@ -365,27 +368,27 @@ void AppStatePostBreakIdle::enter(AppContext* app) {
 
 void AppStatePostBreakIdle::exit(AppContext* app) {
   app->closeCurrentSpan();
-  app->data->removePauseReasons(PauseReason::Idle);
-  app->data->clearPendingPostBreak();
+  app->data->pause().removeReasons(PauseReason::Idle);
+  app->data->postBreak().clear();
   if (m_keepWindowOpen) app->breakWindows->destroy();
 }
 
 void AppStatePostBreakIdle::tick(AppContext* app) {
-  app->data->tickPendingPostBreakIdle();
+  app->data->postBreak().tickIdleSeconds();
 }
 
 void AppStatePostBreakIdle::finalize(AppContext* app) {
-  int idleSeconds = app->data->pendingPostBreakIdleSeconds();
-  int cycleResetThreshold = app->data->pendingPostBreakCycleResetThresholdSeconds();
+  int idleSeconds = app->data->postBreak().idleSeconds();
+  int cycleResetThreshold = app->data->postBreak().cycleResetThresholdSeconds();
   int undoPostponeShrinkThreshold = app->preferences->resetCycleAfterPause->get();
-  bool resetCycle = app->data->pendingPostBreakType() == BreakType::Small &&
+  bool resetCycle = app->data->postBreak().breakType() == BreakType::Small &&
                     idleSeconds > cycleResetThreshold;
-  bool undoPostponeShrink = app->data->pendingPostBreakWasPostponed() &&
+  bool undoPostponeShrink = app->data->postBreak().wasPostponed() &&
                             idleSeconds > undoPostponeShrinkThreshold;
 
   app->data->finalizePendingPostBreak(resetCycle, undoPostponeShrink);
 
-  PauseReasons remainingPauseReasons = app->data->pauseReasons();
+  PauseReasons remainingPauseReasons = app->data->pause().reasons();
   remainingPauseReasons &= ~PauseReasons(PauseReason::Idle);
   if (remainingPauseReasons) {
     app->transitionTo(std::make_unique<AppStatePaused>());
@@ -403,34 +406,34 @@ bool AppStatePostBreakIdle::onSleepEnd(AppContext* app, int sleptSeconds) {
   // Sleep contributes to post-break inactivity, but this state should remain in the
   // same deferred-finalization mode after wake.
   app->openCurrentSpan("pause");
-  app->data->addPendingPostBreakIdleSeconds(sleptSeconds);
+  app->data->postBreak().addIdleSeconds(sleptSeconds);
   return true;
 }
 
 void AppStateMeeting::enter(AppContext* app) {
   app->openCurrentSpan("meeting",
-                       {{"scheduledSeconds", app->data->meetingTotalSeconds()},
-                        {"reason", app->data->meetingReason()}});
-  app->data->resetSecondsToNextBreak();
+                       {{"scheduledSeconds", app->data->meeting().totalSeconds()},
+                        {"reason", app->data->meeting().reason()}});
+  app->data->schedule().resetSecondsToNextBreak(app->data->currentBreakConfig());
   app->idleTimer->setWatchAccuracy(5000);
   app->idleTimer->setMinIdleTime(app->preferences->pauseOnIdleFor->get() * 1000);
 }
 
 void AppStateMeeting::exit(AppContext* app) {
   app->closeCurrentSpan();
-  app->data->clearMeetingData();
+  app->data->meeting().clear();
   app->meetingPrompt->closeEndPrompt();
 }
 
 void AppStateMeeting::tick(AppContext* app) {
-  if (app->data->meetingSecondsRemaining() > 0) app->data->tickMeetingRemaining();
-  int remaining = app->data->meetingSecondsRemaining();
+  if (app->data->meeting().secondsRemaining() > 0) app->data->meeting().tickRemaining();
+  int remaining = app->data->meeting().secondsRemaining();
   if (remaining > 0 && remaining <= 60) {
     app->meetingPrompt->showEndPrompt();
     app->meetingPrompt->setTime(remaining);
   } else if (remaining <= 0) {
     app->db->logEvent("meeting::end", {{"next-break", 0}});
-    if (app->data->effectiveBigBreakEnabled()) app->data->makeNextBreakBig();
+    if (app->data->currentBreakConfig().bigEnabled) app->data->makeNextBreakBig();
     app->transitionTo(std::make_unique<AppStateNormal>());
   }
 }
@@ -438,36 +441,35 @@ void AppStateMeeting::tick(AppContext* app) {
 void AppStateMeeting::onMenuAction(AppContext* app, MenuAction action) {
   if (std::get_if<Action::EndMeetingBreakNow>(&action)) {
     app->db->logEvent("meeting::end", {{"next-break", 0}});
-    if (app->data->effectiveBigBreakEnabled()) app->data->makeNextBreakBig();
-    app->data->earlyBreak();
+    if (app->data->currentBreakConfig().bigEnabled) app->data->makeNextBreakBig();
+    app->data->schedule().earlyBreak();
     app->transitionTo(std::make_unique<AppStateBreak>());
   } else if (auto* a = std::get_if<Action::EndMeetingBreakLater>(&action)) {
     app->db->logEvent("meeting::end", {{"next-break", a->seconds}});
-    if (app->data->effectiveBigBreakEnabled()) app->data->makeNextBreakBig();
-    app->data->setSecondsToNextBreak(a->seconds);
+    if (app->data->currentBreakConfig().bigEnabled) app->data->makeNextBreakBig();
+    app->data->schedule().setSecondsToNextBreak(a->seconds);
     app->transitionTo(std::make_unique<AppStateNormal>());
   } else if (auto* a = std::get_if<Action::ExtendMeeting>(&action)) {
     app->db->logEvent("meeting::extend", {{"seconds", a->seconds}});
-    app->data->extendMeeting(a->seconds);
+    app->data->meeting().extend(a->seconds);
     app->meetingPrompt->closeEndPrompt();
   }
 }
 bool AppStateMeeting::onSleepEnd(AppContext* app, int sleptSeconds) {
-  int breakDuration = app->data->effectiveBigBreakEnabled()
-                          ? app->data->effectiveBigFor()
-                          : app->data->effectiveSmallFor();
-  int skipIfSleptFor = app->data->meetingSecondsRemaining() + breakDuration;
+  BreakConfig config = app->data->currentBreakConfig();
+  int breakDuration = config.bigEnabled ? config.bigFor : config.smallFor;
+  int skipIfSleptFor = app->data->meeting().secondsRemaining() + breakDuration;
   if (sleptSeconds >= skipIfSleptFor) {
     app->db->logEvent("meeting::end", {{"next-break", -1}});
     app->data->resetBreakCycle();
-    app->data->resetSecondsToNextBreak();
+    app->data->schedule().resetSecondsToNextBreak(app->data->currentBreakConfig());
     app->transitionTo(std::make_unique<AppStateNormal>());
     return true;
   }
   // Short sleep: reopen meeting span at current time
   app->openCurrentSpan("meeting",
-                       {{"scheduledSeconds", app->data->meetingTotalSeconds()},
-                        {"reason", app->data->meetingReason()}});
-  app->data->subtractMeetingRemaining(sleptSeconds);
+                       {{"scheduledSeconds", app->data->meeting().totalSeconds()},
+                        {"reason", app->data->meeting().reason()}});
+  app->data->meeting().subtractRemaining(sleptSeconds);
   return true;
 }
