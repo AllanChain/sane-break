@@ -58,6 +58,7 @@ class AbstractBreakWindows : public QObject {
   virtual void playExitSound(BreakType, SanePreferences*) = 0;
   virtual void showHeadsUp(int totalSeconds, BreakType breakType,
                            SanePreferences* preferences) = 0;
+  virtual void setHeadsUpTime(int remainingTime) = 0;
   virtual void hideHeadsUp() = 0;
 
  signals:

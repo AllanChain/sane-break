@@ -87,6 +87,21 @@ void AppContext::onResumeRequest(PauseReasons reasons) {
   m_currentState->onResumeRequest(this, reasons);
 }
 
+void AppContext::checkBreakReadiness() {
+  if (!m_currentState || m_currentState->getID() != AppState::Normal) return;
+
+  int secondsToNextBreak = data->schedule().secondsToNextBreak();
+  int headsUpFor = preferences->headsUpFor->get();
+  if (headsUpFor > 0 && secondsToNextBreak > 0 && secondsToNextBreak <= headsUpFor) {
+    breakWindows->showHeadsUp(headsUpFor, data->breakType(), preferences);
+    breakWindows->setHeadsUpTime(secondsToNextBreak);
+  } else {
+    breakWindows->hideHeadsUp();
+  }
+
+  if (secondsToNextBreak <= 0) transitionTo(std::make_unique<AppStateBreak>());
+}
+
 void AppStateNormal::enter(AppContext* app) {
   app->openCurrentSpan("normal");
   // Use low accuracy (5s) for idle detection in normal state as it can last a long time
@@ -99,14 +114,7 @@ void AppStateNormal::exit(AppContext* app) {
 }
 void AppStateNormal::tick(AppContext* app) {
   app->data->schedule().tickSecondsToNextBreak();
-  int headsUpFor = app->preferences->headsUpFor->get();
-  if (headsUpFor > 0 && app->data->schedule().secondsToNextBreak() <= headsUpFor &&
-      app->data->schedule().secondsToNextBreak() > 0) {
-    app->breakWindows->showHeadsUp(app->data->schedule().secondsToNextBreak(),
-                                   app->data->breakType(), app->preferences);
-  }
-  if (app->data->schedule().secondsToNextBreak() <= 0)
-    app->transitionTo(std::make_unique<AppStateBreak>());
+  app->checkBreakReadiness();
 }
 void AppStateNormal::onIdleStart(AppContext* app) {
   // When in postpone mode, disable pausing

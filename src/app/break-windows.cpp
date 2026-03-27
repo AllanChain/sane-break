@@ -198,7 +198,13 @@ void BreakWindows::showButtons(Buttons buttons, bool show) {
 }
 void BreakWindows::showHeadsUp(int totalSeconds, BreakType breakType,
                                SanePreferences* preferences) {
+  if (!m_headsUpWindows.isEmpty() &&
+      (m_headsUpTotalSeconds != totalSeconds || m_headsUpBreakType != breakType)) {
+    hideHeadsUp();
+  }
   if (!m_headsUpWindows.isEmpty()) return;
+  m_headsUpTotalSeconds = totalSeconds;
+  m_headsUpBreakType = breakType;
   QList<QScreen*> screens = QApplication::screens();
   for (QScreen* screen : std::as_const(screens)) {
     auto* w = new HeadsUpWindow(totalSeconds, preferences->backgroundColor->get(),
@@ -218,10 +224,16 @@ void BreakWindows::showHeadsUp(int totalSeconds, BreakType breakType,
     connect(w, &HeadsUpWindow::clicked, this, &BreakWindows::startBreakRequested);
   }
 }
+void BreakWindows::setHeadsUpTime(int remainingTime) {
+  for (auto* w : std::as_const(m_headsUpWindows)) {
+    w->setTime(remainingTime);
+  }
+}
 void BreakWindows::hideHeadsUp() {
   for (auto* w : std::as_const(m_headsUpWindows)) {
     w->close();
     w->deleteLater();
   }
   m_headsUpWindows.clear();
+  m_headsUpTotalSeconds = 0;
 }

@@ -19,6 +19,7 @@ class HeadsUpWindow : public QWidget {
   HeadsUpWindow(int totalSeconds, QColor bgColor, QColor highlightColor,
                 QColor textColor, QWidget* parent = nullptr);
   void initSize(QScreen* screen);
+  void setTime(int remainingSeconds);
 
  signals:
   void clicked();
@@ -30,6 +31,7 @@ class HeadsUpWindow : public QWidget {
   void mousePressEvent(QMouseEvent*) override;
 
  private:
+  int m_totalSeconds;
   qreal m_progress = 1.0;
   QColor m_bgColor;
   QColor m_flashColor;

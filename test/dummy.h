@@ -62,6 +62,7 @@ class DummyBreakWindows : public AbstractBreakWindows {
   MOCK_METHOD(void, playEnterSound, (BreakType, SanePreferences*), ());
   MOCK_METHOD(void, playExitSound, (BreakType, SanePreferences*), ());
   MOCK_METHOD(void, showHeadsUp, (int, BreakType, SanePreferences*), ());
+  MOCK_METHOD(void, setHeadsUpTime, (int), ());
   MOCK_METHOD(void, hideHeadsUp, (), ());
 };
 

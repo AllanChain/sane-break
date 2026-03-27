@@ -41,11 +41,14 @@ class BreakWindows : public AbstractBreakWindows {
   void playExitSound(BreakType, SanePreferences*) override;
   void showHeadsUp(int totalSeconds, BreakType breakType,
                    SanePreferences* preferences) override;
+  void setHeadsUpTime(int remainingTime) override;
   void hideHeadsUp() override;
 
  private:
   QList<BreakWindow*> m_windows;
   QList<HeadsUpWindow*> m_headsUpWindows;
+  int m_headsUpTotalSeconds = 0;
+  BreakType m_headsUpBreakType = BreakType::Small;
   SoundPlayer* soundPlayer;
   QTimer* clockUpdateTimer;
   void updateClocks();

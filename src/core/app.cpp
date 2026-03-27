@@ -168,6 +168,7 @@ void AbstractApp::postpone(int seconds) {
   // Exit current break if we are postponing breaks
   transitionTo(std::make_unique<AppStateNormal>());
   data->schedule().postpone(seconds);
+  checkBreakReadiness();
 }
 
 void AbstractApp::onBatterySettingChange() {

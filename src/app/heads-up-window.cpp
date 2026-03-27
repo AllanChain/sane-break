@@ -13,10 +13,12 @@
 #include <QScreen>
 #include <QSequentialAnimationGroup>
 #include <QWidget>
+#include <algorithm>
 
 HeadsUpWindow::HeadsUpWindow(int totalSeconds, QColor bgColor, QColor highlightColor,
                              QColor textColor, QWidget* parent)
     : QWidget(parent),
+      m_totalSeconds(std::max(1, totalSeconds)),
       m_bgColor(bgColor),
       m_flashColor(bgColor),
       m_textColor(textColor) {
@@ -33,14 +35,14 @@ HeadsUpWindow::HeadsUpWindow(int totalSeconds, QColor bgColor, QColor highlightC
   setCursor(Qt::PointingHandCursor);
   setFixedSize(PILL_WIDTH, PILL_HEIGHT);
 
-  // Animate progress from 1.0 to 0.0
   m_progressAnim = new QPropertyAnimation(this, "progress");
   m_progressAnim->setStartValue(1.0);
   m_progressAnim->setEndValue(0.0);
-  m_progressAnim->setDuration(totalSeconds * 1000);
+  m_progressAnim->setDuration(m_totalSeconds * 1000);
   connect(this, &HeadsUpWindow::progressChanged, this,
           QOverload<>::of(&QWidget::update));
   m_progressAnim->start();
+  setTime(totalSeconds);
 
   // Slow flash animation: highlight → main, 2.5s per cycle
   auto* flashGroup = new QSequentialAnimationGroup(this);
@@ -59,6 +61,11 @@ HeadsUpWindow::HeadsUpWindow(int totalSeconds, QColor bgColor, QColor highlightC
   connect(this, &HeadsUpWindow::flashColorChanged, this,
           QOverload<>::of(&QWidget::update));
   m_flashAnim->start();
+}
+
+void HeadsUpWindow::setTime(int remainingSeconds) {
+  int clampedSeconds = std::clamp(remainingSeconds, 0, m_totalSeconds);
+  m_progressAnim->setCurrentTime((m_totalSeconds - clampedSeconds) * 1000);
 }
 
 void HeadsUpWindow::initSize(QScreen* screen) {
