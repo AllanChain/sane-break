@@ -147,7 +147,7 @@
     <message>
         <location filename="../../src/app/focus-window.ui" line="62"/>
         <source> min</source>
-        <translation type="unfinished">min</translation>
+        <translation> min</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="125"/>
@@ -323,7 +323,7 @@
     <message>
         <location filename="../../src/app/postpone-window.ui" line="129"/>
         <source> min</source>
-        <translation type="unfinished">min</translation>
+        <translation> min</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="187"/>
@@ -481,7 +481,7 @@
     <message>
         <location filename="../../src/app/pref-window.ui" line="1059"/>
         <source> times</source>
-        <translation type="unfinished">krát</translation>
+        <translation> krát</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1198"/>
@@ -668,7 +668,7 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="1660"/>
         <location filename="../../src/app/pref-window.ui" line="1714"/>
         <source> min</source>
-        <translation type="unfinished">min</translation>
+        <translation> min</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="284"/>
@@ -678,7 +678,7 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="1002"/>
         <location filename="../../src/app/pref-window.ui" line="1032"/>
         <source> sec</source>
-        <translation type="unfinished">s</translation>
+        <translation> s</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="328"/>
@@ -714,7 +714,7 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="410"/>
         <location filename="../../src/app/pref-window.ui" line="666"/>
         <source> breaks</source>
-        <translation type="unfinished">přestávek</translation>
+        <translation> přestávek</translation>
     </message>
     <message>
         <source>&lt;h2&gt;Focus Schedule&lt;/h2&gt;When you activate Focus Mode from the tray, breaks will follow this schedule instead. Use it for shorter breaks when you need to stay focused.</source>
@@ -1412,8 +1412,7 @@ v%1
     <message>
         <location filename="../../src/app/welcome.cpp" line="117"/>
         <source>&lt;h3 align=center&gt;Welcome to Sane Break!&lt;/h3&gt;&lt;p&gt;Sane Break is a cross-platform break reminder designed to help you take meaningful breaks without disrupting your workflow. Sane Break will stay in the system tray and remind you to take breaks at regular intervals. To quit, go to &quot;Postpone&quot; in the tray menu.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;h3 align=center&gt;Vítejte v Sane Break!&lt;/h3&gt;
-&lt;p&gt;Sane Break je multiplatformní připomínka přestávek navržená tak, aby vám pomohla dělat smysluplné přestávky bez rušení vašeho toku práce. Sane Break zůstane v systémovém panelu a připomíná vám, abyste si brali přestávky v pravidelných intervalech. Pro ukončení přejděte do „Odložit“ v nabídce panelu.&lt;/p&gt;</translation>
+        <translation>&lt;h3 align=center&gt;Vítejte v Sane Break!&lt;/h3&gt;&lt;p&gt;Sane Break je multiplatformní připomínka přestávek navržená tak, aby vám pomohla dělat smysluplné přestávky bez rušení vašeho toku práce. Sane Break zůstane v systémovém panelu a připomíná vám, abyste si v pravidelných intervalech dělali přestávky. Pro ukončení přejděte do „Odložit“ v nabídce v oznamovací oblasti systémového panelu.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/welcome.cpp" line="96"/>
