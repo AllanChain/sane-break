@@ -16,7 +16,7 @@ jobs:
     runs-on: macos-26
     steps:
     - uses: actions/checkout@v6
-    - uses: AllanChain/install-qt-static@v6.10
+    - uses: AllanChain/install-qt-static@v6.11
 
     - name: Build Project
       env:
