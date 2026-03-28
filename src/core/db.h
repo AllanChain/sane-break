@@ -17,7 +17,7 @@
 struct TimelineSpan {
   QDateTime start;
   QDateTime end;
-  QString type;    // "normal", "break", "pause", "meeting", "focus"
+  QString type;    // "normal", "break", "paused", "away", "meeting", "focus"
   QString reason;  // optional, from span JSON data (focus/meeting)
 };
 
@@ -28,7 +28,7 @@ struct TimelineEvent {
 
 struct DayTimelineData {
   QDate date;
-  QList<TimelineSpan> spans;       // normal, break, pause, meeting
+  QList<TimelineSpan> spans;       // normal, break, paused, away, meeting
   QList<TimelineSpan> focusSpans;  // focus (rendered as overlay)
   QList<TimelineEvent> events;     // postpone events
 };
@@ -46,8 +46,8 @@ struct DailyBreakStats {
 
 struct DailyUsageStats {
   QDate date;
-  int activeSeconds = 0;  // Normal + Meeting
-  int totalSeconds = 0;   // Normal + Meeting + Break + Pause (excludes sleep)
+  int trackedSeconds = 0;  // Normal
+  int pausedSeconds = 0;   // Paused + Meeting
 };
 
 class BreakDatabase : public QObject {

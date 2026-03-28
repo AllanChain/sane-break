@@ -5,8 +5,10 @@
 #include <gmock/gmock.h>
 #include <qtestcase.h>
 
+#include <QDateTime>
 #include <QObject>
 #include <QSignalSpy>
+#include <QSqlQuery>
 #include <QTest>
 #include <QTimer>
 
@@ -16,6 +18,14 @@
 #include "gmock/gmock.h"
 
 using testing::Mock, testing::NiceMock, testing::_;
+
+static int sumTrackedSeconds(BreakDatabase* db, const QDate& from, const QDate& to) {
+  int total = 0;
+  for (const auto& stats : db->queryDailyUsageStats(from, to)) {
+    total += stats.trackedSeconds;
+  }
+  return total;
+}
 
 class TestApp : public QObject {
   Q_OBJECT
@@ -903,6 +913,63 @@ class TestApp : public QObject {
     // Should remain paused
     QCOMPARE(app.trayData.pauseReasons, PauseReason::Idle);
   }
+  void sleep_end_while_normal_splits_span_in_db() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    QDateTime fakeStart = QDateTime::currentDateTimeUtc().addSecs(-7200);
+    QString fakeStartStr = fakeStart.toUTC().toString(Qt::ISODate);
+
+    app.closeCurrentSpan();
+    app.openCurrentSpan("normal", {}, fakeStart);
+
+    emit deps.systemMonitor->sleepEnded(3600);
+
+    QSqlQuery normalQuery;
+    normalQuery.prepare(
+        "SELECT ended_at FROM spans WHERE type = 'normal' AND started_at = ?");
+    normalQuery.addBindValue(fakeStartStr);
+    QVERIFY(normalQuery.exec());
+    QVERIFY(normalQuery.next());
+    QString normalEndedAt = normalQuery.value(0).toString();
+    QVERIFY(!normalEndedAt.isEmpty());
+
+    QSqlQuery sleepQuery;
+    QVERIFY(sleepQuery.exec(
+        "SELECT started_at, ended_at FROM spans WHERE type = 'sleep' ORDER BY id DESC "
+        "LIMIT 1"));
+    QVERIFY(sleepQuery.next());
+    QString sleepStartedAt = sleepQuery.value(0).toString();
+    QString sleepEndedAt = sleepQuery.value(1).toString();
+
+    QCOMPARE(normalEndedAt, sleepStartedAt);
+    QVERIFY(!sleepEndedAt.isEmpty());
+
+    QSqlQuery openNormalQuery;
+    QVERIFY(openNormalQuery.exec(
+        "SELECT COUNT(*) FROM spans WHERE type = 'normal' AND ended_at IS NULL"));
+    QVERIFY(openNormalQuery.next());
+    QCOMPARE(openNormalQuery.value(0).toInt(), 1);
+  }
+  void sleep_end_while_normal_omits_slept_time_from_usage_stats() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    QDateTime now = QDateTime::currentDateTimeUtc();
+    QDateTime fakeStart = now.addSecs(-7200);
+
+    app.closeCurrentSpan();
+    app.openCurrentSpan("normal", {}, fakeStart);
+
+    emit deps.systemMonitor->sleepEnded(3600);
+
+    QDate from = fakeStart.toLocalTime().date();
+    QDate to = now.toLocalTime().date();
+    int trackedSeconds = sumTrackedSeconds(deps.db, from, to);
+
+    QVERIFY2(trackedSeconds >= 3500, "tracked time should keep the pre-sleep hour");
+    QVERIFY2(trackedSeconds < 5400, "tracked time should not include the slept hour");
+  }
   void sleep_during_post_break_idle_counts_as_inactivity() {
     NiceMock<DummyApp> app(deps);
     app.start();
@@ -949,6 +1016,43 @@ class TestApp : public QObject {
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
     QVERIFY(!app.trayData.pauseReasons);
+  }
+  void pause_spans_rotate_from_paused_to_away_and_back() {
+    deps.preferences->pauseOnBattery->set(true);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    emit deps.systemMonitor->pauseRequested(PauseReason::OnBattery);
+    deps.idleTimer->setIdle(true);
+    deps.idleTimer->setIdle(false);
+    emit deps.systemMonitor->resumeRequested(PauseReason::OnBattery);
+
+    QSqlQuery query;
+    QVERIFY(query.exec(R"(
+      SELECT type,
+             json_extract(data, '$.reasons[0]'),
+             json_extract(data, '$.reasons[1]')
+      FROM spans
+      WHERE type IN ('paused', 'away')
+      ORDER BY id
+    )"));
+
+    QVERIFY(query.next());
+    QCOMPARE(query.value(0).toString(), QString("paused"));
+    QCOMPARE(query.value(1).toString(), QString("idle"));
+    QCOMPARE(query.value(2).toString(), QString("on-battery"));
+
+    QVERIFY(query.next());
+    QCOMPARE(query.value(0).toString(), QString("away"));
+    QCOMPARE(query.value(1).toString(), QString("idle"));
+    QCOMPARE(query.value(2).toString(), QString("on-battery"));
+
+    QVERIFY(query.next());
+    QCOMPARE(query.value(0).toString(), QString("paused"));
+    QCOMPARE(query.value(1).toString(), QString("on-battery"));
+    QVERIFY(!query.value(2).isValid() || query.value(2).toString().isEmpty());
+
+    QVERIFY(!query.next());
   }
   /* We disallow pausing duing postponing because:
    * 1. this will almost not happen, so we can simplify things.
@@ -1072,7 +1176,7 @@ class TestApp : public QObject {
     QVERIFY(!app.trayData.isFocusMode);
     QCOMPARE(app.trayData.secondsToNextBreak, deps.preferences->smallEvery->get());
   }
-  // Postpone blocked during focus
+  // Postpone prevented during focus
   void focus_mode_no_postpone() {
     deps.preferences->focusSmallEvery->set(600);
     deps.preferences->focusSmallFor->set(10);
@@ -1085,7 +1189,7 @@ class TestApp : public QObject {
     int secondsToNextBreak = app.trayData.secondsToNextBreak;
 
     app.postpone(100);
-    // Postpone should be blocked
+    // Postpone should be prevented
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
   }
   // Starting meeting clears focus

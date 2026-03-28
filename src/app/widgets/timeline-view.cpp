@@ -37,7 +37,8 @@
 static QColor colorForType(const QString& type) {
   if (type == "normal") return QColor("#4ade80");    // green-400
   if (type == "break") return QColor("#facc15");     // yellow-400
-  if (type == "pause") return QColor("#9ca3af");     // gray-400
+  if (type == "paused") return QColor("#9ca3af");    // gray-400
+  if (type == "away") return QColor("#cbd5e1");      // slate-300
   if (type == "meeting") return QColor("#60a5fa");   // blue-400
   if (type == "focus") return QColor("#a78bfa");     // violet-400
   if (type == "postpone") return QColor("#f87171");  // red-400
@@ -46,9 +47,11 @@ static QColor colorForType(const QString& type) {
 
 static QString labelForType(const QString& type) {
   if (type == "normal")
-    return QCoreApplication::translate("DayTimelineWidget", "Active");
+    return QCoreApplication::translate("DayTimelineWidget", "Tracked");
   if (type == "break") return QCoreApplication::translate("DayTimelineWidget", "Break");
-  if (type == "pause") return QCoreApplication::translate("DayTimelineWidget", "Pause");
+  if (type == "paused")
+    return QCoreApplication::translate("DayTimelineWidget", "Paused");
+  if (type == "away") return QCoreApplication::translate("DayTimelineWidget", "Away");
   if (type == "meeting")
     return QCoreApplication::translate("DayTimelineWidget", "Meeting");
   if (type == "focus") return QCoreApplication::translate("DayTimelineWidget", "Focus");
@@ -57,7 +60,7 @@ static QString labelForType(const QString& type) {
   return type;
 }
 
-static const QList<QString> kLegendTypes = {"normal",  "break", "pause",
+static const QList<QString> kLegendTypes = {"normal",  "break", "paused",
                                             "meeting", "focus", "postpone"};
 
 QList<QPair<QColor, QString>> timelineLegendItems() {

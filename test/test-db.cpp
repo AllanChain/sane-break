@@ -155,11 +155,11 @@ class TestDb : public QObject {
 
     auto stats = db->queryDailyUsageStats(localDate, localDate);
     QCOMPARE(stats.size(), 1);
-    QCOMPARE(stats[0].activeSeconds, 30 * 60);
-    QCOMPARE(stats[0].totalSeconds, 30 * 60);
+    QCOMPARE(stats[0].trackedSeconds, 30 * 60);
+    QCOMPARE(stats[0].pausedSeconds, 0);
   }
 
-  void usage_meeting_active_time() {
+  void usage_meeting_counts_as_paused_time() {
     // Normal span: 30 min, Meeting span: 20 min
     insertSpan(sqlDb, "normal", "2024-06-15 12:00:00", "2024-06-15 12:30:00");
     insertSpan(sqlDb, "meeting", "2024-06-15 12:30:00", "2024-06-15 12:50:00",
@@ -170,24 +170,40 @@ class TestDb : public QObject {
 
     auto stats = db->queryDailyUsageStats(localDate, localDate);
     QCOMPARE(stats.size(), 1);
-    QCOMPARE(stats[0].activeSeconds, 50 * 60);  // normal + meeting
-    QCOMPARE(stats[0].totalSeconds, 50 * 60);
+    QCOMPARE(stats[0].trackedSeconds, 30 * 60);  // normal only
+    QCOMPARE(stats[0].pausedSeconds, 20 * 60);   // meeting
   }
 
-  void usage_total_includes_break_pause() {
-    // Normal: 20 min, Break: 5 min, Pause: 10 min
+  void usage_excludes_breaks_but_counts_paused_time() {
+    // Normal: 20 min, Break: 5 min, Paused: 10 min
     insertSpan(sqlDb, "normal", "2024-06-15 12:00:00", "2024-06-15 12:20:00");
     insertSpan(sqlDb, "break", "2024-06-15 12:20:00", "2024-06-15 12:25:00",
                R"({"type":"small","normal-exit":true})");
-    insertSpan(sqlDb, "pause", "2024-06-15 12:25:00", "2024-06-15 12:35:00");
+    insertSpan(sqlDb, "paused", "2024-06-15 12:25:00", "2024-06-15 12:35:00");
 
     QDateTime utcNoon(QDate(2024, 6, 15), QTime(12, 0, 0), QTimeZone::UTC);
     QDate localDate = utcNoon.toLocalTime().date();
 
     auto stats = db->queryDailyUsageStats(localDate, localDate);
     QCOMPARE(stats.size(), 1);
-    QCOMPARE(stats[0].activeSeconds, 20 * 60);  // only normal
-    QCOMPARE(stats[0].totalSeconds, 35 * 60);   // normal + break + pause
+    QCOMPARE(stats[0].trackedSeconds, 20 * 60);  // only normal
+    QCOMPARE(stats[0].pausedSeconds, 10 * 60);   // paused only
+  }
+
+  void usage_paused_excludes_away() {
+    insertSpan(sqlDb, "normal", "2024-06-15 12:00:00", "2024-06-15 12:20:00");
+    insertSpan(sqlDb, "paused", "2024-06-15 12:20:00", "2024-06-15 12:30:00",
+               R"({"reasons":["on-battery"]})");
+    insertSpan(sqlDb, "away", "2024-06-15 12:30:00", "2024-06-15 12:45:00",
+               R"({"reasons":["idle","on-battery"]})");
+
+    QDateTime utcNoon(QDate(2024, 6, 15), QTime(12, 0, 0), QTimeZone::UTC);
+    QDate localDate = utcNoon.toLocalTime().date();
+
+    auto stats = db->queryDailyUsageStats(localDate, localDate);
+    QCOMPARE(stats.size(), 1);
+    QCOMPARE(stats[0].trackedSeconds, 20 * 60);
+    QCOMPARE(stats[0].pausedSeconds, 10 * 60);  // paused only, away excluded
   }
 
   void usage_sleep_adjustment() {
@@ -203,8 +219,8 @@ class TestDb : public QObject {
 
     auto stats = db->queryDailyUsageStats(localDate, localDate);
     QCOMPARE(stats.size(), 1);
-    QCOMPARE(stats[0].activeSeconds, 30 * 60);
-    QCOMPARE(stats[0].totalSeconds, 30 * 60);
+    QCOMPARE(stats[0].trackedSeconds, 30 * 60);
+    QCOMPARE(stats[0].pausedSeconds, 0);
   }
 
   void usage_cross_day_split() {
@@ -217,9 +233,9 @@ class TestDb : public QObject {
     QDate localDay2 = utcEnd.toLocalTime().date();
 
     auto stats = db->queryDailyUsageStats(localDay1, localDay2);
-    int totalActive = 0;
-    for (const auto& s : stats) totalActive += s.activeSeconds;
-    QCOMPARE(totalActive, 2 * 3600);
+    int totalTracked = 0;
+    for (const auto& s : stats) totalTracked += s.trackedSeconds;
+    QCOMPARE(totalTracked, 2 * 3600);
   }
 
   void usage_last_unclosed_span() {
@@ -232,9 +248,9 @@ class TestDb : public QObject {
 
     auto stats = db->queryDailyUsageStats(localDate, today);
     QVERIFY(stats.size() >= 1);
-    int totalActive = 0;
-    for (const auto& s : stats) totalActive += s.activeSeconds;
-    QVERIFY(totalActive > 0);
+    int totalTracked = 0;
+    for (const auto& s : stats) totalTracked += s.trackedSeconds;
+    QVERIFY(totalTracked > 0);
   }
 
   void force_break_exits() {

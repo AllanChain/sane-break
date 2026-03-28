@@ -50,7 +50,7 @@
       <item>
        <widget class="DynamicLabel" name="dayUsageLabel">
         <property name="text">
-         <string>Active usage: %1</string>
+         <string>%1 tracked · %2 paused</string>
         </property>
        </widget>
       </item>

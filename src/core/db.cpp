@@ -321,11 +321,11 @@ static void splitSpanIntoDays(const QDateTime& start, const QDateTime& end,
 // Returns per-day usage statistics for the given date range [from, to].
 //
 // Computes two metrics per day:
-//   - activeSeconds: time in Normal + Meeting spans
-//   - totalSeconds:  time in Normal + Meeting + Break + Pause spans
+//   - trackedSeconds: time in Normal spans
+//   - pausedSeconds:  time in Paused + Meeting spans
 //
-// Sleep spans are simply excluded from the query. Each span is split across
-// midnight boundaries using splitSpanIntoDays().
+// Break, away, sleep, and focus spans are excluded from the query. Each span is split
+// across midnight boundaries using splitSpanIntoDays().
 QList<DailyUsageStats> BreakDatabase::queryDailyUsageStats(QDate from, QDate to) {
   QList<DailyUsageStats> results;
   auto err = ensureDb();
@@ -337,7 +337,7 @@ QList<DailyUsageStats> BreakDatabase::queryDailyUsageStats(QDate from, QDate to)
            datetime(COALESCE(ended_at, CURRENT_TIMESTAMP), 'localtime'),
            type
     FROM spans
-    WHERE type IN ('normal', 'meeting', 'break', 'pause')
+    WHERE type IN ('normal', 'meeting', 'paused')
       AND (ended_at IS NOT NULL OR id = (SELECT MAX(id) FROM spans WHERE ended_at IS NULL))
       AND date(started_at, 'localtime') BETWEEN ? AND ?
   )");
@@ -345,7 +345,7 @@ QList<DailyUsageStats> BreakDatabase::queryDailyUsageStats(QDate from, QDate to)
   query.addBindValue(to.toString(Qt::ISODate));
   if (!query.exec()) return results;
 
-  QMap<QDate, int> activeByDay, totalByDay;
+  QMap<QDate, int> trackedByDay, pausedByDay, daysWithUsage;
 
   while (query.next()) {
     QDateTime start = QDateTime::fromString(query.value(0).toString(), Qt::ISODate);
@@ -353,20 +353,23 @@ QList<DailyUsageStats> BreakDatabase::queryDailyUsageStats(QDate from, QDate to)
     QString type = query.value(2).toString();
     if (!start.isValid() || !end.isValid() || start >= end) continue;
 
-    bool isActive = (type == "normal" || type == "meeting");
-
     QMap<QDate, int> daySeconds;
     splitSpanIntoDays(start, end, daySeconds);
     for (auto it = daySeconds.constBegin(); it != daySeconds.constEnd(); ++it) {
       if (it.key() >= from && it.key() <= to) {
-        totalByDay[it.key()] += it.value();
-        if (isActive) activeByDay[it.key()] += it.value();
+        daysWithUsage[it.key()] += it.value();
+        if (type == "normal") {
+          trackedByDay[it.key()] += it.value();
+        } else {
+          pausedByDay[it.key()] += it.value();
+        }
       }
     }
   }
 
-  for (auto it = totalByDay.constBegin(); it != totalByDay.constEnd(); ++it) {
-    results.append({it.key(), activeByDay.value(it.key(), 0), it.value()});
+  for (auto it = daysWithUsage.constBegin(); it != daysWithUsage.constEnd(); ++it) {
+    results.append(
+        {it.key(), trackedByDay.value(it.key(), 0), pausedByDay.value(it.key(), 0)});
   }
   return results;
 }
@@ -397,7 +400,7 @@ static QList<DaySpanSegment> splitSpanByDay(const QDateTime& start,
 
 // Returns per-day timeline data for the given date range [from, to].
 //
-// Queries spans (normal, meeting, break, pause, focus) and postpone events,
+// Queries spans (normal, meeting, break, paused, away, focus) and postpone events,
 // then splits spans by day and groups everything into DayTimelineData.
 QList<DayTimelineData> BreakDatabase::queryDailyTimelines(QDate from, QDate to) {
   QList<DayTimelineData> results;
@@ -414,7 +417,7 @@ QList<DayTimelineData> BreakDatabase::queryDailyTimelines(QDate from, QDate to) 
            type,
            json_extract(data, '$.reason')
     FROM spans
-    WHERE type IN ('normal', 'meeting', 'break', 'pause', 'focus')
+    WHERE type IN ('normal', 'meeting', 'break', 'paused', 'away', 'focus')
       AND (ended_at IS NOT NULL OR id = (SELECT MAX(id) FROM spans WHERE ended_at IS NULL))
       AND date(started_at, 'localtime') BETWEEN ? AND ?
   )");

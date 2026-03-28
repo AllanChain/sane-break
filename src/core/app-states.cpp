@@ -5,6 +5,7 @@
 #include "core/app-states.h"
 
 #include <QDateTime>
+#include <QJsonArray>
 #include <QJsonObject>
 #include <QString>
 #include <memory>
@@ -14,6 +15,46 @@
 #include "core/app-data.h"
 #include "core/break-windows.h"
 #include "core/flags.h"
+
+namespace {
+
+QString pauseReasonName(PauseReason reason) {
+  switch (reason) {
+    case PauseReason::Idle:
+      return "idle";
+    case PauseReason::OnBattery:
+      return "on-battery";
+    case PauseReason::AppOpen:
+      return "app-open";
+    case PauseReason::Sleep:
+      return "sleep";
+    case PauseReason::UnknownMonitor:
+      return "unknown-monitor";
+  }
+  return "unknown";
+}
+
+QJsonArray pauseReasonsToJson(PauseReasons reasons) {
+  QJsonArray reasonNames;
+  for (PauseReason reason :
+       {PauseReason::Idle, PauseReason::OnBattery, PauseReason::AppOpen,
+        PauseReason::Sleep, PauseReason::UnknownMonitor}) {
+    if (reasons.testFlag(reason)) reasonNames.append(pauseReasonName(reason));
+  }
+  return reasonNames;
+}
+
+QString effectivePauseSpanType(PauseReasons reasons) {
+  // Sleep is tracked as its own span in AppContext::onSleepEnd().
+  if (reasons.testFlag(PauseReason::Idle)) return "away";
+  return "paused";
+}
+
+QJsonObject pausedSpanData(PauseReasons reasons) {
+  return {{"reasons", pauseReasonsToJson(reasons)}};
+}
+
+}  // namespace
 
 void AppContext::transitionTo(std::unique_ptr<AppState> state) {
   if (m_currentState && m_currentState->getID() == state->getID()) {
@@ -146,14 +187,18 @@ void AppStateNormal::onMenuAction(AppContext* app, MenuAction action) {
 // - For normal state to paused: low accuracy because the pause may be long
 // - For break state to paused: high accuracy because we want it to be instant
 // Moreover, setting idle interval will reset the event-based watchers.
-void AppStatePaused::enter(AppContext* app) { app->openCurrentSpan("pause"); }
+void AppStatePaused::enter(AppContext* app) {
+  m_currentSpanReasons = app->data->pause().reasons();
+  m_currentSpanType = effectivePauseSpanType(m_currentSpanReasons);
+  app->openCurrentSpan(m_currentSpanType, pausedSpanData(m_currentSpanReasons));
+}
 
 /* To avoid immediate breaks after break resume, we consider the user have already
  * taken the break if there shall be breaks during the pause. Of course, if the user
  * have configured `resetAfterPause`, we just reset it.
  */
 void AppStatePaused::exit(AppContext* app) {
-  app->closeCurrentSpan();
+  app->closeCurrentSpan(pausedSpanData(m_currentSpanReasons));
   BreakConfig config = app->data->currentBreakConfig();
   // Calculate the total duration of the next break to determine if breaks would have
   // occurred during pause
@@ -176,20 +221,62 @@ void AppStatePaused::exit(AppContext* app) {
   app->data->pause().resetSecondsPaused();
   // Ensure pause reasons are cleared on exit
   app->data->pause().clearReasons();
+  m_currentSpanType.clear();
+  m_currentSpanReasons = {};
 }
 void AppStatePaused::tick(AppContext* app) { app->data->pause().tickSecondsPaused(); }
 void AppStatePaused::onIdleStart(AppContext* app) {
   app->data->pause().addReasons(PauseReason::Idle);
+  m_currentSpanReasons |= app->data->pause().reasons();
+  QString nextSpanType = effectivePauseSpanType(app->data->pause().reasons());
+  if (nextSpanType != m_currentSpanType) {
+    app->closeCurrentSpan(pausedSpanData(m_currentSpanReasons));
+    m_currentSpanType = nextSpanType;
+    m_currentSpanReasons = app->data->pause().reasons();
+    app->openCurrentSpan(m_currentSpanType, pausedSpanData(m_currentSpanReasons));
+  }
 }
 void AppStatePaused::onIdleEnd(AppContext* app) {
   // We need to clear screenLockTimer when going through break -> paused -> idleEnd
   app->screenLockTimer->stop();
   app->data->pause().removeReasons(PauseReason::Idle);
+  if (app->data->pause().reasons()) {
+    QString nextSpanType = effectivePauseSpanType(app->data->pause().reasons());
+    if (nextSpanType != m_currentSpanType) {
+      app->closeCurrentSpan(pausedSpanData(m_currentSpanReasons));
+      m_currentSpanType = nextSpanType;
+      m_currentSpanReasons = app->data->pause().reasons();
+      app->openCurrentSpan(m_currentSpanType, pausedSpanData(m_currentSpanReasons));
+    } else {
+      m_currentSpanReasons |= app->data->pause().reasons();
+    }
+  }
   if (!app->data->pause().reasons()) {
     app->transitionTo(std::make_unique<AppStateNormal>());
   }
 }
+void AppStatePaused::onPauseRequest(AppContext* app, PauseReasons) {
+  m_currentSpanReasons |= app->data->pause().reasons();
+  QString nextSpanType = effectivePauseSpanType(app->data->pause().reasons());
+  if (nextSpanType == m_currentSpanType) return;
+
+  app->closeCurrentSpan(pausedSpanData(m_currentSpanReasons));
+  m_currentSpanType = nextSpanType;
+  m_currentSpanReasons = app->data->pause().reasons();
+  app->openCurrentSpan(m_currentSpanType, pausedSpanData(m_currentSpanReasons));
+}
 void AppStatePaused::onResumeRequest(AppContext* app, PauseReasons) {
+  if (app->data->pause().reasons()) {
+    QString nextSpanType = effectivePauseSpanType(app->data->pause().reasons());
+    if (nextSpanType != m_currentSpanType) {
+      app->closeCurrentSpan(pausedSpanData(m_currentSpanReasons));
+      m_currentSpanType = nextSpanType;
+      m_currentSpanReasons = app->data->pause().reasons();
+      app->openCurrentSpan(m_currentSpanType, pausedSpanData(m_currentSpanReasons));
+    } else {
+      m_currentSpanReasons |= app->data->pause().reasons();
+    }
+  }
   if (!app->data->pause().reasons()) {
     app->transitionTo(std::make_unique<AppStateNormal>());
   }
@@ -364,7 +451,8 @@ void BreakPhaseFullScreen::showWindowClickableWidgets(AppContext* app,
 }
 
 void AppStatePostBreakIdle::enter(AppContext* app) {
-  app->openCurrentSpan("pause");
+  app->openCurrentSpan("away",
+                       {{"reasons", QJsonArray{pauseReasonName(PauseReason::Idle)}}});
   app->screenLockTimer->stop();
   app->data->pause().addReasons(PauseReason::Idle);
   if (m_keepWindowOpen) {
@@ -413,7 +501,8 @@ void AppStatePostBreakIdle::onIdleEnd(AppContext* app) {
 bool AppStatePostBreakIdle::onSleepEnd(AppContext* app, int sleptSeconds) {
   // Sleep contributes to post-break inactivity, but this state should remain in the
   // same deferred-finalization mode after wake.
-  app->openCurrentSpan("pause");
+  app->openCurrentSpan("away",
+                       {{"reasons", QJsonArray{pauseReasonName(PauseReason::Idle)}}});
   app->data->postBreak().addIdleSeconds(sleptSeconds);
   return true;
 }

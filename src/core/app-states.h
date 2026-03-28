@@ -138,7 +138,12 @@ class AppStatePaused : public AppState {
   void onIdleStart(AppContext* app) override;
   void onIdleEnd(AppContext* app) override;
   void onMenuAction(AppContext* app, MenuAction action) override;
+  void onPauseRequest(AppContext* app, PauseReasons reasons) override;
   void onResumeRequest(AppContext* app, PauseReasons reasons) override;
+
+ protected:
+  QString m_currentSpanType;
+  PauseReasons m_currentSpanReasons = {};
 };
 
 class BreakPhase;

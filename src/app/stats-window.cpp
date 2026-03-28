@@ -33,6 +33,10 @@ static QString formatDuration(int totalSeconds) {
   return StatsWindow::tr("%1m").arg(minutes);
 }
 
+static bool hideSpanInStatsTimeline(const TimelineSpan& span) {
+  return span.type == "away" || span.type == "sleep";
+}
+
 QDate StatsWindow::weekStartForDate(QDate date) {
   int dow = date.dayOfWeek();  // 1=Mon .. 7=Sun
   int first = QLocale().firstDayOfWeek();
@@ -135,7 +139,8 @@ void StatsWindow::updateDayDetail(QDate date) {
   ui->dayPostponeLabel->setArgs({stats.postponeCount, stats.forceBreakExits});
 
   DailyUsageStats usage = m_usageStatsMap.value(date);
-  ui->dayUsageLabel->setArgs({formatDuration(usage.activeSeconds)});
+  ui->dayUsageLabel->setArgs(
+      {formatDuration(usage.trackedSeconds), formatDuration(usage.pausedSeconds)});
 }
 
 void StatsWindow::updateWeekLabel() {
@@ -151,10 +156,17 @@ void StatsWindow::populateDailyBreakdown(const QList<DayTimelineData>& timelines
   QMap<QDate, DailyBreakStats> statsMap;
   for (const auto& s : allStats) statsMap[s.date] = s;
 
+  QList<DayTimelineData> visibleTimelines = timelines;
+  for (auto& day : visibleTimelines) {
+    day.spans.erase(
+        std::remove_if(day.spans.begin(), day.spans.end(), hideSpanInStatsTimeline),
+        day.spans.end());
+  }
+
   // Compute shared time range across all days
   int rangeStart = 86400;  // will find min
   int rangeEnd = 0;        // will find max
-  for (const auto& day : timelines) {
+  for (const auto& day : visibleTimelines) {
     for (const auto& span : day.spans) {
       int startSec = span.start.time().msecsSinceStartOfDay() / 1000;
       int endSec = span.end.time().msecsSinceStartOfDay() / 1000;
@@ -181,5 +193,5 @@ void StatsWindow::populateDailyBreakdown(const QList<DayTimelineData>& timelines
     rangeEnd = std::min(rangeEnd, 86400);
   }
 
-  ui->timelineView->populate(timelines, rangeStart, rangeEnd, m_weekStart);
+  ui->timelineView->populate(visibleTimelines, rangeStart, rangeEnd, m_weekStart);
 }
