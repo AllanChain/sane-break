@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nl_NL" sourcelanguage="en_US">
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE TS><TS version="2.1" language="nl_NL" sourcelanguage="en_US">
 <context>
     <name>AutoStart</name>
     <message>
@@ -104,32 +102,45 @@
 <context>
     <name>DayTimelineWidget</name>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="49"/>
         <source>Active</source>
-        <translation type="unfinished">Actief</translation>
+        <translation type="obsolete">Actief</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="51"/>
         <source>Break</source>
         <translation type="unfinished">Pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="51"/>
         <source>Pause</source>
-        <translation type="unfinished">Opschorting</translation>
+        <translation type="obsolete">Opschorting</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
+        <source>Tracked</source>
+        <translation type="unfinished">Bijgehouden</translation>
     </message>
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="53"/>
+        <source>Paused</source>
+        <translation type="unfinished">Opgeschort</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="54"/>
+        <source>Away</source>
+        <translation type="unfinished">Afwezig</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="56"/>
         <source>Meeting</source>
         <translation type="unfinished">Vergadering</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="54"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="57"/>
         <source>Focus</source>
         <translation type="unfinished">Concentratie</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="56"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="59"/>
         <source>Postpone</source>
         <translation type="unfinished">Uitstellen</translation>
     </message>
@@ -190,12 +201,12 @@
 <context>
     <name>HeadsUpWindow</name>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="101"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="109"/>
         <source>Break soon</source>
         <translation type="unfinished">Binnenkort pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="110"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="118"/>
         <source>Click to start</source>
         <translation type="unfinished">Klik om te starten</translation>
     </message>
@@ -286,7 +297,7 @@
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="151"/>
-        <source>We&apos;ll check in with you before showing a break reminder.</source>
+        <source>We'll check in with you before showing a break reminder.</source>
         <translation type="unfinished">We controleren uw status voordat we een pauzeherinnering tonen.</translation>
     </message>
     <message>
@@ -339,7 +350,7 @@
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="187"/>
-        <source>You won&apos;t be able to postpone this break again. It will start automatically at the scheduled time.</source>
+        <source>You won't be able to postpone this break again. It will start automatically at the scheduled time.</source>
         <translation type="unfinished">U kunt deze pauze niet opnieuw uitstellen. Deze start automatisch op het geplande tijdstip.</translation>
     </message>
     <message>
@@ -444,7 +455,7 @@
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="934"/>
-        <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
+        <source>After idle for that long during break, Sane Break will keep full screen and there's no way back.</source>
         <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
         <translation>Na een bepaalde mate van inactiviteit tijdens een pauze, zal Sane Break een schermvullende melding tonen.</translation>
     </message>
@@ -498,7 +509,7 @@
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1989"/>
-        <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
+        <source>Let's say you've configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
         <extracomment>Tooltip for &quot;Auto screen lock&quot; config</extracomment>
@@ -558,7 +569,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="867"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
-&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
+&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you're idle again or the timer ends.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Gedrag van herinnering&lt;/h3&gt;
 &lt;p&gt;Sane Break toont een kleine melding gedurende &lt;b&gt;%1&lt;/b&gt; seconden. Als u stopt met werken of ervoor kiest om door te gaan tot de tijd is verlopen, dan wordt het venster schermvullend weergegeven. Tijdens de pauze wordt het scherm vergrendeld na &lt;b&gt;%2&lt;/b&gt; seconden van inactiviteit. Indien u weer actief bent vóór het vergrendelen, dan krimpt de melding tijdelijk naar een klein venster, maar zodra u weer inactief bent of de tijd is verstreken, wordt het opnieuw schermvullend getoond.&lt;/p&gt;</translation>
     </message>
@@ -807,7 +818,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1543"/>
         <source>Pause breaks when any of the following program is running:</source>
-        <translation>Pauzes opschorten indien een van deze programma&apos;s actief is:</translation>
+        <translation>Pauzes opschorten indien een van deze programma's actief is:</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1550"/>
@@ -1281,7 +1292,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         </translation>
     </message>
     <message>
-        <source>You haven&apos;t taken breaks for %1 minutes.</source>
+        <source>You haven't taken breaks for %1 minutes.</source>
         <translation type="vanished">U heeft al %1 minuten lang geen pauze genomen.</translation>
     </message>
     <message numerus="yes">
@@ -1344,6 +1355,11 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation type="unfinished">%1 uitgesteld · %2 keer gedwongen pauze beëindigd</translation>
     </message>
     <message>
+        <location filename="../../src/app/stats-window.ui" line="53"/>
+        <source>%1 tracked · %2 paused</source>
+        <translation type="unfinished">%1 bijgehouden · %2 opgeschort</translation>
+    </message>
+    <message>
         <source>Today</source>
         <translation type="obsolete">Vandaag</translation>
     </message>
@@ -1361,9 +1377,8 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation type="obsolete">%1 uitgesteld</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="53"/>
         <source>Active usage: %1</source>
-        <translation type="unfinished">Actief gebruik: %1</translation>
+        <translation type="obsolete">Actief gebruik: %1</translation>
     </message>
     <message>
         <source>Total usage: %1</source>
@@ -1388,7 +1403,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation type="unfinished">%1 m</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="134"/>
+        <location filename="../../src/app/stats-window.cpp" line="138"/>
         <source>%1s</source>
         <translation type="unfinished">%1 s</translation>
     </message>

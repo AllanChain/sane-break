@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ru" sourcelanguage="en_US">
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE TS><TS version="2.1" language="ru" sourcelanguage="en_US">
 <context>
     <name>AutoStart</name>
     <message>
@@ -92,32 +90,45 @@
 <context>
     <name>DayTimelineWidget</name>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="49"/>
         <source>Active</source>
-        <translation type="unfinished">Активно</translation>
+        <translation type="obsolete">Активно</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="51"/>
         <source>Break</source>
         <translation type="unfinished">Перерыв</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="51"/>
         <source>Pause</source>
-        <translation type="unfinished">Пауза</translation>
+        <translation type="obsolete">Пауза</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
+        <source>Tracked</source>
+        <translation type="unfinished">Отслеживается</translation>
     </message>
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="53"/>
+        <source>Paused</source>
+        <translation type="unfinished">Приостановлено</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="54"/>
+        <source>Away</source>
+        <translation type="unfinished">Нет на месте</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="56"/>
         <source>Meeting</source>
         <translation type="unfinished">Встреча</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="54"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="57"/>
         <source>Focus</source>
         <translation type="unfinished">Фокус</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="56"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="59"/>
         <source>Postpone</source>
         <translation type="unfinished">Отложить</translation>
     </message>
@@ -178,12 +189,12 @@
 <context>
     <name>HeadsUpWindow</name>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="101"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="109"/>
         <source>Break soon</source>
         <translation type="unfinished">Скоро перерыв</translation>
     </message>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="110"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="118"/>
         <source>Click to start</source>
         <translation type="unfinished">Нажмите, чтобы начать</translation>
     </message>
@@ -274,7 +285,7 @@
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="151"/>
-        <source>We&apos;ll check in with you before showing a break reminder.</source>
+        <source>We'll check in with you before showing a break reminder.</source>
         <translation type="unfinished">Мы свяжемся с вами перед показом напоминания о перерыве.</translation>
     </message>
     <message>
@@ -327,7 +338,7 @@
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="187"/>
-        <source>You won&apos;t be able to postpone this break again. It will start automatically at the scheduled time.</source>
+        <source>You won't be able to postpone this break again. It will start automatically at the scheduled time.</source>
         <translation type="unfinished">Вы не сможете отложить этот перерыв повторно. Он начнётся автоматически в запланированное время.</translation>
     </message>
     <message>
@@ -428,7 +439,7 @@
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="934"/>
-        <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
+        <source>After idle for that long during break, Sane Break will keep full screen and there's no way back.</source>
         <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
         <translation>После указанного периода бездействия во время перерыва, Sane Break будет удерживать полноэкранный режим, и прервать его будет невозможно.</translation>
     </message>
@@ -571,7 +582,7 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1989"/>
-        <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
+        <source>Let's say you've configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
         <extracomment>Tooltip for &quot;Auto screen lock&quot; config</extracomment>
@@ -762,7 +773,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="867"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
-&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
+&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you're idle again or the timer ends.&lt;/p&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Поведение напоминания&lt;/h3&gt;
 &lt;p&gt;Sane Break показывает небольшое напоминание на &lt;b&gt;%1&lt;/b&gt; секунд. Если вы прекращаете свою деятельность в это время или выбираете продолжить до окончания таймера, оно переходит в полноэкранный режим. Во время перерыва Sane Break переходит в полноэкранный режим после &lt;b&gt;%2&lt;/b&gt; секунд бездействия. Если вы возобновляете деятельность до блокировки, напоминание временно уменьшается до маленького окна, но снова расширяется до полноэкранного режима, когда вы снова становитесь бездействующим или таймер заканчивается.&lt;/p&gt;</translation>
     </message>
@@ -1184,7 +1195,7 @@ v%1
         </translation>
     </message>
     <message>
-        <source>You haven&apos;t taken breaks for %1 minutes.</source>
+        <source>You haven't taken breaks for %1 minutes.</source>
         <translation type="obsolete">Вы не взяли перерывы уже %1 минут.</translation>
     </message>
     <message numerus="yes">
@@ -1232,6 +1243,11 @@ v%1
         <translation type="unfinished">%1 отложено · %2 выходов с принудительным прерыванием</translation>
     </message>
     <message>
+        <location filename="../../src/app/stats-window.ui" line="53"/>
+        <source>%1 tracked · %2 paused</source>
+        <translation type="unfinished">%1 отслеживается · %2 приостановлено</translation>
+    </message>
+    <message>
         <source>Today</source>
         <translation type="obsolete">Сегодня</translation>
     </message>
@@ -1249,9 +1265,8 @@ v%1
         <translation type="obsolete">%1 отложено</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="53"/>
         <source>Active usage: %1</source>
-        <translation type="unfinished">Активное использование: %1</translation>
+        <translation type="obsolete">Активное использование: %1</translation>
     </message>
     <message>
         <source>Total usage: %1</source>
@@ -1276,7 +1291,7 @@ v%1
         <translation type="unfinished">%1 мин</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="134"/>
+        <location filename="../../src/app/stats-window.cpp" line="138"/>
         <source>%1s</source>
         <translation type="unfinished">%1с</translation>
     </message>

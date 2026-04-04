@@ -92,32 +92,37 @@
 <context>
     <name>DayTimelineWidget</name>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="49"/>
-        <source>Active</source>
-        <translation>活躍</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="51"/>
         <source>Break</source>
         <translation>休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="51"/>
-        <source>Pause</source>
-        <translation>暫停</translation>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
+        <source>Tracked</source>
+        <translation>計入</translation>
     </message>
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="53"/>
+        <source>Paused</source>
+        <translation>暫停</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="54"/>
+        <source>Away</source>
+        <translation>離開</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="56"/>
         <source>Meeting</source>
         <translation>會議</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="54"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="57"/>
         <source>Focus</source>
         <translation>專注</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="56"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="59"/>
         <source>Postpone</source>
         <translation>推遲</translation>
     </message>
@@ -178,12 +183,12 @@
 <context>
     <name>HeadsUpWindow</name>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="101"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="109"/>
         <source>Break soon</source>
         <translation>即將休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="110"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="118"/>
         <source>Click to start</source>
         <translation>點擊開始</translation>
     </message>
@@ -1150,8 +1155,8 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="53"/>
-        <source>Active usage: %1</source>
-        <translation>活躍使用時長：%1</translation>
+        <source>%1 tracked · %2 paused</source>
+        <translation>記錄時長 %1 · 暫停時長 %2</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.cpp" line="32"/>
@@ -1164,7 +1169,7 @@ v%1
         <translation>%1 分鐘</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="134"/>
+        <location filename="../../src/app/stats-window.cpp" line="138"/>
         <source>%1s</source>
         <translation>%1 秒鐘</translation>
     </message>

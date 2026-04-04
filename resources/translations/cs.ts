@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="cs" sourcelanguage="en_US">
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE TS><TS version="2.1" language="cs" sourcelanguage="en_US">
 <context>
     <name>AutoStart</name>
     <message>
@@ -63,7 +61,7 @@
     <message>
         <location filename="../../src/app/break-window.ui" line="91"/>
         <source>Break extended to make up for postponing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Přestávka prodloužena jako náhrada za odložení</translation>
     </message>
     <message>
         <location filename="../../src/app/break-window.ui" line="224"/>
@@ -92,32 +90,45 @@
 <context>
     <name>DayTimelineWidget</name>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="49"/>
         <source>Active</source>
-        <translation type="unfinished">Aktivní</translation>
+        <translation type="obsolete">Aktivní</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="51"/>
         <source>Break</source>
         <translation type="unfinished">Přestávka</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="51"/>
         <source>Pause</source>
-        <translation type="unfinished">Pozastavit</translation>
+        <translation type="obsolete">Pozastavit</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
+        <source>Tracked</source>
+        <translation type="unfinished">Sledováno</translation>
     </message>
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="53"/>
+        <source>Paused</source>
+        <translation type="unfinished">Pozastaveno</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="54"/>
+        <source>Away</source>
+        <translation type="unfinished">Pryč</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="56"/>
         <source>Meeting</source>
         <translation type="unfinished">Schůzka</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="54"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="57"/>
         <source>Focus</source>
         <translation type="unfinished">Zaměření</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="56"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="59"/>
         <source>Postpone</source>
         <translation type="unfinished">Odložit</translation>
     </message>
@@ -137,7 +148,7 @@
     <message>
         <location filename="../../src/app/focus-window.ui" line="27"/>
         <source>Briefly describe what are you working on:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Stručně popište, na čem pracujete:</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="55"/>
@@ -178,14 +189,14 @@
 <context>
     <name>HeadsUpWindow</name>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="101"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="109"/>
         <source>Break soon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Brzy přestávka</translation>
     </message>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="110"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="118"/>
         <source>Click to start</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kliknutím spustit</translation>
     </message>
 </context>
 <context>
@@ -224,12 +235,12 @@
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="63"/>
         <source>Break in %1 minutes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Přestávka za %1 minut</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="70"/>
         <source>Not yet (extend %1 minutes)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ještě ne (prodloužit o %1 minut)</translation>
     </message>
     <message>
         <source>Break in 5 min</source>
@@ -260,7 +271,7 @@
     <message>
         <location filename="../../src/app/meeting-window.ui" line="27"/>
         <source>Briefly describe this meeting/presentation:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Stručně popište tuto schůzku/přednášku:</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="55"/>
@@ -274,7 +285,7 @@
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="151"/>
-        <source>We&apos;ll check in with you before showing a break reminder.</source>
+        <source>We'll check in with you before showing a break reminder.</source>
         <translation type="unfinished">Zkontrolujeme vaši aktivitu před zobrazením připomínky přestávky.</translation>
     </message>
     <message>
@@ -327,7 +338,7 @@
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="187"/>
-        <source>You won&apos;t be able to postpone this break again. It will start automatically at the scheduled time.</source>
+        <source>You won't be able to postpone this break again. It will start automatically at the scheduled time.</source>
         <translation type="unfinished">Tuto přestávku již nelze znovu odložit. Spustí se automaticky v naplánovaný čas.</translation>
     </message>
     <message>
@@ -428,7 +439,7 @@
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="934"/>
-        <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
+        <source>After idle for that long during break, Sane Break will keep full screen and there's no way back.</source>
         <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
         <translation type="unfinished">Po nečinnosti po dobu této délky během přestávky Sane Break zůstane v celoobrazovkovém režimu a nebudete se moci vrátit.</translation>
     </message>
@@ -571,7 +582,7 @@ Všechny barvy jsou ve formátu &lt;code&gt;#AARRGGBB&lt;/code&gt;.</translation
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1989"/>
-        <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
+        <source>Let's say you've configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
         <extracomment>Tooltip for &quot;Auto screen lock&quot; config</extracomment>
@@ -738,7 +749,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="867"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
-&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
+&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you're idle again or the timer ends.&lt;/p&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Chování připomínky&lt;/h3&gt;
 &lt;p&gt;Sane Break zobrazí malou připomínku po dobu &lt;b&gt;%1&lt;/b&gt; sekund. Pokud přestanete s aktivitou během této doby nebo vyberete pokračování až do vypršení časovače, přepne se do celoobrazovkového režimu. Během přestávky se Sane Break zamkne do celoobrazovkového režimu po &lt;b&gt;%2&lt;/b&gt; sekundách nečinnosti. Pokud obnovíte aktivitu před zamknutím, připomínka se dočasně zmenší na malé okno, ale znovu se rozšíří na celou obrazovku, když opět přestanete být aktivní nebo vyprší časovač.&lt;/p&gt;</translation>
     </message>
@@ -751,23 +762,23 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="992"/>
         <source>Tray icon will start flashing this many seconds before the break. Set to 0 to disable.</source>
         <extracomment>Tooltip for &quot;Flash tray icon before break&quot; config</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ikona v panelu začne blikat tolik sekund před přestávkou. Nastavením na 0 vypnete.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="995"/>
         <source>Flash tray icon before break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Blikat ikonou v panelu před přestávkou</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1022"/>
         <source>Show a small notification this many seconds before the break starts. Click it to start the break early. Set to 0 to disable.</source>
         <extracomment>Tooltip for &quot;Show heads-up before break&quot; config</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zobrazit malou upozornění tolik sekund před začátkem přestávky. Kliknutím ji můžete spustit dříve. Nastavením na 0 vypnete.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1025"/>
         <source>Show heads-up before break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zobrazit upozornění před přestávkou</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1207"/>
@@ -782,17 +793,17 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1401"/>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Obrázek pozadí</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1411"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Žádný</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1425"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vymazat</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1441"/>
@@ -822,22 +833,22 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1557"/>
         <source>&lt;h3&gt;External Monitors&lt;/h3&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h3&gt;Externí monitory&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1564"/>
         <source>Pause when unknown monitor is connected</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pozastavit při připojení neznámého monitoru</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1586"/>
         <source>Mark currently connected monitors as known</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Označit právě připojené monitory jako známé</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1606"/>
         <source>Remove selected</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Odstranit vybrané</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1615"/>
@@ -861,22 +872,22 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="1855"/>
         <location filename="../../src/app/pref-window.ui" line="1869"/>
         <source>Browse</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Procházet</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="511"/>
         <source>&lt;h2&gt;Focus Schedule&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Rozvrh zaměření&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="521"/>
         <source>When you activate Focus Mode from the tray, breaks will follow this schedule instead. Use it for shorter breaks when you need to stay focused.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Když aktivujete režim zaměření z panelu, přestávky se budou řídit tímto rozvrhem. Použijte jej pro kratší přestávky, když potřebujete zůstat soustředění.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1895"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: Use &lt;i&gt;Browse&lt;/i&gt; to select a custom sound file. A copy of the file will be saved so it can always be played.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;strong&gt;Tip&lt;/strong&gt;: Pomocí &lt;i&gt;Procházet&lt;/i&gt; vyberte vlastní zvukový soubor. Kopie souboru bude uložena, aby bylo možné jej vždy přehrát.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1933"/>
@@ -999,38 +1010,38 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.cpp" line="647"/>
         <source>Select Sound File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vybrat zvukový soubor</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="648"/>
         <source>Sound Files (*.mp3 *.wav *.ogg *.flac *.m4a)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zvukové soubory (*.mp3 *.wav *.ogg *.flac *.m4a)</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="658"/>
         <location filename="../../src/app/pref-window.cpp" line="679"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Chyba</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="659"/>
         <source>Failed to save a copy of the selected sound file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nepodařilo se uložit kopii vybraného zvukového souboru.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="668"/>
         <source>Select Background Image</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vybrat obrázek pozadí</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="669"/>
         <source>Image Files (*.png *.jpg *.jpeg *.bmp *.webp)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Obrázkové soubory (*.png *.jpg *.jpeg *.bmp *.webp)</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="680"/>
         <source>Failed to save a copy of the selected image file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nepodařilo se uložit kopii vybraného obrázkového souboru.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="490"/>
@@ -1073,7 +1084,7 @@ v%1
     <message>
         <location filename="../../src/app/main.cpp" line="68"/>
         <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ukončete prosím starou instanci před spuštěním nové. Pokud již předchozí instance skončila, můžete novou spustit stejně.</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="73"/>
@@ -1083,12 +1094,12 @@ v%1
     <message>
         <location filename="../../src/app/main.cpp" line="75"/>
         <source>Start Anyway</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Spustit přesto</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="82"/>
         <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nelze spustit, protože jiná instance stále běží. Ručně smažte &quot;%1&quot; a zkuste to znovu.</translation>
     </message>
     <message>
         <source>Please quit the old instance before starting a new one.</source>
@@ -1152,7 +1163,7 @@ v%1
         </translation>
     </message>
     <message>
-        <source>You haven&apos;t taken breaks for %1 minutes.</source>
+        <source>You haven't taken breaks for %1 minutes.</source>
         <translation type="obsolete">Nevzali jste přestávku už %1 minut.</translation>
     </message>
     <message numerus="yes">
@@ -1192,12 +1203,17 @@ v%1
     <message>
         <location filename="../../src/app/stats-window.ui" line="39"/>
         <source>Break time: %1 · Avg flash: %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Čas přestávek: %1 · Prům. blikání: %2</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="46"/>
         <source>%1 postponed · %2 force break exits</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 odloženo · %2 nucených ukončení přestávky</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/stats-window.ui" line="53"/>
+        <source>%1 tracked · %2 paused</source>
+        <translation type="unfinished">%1 sledováno · %2 pozastaveno</translation>
     </message>
     <message>
         <source>Today</source>
@@ -1217,9 +1233,8 @@ v%1
         <translation type="obsolete">%1 odloženo</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="53"/>
         <source>Active usage: %1</source>
-        <translation type="unfinished">Aktivní použití: %1</translation>
+        <translation type="obsolete">Aktivní použití: %1</translation>
     </message>
     <message>
         <source>Total usage: %1</source>
@@ -1244,9 +1259,9 @@ v%1
         <translation type="unfinished">%1 min</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="134"/>
+        <location filename="../../src/app/stats-window.cpp" line="138"/>
         <source>%1s</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 s</translation>
     </message>
     <message>
         <source>Breaks: %1 (%2 completed)</source>
@@ -1370,12 +1385,12 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="136"/>
         <source>Exit meeting (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ukončit schůzku (%1)</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="147"/>
         <source>Paused on unknown monitor</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pozastaveno kvůli neznámému monitoru</translation>
     </message>
     <message>
         <source>Meeting until %1</source>

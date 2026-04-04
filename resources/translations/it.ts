@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="it" sourcelanguage="en_US">
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE TS><TS version="2.1" language="it" sourcelanguage="en_US">
 <context>
     <name>AutoStart</name>
     <message>
@@ -12,7 +10,7 @@
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="63"/>
         <source>Failed to read desktop entry packaged with app</source>
-        <translation type="unfinished">Impossibile leggere la voce del desktop inclusa nell&apos;app</translation>
+        <translation type="unfinished">Impossibile leggere la voce del desktop inclusa nell'app</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="77"/>
@@ -20,7 +18,7 @@
         <location filename="../../src/lib/linux/auto-start.cpp" line="93"/>
         <source>Autostart desktop entry not writable</source>
         <extracomment>Error message when failed to write Linux desktop entry for autostart</extracomment>
-        <translation type="unfinished">La voce del desktop per l&apos;avvio automatico non è scrivibile</translation>
+        <translation type="unfinished">La voce del desktop per l'avvio automatico non è scrivibile</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="111"/>
@@ -37,12 +35,12 @@
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="48"/>
         <source>Disallowed by user</source>
-        <translation type="unfinished">Non consentito dall&apos;utente</translation>
+        <translation type="unfinished">Non consentito dall'utente</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="82"/>
         <source>Unknown error in MSIX autostart</source>
-        <translation type="unfinished">Errore sconosciuto nell&apos;avvio automatico MSIX</translation>
+        <translation type="unfinished">Errore sconosciuto nell'avvio automatico MSIX</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="102"/>
@@ -92,32 +90,45 @@
 <context>
     <name>DayTimelineWidget</name>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="49"/>
         <source>Active</source>
-        <translation type="unfinished">Attivo</translation>
+        <translation type="obsolete">Attivo</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="51"/>
         <source>Break</source>
         <translation type="unfinished">Pausa</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="51"/>
         <source>Pause</source>
-        <translation type="unfinished">Pausa</translation>
+        <translation type="obsolete">Pausa</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
+        <source>Tracked</source>
+        <translation type="unfinished">Tracciato</translation>
     </message>
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="53"/>
+        <source>Paused</source>
+        <translation type="unfinished">In pausa</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="54"/>
+        <source>Away</source>
+        <translation type="unfinished">Assente</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="56"/>
         <source>Meeting</source>
         <translation type="unfinished">Riunione</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="54"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="57"/>
         <source>Focus</source>
         <translation type="unfinished">Concentrazione</translation>
     </message>
     <message>
-        <location filename="../../src/app/widgets/timeline-view.cpp" line="56"/>
+        <location filename="../../src/app/widgets/timeline-view.cpp" line="59"/>
         <source>Postpone</source>
         <translation type="unfinished">Posponi</translation>
     </message>
@@ -178,12 +189,12 @@
 <context>
     <name>HeadsUpWindow</name>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="101"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="109"/>
         <source>Break soon</source>
         <translation type="unfinished">Pausa imminente</translation>
     </message>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="110"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="118"/>
         <source>Click to start</source>
         <translation type="unfinished">Clicca per iniziare</translation>
     </message>
@@ -274,7 +285,7 @@
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="151"/>
-        <source>We&apos;ll check in with you before showing a break reminder.</source>
+        <source>We'll check in with you before showing a break reminder.</source>
         <translation type="unfinished">Verificheremo il tuo stato prima di mostrare un promemoria di pausa.</translation>
     </message>
     <message>
@@ -327,13 +338,13 @@
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="187"/>
-        <source>You won&apos;t be able to postpone this break again. It will start automatically at the scheduled time.</source>
-        <translation type="unfinished">Non potrai più rimandare questa pausa. Inizierà automaticamente all&apos;orario previsto.</translation>
+        <source>You won't be able to postpone this break again. It will start automatically at the scheduled time.</source>
+        <translation type="unfinished">Non potrai più rimandare questa pausa. Inizierà automaticamente all'orario previsto.</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="222"/>
         <source>You can still start the break early. If you do, the adjustments above will be recalculated based on the actual time.</source>
-        <translation type="unfinished">Puoi comunque iniziare la pausa in anticipo. In tal caso, le modifiche sopra indicate verranno ricalcolate in base all&apos;orario effettivo.</translation>
+        <translation type="unfinished">Puoi comunque iniziare la pausa in anticipo. In tal caso, le modifiche sopra indicate verranno ricalcolate in base all'orario effettivo.</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="249"/>
@@ -424,7 +435,7 @@
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="934"/>
-        <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
+        <source>After idle for that long during break, Sane Break will keep full screen and there's no way back.</source>
         <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
         <translation type="unfinished">Dopo essere stato inattivo per quel periodo durante la pausa, Sane Break rimarrà a schermo intero e non ci sarà modo di tornare indietro.</translation>
     </message>
@@ -486,7 +497,7 @@
 &lt;p&gt;User interface components to show in the prompt and full-screen window.&lt;/p&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Componenti da mostrare&lt;/h3&gt;
 
-&lt;p&gt;Componenti dell&apos;interfaccia utente da mostrare nel prompt e nella finestra a schermo intero.&lt;/p&gt;</translation>
+&lt;p&gt;Componenti dell'interfaccia utente da mostrare nel prompt e nella finestra a schermo intero.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1223"/>
@@ -567,18 +578,18 @@ Tutti i colori sono in formato &lt;code&gt;#AARRGGBB&lt;/code&gt;.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1989"/>
-        <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
+        <source>Let's say you've configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
         <extracomment>Tooltip for &quot;Auto screen lock&quot; config</extracomment>
-        <translation type="unfinished">Supponiamo che tu l&apos;abbia configurato su 2 minuti. Se la pausa è più breve di 2 minuti,
-lo schermo si bloccherà 2 minuti dopo l&apos;inizio della pausa, a condizione che non ci sia attività dopo la
+        <translation type="unfinished">Supponiamo che tu l'abbia configurato su 2 minuti. Se la pausa è più breve di 2 minuti,
+lo schermo si bloccherà 2 minuti dopo l'inizio della pausa, a condizione che non ci sia attività dopo la
 pausa. Se la pausa è più lunga di 2 minuti, lo schermo verrà bloccato comunque.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1994"/>
         <source>Automatic screen lock after break start</source>
-        <translation>Blocco dello schermo automatico dopo l&apos;inizio della pausa</translation>
+        <translation>Blocco dello schermo automatico dopo l'inizio della pausa</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1940"/>
@@ -736,9 +747,9 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="867"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
-&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
+&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you're idle again or the timer ends.&lt;/p&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Comportamento del promemoria&lt;/h3&gt;
-&lt;p&gt;Sane Break mostra un piccolo prompt per &lt;b&gt;%1&lt;/b&gt; secondi. Se interrompi la tua attività durante quel tempo, o scegli di continuare fino allo scadere del timer, passa alla modalità a schermo intero. Durante la pausa, Sane Break si blocca in modalità schermo intero dopo &lt;b&gt;%2&lt;/b&gt; secondi di inattività. Se riprendi l&apos;attività prima del blocco, il prompt si riduce temporaneamente a una piccola finestra ma ritorna a schermo intero quando sei nuovamente inattivo o il timer termina.&lt;/p&gt;</translation>
+&lt;p&gt;Sane Break mostra un piccolo prompt per &lt;b&gt;%1&lt;/b&gt; secondi. Se interrompi la tua attività durante quel tempo, o scegli di continuare fino allo scadere del timer, passa alla modalità a schermo intero. Durante la pausa, Sane Break si blocca in modalità schermo intero dopo &lt;b&gt;%2&lt;/b&gt; secondi di inattività. Se riprendi l'attività prima del blocco, il prompt si riduce temporaneamente a una piccola finestra ma ritorna a schermo intero quando sei nuovamente inattivo o il timer termina.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="927"/>
@@ -749,18 +760,18 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="992"/>
         <source>Tray icon will start flashing this many seconds before the break. Set to 0 to disable.</source>
         <extracomment>Tooltip for &quot;Flash tray icon before break&quot; config</extracomment>
-        <translation type="unfinished">L&apos;icona nella barra inizierà a lampeggiare questo numero di secondi prima della pausa. Imposta a 0 per disabilitare.</translation>
+        <translation type="unfinished">L'icona nella barra inizierà a lampeggiare questo numero di secondi prima della pausa. Imposta a 0 per disabilitare.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="995"/>
         <source>Flash tray icon before break</source>
-        <translation type="unfinished">Lampeggia l&apos;icona nella barra prima della pausa</translation>
+        <translation type="unfinished">Lampeggia l'icona nella barra prima della pausa</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1022"/>
         <source>Show a small notification this many seconds before the break starts. Click it to start the break early. Set to 0 to disable.</source>
         <extracomment>Tooltip for &quot;Show heads-up before break&quot; config</extracomment>
-        <translation type="unfinished">Mostra una piccola notifica questo numero di secondi prima dell&apos;inizio della pausa. Cliccaci sopra per iniziare la pausa in anticipo. Imposta a 0 per disabilitare.</translation>
+        <translation type="unfinished">Mostra una piccola notifica questo numero di secondi prima dell'inizio della pausa. Cliccaci sopra per iniziare la pausa in anticipo. Imposta a 0 per disabilitare.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1025"/>
@@ -795,7 +806,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1441"/>
         <source>&lt;p&gt;To preview break windows, save all changes first. The preview begins with a 2-second flashing prompt, followed by a 4-second full-screen break. A small break window will appear first, then a big break window.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Per visualizzare in anteprima le finestre di pausa, salva prima tutte le modifiche. L&apos;anteprima inizia con un prompt lampeggiante di 2 secondi, seguito da una pausa a schermo intero di 4 secondi. Apparirà prima una finestra di pausa breve, poi una finestra di pausa lunga.&lt;/p&gt;</translation>
+        <translation type="unfinished">&lt;p&gt;Per visualizzare in anteprima le finestre di pausa, salva prima tutte le modifiche. L'anteprima inizia con un prompt lampeggiante di 2 secondi, seguito da una pausa a schermo intero di 4 secondi. Apparirà prima una finestra di pausa breve, poi una finestra di pausa lunga.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1451"/>
@@ -849,7 +860,7 @@ v%1
 &lt;p&gt;Sane Break regolerà il programma delle pause dopo una pausa:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Se la pausa è breve, Sane Break reimposterà il tempo per la prossima pausa.&lt;/li&gt;
-  &lt;li&gt;Se è più lunga, Sane Break reimposterà l&apos;intero ciclo di pause, e la prossima pausa sarà la prima pausa breve del ciclo.&lt;/li&gt;
+  &lt;li&gt;Se è più lunga, Sane Break reimposterà l'intero ciclo di pause, e la prossima pausa sarà la prima pausa breve del ciclo.&lt;/li&gt;
 &lt;/ul&gt;</translation>
     </message>
     <message>
@@ -889,7 +900,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="2009"/>
         <source>Launch Sane Break at start up</source>
-        <translation type="unfinished">Avvia Sane Break all&apos;avvio</translation>
+        <translation type="unfinished">Avvia Sane Break all'avvio</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="2135"/>
@@ -914,7 +925,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1950"/>
         <source>Change of language will take effect after app restart.</source>
-        <translation>Il cambio della lingua avrà effetto dopo il riavvio dell&apos;app.</translation>
+        <translation>Il cambio della lingua avrà effetto dopo il riavvio dell'app.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="2155"/>
@@ -969,12 +980,12 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.cpp" line="525"/>
         <source>Start next break after middle clicking on tray icon</source>
-        <translation type="unfinished">Inizia la prossima pausa dopo aver fatto clic col tasto centrale sull&apos;icona nella barra</translation>
+        <translation type="unfinished">Inizia la prossima pausa dopo aver fatto clic col tasto centrale sull'icona nella barra</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="530"/>
         <source>Start next break after double clicking on tray icon</source>
-        <translation type="unfinished">Inizia la prossima pausa dopo aver fatto doppio clic sull&apos;icona nella barra</translation>
+        <translation type="unfinished">Inizia la prossima pausa dopo aver fatto doppio clic sull'icona nella barra</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="608"/>
@@ -1048,7 +1059,7 @@ v%1
     <message>
         <location filename="../../src/lib/linux/system-check.cpp" line="59"/>
         <source>Tray icon is not available, falling back to a normal window</source>
-        <translation type="unfinished">L&apos;icona nella barra non è disponibile, ripiego su una normale finestra</translation>
+        <translation type="unfinished">L'icona nella barra non è disponibile, ripiego su una normale finestra</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/system-check.cpp" line="63"/>
@@ -1058,17 +1069,17 @@ v%1
     <message>
         <location filename="../../src/lib/linux/system-check.cpp" line="66"/>
         <source>You need to install the shell extension if you are using GNOME. Otherwise, Sane break is almost unusable</source>
-        <translation type="unfinished">Devi installare l&apos;estensione shell se stai usando GNOME. Altrimenti, Sane Break è quasi inutilizzabile</translation>
+        <translation type="unfinished">Devi installare l'estensione shell se stai usando GNOME. Altrimenti, Sane Break è quasi inutilizzabile</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="67"/>
         <source>Another instance of Sane Break is running.</source>
-        <translation>Un&apos;altra istanza di Sane Break è in esecuzione.</translation>
+        <translation>Un'altra istanza di Sane Break è in esecuzione.</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="68"/>
         <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
-        <translation type="unfinished">Chiudi la vecchia istanza prima di avviarne una nuova. Se l&apos;istanza precedente è già stata chiusa, puoi comunque avviarne una nuova.</translation>
+        <translation type="unfinished">Chiudi la vecchia istanza prima di avviarne una nuova. Se l'istanza precedente è già stata chiusa, puoi comunque avviarne una nuova.</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="73"/>
@@ -1083,7 +1094,7 @@ v%1
     <message>
         <location filename="../../src/app/main.cpp" line="82"/>
         <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
-        <translation type="unfinished">Impossibile avviare perché un&apos;altra istanza è ancora in esecuzione. Elimina manualmente &quot;%1&quot; e riprova.</translation>
+        <translation type="unfinished">Impossibile avviare perché un'altra istanza è ancora in esecuzione. Elimina manualmente &quot;%1&quot; e riprova.</translation>
     </message>
     <message>
         <source>Please quit the old instance before starting a new one.</source>
@@ -1146,7 +1157,7 @@ v%1
         </translation>
     </message>
     <message>
-        <source>You haven&apos;t taken breaks for %1 minutes.</source>
+        <source>You haven't taken breaks for %1 minutes.</source>
         <translation type="vanished">Non hai fatto pause per %1 minuti.</translation>
     </message>
     <message numerus="yes">
@@ -1193,6 +1204,11 @@ v%1
         <translation type="unfinished">%1 rimandate · %2 uscite dalla pausa forzata</translation>
     </message>
     <message>
+        <location filename="../../src/app/stats-window.ui" line="53"/>
+        <source>%1 tracked · %2 paused</source>
+        <translation type="unfinished">%1 tracciati · %2 in pausa</translation>
+    </message>
+    <message>
         <source>Today</source>
         <translation type="obsolete">Oggi</translation>
     </message>
@@ -1210,9 +1226,8 @@ v%1
         <translation type="obsolete">%1 rimandate</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.ui" line="53"/>
         <source>Active usage: %1</source>
-        <translation type="unfinished">Utilizzo attivo: %1</translation>
+        <translation type="obsolete">Utilizzo attivo: %1</translation>
     </message>
     <message>
         <source>Total usage: %1</source>
@@ -1237,7 +1252,7 @@ v%1
         <translation type="unfinished">%1 m</translation>
     </message>
     <message>
-        <location filename="../../src/app/stats-window.cpp" line="134"/>
+        <location filename="../../src/app/stats-window.cpp" line="138"/>
         <source>%1s</source>
         <translation type="unfinished">%1s</translation>
     </message>
@@ -1384,7 +1399,7 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="143"/>
         <source>Paused on app running</source>
-        <translation type="unfinished">In pausa perché un&apos;&apos;app è in esecuzione</translation>
+        <translation type="unfinished">In pausa perché un''app è in esecuzione</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="145"/>
