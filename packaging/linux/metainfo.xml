@@ -56,6 +56,32 @@
   </screenshots>
 
   <releases>
+  <release version="0.10.0" date="2026-04-05">
+    <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.10.0</url>
+    <description>
+      <p>Features</p>
+      <ul>
+        <li>Add a statistics window with recorded break sessions, daily timelines, and weekly browsing</li>
+        <li>Add meeting/presentation Mode to pause reminders until a chosen time</li>
+        <li>Add Focus mode with a separate configurable schedule for deep work sessions</li>
+        <li>Add a heads-up pill before breaks with an option to start the break immediately</li>
+        <li>Rework postponing so it extends the upcoming break and shortens the following work session</li>
+        <li>Expand break window customization with background images, built-in color picking, and configurable tray flashing</li>
+        <li>Pause automatically when an unknown monitor is connected</li>
+      </ul>
+      <p>Other improvements</p>
+      <ul>
+        <li>Allow small breaks only by disabling big breaks</li>
+        <li>Add Ctrl+W to close the Preferences and Statistics windows</li>
+        <li>Add Italian and Swedish translations and broader translation updates</li>
+      </ul>
+      <p>Bug fixes</p>
+      <ul>
+        <li>Fix a crash in WrappedCheckBox::minimumSizeHint</li>
+        <li>Improve GNOME-specific window behavior so break overlays appear more reliably</li>
+      </ul>
+    </description>
+  </release>
   <release version="0.9.5" date="2026-01-03">
     <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.9.5</url>
     <description>
