@@ -264,8 +264,11 @@ void StatusTray::update(TrayData data) {
   icon->setIcon(renderTrayIcon(trayIconSpec(data)));
 
   int flashTrayFor = preferences->flashTrayFor->get();
+  // Do flash in normal mode if flashing is configured and we are in the time range.
+  // We check the remaining seconds to be greater than zero to avoid triggering flash
+  // right before the break, for example wehn Action::BreakNow is fired.
   if (flashTrayFor > 0 && data.secondsToNextBreak <= flashTrayFor &&
-      !data.pauseReasons && !data.isBreaking) {
+      data.secondsToNextBreak > 0 && !data.pauseReasons && !data.isBreaking) {
     if (!flashTimer->isActive()) {
       QTimer::singleShot(500, [this]() {
         icon->setIcon(emptyIconPixmap);
