@@ -25,6 +25,9 @@
   <content_rating type="oars-1.1" />
   <url type="bugtracker">https://github.com/AllanChain/sane-break/issues</url>
   <url type="homepage">https://github.com/AllanChain/sane-break/</url>
+  <url type="translate">https://hosted.weblate.org/engage/sane-break/</url>
+  <url type="donation">https://ko-fi.com/allanchain</url>
+  <url type="vcs-browser">https://github.com/AllanChain/sane-break/</url>
 
 
   <description>
