@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 // See https://doc.qt.io/qt-6/unix-signals.html
@@ -8,6 +8,7 @@
 
 #include <signal.h>
 #include <sys/socket.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 #include <QObject>
@@ -24,7 +25,7 @@ SignalHandler::SignalHandler(QObject* parent) : QObject(parent) {
 
 void SignalHandler::signalHandler(int) {
   char a = 1;
-  ::write(fd[0], &a, sizeof(a));
+  [[maybe_unused]] const ssize_t bytesWritten = ::write(fd[0], &a, sizeof(a));
 }
 
 int SignalHandler::setup() {
@@ -44,7 +45,11 @@ int SignalHandler::setup() {
 void SignalHandler::handleSignal() {
   notifier->setEnabled(false);
   char tmp;
-  ::read(fd[1], &tmp, sizeof(tmp));
+  const ssize_t bytesRead = ::read(fd[1], &tmp, sizeof(tmp));
+  if (bytesRead <= 0) {
+    notifier->setEnabled(true);
+    return;
+  }
 
   emit exitRequested();
 
