@@ -1,4 +1,4 @@
-find_package(Qt6 REQUIRED COMPONENTS Widgets Sql)
+find_package(Qt6 REQUIRED COMPONENTS Widgets Sql Network)
 
 # core/idle-time.h is also used by sane-idle, so we are making it separate
 add_library(sane-core-idle STATIC idle-time.h)
@@ -14,6 +14,10 @@ add_library(
   app-states.h
   app.cpp
   app.h
+  cli.cpp
+  cli.h
+  command-ipc.cpp
+  command-ipc.h
   break-windows.h
   meeting-prompt.h
   flags.h
@@ -24,4 +28,22 @@ add_library(
   system-monitor.h
   timer.h
 )
-target_link_libraries(sane-core PUBLIC Qt6::Widgets Qt6::Sql sane-core-idle)
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+  find_package(CLI11 CONFIG REQUIRED)
+else()
+  include(FetchContent)
+  FetchContent_Declare(
+    cli11_proj
+    QUIET
+    GIT_REPOSITORY https://github.com/CLIUtils/CLI11.git
+    GIT_TAG v2.6.2
+  )
+  FetchContent_MakeAvailable(cli11_proj)
+endif()
+
+target_link_libraries(
+  sane-core
+  PUBLIC Qt6::Widgets Qt6::Sql Qt6::Network sane-core-idle
+  PRIVATE CLI11::CLI11
+)

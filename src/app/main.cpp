@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <QApplication>
+#include <QCommandLineParser>
 #include <QCoreApplication>
 #include <QDialog>
 #include <QDir>
@@ -14,6 +15,7 @@
 #include <QSettings>
 #include <QStandardPaths>
 #include <QSystemTrayIcon>
+#include <QTextStream>
 #include <QThread>
 #include <QTranslator>
 #include <Qt>
@@ -22,6 +24,8 @@
 #include "app/welcome.h"
 #include "app/widgets/language-select.h"
 #include "config.h"
+#include "core/cli.h"
+#include "core/command-ipc.h"
 #include "core/preferences.h"
 
 #ifdef Q_OS_LINUX
@@ -37,13 +41,43 @@ bool waitForTray() {
   return false;
 }
 
+int runCliCommand(int argc, char* argv[], const QStringList& arguments) {
+  QCoreApplication a(argc, argv);
+
+  CliCommandResult result = sendCliCommand(arguments);
+  QTextStream stream(result.ok ? stdout : stderr);
+  stream << result.message << Qt::endl;
+  return result.ok ? 0 : 1;
+}
+
 int main(int argc, char* argv[]) {
   QCoreApplication::setOrganizationName("SaneBreak");
   QCoreApplication::setApplicationName("SaneBreak");
+  QCoreApplication::setApplicationVersion(PROJECT_VERSION);
   QSettings::setDefaultFormat(QSettings::IniFormat);
-  QApplication a(argc, argv);
 
+  QStringList rawArguments;
+  for (int i = 1; i < argc; i++) {
+    rawArguments.append(QString::fromLocal8Bit(argv[i]));
+  }
+
+  if (!shouldLaunchGuiForArguments(rawArguments)) {
+    return runCliCommand(argc, argv, rawArguments);
+  }
+
+  QApplication a(argc, argv);
   a.setApplicationDisplayName("Sane Break");
+
+  QCommandLineParser parser;
+  parser.setApplicationDescription("Sane Break");
+  parser.process(a);
+  if (!parser.positionalArguments().isEmpty()) {
+    QTextStream(stderr) << QCoreApplication::tr("Unexpected GUI argument: %1")
+                               .arg(parser.positionalArguments().first())
+                        << Qt::endl;
+    return 1;
+  }
+
   if (waitForTray()) a.setQuitOnLastWindowClosed(false);
 
   SanePreferences* preferences = SanePreferences::createDefault();
@@ -108,6 +142,12 @@ int main(int argc, char* argv[]) {
   }
 
   SaneBreakApp* app = SaneBreakApp::create(preferences, &a);
+  CliCommandServer commandServer(app);
+  QString commandServerError;
+  if (!commandServer.start(&commandServerError)) {
+    qWarning().noquote() << QCoreApplication::tr("Could not start command server: %1")
+                                .arg(commandServerError);
+  }
 
   app->start();
   return a.exec();

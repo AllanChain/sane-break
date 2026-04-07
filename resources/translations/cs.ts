@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE TS><TS version="2.1" language="cs" sourcelanguage="en_US">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="cs" sourcelanguage="en_US">
 <context>
     <name>AutoStart</name>
     <message>
@@ -85,6 +87,298 @@
         <location filename="../../src/app/break-window.cpp" line="171"/>
         <source>Break has ended</source>
         <translation type="unfinished">Přestávka skončila</translation>
+    </message>
+</context>
+<context>
+    <name>Cli</name>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="77"/>
+        <source>Invalid duration &quot;%1&quot;. Use a positive duration such as 10m, 600s, or 1h.</source>
+        <translation type="unfinished">Neplatná doba trvání &quot;%1&quot;. Použijte kladnou dobu trvání, například 10m, 600s nebo 1h.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="166"/>
+        <source>Mode: %1</source>
+        <translation type="unfinished">Režim: %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="168"/>
+        <source>Next break: %1 in %2</source>
+        <translation type="unfinished">Další přestávka: %1 za %2</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="171"/>
+        <source>Next big break: %1</source>
+        <translation type="unfinished">Další velká přestávka: %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="175"/>
+        <source>Pause reasons: %1</source>
+        <translation type="unfinished">Důvody pozastavení: %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="178"/>
+        <source>Postponing: yes</source>
+        <translation type="unfinished">Odložení: ano</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="180"/>
+        <source>Meeting: %1 remaining</source>
+        <translation type="unfinished">Schůzka: zbývá %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="185"/>
+        <source>Focus: %1/%2 cycles complete</source>
+        <translation type="unfinished">Zaměření: dokončeno %1/%2 cyklů</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="195"/>
+        <source>Show the application version</source>
+        <translation type="unfinished">Zobrazit verzi aplikace</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="200"/>
+        <source>Show this help text</source>
+        <translation type="unfinished">Zobrazit tento text nápovědy</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="257"/>
+        <source>Start the next break immediately</source>
+        <translation type="unfinished">Okamžitě zahájit další přestávku</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="260"/>
+        <source>Start the next big break immediately</source>
+        <translation type="unfinished">Okamžitě zahájit další velkou přestávku</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="263"/>
+        <source>Pause breaks by external control</source>
+        <translation type="unfinished">Pozastavit přestávky pomocí externího ovládání</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="266"/>
+        <source>Resume breaks paused by external control</source>
+        <translation type="unfinished">Obnovit přestávky pozastavené externím ovládáním</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="269"/>
+        <source>Enable breaks by clearing all pause reasons</source>
+        <translation type="unfinished">Povolit přestávky vymazáním všech důvodů pozastavení</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="273"/>
+        <source>Show current break status</source>
+        <translation type="unfinished">Zobrazit aktuální stav přestávky</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="275"/>
+        <source>Output status as JSON</source>
+        <translation type="unfinished">Výstup stavu jako JSON</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="284"/>
+        <source>Manage meeting or presentation mode</source>
+        <translation type="unfinished">Spravovat režim schůzky nebo přednášky</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="289"/>
+        <source>Start meeting mode for a duration</source>
+        <translation type="unfinished">Spustit režim schůzky na určitou dobu</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="292"/>
+        <source>Meeting duration, for example 45m, 2700s, or 1h</source>
+        <translation type="unfinished">Doba trvání schůzky, například 45m, 2700s nebo 1h</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="296"/>
+        <source>Meeting reason</source>
+        <translation type="unfinished">Důvod schůzky</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="299"/>
+        <source>End meeting mode</source>
+        <translation type="unfinished">Ukončit režim schůzky</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="302"/>
+        <source>Start a break immediately</source>
+        <translation type="unfinished">Okamžitě zahájit přestávku</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="305"/>
+        <source>Schedule the next break after this duration</source>
+        <translation type="unfinished">Naplánovat další přestávku po uplynutí této doby</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="310"/>
+        <source>Extend the current meeting</source>
+        <translation type="unfinished">Prodloužit aktuální schůzku</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="314"/>
+        <source>Duration to extend, for example 10m, 600s, or 1h</source>
+        <translation type="unfinished">Doba prodloužení, například 10m, 600s nebo 1h</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="321"/>
+        <source>Manage focus mode</source>
+        <translation type="unfinished">Spravovat režim zaměření</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="326"/>
+        <source>Start focus mode for a duration</source>
+        <translation type="unfinished">Spustit režim zaměření na určitou dobu</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="329"/>
+        <source>Focus duration, for example 50m, 3000s, or 1h</source>
+        <translation type="unfinished">Doba trvání zaměření, například 50m, 3000s nebo 1h</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="333"/>
+        <source>Focus reason</source>
+        <translation type="unfinished">Důvod zaměření</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="336"/>
+        <source>End focus mode</source>
+        <translation type="unfinished">Ukončit režim zaměření</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="340"/>
+        <source>Postpone the next break</source>
+        <translation type="unfinished">Odložit další přestávku</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="344"/>
+        <source>Duration to postpone, for example 10m, 600s, or 1h. Bare numbers are minutes.</source>
+        <translation type="unfinished">Doba odložení, například 10m, 600s nebo 1h. Holá čísla znamenají minuty.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="360"/>
+        <source>Started the next break.</source>
+        <translation type="unfinished">Další přestávka byla zahájena.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="368"/>
+        <source>Started the next big break.</source>
+        <translation type="unfinished">Další velká přestávka byla zahájena.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="376"/>
+        <source>Paused breaks by external control.</source>
+        <translation type="unfinished">Přestávky byly pozastaveny externím ovládáním.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="384"/>
+        <source>Enabled breaks paused by external control.</source>
+        <translation type="unfinished">Přestávky pozastavené externím ovládáním byly povoleny.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="392"/>
+        <source>Enabled breaks.</source>
+        <translation type="unfinished">Přestávky byly povoleny.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="412"/>
+        <source>Meeting mode is already active.</source>
+        <translation type="unfinished">Režim schůzky je již aktivní.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="427"/>
+        <source>Started meeting mode.</source>
+        <translation type="unfinished">Režim schůzky byl spuštěn.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="435"/>
+        <location filename="../../src/core/cli.cpp" line="470"/>
+        <source>Meeting mode is not active.</source>
+        <translation type="unfinished">Režim schůzky není aktivní.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="443"/>
+        <source>Ended meeting mode and started a break.</source>
+        <translation type="unfinished">Režim schůzky byl ukončen a byla zahájena přestávka.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="462"/>
+        <source>Ended meeting mode.</source>
+        <translation type="unfinished">Režim schůzky byl ukončen.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="485"/>
+        <source>Extended meeting mode.</source>
+        <translation type="unfinished">Režim schůzky byl prodloužen.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="494"/>
+        <source>Focus mode is already active.</source>
+        <translation type="unfinished">Režim zaměření je již aktivní.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="500"/>
+        <source>Cannot start focus mode during meeting mode.</source>
+        <translation type="unfinished">Během režimu schůzky nelze spustit režim zaměření.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="519"/>
+        <source>Started focus mode.</source>
+        <translation type="unfinished">Režim zaměření byl spuštěn.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="528"/>
+        <source>Focus mode is not active.</source>
+        <translation type="unfinished">Režim zaměření není aktivní.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="534"/>
+        <source>Cannot end focus mode during a break.</source>
+        <translation type="unfinished">Během přestávky nelze ukončit režim zaměření.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="541"/>
+        <source>Ended focus mode.</source>
+        <translation type="unfinished">Režim zaměření byl ukončen.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="557"/>
+        <source>Postponed the next break.</source>
+        <translation type="unfinished">Další přestávka byla odložena.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="563"/>
+        <source>Expected a command.</source>
+        <translation type="unfinished">Očekáván příkaz.</translation>
+    </message>
+</context>
+<context>
+    <name>CommandIpc</name>
+    <message>
+        <location filename="../../src/core/command-ipc.cpp" line="63"/>
+        <source>Timed out while waiting for a response.</source>
+        <translation type="unfinished">Časový limit vypršel při čekání na odpověď.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/command-ipc.cpp" line="75"/>
+        <source>Received an invalid response from Sane Break.</source>
+        <translation type="unfinished">Přijata neplatná odpověď od Sane Break.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/command-ipc.cpp" line="123"/>
+        <source>No running Sane Break instance is available.</source>
+        <translation type="unfinished">Žádná běžící instance Sane Break není k dispozici.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/command-ipc.cpp" line="132"/>
+        <source>Timed out while sending the command.</source>
+        <translation type="unfinished">Časový limit vypršel při odesílání příkazu.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/command-ipc.cpp" line="184"/>
+        <source>Unsupported command version.</source>
+        <translation type="unfinished">Nepodporovaná verze příkazu.</translation>
     </message>
 </context>
 <context>
@@ -285,7 +579,7 @@
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="151"/>
-        <source>We'll check in with you before showing a break reminder.</source>
+        <source>We&apos;ll check in with you before showing a break reminder.</source>
         <translation type="unfinished">Zkontrolujeme vaši aktivitu před zobrazením připomínky přestávky.</translation>
     </message>
     <message>
@@ -338,7 +632,7 @@
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="187"/>
-        <source>You won't be able to postpone this break again. It will start automatically at the scheduled time.</source>
+        <source>You won&apos;t be able to postpone this break again. It will start automatically at the scheduled time.</source>
         <translation type="unfinished">Tuto přestávku již nelze znovu odložit. Spustí se automaticky v naplánovaný čas.</translation>
     </message>
     <message>
@@ -439,7 +733,7 @@
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="934"/>
-        <source>After idle for that long during break, Sane Break will keep full screen and there's no way back.</source>
+        <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
         <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
         <translation type="unfinished">Po nečinnosti po dobu této délky během přestávky Sane Break zůstane v celoobrazovkovém režimu a nebudete se moci vrátit.</translation>
     </message>
@@ -582,7 +876,7 @@ Všechny barvy jsou ve formátu &lt;code&gt;#AARRGGBB&lt;/code&gt;.</translation
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1989"/>
-        <source>Let's say you've configured it to 2 minutes. If the break is shorter than 2 minutes, the
+        <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
         <extracomment>Tooltip for &quot;Auto screen lock&quot; config</extracomment>
@@ -749,7 +1043,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="867"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
-&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you're idle again or the timer ends.&lt;/p&gt;</source>
+&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Chování připomínky&lt;/h3&gt;
 &lt;p&gt;Sane Break zobrazí malou připomínku po dobu &lt;b&gt;%1&lt;/b&gt; sekund. Pokud přestanete s aktivitou během této doby nebo vyberete pokračování až do vypršení časovače, přepne se do celoobrazovkového režimu. Během přestávky se Sane Break zamkne do celoobrazovkového režimu po &lt;b&gt;%2&lt;/b&gt; sekundách nečinnosti. Pokud obnovíte aktivitu před zamknutím, připomínka se dočasně zmenší na malé okno, ale znovu se rozšíří na celou obrazovku, když opět přestanete být aktivní nebo vyprší časovač.&lt;/p&gt;</translation>
     </message>
@@ -1077,29 +1371,39 @@ v%1
         <translation type="unfinished">Musíte nainstalovat rozšíření shellu, pokud používáte GNOME. Jinak je Sane Break téměř nepoužitelný</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="67"/>
+        <location filename="../../src/app/main.cpp" line="75"/>
+        <source>Unexpected GUI argument: %1</source>
+        <translation type="unfinished">Neočekávaný argument GUI: %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="101"/>
         <source>Another instance of Sane Break is running.</source>
         <translation type="unfinished">Další instance Sane Break běží.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="68"/>
+        <location filename="../../src/app/main.cpp" line="102"/>
         <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
         <translation type="unfinished">Ukončete prosím starou instanci před spuštěním nové. Pokud již předchozí instance skončila, můžete novou spustit stejně.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="73"/>
+        <location filename="../../src/app/main.cpp" line="107"/>
         <source>Quit</source>
         <translation type="unfinished">Ukončit</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="75"/>
+        <location filename="../../src/app/main.cpp" line="109"/>
         <source>Start Anyway</source>
         <translation type="unfinished">Spustit přesto</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="82"/>
+        <location filename="../../src/app/main.cpp" line="116"/>
         <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
         <translation type="unfinished">Nelze spustit, protože jiná instance stále běží. Ručně smažte &quot;%1&quot; a zkuste to znovu.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="148"/>
+        <source>Could not start command server: %1</source>
+        <translation type="unfinished">Nelze spustit server příkazů: %1</translation>
     </message>
     <message>
         <source>Please quit the old instance before starting a new one.</source>
@@ -1163,7 +1467,7 @@ v%1
         </translation>
     </message>
     <message>
-        <source>You haven't taken breaks for %1 minutes.</source>
+        <source>You haven&apos;t taken breaks for %1 minutes.</source>
         <translation type="obsolete">Nevzali jste přestávku už %1 minut.</translation>
     </message>
     <message numerus="yes">
@@ -1304,13 +1608,13 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="126"/>
-        <location filename="../../src/app/tray.cpp" line="151"/>
+        <location filename="../../src/app/tray.cpp" line="153"/>
         <source>big break</source>
         <translation>velká přestávka</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="127"/>
-        <location filename="../../src/app/tray.cpp" line="151"/>
+        <location filename="../../src/app/tray.cpp" line="153"/>
         <source>small break</source>
         <translation>malá přestávka</translation>
     </message>
@@ -1391,6 +1695,11 @@ v%1
         <location filename="../../src/app/tray.cpp" line="147"/>
         <source>Paused on unknown monitor</source>
         <translation type="unfinished">Pozastaveno kvůli neznámému monitoru</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tray.cpp" line="149"/>
+        <source>Paused by external control</source>
+        <translation type="unfinished">Pozastaveno externím ovládáním</translation>
     </message>
     <message>
         <source>Meeting until %1</source>

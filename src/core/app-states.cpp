@@ -30,6 +30,8 @@ QString pauseReasonName(PauseReason reason) {
       return "sleep";
     case PauseReason::UnknownMonitor:
       return "unknown-monitor";
+    case PauseReason::ExternalControl:
+      return "external-control";
   }
   return "unknown";
 }
@@ -38,7 +40,8 @@ QJsonArray pauseReasonsToJson(PauseReasons reasons) {
   QJsonArray reasonNames;
   for (PauseReason reason :
        {PauseReason::Idle, PauseReason::OnBattery, PauseReason::AppOpen,
-        PauseReason::Sleep, PauseReason::UnknownMonitor}) {
+        PauseReason::Sleep, PauseReason::UnknownMonitor,
+        PauseReason::ExternalControl}) {
     if (reasons.testFlag(reason)) reasonNames.append(pauseReasonName(reason));
   }
   return reasonNames;
