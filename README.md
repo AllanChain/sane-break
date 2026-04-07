@@ -180,7 +180,7 @@ yay -S sane-break
 
 If you want to build it manually, make sure the following packages are installed:
 ```bash
-yay -S qt6-base qt6-multimedia
+yay -S qt6-base qt6-multimedia cli11
 yay -S libxss # X support
 yay -S layer-shell-qt # Wayland support
 ```
@@ -191,7 +191,7 @@ If you want to enable just X11 or Wayland support, you are strongly encouraged t
 
 For KDE users (e.g. KDE Neon), just install
 ```bash
-apt install qt6-base-dev qt6-multimedia-dev
+apt install qt6-base-dev qt6-multimedia-dev libcli11-dev
 apt install libxss-dev # X support
 apt install qt6-wayland-dev liblayershellqtinterface-dev # Wayland support
 ```
@@ -203,7 +203,7 @@ For GNOME users, `liblayershellqtinterface-dev` is optional, and please make sur
 For Guix (see also [#23](https://github.com/AllanChain/sane-break/issues/23)):
 ```bash
 guix shell --container make cmake gcc-toolchain pkg-config vulkan-headers \
-  qtbase@6 qtmultimedia \
+  qtbase@6 qtmultimedia cli11 \
   libxkbcommon libxscrnsaver libx11 \  # X support
   layer-shell-qt qtwayland@6 wayland   # Wayland support
 ```

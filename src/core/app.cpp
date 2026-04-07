@@ -90,7 +90,9 @@ void AbstractApp::start() {
   m_systemMonitor->start();
 }
 
-void AbstractApp::updateTray() {
+void AbstractApp::updateTray() { emit trayDataUpdated(trayDataSnapshot()); }
+
+TrayData AbstractApp::trayDataSnapshot() const {
   BreakConfig config = data->currentBreakConfig();
   bool bigEnabled = config.bigEnabled;
   int secondsFromLastBreakToNext = config.smallEvery;
@@ -116,13 +118,19 @@ void AbstractApp::updateTray() {
       .focusCyclesRemaining = data->focus().cyclesRemaining(),
       .focusTotalCycles = data->focus().totalCycles(),
   };
-  emit trayDataUpdated(trayData);
+  return trayData;
 }
 
 void AbstractApp::breakNow() { onMenuAction(Action::BreakNow{}); }
 void AbstractApp::bigBreakNow() { onMenuAction(Action::BigBreakNow{}); }
 void AbstractApp::enableBreak() { onMenuAction(Action::EnableBreaks{}); }
 void AbstractApp::smallBreakInstead() { onMenuAction(Action::SmallBreakInstead{}); }
+void AbstractApp::pauseByExternalControl() {
+  onPauseRequest(PauseReason::ExternalControl);
+}
+void AbstractApp::resumeFromExternalControl() {
+  onResumeRequest(PauseReason::ExternalControl);
+}
 
 void AbstractApp::startFocus(int totalCycles, const QString& reason) {
   if (data->focus().isActive() || m_currentState->getID() == AppState::Meeting) return;

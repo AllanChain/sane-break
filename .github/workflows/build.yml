@@ -31,7 +31,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y libgmock-dev libgl1-mesa-dev
+        sudo apt install -y libcli11-dev libgmock-dev libgl1-mesa-dev
 
     - name: Install Qt
       uses: jurplel/install-qt-action@v4
@@ -211,7 +211,7 @@ jobs:
     - name: Install dependencies
       run: |
         apt-get update
-        apt-get install -y nodejs g++ cmake libxss-dev \
+        apt-get install -y nodejs g++ cmake libcli11-dev libxss-dev \
           qt6-base-dev qt6-multimedia-dev qt6-tools-dev \
           qt6-wayland-dev qt6-wayland qt6-base-private-dev
 
@@ -255,7 +255,7 @@ jobs:
     - name: Install Wayland & X11
       run: |
         sudo apt update
-        sudo apt install -y libwayland-dev wayland-protocols libxss-dev
+        sudo apt install -y libcli11-dev libwayland-dev wayland-protocols libxss-dev
 
     - name: Install Qt
       uses: jurplel/install-qt-action@v4

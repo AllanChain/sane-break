@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE TS><TS version="2.1" language="es" sourcelanguage="en_US">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="es" sourcelanguage="en_US">
 <context>
     <name>AutoStart</name>
     <message>
@@ -101,6 +103,298 @@
         <location filename="../../src/app/break-window.cpp" line="171"/>
         <source>Break has ended</source>
         <translation>El descanso ha terminado</translation>
+    </message>
+</context>
+<context>
+    <name>Cli</name>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="77"/>
+        <source>Invalid duration &quot;%1&quot;. Use a positive duration such as 10m, 600s, or 1h.</source>
+        <translation type="unfinished">Duración no válida «%1». Usa una duración positiva como 10m, 600s o 1h.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="166"/>
+        <source>Mode: %1</source>
+        <translation type="unfinished">Modo: %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="168"/>
+        <source>Next break: %1 in %2</source>
+        <translation type="unfinished">Siguiente descanso: %1 en %2</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="171"/>
+        <source>Next big break: %1</source>
+        <translation type="unfinished">Siguiente descanso largo: %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="175"/>
+        <source>Pause reasons: %1</source>
+        <translation type="unfinished">Motivos de la pausa: %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="178"/>
+        <source>Postponing: yes</source>
+        <translation type="unfinished">Posponiendo: sí</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="180"/>
+        <source>Meeting: %1 remaining</source>
+        <translation type="unfinished">Reunión: %1 restantes</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="185"/>
+        <source>Focus: %1/%2 cycles complete</source>
+        <translation type="unfinished">Enfoque: %1/%2 ciclos completados</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="195"/>
+        <source>Show the application version</source>
+        <translation type="unfinished">Mostrar la versión de la aplicación</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="200"/>
+        <source>Show this help text</source>
+        <translation type="unfinished">Mostrar este texto de ayuda</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="257"/>
+        <source>Start the next break immediately</source>
+        <translation type="unfinished">Iniciar el siguiente descanso inmediatamente</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="260"/>
+        <source>Start the next big break immediately</source>
+        <translation type="unfinished">Iniciar el siguiente descanso largo inmediatamente</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="263"/>
+        <source>Pause breaks by external control</source>
+        <translation type="unfinished">Pausar los descansos mediante control externo</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="266"/>
+        <source>Resume breaks paused by external control</source>
+        <translation type="unfinished">Reanudar los descansos pausados por control externo</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="269"/>
+        <source>Enable breaks by clearing all pause reasons</source>
+        <translation type="unfinished">Activar los descansos eliminando todos los motivos de pausa</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="273"/>
+        <source>Show current break status</source>
+        <translation type="unfinished">Mostrar el estado actual del descanso</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="275"/>
+        <source>Output status as JSON</source>
+        <translation type="unfinished">Mostrar el estado en formato JSON</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="284"/>
+        <source>Manage meeting or presentation mode</source>
+        <translation type="unfinished">Gestionar el modo de reunión o presentación</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="289"/>
+        <source>Start meeting mode for a duration</source>
+        <translation type="unfinished">Iniciar el modo de reunión durante un periodo</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="292"/>
+        <source>Meeting duration, for example 45m, 2700s, or 1h</source>
+        <translation type="unfinished">Duración de la reunión, por ejemplo 45m, 2700s o 1h</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="296"/>
+        <source>Meeting reason</source>
+        <translation type="unfinished">Motivo de la reunión</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="299"/>
+        <source>End meeting mode</source>
+        <translation type="unfinished">Finalizar el modo de reunión</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="302"/>
+        <source>Start a break immediately</source>
+        <translation type="unfinished">Iniciar un descanso inmediatamente</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="305"/>
+        <source>Schedule the next break after this duration</source>
+        <translation type="unfinished">Programar el siguiente descanso tras este periodo</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="310"/>
+        <source>Extend the current meeting</source>
+        <translation type="unfinished">Ampliar la reunión actual</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="314"/>
+        <source>Duration to extend, for example 10m, 600s, or 1h</source>
+        <translation type="unfinished">Duración de la ampliación, por ejemplo 10m, 600s o 1h</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="321"/>
+        <source>Manage focus mode</source>
+        <translation type="unfinished">Gestionar el modo de enfoque</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="326"/>
+        <source>Start focus mode for a duration</source>
+        <translation type="unfinished">Iniciar el modo de enfoque durante un periodo</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="329"/>
+        <source>Focus duration, for example 50m, 3000s, or 1h</source>
+        <translation type="unfinished">Duración del enfoque, por ejemplo 50m, 3000s o 1h</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="333"/>
+        <source>Focus reason</source>
+        <translation type="unfinished">Motivo del enfoque</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="336"/>
+        <source>End focus mode</source>
+        <translation type="unfinished">Finalizar el modo de enfoque</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="340"/>
+        <source>Postpone the next break</source>
+        <translation type="unfinished">Posponer el siguiente descanso</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="344"/>
+        <source>Duration to postpone, for example 10m, 600s, or 1h. Bare numbers are minutes.</source>
+        <translation type="unfinished">Duración a posponer, por ejemplo 10m, 600s o 1h. Los números solos se interpretan como minutos.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="360"/>
+        <source>Started the next break.</source>
+        <translation type="unfinished">Se ha iniciado el siguiente descanso.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="368"/>
+        <source>Started the next big break.</source>
+        <translation type="unfinished">Se ha iniciado el siguiente descanso largo.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="376"/>
+        <source>Paused breaks by external control.</source>
+        <translation type="unfinished">Descansos pausados por control externo.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="384"/>
+        <source>Enabled breaks paused by external control.</source>
+        <translation type="unfinished">Descansos reactivados tras haber sido pausados por control externo.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="392"/>
+        <source>Enabled breaks.</source>
+        <translation type="unfinished">Descansos activados.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="412"/>
+        <source>Meeting mode is already active.</source>
+        <translation type="unfinished">El modo de reunión ya está activo.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="427"/>
+        <source>Started meeting mode.</source>
+        <translation type="unfinished">Se ha iniciado el modo de reunión.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="435"/>
+        <location filename="../../src/core/cli.cpp" line="470"/>
+        <source>Meeting mode is not active.</source>
+        <translation type="unfinished">El modo de reunión no está activo.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="443"/>
+        <source>Ended meeting mode and started a break.</source>
+        <translation type="unfinished">Se ha finalizado el modo de reunión y se ha iniciado un descanso.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="462"/>
+        <source>Ended meeting mode.</source>
+        <translation type="unfinished">Se ha finalizado el modo de reunión.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="485"/>
+        <source>Extended meeting mode.</source>
+        <translation type="unfinished">Se ha ampliado el modo de reunión.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="494"/>
+        <source>Focus mode is already active.</source>
+        <translation type="unfinished">El modo de enfoque ya está activo.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="500"/>
+        <source>Cannot start focus mode during meeting mode.</source>
+        <translation type="unfinished">No se puede iniciar el modo de enfoque durante el modo de reunión.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="519"/>
+        <source>Started focus mode.</source>
+        <translation type="unfinished">Se ha iniciado el modo de enfoque.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="528"/>
+        <source>Focus mode is not active.</source>
+        <translation type="unfinished">El modo de enfoque no está activo.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="534"/>
+        <source>Cannot end focus mode during a break.</source>
+        <translation type="unfinished">No se puede finalizar el modo de enfoque durante un descanso.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="541"/>
+        <source>Ended focus mode.</source>
+        <translation type="unfinished">Se ha finalizado el modo de enfoque.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="557"/>
+        <source>Postponed the next break.</source>
+        <translation type="unfinished">Se ha pospuesto el siguiente descanso.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/cli.cpp" line="563"/>
+        <source>Expected a command.</source>
+        <translation type="unfinished">Se esperaba un comando.</translation>
+    </message>
+</context>
+<context>
+    <name>CommandIpc</name>
+    <message>
+        <location filename="../../src/core/command-ipc.cpp" line="63"/>
+        <source>Timed out while waiting for a response.</source>
+        <translation type="unfinished">Se agotó el tiempo de espera para recibir una respuesta.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/command-ipc.cpp" line="75"/>
+        <source>Received an invalid response from Sane Break.</source>
+        <translation type="unfinished">Se recibió una respuesta no válida de Sane Break.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/command-ipc.cpp" line="123"/>
+        <source>No running Sane Break instance is available.</source>
+        <translation type="unfinished">No hay ninguna instancia de Sane Break en ejecución disponible.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/command-ipc.cpp" line="132"/>
+        <source>Timed out while sending the command.</source>
+        <translation type="unfinished">Se agotó el tiempo de espera al enviar el comando.</translation>
+    </message>
+    <message>
+        <location filename="../../src/core/command-ipc.cpp" line="184"/>
+        <source>Unsupported command version.</source>
+        <translation type="unfinished">Versión de comando no compatible.</translation>
     </message>
 </context>
 <context>
@@ -301,7 +595,7 @@
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="151"/>
-        <source>We'll check in with you before showing a break reminder.</source>
+        <source>We&apos;ll check in with you before showing a break reminder.</source>
         <translation type="unfinished">Te consultaremos antes de mostrar un recordatorio de descanso.</translation>
     </message>
     <message>
@@ -354,7 +648,7 @@
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="187"/>
-        <source>You won't be able to postpone this break again. It will start automatically at the scheduled time.</source>
+        <source>You won&apos;t be able to postpone this break again. It will start automatically at the scheduled time.</source>
         <translation type="unfinished">No podrás posponer este descanso nuevamente. Comenzará automáticamente a la hora programada.</translation>
     </message>
     <message>
@@ -455,7 +749,7 @@
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="934"/>
-        <source>After idle for that long during break, Sane Break will keep full screen and there's no way back.</source>
+        <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
         <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
         <translation>Tras este periodo de inactividad durante el descanso, Sane Break se mantendrá en pantalla completa sin opción a volver atrás.</translation>
     </message>
@@ -592,7 +886,7 @@ Todos los colores están en formato &lt;code&gt;#AARRGGBB&lt;/code&gt;.</transla
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1989"/>
-        <source>Let's say you've configured it to 2 minutes. If the break is shorter than 2 minutes, the
+        <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
         <extracomment>Tooltip for &quot;Auto screen lock&quot; config</extracomment>
@@ -785,7 +1079,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="867"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
-&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you're idle again or the timer ends.&lt;/p&gt;</source>
+&lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Funcionamiento del recordatorio&lt;/h3&gt;
 &lt;p&gt;Sane Break muestra un pequeño aviso durante &lt;b&gt;%1&lt;/b&gt; segundos. Si detienes tu actividad durante ese tiempo o decides continuar hasta que el contador llegue a cero, el aviso se expandirá a pantalla completa. Durante el descanso, Sane Break bloquea la pantalla completa tras &lt;b&gt;%2&lt;/b&gt; segundos de inactividad. Si retomas la actividad antes del bloqueo, el aviso se empequeñecerá temporalmente, pero volverá a expandirse cuando vuelvas a estar inactivo o el contador llegue a cero.&lt;/p&gt;</translation>
     </message>
@@ -1124,29 +1418,39 @@ v%1
         <translation>Si estás usando GNOME, debes instalar la extensión &quot;shell&quot;. De lo contrario Sane Break será prácticamente inservible</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="67"/>
+        <location filename="../../src/app/main.cpp" line="75"/>
+        <source>Unexpected GUI argument: %1</source>
+        <translation type="unfinished">Argumento de interfaz gráfica inesperado: %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="101"/>
         <source>Another instance of Sane Break is running.</source>
         <translation>Sane Break ya se está ejecutando en otra instancia.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="68"/>
+        <location filename="../../src/app/main.cpp" line="102"/>
         <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
         <translation type="unfinished">Cierra la instancia anterior antes de iniciar una nueva. Si la instancia anterior ya ha terminado, puedes iniciar una nueva de todos modos.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="73"/>
+        <location filename="../../src/app/main.cpp" line="107"/>
         <source>Quit</source>
         <translation type="unfinished">Cerrar</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="75"/>
+        <location filename="../../src/app/main.cpp" line="109"/>
         <source>Start Anyway</source>
         <translation type="unfinished">Iniciar de todos modos</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="82"/>
+        <location filename="../../src/app/main.cpp" line="116"/>
         <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
         <translation type="unfinished">No se pudo iniciar porque otra instancia todavía se está ejecutando. Por favor, elimina manualmente &quot;%1&quot; e inténtalo de nuevo.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/main.cpp" line="148"/>
+        <source>Could not start command server: %1</source>
+        <translation type="unfinished">No se pudo iniciar el servidor de comandos: %1</translation>
     </message>
     <message>
         <source>Please quit the old instance before starting a new one.</source>
@@ -1209,7 +1513,7 @@ v%1
         </translation>
     </message>
     <message>
-        <source>You haven't taken breaks for %1 minutes.</source>
+        <source>You haven&apos;t taken breaks for %1 minutes.</source>
         <translation type="vanished">No te has tomado ningún descanso en %1 minutos.</translation>
     </message>
     <message numerus="yes">
@@ -1348,13 +1652,13 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="126"/>
-        <location filename="../../src/app/tray.cpp" line="151"/>
+        <location filename="../../src/app/tray.cpp" line="153"/>
         <source>big break</source>
         <translation>descanso largo</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="127"/>
-        <location filename="../../src/app/tray.cpp" line="151"/>
+        <location filename="../../src/app/tray.cpp" line="153"/>
         <source>small break</source>
         <translation>descanso breve</translation>
     </message>
@@ -1433,6 +1737,11 @@ v%1
         <location filename="../../src/app/tray.cpp" line="147"/>
         <source>Paused on unknown monitor</source>
         <translation type="unfinished">Pausado por monitor desconocido</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tray.cpp" line="149"/>
+        <source>Paused by external control</source>
+        <translation type="unfinished">Pausado por control externo</translation>
     </message>
     <message>
         <source>Meeting until %1</source>

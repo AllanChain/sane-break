@@ -59,6 +59,8 @@ class AbstractApp : public AppContext {
   void smallBreakInstead();
   void postpone(int seconds);
   void enableBreak();
+  void pauseByExternalControl();
+  void resumeFromExternalControl();
 
   void startMeeting(int seconds, const QString& reason);
   void endMeetingBreakNow();
@@ -67,6 +69,8 @@ class AbstractApp : public AppContext {
 
   void startFocus(int totalCycles, const QString& reason);
   void endFocus();
+
+  TrayData trayDataSnapshot() const;
 
  signals:
   void trayDataUpdated(TrayData);
