@@ -27,7 +27,7 @@ class BreakReminder;
 
 class BreakWindow : public QMainWindow {
   Q_OBJECT
-  Q_PROPERTY(QColor color MEMBER backgroundColor NOTIFY colorChanged)
+  Q_PROPERTY(QColor color READ color WRITE setColor)
 
  public:
   BreakWindow(BreakWindowData data, QWidget* parent = nullptr);
@@ -42,7 +42,8 @@ class BreakWindow : public QMainWindow {
   void showButtons(AbstractBreakWindows::Buttons buttons, bool show = true);
 
   void initSize(QScreen* screen);
-  void colorChanged();
+  QColor color() const;
+  void setColor(const QColor& color);
 
  signals:
   void lockScreenRequested();
@@ -54,7 +55,7 @@ class BreakWindow : public QMainWindow {
   QColor backgroundColor;
   BreakWindowData m_data;
   QPropertyAnimation* m_progressAnim;
-  QAbstractAnimation* m_bgAnim;
+  QAbstractAnimation* m_bgAnim = nullptr;
   QLabel* m_bgImageLabel = nullptr;
   QGraphicsOpacityEffect* m_bgImageOpacity = nullptr;
   bool m_waylandWorkaround = false;

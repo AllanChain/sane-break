@@ -112,8 +112,12 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget* parent)
   m_progressAnim->setDuration(m_totalSeconds * 1000);
   m_progressAnim->start();
 
-  auto* bgAnimGroup = new QSequentialAnimationGroup(this);
   int baseDuration = data.theme.flashAnimationDuration;
+  if (baseDuration <= 0) {
+    setColor(data.theme.mainBackground);
+    return;
+  }
+  auto* bgAnimGroup = new QSequentialAnimationGroup(this);
   int flashCount = std::max({2, 10000 / baseDuration});
 
   // Flash burst
@@ -149,7 +153,11 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget* parent)
   m_bgAnim->start();
 }
 
-void BreakWindow::colorChanged() {
+QColor BreakWindow::color() const { return backgroundColor; }
+
+void BreakWindow::setColor(const QColor& color) {
+  if (backgroundColor == color) return;
+  backgroundColor = color;
   setStyleSheet(QString("BreakWindow, BreakWindow #BreakReminder { background: "
                         "rgba(%1, %2, %3, %4); }")
                     .arg(backgroundColor.red())
@@ -191,7 +199,7 @@ void BreakWindow::showFullScreen() {
     // Instead, we just change the flags of QWindow
     windowHandle()->setFlag(Qt::WindowTransparentForInput, false);
   }
-  m_bgAnim->stop();
+  if (m_bgAnim) m_bgAnim->stop();
   setProperty("color", m_data.theme.mainBackground);
 
   ui->breakLabel->setText(m_data.message.fullScreen);
@@ -237,7 +245,11 @@ void BreakWindow::showFlashPrompt() {
     fadeOut->start(QPropertyAnimation::DeleteWhenStopped);
     connect(fadeOut, &QPropertyAnimation::finished, m_bgImageLabel, &QLabel::hide);
   }
-  m_bgAnim->start();
+  if (m_bgAnim) {
+    m_bgAnim->start();
+  } else {
+    setColor(m_data.theme.mainBackground);
+  }
 
   ui->breakLabel->setText(m_data.message.prompt);
   if (!m_data.show.prograssBar) {

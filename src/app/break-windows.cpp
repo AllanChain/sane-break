@@ -61,6 +61,8 @@ BreakWindows::BreakWindows(QObject* parent) : AbstractBreakWindows(parent) {
 
 BreakWindowData BreakWindows::createData(BreakType type, SanePreferences* preferences,
                                          int breakDuration, bool isPostponed) {
+  int flashSpeed = preferences->flashSpeed->get();
+  int flashAnimationDuration = flashSpeed > 0 ? 60000 / flashSpeed : 0;
   QString promptMessage = type == BreakType::Big
                               ? preferences->bigMessages->defaultValue()[0]
                               : preferences->smallMessages->defaultValue()[0];
@@ -83,7 +85,7 @@ BreakWindowData BreakWindows::createData(BreakType type, SanePreferences* prefer
                 .highlightBackground = preferences->smallHighlightColor->get(),
                 .messageColor = preferences->messageColor->get(),
                 .countDownColor = preferences->countDownColor->get(),
-                .flashAnimationDuration = 60000 / preferences->flashSpeed->get(),
+                .flashAnimationDuration = flashAnimationDuration,
                 .backgroundImage = preferences->backgroundImage->get(),
             },
         .show =
@@ -107,7 +109,7 @@ BreakWindowData BreakWindows::createData(BreakType type, SanePreferences* prefer
                 .highlightBackground = preferences->bigHighlightColor->get(),
                 .messageColor = preferences->messageColor->get(),
                 .countDownColor = preferences->countDownColor->get(),
-                .flashAnimationDuration = 60000 / preferences->flashSpeed->get(),
+                .flashAnimationDuration = flashAnimationDuration,
                 .backgroundImage = preferences->backgroundImage->get(),
             },
         .show =
