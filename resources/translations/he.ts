@@ -79,12 +79,12 @@
 <context>
     <name>BreakWindow</name>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="169"/>
+        <location filename="../../src/app/break-window.cpp" line="177"/>
         <source>Break will end at: %1</source>
         <translation type="unfinished">ההפסקה תסתיים ב: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="171"/>
+        <location filename="../../src/app/break-window.cpp" line="179"/>
         <source>Break has ended</source>
         <translation type="unfinished">ההפסקה הסתיימה</translation>
     </message>
@@ -445,39 +445,57 @@
         <translation type="unfinished">תאר בקצרה על מה אתה עובד:</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="55"/>
+        <location filename="../../src/app/focus-window.ui" line="40"/>
+        <source>Enter at least 6 characters.</source>
+        <translation type="unfinished">יש להזין לפחות 6 תווים.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.ui" line="68"/>
         <source>Focus duration</source>
         <translation type="unfinished">משך זמן הריכוז</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="62"/>
+        <location filename="../../src/app/focus-window.ui" line="75"/>
         <source> min</source>
         <translation type="unfinished">דקה</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="125"/>
+        <location filename="../../src/app/focus-window.ui" line="138"/>
         <source>The break schedule will be temporarily switched to:</source>
         <translation type="unfinished">לוח הזמנים להפסקות ישתנה באופן זמני ל:</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="142"/>
+        <location filename="../../src/app/focus-window.ui" line="155"/>
         <source>A &lt;b&gt;%1&lt;/b&gt; seconds small break every &lt;b&gt;%2&lt;/b&gt; minutes</source>
         <translation type="unfinished">הפסקה קטנה של &lt;b&gt;%1&lt;/b&gt; שניות כל &lt;b&gt;%2&lt;/b&gt; דקות</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="159"/>
+        <location filename="../../src/app/focus-window.ui" line="172"/>
         <source>1 in every &lt;b&gt;%2&lt;/b&gt; breaks is a &lt;b&gt;%1&lt;/b&gt; seconds big break</source>
         <translation type="unfinished">אחת מכל &lt;b&gt;%2&lt;/b&gt; הפסקות היא הפסקה גדולה של &lt;b&gt;%1&lt;/b&gt; שניות</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="188"/>
+        <location filename="../../src/app/focus-window.ui" line="201"/>
         <source>Cancel</source>
         <translation type="unfinished">ביטול</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="201"/>
+        <location filename="../../src/app/focus-window.ui" line="214"/>
         <source>Take a %1 second break to enter focus mode</source>
         <translation type="unfinished">קח הפסקה של %1 שניות כדי להיכנס למצב ריכוז</translation>
+    </message>
+</context>
+<context>
+    <name>FocusWindow</name>
+    <message>
+        <location filename="../../src/app/focus-window.cpp" line="81"/>
+        <source>Enter at least %1 characters.</source>
+        <translation type="unfinished">יש להזין לפחות %1 תווים.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.cpp" line="87"/>
+        <source>Add a little more detail.</source>
+        <translation type="unfinished">הוסף מעט יותר פרטים.</translation>
     </message>
 </context>
 <context>
@@ -568,29 +586,57 @@
         <translation type="unfinished">תאר בקצרה את הפגישה/ההצגה הזו:</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="55"/>
+        <location filename="../../src/app/meeting-window.ui" line="40"/>
+        <source>Enter at least 6 characters.</source>
+        <translation type="unfinished">יש להזין לפחות 6 תווים.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.ui" line="68"/>
         <source>It will end at</source>
         <translation type="unfinished">הוא יסתיים ב</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="116"/>
+        <location filename="../../src/app/meeting-window.ui" line="129"/>
         <source>No break reminders will show before &lt;b&gt;%1&lt;/b&gt;</source>
         <translation type="unfinished">אין תזכורות להפסקות שיופיעו לפני &lt;b&gt;%1&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="151"/>
+        <location filename="../../src/app/meeting-window.ui" line="164"/>
         <source>We&apos;ll check in with you before showing a break reminder.</source>
         <translation type="unfinished">נבדוק את מצבך לפני הצגת תזכורת להפסקה.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="178"/>
+        <location filename="../../src/app/meeting-window.ui" line="191"/>
         <source>Cancel</source>
         <translation type="unfinished">ביטול</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="191"/>
+        <location filename="../../src/app/meeting-window.ui" line="204"/>
         <source>Enter Meeting/Presentation Mode</source>
         <translation type="unfinished">הכנס למצב פגישה/הצגה</translation>
+    </message>
+</context>
+<context>
+    <name>MeetingWindow</name>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="58"/>
+        <source>Choose a future end time and enter at least %1 characters.</source>
+        <translation type="unfinished">בחר זמן סיום עתידי והזן לפחות %1 תווים.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="65"/>
+        <source>Choose an end time later than now.</source>
+        <translation type="unfinished">בחר זמן סיום מאוחר יותר מהזמן הנוכחי.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="72"/>
+        <source>Enter at least %1 characters.</source>
+        <translation type="unfinished">יש להזין לפחות %1 תווים.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="78"/>
+        <source>Add a little more detail.</source>
+        <translation type="unfinished">הוסף מעט יותר פרטים.</translation>
     </message>
 </context>
 <context>

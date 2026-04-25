@@ -14,6 +14,12 @@
 #include "core/preferences.h"
 #include "ui_focus-window.h"
 
+namespace {
+constexpr int kMinReasonLength = 6;
+constexpr auto kHelperTextStyle = "color: #6b7280;";
+constexpr auto kErrorTextStyle = "color: #ef4444;";
+}  // namespace
+
 FocusWindow::FocusWindow(SanePreferences* preferences, QWidget* parent)
     : QDialog(parent), ui(new Ui::FocusUI), preferences(preferences) {
   ui->setupUi(this);
@@ -35,8 +41,9 @@ FocusWindow::FocusWindow(SanePreferences* preferences, QWidget* parent)
   connect(this, &QDialog::accepted, this, [this]() {
     int focusSmallEvery = this->preferences->focusSmallEvery->get();
     int totalCycles = ui->spinBox->value() * 60 / focusSmallEvery;
-    emit focusRequested(totalCycles, ui->reasonEdit->text());
+    emit focusRequested(totalCycles, ui->reasonEdit->text().trimmed());
   });
+  onInputUpdate();
 }
 
 void FocusWindow::updateTextFromPreferences() {
@@ -62,5 +69,25 @@ void FocusWindow::updateTextFromPreferences() {
 }
 
 void FocusWindow::onInputUpdate() {
-  ui->confirmButton->setEnabled(ui->reasonEdit->text().length() > 5);
+  QString reason = ui->reasonEdit->text().trimmed();
+  int remainingChars = kMinReasonLength - reason.length();
+  bool hasLongEnoughReason = remainingChars <= 0;
+
+  ui->confirmButton->setEnabled(hasLongEnoughReason);
+
+  if (reason.isEmpty()) {
+    ui->reasonHelpLabel->setStyleSheet(kHelperTextStyle);
+    ui->reasonHelpLabel->setText(
+        tr("Enter at least %1 characters.").arg(kMinReasonLength));
+    return;
+  }
+
+  if (!hasLongEnoughReason) {
+    ui->reasonHelpLabel->setStyleSheet(kErrorTextStyle);
+    ui->reasonHelpLabel->setText(tr("Add a little more detail."));
+    return;
+  }
+
+  ui->reasonHelpLabel->setStyleSheet(kHelperTextStyle);
+  ui->reasonHelpLabel->setText(" ");
 }

@@ -91,12 +91,12 @@
         <translation type="vanished">Il est temps de faire une petite pause</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="169"/>
+        <location filename="../../src/app/break-window.cpp" line="177"/>
         <source>Break will end at: %1</source>
         <translation>La pause prendra fin à&#xa0;: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="171"/>
+        <location filename="../../src/app/break-window.cpp" line="179"/>
         <source>Break has ended</source>
         <translation>La pause est terminée</translation>
     </message>
@@ -457,39 +457,57 @@
         <translation type="unfinished">Décrivez brièvement ce sur quoi vous travaillez :</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="55"/>
+        <location filename="../../src/app/focus-window.ui" line="40"/>
+        <source>Enter at least 6 characters.</source>
+        <translation type="unfinished">Saisissez au moins 6 caractères.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.ui" line="68"/>
         <source>Focus duration</source>
         <translation type="unfinished">Durée du mode concentration</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="62"/>
+        <location filename="../../src/app/focus-window.ui" line="75"/>
         <source> min</source>
         <translation type="unfinished"> min</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="125"/>
+        <location filename="../../src/app/focus-window.ui" line="138"/>
         <source>The break schedule will be temporarily switched to:</source>
         <translation type="unfinished">Le programme des pauses sera temporairement modifié comme suit&#xa0;:</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="142"/>
+        <location filename="../../src/app/focus-window.ui" line="155"/>
         <source>A &lt;b&gt;%1&lt;/b&gt; seconds small break every &lt;b&gt;%2&lt;/b&gt; minutes</source>
         <translation type="unfinished">Une petite pause de &lt;b&gt;%1&lt;/b&gt; secondes toutes les &lt;b&gt;%2&lt;/b&gt; minutes</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="159"/>
+        <location filename="../../src/app/focus-window.ui" line="172"/>
         <source>1 in every &lt;b&gt;%2&lt;/b&gt; breaks is a &lt;b&gt;%1&lt;/b&gt; seconds big break</source>
         <translation type="unfinished">Une pause sur &lt;b&gt;%2&lt;/b&gt; est une grosse pause de &lt;b&gt;%1&lt;/b&gt; secondes</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="188"/>
+        <location filename="../../src/app/focus-window.ui" line="201"/>
         <source>Cancel</source>
         <translation type="unfinished">Annuler</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="201"/>
+        <location filename="../../src/app/focus-window.ui" line="214"/>
         <source>Take a %1 second break to enter focus mode</source>
         <translation type="unfinished">Prenez une pause de %1 secondes pour activer le mode concentration</translation>
+    </message>
+</context>
+<context>
+    <name>FocusWindow</name>
+    <message>
+        <location filename="../../src/app/focus-window.cpp" line="81"/>
+        <source>Enter at least %1 characters.</source>
+        <translation type="unfinished">Saisissez au moins %1 caractères.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.cpp" line="87"/>
+        <source>Add a little more detail.</source>
+        <translation type="unfinished">Ajoutez un peu plus de détails.</translation>
     </message>
 </context>
 <context>
@@ -580,29 +598,57 @@
         <translation type="unfinished">Décrivez brièvement cette réunion/présentation :</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="55"/>
+        <location filename="../../src/app/meeting-window.ui" line="40"/>
+        <source>Enter at least 6 characters.</source>
+        <translation type="unfinished">Saisissez au moins 6 caractères.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.ui" line="68"/>
         <source>It will end at</source>
         <translation type="unfinished">Il prendra fin à</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="116"/>
+        <location filename="../../src/app/meeting-window.ui" line="129"/>
         <source>No break reminders will show before &lt;b&gt;%1&lt;/b&gt;</source>
         <translation type="unfinished">Aucun rappel de pause n’apparaîtra avant &lt;b&gt;%1&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="151"/>
+        <location filename="../../src/app/meeting-window.ui" line="164"/>
         <source>We&apos;ll check in with you before showing a break reminder.</source>
         <translation type="unfinished">Nous vérifierons votre disponibilité avant d’afficher un rappel de pause.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="178"/>
+        <location filename="../../src/app/meeting-window.ui" line="191"/>
         <source>Cancel</source>
         <translation type="unfinished">Annuler</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="191"/>
+        <location filename="../../src/app/meeting-window.ui" line="204"/>
         <source>Enter Meeting/Presentation Mode</source>
         <translation type="unfinished">Activer le mode réunion/présentation</translation>
+    </message>
+</context>
+<context>
+    <name>MeetingWindow</name>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="58"/>
+        <source>Choose a future end time and enter at least %1 characters.</source>
+        <translation type="unfinished">Choisissez une heure de fin ultérieure et saisissez au moins %1 caractères.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="65"/>
+        <source>Choose an end time later than now.</source>
+        <translation type="unfinished">Choisissez une heure de fin postérieure à l&apos;heure actuelle.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="72"/>
+        <source>Enter at least %1 characters.</source>
+        <translation type="unfinished">Saisissez au moins %1 caractères.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="78"/>
+        <source>Add a little more detail.</source>
+        <translation type="unfinished">Ajoutez un peu plus de détails.</translation>
     </message>
 </context>
 <context>

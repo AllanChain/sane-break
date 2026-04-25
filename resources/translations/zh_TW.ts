@@ -79,12 +79,12 @@
 <context>
     <name>BreakWindow</name>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="169"/>
+        <location filename="../../src/app/break-window.cpp" line="177"/>
         <source>Break will end at: %1</source>
         <translation>休息將在 %1 結束</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="171"/>
+        <location filename="../../src/app/break-window.cpp" line="179"/>
         <source>Break has ended</source>
         <translation>休息已結束</translation>
     </message>
@@ -437,39 +437,57 @@
         <translation>簡要說明正在進行的工作：</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="55"/>
+        <location filename="../../src/app/focus-window.ui" line="40"/>
+        <source>Enter at least 6 characters.</source>
+        <translation type="unfinished">請輸入至少 6 個字符。</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.ui" line="68"/>
         <source>Focus duration</source>
         <translation>專注時長</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="62"/>
+        <location filename="../../src/app/focus-window.ui" line="75"/>
         <source> min</source>
         <translation> 分鐘</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="125"/>
+        <location filename="../../src/app/focus-window.ui" line="138"/>
         <source>The break schedule will be temporarily switched to:</source>
         <translation>休息計劃會被暫時調整為：</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="142"/>
+        <location filename="../../src/app/focus-window.ui" line="155"/>
         <source>A &lt;b&gt;%1&lt;/b&gt; seconds small break every &lt;b&gt;%2&lt;/b&gt; minutes</source>
         <translation>每 &lt;b&gt;%2&lt;/b&gt; 分鐘一次 &lt;b&gt;%1&lt;/b&gt; 秒的小休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="159"/>
+        <location filename="../../src/app/focus-window.ui" line="172"/>
         <source>1 in every &lt;b&gt;%2&lt;/b&gt; breaks is a &lt;b&gt;%1&lt;/b&gt; seconds big break</source>
         <translation>每 &lt;b&gt;%2&lt;/b&gt; 次休息是一次 &lt;b&gt;%1&lt;/b&gt; 秒的大休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="188"/>
+        <location filename="../../src/app/focus-window.ui" line="201"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="201"/>
+        <location filename="../../src/app/focus-window.ui" line="214"/>
         <source>Take a %1 second break to enter focus mode</source>
         <translation>休息 %1 秒以進入專注模式</translation>
+    </message>
+</context>
+<context>
+    <name>FocusWindow</name>
+    <message>
+        <location filename="../../src/app/focus-window.cpp" line="81"/>
+        <source>Enter at least %1 characters.</source>
+        <translation type="unfinished">請輸入至少 %1 個字符。</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.cpp" line="87"/>
+        <source>Add a little more detail.</source>
+        <translation type="unfinished">請補充更多細節。</translation>
     </message>
 </context>
 <context>
@@ -552,29 +570,57 @@
         <translation>簡要說明這次會議/演示的內容：</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="55"/>
+        <location filename="../../src/app/meeting-window.ui" line="40"/>
+        <source>Enter at least 6 characters.</source>
+        <translation type="unfinished">請輸入至少 6 個字符。</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.ui" line="68"/>
         <source>It will end at</source>
         <translation>預計結束於</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="116"/>
+        <location filename="../../src/app/meeting-window.ui" line="129"/>
         <source>No break reminders will show before &lt;b&gt;%1&lt;/b&gt;</source>
         <translation>&lt;b&gt;%1&lt;/b&gt; 之前不會有休息提示</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="151"/>
+        <location filename="../../src/app/meeting-window.ui" line="164"/>
         <source>We&apos;ll check in with you before showing a break reminder.</source>
         <translation>在顯示休息提示前，我們會先與您確認。</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="178"/>
+        <location filename="../../src/app/meeting-window.ui" line="191"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="191"/>
+        <location filename="../../src/app/meeting-window.ui" line="204"/>
         <source>Enter Meeting/Presentation Mode</source>
         <translation>進入會議/演示模式</translation>
+    </message>
+</context>
+<context>
+    <name>MeetingWindow</name>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="58"/>
+        <source>Choose a future end time and enter at least %1 characters.</source>
+        <translation type="unfinished">請選擇一個未來的結束時間，並輸入至少 %1 個字符。</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="65"/>
+        <source>Choose an end time later than now.</source>
+        <translation type="unfinished">請選擇一個晚於當前時間的結束時間。</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="72"/>
+        <source>Enter at least %1 characters.</source>
+        <translation type="unfinished">請輸入至少 %1 個字符。</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="78"/>
+        <source>Add a little more detail.</source>
+        <translation type="unfinished">請補充更多細節。</translation>
     </message>
 </context>
 <context>

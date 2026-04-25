@@ -79,12 +79,12 @@
 <context>
     <name>BreakWindow</name>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="169"/>
+        <location filename="../../src/app/break-window.cpp" line="177"/>
         <source>Break will end at: %1</source>
         <translation>Rasten slutar klockan: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="171"/>
+        <location filename="../../src/app/break-window.cpp" line="179"/>
         <source>Break has ended</source>
         <translation>Rasten är slut</translation>
     </message>
@@ -445,39 +445,57 @@
         <translation type="unfinished">Beskriv kort vad du arbetar med:</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="55"/>
+        <location filename="../../src/app/focus-window.ui" line="40"/>
+        <source>Enter at least 6 characters.</source>
+        <translation type="unfinished">Ange minst 6 tecken.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.ui" line="68"/>
         <source>Focus duration</source>
         <translation type="unfinished">Fokustid</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="62"/>
+        <location filename="../../src/app/focus-window.ui" line="75"/>
         <source> min</source>
         <translation type="unfinished"> min</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="125"/>
+        <location filename="../../src/app/focus-window.ui" line="138"/>
         <source>The break schedule will be temporarily switched to:</source>
         <translation type="unfinished">Rastschemat kommer tillfälligt att ändras till:</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="142"/>
+        <location filename="../../src/app/focus-window.ui" line="155"/>
         <source>A &lt;b&gt;%1&lt;/b&gt; seconds small break every &lt;b&gt;%2&lt;/b&gt; minutes</source>
         <translation type="unfinished">En &lt;b&gt;%1&lt;/b&gt; sekunder lång kort rast varje &lt;b&gt;%2&lt;/b&gt; minuter</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="159"/>
+        <location filename="../../src/app/focus-window.ui" line="172"/>
         <source>1 in every &lt;b&gt;%2&lt;/b&gt; breaks is a &lt;b&gt;%1&lt;/b&gt; seconds big break</source>
         <translation type="unfinished">1 av varje &lt;b&gt;%2&lt;/b&gt; raster är en &lt;b&gt;%1&lt;/b&gt; sekunder lång lång rast</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="188"/>
+        <location filename="../../src/app/focus-window.ui" line="201"/>
         <source>Cancel</source>
         <translation type="unfinished">Avbryt</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.ui" line="201"/>
+        <location filename="../../src/app/focus-window.ui" line="214"/>
         <source>Take a %1 second break to enter focus mode</source>
         <translation type="unfinished">Ta en %1 sekunder lång rast för att aktivera fokusläget</translation>
+    </message>
+</context>
+<context>
+    <name>FocusWindow</name>
+    <message>
+        <location filename="../../src/app/focus-window.cpp" line="81"/>
+        <source>Enter at least %1 characters.</source>
+        <translation type="unfinished">Ange minst %1 tecken.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.cpp" line="87"/>
+        <source>Add a little more detail.</source>
+        <translation type="unfinished">Lägg till lite mer detaljer.</translation>
     </message>
 </context>
 <context>
@@ -568,29 +586,57 @@
         <translation type="unfinished">Beskriv kort detta möte/presentation:</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="55"/>
+        <location filename="../../src/app/meeting-window.ui" line="40"/>
+        <source>Enter at least 6 characters.</source>
+        <translation type="unfinished">Ange minst 6 tecken.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.ui" line="68"/>
         <source>It will end at</source>
         <translation type="unfinished">Det avslutas klockan</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="116"/>
+        <location filename="../../src/app/meeting-window.ui" line="129"/>
         <source>No break reminders will show before &lt;b&gt;%1&lt;/b&gt;</source>
         <translation type="unfinished">Ingen rastpåminnelse visas före &lt;b&gt;%1&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="151"/>
+        <location filename="../../src/app/meeting-window.ui" line="164"/>
         <source>We&apos;ll check in with you before showing a break reminder.</source>
         <translation type="unfinished">Vi kontrollerar med dig innan vi visar en rastpåminnelse.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="178"/>
+        <location filename="../../src/app/meeting-window.ui" line="191"/>
         <source>Cancel</source>
         <translation type="unfinished">Avbryt</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.ui" line="191"/>
+        <location filename="../../src/app/meeting-window.ui" line="204"/>
         <source>Enter Meeting/Presentation Mode</source>
         <translation type="unfinished">Aktivera mötes-/presentationsläge</translation>
+    </message>
+</context>
+<context>
+    <name>MeetingWindow</name>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="58"/>
+        <source>Choose a future end time and enter at least %1 characters.</source>
+        <translation type="unfinished">Välj ett sluttidpunkt i framtiden och ange minst %1 tecken.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="65"/>
+        <source>Choose an end time later than now.</source>
+        <translation type="unfinished">Välj en sluttidpunkt som är senare än nu.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="72"/>
+        <source>Enter at least %1 characters.</source>
+        <translation type="unfinished">Ange minst %1 tecken.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="78"/>
+        <source>Add a little more detail.</source>
+        <translation type="unfinished">Lägg till lite mer detaljer.</translation>
     </message>
 </context>
 <context>

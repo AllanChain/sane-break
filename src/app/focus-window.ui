@@ -32,6 +32,19 @@
     <widget class="QLineEdit" name="reasonEdit"/>
    </item>
    <item>
+    <widget class="QLabel" name="reasonHelpLabel">
+     <property name="styleSheet">
+      <string notr="true">color: #6b7280;</string>
+     </property>
+     <property name="text">
+      <string>Enter at least 6 characters.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <property name="topMargin">
       <number>6</number>
