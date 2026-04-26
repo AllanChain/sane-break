@@ -92,265 +92,124 @@
 <context>
     <name>Cli</name>
     <message>
-        <location filename="../../src/core/cli.cpp" line="77"/>
-        <source>Invalid duration &quot;%1&quot;. Use a positive duration such as 10m, 600s, or 1h.</source>
-        <translation type="unfinished">Durata non valida &quot;%1&quot;. Usa una durata positiva come 10m, 600s o 1h.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="166"/>
-        <source>Mode: %1</source>
-        <translation type="unfinished">Modalità: %1</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="168"/>
-        <source>Next break: %1 in %2</source>
-        <translation type="unfinished">Prossima pausa: %1 tra %2</translation>
-    </message>
-    <message>
         <location filename="../../src/core/cli.cpp" line="171"/>
-        <source>Next big break: %1</source>
-        <translation type="unfinished">Prossima pausa lunga: %1</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="175"/>
-        <source>Pause reasons: %1</source>
-        <translation type="unfinished">Motivi della pausa: %1</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="178"/>
-        <source>Postponing: yes</source>
-        <translation type="unfinished">Rimando: sì</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="180"/>
-        <source>Meeting: %1 remaining</source>
-        <translation type="unfinished">Riunione: %1 rimanenti</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="185"/>
-        <source>Focus: %1/%2 cycles complete</source>
-        <translation type="unfinished">Concentrazione: %1/%2 cicli completati</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="195"/>
         <source>Show the application version</source>
         <translation type="unfinished">Mostra la versione dell&apos;applicazione</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="200"/>
+        <location filename="../../src/core/cli.cpp" line="176"/>
         <source>Show this help text</source>
         <translation type="unfinished">Mostra questo testo di aiuto</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="257"/>
+        <location filename="../../src/core/cli.cpp" line="233"/>
         <source>Start the next break immediately</source>
         <translation type="unfinished">Avvia immediatamente la prossima pausa</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="260"/>
+        <location filename="../../src/core/cli.cpp" line="236"/>
         <source>Start the next big break immediately</source>
         <translation type="unfinished">Avvia immediatamente la prossima pausa lunga</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="263"/>
+        <location filename="../../src/core/cli.cpp" line="239"/>
         <source>Pause breaks by external control</source>
         <translation type="unfinished">Metti in pausa le pause tramite controllo esterno</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="266"/>
+        <location filename="../../src/core/cli.cpp" line="242"/>
         <source>Resume breaks paused by external control</source>
         <translation type="unfinished">Riprendi le pause messe in pausa tramite controllo esterno</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="269"/>
+        <location filename="../../src/core/cli.cpp" line="245"/>
         <source>Enable breaks by clearing all pause reasons</source>
         <translation type="unfinished">Abilita le pause cancellando tutti i motivi di pausa</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="273"/>
+        <location filename="../../src/core/cli.cpp" line="249"/>
         <source>Show current break status</source>
         <translation type="unfinished">Mostra lo stato attuale della pausa</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="275"/>
-        <source>Output status as JSON</source>
-        <translation type="unfinished">Output dello stato come JSON</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="284"/>
+        <location filename="../../src/core/cli.cpp" line="257"/>
         <source>Manage meeting or presentation mode</source>
         <translation type="unfinished">Gestisci la modalità riunione o presentazione</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="289"/>
+        <location filename="../../src/core/cli.cpp" line="262"/>
         <source>Start meeting mode for a duration</source>
         <translation type="unfinished">Avvia la modalità riunione per una durata</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="292"/>
+        <location filename="../../src/core/cli.cpp" line="265"/>
         <source>Meeting duration, for example 45m, 2700s, or 1h</source>
         <translation type="unfinished">Durata della riunione, ad esempio 45m, 2700s o 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="296"/>
+        <location filename="../../src/core/cli.cpp" line="269"/>
         <source>Meeting reason</source>
         <translation type="unfinished">Motivo della riunione</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="299"/>
+        <location filename="../../src/core/cli.cpp" line="272"/>
         <source>End meeting mode</source>
         <translation type="unfinished">Termina la modalità riunione</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="302"/>
+        <location filename="../../src/core/cli.cpp" line="275"/>
         <source>Start a break immediately</source>
         <translation type="unfinished">Avvia una pausa immediatamente</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="305"/>
+        <location filename="../../src/core/cli.cpp" line="278"/>
         <source>Schedule the next break after this duration</source>
         <translation type="unfinished">Programma la prossima pausa dopo questa durata</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="310"/>
+        <location filename="../../src/core/cli.cpp" line="283"/>
         <source>Extend the current meeting</source>
         <translation type="unfinished">Estendi la riunione corrente</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="314"/>
+        <location filename="../../src/core/cli.cpp" line="287"/>
         <source>Duration to extend, for example 10m, 600s, or 1h</source>
         <translation type="unfinished">Durata dell&apos;estensione, ad esempio 10m, 600s o 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="321"/>
+        <location filename="../../src/core/cli.cpp" line="294"/>
         <source>Manage focus mode</source>
         <translation type="unfinished">Gestisci la modalità concentrazione</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="326"/>
+        <location filename="../../src/core/cli.cpp" line="299"/>
         <source>Start focus mode for a duration</source>
         <translation type="unfinished">Avvia la modalità concentrazione per una durata</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="329"/>
+        <location filename="../../src/core/cli.cpp" line="302"/>
         <source>Focus duration, for example 50m, 3000s, or 1h</source>
         <translation type="unfinished">Durata della concentrazione, ad esempio 50m, 3000s o 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="333"/>
+        <location filename="../../src/core/cli.cpp" line="306"/>
         <source>Focus reason</source>
         <translation type="unfinished">Motivo della concentrazione</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="336"/>
+        <location filename="../../src/core/cli.cpp" line="309"/>
         <source>End focus mode</source>
         <translation type="unfinished">Termina la modalità concentrazione</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="340"/>
+        <location filename="../../src/core/cli.cpp" line="313"/>
         <source>Postpone the next break</source>
         <translation type="unfinished">Rimanda la prossima pausa</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="344"/>
+        <location filename="../../src/core/cli.cpp" line="317"/>
         <source>Duration to postpone, for example 10m, 600s, or 1h. Bare numbers are minutes.</source>
         <translation type="unfinished">Durata del rimando, ad esempio 10m, 600s o 1h. I numeri nudi sono minuti.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="360"/>
-        <source>Started the next break.</source>
-        <translation type="unfinished">Avviata la prossima pausa.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="368"/>
-        <source>Started the next big break.</source>
-        <translation type="unfinished">Avviata la prossima pausa lunga.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="376"/>
-        <source>Paused breaks by external control.</source>
-        <translation type="unfinished">Pause messe in pausa tramite controllo esterno.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="384"/>
-        <source>Enabled breaks paused by external control.</source>
-        <translation type="unfinished">Pause abilitate precedentemente messe in pausa tramite controllo esterno.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="392"/>
-        <source>Enabled breaks.</source>
-        <translation type="unfinished">Pause abilitate.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="412"/>
-        <source>Meeting mode is already active.</source>
-        <translation type="unfinished">La modalità riunione è già attiva.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="427"/>
-        <source>Started meeting mode.</source>
-        <translation type="unfinished">Modalità riunione avviata.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="435"/>
-        <location filename="../../src/core/cli.cpp" line="470"/>
-        <source>Meeting mode is not active.</source>
-        <translation type="unfinished">La modalità riunione non è attiva.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="443"/>
-        <source>Ended meeting mode and started a break.</source>
-        <translation type="unfinished">Modalità riunione terminata e pausa avviata.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="462"/>
-        <source>Ended meeting mode.</source>
-        <translation type="unfinished">Modalità riunione terminata.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="485"/>
-        <source>Extended meeting mode.</source>
-        <translation type="unfinished">Modalità riunione estesa.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="494"/>
-        <source>Focus mode is already active.</source>
-        <translation type="unfinished">La modalità concentrazione è già attiva.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="500"/>
-        <source>Cannot start focus mode during meeting mode.</source>
-        <translation type="unfinished">Impossibile avviare la modalità concentrazione durante la modalità riunione.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="519"/>
-        <source>Started focus mode.</source>
-        <translation type="unfinished">Modalità concentrazione avviata.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="528"/>
-        <source>Focus mode is not active.</source>
-        <translation type="unfinished">La modalità concentrazione non è attiva.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="534"/>
-        <source>Cannot end focus mode during a break.</source>
-        <translation type="unfinished">Impossibile terminare la modalità concentrazione durante una pausa.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="541"/>
-        <source>Ended focus mode.</source>
-        <translation type="unfinished">Modalità concentrazione terminata.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="557"/>
-        <source>Postponed the next break.</source>
-        <translation type="unfinished">Prossima pausa rimandata.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="563"/>
-        <source>Expected a command.</source>
-        <translation type="unfinished">Atteso un comando.</translation>
     </message>
 </context>
 <context>

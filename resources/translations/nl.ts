@@ -104,265 +104,124 @@
 <context>
     <name>Cli</name>
     <message>
-        <location filename="../../src/core/cli.cpp" line="77"/>
-        <source>Invalid duration &quot;%1&quot;. Use a positive duration such as 10m, 600s, or 1h.</source>
-        <translation type="unfinished">Ongeldige duur &quot;%1&quot;. Gebruik een positieve duur zoals 10m, 600s of 1u.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="166"/>
-        <source>Mode: %1</source>
-        <translation type="unfinished">Modus: %1</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="168"/>
-        <source>Next break: %1 in %2</source>
-        <translation type="unfinished">Volgende pauze: %1 over %2</translation>
-    </message>
-    <message>
         <location filename="../../src/core/cli.cpp" line="171"/>
-        <source>Next big break: %1</source>
-        <translation type="unfinished">Volgende lange pauze: %1</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="175"/>
-        <source>Pause reasons: %1</source>
-        <translation type="unfinished">Redenen voor opschorting: %1</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="178"/>
-        <source>Postponing: yes</source>
-        <translation type="unfinished">Uitstellen: ja</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="180"/>
-        <source>Meeting: %1 remaining</source>
-        <translation type="unfinished">Vergadering: %1 resterend</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="185"/>
-        <source>Focus: %1/%2 cycles complete</source>
-        <translation type="unfinished">Concentratie: %1/%2 cycli voltooid</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="195"/>
         <source>Show the application version</source>
         <translation type="unfinished">Toon de versie van het programma</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="200"/>
+        <location filename="../../src/core/cli.cpp" line="176"/>
         <source>Show this help text</source>
         <translation type="unfinished">Toon deze helppagina</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="257"/>
+        <location filename="../../src/core/cli.cpp" line="233"/>
         <source>Start the next break immediately</source>
         <translation type="unfinished">Start de volgende pauze direct</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="260"/>
+        <location filename="../../src/core/cli.cpp" line="236"/>
         <source>Start the next big break immediately</source>
         <translation type="unfinished">Start de volgende lange pauze direct</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="263"/>
+        <location filename="../../src/core/cli.cpp" line="239"/>
         <source>Pause breaks by external control</source>
         <translation type="unfinished">Pauzes opschorten via externe besturing</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="266"/>
+        <location filename="../../src/core/cli.cpp" line="242"/>
         <source>Resume breaks paused by external control</source>
         <translation type="unfinished">Hervat pauzes die zijn opgeschort via externe besturing</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="269"/>
+        <location filename="../../src/core/cli.cpp" line="245"/>
         <source>Enable breaks by clearing all pause reasons</source>
         <translation type="unfinished">Schakel pauzes in door alle redenen voor opschorting te wissen</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="273"/>
+        <location filename="../../src/core/cli.cpp" line="249"/>
         <source>Show current break status</source>
         <translation type="unfinished">Toon huidige pauzestatus</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="275"/>
-        <source>Output status as JSON</source>
-        <translation type="unfinished">Status uitvoeren als JSON</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="284"/>
+        <location filename="../../src/core/cli.cpp" line="257"/>
         <source>Manage meeting or presentation mode</source>
         <translation type="unfinished">Beheer vergaderings- of presentatiemodus</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="289"/>
+        <location filename="../../src/core/cli.cpp" line="262"/>
         <source>Start meeting mode for a duration</source>
         <translation type="unfinished">Start vergaderingsmodus voor een bepaalde duur</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="292"/>
+        <location filename="../../src/core/cli.cpp" line="265"/>
         <source>Meeting duration, for example 45m, 2700s, or 1h</source>
         <translation type="unfinished">Duur van vergadering, bijvoorbeeld 45m, 2700s of 1u</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="296"/>
+        <location filename="../../src/core/cli.cpp" line="269"/>
         <source>Meeting reason</source>
         <translation type="unfinished">Reden voor vergadering</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="299"/>
+        <location filename="../../src/core/cli.cpp" line="272"/>
         <source>End meeting mode</source>
         <translation type="unfinished">Beëindig vergaderingsmodus</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="302"/>
+        <location filename="../../src/core/cli.cpp" line="275"/>
         <source>Start a break immediately</source>
         <translation type="unfinished">Start direct een pauze</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="305"/>
+        <location filename="../../src/core/cli.cpp" line="278"/>
         <source>Schedule the next break after this duration</source>
         <translation type="unfinished">Plan de volgende pauze na deze duur</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="310"/>
+        <location filename="../../src/core/cli.cpp" line="283"/>
         <source>Extend the current meeting</source>
         <translation type="unfinished">Verleng de huidige vergadering</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="314"/>
+        <location filename="../../src/core/cli.cpp" line="287"/>
         <source>Duration to extend, for example 10m, 600s, or 1h</source>
         <translation type="unfinished">Te verlengen duur, bijvoorbeeld 10m, 600s of 1u</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="321"/>
+        <location filename="../../src/core/cli.cpp" line="294"/>
         <source>Manage focus mode</source>
         <translation type="unfinished">Beheer concentratiemodus</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="326"/>
+        <location filename="../../src/core/cli.cpp" line="299"/>
         <source>Start focus mode for a duration</source>
         <translation type="unfinished">Start concentratiemodus voor een bepaalde duur</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="329"/>
+        <location filename="../../src/core/cli.cpp" line="302"/>
         <source>Focus duration, for example 50m, 3000s, or 1h</source>
         <translation type="unfinished">Duur van concentratieperiode, bijvoorbeeld 50m, 3000s of 1u</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="333"/>
+        <location filename="../../src/core/cli.cpp" line="306"/>
         <source>Focus reason</source>
         <translation type="unfinished">Reden voor concentratie</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="336"/>
+        <location filename="../../src/core/cli.cpp" line="309"/>
         <source>End focus mode</source>
         <translation type="unfinished">Beëindig concentratiemodus</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="340"/>
+        <location filename="../../src/core/cli.cpp" line="313"/>
         <source>Postpone the next break</source>
         <translation type="unfinished">Stel de volgende pauze uit</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="344"/>
+        <location filename="../../src/core/cli.cpp" line="317"/>
         <source>Duration to postpone, for example 10m, 600s, or 1h. Bare numbers are minutes.</source>
         <translation type="unfinished">Uitstelduur, bijvoorbeeld 10m, 600s of 1u. Losse getallen worden gezien als minuten.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="360"/>
-        <source>Started the next break.</source>
-        <translation type="unfinished">De volgende pauze is gestart.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="368"/>
-        <source>Started the next big break.</source>
-        <translation type="unfinished">De volgende lange pauze is gestart.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="376"/>
-        <source>Paused breaks by external control.</source>
-        <translation type="unfinished">Pauzes opgeschort via externe besturing.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="384"/>
-        <source>Enabled breaks paused by external control.</source>
-        <translation type="unfinished">Via externe besturing opgeschorte pauzes weer ingeschakeld.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="392"/>
-        <source>Enabled breaks.</source>
-        <translation type="unfinished">Pauzes ingeschakeld.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="412"/>
-        <source>Meeting mode is already active.</source>
-        <translation type="unfinished">Vergaderingsmodus is reeds actief.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="427"/>
-        <source>Started meeting mode.</source>
-        <translation type="unfinished">Vergaderingsmodus gestart.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="435"/>
-        <location filename="../../src/core/cli.cpp" line="470"/>
-        <source>Meeting mode is not active.</source>
-        <translation type="unfinished">Vergaderingsmodus is niet actief.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="443"/>
-        <source>Ended meeting mode and started a break.</source>
-        <translation type="unfinished">Vergaderingsmodus beëindigd en pauze gestart.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="462"/>
-        <source>Ended meeting mode.</source>
-        <translation type="unfinished">Vergaderingsmodus beëindigd.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="485"/>
-        <source>Extended meeting mode.</source>
-        <translation type="unfinished">Vergaderingsmodus verlengd.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="494"/>
-        <source>Focus mode is already active.</source>
-        <translation type="unfinished">Concentratiemodus is reeds actief.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="500"/>
-        <source>Cannot start focus mode during meeting mode.</source>
-        <translation type="unfinished">Kan concentratiemodus niet starten tijdens vergaderingsmodus.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="519"/>
-        <source>Started focus mode.</source>
-        <translation type="unfinished">Concentratiemodus gestart.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="528"/>
-        <source>Focus mode is not active.</source>
-        <translation type="unfinished">Concentratiemodus is niet actief.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="534"/>
-        <source>Cannot end focus mode during a break.</source>
-        <translation type="unfinished">Kan concentratiemodus niet beëindigen tijdens een pauze.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="541"/>
-        <source>Ended focus mode.</source>
-        <translation type="unfinished">Concentratiemodus beëindigd.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="557"/>
-        <source>Postponed the next break.</source>
-        <translation type="unfinished">De volgende pauze is uitgesteld.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="563"/>
-        <source>Expected a command.</source>
-        <translation type="unfinished">Er werd een opdracht verwacht.</translation>
     </message>
 </context>
 <context>

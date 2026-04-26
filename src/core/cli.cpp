@@ -9,7 +9,6 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <algorithm>
 #include <limits>
 #include <optional>
 #include <sstream>
@@ -57,27 +56,6 @@ std::optional<int> parseDurationSeconds(const std::string& rawValue) {
     return std::nullopt;
   }
   return static_cast<int>(amount * multiplier);
-}
-
-QString formatDuration(int totalSeconds) {
-  int seconds = std::max(0, totalSeconds);
-  int hours = seconds / 3600;
-  seconds %= 3600;
-  int minutes = seconds / 60;
-  seconds %= 60;
-
-  QStringList parts;
-  if (hours > 0) parts.append(QString("%1h").arg(hours));
-  if (minutes > 0 || hours > 0) parts.append(QString("%1m").arg(minutes));
-  parts.append(QString("%1s").arg(seconds));
-  return parts.join(QLatin1Char(' '));
-}
-
-QString invalidDurationMessage(const std::string& rawValue) {
-  return CliTranslation::tr(
-             "Invalid duration \"%1\". Use a positive duration such as "
-             "10m, 600s, or 1h.")
-      .arg(QString::fromStdString(rawValue));
 }
 
 std::optional<int> focusCyclesForDuration(int seconds, int secondsPerCycle) {
@@ -161,32 +139,30 @@ QJsonObject statusToJson(const TrayData& data) {
   };
 }
 
-QString formatStatus(const TrayData& data) {
-  QStringList lines;
-  lines.append(CliTranslation::tr("Mode: %1").arg(statusModeName(data)));
-  lines.append(
-      CliTranslation::tr("Next break: %1 in %2")
-          .arg(nextBreakTypeName(data), formatDuration(data.secondsToNextBreak)));
-  if (data.bigBreakEnabled) {
-    lines.append(CliTranslation::tr("Next big break: %1")
-                     .arg(formatDuration(data.secondsToNextBigBreak)));
+QString compactJson(const QJsonObject& object) {
+  return QString::fromUtf8(QJsonDocument(object).toJson(QJsonDocument::Compact));
+}
+
+CliCommandResult jsonStatusResult(const TrayData& data) {
+  return {
+      .ok = true,
+      .message = compactJson(statusToJson(data)),
+  };
+}
+
+CliCommandResult jsonErrorResult(const QString& code, const QString& message,
+                                 const QJsonObject& details = {}) {
+  QJsonObject error{
+      {"error", code},
+      {"message", message},
+  };
+  for (auto it = details.begin(); it != details.end(); ++it) {
+    error.insert(it.key(), it.value());
   }
-  if (data.pauseReasons) {
-    lines.append(CliTranslation::tr("Pause reasons: %1")
-                     .arg(pauseReasonNames(data.pauseReasons).join(", ")));
-  }
-  if (data.isPostponing) lines.append(CliTranslation::tr("Postponing: yes"));
-  if (data.isInMeeting) {
-    lines.append(CliTranslation::tr("Meeting: %1 remaining")
-                     .arg(formatDuration(data.meetingSecondsRemaining)));
-  }
-  if (data.isFocusMode) {
-    int cyclesDone = data.focusTotalCycles - data.focusCyclesRemaining;
-    lines.append(CliTranslation::tr("Focus: %1/%2 cycles complete")
-                     .arg(cyclesDone)
-                     .arg(data.focusTotalCycles));
-  }
-  return lines.join(QLatin1Char('\n'));
+  return {
+      .ok = false,
+      .message = compactJson(error),
+  };
 }
 
 void addVersionFlag(CLI::App& app) {
@@ -233,10 +209,10 @@ CliCommandResult handleCliParseError(const CLI::App& app,
   app.exit(error, out, err);
 
   const bool ok = error.get_exit_code() == 0;
-  return {
-      .ok = ok,
-      .message = QString::fromStdString(ok ? out.str() : err.str()),
-  };
+  if (ok) {
+    return {.ok = true, .message = QString::fromStdString(out.str())};
+  }
+  return jsonErrorResult("cli-parse-error", QString::fromStdString(err.str()));
 }
 
 }  // namespace
@@ -271,9 +247,6 @@ CliCommandResult executeCliCommand(AbstractApp* app, const QStringList& argument
   bool jsonStatus = false;
   CLI::App* status = addCliCommand(cli, QStringLiteral("status"),
                                    CliTranslation::tr("Show current break status"));
-  status->add_flag("--json", jsonStatus,
-                   CliTranslation::tr("Output status as JSON").toStdString());
-
   std::string meetingStartDuration;
   std::string meetingStartReason;
   std::string meetingEndBreakLater;
@@ -355,150 +328,113 @@ CliCommandResult executeCliCommand(AbstractApp* app, const QStringList& argument
 
   if (breakNow->parsed()) {
     app->breakNow();
-    return {
-        .ok = true,
-        .message = CliTranslation::tr("Started the next break."),
-    };
+    return jsonStatusResult(app->trayDataSnapshot());
   }
 
   if (bigBreakNow->parsed()) {
     app->bigBreakNow();
-    return {
-        .ok = true,
-        .message = CliTranslation::tr("Started the next big break."),
-    };
+    return jsonStatusResult(app->trayDataSnapshot());
   }
 
   if (pause->parsed()) {
     app->pauseByExternalControl();
-    return {
-        .ok = true,
-        .message = CliTranslation::tr("Paused breaks by external control."),
-    };
+    return jsonStatusResult(app->trayDataSnapshot());
   }
 
   if (resume->parsed()) {
     app->resumeFromExternalControl();
-    return {
-        .ok = true,
-        .message = CliTranslation::tr("Enabled breaks paused by external control."),
-    };
+    return jsonStatusResult(app->trayDataSnapshot());
   }
 
   if (enableBreak->parsed()) {
     app->enableBreak();
-    return {
-        .ok = true,
-        .message = CliTranslation::tr("Enabled breaks."),
-    };
+    return jsonStatusResult(app->trayDataSnapshot());
   }
 
   if (status->parsed()) {
-    TrayData data = app->trayDataSnapshot();
-    return {
-        .ok = true,
-        .message =
-            jsonStatus
-                ? QString::fromUtf8(
-                      QJsonDocument(statusToJson(data)).toJson(QJsonDocument::Compact))
-                : formatStatus(data),
-    };
+    Q_UNUSED(jsonStatus);
+    return jsonStatusResult(app->trayDataSnapshot());
   }
 
   if (meetingStart->parsed()) {
     if (app->trayDataSnapshot().isInMeeting) {
-      return {
-          .ok = false,
-          .message = CliTranslation::tr("Meeting mode is already active."),
-      };
+      return jsonErrorResult("meeting-already-active",
+                             QStringLiteral("Meeting mode is already active."));
     }
 
     std::optional<int> seconds = parseDurationSeconds(meetingStartDuration);
     if (!seconds) {
-      return {
-          .ok = false,
-          .message = invalidDurationMessage(meetingStartDuration),
-      };
+      return jsonErrorResult("invalid-duration",
+                             QString("Invalid duration \"%1\". Use a positive duration "
+                                     "such as 10m, 600s, or 1h.")
+                                 .arg(QString::fromStdString(meetingStartDuration)),
+                             {{"input", QString::fromStdString(meetingStartDuration)}});
     }
 
     app->startMeeting(*seconds, QString::fromStdString(meetingStartReason));
-    return {
-        .ok = true,
-        .message = CliTranslation::tr("Started meeting mode."),
-    };
+    return jsonStatusResult(app->trayDataSnapshot());
   }
 
   if (meetingEnd->parsed()) {
     if (!app->trayDataSnapshot().isInMeeting) {
-      return {
-          .ok = false,
-          .message = CliTranslation::tr("Meeting mode is not active."),
-      };
+      return jsonErrorResult("meeting-not-active",
+                             QStringLiteral("Meeting mode is not active."));
     }
 
     if (meetingEndBreakNow) {
       app->endMeetingBreakNow();
-      return {
-          .ok = true,
-          .message = CliTranslation::tr("Ended meeting mode and started a break."),
-      };
+      return jsonStatusResult(app->trayDataSnapshot());
     }
 
     int seconds = app->preferences->smallEvery->get();
     if (!meetingEndBreakLater.empty()) {
       std::optional<int> parsedSeconds = parseDurationSeconds(meetingEndBreakLater);
       if (!parsedSeconds) {
-        return {
-            .ok = false,
-            .message = invalidDurationMessage(meetingEndBreakLater),
-        };
+        return jsonErrorResult(
+            "invalid-duration",
+            QString(
+                "Invalid duration \"%1\". Use a positive duration such as 10m, 600s, "
+                "or 1h.")
+                .arg(QString::fromStdString(meetingEndBreakLater)),
+            {{"input", QString::fromStdString(meetingEndBreakLater)}});
       }
       seconds = *parsedSeconds;
     }
 
     app->endMeetingBreakLater(seconds);
-    return {
-        .ok = true,
-        .message = CliTranslation::tr("Ended meeting mode."),
-    };
+    return jsonStatusResult(app->trayDataSnapshot());
   }
 
   if (meetingExtend->parsed()) {
     if (!app->trayDataSnapshot().isInMeeting) {
-      return {
-          .ok = false,
-          .message = CliTranslation::tr("Meeting mode is not active."),
-      };
+      return jsonErrorResult("meeting-not-active",
+                             QStringLiteral("Meeting mode is not active."));
     }
 
     std::optional<int> seconds = parseDurationSeconds(meetingExtendDuration);
     if (!seconds) {
-      return {
-          .ok = false,
-          .message = invalidDurationMessage(meetingExtendDuration),
-      };
+      return jsonErrorResult(
+          "invalid-duration",
+          QString("Invalid duration \"%1\". Use a positive duration such as 10m, 600s, "
+                  "or 1h.")
+              .arg(QString::fromStdString(meetingExtendDuration)),
+          {{"input", QString::fromStdString(meetingExtendDuration)}});
     }
 
     app->extendMeeting(*seconds);
-    return {
-        .ok = true,
-        .message = CliTranslation::tr("Extended meeting mode."),
-    };
+    return jsonStatusResult(app->trayDataSnapshot());
   }
 
   if (focusStart->parsed()) {
     TrayData data = app->trayDataSnapshot();
     if (data.isFocusMode) {
-      return {
-          .ok = false,
-          .message = CliTranslation::tr("Focus mode is already active."),
-      };
+      return jsonErrorResult("focus-already-active",
+                             QStringLiteral("Focus mode is already active."));
     }
     if (data.isInMeeting) {
-      return {
-          .ok = false,
-          .message = CliTranslation::tr("Cannot start focus mode during meeting mode."),
-      };
+      return jsonErrorResult(
+          "focus-during-meeting",
+          QStringLiteral("Cannot start focus mode during meeting mode."));
     }
 
     std::optional<int> seconds = parseDurationSeconds(focusStartDuration);
@@ -507,59 +443,45 @@ CliCommandResult executeCliCommand(AbstractApp* app, const QStringList& argument
             ? focusCyclesForDuration(*seconds, app->preferences->focusSmallEvery->get())
             : std::nullopt;
     if (!cycles) {
-      return {
-          .ok = false,
-          .message = invalidDurationMessage(focusStartDuration),
-      };
+      return jsonErrorResult("invalid-duration",
+                             QString("Invalid duration \"%1\". Use a positive duration "
+                                     "such as 10m, 600s, or 1h.")
+                                 .arg(QString::fromStdString(focusStartDuration)),
+                             {{"input", QString::fromStdString(focusStartDuration)}});
     }
 
     app->startFocus(*cycles, QString::fromStdString(focusStartReason));
-    return {
-        .ok = true,
-        .message = CliTranslation::tr("Started focus mode."),
-    };
+    return jsonStatusResult(app->trayDataSnapshot());
   }
 
   if (focusEnd->parsed()) {
     TrayData data = app->trayDataSnapshot();
     if (!data.isFocusMode) {
-      return {
-          .ok = false,
-          .message = CliTranslation::tr("Focus mode is not active."),
-      };
+      return jsonErrorResult("focus-not-active",
+                             QStringLiteral("Focus mode is not active."));
     }
     if (data.isBreaking) {
-      return {
-          .ok = false,
-          .message = CliTranslation::tr("Cannot end focus mode during a break."),
-      };
+      return jsonErrorResult("focus-end-during-break",
+                             QStringLiteral("Cannot end focus mode during a break."));
     }
 
     app->endFocus();
-    return {
-        .ok = true,
-        .message = CliTranslation::tr("Ended focus mode."),
-    };
+    return jsonStatusResult(app->trayDataSnapshot());
   }
 
   if (postpone->parsed()) {
     std::optional<int> seconds = parseDurationSeconds(postponeTime);
     if (!seconds) {
-      return {
-          .ok = false,
-          .message = invalidDurationMessage(postponeTime),
-      };
+      return jsonErrorResult("invalid-duration",
+                             QString("Invalid duration \"%1\". Use a positive duration "
+                                     "such as 10m, 600s, or 1h.")
+                                 .arg(QString::fromStdString(postponeTime)),
+                             {{"input", QString::fromStdString(postponeTime)}});
     }
 
     app->postpone(*seconds);
-    return {
-        .ok = true,
-        .message = CliTranslation::tr("Postponed the next break."),
-    };
+    return jsonStatusResult(app->trayDataSnapshot());
   }
 
-  return {
-      .ok = false,
-      .message = CliTranslation::tr("Expected a command."),
-  };
+  return jsonErrorResult("expected-command", QStringLiteral("Expected a command."));
 }

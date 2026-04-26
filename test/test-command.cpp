@@ -35,6 +35,15 @@ class TestCommand : public QObject {
     return future.get();
   }
 
+  void assertJsonObject(const QString& json, QJsonObject* object) {
+    QJsonParseError parseError;
+    QJsonDocument document = QJsonDocument::fromJson(json.toUtf8(), &parseError);
+    QVERIFY2(parseError.error == QJsonParseError::NoError,
+             qPrintable(parseError.errorString()));
+    QVERIFY2(document.isObject(), qPrintable(json));
+    *object = document.object();
+  }
+
  private slots:
   void init() {
     QTest::failOnWarning();
@@ -71,7 +80,11 @@ class TestCommand : public QObject {
 
     CliCommandResult result = executeCliCommand(&app, {"pause", "10m"});
     QVERIFY(!result.ok);
-    QVERIFY2(result.message.contains("10m"), qPrintable(result.message));
+    QJsonObject response;
+    assertJsonObject(result.message, &response);
+    QCOMPARE(response["error"].toString(), QString("cli-parse-error"));
+    QVERIFY2(response["message"].toString().contains("10m"),
+             qPrintable(result.message));
     QVERIFY(!app.trayData.pauseReasons);
   }
 
@@ -81,6 +94,10 @@ class TestCommand : public QObject {
 
     CliCommandResult result = executeCliCommand(&app, {"pause"});
     QVERIFY2(result.ok, qPrintable(result.message));
+    QJsonObject response;
+    assertJsonObject(result.message, &response);
+    QCOMPARE(response["pauseReasons"].toArray().first().toString(),
+             QString("external-control"));
     QCOMPARE(app.trayData.pauseReasons, PauseReason::ExternalControl);
   }
 
@@ -101,6 +118,9 @@ class TestCommand : public QObject {
     CliCommandResult result = executeCliCommand(&app, {"postpone", timeArgument});
 
     QVERIFY2(result.ok, qPrintable(result.message));
+    QJsonObject response;
+    assertJsonObject(result.message, &response);
+    QCOMPARE(response["nextBreakSeconds"].toInt(), secondsToNextBreak + 10 * 60);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak + 10 * 60);
   }
 
@@ -112,7 +132,10 @@ class TestCommand : public QObject {
     CliCommandResult result = executeCliCommand(&app, {"postpone", "soon"});
 
     QVERIFY(!result.ok);
-    QVERIFY2(result.message.contains("soon"), qPrintable(result.message));
+    QJsonObject response;
+    assertJsonObject(result.message, &response);
+    QCOMPARE(response["error"].toString(), QString("invalid-duration"));
+    QCOMPARE(response["input"].toString(), QString("soon"));
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
   }
 
@@ -123,9 +146,14 @@ class TestCommand : public QObject {
     CliCommandResult result = executeCliCommand(&app, {"status"});
 
     QVERIFY2(result.ok, qPrintable(result.message));
-    QCOMPARE(result.message, QString("Mode: normal\n"
-                                     "Next break: small in 20m 0s\n"
-                                     "Next big break: 1h 0m 0s"));
+    QJsonObject status;
+    assertJsonObject(result.message, &status);
+    QCOMPARE(status["mode"].toString(), QString("normal"));
+    QCOMPARE(status["isBreaking"].toBool(), false);
+    QCOMPARE(status["nextBreakType"].toString(), QString("small"));
+    QCOMPARE(status["nextBreakSeconds"].toInt(), 20 * 60);
+    QCOMPARE(status["bigBreakEnabled"].toBool(), true);
+    QCOMPARE(status["nextBigBreakSeconds"].toInt(), 60 * 60);
     QVERIFY(!app.trayData.pauseReasons);
   }
 
@@ -134,12 +162,11 @@ class TestCommand : public QObject {
     app.start();
     app.pauseByExternalControl();
 
-    CliCommandResult result = executeCliCommand(&app, {"status", "--json"});
+    CliCommandResult result = executeCliCommand(&app, {"status"});
 
     QVERIFY2(result.ok, qPrintable(result.message));
-    QJsonDocument document = QJsonDocument::fromJson(result.message.toUtf8());
-    QVERIFY2(document.isObject(), qPrintable(result.message));
-    QJsonObject status = document.object();
+    QJsonObject status;
+    assertJsonObject(result.message, &status);
     QCOMPARE(status["mode"].toString(), QString("paused"));
     QCOMPARE(status["isBreaking"].toBool(), false);
     QCOMPARE(status["nextBreakType"].toString(), QString("small"));
@@ -217,7 +244,9 @@ class TestCommand : public QObject {
     CliCommandResult result = executeCliCommand(&app, arguments);
 
     QVERIFY(!result.ok);
-    QVERIFY2(result.message.contains("not active"), qPrintable(result.message));
+    QJsonObject response;
+    assertJsonObject(result.message, &response);
+    QCOMPARE(response["error"].toString(), QString("meeting-not-active"));
   }
 
   void cli_rejects_invalid_meeting_duration() {
@@ -228,7 +257,10 @@ class TestCommand : public QObject {
         executeCliCommand(&app, {"meeting", "start", "--for", "soon"});
 
     QVERIFY(!result.ok);
-    QVERIFY2(result.message.contains("soon"), qPrintable(result.message));
+    QJsonObject response;
+    assertJsonObject(result.message, &response);
+    QCOMPARE(response["error"].toString(), QString("invalid-duration"));
+    QCOMPARE(response["input"].toString(), QString("soon"));
     QVERIFY(!app.trayData.isInMeeting);
   }
 
@@ -277,7 +309,9 @@ class TestCommand : public QObject {
     CliCommandResult result = executeCliCommand(&app, {"focus", "end"});
 
     QVERIFY(!result.ok);
-    QVERIFY2(result.message.contains("during a break"), qPrintable(result.message));
+    QJsonObject response;
+    assertJsonObject(result.message, &response);
+    QCOMPARE(response["error"].toString(), QString("focus-end-during-break"));
     QVERIFY(app.trayData.isFocusMode);
   }
 
@@ -290,7 +324,9 @@ class TestCommand : public QObject {
         executeCliCommand(&app, {"focus", "start", "--for", "25m"});
 
     QVERIFY(!result.ok);
-    QVERIFY2(result.message.contains("meeting"), qPrintable(result.message));
+    QJsonObject response;
+    assertJsonObject(result.message, &response);
+    QCOMPARE(response["error"].toString(), QString("focus-during-meeting"));
     QVERIFY(!app.trayData.isFocusMode);
     QVERIFY(app.trayData.isInMeeting);
   }
@@ -339,8 +375,13 @@ class TestCommand : public QObject {
 
     CliCommandResult result = executeCliCommand(&app, {"unknown"});
     QVERIFY(!result.ok);
-    QVERIFY2(result.message.contains("unknown"), qPrintable(result.message));
-    QVERIFY2(result.message.contains("break-now"), qPrintable(result.message));
+    QJsonObject response;
+    assertJsonObject(result.message, &response);
+    QCOMPARE(response["error"].toString(), QString("cli-parse-error"));
+    QVERIFY2(response["message"].toString().contains("unknown"),
+             qPrintable(result.message));
+    QVERIFY2(response["message"].toString().contains("break-now"),
+             qPrintable(result.message));
   }
 
   void external_control_pause_round_trip() {

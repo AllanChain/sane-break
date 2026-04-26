@@ -92,265 +92,124 @@
 <context>
     <name>Cli</name>
     <message>
-        <location filename="../../src/core/cli.cpp" line="77"/>
-        <source>Invalid duration &quot;%1&quot;. Use a positive duration such as 10m, 600s, or 1h.</source>
-        <translation type="unfinished">משך זמן לא חוקי &quot;%1&quot;. השתמש במשך זמן חיובי כמו 10m, 600s, או 1h.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="166"/>
-        <source>Mode: %1</source>
-        <translation type="unfinished">מצב: %1</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="168"/>
-        <source>Next break: %1 in %2</source>
-        <translation type="unfinished">ההפסקה הבאה: %1 בעוד %2</translation>
-    </message>
-    <message>
         <location filename="../../src/core/cli.cpp" line="171"/>
-        <source>Next big break: %1</source>
-        <translation type="unfinished">ההפסקה הגדולה הבאה: %1</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="175"/>
-        <source>Pause reasons: %1</source>
-        <translation type="unfinished">סיבות להשהיה: %1</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="178"/>
-        <source>Postponing: yes</source>
-        <translation type="unfinished">דחייה: כן</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="180"/>
-        <source>Meeting: %1 remaining</source>
-        <translation type="unfinished">פגישה: נותרו %1</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="185"/>
-        <source>Focus: %1/%2 cycles complete</source>
-        <translation type="unfinished">ריכוז: %1/%2 מחזורים הושלמו</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="195"/>
         <source>Show the application version</source>
         <translation type="unfinished">הצג את גרסת היישום</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="200"/>
+        <location filename="../../src/core/cli.cpp" line="176"/>
         <source>Show this help text</source>
         <translation type="unfinished">הצג טקסט עזרה זה</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="257"/>
+        <location filename="../../src/core/cli.cpp" line="233"/>
         <source>Start the next break immediately</source>
         <translation type="unfinished">התחל את ההפסקה הבאה מיד</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="260"/>
+        <location filename="../../src/core/cli.cpp" line="236"/>
         <source>Start the next big break immediately</source>
         <translation type="unfinished">התחל את ההפסקה הגדולה הבאה מיד</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="263"/>
+        <location filename="../../src/core/cli.cpp" line="239"/>
         <source>Pause breaks by external control</source>
         <translation type="unfinished">השהה הפסקות באמצעות בקרה חיצונית</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="266"/>
+        <location filename="../../src/core/cli.cpp" line="242"/>
         <source>Resume breaks paused by external control</source>
         <translation type="unfinished">חדש הפסקות שהושהו על ידי בקרה חיצונית</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="269"/>
+        <location filename="../../src/core/cli.cpp" line="245"/>
         <source>Enable breaks by clearing all pause reasons</source>
         <translation type="unfinished">אפשר הפסקות על ידי ניקוי כל סיבות ההשהיה</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="273"/>
+        <location filename="../../src/core/cli.cpp" line="249"/>
         <source>Show current break status</source>
         <translation type="unfinished">הצג את מצב ההפסקה הנוכחי</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="275"/>
-        <source>Output status as JSON</source>
-        <translation type="unfinished">פלט סטטוס כ-JSON</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="284"/>
+        <location filename="../../src/core/cli.cpp" line="257"/>
         <source>Manage meeting or presentation mode</source>
         <translation type="unfinished">נהל מצב פגישה או מצגת</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="289"/>
+        <location filename="../../src/core/cli.cpp" line="262"/>
         <source>Start meeting mode for a duration</source>
         <translation type="unfinished">התחל מצב פגישה למשך זמן מסוים</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="292"/>
+        <location filename="../../src/core/cli.cpp" line="265"/>
         <source>Meeting duration, for example 45m, 2700s, or 1h</source>
         <translation type="unfinished">משך הפגישה, למשל 45m, 2700s, או 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="296"/>
+        <location filename="../../src/core/cli.cpp" line="269"/>
         <source>Meeting reason</source>
         <translation type="unfinished">סיבת הפגישה</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="299"/>
+        <location filename="../../src/core/cli.cpp" line="272"/>
         <source>End meeting mode</source>
         <translation type="unfinished">סיים מצב פגישה</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="302"/>
+        <location filename="../../src/core/cli.cpp" line="275"/>
         <source>Start a break immediately</source>
         <translation type="unfinished">התחל הפסקה מיד</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="305"/>
+        <location filename="../../src/core/cli.cpp" line="278"/>
         <source>Schedule the next break after this duration</source>
         <translation type="unfinished">תזמן את ההפסקה הבאה לאחר משך זמן זה</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="310"/>
+        <location filename="../../src/core/cli.cpp" line="283"/>
         <source>Extend the current meeting</source>
         <translation type="unfinished">הארך את הפגישה הנוכחית</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="314"/>
+        <location filename="../../src/core/cli.cpp" line="287"/>
         <source>Duration to extend, for example 10m, 600s, or 1h</source>
         <translation type="unfinished">משך הזמן להארכה, למשל 10m, 600s, או 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="321"/>
+        <location filename="../../src/core/cli.cpp" line="294"/>
         <source>Manage focus mode</source>
         <translation type="unfinished">נהל מצב ריכוז</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="326"/>
+        <location filename="../../src/core/cli.cpp" line="299"/>
         <source>Start focus mode for a duration</source>
         <translation type="unfinished">התחל מצב ריכוז למשך זמן מסוים</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="329"/>
+        <location filename="../../src/core/cli.cpp" line="302"/>
         <source>Focus duration, for example 50m, 3000s, or 1h</source>
         <translation type="unfinished">משך הריכוז, למשל 50m, 3000s, או 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="333"/>
+        <location filename="../../src/core/cli.cpp" line="306"/>
         <source>Focus reason</source>
         <translation type="unfinished">סיבת הריכוז</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="336"/>
+        <location filename="../../src/core/cli.cpp" line="309"/>
         <source>End focus mode</source>
         <translation type="unfinished">סיים מצב ריכוז</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="340"/>
+        <location filename="../../src/core/cli.cpp" line="313"/>
         <source>Postpone the next break</source>
         <translation type="unfinished">דחה את ההפסקה הבאה</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="344"/>
+        <location filename="../../src/core/cli.cpp" line="317"/>
         <source>Duration to postpone, for example 10m, 600s, or 1h. Bare numbers are minutes.</source>
         <translation type="unfinished">משך הזמן לדחייה, למשל 10m, 600s, או 1h. מספרים ללא יחידה הם בדקות.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="360"/>
-        <source>Started the next break.</source>
-        <translation type="unfinished">ההפסקה הבאה הופעלה.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="368"/>
-        <source>Started the next big break.</source>
-        <translation type="unfinished">ההפסקה הגדולה הבאה הופעלה.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="376"/>
-        <source>Paused breaks by external control.</source>
-        <translation type="unfinished">ההפסקות הושהו על ידי בקרה חיצונית.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="384"/>
-        <source>Enabled breaks paused by external control.</source>
-        <translation type="unfinished">ההפסקות שהושהו על ידי בקרה חיצונית הופעלו מחדש.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="392"/>
-        <source>Enabled breaks.</source>
-        <translation type="unfinished">ההפסקות הופעלו.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="412"/>
-        <source>Meeting mode is already active.</source>
-        <translation type="unfinished">מצב פגישה כבר פעיל.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="427"/>
-        <source>Started meeting mode.</source>
-        <translation type="unfinished">מצב פגישה הופעל.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="435"/>
-        <location filename="../../src/core/cli.cpp" line="470"/>
-        <source>Meeting mode is not active.</source>
-        <translation type="unfinished">מצב פגישה אינו פעיל.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="443"/>
-        <source>Ended meeting mode and started a break.</source>
-        <translation type="unfinished">מצב הפגישה הסתיים והופעלה הפסקה.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="462"/>
-        <source>Ended meeting mode.</source>
-        <translation type="unfinished">מצב הפגישה הסתיים.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="485"/>
-        <source>Extended meeting mode.</source>
-        <translation type="unfinished">מצב הפגישה הוארך.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="494"/>
-        <source>Focus mode is already active.</source>
-        <translation type="unfinished">מצב ריכוז כבר פעיל.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="500"/>
-        <source>Cannot start focus mode during meeting mode.</source>
-        <translation type="unfinished">לא ניתן להתחיל מצב ריכוז בזמן מצב פגישה.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="519"/>
-        <source>Started focus mode.</source>
-        <translation type="unfinished">מצב ריכוז הופעל.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="528"/>
-        <source>Focus mode is not active.</source>
-        <translation type="unfinished">מצב ריכוז אינו פעיל.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="534"/>
-        <source>Cannot end focus mode during a break.</source>
-        <translation type="unfinished">לא ניתן לסיים מצב ריכוז במהלך הפסקה.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="541"/>
-        <source>Ended focus mode.</source>
-        <translation type="unfinished">מצב הריכוז הסתיים.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="557"/>
-        <source>Postponed the next break.</source>
-        <translation type="unfinished">ההפסקה הבאה נדחתה.</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="563"/>
-        <source>Expected a command.</source>
-        <translation type="unfinished">ציפינו לפקודה.</translation>
     </message>
 </context>
 <context>

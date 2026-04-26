@@ -92,265 +92,124 @@
 <context>
     <name>Cli</name>
     <message>
-        <location filename="../../src/core/cli.cpp" line="77"/>
-        <source>Invalid duration &quot;%1&quot;. Use a positive duration such as 10m, 600s, or 1h.</source>
-        <translation type="unfinished">無效的時長 &quot;%1&quot;。請使用正數時長，例如 10m、600s 或 1h。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="166"/>
-        <source>Mode: %1</source>
-        <translation type="unfinished">模式：%1</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="168"/>
-        <source>Next break: %1 in %2</source>
-        <translation type="unfinished">下次休息：%2 後進行%1</translation>
-    </message>
-    <message>
         <location filename="../../src/core/cli.cpp" line="171"/>
-        <source>Next big break: %1</source>
-        <translation type="unfinished">下次大休息：%1</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="175"/>
-        <source>Pause reasons: %1</source>
-        <translation type="unfinished">暫停原因：%1</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="178"/>
-        <source>Postponing: yes</source>
-        <translation type="unfinished">已推遲：是</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="180"/>
-        <source>Meeting: %1 remaining</source>
-        <translation type="unfinished">會議：剩餘 %1</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="185"/>
-        <source>Focus: %1/%2 cycles complete</source>
-        <translation type="unfinished">專注：已完成 %1/%2 個循環</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="195"/>
         <source>Show the application version</source>
         <translation type="unfinished">顯示應用版本</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="200"/>
+        <location filename="../../src/core/cli.cpp" line="176"/>
         <source>Show this help text</source>
         <translation type="unfinished">顯示此幫助文本</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="257"/>
+        <location filename="../../src/core/cli.cpp" line="233"/>
         <source>Start the next break immediately</source>
         <translation type="unfinished">立即開始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="260"/>
+        <location filename="../../src/core/cli.cpp" line="236"/>
         <source>Start the next big break immediately</source>
         <translation type="unfinished">立即開始下一次大休息</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="263"/>
+        <location filename="../../src/core/cli.cpp" line="239"/>
         <source>Pause breaks by external control</source>
         <translation type="unfinished">通過外部控制暫停休息</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="266"/>
+        <location filename="../../src/core/cli.cpp" line="242"/>
         <source>Resume breaks paused by external control</source>
         <translation type="unfinished">恢復被外部控制暫停的休息</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="269"/>
+        <location filename="../../src/core/cli.cpp" line="245"/>
         <source>Enable breaks by clearing all pause reasons</source>
         <translation type="unfinished">清除所有暫停原因以啟用休息</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="273"/>
+        <location filename="../../src/core/cli.cpp" line="249"/>
         <source>Show current break status</source>
         <translation type="unfinished">顯示當前休息狀態</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="275"/>
-        <source>Output status as JSON</source>
-        <translation type="unfinished">以 JSON 格式輸出狀態</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="284"/>
+        <location filename="../../src/core/cli.cpp" line="257"/>
         <source>Manage meeting or presentation mode</source>
         <translation type="unfinished">管理會議或演示模式</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="289"/>
+        <location filename="../../src/core/cli.cpp" line="262"/>
         <source>Start meeting mode for a duration</source>
         <translation type="unfinished">啟動指定時長的會議模式</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="292"/>
+        <location filename="../../src/core/cli.cpp" line="265"/>
         <source>Meeting duration, for example 45m, 2700s, or 1h</source>
         <translation type="unfinished">會議時長，例如 45m、2700s 或 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="296"/>
+        <location filename="../../src/core/cli.cpp" line="269"/>
         <source>Meeting reason</source>
         <translation type="unfinished">會議原因</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="299"/>
+        <location filename="../../src/core/cli.cpp" line="272"/>
         <source>End meeting mode</source>
         <translation type="unfinished">結束會議模式</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="302"/>
+        <location filename="../../src/core/cli.cpp" line="275"/>
         <source>Start a break immediately</source>
         <translation type="unfinished">立即開始休息</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="305"/>
+        <location filename="../../src/core/cli.cpp" line="278"/>
         <source>Schedule the next break after this duration</source>
         <translation type="unfinished">在此時長後安排下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="310"/>
+        <location filename="../../src/core/cli.cpp" line="283"/>
         <source>Extend the current meeting</source>
         <translation type="unfinished">延長當前會議</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="314"/>
+        <location filename="../../src/core/cli.cpp" line="287"/>
         <source>Duration to extend, for example 10m, 600s, or 1h</source>
         <translation type="unfinished">延長的時長，例如 10m、600s 或 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="321"/>
+        <location filename="../../src/core/cli.cpp" line="294"/>
         <source>Manage focus mode</source>
         <translation type="unfinished">管理專注模式</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="326"/>
+        <location filename="../../src/core/cli.cpp" line="299"/>
         <source>Start focus mode for a duration</source>
         <translation type="unfinished">啟動指定時長的專注模式</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="329"/>
+        <location filename="../../src/core/cli.cpp" line="302"/>
         <source>Focus duration, for example 50m, 3000s, or 1h</source>
         <translation type="unfinished">專注時長，例如 50m、3000s 或 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="333"/>
+        <location filename="../../src/core/cli.cpp" line="306"/>
         <source>Focus reason</source>
         <translation type="unfinished">專注原因</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="336"/>
+        <location filename="../../src/core/cli.cpp" line="309"/>
         <source>End focus mode</source>
         <translation type="unfinished">結束專注模式</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="340"/>
+        <location filename="../../src/core/cli.cpp" line="313"/>
         <source>Postpone the next break</source>
         <translation type="unfinished">推遲下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="344"/>
+        <location filename="../../src/core/cli.cpp" line="317"/>
         <source>Duration to postpone, for example 10m, 600s, or 1h. Bare numbers are minutes.</source>
         <translation type="unfinished">推遲的時長，例如 10m、600s 或 1h。純數字表示分鐘。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="360"/>
-        <source>Started the next break.</source>
-        <translation type="unfinished">已開始下一次休息。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="368"/>
-        <source>Started the next big break.</source>
-        <translation type="unfinished">已開始下一次大休息。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="376"/>
-        <source>Paused breaks by external control.</source>
-        <translation type="unfinished">已通過外部控制暫停休息。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="384"/>
-        <source>Enabled breaks paused by external control.</source>
-        <translation type="unfinished">已恢復被外部控制暫停的休息。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="392"/>
-        <source>Enabled breaks.</source>
-        <translation type="unfinished">已啟用休息。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="412"/>
-        <source>Meeting mode is already active.</source>
-        <translation type="unfinished">會議模式已在運行中。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="427"/>
-        <source>Started meeting mode.</source>
-        <translation type="unfinished">已啟動會議模式。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="435"/>
-        <location filename="../../src/core/cli.cpp" line="470"/>
-        <source>Meeting mode is not active.</source>
-        <translation type="unfinished">會議模式未運行。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="443"/>
-        <source>Ended meeting mode and started a break.</source>
-        <translation type="unfinished">已結束會議模式並開始休息。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="462"/>
-        <source>Ended meeting mode.</source>
-        <translation type="unfinished">已結束會議模式。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="485"/>
-        <source>Extended meeting mode.</source>
-        <translation type="unfinished">已延長會議模式。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="494"/>
-        <source>Focus mode is already active.</source>
-        <translation type="unfinished">專注模式已在運行中。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="500"/>
-        <source>Cannot start focus mode during meeting mode.</source>
-        <translation type="unfinished">無法在會議模式期間啟動專注模式。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="519"/>
-        <source>Started focus mode.</source>
-        <translation type="unfinished">已啟動專注模式。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="528"/>
-        <source>Focus mode is not active.</source>
-        <translation type="unfinished">專注模式未運行。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="534"/>
-        <source>Cannot end focus mode during a break.</source>
-        <translation type="unfinished">無法在休息期間結束專注模式。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="541"/>
-        <source>Ended focus mode.</source>
-        <translation type="unfinished">已結束專注模式。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="557"/>
-        <source>Postponed the next break.</source>
-        <translation type="unfinished">已推遲下一次休息。</translation>
-    </message>
-    <message>
-        <location filename="../../src/core/cli.cpp" line="563"/>
-        <source>Expected a command.</source>
-        <translation type="unfinished">需要輸入命令。</translation>
     </message>
 </context>
 <context>
