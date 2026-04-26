@@ -94,122 +94,122 @@
     <message>
         <location filename="../../src/core/cli.cpp" line="171"/>
         <source>Show the application version</source>
-        <translation type="unfinished">顯示應用版本</translation>
+        <translation>顯示應用版本</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="176"/>
         <source>Show this help text</source>
-        <translation type="unfinished">顯示此幫助文本</translation>
+        <translation>顯示此幫助文本</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="233"/>
         <source>Start the next break immediately</source>
-        <translation type="unfinished">立即開始下一次休息</translation>
+        <translation>立即開始下一次休息</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="236"/>
         <source>Start the next big break immediately</source>
-        <translation type="unfinished">立即開始下一次大休息</translation>
+        <translation>立即開始下一次大休息</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="239"/>
         <source>Pause breaks by external control</source>
-        <translation type="unfinished">通過外部控制暫停休息</translation>
+        <translation>通過外部控制暫停休息</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="242"/>
         <source>Resume breaks paused by external control</source>
-        <translation type="unfinished">恢復被外部控制暫停的休息</translation>
+        <translation>恢復被外部控制暫停的休息</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="245"/>
         <source>Enable breaks by clearing all pause reasons</source>
-        <translation type="unfinished">清除所有暫停原因以啟用休息</translation>
+        <translation>清除所有暫停原因以啟用休息</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="249"/>
         <source>Show current break status</source>
-        <translation type="unfinished">顯示當前休息狀態</translation>
+        <translation>顯示當前休息狀態</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="257"/>
         <source>Manage meeting or presentation mode</source>
-        <translation type="unfinished">管理會議或演示模式</translation>
+        <translation>管理會議或演示模式</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="262"/>
         <source>Start meeting mode for a duration</source>
-        <translation type="unfinished">啟動指定時長的會議模式</translation>
+        <translation>啟動指定時長的會議模式</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="265"/>
         <source>Meeting duration, for example 45m, 2700s, or 1h</source>
-        <translation type="unfinished">會議時長，例如 45m、2700s 或 1h</translation>
+        <translation>會議時長，例如 45m、2700s 或 1h</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="269"/>
         <source>Meeting reason</source>
-        <translation type="unfinished">會議原因</translation>
+        <translation>會議原因</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="272"/>
         <source>End meeting mode</source>
-        <translation type="unfinished">結束會議模式</translation>
+        <translation>結束會議模式</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="275"/>
         <source>Start a break immediately</source>
-        <translation type="unfinished">立即開始休息</translation>
+        <translation>立即開始休息</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="278"/>
         <source>Schedule the next break after this duration</source>
-        <translation type="unfinished">在此時長後安排下一次休息</translation>
+        <translation>在此時長後安排下一次休息</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="283"/>
         <source>Extend the current meeting</source>
-        <translation type="unfinished">延長當前會議</translation>
+        <translation>延長當前會議</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="287"/>
         <source>Duration to extend, for example 10m, 600s, or 1h</source>
-        <translation type="unfinished">延長的時長，例如 10m、600s 或 1h</translation>
+        <translation>延長的時長，例如 10m、600s 或 1h</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="294"/>
         <source>Manage focus mode</source>
-        <translation type="unfinished">管理專注模式</translation>
+        <translation>管理專注模式</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="299"/>
         <source>Start focus mode for a duration</source>
-        <translation type="unfinished">啟動指定時長的專注模式</translation>
+        <translation>啟動指定時長的專注模式</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="302"/>
         <source>Focus duration, for example 50m, 3000s, or 1h</source>
-        <translation type="unfinished">專注時長，例如 50m、3000s 或 1h</translation>
+        <translation>專注時長，例如 50m、3000s 或 1h</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="306"/>
         <source>Focus reason</source>
-        <translation type="unfinished">專注原因</translation>
+        <translation>專注原因</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="309"/>
         <source>End focus mode</source>
-        <translation type="unfinished">結束專注模式</translation>
+        <translation>結束專注模式</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="313"/>
         <source>Postpone the next break</source>
-        <translation type="unfinished">推遲下一次休息</translation>
+        <translation>推遲下一次休息</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="317"/>
         <source>Duration to postpone, for example 10m, 600s, or 1h. Bare numbers are minutes.</source>
-        <translation type="unfinished">推遲的時長，例如 10m、600s 或 1h。純數字表示分鐘。</translation>
+        <translation>推遲的時長，例如 10m、600s 或 1h。純數字表示分鐘。</translation>
     </message>
 </context>
 <context>
@@ -217,27 +217,27 @@
     <message>
         <location filename="../../src/core/command-ipc.cpp" line="63"/>
         <source>Timed out while waiting for a response.</source>
-        <translation type="unfinished">等待響應時超時。</translation>
+        <translation>等待響應時超時。</translation>
     </message>
     <message>
         <location filename="../../src/core/command-ipc.cpp" line="75"/>
         <source>Received an invalid response from Sane Break.</source>
-        <translation type="unfinished">收到來自 Sane Break 的無效響應。</translation>
+        <translation>收到來自 Sane Break 的無效響應。</translation>
     </message>
     <message>
         <location filename="../../src/core/command-ipc.cpp" line="123"/>
         <source>No running Sane Break instance is available.</source>
-        <translation type="unfinished">沒有正在運行的 Sane Break 實例。</translation>
+        <translation>沒有正在運行的 Sane Break 實例。</translation>
     </message>
     <message>
         <location filename="../../src/core/command-ipc.cpp" line="132"/>
         <source>Timed out while sending the command.</source>
-        <translation type="unfinished">發送命令時超時。</translation>
+        <translation>發送命令時超時。</translation>
     </message>
     <message>
         <location filename="../../src/core/command-ipc.cpp" line="184"/>
         <source>Unsupported command version.</source>
-        <translation type="unfinished">不支持的命令版本。</translation>
+        <translation>不支持的命令版本。</translation>
     </message>
 </context>
 <context>
@@ -298,7 +298,7 @@
     <message>
         <location filename="../../src/app/focus-window.ui" line="40"/>
         <source>Enter at least 6 characters.</source>
-        <translation type="unfinished">請輸入至少 6 個字符。</translation>
+        <translation>請輸入至少 6 個字符。</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="68"/>
@@ -341,12 +341,12 @@
     <message>
         <location filename="../../src/app/focus-window.cpp" line="81"/>
         <source>Enter at least %1 characters.</source>
-        <translation type="unfinished">請輸入至少 %1 個字符。</translation>
+        <translation>請輸入至少 %1 個字符。</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.cpp" line="87"/>
         <source>Add a little more detail.</source>
-        <translation type="unfinished">請補充更多細節。</translation>
+        <translation>請補充更多細節。</translation>
     </message>
 </context>
 <context>
@@ -431,7 +431,7 @@
     <message>
         <location filename="../../src/app/meeting-window.ui" line="40"/>
         <source>Enter at least 6 characters.</source>
-        <translation type="unfinished">請輸入至少 6 個字符。</translation>
+        <translation>請輸入至少 6 個字符。</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="68"/>
@@ -464,22 +464,22 @@
     <message>
         <location filename="../../src/app/meeting-window.cpp" line="58"/>
         <source>Choose a future end time and enter at least %1 characters.</source>
-        <translation type="unfinished">請選擇一個未來的結束時間，並輸入至少 %1 個字符。</translation>
+        <translation>請選擇一個未來的結束時間，並輸入至少 %1 個字符。</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.cpp" line="65"/>
         <source>Choose an end time later than now.</source>
-        <translation type="unfinished">請選擇一個晚於當前時間的結束時間。</translation>
+        <translation>請選擇一個晚於當前時間的結束時間。</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.cpp" line="72"/>
         <source>Enter at least %1 characters.</source>
-        <translation type="unfinished">請輸入至少 %1 個字符。</translation>
+        <translation>請輸入至少 %1 個字符。</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.cpp" line="78"/>
         <source>Add a little more detail.</source>
-        <translation type="unfinished">請補充更多細節。</translation>
+        <translation>請補充更多細節。</translation>
     </message>
 </context>
 <context>
@@ -1238,7 +1238,7 @@ v%1
     <message>
         <location filename="../../src/app/main.cpp" line="75"/>
         <source>Unexpected GUI argument: %1</source>
-        <translation type="unfinished">意外的圖形界面參數：%1</translation>
+        <translation>意外的圖形界面參數：%1</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="101"/>
@@ -1268,7 +1268,7 @@ v%1
     <message>
         <location filename="../../src/app/main.cpp" line="148"/>
         <source>Could not start command server: %1</source>
-        <translation type="unfinished">無法啟動命令服務器：%1</translation>
+        <translation>無法啟動命令服務器：%1</translation>
     </message>
 </context>
 <context>
@@ -1508,7 +1508,7 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="149"/>
         <source>Paused by external control</source>
-        <translation type="unfinished">被外部控制暫停</translation>
+        <translation>被外部控制暫停</translation>
     </message>
 </context>
 <context>
