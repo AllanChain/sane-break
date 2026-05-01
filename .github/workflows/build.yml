@@ -360,7 +360,7 @@ jobs:
           pattern: sane-break-*
           merge-multiple: true
           skip-decompress: true
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           files: release/*
           body: |
