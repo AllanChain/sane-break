@@ -119,7 +119,7 @@ void TimeAxisItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* /*op
   for (int h = startHour; h <= endHour; h += stepHours) {
     int sec = h * 3600;
     qreal x = timeToX(sec);
-    QString label = QString("%1:00").arg(h, 2, 10, QChar('0'));
+    QString label = QLocale::system().toString(QTime(h % 24, 0), QLocale::ShortFormat);
 
     // Tick mark (cosmetic pen keeps constant pixel width)
     painter->drawLine(QPointF(x, 0), QPointF(x, 4));
@@ -174,8 +174,9 @@ static int spanSecond(const TimelineSpan& span, bool start) {
 static QString spanTooltip(const QString& label, const TimelineSpan& span) {
   QString tip = label;
   if (!span.reason.isEmpty()) tip += "\n" + span.reason;
-  tip += "\n" + span.start.time().toString("H:mm") + " - " +
-         span.end.time().toString("H:mm");
+  QLocale locale = QLocale::system();
+  tip += "\n" + locale.toString(span.start.time(), QLocale::ShortFormat) + " - " +
+         locale.toString(span.end.time(), QLocale::ShortFormat);
   return tip;
 }
 

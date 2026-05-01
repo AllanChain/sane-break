@@ -10,6 +10,7 @@
 #include <QAudioOutput>
 #include <QGuiApplication>
 #include <QList>
+#include <QLocale>
 #include <QMediaPlayer>
 #include <QObject>
 #include <QRandomGenerator>
@@ -178,13 +179,14 @@ void BreakWindows::setTime(int remainingTime) {
   if (estimatedEndTime.msec() > 500) {
     estimatedEndTime = estimatedEndTime.addMSecs(500);
   }
+  QString endTime = QLocale::system().toString(estimatedEndTime, QLocale::ShortFormat);
   for (auto w : std::as_const(m_windows)) {
-    w->setTime(remainingTime, estimatedEndTime.toString("hh:mm:ss"));
+    w->setTime(remainingTime, endTime);
   }
 }
 void BreakWindows::updateClocks() {
   QTime now = QTime::currentTime();
-  QString hourMinute = now.toString("hh:mm");
+  QString hourMinute = QLocale::system().toString(now, QLocale::ShortFormat);
   for (auto w : std::as_const(m_windows)) {
     w->setClock(hourMinute);
   }

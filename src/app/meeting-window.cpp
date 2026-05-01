@@ -8,6 +8,7 @@
 #include <QDialog>
 #include <QLabel>
 #include <QLineEdit>
+#include <QLocale>
 #include <QPushButton>
 #include <QTime>
 #include <QTimeEdit>
@@ -30,6 +31,9 @@ MeetingWindow::MeetingWindow(SanePreferences* preferences, BreakDatabase* db,
     : QDialog(parent), ui(new Ui::MeetingUI), preferences(preferences), db(db) {
   ui->setupUi(this);
   setAttribute(Qt::WA_DeleteOnClose);
+  QLocale timeLocale = QLocale::system();
+  ui->endTime->setLocale(timeLocale);
+  ui->endTime->setDisplayFormat(timeLocale.timeFormat(QLocale::ShortFormat));
   connect(ui->endTime, &QTimeEdit::timeChanged, this, &MeetingWindow::onInputUpdate);
   connect(ui->reasonEdit, &QLineEdit::textChanged, this, &MeetingWindow::onInputUpdate);
   connect(ui->confirmButton, &QPushButton::pressed, this, [this]() {
@@ -50,7 +54,8 @@ void MeetingWindow::onInputUpdate() {
   bool hasLongEnoughReason = remainingChars <= 0;
 
   ui->confirmButton->setEnabled(hasFutureEndTime && hasLongEnoughReason);
-  ui->dynamicLabel->setArgs({endTime.toString("HH:mm")});
+  ui->dynamicLabel->setArgs(
+      {QLocale::system().toString(endTime, QLocale::ShortFormat)});
 
   if (!hasFutureEndTime && !hasLongEnoughReason) {
     ui->reasonHelpLabel->setStyleSheet(kErrorTextStyle);
