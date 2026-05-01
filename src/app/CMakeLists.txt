@@ -65,6 +65,9 @@ qt_add_executable(
   sane-break-app MANUAL_FINALIZATION main.cpp ${CMAKE_SOURCE_DIR}/resources/index.qrc
 )
 target_link_libraries(sane-break-app PRIVATE sane-gui)
+if(SANE_BREAK_CLI_CONTROL_ENABLED)
+  target_compile_definitions(sane-break-app PRIVATE SANE_BREAK_CLI_CONTROL_ENABLED)
+endif()
 
 include(cmake/translation.cmake)
 

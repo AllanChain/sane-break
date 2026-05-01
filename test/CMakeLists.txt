@@ -7,7 +7,10 @@ add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} --verbose --output-on-fai
 
 include_directories("../src")
 
-set(TEST_FILES test-app.cpp test-command.cpp test-db.cpp test-window.cpp)
+set(TEST_FILES test-app.cpp test-db.cpp test-window.cpp)
+if(SANE_BREAK_CLI_CONTROL_ENABLED)
+  list(APPEND TEST_FILES test-command.cpp)
+endif()
 set(UTIL_FILES dummy.h)
 
 # app should use local settings

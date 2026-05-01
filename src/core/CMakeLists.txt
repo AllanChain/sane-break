@@ -14,10 +14,6 @@ add_library(
   app-states.h
   app.cpp
   app.h
-  cli.cpp
-  cli.h
-  command-ipc.cpp
-  command-ipc.h
   break-windows.h
   meeting-prompt.h
   flags.h
@@ -29,8 +25,14 @@ add_library(
   timer.h
 )
 
+set(SANE_BREAK_CLI_CONTROL_ENABLED OFF)
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-  find_package(CLI11 CONFIG REQUIRED)
+  find_package(CLI11 CONFIG QUIET)
+  if(CLI11_FOUND)
+    set(SANE_BREAK_CLI_CONTROL_ENABLED ON)
+  else()
+    message(WARNING "CLI11 not found; building without CLI control feature.")
+  endif()
 else()
   include(FetchContent)
   FetchContent_Declare(
@@ -40,10 +42,19 @@ else()
     GIT_TAG v2.6.2
   )
   FetchContent_MakeAvailable(cli11_proj)
+  set(SANE_BREAK_CLI_CONTROL_ENABLED ON)
 endif()
 
-target_link_libraries(
-  sane-core
-  PUBLIC Qt6::Widgets Qt6::Sql Qt6::Network sane-core-idle
-  PRIVATE CLI11::CLI11
+set(SANE_BREAK_CLI_CONTROL_ENABLED
+    ${SANE_BREAK_CLI_CONTROL_ENABLED}
+    CACHE INTERNAL "Whether CLI control feature is built" FORCE
 )
+
+target_link_libraries(
+  sane-core PUBLIC Qt6::Widgets Qt6::Sql Qt6::Network sane-core-idle
+)
+
+if(SANE_BREAK_CLI_CONTROL_ENABLED)
+  target_sources(sane-core PRIVATE cli.cpp cli.h command-ipc.cpp command-ipc.h)
+  target_link_libraries(sane-core PRIVATE CLI11::CLI11)
+endif()

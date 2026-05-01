@@ -24,8 +24,10 @@
 #include "app/welcome.h"
 #include "app/widgets/language-select.h"
 #include "config.h"
+#ifdef SANE_BREAK_CLI_CONTROL_ENABLED
 #include "core/cli.h"
 #include "core/command-ipc.h"
+#endif
 #include "core/preferences.h"
 
 #ifdef Q_OS_LINUX
@@ -41,6 +43,7 @@ bool waitForTray() {
   return false;
 }
 
+#ifdef SANE_BREAK_CLI_CONTROL_ENABLED
 int runCliCommand(int argc, char* argv[], const QStringList& arguments) {
   QCoreApplication a(argc, argv);
 
@@ -49,6 +52,7 @@ int runCliCommand(int argc, char* argv[], const QStringList& arguments) {
   stream << result.message << Qt::endl;
   return result.ok ? 0 : 1;
 }
+#endif
 
 int main(int argc, char* argv[]) {
   QCoreApplication::setOrganizationName("SaneBreak");
@@ -61,9 +65,11 @@ int main(int argc, char* argv[]) {
     rawArguments.append(QString::fromLocal8Bit(argv[i]));
   }
 
+#ifdef SANE_BREAK_CLI_CONTROL_ENABLED
   if (!shouldLaunchGuiForArguments(rawArguments)) {
     return runCliCommand(argc, argv, rawArguments);
   }
+#endif
 
   QApplication a(argc, argv);
   a.setApplicationDisplayName("Sane Break");
@@ -142,12 +148,14 @@ int main(int argc, char* argv[]) {
   }
 
   SaneBreakApp* app = SaneBreakApp::create(preferences, &a);
+#ifdef SANE_BREAK_CLI_CONTROL_ENABLED
   CliCommandServer commandServer(app);
   QString commandServerError;
   if (!commandServer.start(&commandServerError)) {
     qWarning().noquote() << QCoreApplication::tr("Could not start command server: %1")
                                 .arg(commandServerError);
   }
+#endif
 
   app->start();
   return a.exec();
