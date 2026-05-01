@@ -59,6 +59,22 @@
   </screenshots>
 
   <releases>
+  <release version="0.10.1" date="2026-05-01">
+    <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.10.1</url>
+    <description>
+      <p>Bug fixes</p>
+      <ul>
+        <li>Fix a divide-by-zero crash when flashing speed is set to 0 BPM</li>
+        <li>Fix the tray icon disappearing after triggering Break Now</li>
+      </ul>
+      <p>Other improvements</p>
+      <ul>
+        <li>Use the system locale's time format in break windows, meeting time pickers, and timeline labels</li>
+        <li>Show clearer inline guidance when meeting or focus reasons are too short, and ignore whitespace-only input</li>
+        <li>Mark the GNOME extension as compatible with GNOME 50</li>
+      </ul>
+    </description>
+  </release>
   <release version="0.10.0" date="2026-04-05">
     <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.10.0</url>
     <description>
