@@ -490,22 +490,32 @@
 <context>
     <name>MeetingWindow</name>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="58"/>
+        <location filename="../../src/app/meeting-window.cpp" line="82"/>
+        <source>tomorrow at %1</source>
+        <translation type="unfinished">morgen om %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="89"/>
         <source>Choose a future end time and enter at least %1 characters.</source>
         <translation type="unfinished">Kies een eindtijd in de toekomst en voer minimaal %1 tekens in.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="65"/>
+        <location filename="../../src/app/meeting-window.cpp" line="99"/>
         <source>Choose an end time later than now.</source>
         <translation type="unfinished">Kies een eindtijd die later is dan nu.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="72"/>
+        <location filename="../../src/app/meeting-window.cpp" line="102"/>
+        <source>Choose a later time today, or a tomorrow time before %1.</source>
+        <translation type="unfinished">Kies een later tijdstip vandaag, of een tijdstip morgen voor %1.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="112"/>
         <source>Enter at least %1 characters.</source>
         <translation type="unfinished">Voer minimaal %1 tekens in.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="78"/>
+        <location filename="../../src/app/meeting-window.cpp" line="118"/>
         <source>Add a little more detail.</source>
         <translation type="unfinished">Voeg wat meer details toe.</translation>
     </message>
@@ -1359,37 +1369,37 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation>Installeer de uitbreiding indien u gebruikmaakt van GNOME, anders zal Sane Break niet naar behoren werken.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="75"/>
+        <location filename="../../src/app/main.cpp" line="81"/>
         <source>Unexpected GUI argument: %1</source>
         <translation type="unfinished">Onverwacht GUI-argument: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="101"/>
+        <location filename="../../src/app/main.cpp" line="107"/>
         <source>Another instance of Sane Break is running.</source>
         <translation type="unfinished">Een andere instantie van Sane Break is al actief.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="102"/>
+        <location filename="../../src/app/main.cpp" line="108"/>
         <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
         <translation type="unfinished">Sluit de bestaande instantie voordat u een nieuwe start. Als de vorige instantie reeds is afgesloten, kunt u toch een nieuwe starten.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="107"/>
+        <location filename="../../src/app/main.cpp" line="113"/>
         <source>Quit</source>
         <translation type="unfinished">Afsluiten</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="109"/>
+        <location filename="../../src/app/main.cpp" line="115"/>
         <source>Start Anyway</source>
         <translation type="unfinished">Toch starten</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="116"/>
+        <location filename="../../src/app/main.cpp" line="122"/>
         <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
         <translation type="unfinished">Kan niet starten omdat er nog een andere instantie actief is. Verwijder &quot;%1&quot; handmatig en probeer het opnieuw.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="148"/>
+        <location filename="../../src/app/main.cpp" line="155"/>
         <source>Could not start command server: %1</source>
         <translation type="unfinished">Kon opdrachtdienst niet starten: %1</translation>
     </message>
@@ -1417,7 +1427,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation type="vanished">Lange pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="188"/>
+        <location filename="../../src/app/app.cpp" line="191"/>
         <source>Postpone</source>
         <translation>Uitstellen</translation>
     </message>
@@ -1479,17 +1489,17 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation type="unfinished">U hebt deze pauze al één keer uitgesteld.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="184"/>
+        <location filename="../../src/app/app.cpp" line="187"/>
         <source>Are you sure to quit Sane Break?</source>
         <translation>Weet u zeker dat u Sane Break wilt afsluiten?</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="185"/>
+        <location filename="../../src/app/app.cpp" line="188"/>
         <source>You can postpone the breaks instead.</source>
         <translation>U kunt ook de pauzes uitstellen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="187"/>
+        <location filename="../../src/app/app.cpp" line="190"/>
         <source>Cancel</source>
         <translation>Annuleren</translation>
     </message>
@@ -1512,7 +1522,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="189"/>
+        <location filename="../../src/app/app.cpp" line="192"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>

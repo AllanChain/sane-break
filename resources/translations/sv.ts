@@ -478,22 +478,32 @@
 <context>
     <name>MeetingWindow</name>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="58"/>
+        <location filename="../../src/app/meeting-window.cpp" line="82"/>
+        <source>tomorrow at %1</source>
+        <translation type="unfinished">i morgon klockan %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="89"/>
         <source>Choose a future end time and enter at least %1 characters.</source>
         <translation type="unfinished">Välj ett sluttidpunkt i framtiden och ange minst %1 tecken.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="65"/>
+        <location filename="../../src/app/meeting-window.cpp" line="99"/>
         <source>Choose an end time later than now.</source>
         <translation type="unfinished">Välj en sluttidpunkt som är senare än nu.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="72"/>
+        <location filename="../../src/app/meeting-window.cpp" line="102"/>
+        <source>Choose a later time today, or a tomorrow time before %1.</source>
+        <translation type="unfinished">Välj en senare tidpunkt idag, eller en tidpunkt i morgon före %1.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="112"/>
         <source>Enter at least %1 characters.</source>
         <translation type="unfinished">Ange minst %1 tecken.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="78"/>
+        <location filename="../../src/app/meeting-window.cpp" line="118"/>
         <source>Add a little more detail.</source>
         <translation type="unfinished">Lägg till lite mer detaljer.</translation>
     </message>
@@ -1271,37 +1281,37 @@ v%1
         <translation>Du måste installera skalutökningen om du använder GNOME. Annars är Sane break nästan oanvändbar</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="75"/>
+        <location filename="../../src/app/main.cpp" line="81"/>
         <source>Unexpected GUI argument: %1</source>
         <translation type="unfinished">Oväntat GUI-argument: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="101"/>
+        <location filename="../../src/app/main.cpp" line="107"/>
         <source>Another instance of Sane Break is running.</source>
         <translation>Ett annat exempel på Sane Break körs.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="102"/>
+        <location filename="../../src/app/main.cpp" line="108"/>
         <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
         <translation type="unfinished">Avsluta den gamla instansen innan du startar en ny. Om den tidigare instansen redan har avslutats kan du starta en ny ändå.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="107"/>
+        <location filename="../../src/app/main.cpp" line="113"/>
         <source>Quit</source>
         <translation type="unfinished">Avsluta</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="109"/>
+        <location filename="../../src/app/main.cpp" line="115"/>
         <source>Start Anyway</source>
         <translation type="unfinished">Starta ändå</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="116"/>
+        <location filename="../../src/app/main.cpp" line="122"/>
         <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
         <translation type="unfinished">Kunde inte starta eftersom en annan instans fortfarande körs. Ta bort &quot;%1&quot; manuellt och försök igen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="148"/>
+        <location filename="../../src/app/main.cpp" line="155"/>
         <source>Could not start command server: %1</source>
         <translation type="unfinished">Kunde inte starta kommandoserver: %1</translation>
     </message>
@@ -1339,22 +1349,22 @@ v%1
         <translation type="unfinished">Du har redan skjutit upp denna rast en gång.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="184"/>
+        <location filename="../../src/app/app.cpp" line="187"/>
         <source>Are you sure to quit Sane Break?</source>
         <translation>Är du säker på att du vill avsluta Sane Break?</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="185"/>
+        <location filename="../../src/app/app.cpp" line="188"/>
         <source>You can postpone the breaks instead.</source>
         <translation>Du kan istället skjuta upp rasterna.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="187"/>
+        <location filename="../../src/app/app.cpp" line="190"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="188"/>
+        <location filename="../../src/app/app.cpp" line="191"/>
         <source>Postpone</source>
         <translation type="unfinished">Skjut upp</translation>
     </message>
@@ -1377,7 +1387,7 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="189"/>
+        <location filename="../../src/app/app.cpp" line="192"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>

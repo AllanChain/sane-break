@@ -172,7 +172,10 @@ void SaneBreakApp::openMeetingWindow() {
     meetingWindow = new MeetingWindow(preferences, db);
     connect(meetingWindow, &MeetingWindow::meetingRequested, this,
             [this](QTime endTime, QString reason) {
-              int seconds = QTime::currentTime().secsTo(endTime);
+              QDateTime now = QDateTime::currentDateTime();
+              auto resolvedEndTime = MeetingTime::resolveEndDateTime(now, endTime);
+              if (!resolvedEndTime) return;
+              int seconds = now.secsTo(*resolvedEndTime);
               if (seconds > 0) startMeeting(seconds, reason);
             });
   }

@@ -462,22 +462,32 @@
 <context>
     <name>MeetingWindow</name>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="58"/>
+        <location filename="../../src/app/meeting-window.cpp" line="82"/>
+        <source>tomorrow at %1</source>
+        <translation>明天 %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="89"/>
         <source>Choose a future end time and enter at least %1 characters.</source>
         <translation>请选择一个未来的结束时间，并输入至少 %1 个字符。</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="65"/>
+        <location filename="../../src/app/meeting-window.cpp" line="99"/>
         <source>Choose an end time later than now.</source>
         <translation>请选择一个晚于当前时间的结束时间。</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="72"/>
+        <location filename="../../src/app/meeting-window.cpp" line="102"/>
+        <source>Choose a later time today, or a tomorrow time before %1.</source>
+        <translation>请选择今天稍晚的时间，或明天 %1 之前的时间。</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="112"/>
         <source>Enter at least %1 characters.</source>
         <translation>请输入至少 %1 个字符。</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="78"/>
+        <location filename="../../src/app/meeting-window.cpp" line="118"/>
         <source>Add a little more detail.</source>
         <translation>请补充更多细节。</translation>
     </message>
@@ -1236,37 +1246,37 @@ v%1
         <translation>如果你在使用 GNOME，那么需要安装对应的 shell 扩展，否则 Sane Break 不能正常使用</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="75"/>
+        <location filename="../../src/app/main.cpp" line="81"/>
         <source>Unexpected GUI argument: %1</source>
         <translation>意外的图形界面参数：%1</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="101"/>
+        <location filename="../../src/app/main.cpp" line="107"/>
         <source>Another instance of Sane Break is running.</source>
         <translation>另一个 Sane Break 实例正在运行。</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="102"/>
+        <location filename="../../src/app/main.cpp" line="108"/>
         <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
         <translation>启动新实例前，请先关闭旧实例。若前一个实例已退出，您可选择仍要启动。</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="107"/>
+        <location filename="../../src/app/main.cpp" line="113"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="109"/>
+        <location filename="../../src/app/main.cpp" line="115"/>
         <source>Start Anyway</source>
         <translation>仍要启动</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="116"/>
+        <location filename="../../src/app/main.cpp" line="122"/>
         <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
         <translation>无法启动，因为另一个实例仍在运行。请手动删除 %1 并重试。</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="148"/>
+        <location filename="../../src/app/main.cpp" line="155"/>
         <source>Could not start command server: %1</source>
         <translation>无法启动命令服务器：%1</translation>
     </message>
@@ -1300,27 +1310,27 @@ v%1
         <translation>这次休息您已经推迟过一次了。</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="184"/>
+        <location filename="../../src/app/app.cpp" line="187"/>
         <source>Are you sure to quit Sane Break?</source>
         <translation>确定退出 Sane Break？</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="185"/>
+        <location filename="../../src/app/app.cpp" line="188"/>
         <source>You can postpone the breaks instead.</source>
         <translation>你可以推迟休息而非退出。</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="187"/>
+        <location filename="../../src/app/app.cpp" line="190"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="188"/>
+        <location filename="../../src/app/app.cpp" line="191"/>
         <source>Postpone</source>
         <translation>推迟</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="189"/>
+        <location filename="../../src/app/app.cpp" line="192"/>
         <source>Yes</source>
         <translation>是的</translation>
     </message>

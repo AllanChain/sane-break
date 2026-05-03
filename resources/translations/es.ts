@@ -494,22 +494,32 @@
 <context>
     <name>MeetingWindow</name>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="58"/>
+        <location filename="../../src/app/meeting-window.cpp" line="82"/>
+        <source>tomorrow at %1</source>
+        <translation type="unfinished">mañana a las %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="89"/>
         <source>Choose a future end time and enter at least %1 characters.</source>
         <translation type="unfinished">Elige una hora de finalización futura e introduce al menos %1 caracteres.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="65"/>
+        <location filename="../../src/app/meeting-window.cpp" line="99"/>
         <source>Choose an end time later than now.</source>
         <translation type="unfinished">Elige una hora de finalización posterior a la actual.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="72"/>
+        <location filename="../../src/app/meeting-window.cpp" line="102"/>
+        <source>Choose a later time today, or a tomorrow time before %1.</source>
+        <translation type="unfinished">Elige una hora posterior de hoy, o una hora de mañana anterior a las %1.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="112"/>
         <source>Enter at least %1 characters.</source>
         <translation type="unfinished">Introduce al menos %1 caracteres.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="78"/>
+        <location filename="../../src/app/meeting-window.cpp" line="118"/>
         <source>Add a little more detail.</source>
         <translation type="unfinished">Añade un poco más de detalle.</translation>
     </message>
@@ -1323,37 +1333,37 @@ v%1
         <translation>Si estás usando GNOME, debes instalar la extensión &quot;shell&quot;. De lo contrario Sane Break será prácticamente inservible</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="75"/>
+        <location filename="../../src/app/main.cpp" line="81"/>
         <source>Unexpected GUI argument: %1</source>
         <translation type="unfinished">Argumento de interfaz gráfica inesperado: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="101"/>
+        <location filename="../../src/app/main.cpp" line="107"/>
         <source>Another instance of Sane Break is running.</source>
         <translation>Sane Break ya se está ejecutando en otra instancia.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="102"/>
+        <location filename="../../src/app/main.cpp" line="108"/>
         <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
         <translation type="unfinished">Cierra la instancia anterior antes de iniciar una nueva. Si la instancia anterior ya ha terminado, puedes iniciar una nueva de todos modos.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="107"/>
+        <location filename="../../src/app/main.cpp" line="113"/>
         <source>Quit</source>
         <translation type="unfinished">Cerrar</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="109"/>
+        <location filename="../../src/app/main.cpp" line="115"/>
         <source>Start Anyway</source>
         <translation type="unfinished">Iniciar de todos modos</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="116"/>
+        <location filename="../../src/app/main.cpp" line="122"/>
         <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
         <translation type="unfinished">No se pudo iniciar porque otra instancia todavía se está ejecutando. Por favor, elimina manualmente &quot;%1&quot; e inténtalo de nuevo.</translation>
     </message>
     <message>
-        <location filename="../../src/app/main.cpp" line="148"/>
+        <location filename="../../src/app/main.cpp" line="155"/>
         <source>Could not start command server: %1</source>
         <translation type="unfinished">No se pudo iniciar el servidor de comandos: %1</translation>
     </message>
@@ -1391,22 +1401,22 @@ v%1
         <translation type="unfinished">Ya has pospuesto este descanso una vez.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="184"/>
+        <location filename="../../src/app/app.cpp" line="187"/>
         <source>Are you sure to quit Sane Break?</source>
         <translation>¿Seguro que quieres cerrar Sane Break?</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="185"/>
+        <location filename="../../src/app/app.cpp" line="188"/>
         <source>You can postpone the breaks instead.</source>
         <translation>En lugar de eso, también puedes optar por posponer los descansos.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="187"/>
+        <location filename="../../src/app/app.cpp" line="190"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="188"/>
+        <location filename="../../src/app/app.cpp" line="191"/>
         <source>Postpone</source>
         <translation type="unfinished">Posponer</translation>
     </message>
@@ -1429,7 +1439,7 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="189"/>
+        <location filename="../../src/app/app.cpp" line="192"/>
         <source>Yes</source>
         <translation>Sí</translation>
     </message>

@@ -10,11 +10,14 @@
 #include <QLineEdit>
 #include <QLocale>
 #include <QPushButton>
+#include <QString>
 #include <QTime>
 #include <QTimeEdit>
+#include <QTimeZone>
 #include <QTimer>
 #include <QWidget>
 #include <Qt>
+#include <optional>
 
 #include "core/db.h"
 #include "core/preferences.h"
@@ -25,6 +28,25 @@ constexpr int kMinReasonLength = 6;
 constexpr auto kHelperTextStyle = "color: #6b7280;";
 constexpr auto kErrorTextStyle = "color: #ef4444;";
 }  // namespace
+
+namespace MeetingTime {
+
+std::optional<QDateTime> resolveEndDateTime(const QDateTime& now,
+                                            const QTime& endTime) {
+  if (!endTime.isValid()) return std::nullopt;
+
+  QDateTime todayCandidate(now.date(), endTime, now.timeZone());
+  if (todayCandidate > now) return todayCandidate;
+
+  QDateTime tomorrowCandidate = todayCandidate.addDays(1);
+  if (now.secsTo(tomorrowCandidate) <= kMidnightRolloverThresholdSeconds) {
+    return tomorrowCandidate;
+  }
+
+  return std::nullopt;
+}
+
+}  // namespace MeetingTime
 
 MeetingWindow::MeetingWindow(SanePreferences* preferences, BreakDatabase* db,
                              QWidget* parent)
@@ -47,17 +69,21 @@ MeetingWindow::MeetingWindow(SanePreferences* preferences, BreakDatabase* db,
 
 void MeetingWindow::onInputUpdate() {
   QTime endTime = ui->endTime->time();
-  QTime currentTime = QTime::currentTime();
+  QDateTime now = QDateTime::currentDateTime();
   QString reason = ui->reasonEdit->text().trimmed();
-  bool hasFutureEndTime = endTime > currentTime;
+  auto resolvedEndTime = MeetingTime::resolveEndDateTime(now, endTime);
+  bool isValidEndTime = resolvedEndTime.has_value();
   int remainingChars = kMinReasonLength - reason.length();
   bool hasLongEnoughReason = remainingChars <= 0;
 
-  ui->confirmButton->setEnabled(hasFutureEndTime && hasLongEnoughReason);
-  ui->dynamicLabel->setArgs(
-      {QLocale::system().toString(endTime, QLocale::ShortFormat)});
+  ui->confirmButton->setEnabled(isValidEndTime && hasLongEnoughReason);
+  QString endTimeLabel = QLocale::system().toString(endTime, QLocale::ShortFormat);
+  if (resolvedEndTime && resolvedEndTime->date() > now.date()) {
+    endTimeLabel = tr("tomorrow at %1").arg(endTimeLabel);
+  }
+  ui->dynamicLabel->setArgs({endTimeLabel});
 
-  if (!hasFutureEndTime && !hasLongEnoughReason) {
+  if (!isValidEndTime && !hasLongEnoughReason) {
     ui->reasonHelpLabel->setStyleSheet(kErrorTextStyle);
     ui->reasonHelpLabel->setText(
         tr("Choose a future end time and enter at least %1 characters.")
@@ -65,9 +91,18 @@ void MeetingWindow::onInputUpdate() {
     return;
   }
 
-  if (!hasFutureEndTime) {
+  if (!isValidEndTime) {
     ui->reasonHelpLabel->setStyleSheet(kErrorTextStyle);
-    ui->reasonHelpLabel->setText(tr("Choose an end time later than now."));
+    QDateTime maybeTomorrowCutoff =
+        now.addSecs(MeetingTime::kMidnightRolloverThresholdSeconds);
+    if (maybeTomorrowCutoff.date() == now.date()) {
+      ui->reasonHelpLabel->setText(tr("Choose an end time later than now."));
+    } else {
+      ui->reasonHelpLabel->setText(
+          tr("Choose a later time today, or a tomorrow time before %1.")
+              .arg(QLocale::system().toString(maybeTomorrowCutoff.time(),
+                                              QLocale::ShortFormat)));
+    }
     return;
   }
 

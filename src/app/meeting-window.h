@@ -5,6 +5,7 @@
 #pragma once
 
 #include <QColor>
+#include <QDateTime>
 #include <QDialog>
 #include <QLabel>
 #include <QLineEdit>
@@ -14,9 +15,18 @@
 #include <QStringList>
 #include <QTime>
 #include <QTimer>
+#include <optional>
 
 #include "core/db.h"
 #include "core/preferences.h"
+
+namespace MeetingTime {
+
+constexpr int kMidnightRolloverThresholdSeconds = 6 * 60 * 60;
+
+std::optional<QDateTime> resolveEndDateTime(const QDateTime& now, const QTime& endTime);
+
+}  // namespace MeetingTime
 
 namespace Ui {
 class MeetingUI;
