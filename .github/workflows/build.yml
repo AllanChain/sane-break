@@ -375,7 +375,12 @@ jobs:
             <details>
             <summary>macOS</summary>
 
-            Download `sane-break-macos-x86_64.dmg` file if you are using Intel mac, or `sane-break-macos-arm64.dmg` if you are using ARM chip. Open and install it. macOS 13 or newer are supported.
+            Recommended installation method:
+            ```bash
+            brew install allanchain/tap/sane-break
+            ```
+
+            Alternatively, download `sane-break-macos-x86_64.dmg` if you are using an Intel Mac, or `sane-break-macos-arm64.dmg` if you are using Apple silicon. Open and install it. macOS 13 or newer are supported.
             </details>
 
             <details>

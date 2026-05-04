@@ -74,7 +74,13 @@ https://github.com/user-attachments/assets/35002673-ce83-4848-bd5e-6cc6dbbd4c8c
 
 ### macOS
 
-Sane Break is available on [App Store](https://apps.apple.com/us/app/sane-break/id6740942634)
+For macOS, the recommended installation method is Homebrew:
+
+```bash
+brew install allanchain/tap/sane-break
+```
+
+Sane Break is also available on the [App Store](https://apps.apple.com/us/app/sane-break/id6740942634).
 
 ### Windows
 
