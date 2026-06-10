@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="uk" sourcelanguage="en_US">
+<TS version="2.1" language="uk_UA" sourcelanguage="en_US">
 <context>
     <name>AutoStart</name>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="54"/>
         <source>Failed to connect to Flatpak response</source>
         <extracomment>Error message when requesting autostart in Flatpak got no response</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Не вдалося отримати відповідь від Flatpak</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="63"/>
         <source>Failed to read desktop entry packaged with app</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Не вдалося прочитати файл запуску, упакований із застосунком</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="77"/>
@@ -20,42 +20,42 @@
         <location filename="../../src/lib/linux/auto-start.cpp" line="93"/>
         <source>Autostart desktop entry not writable</source>
         <extracomment>Error message when failed to write Linux desktop entry for autostart</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Файл автозапуску недоступний для запису</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="111"/>
         <source>The request to autostart was cancelled</source>
         <extracomment>Error message when requesting autostart in Flatpak got cancelled by user</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Запит на автозапуск було скасовано</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="45"/>
         <location filename="../../src/lib/windows/auto-start.cpp" line="62"/>
         <source>Disallowed by policy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Заборонено політикою безпеки</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="48"/>
         <source>Disallowed by user</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Заборонено користувачем</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="82"/>
         <source>Unknown error in MSIX autostart</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Невідома помилка автозапуску MSIX</translation>
     </message>
     <message>
         <location filename="../../src/lib/windows/auto-start.cpp" line="102"/>
         <source>Permission denied</source>
         <extracomment>Error message when requesting autostart got permission denied</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Доступ заборонено</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/auto-start.cpp" line="44"/>
         <location filename="../../src/lib/windows/auto-start.cpp" line="105"/>
         <source>Unknown error</source>
         <extracomment>Error message when requesting autostart got unknown error</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Невідома помилка</translation>
     </message>
 </context>
 <context>
@@ -63,7 +63,7 @@
     <message>
         <location filename="../../src/app/break-window.ui" line="91"/>
         <source>Break extended to make up for postponing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Перерву подовжено, щоб компенсувати відкладання</translation>
     </message>
     <message>
         <location filename="../../src/app/break-window.ui" line="224"/>
@@ -73,7 +73,7 @@
     <message>
         <location filename="../../src/app/break-window.ui" line="278"/>
         <source>Exit Force Break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Вийти з примусової перерви</translation>
     </message>
 </context>
 <context>
@@ -81,12 +81,12 @@
     <message>
         <location filename="../../src/app/break-window.cpp" line="177"/>
         <source>Break will end at: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Перерва закінчиться о: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/break-window.cpp" line="179"/>
         <source>Break has ended</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Перерва закінчилася</translation>
     </message>
 </context>
 <context>
@@ -94,122 +94,122 @@
     <message>
         <location filename="../../src/core/cli.cpp" line="171"/>
         <source>Show the application version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Показати версію застосунку</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="176"/>
         <source>Show this help text</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Показати цей текст допомоги</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="233"/>
         <source>Start the next break immediately</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Негайно розпочати наступну перерву</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="236"/>
         <source>Start the next big break immediately</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Негайно розпочати наступну довгу перерву</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="239"/>
         <source>Pause breaks by external control</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Призупинити перерви через зовнішнє керування</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="242"/>
         <source>Resume breaks paused by external control</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Відновити перерви, призупинені зовнішнім керуванням</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="245"/>
         <source>Enable breaks by clearing all pause reasons</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Увімкнути перерви, очистивши всі причини паузи</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="249"/>
         <source>Show current break status</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Показати поточний стан перерви</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="257"/>
         <source>Manage meeting or presentation mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Керування режимом зустрічі або презентації</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="262"/>
         <source>Start meeting mode for a duration</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Запустити режим зустрічі на певний час</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="265"/>
         <source>Meeting duration, for example 45m, 2700s, or 1h</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Тривалість зустрічі, наприклад 45хв, 2700сек або 1год</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="269"/>
         <source>Meeting reason</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Причина зустрічі</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="272"/>
         <source>End meeting mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Завершити режим зустрічі</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="275"/>
         <source>Start a break immediately</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Негайно розпочати перерву</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="278"/>
         <source>Schedule the next break after this duration</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Запланувати наступну перерву після цієї тривалості</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="283"/>
         <source>Extend the current meeting</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Подовжити поточну зустріч</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="287"/>
         <source>Duration to extend, for example 10m, 600s, or 1h</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Час подовження, наприклад 10хв, 600сек або 1год</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="294"/>
         <source>Manage focus mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Керування режимом фокусу</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="299"/>
         <source>Start focus mode for a duration</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Запустити режим фокусу на певний час</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="302"/>
         <source>Focus duration, for example 50m, 3000s, or 1h</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Тривалість фокусу, наприклад 50хв, 3000сек або 1год</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="306"/>
         <source>Focus reason</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Причина фокусу</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="309"/>
         <source>End focus mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Завершити режим фокусу</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="313"/>
         <source>Postpone the next break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Відкласти наступну перерву</translation>
     </message>
     <message>
         <location filename="../../src/core/cli.cpp" line="317"/>
         <source>Duration to postpone, for example 10m, 600s, or 1h. Bare numbers are minutes.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Час відкладання, наприклад 10хв, 600сек або 1год. Числа без одиниць виміру означають хвилини.</translation>
     </message>
 </context>
 <context>
@@ -217,27 +217,27 @@
     <message>
         <location filename="../../src/core/command-ipc.cpp" line="63"/>
         <source>Timed out while waiting for a response.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Час очікування відповіді минув.</translation>
     </message>
     <message>
         <location filename="../../src/core/command-ipc.cpp" line="75"/>
         <source>Received an invalid response from Sane Break.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Отримано недійсну відповідь від Sane Break.</translation>
     </message>
     <message>
         <location filename="../../src/core/command-ipc.cpp" line="123"/>
         <source>No running Sane Break instance is available.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Немає запущеного екземпляра Sane Break.</translation>
     </message>
     <message>
         <location filename="../../src/core/command-ipc.cpp" line="132"/>
         <source>Timed out while sending the command.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Час очікування під час надсилання команди минув.</translation>
     </message>
     <message>
         <location filename="../../src/core/command-ipc.cpp" line="184"/>
         <source>Unsupported command version.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Непідтримувана версія команди.</translation>
     </message>
 </context>
 <context>
@@ -245,37 +245,37 @@
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="51"/>
         <source>Break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Перерва</translation>
     </message>
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="50"/>
         <source>Tracked</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Відстежується</translation>
     </message>
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="53"/>
         <source>Paused</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Призупинено</translation>
     </message>
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="54"/>
         <source>Away</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Відсутній</translation>
     </message>
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="56"/>
         <source>Meeting</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Зустріч</translation>
     </message>
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="57"/>
         <source>Focus</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Фокус</translation>
     </message>
     <message>
         <location filename="../../src/app/widgets/timeline-view.cpp" line="59"/>
         <source>Postpone</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Відкласти</translation>
     </message>
 </context>
 <context>
@@ -283,57 +283,57 @@
     <message>
         <location filename="../../src/app/focus-window.ui" line="14"/>
         <source>Focus Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Режим фокусу</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="20"/>
         <source>&lt;h2&gt;Focus Mode&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Режим фокусу&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="27"/>
         <source>Briefly describe what are you working on:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Коротко опишіть, над чим ви працюєте:</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="40"/>
         <source>Enter at least 6 characters.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Введіть щонайменше 6 символів.</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="68"/>
         <source>Focus duration</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Тривалість фокусу</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="75"/>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">хв.</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="138"/>
         <source>The break schedule will be temporarily switched to:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Розклад перерв буде тимчасово змінено на:</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="155"/>
         <source>A &lt;b&gt;%1&lt;/b&gt; seconds small break every &lt;b&gt;%2&lt;/b&gt; minutes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Коротка перерва тривалістю &lt;b&gt;%1&lt;/b&gt; сек кожні &lt;b&gt;%2&lt;/b&gt; хв</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="172"/>
         <source>1 in every &lt;b&gt;%2&lt;/b&gt; breaks is a &lt;b&gt;%1&lt;/b&gt; seconds big break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Кожна &lt;b&gt;%2&lt;/b&gt;-га перерва є довгою тривалістю &lt;b&gt;%1&lt;/b&gt; сек</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="201"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Скасувати</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.ui" line="214"/>
         <source>Take a %1 second break to enter focus mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Зробіть перерву на %1 сек, щоб увійти в режим фокусу</translation>
     </message>
 </context>
 <context>
@@ -341,12 +341,12 @@
     <message>
         <location filename="../../src/app/focus-window.cpp" line="81"/>
         <source>Enter at least %1 characters.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Введіть щонайменше %1 символів.</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.cpp" line="87"/>
         <source>Add a little more detail.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Додайте трохи більше деталей.</translation>
     </message>
 </context>
 <context>
@@ -354,12 +354,12 @@
     <message>
         <location filename="../../src/app/heads-up-window.cpp" line="109"/>
         <source>Break soon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Скоро перерва</translation>
     </message>
     <message>
         <location filename="../../src/app/heads-up-window.cpp" line="118"/>
         <source>Click to start</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Натисніть, щоб почати</translation>
     </message>
 </context>
 <context>
@@ -375,7 +375,7 @@
         <source>English</source>
         <comment>current language</comment>
         <extracomment>This is the name of the current language in the current language</extracomment>
-        <translation>Англійська</translation>
+        <translation>Yкраїнська</translation>
     </message>
 </context>
 <context>
@@ -383,32 +383,32 @@
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="14"/>
         <source>Meeting Mode Ended</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Режим зустрічі завершено</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="20"/>
         <source>&lt;h2&gt;Meeting Mode Ended&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Режим зустрічі завершено&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="30"/>
         <source>Your meeting/presentation mode has ended. Would you like to take a break?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ваш режим зустрічі/презентації завершився. Бажаєте зробити перерву?</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="63"/>
         <source>Break in %1 minutes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Перерва через %1 хв</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="70"/>
         <source>Not yet (extend %1 minutes)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ще ні (подовжити на %1 хв)</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-prompt.ui" line="53"/>
         <source>Break now (%1s)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Перерва зараз (%1с)</translation>
     </message>
 </context>
 <context>
@@ -416,47 +416,47 @@
     <message>
         <location filename="../../src/app/meeting-window.ui" line="14"/>
         <source>Meeting Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Режим зустрічі</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="20"/>
         <source>&lt;h2&gt;Meeting/Presentation Mode&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Режим зустрічі/презентації&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="27"/>
         <source>Briefly describe this meeting/presentation:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Коротко опишіть цю зустріч/презентацію:</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="40"/>
         <source>Enter at least 6 characters.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Введіть щонайменше 6 символів.</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="68"/>
         <source>It will end at</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Завершиться о</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="129"/>
         <source>No break reminders will show before &lt;b&gt;%1&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Нагадування про перерви не з’являтимуться до &lt;b&gt;%1&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="164"/>
         <source>We&apos;ll check in with you before showing a break reminder.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ми запитаємо вас перед тим, як показати нагадування про перерву.</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="191"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Скасувати</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.ui" line="204"/>
         <source>Enter Meeting/Presentation Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Увійти в режим зустрічі/презентації</translation>
     </message>
 </context>
 <context>
@@ -464,32 +464,32 @@
     <message>
         <location filename="../../src/app/meeting-window.cpp" line="82"/>
         <source>tomorrow at %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">завтра о %1</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.cpp" line="89"/>
         <source>Choose a future end time and enter at least %1 characters.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Виберіть час завершення в майбутньому та введіть щонайменше %1 символів.</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.cpp" line="99"/>
         <source>Choose an end time later than now.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Виберіть час завершення пізніше за поточний.</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.cpp" line="102"/>
         <source>Choose a later time today, or a tomorrow time before %1.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Виберіть пізніший час сьогодні або час завтра до %1.</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.cpp" line="112"/>
         <source>Enter at least %1 characters.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Введіть щонайменше %1 символів.</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.cpp" line="118"/>
         <source>Add a little more detail.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Додайте трохи більше деталей.</translation>
     </message>
 </context>
 <context>
@@ -497,57 +497,57 @@
     <message>
         <location filename="../../src/app/postpone-window.ui" line="14"/>
         <source>Postpone</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Відкласти</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="20"/>
         <source>&lt;h2&gt;Postponing this break&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Відкладання цієї перерви&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="27"/>
         <source>Postponing this break by &lt;b&gt;%1&lt;/b&gt; minutes will:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Відкладання цієї перерви на &lt;b&gt;%1&lt;/b&gt; хв призведе до:</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="57"/>
         <source>Shorten your next work session by &lt;b&gt;%1&lt;/b&gt; minutes;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Скорочення вашого наступного робочого сеансу на &lt;b&gt;%1&lt;/b&gt; хв;</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="92"/>
         <source>Extend the break by &lt;b&gt;%1&lt;/b&gt; seconds.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Подовження перерви на &lt;b&gt;%1&lt;/b&gt; сек.</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="122"/>
         <source>Postpone by</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Відкласти на</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="129"/>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">хв.</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="187"/>
         <source>You won&apos;t be able to postpone this break again. It will start automatically at the scheduled time.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ви не зможете відкласти цю перерву знову. Вона розпочнеться автоматично у запланований час.</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="222"/>
         <source>You can still start the break early. If you do, the adjustments above will be recalculated based on the actual time.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ви все ще можете розпочати перерву раніше. Якщо ви це зробите, вищезазначені коригування будуть перераховані на основі фактичного часу.</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="249"/>
         <source>Keep original schedule</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Зберегти початковий розклад</translation>
     </message>
     <message>
         <location filename="../../src/app/postpone-window.ui" line="262"/>
         <source>Do the adjustments</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Застосувати коригування</translation>
     </message>
 </context>
 <context>
@@ -625,12 +625,12 @@
     <message>
         <location filename="../../src/app/pref-window.ui" line="511"/>
         <source>&lt;h2&gt;Focus Schedule&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Розклад фокусу&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="521"/>
         <source>When you activate Focus Mode from the tray, breaks will follow this schedule instead. Use it for shorter breaks when you need to stay focused.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Коли ви активуєте режим фокусу з системного трею, перерви дотримуватимуться цього розкладу. Використовуйте його для коротших перерв, коли потрібно зосередитися.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="934"/>
@@ -646,12 +646,12 @@
     <message>
         <location filename="../../src/app/pref-window.ui" line="1068"/>
         <source>Close windows right after small break ends</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Закрити вікна одразу після завершення короткої перерви</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1075"/>
         <source>Close windows right after big break ends</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Закрити вікна одразу після завершення довгої перерви</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1101"/>
@@ -677,54 +677,56 @@
     <message>
         <location filename="../../src/app/pref-window.ui" line="1052"/>
         <source>Max number of force break exits</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Максимальна кількість виходів з примусової перерви</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="110"/>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Інтерфейс</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1059"/>
         <source> times</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">разів</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1198"/>
         <source>&lt;h3&gt;Components to Show&lt;/h3&gt;
 
 &lt;p&gt;User interface components to show in the prompt and full-screen window.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h3&gt;Компоненти для відображення&lt;/h3&gt;
+
+&lt;p&gt;Елементи інтерфейсу, які відображатимуться у запрошенні та повноекранному вікні.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1223"/>
         <location filename="../../src/app/pref-window.ui" line="1269"/>
         <source>Time when break ends</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Час завершення перерви</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1244"/>
         <location filename="../../src/app/pref-window.ui" line="1290"/>
         <source>Countdown timer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Таймер зворотного відліку</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1216"/>
         <location filename="../../src/app/pref-window.ui" line="1262"/>
         <source>Progress bar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Індикатор прогресу</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1230"/>
         <location filename="../../src/app/pref-window.ui" line="1276"/>
         <source>Clock</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Годинник</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1237"/>
         <location filename="../../src/app/pref-window.ui" line="1283"/>
         <source>Buttons</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Кнопки</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1299"/>
@@ -776,7 +778,7 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1895"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: Use &lt;i&gt;Browse&lt;/i&gt; to select a custom sound file. A copy of the file will be saved so it can always be played.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;strong&gt;Порада&lt;/strong&gt;: Використовуйте &lt;i&gt;Огляд&lt;/i&gt;, щоб вибрати власний звуковий файл. Копія файлу буде збережена, щоб його завжди можна було відтворити.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1989"/>
@@ -808,7 +810,13 @@ v%1
 &lt;p&gt;Remind breaks without mindless skips. &lt;/p&gt;
 &lt;p&gt;2024-2026, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;Sane Break developers&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
 &lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;div&gt;
+&lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
+v%1
+&lt;/div&gt;
+&lt;p&gt;Нагадування про перерви без необдуманих пропусків. &lt;/p&gt;
+&lt;p&gt;2024-2026, &lt;a href=&quot;https://github.com/AllanChain/sane-break/&quot;&gt;розробники Sane Break&lt;/a&gt; (&lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.en.html&quot;&gt;GPL 3.0&lt;/a&gt;)
+&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="325"/>
@@ -900,13 +908,13 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="268"/>
         <source>&lt;h2&gt;Normal Schedule&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Звичайний розклад&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="398"/>
         <location filename="../../src/app/pref-window.ui" line="654"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Увімкнено</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="410"/>
@@ -917,17 +925,17 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="767"/>
         <source>&lt;h2&gt;Postpone&lt;/h2&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h2&gt;Відкладання&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="774"/>
         <source>Maximum postpone time as a percentage of your work session (&lt;b&gt;%1&lt;/b&gt; min)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Максимальний час відкладання у відсотках від вашого робочого сеансу (&lt;b&gt;%1&lt;/b&gt; хв)</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="811"/>
         <source>Postponing breaks adds extra time to your next long break, proportional to how much time you postponed. You can adjust the multiplier for how much extra time is added.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Відкладання перерв додає додатковий час до вашої наступної довгої перерви, пропорційно до того, на скільки ви її відклали. Ви можете налаштувати множник для додавання додаткового часу.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="867"/>
@@ -939,64 +947,64 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="927"/>
         <source>Show break prompt for</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Показувати запрошення до перерви протягом</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="992"/>
         <source>Tray icon will start flashing this many seconds before the break. Set to 0 to disable.</source>
         <extracomment>Tooltip for &quot;Flash tray icon before break&quot; config</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Іконка в трею почне блимати за стільки секунд до перерви. Встановіть 0, щоб вимкнути.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="995"/>
         <source>Flash tray icon before break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Блимання іконки в трею перед перервою</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1022"/>
         <source>Show a small notification this many seconds before the break starts. Click it to start the break early. Set to 0 to disable.</source>
         <extracomment>Tooltip for &quot;Show heads-up before break&quot; config</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Показувати маленьке сповіщення за стільки секунд до початку перерви. Натисніть на нього, щоб розпочати перерву раніше. Встановіть 0, щоб вимкнути.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1025"/>
         <source>Show heads-up before break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Показувати попередження перед перервою</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1207"/>
         <source>&lt;h4&gt;Small break&lt;/h4&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h4&gt;Коротка перерва&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1253"/>
         <source>&lt;h4&gt;Big break&lt;/h4&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h4&gt;Довга перерва&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1401"/>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Фонове зображення</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1411"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Немає</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1425"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Очистити</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1441"/>
         <source>&lt;p&gt;To preview break windows, save all changes first. The preview begins with a 2-second flashing prompt, followed by a 4-second full-screen break. A small break window will appear first, then a big break window.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;p&gt;Щоб переглянути вікна перерв, спершу збережіть усі зміни. Попередній перегляд починається з 2-секундного блимаючого запрошення, за яким слідує 4-секундна повноекранна перерва. Спершу з’явиться вікно короткої перерви, потім — довгої.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1451"/>
         <source>Preview Break Windows</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Попередній перегляд вікон перерв</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1536"/>
@@ -1016,22 +1024,22 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1557"/>
         <source>&lt;h3&gt;External Monitors&lt;/h3&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;h3&gt;Зовнішні монітори&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1564"/>
         <source>Pause when unknown monitor is connected</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Призупиняти при підключенні невідомого монітора</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1586"/>
         <source>Mark currently connected monitors as known</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Позначити підключені монітори як відомі</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1606"/>
         <source>Remove selected</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Видалити вибране</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1615"/>
@@ -1055,7 +1063,7 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="1855"/>
         <location filename="../../src/app/pref-window.ui" line="1869"/>
         <source>Browse</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Огляд</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1933"/>
@@ -1065,7 +1073,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1963"/>
         <source>Database file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Файл бази даних</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="2009"/>
@@ -1080,12 +1088,12 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="2164"/>
         <source>Help Us Translate!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Допоможіть нам з перекладом!</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="2197"/>
         <source>Revert to Last Saved</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Повернутися до останнього збереженого</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1911"/>
@@ -1105,7 +1113,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="2204"/>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Типові значення</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="2227"/>
@@ -1153,12 +1161,12 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.cpp" line="525"/>
         <source>Start next break after middle clicking on tray icon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Розпочати наступну перерву після натискання середньої кнопки миші на іконці в трею</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="530"/>
         <source>Start next break after double clicking on tray icon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Розпочати наступну перерву після подвійного натискання на іконці в трею</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="608"/>
@@ -1178,38 +1186,38 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.cpp" line="647"/>
         <source>Select Sound File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Вибрати звуковий файл</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="648"/>
         <source>Sound Files (*.mp3 *.wav *.ogg *.flac *.m4a)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Звукові файли (*.mp3 *.wav *.ogg *.flac *.m4a)</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="658"/>
         <location filename="../../src/app/pref-window.cpp" line="679"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Помилка</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="659"/>
         <source>Failed to save a copy of the selected sound file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Не вдалося зберегти копію вибраного звукового файлу.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="668"/>
         <source>Select Background Image</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Вибрати фонове зображення</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="669"/>
         <source>Image Files (*.png *.jpg *.jpeg *.bmp *.webp)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Файли зображень (*.png *.jpg *.jpeg *.bmp *.webp)</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="680"/>
         <source>Failed to save a copy of the selected image file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Не вдалося зберегти копію вибраного файлу зображення.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.cpp" line="490"/>
@@ -1232,52 +1240,52 @@ v%1
     <message>
         <location filename="../../src/lib/linux/system-check.cpp" line="59"/>
         <source>Tray icon is not available, falling back to a normal window</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Іконка в трею недоступна, повертаємось до звичайного вікна</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/system-check.cpp" line="63"/>
         <source>The compositor does not support layer shell, and window positioning will be bugged</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Композитор не підтримує layer shell, тому позиціонування вікон може працювати некоректно</translation>
     </message>
     <message>
         <location filename="../../src/lib/linux/system-check.cpp" line="66"/>
         <source>You need to install the shell extension if you are using GNOME. Otherwise, Sane break is almost unusable</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Якщо ви використовуєте GNOME, вам потрібно встановити розширення оболонки. Інакше Sane Break буде майже непридатним для використання</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="81"/>
         <source>Unexpected GUI argument: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Неочікуваний аргумент GUI: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="107"/>
         <source>Another instance of Sane Break is running.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Інший екземпляр Sane Break вже запущено.</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="108"/>
         <source>Please quit the old instance before starting a new one. If the previous instance has already exited, you can start a new one anyway.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Будь ласка, завершіть старий екземпляр перед запуском нового. Якщо попередній екземпляр уже завершив роботу, ви все одно можете запустити новий.</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="113"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Вийти</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="115"/>
         <source>Start Anyway</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Все одно запустити</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="122"/>
         <source>Could not start because another instance is still running. Please manually delete &quot;%1&quot; and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Не вдалося запустити, оскільки інший екземпляр все ще працює. Будь ласка, вручну видаліть &quot;%1&quot; і спробуйте знову.</translation>
     </message>
     <message>
         <location filename="../../src/app/main.cpp" line="155"/>
         <source>Could not start command server: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Не вдалося запустити сервер команд: %1</translation>
     </message>
 </context>
 <context>
@@ -1285,53 +1293,53 @@ v%1
     <message>
         <location filename="../../src/app/app.cpp" line="154"/>
         <source>No further postpones are allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Подальші відкладання не дозволені.</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="147"/>
         <location filename="../../src/app/app.cpp" line="156"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Гаразд</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="144"/>
         <source>Cannot postpone during focus mode.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Не можна відкладати під час режиму фокусу.</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="145"/>
         <source>End focus mode first if you want to postpone.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Спершу завершіть режим фокусу, якщо хочете відкласти.</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="153"/>
         <source>You have already postponed this break once.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ви вже відкладали цю перерву один раз.</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="187"/>
         <source>Are you sure to quit Sane Break?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ви впевнені, що хочете вийти з Sane Break?</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="188"/>
         <source>You can postpone the breaks instead.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Натомість ви можете відкласти перерви.</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="190"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Скасувати</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="191"/>
         <source>Postpone</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Відкласти</translation>
     </message>
     <message>
         <location filename="../../src/app/app.cpp" line="192"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Так</translation>
     </message>
 </context>
 <context>
@@ -1352,42 +1360,42 @@ v%1
     <message>
         <location filename="../../src/app/stats-window.ui" line="20"/>
         <source>Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Статистика</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="32"/>
         <source>%1 breaks (%2 completed)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 перерв (%2 завершено)</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="39"/>
         <source>Break time: %1 · Avg flash: %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Час перерви: %1 · Середнє блимання: %2</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="46"/>
         <source>%1 postponed · %2 force break exits</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 відкладено · %2 виходів з примусової перерви</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.ui" line="53"/>
         <source>%1 tracked · %2 paused</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 відстежено · %2 призупинено</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.cpp" line="32"/>
         <source>%1h %2m</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1год %2хв</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.cpp" line="33"/>
         <source>%1m</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1хв</translation>
     </message>
     <message>
         <location filename="../../src/app/stats-window.cpp" line="138"/>
         <source>%1s</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1с</translation>
     </message>
 </context>
 <context>
@@ -1402,18 +1410,18 @@ v%1
         <location filename="../../src/app/tray.cpp" line="81"/>
         <source>%n more minutes</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>ще %n хвилина</numerusform>
+            <numerusform>ще %n хвилини</numerusform>
+            <numerusform>ще %n хвилин</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/tray.cpp" line="82"/>
         <source>%n more hours</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>ще %n година</numerusform>
+            <numerusform>ще %n години</numerusform>
+            <numerusform>ще %n годин</numerusform>
         </translation>
     </message>
     <message>
@@ -1446,7 +1454,7 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="136"/>
         <source>Exit meeting (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Вийти зі зустрічі (%1)</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="101"/>
@@ -1461,27 +1469,27 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="59"/>
         <source>Meeting Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Режим зустрічі</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="62"/>
         <source>Focus Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Режим фокусу</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="64"/>
         <source>End Focus &amp;&amp; Break</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Завершити фокус &amp;&amp; перерву</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="72"/>
         <source>Extend Meeting</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Подовжити зустріч</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="92"/>
         <source>Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Статистика</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="103"/>
@@ -1491,12 +1499,12 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="124"/>
         <source>focus: %1 %2 (%3/%4)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">фокус: %1 %2 (%3/%4)</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="137"/>
         <source>Meeting mode — until %1 (%2 left)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Режим зустрічі — до %1 (залишилось %2)</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="141"/>
@@ -1516,12 +1524,12 @@ v%1
     <message>
         <location filename="../../src/app/tray.cpp" line="147"/>
         <source>Paused on unknown monitor</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Призупинено через невідомий монітор</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="149"/>
         <source>Paused by external control</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Призупинено зовнішнім керуванням</translation>
     </message>
 </context>
 <context>
