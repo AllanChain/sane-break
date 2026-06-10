@@ -36,7 +36,8 @@ QString ScreenMonitor::screenId(const QScreen* screen) {
 QStringList ScreenMonitor::connectedScreenIds() {
   QStringList ids;
   for (const QScreen* screen : QGuiApplication::screens()) {
-    ids.append(screenId(screen));
+    auto id = screenId(screen);
+    if (!id.isEmpty()) ids.append(id);
   }
   return ids;
 }
