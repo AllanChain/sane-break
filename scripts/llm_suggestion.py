@@ -111,7 +111,10 @@ def ask_ai(
     received_chars = 0
     has_announced_stream = False
     for chunk in response:
-        chunk_message = chunk.choices[0].delta.content
+        if not chunk.choices:
+            continue
+        delta = chunk.choices[0].delta
+        chunk_message = delta.content if delta is not None else None
         if chunk_message:
             chunks.append(chunk_message)
             received_chars += len(chunk_message)
