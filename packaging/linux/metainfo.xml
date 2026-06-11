@@ -59,6 +59,16 @@
   </screenshots>
 
   <releases>
+  <release version="0.10.2" date="2026-06-11">
+    <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.10.2</url>
+    <description>
+      <p>Bug fixes</p>
+      <ul>
+        <li>Allow meeting ends tomorrow for night owls</li>
+        <li>Fix crash during screen removal</li>
+      </ul>
+    </description>
+  </release>
   <release version="0.10.1" date="2026-05-01">
     <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.10.1</url>
     <description>
