@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "auto-start.h"
@@ -32,7 +32,7 @@ void AutoStart::setEnabled(bool enabled) {
       {"background", enabled},
       {"commandline", QStringList({"sane-break"})},
       {"reason", "Launch Sane Break at startup"},
-      {"handle_token", QString("io/github/AllanChain/SaneBreak/%1").arg(token)}};
+      {"handle_token", QString("SaneBreak%1").arg(token)}};
   msg << "" << options;
   QDBusMessage response = sessionBus.call(msg);
 
