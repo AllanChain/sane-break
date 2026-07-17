@@ -773,7 +773,7 @@ Tutti i colori sono in formato &lt;code&gt;#AARRGGBB&lt;/code&gt;.</translation>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1465"/>
         <source>&lt;h3&gt;Pause Conditions&lt;/h3&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;Condizioni di pausa&lt;/h3&gt;</translation>
+        <translation>&lt;h3&gt;Condizioni per la pausa&lt;/h3&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1676"/>
