@@ -13,6 +13,7 @@
 #include <QScreen>
 #include <QSequentialAnimationGroup>
 #include <QWidget>
+#include <QWindow>
 #include <algorithm>
 
 HeadsUpWindow::HeadsUpWindow(int totalSeconds, QColor bgColor, QColor highlightColor,
@@ -69,9 +70,11 @@ void HeadsUpWindow::setTime(int remainingSeconds) {
 }
 
 void HeadsUpWindow::initSize(QScreen* screen) {
+  m_screen = screen;
   QRect geo = screen->availableGeometry();
   move(geo.x() + (geo.width() - PILL_WIDTH) / 2, geo.y() + 16);
   createWinId();
+  if (windowHandle() && screen) windowHandle()->setScreen(screen);
 }
 
 void HeadsUpWindow::paintEvent(QPaintEvent*) {

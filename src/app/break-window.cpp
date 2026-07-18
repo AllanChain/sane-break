@@ -203,16 +203,24 @@ void BreakWindow::showFullScreen() {
   setProperty("color", m_data.theme.mainBackground);
 
   ui->breakLabel->setText(m_data.message.fullScreen);
-  if (m_data.isPostponed) ui->postponeLabel->setVisible(true);
-  if (m_data.show.countdown) ui->countDownLabel->setVisible(true);
+  // Set visibility explicitly from the preferences rather than only showing when the
+  // flag is true. showFlashPrompt() normally hides these first, but a window created
+  // directly into the full-screen phase (e.g. on display hot-plug) skips that step, so
+  // without these explicit hides every widget would stay visible regardless of the
+  // small/bigBreakShow* preferences. The progress bar had the symmetric problem: it
+  // was never managed here at all, so it stayed at the .ui default (visible) and
+  // showed on hot-plugged windows even when show.progressBar was false.
+  ui->progressBar->setVisible(m_data.show.prograssBar);
+  ui->postponeLabel->setVisible(m_data.isPostponed);
+  ui->countDownLabel->setVisible(m_data.show.countdown);
+  ui->clock->setVisible(m_data.show.clock);
   if (m_data.show.clock) {
-    ui->clock->setVisible(true);
     ui->clock->setStyleSheet(
         QString("QLabel { background: transparent; font-size: %1px; }")
             .arg(m_data.show.countdown ? 50 : 100));
   }
-  if (m_data.show.endTime) ui->breakEndTimeLabel->setVisible(true);
-  if (m_data.show.buttons) ui->buttons->setVisible(true);
+  ui->breakEndTimeLabel->setVisible(m_data.show.endTime);
+  ui->buttons->setVisible(m_data.show.buttons);
 
   QPropertyAnimation* resizeAnim =
       new QPropertyAnimation(m_waylandWorkaround ? mainWidget : this, "geometry");
@@ -252,9 +260,10 @@ void BreakWindow::showFlashPrompt() {
   }
 
   ui->breakLabel->setText(m_data.message.prompt);
-  if (!m_data.show.prograssBar) {
-    ui->progressBar->setVisible(false);
-  }
+  // Set visibility explicitly (idempotent) so a window that skips the
+  // prompt->fullscreen animation, or re-enters prompt from fullscreen, has the right
+  // state.
+  ui->progressBar->setVisible(m_data.show.prograssBar);
   ui->postponeLabel->setVisible(false);
   ui->countDownLabel->setVisible(false);
   ui->clock->setVisible(false);
@@ -274,6 +283,7 @@ void BreakWindow::showFlashPrompt() {
 }
 
 void BreakWindow::initSize(QScreen* screen) {
+  m_screen = screen;
   if (m_waylandWorkaround) {
     QRect rect = screen->availableGeometry();
     // Avoid using full height when initializing the main window. GNOME will refuse to
@@ -289,6 +299,12 @@ void BreakWindow::initSize(QScreen* screen) {
                 SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
   }
   createWinId();
+  // Pin the surface to the requested output. On Wayland + layer-shell this makes
+  // LayerShellQt place the surface on the right output (it reads QWindow::screen()
+  // by default); on other platforms it keeps screen() authoritative after creation.
+  // Must come after createWinId() so windowHandle() is valid, and before show() so
+  // the surface is created on the right output from the start.
+  if (windowHandle() && screen) windowHandle()->setScreen(screen);
 #ifdef Q_OS_MACOS
   macSetAllWorkspaces(windowHandle());
 #endif
