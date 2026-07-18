@@ -372,6 +372,9 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
   controllers->add(PrefGroup::Pause,
                    new PrefController<QSpinBox, int>(ui->pauseOnIdleBox,
                                                      preferences->pauseOnIdleFor, 60));
+  controllers->add(PrefGroup::Pause, new PrefController<QCheckBox, bool>(
+                                         ui->treatInhibitorAsActivityCheck,
+                                         preferences->treatInhibitorAsActivity));
   connect(controllers->add(PrefGroup::Pause,
                            new PrefController<QSpinBox, int>(
                                ui->resetBreakBox, preferences->resetAfterPause, 60)),

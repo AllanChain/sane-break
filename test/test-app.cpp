@@ -14,6 +14,7 @@
 
 #include "core/app.h"
 #include "core/flags.h"
+#include "core/idle-time.h"
 #include "dummy.h"
 #include "gmock/gmock.h"
 
@@ -166,6 +167,63 @@ class TestApp : public QObject {
     int secondsToNextBreak = app.trayData.secondsToNextBreak;
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
+  }
+  // Default preference (treatInhibitorAsActivity == true) maps to InhibitorAware.
+  void idle_mode_default_is_inhibitor_aware() {
+    NiceMock<DummyApp> app(deps);
+    QCOMPARE(deps.preferences->treatInhibitorAsActivity->get(), true);
+    app.start();
+    QCOMPARE(deps.idleTimer->recordedMode(), IdleMode::InhibitorAware);
+  }
+  // Setting the preference to false before start maps to InputOnly.
+  void idle_mode_false_pref_is_input_only() {
+    deps.preferences->treatInhibitorAsActivity->set(false);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+    QCOMPARE(deps.idleTimer->recordedMode(), IdleMode::InputOnly);
+  }
+  // Changing the preference at runtime re-applies the mode live.
+  void idle_mode_live_change() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+    QCOMPARE(deps.idleTimer->recordedMode(), IdleMode::InhibitorAware);
+    deps.preferences->treatInhibitorAsActivity->set(false);
+    QCOMPARE(deps.idleTimer->recordedMode(), IdleMode::InputOnly);
+    deps.preferences->treatInhibitorAsActivity->set(true);
+    QCOMPARE(deps.idleTimer->recordedMode(), IdleMode::InhibitorAware);
+  }
+  // During a break, idle must be measured with raw input (InputOnly) regardless of
+  // the preference, so phase transitions and force-break escalation correctly detect
+  // actual user presence instead of being masked by a background inhibitor.
+  void idle_mode_during_break_is_input_only() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+    QCOMPARE(deps.idleTimer->recordedMode(), IdleMode::InhibitorAware);
+    app.advance(app.trayData.secondsToNextBreak);
+    QVERIFY(app.trayData.isBreaking);
+    QCOMPARE(deps.idleTimer->recordedMode(), IdleMode::InputOnly);
+  }
+  // After a break ends, the preferred mode is restored when returning to normal.
+  void idle_mode_restores_after_break() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+    app.advance(app.trayData.secondsToNextBreak);
+    QCOMPARE(deps.idleTimer->recordedMode(), IdleMode::InputOnly);
+    app.advanceToBreakEnd();
+    QVERIFY(!app.trayData.isBreaking);
+    QCOMPARE(deps.idleTimer->recordedMode(), IdleMode::InhibitorAware);
+  }
+  // Force break also uses InputOnly — an inhibitor must not prevent force-break
+  // escalation when the user is actually active.
+  void idle_mode_during_force_break_is_input_only() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+    app.advance(app.trayData.secondsToNextBreak);
+    // User stays "active" (not idle) so the break escalates to force break.
+    app.advanceToForceBreakStart();
+    QCOMPARE(deps.idleTimer->recordedMode(), IdleMode::InputOnly);
+    app.advanceToBreakEnd();
+    QCOMPARE(deps.idleTimer->recordedMode(), IdleMode::InhibitorAware);
   }
   void long_post_break_idle_resets_cycle_data() {
     QTest::addColumn<bool>("autoCloseWindow");

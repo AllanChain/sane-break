@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "wayland-idle.h"
@@ -18,6 +18,7 @@
 #include <cstdint>
 #include <cstring>
 
+#include "core/idle-time.h"
 #include "wayland-ext-idle-notify-v1-client-protocol.h"
 
 IdleTimeWayland::IdleTimeWayland(QObject* parent) {
@@ -40,10 +41,16 @@ IdleTimeWayland::IdleTimeWayland(QObject* parent) {
   wl_registry_add_listener(registry, &globalListener, this);
   wl_display_roundtrip(display);
 
-  const auto wl_ntfr_ver = ext_idle_notifier_v1_get_version(idleNotifier);
-  const auto wl_ntfr_ver_w_input_idle = decltype(wl_ntfr_ver){2};
+  chooseGetIdleNotification();
+}
 
-  if (wl_ntfr_ver < wl_ntfr_ver_w_input_idle) {
+void IdleTimeWayland::chooseGetIdleNotification() {
+  if (idleNotifier == nullptr) return;
+  const auto wl_ntfr_ver = ext_idle_notifier_v1_get_version(idleNotifier);
+  // InhibitorAware (default): use v1 get_idle_notification, which respects
+  // zwp_idle_inhibitor_v1. InputOnly: use v2 get_input_idle_notification, which
+  // ignores inhibitors; fall back to v1 on v1-only compositors.
+  if (m_idleMode == IdleMode::InhibitorAware || wl_ntfr_ver < 2) {
     get_idle_notification = ext_idle_notifier_v1_get_idle_notification;
   } else {
     get_idle_notification = ext_idle_notifier_v1_get_input_idle_notification;
@@ -96,6 +103,20 @@ void IdleTimeWayland::stopWatching() {
 void IdleTimeWayland::setMinIdleTime(int idleTime) {
   if (idleTime == m_minIdleTime) return;
   m_minIdleTime = idleTime;
+  if (!isWatching) return;
+  if (idleNotification != nullptr) {
+    ext_idle_notification_v1_destroy(idleNotification);
+  }
+  idleNotification = get_idle_notification(idleNotifier, m_minIdleTime, seat);
+  ext_idle_notification_v1_add_listener(idleNotification, &idleListener, this);
+}
+
+void IdleTimeWayland::setIdleMode(IdleMode mode) {
+  if (mode == m_idleMode) return;
+  m_idleMode = mode;
+  // Re-evaluate which request to use, then re-create the notification object so the
+  // new request (v1 vs v2) takes effect immediately (mirrors setMinIdleTime()).
+  chooseGetIdleNotification();
   if (!isWatching) return;
   if (idleNotification != nullptr) {
     ext_idle_notification_v1_destroy(idleNotification);

@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "read-based-idle.h"
@@ -7,11 +7,14 @@
 #include <QObject>
 #include <QTimer>
 #include <functional>
+#include <memory>
+#include <utility>
 
 #include "core/idle-time.h"
+#include "idle-reader.h"
 
 ReadBasedIdleTime::ReadBasedIdleTime(QObject* parent, std::function<int()> idleReader)
-    : SystemIdleTime(parent), m_idleReader(idleReader) {
+    : SystemIdleTime(parent), m_rawReader(std::move(idleReader)) {
   m_timer = new QTimer(this);
   m_delay = new QTimer(this);
   m_delay->setSingleShot(true);
@@ -20,7 +23,7 @@ ReadBasedIdleTime::ReadBasedIdleTime(QObject* parent, std::function<int()> idleR
 };
 
 void ReadBasedIdleTime::startWatching() {
-  // Assume currently not idle and nofity first idle event
+  // Assume currently not idle and notifity first idle event
   m_isIdle = false;
   m_timer->setInterval(m_watchAccuracy);
   // We emit idleStart after at least m_minIdleTime msec.
@@ -44,8 +47,12 @@ void ReadBasedIdleTime::setWatchAccuracy(int accuracy) {
 
 void ReadBasedIdleTime::setMinIdleTime(int idleTime) { m_minIdleTime = idleTime; };
 
+void ReadBasedIdleTime::setInhibitor(std::function<bool()> inhibited) {
+  m_reader = std::make_unique<IdleReader>(m_rawReader, std::move(inhibited));
+}
+
 void ReadBasedIdleTime::tick() {
-  int currentIdleTime = m_idleReader();
+  int currentIdleTime = m_reader ? m_reader->read(m_idleMode) : m_rawReader();
   if (currentIdleTime < m_minIdleTime && m_isIdle) {
     m_isIdle = false;
     emit idleEnd();

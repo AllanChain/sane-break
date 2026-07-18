@@ -7,7 +7,7 @@ add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} --verbose --output-on-fai
 
 include_directories("../src")
 
-set(TEST_FILES test-app.cpp test-db.cpp test-window.cpp)
+set(TEST_FILES test-app.cpp test-db.cpp test-window.cpp test-idle-reader.cpp)
 if(SANE_BREAK_CLI_CONTROL_ENABLED)
   list(APPEND TEST_FILES test-command.cpp)
 endif()
@@ -25,6 +25,11 @@ foreach(TEST_FILE ${TEST_FILES})
 
   add_dependencies(check "${TEST_FILE_NAME}")
 endforeach()
+
+# test-idle-reader exercises the pure-logic IdleReader, which has no platform
+# dependencies. Compile it directly rather than linking the full (platform-specific)
+# sane-idle static library.
+target_sources(test-idle-reader PRIVATE ${CMAKE_SOURCE_DIR}/src/idle/idle-reader.cpp)
 
 # Screenshot harness (not part of check target)
 add_executable(

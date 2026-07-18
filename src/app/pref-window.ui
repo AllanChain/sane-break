@@ -1531,6 +1531,16 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
              </layout>
             </item>
             <item>
+             <widget class="QCheckBox" name="treatInhibitorAsActivityCheck">
+              <property name="toolTip">
+               <string>Video players, presentations, and some games prevent the screen from sleeping. When on, that counts as activity so the idle pause won't trigger while they run; when off, only your actual input counts. Effectiveness varies by platform: full on ext-idle-notify Wayland; best-effort on X11 where only XScreenSaverSuspend-based inhibition is detected.</string>
+              </property>
+              <property name="text">
+               <string>When an app keeps the screen awake, count it as activity (e.g. video playback)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QCheckBox" name="pauseOnBatteryCheck">
               <property name="text">
                <string>Pause on battery</string>

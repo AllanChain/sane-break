@@ -1,6 +1,8 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
+
+#pragma once
 
 #include <QObject>
 
@@ -14,4 +16,12 @@ class IdleTimeX11 : public IdleTimeReaderInterface {
   IdleTimeX11() = default;
   ~IdleTimeX11() = default;
   int read() override;
+  // True while any client holds a XScreenSaverSuspend(True) inhibition, which
+  // flips XScreenSaverInfo.state to ScreenSaverDisabled. Read from the same
+  // XScreenSaverQueryInfo call as idle, so it is free and always current after
+  // read() has been called.
+  bool isInhibited() override { return m_inhibited; }
+
+ private:
+  bool m_inhibited = false;
 };
