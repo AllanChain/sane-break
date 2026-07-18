@@ -10,6 +10,7 @@
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QDBusVariant>
+#include <QDebug>
 #include <QList>
 #include <QObject>
 #include <QString>
@@ -62,5 +63,7 @@ void LogindInhibitor::refresh() {
     }
   }
 
+  if (inhibited != m_inhibited)
+    qDebug() << "idle: logind inhibitor" << (inhibited ? "active" : "released");
   m_inhibited = inhibited;
 }

@@ -9,6 +9,7 @@
 #include <wayland-client-protocol.h>
 #include <wayland-client.h>
 
+#include <QDebug>
 #include <QElapsedTimer>
 #include <QGuiApplication>
 #include <QObject>
@@ -52,8 +53,10 @@ void IdleTimeWayland::chooseGetIdleNotification() {
   // ignores inhibitors; fall back to v1 on v1-only compositors.
   if (m_idleMode == IdleMode::InhibitorAware || wl_ntfr_ver < 2) {
     get_idle_notification = ext_idle_notifier_v1_get_idle_notification;
+    qDebug() << "idle: wayland using v1 get_idle_notification (inhibitor-aware)";
   } else {
     get_idle_notification = ext_idle_notifier_v1_get_input_idle_notification;
+    qDebug() << "idle: wayland using v2 get_input_idle_notification (input-only)";
   }
 }
 

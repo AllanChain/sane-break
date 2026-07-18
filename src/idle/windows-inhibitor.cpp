@@ -6,6 +6,8 @@
 
 #include <powerbase.h>
 
+#include <QDebug>
+
 // ES_DISPLAY_REQUIRED: an app is requesting the display stay on.
 #ifndef ES_DISPLAY_REQUIRED
 #define ES_DISPLAY_REQUIRED 0x00000002
@@ -19,5 +21,11 @@ bool windowsDisplayInhibited() {
   NTSTATUS status = CallNtPowerInformation(SystemExecutionState, nullptr, 0, &execState,
                                            sizeof(execState));
   if (status != 0) return false;  // treat errors as "not inhibited"
-  return (execState & ES_DISPLAY_REQUIRED) != 0;
+  bool inhibited = (execState & ES_DISPLAY_REQUIRED) != 0;
+  static bool lastInhibited = false;  // edge-triggered log; stateless free fn
+  if (inhibited != lastInhibited) {
+    lastInhibited = inhibited;
+    qDebug() << "idle: windows inhibitor" << (inhibited ? "active" : "released");
+  }
+  return inhibited;
 }
