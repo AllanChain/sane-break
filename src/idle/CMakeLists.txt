@@ -12,8 +12,10 @@ add_library(
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   find_package(Qt6 REQUIRED COMPONENTS DBus)
   target_sources(
-    sane-idle PRIVATE linux/factory.h linux/factory.cpp linux/logind-inhibitor.h
-                      linux/logind-inhibitor.cpp
+    sane-idle
+    PRIVATE linux/factory.h linux/factory.cpp linux/inhibitor-proxy-idle.h
+            linux/inhibitor-proxy-idle.cpp linux/linux-idle-inhibitor.h
+            linux/linux-idle-inhibitor.cpp
   )
   target_link_libraries(sane-idle PRIVATE Qt6::DBus)
   add_subdirectory(linux)

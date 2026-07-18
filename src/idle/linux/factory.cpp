@@ -13,56 +13,45 @@
 #include "core/idle-time.h"
 #include "idle/idle-interface.h"
 #include "idle/read-based-idle.h"
-#include "logind-inhibitor.h"
+#include "inhibitor-proxy-idle.h"
+#include "linux-idle-inhibitor.h"
 
 #define SANE_BREAK_LIB_PREFIX "libsanebreak_idle_"
 
 SystemIdleTime* createLinuxIdleTimer(QObject* parent) {
+  QString pluginName;
   if (QGuiApplication::platformName() == "wayland") {
-    QDBusInterface iface("org.gnome.Mutter.IdleMonitor",
-                         "/org/gnome/Mutter/IdleMonitor/Core",
-                         "org.gnome.Mutter.IdleMonitor", QDBusConnection::sessionBus());
-    if (iface.isValid()) {
-      QPluginLoader loader(SANE_BREAK_LIB_PREFIX "gnome");
-      if (!loader.load()) {
-        qCritical() << loader.errorString();
-        qFatal("Fail to load GNOME idle time plugin.");
-      }
-      auto reader = qobject_cast<IdleTimeReaderInterface*>(loader.instance());
-      if (!reader) qFatal("Fail to instantiate GNOME idle time plugin.");
-      reader->setParent(parent);
-      // Mutter's GetIdletime is input-only; logind catches idle inhibitors (GNOME
-      // forwards its SessionManager/ScreenSaver inhibitors to logind).
-      auto* rbt = new ReadBasedIdleTime(parent, [reader]() { return reader->read(); });
-      auto* logind = new LogindInhibitor(parent);
-      rbt->setInhibitor([logind]() { return logind->isIdleInhibited(); });
-      return rbt;
-    }
-    QPluginLoader loader(SANE_BREAK_LIB_PREFIX "wayland");
-    if (!loader.load()) {
-      qCritical() << loader.errorString();
-      qFatal("Fail to load Wayland idle time plugin.");
-    }
-    auto reader = qobject_cast<IdleTimeInterface*>(loader.instance());
-    if (!reader) qFatal("Fail to instantiate Wayland idle time plugin.");
-    reader->setParent(parent);
-    return reader;
+    QDBusInterface mutter(
+        "org.gnome.Mutter.IdleMonitor", "/org/gnome/Mutter/IdleMonitor/Core",
+        "org.gnome.Mutter.IdleMonitor", QDBusConnection::sessionBus());
+    pluginName = mutter.isValid() ? "gnome" : "wayland";
   } else {
-    QPluginLoader loader(SANE_BREAK_LIB_PREFIX "x11");
-    if (!loader.load()) {
-      qCritical() << loader.errorString();
-      qFatal("Fail to load X11 idle time plugin.");
-    }
-    auto reader = qobject_cast<IdleTimeReaderInterface*>(loader.instance());
-    if (!reader) qFatal("Fail to instantiate X11 idle time plugin.");
+    pluginName = "x11";
+  }
+
+  QPluginLoader loader(SANE_BREAK_LIB_PREFIX + pluginName);
+  if (!loader.load()) {
+    qCritical() << loader.errorString();
+    qFatal("Fail to load %s idle time plugin.", qPrintable(pluginName));
+  }
+
+  auto* logind = new LinuxIdleInhibitor(parent);
+
+  // Reader plugins (GNOME, X11) expose a polling interface; the Wayland plugin is
+  // event-driven and uses the proxy wrapper instead.
+  if (auto* reader = qobject_cast<IdleTimeReaderInterface*>(loader.instance())) {
     reader->setParent(parent);
-    // X11: the ScreenSaverDisabled heuristic (XScreenSaverSuspend) is free in the
-    // same call as idle, and logind catches D-Bus inhibitors that forward to it.
     auto* rbt = new ReadBasedIdleTime(parent, [reader]() { return reader->read(); });
-    auto* logind = new LogindInhibitor(parent);
     rbt->setInhibitor([logind, reader]() {
       return logind->isIdleInhibited() || reader->isInhibited();
     });
     return rbt;
   }
+
+  if (auto* reader = qobject_cast<IdleTimeInterface*>(loader.instance())) {
+    reader->setParent(parent);
+    return new InhibitorProxyIdleTime(reader, logind, parent);
+  }
+
+  qFatal("Fail to instantiate %s idle time plugin.", qPrintable(pluginName));
 }
