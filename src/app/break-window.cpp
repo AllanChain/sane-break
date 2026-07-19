@@ -104,13 +104,8 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget* parent)
 
   ui->postponeLabel->setVisible(false);
 
-  m_progressAnim = new QPropertyAnimation(ui->progressBar, "value");
-  m_progressAnim->setStartValue(ui->progressBar->maximum());
-  m_progressAnim->setEndValue(0);
-
-  this->m_totalSeconds = data.totalSeconds;
-  m_progressAnim->setDuration(m_totalSeconds * 1000);
-  m_progressAnim->start();
+  m_progressAnim = new QPropertyAnimation(ui->progressBar, "value", this);
+  m_totalSeconds = data.totalSeconds;
 
   int baseDuration = data.theme.flashAnimationDuration;
   if (baseDuration <= 0) {
@@ -167,7 +162,22 @@ void BreakWindow::setColor(const QColor& color) {
 }
 
 void BreakWindow::setTime(int remainingTime, QString estimatedEndTime) {
-  m_progressAnim->setCurrentTime((m_totalSeconds - remainingTime) * 1000);
+  // Drive the progress bar from the authoritative remaining time.  Each call
+  // starts a short animation from the bar's current value to the new target,
+  // giving smooth sub-second interpolation without a long-running animation
+  // whose state can desync from the real countdown (e.g. when the animation
+  // reaches its end and stops, after which setCurrentTime no longer updates
+  // the property).
+  int targetValue =
+      m_totalSeconds > 0
+          ? static_cast<int>(ui->progressBar->maximum() *
+                             static_cast<double>(remainingTime) / m_totalSeconds)
+          : 0;
+  m_progressAnim->stop();
+  m_progressAnim->setStartValue(ui->progressBar->value());
+  m_progressAnim->setEndValue(targetValue);
+  m_progressAnim->setDuration(1000);
+  m_progressAnim->start();
   if (m_totalSeconds <= 60) {
     ui->countDownLabel->setText(QString("%1").arg(remainingTime));
   } else {

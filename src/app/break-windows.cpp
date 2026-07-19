@@ -175,6 +175,12 @@ BreakWindowData BreakWindows::createData(BreakType type, SanePreferences* prefer
 void BreakWindows::create(BreakWindowData data) {
   m_activeBreak.emplace();
   m_activeBreak->data = data;
+  // Initialize remainingTime to the full duration: a freshly created break has
+  // not started counting down yet.  Without this, remainingTime defaults to 0
+  // (the struct default), so createOnScreen() would call setTime(0, ...) before
+  // AppStateBreak::enter() sets the real time, causing a brief visual glitch
+  // where the progress bar animates to empty and then back to full.
+  m_activeBreak->remainingTime = data.totalSeconds;
   // A pending debounce from a previous break is harmless (reconcile finds every
   // screen covered) but stopping it avoids a redundant pass.
   m_screenDebounce->stop();
