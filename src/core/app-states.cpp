@@ -15,6 +15,7 @@
 #include "core/app-data.h"
 #include "core/break-windows.h"
 #include "core/flags.h"
+#include "core/idle-time.h"
 
 namespace {
 
@@ -146,11 +147,20 @@ void AppContext::checkBreakReadiness() {
   if (secondsToNextBreak <= 0) transitionTo(std::make_unique<AppStateBreak>());
 }
 
+void AppContext::applyIdleMode() {
+  idleTimer->setIdleMode(preferences->treatInhibitorAsActivity->get()
+                             ? IdleMode::InhibitorAware
+                             : IdleMode::InputOnly);
+}
+
 void AppStateNormal::enter(AppContext* app) {
   app->openCurrentSpan("normal");
   // Use low accuracy (5s) for idle detection in normal state as it can last a long time
   app->idleTimer->setWatchAccuracy(5000);
   app->idleTimer->setMinIdleTime(app->preferences->pauseOnIdleFor->get() * 1000);
+  // Restore the user's preferred idle mode (inhibitor-aware idle pause suppression
+  // belongs here, not during breaks which override it to InputOnly).
+  app->applyIdleMode();
 }
 void AppStateNormal::exit(AppContext* app) {
   app->closeCurrentSpan();
@@ -309,6 +319,11 @@ void AppStateBreak::enter(AppContext* app) {
   // transitions
   app->idleTimer->setWatchAccuracy(500);
   app->idleTimer->setMinIdleTime(2000);
+  // Breaks always use raw input idle (InputOnly), ignoring idle inhibitors. A
+  // background video player holding an inhibitor must not make the break think the
+  // user is active — we need to detect actual presence to drive phase transitions
+  // (prompt ↔ full-screen), force-break escalation, and post-break auto-close.
+  app->idleTimer->setIdleMode(IdleMode::InputOnly);
   app->breakWindows->create(app->data->breakType(), app->preferences,
                             data->totalSeconds(),
                             app->data->schedule().isBreakExtendedByPostpone());
@@ -517,6 +532,7 @@ void AppStateMeeting::enter(AppContext* app) {
   app->data->schedule().resetSecondsToNextBreak(app->data->currentBreakConfig());
   app->idleTimer->setWatchAccuracy(5000);
   app->idleTimer->setMinIdleTime(app->preferences->pauseOnIdleFor->get() * 1000);
+  app->applyIdleMode();
 }
 
 void AppStateMeeting::exit(AppContext* app) {

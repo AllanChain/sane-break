@@ -1,5 +1,5 @@
 // Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-// Copyright (C) 2024-2025 Sane Break developers
+// Copyright (C) 2024-2026 Sane Break developers
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
@@ -13,6 +13,7 @@
 #include <QTimer>
 #include <cstdint>
 
+#include "core/idle-time.h"
 #include "idle/idle-interface.h"
 #include "wayland-ext-idle-notify-v1-client-protocol.h"
 
@@ -28,6 +29,7 @@ class IdleTimeWayland : public IdleTimeInterface {
   void stopWatching() override;
   void setWatchAccuracy(int) override {};
   void setMinIdleTime(int idleTime) override;
+  void setIdleMode(IdleMode mode) override;
 
  private:
   static void globalAdded(void* data, wl_registry* registry, uint32_t name,
@@ -37,6 +39,11 @@ class IdleTimeWayland : public IdleTimeInterface {
   static void idled(void* data, ext_idle_notification_v1* object);
   static void resumed(void* data, ext_idle_notification_v1* object);
   const struct ext_idle_notification_v1_listener idleListener{idled, resumed};
+  // Choose get_idle_notification (v1, respects inhibitors) vs
+  // get_input_idle_notification (v2, input-only) based on the mode and the bound
+  // notifier version. Called from the constructor after binding and from
+  // setIdleMode() on a mode change.
+  void chooseGetIdleNotification();
   wl_seat* seat;
   ext_idle_notifier_v1* idleNotifier = nullptr;
   ext_idle_notification_v1* idleNotification = nullptr;

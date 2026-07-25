@@ -68,6 +68,8 @@ AbstractApp::AbstractApp(const AppDependencies& deps, QObject* parent)
 
   connect(preferences->pauseOnBattery, &SettingWithSignal::changed, this,
           &AbstractApp::onBatterySettingChange);
+  connect(preferences->treatInhibitorAsActivity, &SettingWithSignal::changed, this,
+          [this]() { applyIdleMode(); });
   connect(preferences->smallEvery, &SettingWithSignal::changed, this, [this]() {
     if (!this->data->focus().isActive()) {
       this->data->schedule().resetSecondsToNextBreak(this->data->currentBreakConfig());
@@ -85,6 +87,9 @@ AbstractApp::AbstractApp(const AppDependencies& deps, QObject* parent)
 void AbstractApp::start() {
   db->logEvent("app::start");
   transitionTo(std::make_unique<AppStateNormal>());
+  // Apply the idle mode before watching so the correct notification request /
+  // wrapper is active first.
+  applyIdleMode();
   idleTimer->startWatching();
   m_countDownTimer->start();
   m_systemMonitor->start();

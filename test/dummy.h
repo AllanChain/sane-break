@@ -35,10 +35,12 @@ class DummyIdleTime : public SystemIdleTime {
   Q_OBJECT
  public:
   using SystemIdleTime::SystemIdleTime;
-  void startWatching() { m_isIdle = false; };
-  void stopWatching() {};
-  void setWatchAccuracy(int) {};
-  void setMinIdleTime(int) {};
+  void startWatching() override { m_isIdle = false; };
+  void stopWatching() override {};
+  void setWatchAccuracy(int) override {};
+  void setMinIdleTime(int) override {};
+  void setIdleMode(IdleMode mode) override { m_recordedMode = mode; };
+  IdleMode recordedMode() const { return m_recordedMode; };
   void setIdle(bool idle) {
     m_isIdle = idle;
     if (idle) {
@@ -47,6 +49,9 @@ class DummyIdleTime : public SystemIdleTime {
       emit idleEnd();
     }
   }
+
+ private:
+  IdleMode m_recordedMode = IdleMode::InhibitorAware;
 };
 
 class DummyBreakWindows : public AbstractBreakWindows {
