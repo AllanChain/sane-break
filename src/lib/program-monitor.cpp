@@ -36,7 +36,7 @@ void RunningProgramsMonitor::tick() {
   bool currentlySeen = false;
   for (const QString& program : runningPrograms()) {
     for (const QString& entry : std::as_const(programsToMonitor)) {
-      if (program.contains(entry)) {
+      if (program.contains(entry, Qt::CaseInsensitive)) {
         currentlySeen = true;
         break;
       }
