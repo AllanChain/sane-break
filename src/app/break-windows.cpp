@@ -19,6 +19,7 @@
 #include <QSettings>
 #include <QTime>
 #include <QTimer>
+#include <concepts>
 #include <utility>
 
 #include "app/break-window.h"
@@ -42,11 +43,15 @@
 #endif
 
 namespace {
-// BreakWindow and HeadsUpWindow both expose screenIdentity(), close(), and
-// deleteLater(), so the collect-then-mutate removal and the "has window on screen"
-// lookup are identical across the two types. Templatizing avoids four copy-pasted
-// bodies.
-template <typename T, typename Pred>
+
+template <typename T>
+concept ScreenAwareWindow = requires(T* w, QScreen* s) {
+  { w->screenIdentity() } -> std::same_as<QScreen*>;
+  w->close();
+  w->deleteLater();
+};
+
+template <ScreenAwareWindow T, typename Pred>
 void removeWindowsIf(QList<T*>& windows, Pred pred) {
   QList<T*> toDestroy;
   for (T* w : std::as_const(windows))
@@ -57,12 +62,14 @@ void removeWindowsIf(QList<T*>& windows, Pred pred) {
     w->deleteLater();
   }
 }
-template <typename T>
+
+template <ScreenAwareWindow T>
 bool hasWindowOn(const QList<T*>& windows, QScreen* screen) {
   for (T* w : windows)
     if (w->screenIdentity() == screen) return true;
   return false;
 }
+
 }  // namespace
 
 BreakWindows::BreakWindows(QObject* parent) : AbstractBreakWindows(parent) {

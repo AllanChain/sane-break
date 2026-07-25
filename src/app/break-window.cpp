@@ -213,13 +213,6 @@ void BreakWindow::showFullScreen() {
   setProperty("color", m_data.theme.mainBackground);
 
   ui->breakLabel->setText(m_data.message.fullScreen);
-  // Set visibility explicitly from the preferences rather than only showing when the
-  // flag is true. showFlashPrompt() normally hides these first, but a window created
-  // directly into the full-screen phase (e.g. on display hot-plug) skips that step, so
-  // without these explicit hides every widget would stay visible regardless of the
-  // small/bigBreakShow* preferences. The progress bar had the symmetric problem: it
-  // was never managed here at all, so it stayed at the .ui default (visible) and
-  // showed on hot-plugged windows even when show.progressBar was false.
   ui->progressBar->setVisible(m_data.show.prograssBar);
   ui->postponeLabel->setVisible(m_data.isPostponed);
   ui->countDownLabel->setVisible(m_data.show.countdown);
@@ -270,9 +263,6 @@ void BreakWindow::showFlashPrompt() {
   }
 
   ui->breakLabel->setText(m_data.message.prompt);
-  // Set visibility explicitly (idempotent) so a window that skips the
-  // prompt->fullscreen animation, or re-enters prompt from fullscreen, has the right
-  // state.
   ui->progressBar->setVisible(m_data.show.prograssBar);
   ui->postponeLabel->setVisible(false);
   ui->countDownLabel->setVisible(false);
