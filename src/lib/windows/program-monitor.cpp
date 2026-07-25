@@ -4,8 +4,10 @@
 
 #include "program-monitor.h"
 
-#include <tlhelp32.h>
+// clang-format off
 #include <windows.h>
+#include <tlhelp32.h>
+// clang-format on
 
 #include <QString>
 #include <QStringList>
