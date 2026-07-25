@@ -40,6 +40,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
             macos/workspace.mm
   )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+  target_link_libraries(sane-lib PRIVATE ntdll)
   target_sources(
     sane-lib PRIVATE windows/auto-start.cpp windows/battery.cpp windows/battery.h
                      windows/screen-lock.cpp windows/program-monitor.cpp
