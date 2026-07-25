@@ -91,12 +91,12 @@
         <translation type="vanished">Il est temps de faire une petite pause</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="177"/>
+        <location filename="../../src/app/break-window.cpp" line="187"/>
         <source>Break will end at: %1</source>
         <translation>La pause prendra fin à&#xa0;: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="179"/>
+        <location filename="../../src/app/break-window.cpp" line="189"/>
         <source>Break has ended</source>
         <translation>La pause est terminée</translation>
     </message>
@@ -372,12 +372,12 @@
 <context>
     <name>HeadsUpWindow</name>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="109"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="112"/>
         <source>Break soon</source>
         <translation type="unfinished">Pause bientôt</translation>
     </message>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="118"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="121"/>
         <source>Click to start</source>
         <translation type="unfinished">Cliquez pour démarrer</translation>
     </message>

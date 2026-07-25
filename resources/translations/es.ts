@@ -95,12 +95,12 @@
         <translation type="vanished">&lt;p&gt;Pospón Sane Break pulsando &lt;code&gt;Win&lt;/code&gt; y haciendo clic derecho en el icono de Sane Break en la bandeja del sistema.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="177"/>
+        <location filename="../../src/app/break-window.cpp" line="187"/>
         <source>Break will end at: %1</source>
         <translation>El descanso finaliza a las: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="179"/>
+        <location filename="../../src/app/break-window.cpp" line="189"/>
         <source>Break has ended</source>
         <translation>El descanso ha terminado</translation>
     </message>
@@ -376,12 +376,12 @@
 <context>
     <name>HeadsUpWindow</name>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="109"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="112"/>
         <source>Break soon</source>
         <translation>Se acerca el descanso</translation>
     </message>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="118"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="121"/>
         <source>Click to start</source>
         <translation>Clica para empezar</translation>
     </message>
