@@ -4,12 +4,12 @@
 
 #include "program-monitor.h"
 
+#include <tlhelp32.h>
+#include <windows.h>
+
 #include <QString>
 #include <QStringList>
-
 #include <memory>
-#include <windows.h>
-#include <tlhelp32.h>
 
 // Minimal NT types needed for ProcessCommandLineInformation.
 // Defined here to avoid dependency on <winternl.h> which has
@@ -25,11 +25,8 @@ struct UNICODE_STRING {
 
 // NtQueryInformationProcess is exported from ntdll.dll
 extern "C" NTSTATUS NTAPI NtQueryInformationProcess(
-    HANDLE ProcessHandle,
-    PROCESSINFOCLASS ProcessInformationClass,
-    PVOID ProcessInformation,
-    ULONG ProcessInformationLength,
-    PULONG ReturnLength);
+    HANDLE ProcessHandle, PROCESSINFOCLASS ProcessInformationClass,
+    PVOID ProcessInformation, ULONG ProcessInformationLength, PULONG ReturnLength);
 
 // ProcessCommandLineInformation (value 60) retrieves the full command line
 // as a UNICODE_STRING. Available since Windows 8.1.
@@ -38,8 +35,8 @@ static constexpr PROCESSINFOCLASS kProcessCommandLineInformation = 60;
 static QString getProcessCommandLine(HANDLE hProcess) {
   // First call to determine required buffer size
   ULONG returnLength = 0;
-  NTSTATUS status = NtQueryInformationProcess(
-      hProcess, kProcessCommandLineInformation, nullptr, 0, &returnLength);
+  NTSTATUS status = NtQueryInformationProcess(hProcess, kProcessCommandLineInformation,
+                                              nullptr, 0, &returnLength);
 
   // STATUS_INFO_LENGTH_MISMATCH (0xC0000004) means the function told
   // us the required size — that's expected on the first call.
@@ -47,11 +44,10 @@ static QString getProcessCommandLine(HANDLE hProcess) {
 
   auto buffer = std::make_unique<BYTE[]>(returnLength);
   status = NtQueryInformationProcess(hProcess, kProcessCommandLineInformation,
-                                     buffer.get(), returnLength,
-                                     &returnLength);
+                                     buffer.get(), returnLength, &returnLength);
   if (status != 0) return {};  // STATUS_SUCCESS == 0
 
-  auto *pUnicodeStr = reinterpret_cast<UNICODE_STRING *>(buffer.get());
+  auto* pUnicodeStr = reinterpret_cast<UNICODE_STRING*>(buffer.get());
   if (!pUnicodeStr->Buffer || pUnicodeStr->Length == 0) return {};
 
   return QString::fromWCharArray(pUnicodeStr->Buffer,
@@ -83,9 +79,8 @@ const QStringList RunningProgramsMonitor::runningPrograms() {
 
       QString commandLine;
 
-      HANDLE hProcess = OpenProcess(
-          PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_VM_READ, FALSE,
-          pe.th32ProcessID);
+      HANDLE hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_VM_READ,
+                                    FALSE, pe.th32ProcessID);
 
       if (hProcess) {
         // Best: full command line via NtQueryInformationProcess (Win 8.1+)
