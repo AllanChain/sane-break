@@ -7,7 +7,6 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <IOKit/pwr_mgt/IOPMLib.h>
 
-#include <QDebug>
 #include <QTimer>
 
 MacosInhibitor::MacosInhibitor(QObject* parent) : QObject(parent) {
@@ -20,44 +19,19 @@ MacosInhibitor::MacosInhibitor(QObject* parent) : QObject(parent) {
 
 void MacosInhibitor::refresh() {
   bool inhibited = false;
-  // Returns a dictionary mapping PID (CFNumberRef) -> CFArrayRef of assertion dicts.
-  CFDictionaryRef assertionsByProcess = nullptr;
-  if (IOPMCopyAssertionsByProcess(&assertionsByProcess) == kIOReturnSuccess &&
-      assertionsByProcess != nullptr) {
-    CFIndex count = CFDictionaryGetCount(assertionsByProcess);
-    if (count > 0) {
-      const void** keys = new const void*[count];
-      const void** values = new const void*[count];
-      CFDictionaryGetKeysAndValues(assertionsByProcess, keys, values);
-      for (CFIndex i = 0; i < count && !inhibited; ++i) {
-        CFArrayRef assertions = static_cast<CFArrayRef>(values[i]);
-        CFIndex n = CFArrayGetCount(assertions);
-        for (CFIndex j = 0; j < n; ++j) {
-          CFDictionaryRef dict =
-              static_cast<CFDictionaryRef>(CFArrayGetValueAtIndex(assertions, j));
-          CFStringRef type = static_cast<CFStringRef>(
-              CFDictionaryGetValue(dict, kIOPMAssertionTypeKey));
-          CFNumberRef level = static_cast<CFNumberRef>(
-              CFDictionaryGetValue(dict, kIOPMAssertionLevelKey));
-          if (type && level) {
-            if (CFStringCompare(type, CFSTR("PreventUserIdleDisplaySleep"), 0) ==
-                kCFCompareEqualTo) {
-              IOPMAssertionLevel lvl = kIOPMAssertionLevelOff;
-              if (CFNumberGetValue(level, kCFNumberIntType, &lvl) &&
-                  lvl == kIOPMAssertionLevelOn) {
-                inhibited = true;
-                break;
-              }
-            }
-          }
-        }
-      }
-      delete[] keys;
-      delete[] values;
+  // This is the system-wide aggregate used by `pmset -g assertions`.
+  CFDictionaryRef assertionStatus = nullptr;
+  IOReturn result = IOPMCopyAssertionsStatus(&assertionStatus);
+  if (result == kIOReturnSuccess && assertionStatus != nullptr) {
+    CFNumberRef level = static_cast<CFNumberRef>(
+        CFDictionaryGetValue(assertionStatus, CFSTR("PreventUserIdleDisplaySleep")));
+    int levelValue = 0;
+    if (level && CFNumberGetValue(level, kCFNumberIntType, &levelValue)) {
+      // IOPMCopyAssertionsStatus reports a nonzero aggregate state (currently 1),
+      // unlike per-process assertions, which use kIOPMAssertionLevelOn (255).
+      inhibited = levelValue != 0;
     }
-    CFRelease(assertionsByProcess);
+    CFRelease(assertionStatus);
   }
-  if (inhibited != m_inhibited)
-    qDebug() << "idle: macos inhibitor" << (inhibited ? "active" : "released");
   m_inhibited = inhibited;
 }

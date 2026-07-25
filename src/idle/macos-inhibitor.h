@@ -15,11 +15,11 @@
 //
 // HIDIdleTime (read by macosIdleTime()) only tracks HID input, so a video player
 // holding a PreventUserIdleDisplaySleep assertion does not pause it. In InhibitorAware
-// mode we detect such assertions via IOPMCopyAssertionsByProcess and zero the reported
-// idle while one is active.
+// mode we read the system-wide assertion status and zero the reported idle while one
+// is active.
 //
-// The assertion list is polled on a slow timer (~2 s) and cached; the per-tick reader
-// only reads the cached flag. No entitlement changes.
+// The aggregate status is polled on a slow timer (~2 s) and cached; the per-tick
+// reader only reads the cached flag. No entitlement changes.
 class MacosInhibitor : public QObject {
   Q_OBJECT
  public:
