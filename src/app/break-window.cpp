@@ -104,13 +104,8 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget* parent)
 
   ui->postponeLabel->setVisible(false);
 
-  m_progressAnim = new QPropertyAnimation(ui->progressBar, "value");
-  m_progressAnim->setStartValue(ui->progressBar->maximum());
-  m_progressAnim->setEndValue(0);
-
-  this->m_totalSeconds = data.totalSeconds;
-  m_progressAnim->setDuration(m_totalSeconds * 1000);
-  m_progressAnim->start();
+  m_progressAnim = new QPropertyAnimation(ui->progressBar, "value", this);
+  m_totalSeconds = data.totalSeconds;
 
   int baseDuration = data.theme.flashAnimationDuration;
   if (baseDuration <= 0) {
@@ -167,7 +162,22 @@ void BreakWindow::setColor(const QColor& color) {
 }
 
 void BreakWindow::setTime(int remainingTime, QString estimatedEndTime) {
-  m_progressAnim->setCurrentTime((m_totalSeconds - remainingTime) * 1000);
+  // Drive the progress bar from the authoritative remaining time.  Each call
+  // starts a short animation from the bar's current value to the new target,
+  // giving smooth sub-second interpolation without a long-running animation
+  // whose state can desync from the real countdown (e.g. when the animation
+  // reaches its end and stops, after which setCurrentTime no longer updates
+  // the property).
+  int targetValue =
+      m_totalSeconds > 0
+          ? static_cast<int>(ui->progressBar->maximum() *
+                             static_cast<double>(remainingTime) / m_totalSeconds)
+          : 0;
+  m_progressAnim->stop();
+  m_progressAnim->setStartValue(ui->progressBar->value());
+  m_progressAnim->setEndValue(targetValue);
+  m_progressAnim->setDuration(1000);
+  m_progressAnim->start();
   if (m_totalSeconds <= 60) {
     ui->countDownLabel->setText(QString("%1").arg(remainingTime));
   } else {
@@ -203,16 +213,17 @@ void BreakWindow::showFullScreen() {
   setProperty("color", m_data.theme.mainBackground);
 
   ui->breakLabel->setText(m_data.message.fullScreen);
-  if (m_data.isPostponed) ui->postponeLabel->setVisible(true);
-  if (m_data.show.countdown) ui->countDownLabel->setVisible(true);
+  ui->progressBar->setVisible(m_data.show.prograssBar);
+  ui->postponeLabel->setVisible(m_data.isPostponed);
+  ui->countDownLabel->setVisible(m_data.show.countdown);
+  ui->clock->setVisible(m_data.show.clock);
   if (m_data.show.clock) {
-    ui->clock->setVisible(true);
     ui->clock->setStyleSheet(
         QString("QLabel { background: transparent; font-size: %1px; }")
             .arg(m_data.show.countdown ? 50 : 100));
   }
-  if (m_data.show.endTime) ui->breakEndTimeLabel->setVisible(true);
-  if (m_data.show.buttons) ui->buttons->setVisible(true);
+  ui->breakEndTimeLabel->setVisible(m_data.show.endTime);
+  ui->buttons->setVisible(m_data.show.buttons);
 
   QPropertyAnimation* resizeAnim =
       new QPropertyAnimation(m_waylandWorkaround ? mainWidget : this, "geometry");
@@ -252,9 +263,7 @@ void BreakWindow::showFlashPrompt() {
   }
 
   ui->breakLabel->setText(m_data.message.prompt);
-  if (!m_data.show.prograssBar) {
-    ui->progressBar->setVisible(false);
-  }
+  ui->progressBar->setVisible(m_data.show.prograssBar);
   ui->postponeLabel->setVisible(false);
   ui->countDownLabel->setVisible(false);
   ui->clock->setVisible(false);
@@ -274,6 +283,7 @@ void BreakWindow::showFlashPrompt() {
 }
 
 void BreakWindow::initSize(QScreen* screen) {
+  m_screen = screen;
   if (m_waylandWorkaround) {
     QRect rect = screen->availableGeometry();
     // Avoid using full height when initializing the main window. GNOME will refuse to
@@ -289,6 +299,12 @@ void BreakWindow::initSize(QScreen* screen) {
                 SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
   }
   createWinId();
+  // Pin the surface to the requested output. On Wayland + layer-shell this makes
+  // LayerShellQt place the surface on the right output (it reads QWindow::screen()
+  // by default); on other platforms it keeps screen() authoritative after creation.
+  // Must come after createWinId() so windowHandle() is valid, and before show() so
+  // the surface is created on the right output from the start.
+  if (windowHandle() && screen) windowHandle()->setScreen(screen);
 #ifdef Q_OS_MACOS
   macSetAllWorkspaces(windowHandle());
 #endif

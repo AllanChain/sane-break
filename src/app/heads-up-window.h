@@ -20,6 +20,8 @@ class HeadsUpWindow : public QWidget {
                 QColor textColor, QWidget* parent = nullptr);
   void initSize(QScreen* screen);
   void setTime(int remainingSeconds);
+  // Raw screen identity captured in initSize; see BreakWindow::screenIdentity().
+  QScreen* screenIdentity() const { return m_screen; }
 
  signals:
   void clicked();
@@ -38,6 +40,7 @@ class HeadsUpWindow : public QWidget {
   QColor m_textColor;
   QPropertyAnimation* m_progressAnim;
   QAbstractAnimation* m_flashAnim;
+  QScreen* m_screen = nullptr;
 
   static const int PILL_WIDTH = 280;
   static const int PILL_HEIGHT = 56;
