@@ -45,6 +45,8 @@ SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
   postponeExtendBreakPercent =
       new Setting<int>(settings, "postpone/extend-break-ratio", 100);
 
+  minReasonLength = new Setting<int>(settings, "reason/min-length", 0);
+
   flashFor = new Setting<int>(settings, "break/flash-for", 30);
   confirmAfter = new Setting<int>(settings, "break/confirm-after", 30);
   flashTrayFor = new Setting<int>(settings, "break/flash-tray-for", 30);

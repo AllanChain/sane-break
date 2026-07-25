@@ -24,7 +24,6 @@
 #include "ui_meeting-window.h"
 
 namespace {
-constexpr int kMinReasonLength = 6;
 constexpr auto kHelperTextStyle = "color: #6b7280;";
 constexpr auto kErrorTextStyle = "color: #ef4444;";
 }  // namespace
@@ -67,14 +66,16 @@ MeetingWindow::MeetingWindow(SanePreferences* preferences, BreakDatabase* db,
   onInputUpdate();
 }
 
+void MeetingWindow::setEndTime(QTime endTime) { ui->endTime->setTime(endTime); }
+
 void MeetingWindow::onInputUpdate() {
   QTime endTime = ui->endTime->time();
   QDateTime now = QDateTime::currentDateTime();
   QString reason = ui->reasonEdit->text().trimmed();
   auto resolvedEndTime = MeetingTime::resolveEndDateTime(now, endTime);
   bool isValidEndTime = resolvedEndTime.has_value();
-  int remainingChars = kMinReasonLength - reason.length();
-  bool hasLongEnoughReason = remainingChars <= 0;
+  int minReasonLength = preferences->minReasonLength->get();
+  bool hasLongEnoughReason = reason.length() >= minReasonLength;
 
   ui->confirmButton->setEnabled(isValidEndTime && hasLongEnoughReason);
   QString endTimeLabel = QLocale::system().toString(endTime, QLocale::ShortFormat);
@@ -87,7 +88,7 @@ void MeetingWindow::onInputUpdate() {
     ui->reasonHelpLabel->setStyleSheet(kErrorTextStyle);
     ui->reasonHelpLabel->setText(
         tr("Choose a future end time and enter at least %1 characters.")
-            .arg(kMinReasonLength));
+            .arg(minReasonLength));
     return;
   }
 
@@ -108,8 +109,13 @@ void MeetingWindow::onInputUpdate() {
 
   if (reason.isEmpty()) {
     ui->reasonHelpLabel->setStyleSheet(kHelperTextStyle);
-    ui->reasonHelpLabel->setText(
-        tr("Enter at least %1 characters.").arg(kMinReasonLength));
+    if (minReasonLength == 0) {
+      ui->reasonHelpLabel->setText(
+          tr("Optional — briefly describe what you're working on."));
+    } else {
+      ui->reasonHelpLabel->setText(
+          tr("Enter at least %1 characters.").arg(minReasonLength));
+    }
     return;
   }
 

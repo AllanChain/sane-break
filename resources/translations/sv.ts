@@ -347,12 +347,17 @@
 <context>
     <name>FocusWindow</name>
     <message>
-        <location filename="../../src/app/focus-window.cpp" line="81"/>
+        <location filename="../../src/app/focus-window.cpp" line="86"/>
+        <source>Optional — briefly describe what you&apos;re working on.</source>
+        <translation type="unfinished">Valfritt – beskriv kort vad du arbetar med.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.cpp" line="89"/>
         <source>Enter at least %1 characters.</source>
         <translation type="unfinished">Ange minst %1 tecken.</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.cpp" line="87"/>
+        <location filename="../../src/app/focus-window.cpp" line="96"/>
         <source>Add a little more detail.</source>
         <translation type="unfinished">Lägg till lite mer detaljer.</translation>
     </message>
@@ -478,32 +483,37 @@
 <context>
     <name>MeetingWindow</name>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="82"/>
+        <location filename="../../src/app/meeting-window.cpp" line="83"/>
         <source>tomorrow at %1</source>
         <translation type="unfinished">i morgon klockan %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="89"/>
+        <location filename="../../src/app/meeting-window.cpp" line="90"/>
         <source>Choose a future end time and enter at least %1 characters.</source>
         <translation type="unfinished">Välj ett sluttidpunkt i framtiden och ange minst %1 tecken.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="99"/>
+        <location filename="../../src/app/meeting-window.cpp" line="100"/>
         <source>Choose an end time later than now.</source>
         <translation type="unfinished">Välj en sluttidpunkt som är senare än nu.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="102"/>
+        <location filename="../../src/app/meeting-window.cpp" line="103"/>
         <source>Choose a later time today, or a tomorrow time before %1.</source>
         <translation type="unfinished">Välj en senare tidpunkt idag, eller en tidpunkt i morgon före %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="112"/>
+        <location filename="../../src/app/meeting-window.cpp" line="114"/>
+        <source>Optional — briefly describe what you&apos;re working on.</source>
+        <translation type="unfinished">Valfritt – beskriv kort vad du arbetar med.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="117"/>
         <source>Enter at least %1 characters.</source>
         <translation type="unfinished">Ange minst %1 tecken.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="118"/>
+        <location filename="../../src/app/meeting-window.cpp" line="124"/>
         <source>Add a little more detail.</source>
         <translation type="unfinished">Lägg till lite mer detaljer.</translation>
     </message>
@@ -584,19 +594,19 @@
         <translation>Om</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1813"/>
-        <location filename="../../src/app/pref-window.ui" line="1851"/>
+        <location filename="../../src/app/pref-window.ui" line="1843"/>
+        <location filename="../../src/app/pref-window.ui" line="1881"/>
         <source>Bell before breaks</source>
         <translation>Ljudsignal före raster</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1768"/>
-        <location filename="../../src/app/pref-window.ui" line="1893"/>
+        <location filename="../../src/app/pref-window.ui" line="1798"/>
+        <location filename="../../src/app/pref-window.ui" line="1923"/>
         <source>Bell after breaks</source>
         <translation>Ljudsignal efter raster</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="924"/>
+        <location filename="../../src/app/pref-window.ui" line="954"/>
         <source>Time in seconds before forcing break after work reminder appears.</source>
         <extracomment>Tooltip for &quot;Flash break prompt for&quot; config</extracomment>
         <translation>Tid i sekunder innan påminnelsen om att ta en rast efter arbetet visas.</translation>
@@ -643,49 +653,49 @@
         <translation type="vanished">&lt;h3&gt;Skjut upp&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="934"/>
+        <location filename="../../src/app/pref-window.ui" line="964"/>
         <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
         <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
         <translation>Efter att ha varit inaktiv så länge under rasten kommer Sane Break att fortsätta att visa helskärmsläge och det finns ingen väg tillbaka.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="937"/>
+        <location filename="../../src/app/pref-window.ui" line="967"/>
         <source>Confirm break after</source>
         <translation>Bekräfta rast efter</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1068"/>
+        <location filename="../../src/app/pref-window.ui" line="1098"/>
         <source>Close windows right after small break ends</source>
         <translation>Stäng fönstren direkt efter att den korta rasten är slut</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1075"/>
+        <location filename="../../src/app/pref-window.ui" line="1105"/>
         <source>Close windows right after big break ends</source>
         <translation>Stäng fönstren direkt efter att den långa rasten är slut</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1101"/>
+        <location filename="../../src/app/pref-window.ui" line="1131"/>
         <source>Flash speed</source>
         <translation>Blixthastighet</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1156"/>
-        <location filename="../../src/app/pref-window.ui" line="1189"/>
+        <location filename="../../src/app/pref-window.ui" line="1186"/>
+        <location filename="../../src/app/pref-window.ui" line="1219"/>
         <source>(One line per message)</source>
         <translation>(En rad per meddelande)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1163"/>
+        <location filename="../../src/app/pref-window.ui" line="1193"/>
         <source>Big break prompt messages:</source>
         <translation>Meddelanden om långa raster:</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1173"/>
+        <location filename="../../src/app/pref-window.ui" line="1203"/>
         <source>Small break prompt messages:</source>
         <translation>Promptmeddelanden om kort rast:</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1052"/>
+        <location filename="../../src/app/pref-window.ui" line="1082"/>
         <source>Max number of force break exits</source>
         <translation>Maximalt antal tvingade raster avslutar</translation>
     </message>
@@ -695,12 +705,12 @@
         <translation>Gränssnitt</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1059"/>
+        <location filename="../../src/app/pref-window.ui" line="1089"/>
         <source> times</source>
         <translation> gånger</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1198"/>
+        <location filename="../../src/app/pref-window.ui" line="1228"/>
         <source>&lt;h3&gt;Components to Show&lt;/h3&gt;
 
 &lt;p&gt;User interface components to show in the prompt and full-screen window.&lt;/p&gt;</source>
@@ -709,84 +719,84 @@
 &lt;p&gt;Användargränssnittskomponenter som ska visas i promptfönstret och helskärmsfönstret.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1223"/>
-        <location filename="../../src/app/pref-window.ui" line="1269"/>
+        <location filename="../../src/app/pref-window.ui" line="1253"/>
+        <location filename="../../src/app/pref-window.ui" line="1299"/>
         <source>Time when break ends</source>
         <translation>Tidpunkt när rasten slutar</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1244"/>
-        <location filename="../../src/app/pref-window.ui" line="1290"/>
+        <location filename="../../src/app/pref-window.ui" line="1274"/>
+        <location filename="../../src/app/pref-window.ui" line="1320"/>
         <source>Countdown timer</source>
         <translation>Nedräkningstimer</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1216"/>
-        <location filename="../../src/app/pref-window.ui" line="1262"/>
+        <location filename="../../src/app/pref-window.ui" line="1246"/>
+        <location filename="../../src/app/pref-window.ui" line="1292"/>
         <source>Progress bar</source>
         <translation>Förloppsmästare</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1230"/>
-        <location filename="../../src/app/pref-window.ui" line="1276"/>
+        <location filename="../../src/app/pref-window.ui" line="1260"/>
+        <location filename="../../src/app/pref-window.ui" line="1306"/>
         <source>Clock</source>
         <translation>Klocka</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1237"/>
-        <location filename="../../src/app/pref-window.ui" line="1283"/>
+        <location filename="../../src/app/pref-window.ui" line="1267"/>
+        <location filename="../../src/app/pref-window.ui" line="1313"/>
         <source>Buttons</source>
         <translation>Knappar</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1299"/>
+        <location filename="../../src/app/pref-window.ui" line="1329"/>
         <source>&lt;h3&gt;Color Theme&lt;/h3&gt;
 All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
         <translation>&lt;h3&gt;Färgtema&lt;/h3&gt;
 Alla färger är i formatet &lt;code&gt;#AARRGGBB&lt;/code&gt;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1383"/>
+        <location filename="../../src/app/pref-window.ui" line="1413"/>
         <source>Big break</source>
         <translation>Lång rast</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1352"/>
+        <location filename="../../src/app/pref-window.ui" line="1382"/>
         <source>Message</source>
         <translation>Meddelande</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1390"/>
+        <location filename="../../src/app/pref-window.ui" line="1420"/>
         <source>Small break</source>
         <translation>Liten rast</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1359"/>
+        <location filename="../../src/app/pref-window.ui" line="1389"/>
         <source>Background</source>
         <translation>Bakgrund</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1366"/>
+        <location filename="../../src/app/pref-window.ui" line="1396"/>
         <source>Count down</source>
         <translation>Nedräkning</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1465"/>
+        <location filename="../../src/app/pref-window.ui" line="1495"/>
         <source>&lt;h3&gt;Pause Conditions&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;Pausvillkor&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1686"/>
+        <location filename="../../src/app/pref-window.ui" line="1716"/>
         <source>Long pause threshold</source>
         <translation>Lång rastgräns</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1740"/>
+        <location filename="../../src/app/pref-window.ui" line="1770"/>
         <source>Short pause threshold</source>
         <translation>Kort pausgräns</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1999"/>
+        <location filename="../../src/app/pref-window.ui" line="2029"/>
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
@@ -796,17 +806,17 @@ låses skärmen 2 minuter efter att rasten har börjat, förutsatt att det inte 
 aktivitet efter rasten. Om rasten är längre än 2 minuter låses skärmen oavsett.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2004"/>
+        <location filename="../../src/app/pref-window.ui" line="2034"/>
         <source>Automatic screen lock after break start</source>
         <translation>Automatisk skärmlåsning efter raststart</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1950"/>
+        <location filename="../../src/app/pref-window.ui" line="1980"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Hjälp till att översätta!&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2121"/>
+        <location filename="../../src/app/pref-window.ui" line="2151"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -841,39 +851,39 @@ v%1
         <translation type="vanished">Skjut upp i minuter</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1086"/>
+        <location filename="../../src/app/pref-window.ui" line="1116"/>
         <source>&lt;h3&gt;Prompt Appearance&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;Promptutseende&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1765"/>
-        <location filename="../../src/app/pref-window.ui" line="1810"/>
+        <location filename="../../src/app/pref-window.ui" line="1795"/>
+        <location filename="../../src/app/pref-window.ui" line="1840"/>
         <source>Try restart Sane Break if no sound</source>
         <translation>Prova att starta om Sane Break om det inte hörs något ljud</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1782"/>
-        <location filename="../../src/app/pref-window.ui" line="1796"/>
-        <location filename="../../src/app/pref-window.ui" line="1858"/>
-        <location filename="../../src/app/pref-window.ui" line="1872"/>
+        <location filename="../../src/app/pref-window.ui" line="1812"/>
+        <location filename="../../src/app/pref-window.ui" line="1826"/>
+        <location filename="../../src/app/pref-window.ui" line="1888"/>
+        <location filename="../../src/app/pref-window.ui" line="1902"/>
         <source>Play</source>
         <translation>Spela</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1474"/>
+        <location filename="../../src/app/pref-window.ui" line="1504"/>
         <source>Sane Break will pause if it detects no activity for this many minutes</source>
         <extracomment>Tooltip for &quot;Pause if idle for&quot; config</extracomment>
         <translation>Sane Break pausar om det inte upptäcker någon aktivitet under så många minuter</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1477"/>
+        <location filename="../../src/app/pref-window.ui" line="1507"/>
         <source>Pause if idle for</source>
         <translation>Pausa om overksam i</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="275"/>
         <location filename="../../src/app/pref-window.ui" line="531"/>
-        <location filename="../../src/app/pref-window.ui" line="1756"/>
+        <location filename="../../src/app/pref-window.ui" line="1786"/>
         <source>&lt;h3&gt;Small Breaks&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;Korta raster&lt;/h3&gt;</translation>
     </message>
@@ -882,19 +892,19 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="436"/>
         <location filename="../../src/app/pref-window.ui" line="591"/>
         <location filename="../../src/app/pref-window.ui" line="692"/>
-        <location filename="../../src/app/pref-window.ui" line="1518"/>
-        <location filename="../../src/app/pref-window.ui" line="1670"/>
-        <location filename="../../src/app/pref-window.ui" line="1724"/>
+        <location filename="../../src/app/pref-window.ui" line="1548"/>
+        <location filename="../../src/app/pref-window.ui" line="1700"/>
+        <location filename="../../src/app/pref-window.ui" line="1754"/>
         <source> min</source>
         <translation> min</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="284"/>
         <location filename="../../src/app/pref-window.ui" line="540"/>
-        <location filename="../../src/app/pref-window.ui" line="883"/>
-        <location filename="../../src/app/pref-window.ui" line="972"/>
+        <location filename="../../src/app/pref-window.ui" line="913"/>
         <location filename="../../src/app/pref-window.ui" line="1002"/>
         <location filename="../../src/app/pref-window.ui" line="1032"/>
+        <location filename="../../src/app/pref-window.ui" line="1062"/>
         <source> sec</source>
         <translation> s</translation>
     </message>
@@ -913,7 +923,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="391"/>
         <location filename="../../src/app/pref-window.ui" line="647"/>
-        <location filename="../../src/app/pref-window.ui" line="1829"/>
+        <location filename="../../src/app/pref-window.ui" line="1859"/>
         <source>&lt;h3&gt;Big Breaks&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;Långa raster&lt;/h3&gt;</translation>
     </message>
@@ -954,121 +964,132 @@ v%1
         <translation type="unfinished">Att skjuta upp raster lägger till extra tid på din nästa långa rast, i proportion till hur mycket tid du skjutit upp. Du kan justera multiplikatorn för hur mycket extra tid som läggs till.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="867"/>
+        <location filename="../../src/app/pref-window.ui" line="862"/>
+        <source>Minimum number of characters required for the reason when entering meeting or focus mode. Set to 0 to make the reason optional.</source>
+        <extracomment>Tooltip for minimum reason length</extracomment>
+        <translation type="unfinished">Minsta antal tecken som krävs för anledningen vid aktivering av mötes- eller fokusläge. Ställ in på 0 för att göra anledningen valfri.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="865"/>
+        <source>Minimum reason length for meeting and focus mode</source>
+        <translation type="unfinished">Minsta längd på anledning för mötes- och fokusläge</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="897"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
 &lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Påminnelsebeteende&lt;/h3&gt;
 &lt;p&gt;Sane Break visar en liten uppmaning i &lt;b&gt;%1&lt;/b&gt; sekunder. Om du avbryter din aktivitet under den tiden eller väljer att fortsätta tills timern löper ut övergår programmet till helskärmsläge. Under pausen låses Sane Break i helskärmsläge efter &lt;b&gt;%2&lt;/b&gt; sekunders inaktivitet. Om du återupptar aktiviteten innan låset aktiveras krymper uppmaningen tillfälligt till ett litet fönster, men expanderar åter till helskärmsläge när du är inaktiv igen eller när timern löper ut.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="927"/>
+        <location filename="../../src/app/pref-window.ui" line="957"/>
         <source>Show break prompt for</source>
         <translation>Visa rastmeddelande för</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="992"/>
+        <location filename="../../src/app/pref-window.ui" line="1022"/>
         <source>Tray icon will start flashing this many seconds before the break. Set to 0 to disable.</source>
         <extracomment>Tooltip for &quot;Flash tray icon before break&quot; config</extracomment>
         <translation type="unfinished">Aktivitetsfältets ikon börjar blinka så många sekunder innan rasten. Ställ in på 0 för att inaktivera.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="995"/>
+        <location filename="../../src/app/pref-window.ui" line="1025"/>
         <source>Flash tray icon before break</source>
         <translation type="unfinished">Blinka aktivitetsfältets ikon före rast</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1022"/>
+        <location filename="../../src/app/pref-window.ui" line="1052"/>
         <source>Show a small notification this many seconds before the break starts. Click it to start the break early. Set to 0 to disable.</source>
         <extracomment>Tooltip for &quot;Show heads-up before break&quot; config</extracomment>
         <translation type="unfinished">Visa en liten avisering så många sekunder innan rasten börjar. Klicka på den för att starta rasten i förtid. Ställ in på 0 för att inaktivera.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1025"/>
+        <location filename="../../src/app/pref-window.ui" line="1055"/>
         <source>Show heads-up before break</source>
         <translation type="unfinished">Visa avisering före rast</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1207"/>
+        <location filename="../../src/app/pref-window.ui" line="1237"/>
         <source>&lt;h4&gt;Small break&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Kort rast&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1253"/>
+        <location filename="../../src/app/pref-window.ui" line="1283"/>
         <source>&lt;h4&gt;Big break&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Lång rast&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1401"/>
+        <location filename="../../src/app/pref-window.ui" line="1431"/>
         <source>Background image</source>
         <translation type="unfinished">Bakgrundsbild</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1411"/>
+        <location filename="../../src/app/pref-window.ui" line="1441"/>
         <source>None</source>
         <translation type="unfinished">Ingen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1425"/>
+        <location filename="../../src/app/pref-window.ui" line="1455"/>
         <source>Clear</source>
         <translation type="unfinished">Rensa</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1441"/>
+        <location filename="../../src/app/pref-window.ui" line="1471"/>
         <source>&lt;p&gt;To preview break windows, save all changes first. The preview begins with a 2-second flashing prompt, followed by a 4-second full-screen break. A small break window will appear first, then a big break window.&lt;/p&gt;</source>
         <translation>&lt;p&gt;För att förhandsgranska rastfönster, spara först alla ändringar. Förhandsgranskningen börjar med en 2 sekunder lång blinkande uppmaning, följt av en 4 sekunder lång rast i helskärmsläge. Först visas ett fönster för kort rast, sedan ett fönster för lång rast.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1451"/>
+        <location filename="../../src/app/pref-window.ui" line="1481"/>
         <source>Preview Break Windows</source>
         <translation>Förhandsgranska rastfönster</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1536"/>
+        <location filename="../../src/app/pref-window.ui" line="1566"/>
         <source>Video players, presentations, and some games prevent the screen from sleeping. When on, that counts as activity so the idle pause won&apos;t trigger while they run; when off, only your actual input counts. Effectiveness varies by platform: full on ext-idle-notify Wayland; best-effort on X11 where only XScreenSaverSuspend-based inhibition is detected.</source>
         <translation type="unfinished">Videospelare, presentationer och vissa spel förhindrar att skärmen går i viloläge. När detta är påslaget räknas det som aktivitet, så paus vid overksamhet utlöses inte medan de körs; när det är avstängt räknas endast din faktiska inmatning. Effektiviteten varierar beroende på plattform: fullt stöd via ext-idle-notify på Wayland; bästa möjliga uppskattning på X11 där endast inaktivering baserad på XScreenSaverSuspend detekteras.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1539"/>
+        <location filename="../../src/app/pref-window.ui" line="1569"/>
         <source>When an app keeps the screen awake, count it as activity (e.g. video playback)</source>
         <translation type="unfinished">När en app håller skärmen vaken, räkna det som aktivitet (t.ex. videouppspelning)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1546"/>
+        <location filename="../../src/app/pref-window.ui" line="1576"/>
         <source>Pause on battery</source>
         <translation>Paus på batteri</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1553"/>
+        <location filename="../../src/app/pref-window.ui" line="1583"/>
         <source>Pause breaks when any of the following program is running:</source>
         <translation>Pausar raster när något av följande program körs:</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1560"/>
+        <location filename="../../src/app/pref-window.ui" line="1590"/>
         <source>(Write one program name per line)</source>
         <translation>(Skriv ett programnamn per rad)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1567"/>
+        <location filename="../../src/app/pref-window.ui" line="1597"/>
         <source>&lt;h3&gt;External Monitors&lt;/h3&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Externa skärmar&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1574"/>
+        <location filename="../../src/app/pref-window.ui" line="1604"/>
         <source>Pause when unknown monitor is connected</source>
         <translation type="unfinished">Pausa när en okänd skärm ansluts</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1596"/>
+        <location filename="../../src/app/pref-window.ui" line="1626"/>
         <source>Mark currently connected monitors as known</source>
         <translation type="unfinished">Markera aktuellt anslutna skärmar som kända</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1616"/>
+        <location filename="../../src/app/pref-window.ui" line="1646"/>
         <source>Remove selected</source>
         <translation type="unfinished">Ta bort markerade</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1625"/>
+        <location filename="../../src/app/pref-window.ui" line="1655"/>
         <source>&lt;h3&gt;Reset Break Schedule After Pause&lt;/h3&gt;
 &lt;p&gt;Sane Break will adjust the break schedule after pausing:&lt;/p&gt;
 &lt;ul&gt;
@@ -1083,11 +1104,11 @@ v%1
 &lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1418"/>
-        <location filename="../../src/app/pref-window.ui" line="1789"/>
-        <location filename="../../src/app/pref-window.ui" line="1803"/>
-        <location filename="../../src/app/pref-window.ui" line="1865"/>
-        <location filename="../../src/app/pref-window.ui" line="1879"/>
+        <location filename="../../src/app/pref-window.ui" line="1448"/>
+        <location filename="../../src/app/pref-window.ui" line="1819"/>
+        <location filename="../../src/app/pref-window.ui" line="1833"/>
+        <location filename="../../src/app/pref-window.ui" line="1895"/>
+        <location filename="../../src/app/pref-window.ui" line="1909"/>
         <source>Browse</source>
         <translation type="unfinished">Bläddra</translation>
     </message>
@@ -1102,62 +1123,62 @@ v%1
         <translation type="unfinished">När du aktiverar fokusläget från aktivitetsfältet följer raster istället detta schema. Använd det för kortare raster när du behöver hålla fokus.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1905"/>
+        <location filename="../../src/app/pref-window.ui" line="1935"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: Use &lt;i&gt;Browse&lt;/i&gt; to select a custom sound file. A copy of the file will be saved so it can always be played.</source>
         <translation type="unfinished">&lt;strong&gt;Tips&lt;/strong&gt;: Använd &lt;i&gt;Bläddra&lt;/i&gt; för att välja en anpassad ljudfil. En kopia av filen sparas så att den alltid kan spelas upp.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1943"/>
+        <location filename="../../src/app/pref-window.ui" line="1973"/>
         <source>Configuration file</source>
         <translation>Konfigurationsfil</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1973"/>
+        <location filename="../../src/app/pref-window.ui" line="2003"/>
         <source>Database file</source>
         <translation type="unfinished">Databasfil</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2019"/>
+        <location filename="../../src/app/pref-window.ui" line="2049"/>
         <source>Launch Sane Break at start up</source>
         <translation>Starta Sane Break vid uppstart</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2145"/>
+        <location filename="../../src/app/pref-window.ui" line="2175"/>
         <source>Get the Source Code</source>
         <translation>Hämta källkoden</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2174"/>
+        <location filename="../../src/app/pref-window.ui" line="2204"/>
         <source>Help Us Translate!</source>
         <translation>Hjälp oss att översätta!</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2207"/>
+        <location filename="../../src/app/pref-window.ui" line="2237"/>
         <source>Revert to Last Saved</source>
         <translation>Återgå till senast sparade</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1921"/>
+        <location filename="../../src/app/pref-window.ui" line="1951"/>
         <source>Language</source>
         <translation>Språk</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1960"/>
+        <location filename="../../src/app/pref-window.ui" line="1990"/>
         <source>Change of language will take effect after app restart.</source>
         <translation>Språksändringen träder i kraft efter att appen startats om.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2165"/>
+        <location filename="../../src/app/pref-window.ui" line="2195"/>
         <source>Third-party Libraries Licenses</source>
         <translation>Licenser för tredjepartsbibliotek</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2214"/>
+        <location filename="../../src/app/pref-window.ui" line="2244"/>
         <source>Defaults</source>
         <translation>Standard</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2237"/>
+        <location filename="../../src/app/pref-window.ui" line="2267"/>
         <source>Save</source>
         <translation>Spara</translation>
     </message>
@@ -1165,9 +1186,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="519"/>
-        <location filename="../../src/app/pref-window.cpp" line="520"/>
-        <location filename="../../src/app/pref-window.cpp" line="521"/>
+        <location filename="../../src/app/pref-window.cpp" line="522"/>
+        <location filename="../../src/app/pref-window.cpp" line="523"/>
+        <location filename="../../src/app/pref-window.cpp" line="524"/>
         <source>%n min</source>
         <translation type="unfinished">
             <numerusform>%n min</numerusform>
@@ -1184,7 +1205,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="518"/>
+        <location filename="../../src/app/pref-window.cpp" line="521"/>
         <source>%n sec</source>
         <translation type="unfinished">
             <numerusform>%n s</numerusform>
@@ -1192,83 +1213,83 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="517"/>
+        <location filename="../../src/app/pref-window.cpp" line="520"/>
         <source>Disabled</source>
         <translation>Inaktiverad</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="528"/>
+        <location filename="../../src/app/pref-window.cpp" line="531"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>Starta nästa rast efter att ha klickat med mittknappen på ikonen i aktivitetsfältet</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="533"/>
+        <location filename="../../src/app/pref-window.cpp" line="536"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>Starta nästa rast efter att ha dubbelklickat på ikonen i aktivitetsfältet</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="611"/>
+        <location filename="../../src/app/pref-window.cpp" line="614"/>
         <source>Save</source>
         <translation>Spara</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="612"/>
+        <location filename="../../src/app/pref-window.cpp" line="615"/>
         <source>Discard</source>
         <translation>Förkasta</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="613"/>
+        <location filename="../../src/app/pref-window.cpp" line="616"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="650"/>
+        <location filename="../../src/app/pref-window.cpp" line="653"/>
         <source>Select Sound File</source>
         <translation type="unfinished">Välj ljudfil</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="651"/>
+        <location filename="../../src/app/pref-window.cpp" line="654"/>
         <source>Sound Files (*.mp3 *.wav *.ogg *.flac *.m4a)</source>
         <translation type="unfinished">Ljudfiler (*.mp3 *.wav *.ogg *.flac *.m4a)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="661"/>
-        <location filename="../../src/app/pref-window.cpp" line="682"/>
+        <location filename="../../src/app/pref-window.cpp" line="664"/>
+        <location filename="../../src/app/pref-window.cpp" line="685"/>
         <source>Error</source>
         <translation type="unfinished">Fel</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="662"/>
+        <location filename="../../src/app/pref-window.cpp" line="665"/>
         <source>Failed to save a copy of the selected sound file.</source>
         <translation type="unfinished">Det gick inte att spara en kopia av den valda ljudfilen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="671"/>
+        <location filename="../../src/app/pref-window.cpp" line="674"/>
         <source>Select Background Image</source>
         <translation type="unfinished">Välj bakgrundsbild</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="672"/>
+        <location filename="../../src/app/pref-window.cpp" line="675"/>
         <source>Image Files (*.png *.jpg *.jpeg *.bmp *.webp)</source>
         <translation type="unfinished">Bilddfiler (*.png *.jpg *.jpeg *.bmp *.webp)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="683"/>
+        <location filename="../../src/app/pref-window.cpp" line="686"/>
         <source>Failed to save a copy of the selected image file.</source>
         <translation type="unfinished">Det gick inte att spara en kopia av den valda bildfilen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="493"/>
+        <location filename="../../src/app/pref-window.cpp" line="496"/>
         <source>Setting autostart failed</source>
         <translation>Inställning av autostart misslyckades</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="608"/>
+        <location filename="../../src/app/pref-window.cpp" line="611"/>
         <source>The preferences have been modified.</source>
         <translation>Inställningarna har ändrats.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="609"/>
+        <location filename="../../src/app/pref-window.cpp" line="612"/>
         <source>Do you want to save your changes?</source>
         <translation>Vill du spara dina ändringar?</translation>
     </message>
@@ -1333,48 +1354,48 @@ v%1
 <context>
     <name>SaneBreakApp</name>
     <message>
-        <location filename="../../src/app/app.cpp" line="154"/>
+        <location filename="../../src/app/app.cpp" line="167"/>
         <source>No further postpones are allowed.</source>
         <translation type="unfinished">Inga fler uppskjutningar tillåts.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="147"/>
-        <location filename="../../src/app/app.cpp" line="156"/>
+        <location filename="../../src/app/app.cpp" line="160"/>
+        <location filename="../../src/app/app.cpp" line="169"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="144"/>
+        <location filename="../../src/app/app.cpp" line="157"/>
         <source>Cannot postpone during focus mode.</source>
         <translation type="unfinished">Kan inte skjuta upp under fokusläge.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="145"/>
+        <location filename="../../src/app/app.cpp" line="158"/>
         <source>End focus mode first if you want to postpone.</source>
         <translation type="unfinished">Avsluta fokusläget först om du vill skjuta upp.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="153"/>
+        <location filename="../../src/app/app.cpp" line="166"/>
         <source>You have already postponed this break once.</source>
         <translation type="unfinished">Du har redan skjutit upp denna rast en gång.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="187"/>
+        <location filename="../../src/app/app.cpp" line="204"/>
         <source>Are you sure to quit Sane Break?</source>
         <translation>Är du säker på att du vill avsluta Sane Break?</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="188"/>
+        <location filename="../../src/app/app.cpp" line="205"/>
         <source>You can postpone the breaks instead.</source>
         <translation>Du kan istället skjuta upp rasterna.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="190"/>
+        <location filename="../../src/app/app.cpp" line="207"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="191"/>
+        <location filename="../../src/app/app.cpp" line="208"/>
         <source>Postpone</source>
         <translation type="unfinished">Skjut upp</translation>
     </message>
@@ -1397,7 +1418,7 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="192"/>
+        <location filename="../../src/app/app.cpp" line="209"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
@@ -1405,12 +1426,12 @@ v%1
 <context>
     <name>SanePreferences</name>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="65"/>
+        <location filename="../../src/core/preferences.cpp" line="67"/>
         <source>Time for a small break</source>
         <translation>Dags för en liten rast</translation>
     </message>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="68"/>
+        <location filename="../../src/core/preferences.cpp" line="70"/>
         <source>Time for a big break</source>
         <translation>Dags för en lång rast</translation>
     </message>
@@ -1497,66 +1518,70 @@ v%1
 <context>
     <name>StatusTrayWindow</name>
     <message>
-        <location filename="../../src/app/tray.cpp" line="56"/>
+        <location filename="../../src/app/tray.cpp" line="58"/>
         <source>Postpone</source>
         <translation>Skjut upp</translation>
     </message>
     <message numerus="yes">
+        <location filename="../../src/app/tray.cpp" line="137"/>
+        <location filename="../../src/app/tray.cpp" line="154"/>
+        <location filename="../../src/app/tray.cpp" line="155"/>
+        <location filename="../../src/app/tray.cpp" line="174"/>
         <source>%n min</source>
-        <translation type="obsolete">
+        <translation type="unfinished">
             <numerusform>%n min</numerusform>
             <numerusform>%n min</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="83"/>
+        <location filename="../../src/app/tray.cpp" line="95"/>
         <source>Enable Break</source>
         <translation>Aktivera rast</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="90"/>
+        <location filename="../../src/app/tray.cpp" line="102"/>
         <source>Preferences</source>
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="95"/>
+        <location filename="../../src/app/tray.cpp" line="107"/>
         <source>Quit</source>
         <translation>Avsluta</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="126"/>
-        <location filename="../../src/app/tray.cpp" line="153"/>
+        <location filename="../../src/app/tray.cpp" line="210"/>
+        <location filename="../../src/app/tray.cpp" line="237"/>
         <source>big break</source>
         <translation>lång rast</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="127"/>
-        <location filename="../../src/app/tray.cpp" line="153"/>
+        <location filename="../../src/app/tray.cpp" line="211"/>
+        <location filename="../../src/app/tray.cpp" line="237"/>
         <source>small break</source>
         <translation>kort rast</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="101"/>
+        <location filename="../../src/app/tray.cpp" line="185"/>
         <source>Next break after %1</source>
         <translation>Nästa rast efter %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="49"/>
+        <location filename="../../src/app/tray.cpp" line="51"/>
         <source>Take a small break instead</source>
         <translation>Ta en liten rast istället</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="59"/>
+        <location filename="../../src/app/tray.cpp" line="66"/>
         <source>Meeting Mode</source>
         <translation type="unfinished">Mötesläge</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="62"/>
+        <location filename="../../src/app/tray.cpp" line="70"/>
         <source>Focus Mode</source>
         <translation type="unfinished">Fokusläge</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="64"/>
+        <location filename="../../src/app/tray.cpp" line="76"/>
         <source>End Focus &amp;&amp; Break</source>
         <translation type="unfinished">Avsluta fokus &amp;&amp; rast</translation>
     </message>
@@ -1565,13 +1590,13 @@ v%1
         <translation type="obsolete">Avsluta möte &amp;&amp; rast nu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="72"/>
+        <location filename="../../src/app/tray.cpp" line="84"/>
         <source>Extend Meeting</source>
         <translation type="unfinished">Förläng möte</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/tray.cpp" line="80"/>
-        <location filename="../../src/app/tray.cpp" line="81"/>
+        <location filename="../../src/app/tray.cpp" line="92"/>
+        <location filename="../../src/app/tray.cpp" line="93"/>
         <source>%n more minutes</source>
         <translation type="unfinished">
             <numerusform>%n minut till</numerusform>
@@ -1579,7 +1604,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/tray.cpp" line="82"/>
+        <location filename="../../src/app/tray.cpp" line="94"/>
         <source>%n more hours</source>
         <translation type="unfinished">
             <numerusform>%n timme till</numerusform>
@@ -1587,32 +1612,47 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="92"/>
+        <location filename="../../src/app/tray.cpp" line="104"/>
         <source>Statistics</source>
         <translation type="unfinished">Statistik</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="103"/>
+        <location filename="../../src/app/tray.cpp" line="142"/>
+        <location filename="../../src/app/tray.cpp" line="165"/>
+        <location filename="../../src/app/tray.cpp" line="179"/>
+        <source>Custom…</source>
+        <translation type="unfinished">Anpassad…</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/app/tray.cpp" line="156"/>
+        <source>%n hours</source>
+        <translation type="unfinished">
+            <numerusform>%n timme</numerusform>
+            <numerusform>%n timmar</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tray.cpp" line="187"/>
         <source>Next big break after %1</source>
         <translation>Nästa långa rast efter %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="124"/>
+        <location filename="../../src/app/tray.cpp" line="208"/>
         <source>focus: %1 %2 (%3/%4)</source>
         <translation type="unfinished">fokus: %1 %2 (%3/%4)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="136"/>
+        <location filename="../../src/app/tray.cpp" line="220"/>
         <source>Exit meeting (%1)</source>
         <translation type="unfinished">Avsluta möte (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="147"/>
+        <location filename="../../src/app/tray.cpp" line="231"/>
         <source>Paused on unknown monitor</source>
         <translation type="unfinished">Pausad vid okänd skärm</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="149"/>
+        <location filename="../../src/app/tray.cpp" line="233"/>
         <source>Paused by external control</source>
         <translation type="unfinished">Pausad via extern kontroll</translation>
     </message>
@@ -1621,22 +1661,22 @@ v%1
         <translation type="obsolete">Möte tills %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="137"/>
+        <location filename="../../src/app/tray.cpp" line="221"/>
         <source>Meeting mode — until %1 (%2 left)</source>
         <translation type="unfinished">Mötesläge — tills %1 (%2 kvar)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="141"/>
+        <location filename="../../src/app/tray.cpp" line="225"/>
         <source>Paused on battery</source>
         <translation>Pausad på batteri</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="143"/>
+        <location filename="../../src/app/tray.cpp" line="227"/>
         <source>Paused on app running</source>
         <translation>Pausad medan appen körs</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="145"/>
+        <location filename="../../src/app/tray.cpp" line="229"/>
         <source>Paused on idle</source>
         <translation>Pausad vid overksam</translation>
     </message>

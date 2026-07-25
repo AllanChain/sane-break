@@ -339,12 +339,17 @@
 <context>
     <name>FocusWindow</name>
     <message>
-        <location filename="../../src/app/focus-window.cpp" line="81"/>
+        <location filename="../../src/app/focus-window.cpp" line="86"/>
+        <source>Optional — briefly describe what you&apos;re working on.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/focus-window.cpp" line="89"/>
         <source>Enter at least %1 characters.</source>
         <translation type="unfinished">Adjon meg legalább %1 karaktert.</translation>
     </message>
     <message>
-        <location filename="../../src/app/focus-window.cpp" line="87"/>
+        <location filename="../../src/app/focus-window.cpp" line="96"/>
         <source>Add a little more detail.</source>
         <translation type="unfinished">Adjon hozzá még egy kicsit több részletet.</translation>
     </message>
@@ -462,32 +467,37 @@
 <context>
     <name>MeetingWindow</name>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="82"/>
+        <location filename="../../src/app/meeting-window.cpp" line="83"/>
         <source>tomorrow at %1</source>
         <translation type="unfinished">holnap %1-kor</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="89"/>
+        <location filename="../../src/app/meeting-window.cpp" line="90"/>
         <source>Choose a future end time and enter at least %1 characters.</source>
         <translation type="unfinished">Válasszon egy jövőbeli befejezési időpontot, és adjon meg legalább %1 karaktert.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="99"/>
+        <location filename="../../src/app/meeting-window.cpp" line="100"/>
         <source>Choose an end time later than now.</source>
         <translation type="unfinished">Válasszon egy mostaninál későbbi befejezési időpontot.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="102"/>
+        <location filename="../../src/app/meeting-window.cpp" line="103"/>
         <source>Choose a later time today, or a tomorrow time before %1.</source>
         <translation type="unfinished">Válasszon egy későbbi időpontot ma, vagy egy holnapi időpontot %1 előtt.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="112"/>
+        <location filename="../../src/app/meeting-window.cpp" line="114"/>
+        <source>Optional — briefly describe what you&apos;re working on.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/meeting-window.cpp" line="117"/>
         <source>Enter at least %1 characters.</source>
         <translation type="unfinished">Adjon meg legalább %1 karaktert.</translation>
     </message>
     <message>
-        <location filename="../../src/app/meeting-window.cpp" line="118"/>
+        <location filename="../../src/app/meeting-window.cpp" line="124"/>
         <source>Add a little more detail.</source>
         <translation type="unfinished">Adjon hozzá még egy kicsit több részletet.</translation>
     </message>
@@ -568,19 +578,19 @@
         <translation>Az alkalmazásról</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1813"/>
-        <location filename="../../src/app/pref-window.ui" line="1851"/>
+        <location filename="../../src/app/pref-window.ui" line="1843"/>
+        <location filename="../../src/app/pref-window.ui" line="1881"/>
         <source>Bell before breaks</source>
         <translation>Hangjelzés szünetek előtt</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1768"/>
-        <location filename="../../src/app/pref-window.ui" line="1893"/>
+        <location filename="../../src/app/pref-window.ui" line="1798"/>
+        <location filename="../../src/app/pref-window.ui" line="1923"/>
         <source>Bell after breaks</source>
         <translation>Hangjelzés szünetek végénél</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="924"/>
+        <location filename="../../src/app/pref-window.ui" line="954"/>
         <source>Time in seconds before forcing break after work reminder appears.</source>
         <extracomment>Tooltip for &quot;Flash break prompt for&quot; config</extracomment>
         <translation>Emlékeztető megjelenése és szünet kikényszerítése közötti idő (másodperc).</translation>
@@ -633,49 +643,49 @@
         <translation type="unfinished">Ha aktiválja a Fókusz módot a tálcáról, a szünetek ezt az ütemezést követik. Használja rövidebb szünetekhez, amikor koncentrálnia kell.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="934"/>
+        <location filename="../../src/app/pref-window.ui" line="964"/>
         <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
         <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
         <translation>Szünetben ennyi tétlenséggel töltött idő után az már nem megszakítható.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="937"/>
+        <location filename="../../src/app/pref-window.ui" line="967"/>
         <source>Confirm break after</source>
         <translation>Szünet visszavonhatatlan ennyi tétlenség után</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1068"/>
+        <location filename="../../src/app/pref-window.ui" line="1098"/>
         <source>Close windows right after small break ends</source>
         <translation type="unfinished">Ablakok bezárása közvetlenül a kis szünet vége után</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1075"/>
+        <location filename="../../src/app/pref-window.ui" line="1105"/>
         <source>Close windows right after big break ends</source>
         <translation type="unfinished">Ablakok bezárása közvetlenül a nagy szünet vége után</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1101"/>
+        <location filename="../../src/app/pref-window.ui" line="1131"/>
         <source>Flash speed</source>
         <translation>Villogás gyorsasága</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1156"/>
-        <location filename="../../src/app/pref-window.ui" line="1189"/>
+        <location filename="../../src/app/pref-window.ui" line="1186"/>
+        <location filename="../../src/app/pref-window.ui" line="1219"/>
         <source>(One line per message)</source>
         <translation>(Soronként egy felirat)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1163"/>
+        <location filename="../../src/app/pref-window.ui" line="1193"/>
         <source>Big break prompt messages:</source>
         <translation>Nagy szünet feliratai:</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1173"/>
+        <location filename="../../src/app/pref-window.ui" line="1203"/>
         <source>Small break prompt messages:</source>
         <translation>Kis szünet feliratai:</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1052"/>
+        <location filename="../../src/app/pref-window.ui" line="1082"/>
         <source>Max number of force break exits</source>
         <translation type="unfinished">Kényszerített szünetből való kilépések maximális száma</translation>
     </message>
@@ -685,12 +695,12 @@
         <translation type="unfinished">Felület</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1059"/>
+        <location filename="../../src/app/pref-window.ui" line="1089"/>
         <source> times</source>
         <translation type="unfinished">alkalommal</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1198"/>
+        <location filename="../../src/app/pref-window.ui" line="1228"/>
         <source>&lt;h3&gt;Components to Show&lt;/h3&gt;
 
 &lt;p&gt;User interface components to show in the prompt and full-screen window.&lt;/p&gt;</source>
@@ -699,89 +709,89 @@
 &lt;p&gt;A felhasználói felület elemei, amelyek megjelennek az értesítésben és a teljes képernyős ablakban.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1223"/>
-        <location filename="../../src/app/pref-window.ui" line="1269"/>
+        <location filename="../../src/app/pref-window.ui" line="1253"/>
+        <location filename="../../src/app/pref-window.ui" line="1299"/>
         <source>Time when break ends</source>
         <translation type="unfinished">Szünet végének időpontja</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1244"/>
-        <location filename="../../src/app/pref-window.ui" line="1290"/>
+        <location filename="../../src/app/pref-window.ui" line="1274"/>
+        <location filename="../../src/app/pref-window.ui" line="1320"/>
         <source>Countdown timer</source>
         <translation type="unfinished">Visszaszámláló</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1216"/>
-        <location filename="../../src/app/pref-window.ui" line="1262"/>
+        <location filename="../../src/app/pref-window.ui" line="1246"/>
+        <location filename="../../src/app/pref-window.ui" line="1292"/>
         <source>Progress bar</source>
         <translation type="unfinished">Folyamatjelző sáv</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1230"/>
-        <location filename="../../src/app/pref-window.ui" line="1276"/>
+        <location filename="../../src/app/pref-window.ui" line="1260"/>
+        <location filename="../../src/app/pref-window.ui" line="1306"/>
         <source>Clock</source>
         <translation type="unfinished">Óra</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1237"/>
-        <location filename="../../src/app/pref-window.ui" line="1283"/>
+        <location filename="../../src/app/pref-window.ui" line="1267"/>
+        <location filename="../../src/app/pref-window.ui" line="1313"/>
         <source>Buttons</source>
         <translation type="unfinished">Gombok</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1299"/>
+        <location filename="../../src/app/pref-window.ui" line="1329"/>
         <source>&lt;h3&gt;Color Theme&lt;/h3&gt;
 All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
         <translation>&lt;h3&gt;Színskála&lt;/h3&gt;
 A színkódok &lt;code&gt;#AARRGGBB&lt;/code&gt; formátumban vannak.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1383"/>
+        <location filename="../../src/app/pref-window.ui" line="1413"/>
         <source>Big break</source>
         <translation>Nagy szünet</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1352"/>
+        <location filename="../../src/app/pref-window.ui" line="1382"/>
         <source>Message</source>
         <translation>Felirat</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1390"/>
+        <location filename="../../src/app/pref-window.ui" line="1420"/>
         <source>Small break</source>
         <translation>Kis szünet</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1359"/>
+        <location filename="../../src/app/pref-window.ui" line="1389"/>
         <source>Background</source>
         <translation>Háttér</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1366"/>
+        <location filename="../../src/app/pref-window.ui" line="1396"/>
         <source>Count down</source>
         <translation>Visszaszámláló</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1465"/>
+        <location filename="../../src/app/pref-window.ui" line="1495"/>
         <source>&lt;h3&gt;Pause Conditions&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;Szünet feltételei&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1686"/>
+        <location filename="../../src/app/pref-window.ui" line="1716"/>
         <source>Long pause threshold</source>
         <translation>Hosszú szünet ideje</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1740"/>
+        <location filename="../../src/app/pref-window.ui" line="1770"/>
         <source>Short pause threshold</source>
         <translation>Rövid szünet ideje</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1905"/>
+        <location filename="../../src/app/pref-window.ui" line="1935"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: Use &lt;i&gt;Browse&lt;/i&gt; to select a custom sound file. A copy of the file will be saved so it can always be played.</source>
         <translation type="unfinished">&lt;strong&gt;Tipp&lt;/strong&gt;: Használja a &lt;i&gt;Tallózás&lt;/i&gt; gombot egyéni hangfájl kiválasztásához. A fájl másolata elmentésre kerül, hogy mindig lejátszható legyen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1999"/>
+        <location filename="../../src/app/pref-window.ui" line="2029"/>
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
@@ -791,17 +801,17 @@ kezdés után két perccel lesz lezárva, ha a szünet vége után nincs aktivit
 legalább két perc, akkor a képernyő mindenképpen lezár.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2004"/>
+        <location filename="../../src/app/pref-window.ui" line="2034"/>
         <source>Automatic screen lock after break start</source>
         <translation>Képernyő automatikus lezárása a szünet kezdése után</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1950"/>
+        <location filename="../../src/app/pref-window.ui" line="1980"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Segíts a fordításban!&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2121"/>
+        <location filename="../../src/app/pref-window.ui" line="2151"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -832,39 +842,39 @@ v%1
         <translation type="unfinished">Nagy szünetek időtartama (másodpercben)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1086"/>
+        <location filename="../../src/app/pref-window.ui" line="1116"/>
         <source>&lt;h3&gt;Prompt Appearance&lt;/h3&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Értesítés megjelenése&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1765"/>
-        <location filename="../../src/app/pref-window.ui" line="1810"/>
+        <location filename="../../src/app/pref-window.ui" line="1795"/>
+        <location filename="../../src/app/pref-window.ui" line="1840"/>
         <source>Try restart Sane Break if no sound</source>
         <translation type="unfinished">Próbálja meg újraindítani a Sane Break-et, ha nincs hang</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1782"/>
-        <location filename="../../src/app/pref-window.ui" line="1796"/>
-        <location filename="../../src/app/pref-window.ui" line="1858"/>
-        <location filename="../../src/app/pref-window.ui" line="1872"/>
+        <location filename="../../src/app/pref-window.ui" line="1812"/>
+        <location filename="../../src/app/pref-window.ui" line="1826"/>
+        <location filename="../../src/app/pref-window.ui" line="1888"/>
+        <location filename="../../src/app/pref-window.ui" line="1902"/>
         <source>Play</source>
         <translation type="unfinished">Lejátszás</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1474"/>
+        <location filename="../../src/app/pref-window.ui" line="1504"/>
         <source>Sane Break will pause if it detects no activity for this many minutes</source>
         <extracomment>Tooltip for &quot;Pause if idle for&quot; config</extracomment>
         <translation type="unfinished">A Sane Break szüneteltet, ha ennyi percig nem észlel aktivitást</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1477"/>
+        <location filename="../../src/app/pref-window.ui" line="1507"/>
         <source>Pause if idle for</source>
         <translation type="unfinished">Szüneteltetés tétlenség esetén</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="275"/>
         <location filename="../../src/app/pref-window.ui" line="531"/>
-        <location filename="../../src/app/pref-window.ui" line="1756"/>
+        <location filename="../../src/app/pref-window.ui" line="1786"/>
         <source>&lt;h3&gt;Small Breaks&lt;/h3&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Kis szünetek&lt;/h3&gt;</translation>
     </message>
@@ -873,19 +883,19 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="436"/>
         <location filename="../../src/app/pref-window.ui" line="591"/>
         <location filename="../../src/app/pref-window.ui" line="692"/>
-        <location filename="../../src/app/pref-window.ui" line="1518"/>
-        <location filename="../../src/app/pref-window.ui" line="1670"/>
-        <location filename="../../src/app/pref-window.ui" line="1724"/>
+        <location filename="../../src/app/pref-window.ui" line="1548"/>
+        <location filename="../../src/app/pref-window.ui" line="1700"/>
+        <location filename="../../src/app/pref-window.ui" line="1754"/>
         <source> min</source>
         <translation type="unfinished">perc</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="284"/>
         <location filename="../../src/app/pref-window.ui" line="540"/>
-        <location filename="../../src/app/pref-window.ui" line="883"/>
-        <location filename="../../src/app/pref-window.ui" line="972"/>
+        <location filename="../../src/app/pref-window.ui" line="913"/>
         <location filename="../../src/app/pref-window.ui" line="1002"/>
         <location filename="../../src/app/pref-window.ui" line="1032"/>
+        <location filename="../../src/app/pref-window.ui" line="1062"/>
         <source> sec</source>
         <translation type="unfinished">mp</translation>
     </message>
@@ -900,7 +910,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="391"/>
         <location filename="../../src/app/pref-window.ui" line="647"/>
-        <location filename="../../src/app/pref-window.ui" line="1829"/>
+        <location filename="../../src/app/pref-window.ui" line="1859"/>
         <source>&lt;h3&gt;Big Breaks&lt;/h3&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Nagy szünetek&lt;/h3&gt;</translation>
     </message>
@@ -937,121 +947,132 @@ v%1
         <translation type="unfinished">A szünetek elhalasztása extra időt ad a következő hosszú szünetéhez, arányosan azzal, amennyivel elhalasztotta. Beállíthatja a szorzót, amely meghatározza, mennyi extra idő kerül hozzáadásra.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="867"/>
+        <location filename="../../src/app/pref-window.ui" line="862"/>
+        <source>Minimum number of characters required for the reason when entering meeting or focus mode. Set to 0 to make the reason optional.</source>
+        <extracomment>Tooltip for minimum reason length</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="865"/>
+        <source>Minimum reason length for meeting and focus mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="897"/>
         <source>&lt;h3&gt;Reminder Behavior&lt;/h3&gt;
 &lt;p&gt;Sane Break shows a small prompt for &lt;b&gt;%1&lt;/b&gt; seconds. If you stop your activity during that time, or choose to continue until the timer runs out, it transitions to full-screen. During the break, Sane Break locks into full-screen mode after &lt;b&gt;%2&lt;/b&gt; seconds of inactivity. If you resume activity before the lock, the prompt shrinks to a small window temporarily but re-expands to full-screen when you&apos;re idle again or the timer ends.&lt;/p&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Emlékeztető viselkedése&lt;/h3&gt;
 &lt;p&gt;A Sane Break egy kis értesítést mutat &lt;b&gt;%1&lt;/b&gt; másodpercig. Ha ez alatt az idő alatt abbahagyja az aktivitást, vagy választja a folytatást az időzítő lejártáig, akkor teljes képernyőre vált. A szünet alatt a Sane Break &lt;b&gt;%2&lt;/b&gt; másodperc inaktivitás után teljes képernyős módba zár. Ha a zárolás előtt folytatja az aktivitást, az értesítés ideiglenesen kis ablakká zsugorodik, de újra teljes képernyőre tágul, amikor ismét tétlen lesz, vagy az időzítő lejár.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="927"/>
+        <location filename="../../src/app/pref-window.ui" line="957"/>
         <source>Show break prompt for</source>
         <translation type="unfinished">Szünet értesítés megjelenítése ennyi ideig:</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="992"/>
+        <location filename="../../src/app/pref-window.ui" line="1022"/>
         <source>Tray icon will start flashing this many seconds before the break. Set to 0 to disable.</source>
         <extracomment>Tooltip for &quot;Flash tray icon before break&quot; config</extracomment>
         <translation type="unfinished">A tálca ikon ennyi másodperccel a szünet előtt kezd villogni. Állítsa 0-ra a letiltáshoz.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="995"/>
+        <location filename="../../src/app/pref-window.ui" line="1025"/>
         <source>Flash tray icon before break</source>
         <translation type="unfinished">Tálca ikon villogtatása szünet előtt</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1022"/>
+        <location filename="../../src/app/pref-window.ui" line="1052"/>
         <source>Show a small notification this many seconds before the break starts. Click it to start the break early. Set to 0 to disable.</source>
         <extracomment>Tooltip for &quot;Show heads-up before break&quot; config</extracomment>
         <translation type="unfinished">Kis értesítés megjelenítése ennyi másodperccel a szünet kezdete előtt. Kattintson rá a szünet korábbi indításához. Állítsa 0-ra a letiltáshoz.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1025"/>
+        <location filename="../../src/app/pref-window.ui" line="1055"/>
         <source>Show heads-up before break</source>
         <translation type="unfinished">Figyelmeztetés megjelenítése szünet előtt</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1207"/>
+        <location filename="../../src/app/pref-window.ui" line="1237"/>
         <source>&lt;h4&gt;Small break&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;Kis szünet&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1253"/>
+        <location filename="../../src/app/pref-window.ui" line="1283"/>
         <source>&lt;h4&gt;Big break&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;Nagy szünet&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1401"/>
+        <location filename="../../src/app/pref-window.ui" line="1431"/>
         <source>Background image</source>
         <translation type="unfinished">Háttérkép</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1411"/>
+        <location filename="../../src/app/pref-window.ui" line="1441"/>
         <source>None</source>
         <translation type="unfinished">Nincs</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1425"/>
+        <location filename="../../src/app/pref-window.ui" line="1455"/>
         <source>Clear</source>
         <translation type="unfinished">Törlés</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1441"/>
+        <location filename="../../src/app/pref-window.ui" line="1471"/>
         <source>&lt;p&gt;To preview break windows, save all changes first. The preview begins with a 2-second flashing prompt, followed by a 4-second full-screen break. A small break window will appear first, then a big break window.&lt;/p&gt;</source>
         <translation type="unfinished">&lt;p&gt;A szünet ablakok előnézetéhez először mentse el az összes változtatást. Az előnézet egy 2 másodperces villogó értesítéssel kezdődik, amelyet egy 4 másodperces teljes képernyős szünet követ. Először egy kis szünet ablak jelenik meg, majd egy nagy szünet ablak.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1451"/>
+        <location filename="../../src/app/pref-window.ui" line="1481"/>
         <source>Preview Break Windows</source>
         <translation type="unfinished">Szünet ablakok előnézete</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1536"/>
+        <location filename="../../src/app/pref-window.ui" line="1566"/>
         <source>Video players, presentations, and some games prevent the screen from sleeping. When on, that counts as activity so the idle pause won&apos;t trigger while they run; when off, only your actual input counts. Effectiveness varies by platform: full on ext-idle-notify Wayland; best-effort on X11 where only XScreenSaverSuspend-based inhibition is detected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1539"/>
+        <location filename="../../src/app/pref-window.ui" line="1569"/>
         <source>When an app keeps the screen awake, count it as activity (e.g. video playback)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1546"/>
+        <location filename="../../src/app/pref-window.ui" line="1576"/>
         <source>Pause on battery</source>
         <translation type="unfinished">Szüneteltetés akkumulátorról történő üzemelés során</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1553"/>
+        <location filename="../../src/app/pref-window.ui" line="1583"/>
         <source>Pause breaks when any of the following program is running:</source>
         <translation type="unfinished">Szünetek szüneteltetése, ha a következő programok bármelyike fut:</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1560"/>
+        <location filename="../../src/app/pref-window.ui" line="1590"/>
         <source>(Write one program name per line)</source>
         <translation type="unfinished">(Soronként egy programnév)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1567"/>
+        <location filename="../../src/app/pref-window.ui" line="1597"/>
         <source>&lt;h3&gt;External Monitors&lt;/h3&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Külső monitorok&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1574"/>
+        <location filename="../../src/app/pref-window.ui" line="1604"/>
         <source>Pause when unknown monitor is connected</source>
         <translation type="unfinished">Szüneteltetés ismeretlen monitor csatlakoztatásakor</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1596"/>
+        <location filename="../../src/app/pref-window.ui" line="1626"/>
         <source>Mark currently connected monitors as known</source>
         <translation type="unfinished">Jelenleg csatlakoztatott monitorok megjelölése ismertként</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1616"/>
+        <location filename="../../src/app/pref-window.ui" line="1646"/>
         <source>Remove selected</source>
         <translation type="unfinished">Kijelölt eltávolítása</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1625"/>
+        <location filename="../../src/app/pref-window.ui" line="1655"/>
         <source>&lt;h3&gt;Reset Break Schedule After Pause&lt;/h3&gt;
 &lt;p&gt;Sane Break will adjust the break schedule after pausing:&lt;/p&gt;
 &lt;ul&gt;
@@ -1066,66 +1087,66 @@ v%1
 &lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1418"/>
-        <location filename="../../src/app/pref-window.ui" line="1789"/>
-        <location filename="../../src/app/pref-window.ui" line="1803"/>
-        <location filename="../../src/app/pref-window.ui" line="1865"/>
-        <location filename="../../src/app/pref-window.ui" line="1879"/>
+        <location filename="../../src/app/pref-window.ui" line="1448"/>
+        <location filename="../../src/app/pref-window.ui" line="1819"/>
+        <location filename="../../src/app/pref-window.ui" line="1833"/>
+        <location filename="../../src/app/pref-window.ui" line="1895"/>
+        <location filename="../../src/app/pref-window.ui" line="1909"/>
         <source>Browse</source>
         <translation type="unfinished">Tallózás</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1943"/>
+        <location filename="../../src/app/pref-window.ui" line="1973"/>
         <source>Configuration file</source>
         <translation type="unfinished">Konfigurációs fájl</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1973"/>
+        <location filename="../../src/app/pref-window.ui" line="2003"/>
         <source>Database file</source>
         <translation type="unfinished">Adatbázis fájl</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2019"/>
+        <location filename="../../src/app/pref-window.ui" line="2049"/>
         <source>Launch Sane Break at start up</source>
         <translation type="unfinished">Sane Break indítása rendszerindításkor</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2145"/>
+        <location filename="../../src/app/pref-window.ui" line="2175"/>
         <source>Get the Source Code</source>
         <translation type="unfinished">Forráskód letöltése</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2174"/>
+        <location filename="../../src/app/pref-window.ui" line="2204"/>
         <source>Help Us Translate!</source>
         <translation type="unfinished">Segítsen a fordításban!</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2207"/>
+        <location filename="../../src/app/pref-window.ui" line="2237"/>
         <source>Revert to Last Saved</source>
         <translation type="unfinished">Visszaállítás az utolsó mentett állapotra</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1921"/>
+        <location filename="../../src/app/pref-window.ui" line="1951"/>
         <source>Language</source>
         <translation type="unfinished">Nyelv</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1960"/>
+        <location filename="../../src/app/pref-window.ui" line="1990"/>
         <source>Change of language will take effect after app restart.</source>
         <translation type="unfinished">A nyelvváltás az alkalmazás újraindítása után lép életbe.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2165"/>
+        <location filename="../../src/app/pref-window.ui" line="2195"/>
         <source>Third-party Libraries Licenses</source>
         <translation type="unfinished">Harmadik féltől származó könyvtárak licencei</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2214"/>
+        <location filename="../../src/app/pref-window.ui" line="2244"/>
         <source>Defaults</source>
         <translation type="unfinished">Alapértelmezések</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2237"/>
+        <location filename="../../src/app/pref-window.ui" line="2267"/>
         <source>Save</source>
         <translation type="unfinished">Mentés</translation>
     </message>
@@ -1133,9 +1154,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="519"/>
-        <location filename="../../src/app/pref-window.cpp" line="520"/>
-        <location filename="../../src/app/pref-window.cpp" line="521"/>
+        <location filename="../../src/app/pref-window.cpp" line="522"/>
+        <location filename="../../src/app/pref-window.cpp" line="523"/>
+        <location filename="../../src/app/pref-window.cpp" line="524"/>
         <source>%n min</source>
         <translation type="unfinished">
             <numerusform>%n perc</numerusform>
@@ -1150,90 +1171,90 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="518"/>
+        <location filename="../../src/app/pref-window.cpp" line="521"/>
         <source>%n sec</source>
         <translation type="unfinished">
             <numerusform>%n mp</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="517"/>
+        <location filename="../../src/app/pref-window.cpp" line="520"/>
         <source>Disabled</source>
         <translation type="unfinished">Letiltva</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="528"/>
+        <location filename="../../src/app/pref-window.cpp" line="531"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation type="unfinished">Következő szünet indítása a tálca ikon középső gombbal történő kattintásával</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="533"/>
+        <location filename="../../src/app/pref-window.cpp" line="536"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation type="unfinished">Következő szünet indítása a tálca ikon dupla kattintásával</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="611"/>
+        <location filename="../../src/app/pref-window.cpp" line="614"/>
         <source>Save</source>
         <translation type="unfinished">Mentés</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="612"/>
+        <location filename="../../src/app/pref-window.cpp" line="615"/>
         <source>Discard</source>
         <translation type="unfinished">Elvetés</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="613"/>
+        <location filename="../../src/app/pref-window.cpp" line="616"/>
         <source>Cancel</source>
         <translation type="unfinished">Mégse</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="650"/>
+        <location filename="../../src/app/pref-window.cpp" line="653"/>
         <source>Select Sound File</source>
         <translation type="unfinished">Hangfájl kiválasztása</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="651"/>
+        <location filename="../../src/app/pref-window.cpp" line="654"/>
         <source>Sound Files (*.mp3 *.wav *.ogg *.flac *.m4a)</source>
         <translation type="unfinished">Hangfájlok (*.mp3 *.wav *.ogg *.flac *.m4a)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="661"/>
-        <location filename="../../src/app/pref-window.cpp" line="682"/>
+        <location filename="../../src/app/pref-window.cpp" line="664"/>
+        <location filename="../../src/app/pref-window.cpp" line="685"/>
         <source>Error</source>
         <translation type="unfinished">Hiba</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="662"/>
+        <location filename="../../src/app/pref-window.cpp" line="665"/>
         <source>Failed to save a copy of the selected sound file.</source>
         <translation type="unfinished">Nem sikerült menteni a kiválasztott hangfájl másolatát.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="671"/>
+        <location filename="../../src/app/pref-window.cpp" line="674"/>
         <source>Select Background Image</source>
         <translation type="unfinished">Háttérkép kiválasztása</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="672"/>
+        <location filename="../../src/app/pref-window.cpp" line="675"/>
         <source>Image Files (*.png *.jpg *.jpeg *.bmp *.webp)</source>
         <translation type="unfinished">Képfájlok (*.png *.jpg *.jpeg *.bmp *.webp)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="683"/>
+        <location filename="../../src/app/pref-window.cpp" line="686"/>
         <source>Failed to save a copy of the selected image file.</source>
         <translation type="unfinished">Nem sikerült menteni a kiválasztott képfájl másolatát.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="493"/>
+        <location filename="../../src/app/pref-window.cpp" line="496"/>
         <source>Setting autostart failed</source>
         <translation type="unfinished">Az automatikus indítás beállítása sikertelen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="608"/>
+        <location filename="../../src/app/pref-window.cpp" line="611"/>
         <source>The preferences have been modified.</source>
         <translation type="unfinished">A beállítások módosultak.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="609"/>
+        <location filename="../../src/app/pref-window.cpp" line="612"/>
         <source>Do you want to save your changes?</source>
         <translation type="unfinished">Szeretné menteni a változtatásokat?</translation>
     </message>
@@ -1294,53 +1315,53 @@ v%1
 <context>
     <name>SaneBreakApp</name>
     <message>
-        <location filename="../../src/app/app.cpp" line="154"/>
+        <location filename="../../src/app/app.cpp" line="167"/>
         <source>No further postpones are allowed.</source>
         <translation type="unfinished">További elhalasztás nem engedélyezett.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="147"/>
-        <location filename="../../src/app/app.cpp" line="156"/>
+        <location filename="../../src/app/app.cpp" line="160"/>
+        <location filename="../../src/app/app.cpp" line="169"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="144"/>
+        <location filename="../../src/app/app.cpp" line="157"/>
         <source>Cannot postpone during focus mode.</source>
         <translation type="unfinished">Nem halasztható el fókusz mód közben.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="145"/>
+        <location filename="../../src/app/app.cpp" line="158"/>
         <source>End focus mode first if you want to postpone.</source>
         <translation type="unfinished">Először fejezze be a fókusz módot, ha el akarja halasztani.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="153"/>
+        <location filename="../../src/app/app.cpp" line="166"/>
         <source>You have already postponed this break once.</source>
         <translation type="unfinished">Ezt a szünetet már egyszer elhalasztotta.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="187"/>
+        <location filename="../../src/app/app.cpp" line="204"/>
         <source>Are you sure to quit Sane Break?</source>
         <translation type="unfinished">Biztosan ki szeretne lépni a Sane Break-ből?</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="188"/>
+        <location filename="../../src/app/app.cpp" line="205"/>
         <source>You can postpone the breaks instead.</source>
         <translation type="unfinished">Inkább elhalaszthatja a szüneteket.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="190"/>
+        <location filename="../../src/app/app.cpp" line="207"/>
         <source>Cancel</source>
         <translation type="unfinished">Mégse</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="191"/>
+        <location filename="../../src/app/app.cpp" line="208"/>
         <source>Postpone</source>
         <translation type="unfinished">Elhalasztás</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="192"/>
+        <location filename="../../src/app/app.cpp" line="209"/>
         <source>Yes</source>
         <translation type="unfinished">Igen</translation>
     </message>
@@ -1348,12 +1369,12 @@ v%1
 <context>
     <name>SanePreferences</name>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="65"/>
+        <location filename="../../src/core/preferences.cpp" line="67"/>
         <source>Time for a small break</source>
         <translation>Itt az idő egy kis szünetre</translation>
     </message>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="68"/>
+        <location filename="../../src/core/preferences.cpp" line="70"/>
         <source>Time for a big break</source>
         <translation>Itt az idő egy nagyobb szünetre</translation>
     </message>
@@ -1404,129 +1425,153 @@ v%1
 <context>
     <name>StatusTrayWindow</name>
     <message>
-        <location filename="../../src/app/tray.cpp" line="56"/>
+        <location filename="../../src/app/tray.cpp" line="58"/>
         <source>Postpone</source>
         <translation type="unfinished">Elhalasztás</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/tray.cpp" line="80"/>
-        <location filename="../../src/app/tray.cpp" line="81"/>
+        <location filename="../../src/app/tray.cpp" line="92"/>
+        <location filename="../../src/app/tray.cpp" line="93"/>
         <source>%n more minutes</source>
         <translation type="unfinished">
             <numerusform>%n további perc</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/tray.cpp" line="82"/>
+        <location filename="../../src/app/tray.cpp" line="94"/>
         <source>%n more hours</source>
         <translation type="unfinished">
             <numerusform>%n további óra</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="83"/>
+        <location filename="../../src/app/tray.cpp" line="95"/>
         <source>Enable Break</source>
         <translation type="unfinished">Szünet engedélyezése</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="90"/>
+        <location filename="../../src/app/tray.cpp" line="102"/>
         <source>Preferences</source>
         <translation type="unfinished">Beállítások</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="95"/>
+        <location filename="../../src/app/tray.cpp" line="107"/>
         <source>Quit</source>
         <translation type="unfinished">Kilépés</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="126"/>
-        <location filename="../../src/app/tray.cpp" line="153"/>
+        <location filename="../../src/app/tray.cpp" line="210"/>
+        <location filename="../../src/app/tray.cpp" line="237"/>
         <source>big break</source>
         <translation>nagy szünet</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="127"/>
-        <location filename="../../src/app/tray.cpp" line="153"/>
+        <location filename="../../src/app/tray.cpp" line="211"/>
+        <location filename="../../src/app/tray.cpp" line="237"/>
         <source>small break</source>
         <translation>kis szünet</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="136"/>
+        <location filename="../../src/app/tray.cpp" line="220"/>
         <source>Exit meeting (%1)</source>
         <translation type="unfinished">Találkozó elhagyása (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="101"/>
+        <location filename="../../src/app/tray.cpp" line="185"/>
         <source>Next break after %1</source>
         <translation type="unfinished">Következő szünet %1 után</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="49"/>
+        <location filename="../../src/app/tray.cpp" line="51"/>
         <source>Take a small break instead</source>
         <translation type="unfinished">Tartson inkább egy kis szünetet</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="59"/>
+        <location filename="../../src/app/tray.cpp" line="66"/>
         <source>Meeting Mode</source>
         <translation type="unfinished">Találkozó mód</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="62"/>
+        <location filename="../../src/app/tray.cpp" line="70"/>
         <source>Focus Mode</source>
         <translation type="unfinished">Fókusz mód</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="64"/>
+        <location filename="../../src/app/tray.cpp" line="76"/>
         <source>End Focus &amp;&amp; Break</source>
         <translation type="unfinished">Fókusz és szünet befejezése</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="72"/>
+        <location filename="../../src/app/tray.cpp" line="84"/>
         <source>Extend Meeting</source>
         <translation type="unfinished">Találkozó meghosszabbítása</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="92"/>
+        <location filename="../../src/app/tray.cpp" line="104"/>
         <source>Statistics</source>
         <translation type="unfinished">Statisztika</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../../src/app/tray.cpp" line="137"/>
+        <location filename="../../src/app/tray.cpp" line="154"/>
+        <location filename="../../src/app/tray.cpp" line="155"/>
+        <location filename="../../src/app/tray.cpp" line="174"/>
+        <source>%n min</source>
+        <translation type="unfinished">
+            <numerusform>%n perc</numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="103"/>
+        <location filename="../../src/app/tray.cpp" line="142"/>
+        <location filename="../../src/app/tray.cpp" line="165"/>
+        <location filename="../../src/app/tray.cpp" line="179"/>
+        <source>Custom…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../src/app/tray.cpp" line="156"/>
+        <source>%n hours</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tray.cpp" line="187"/>
         <source>Next big break after %1</source>
         <translation type="unfinished">Következő nagy szünet %1 után</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="124"/>
+        <location filename="../../src/app/tray.cpp" line="208"/>
         <source>focus: %1 %2 (%3/%4)</source>
         <translation type="unfinished">fókusz: %1 %2 (%3/%4)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="137"/>
+        <location filename="../../src/app/tray.cpp" line="221"/>
         <source>Meeting mode — until %1 (%2 left)</source>
         <translation type="unfinished">Találkozó mód — eddig: %1 (%2 maradt)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="141"/>
+        <location filename="../../src/app/tray.cpp" line="225"/>
         <source>Paused on battery</source>
         <translation type="unfinished">Szüneteltetve akkumulátorról</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="143"/>
+        <location filename="../../src/app/tray.cpp" line="227"/>
         <source>Paused on app running</source>
         <translation type="unfinished">Szüneteltetve futó alkalmazás miatt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="145"/>
+        <location filename="../../src/app/tray.cpp" line="229"/>
         <source>Paused on idle</source>
         <translation type="unfinished">Szüneteltetve tétlenség miatt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="147"/>
+        <location filename="../../src/app/tray.cpp" line="231"/>
         <source>Paused on unknown monitor</source>
         <translation type="unfinished">Szüneteltetve ismeretlen monitor miatt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="149"/>
+        <location filename="../../src/app/tray.cpp" line="233"/>
         <source>Paused by external control</source>
         <translation type="unfinished">Szüneteltetve külső vezérlés által</translation>
     </message>

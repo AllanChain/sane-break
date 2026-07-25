@@ -6,12 +6,12 @@
 #include <QColor>
 #include <QContextMenuEvent>
 #include <QLabel>
+#include <QList>
 #include <QMenu>
 #include <QObject>
 #include <QPixmap>
 #include <QSystemTrayIcon>
 #include <QTimer>
-#include <QVector>
 #include <QWidget>
 #include <optional>
 
@@ -52,33 +52,48 @@ class StatusTrayWindow : public QObject {
   void enableBreakRequested();
   void preferenceWindowRequested();
   void postponeRequested();
+  void postponePresetRequested(int minutes);
   void meetingRequested();
+  void meetingPresetRequested(int minutes);
   void endMeetingRequested();
   void extendMeetingRequested(int seconds);
   void focusRequested();
+  void focusPresetRequested(int minutes);
   void endFocusRequested();
   void statsRequested();
   void quitRequested();
 
+ public:
+  static QList<int> postponePresets(int maxMinutes);
+  static QList<int> focusPresets(int focusSmallEveryMinutes);
+
+  QMenu* getPostponeMenu() const { return postponeMenu; }
+  QMenu* getMeetingMenu() const { return meetingMenu; }
+  QMenu* getFocusMenu() const { return focusMenu; }
+
  protected:
   SanePreferences* preferences;
   QMenu* menu;
-  QAction* postponeMenu;
-  QAction* meetingAction;
+  QMenu* postponeMenu;
+  QMenu* meetingMenu;
   QAction* endMeetingAction;
   QMenu* extendMeetingMenu;
   struct ExtendOption {
     QAction* action;
     int seconds;
   };
-  QVector<ExtendOption> extendOptions;
-  QAction* focusAction;
+  QList<ExtendOption> extendOptions;
+  QMenu* focusMenu;
   QAction* endFocusAction;
   QAction* quitAction;
   QAction* nextBreakAction;
   QAction* bigBreakAction;
   QAction* smallBreakInsteadAction;
   QAction* enableBreak;
+
+  void buildPostponeMenu();
+  void buildMeetingMenu();
+  void buildFocusMenu();
 };
 
 class StatusTray : public StatusTrayWindow {

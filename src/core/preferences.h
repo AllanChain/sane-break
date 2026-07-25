@@ -100,6 +100,8 @@ class SanePreferences : public QObject {
   Setting<int>* postponeShrinkNextPercent;
   Setting<int>* postponeExtendBreakPercent;
 
+  Setting<int>* minReasonLength;
+
   Setting<int>* flashFor;
   Setting<int>* confirmAfter;
   Setting<int>* flashTrayFor;

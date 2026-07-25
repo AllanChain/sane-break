@@ -17,6 +17,7 @@
 #include <QTimer>
 #include <QWindow>
 #include <Qt>
+#include <optional>
 
 #include "app/break-windows.h"
 #include "app/pref-window.h"
@@ -58,11 +59,17 @@ SaneBreakApp::SaneBreakApp(const AppDependencies& deps, QObject* parent)
   connect(tray, &StatusTrayWindow::smallBreakInsteadRequested, this,
           &SaneBreakApp::smallBreakInstead);
   connect(tray, &StatusTrayWindow::postponeRequested, this,
-          &SaneBreakApp::openPostponeWindow);
+          [this]() { openPostponeWindow(std::nullopt); });
+  connect(tray, &StatusTrayWindow::postponePresetRequested, this,
+          [this](int minutes) { openPostponeWindow(minutes); });
   connect(tray, &StatusTrayWindow::meetingRequested, this,
-          &SaneBreakApp::openMeetingWindow);
+          [this]() { openMeetingWindow(std::nullopt); });
+  connect(tray, &StatusTrayWindow::meetingPresetRequested, this,
+          [this](int minutes) { openMeetingWindow(minutes); });
   connect(tray, &StatusTrayWindow::focusRequested, this,
-          &SaneBreakApp::openFocusWindow);
+          [this]() { openFocusWindow(std::nullopt); });
+  connect(tray, &StatusTrayWindow::focusPresetRequested, this,
+          [this](int minutes) { openFocusWindow(minutes); });
   connect(tray, &StatusTrayWindow::endFocusRequested, this, &SaneBreakApp::endFocus);
   connect(tray, &StatusTrayWindow::endMeetingRequested, this,
           [this]() { endMeetingBreakLater(preferences->smallEvery->get()); });
@@ -127,7 +134,7 @@ void SaneBreakApp::openStatsWindow() {
   showAndActivate(statsWindow);
 }
 
-void SaneBreakApp::openFocusWindow() {
+void SaneBreakApp::openFocusWindow(std::optional<int> presetMinutes) {
   if (data->focus().isActive() || m_currentState->getID() == AppState::Meeting ||
       data->schedule().isPostponing())
     return;
@@ -135,10 +142,16 @@ void SaneBreakApp::openFocusWindow() {
     focusWindow = new FocusWindow(preferences);
     connect(focusWindow, &FocusWindow::focusRequested, this, &SaneBreakApp::startFocus);
   }
+  if (presetMinutes.has_value()) {
+    focusWindow->setMinutes(presetMinutes.value());
+  } else {
+    int defaultMinutes = preferences->focusSmallEvery->get() / 60 * 2;
+    focusWindow->setMinutes(defaultMinutes);
+  }
   showAndActivate(focusWindow);
 }
 
-void SaneBreakApp::openPostponeWindow() {
+void SaneBreakApp::openPostponeWindow(std::optional<int> presetMinutes) {
   if (data->focus().isActive()) {
     QMessageBox msgBox;
     msgBox.setText(tr("Cannot postpone during focus mode."));
@@ -163,10 +176,11 @@ void SaneBreakApp::openPostponeWindow() {
     connect(postponeWindow, &PostponeWindow::postponeRequested, this,
             &SaneBreakApp::postpone);
   }
+  postponeWindow->setMinutes(presetMinutes.value_or(0));
   showAndActivate(postponeWindow);
 }
 
-void SaneBreakApp::openMeetingWindow() {
+void SaneBreakApp::openMeetingWindow(std::optional<int> presetMinutes) {
   if (m_currentState->getID() == AppState::Meeting) return;
   if (!meetingWindow) {
     meetingWindow = new MeetingWindow(preferences, db);
@@ -179,6 +193,9 @@ void SaneBreakApp::openMeetingWindow() {
               if (seconds > 0) startMeeting(seconds, reason);
             });
   }
+  int minutes = presetMinutes.value_or(30);
+  QTime endTime = QTime::currentTime().addSecs(minutes * 60);
+  meetingWindow->setEndTime(endTime);
   showAndActivate(meetingWindow);
 }
 

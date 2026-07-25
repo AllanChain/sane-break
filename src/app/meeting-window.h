@@ -40,6 +40,8 @@ class MeetingWindow : public QDialog {
                 QWidget* parent = nullptr);
   ~MeetingWindow() = default;
 
+  void setEndTime(QTime endTime);
+
  signals:
   void meetingRequested(QTime endTime, QString reason);
 

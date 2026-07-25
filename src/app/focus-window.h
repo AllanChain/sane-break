@@ -23,6 +23,8 @@ class FocusWindow : public QDialog {
   FocusWindow(SanePreferences* preferences, QWidget* parent = nullptr);
   ~FocusWindow() = default;
 
+  void setMinutes(int minutes);
+
  signals:
   void focusRequested(int totalCycles, QString reason);
 

@@ -7,6 +7,7 @@
 #include <qnamespace.h>
 
 #include <QLabel>
+#include <QList>
 #include <QLocale>
 #include <QMessageBox>
 #include <QObject>
@@ -19,6 +20,7 @@
 #include <QTimer>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <algorithm>
 #include <optional>
 
 #include "core/app.h"
@@ -53,14 +55,24 @@ StatusTrayWindow::StatusTrayWindow(SanePreferences* preferences, QObject* parent
 
   menu->addSeparator();
 
-  postponeMenu = menu->addAction(tr("Postpone"));
-  connect(postponeMenu, &QAction::triggered, this,
-          &StatusTrayWindow::postponeRequested);
-  meetingAction = menu->addAction(tr("Meeting Mode"));
-  connect(meetingAction, &QAction::triggered, this,
-          &StatusTrayWindow::meetingRequested);
-  focusAction = menu->addAction(tr("Focus Mode"));
-  connect(focusAction, &QAction::triggered, this, &StatusTrayWindow::focusRequested);
+  postponeMenu = new QMenu(tr("Postpone"), menu);
+  menu->addMenu(postponeMenu);
+  connect(preferences->smallEvery, &Setting<int>::changed, this,
+          &StatusTrayWindow::buildPostponeMenu);
+  connect(preferences->postponeMaxMinutePercent, &Setting<int>::changed, this,
+          &StatusTrayWindow::buildPostponeMenu);
+  buildPostponeMenu();
+
+  meetingMenu = new QMenu(tr("Meeting Mode"), menu);
+  menu->addMenu(meetingMenu);
+  buildMeetingMenu();
+
+  focusMenu = new QMenu(tr("Focus Mode"), menu);
+  menu->addMenu(focusMenu);
+  connect(preferences->focusSmallEvery, &Setting<int>::changed, this,
+          &StatusTrayWindow::buildFocusMenu);
+  buildFocusMenu();
+
   endFocusAction = menu->addAction(tr("End Focus && Break"));
   endFocusAction->setVisible(false);
   connect(endFocusAction, &QAction::triggered, this,
@@ -96,6 +108,78 @@ StatusTrayWindow::StatusTrayWindow(SanePreferences* preferences, QObject* parent
   connect(quitAction, &QAction::triggered, this, &StatusTrayWindow::quitRequested);
 }
 
+QList<int> StatusTrayWindow::postponePresets(int maxMinutes) {
+  QList<int> presets;
+  int current = maxMinutes;
+  while (current >= 2) {
+    presets.append(current);
+    current = (current + 1) / 2;
+  }
+  std::reverse(presets.begin(), presets.end());
+  return presets;
+}
+
+QList<int> StatusTrayWindow::focusPresets(int focusSmallEveryMinutes) {
+  QList<int> presets;
+  for (int i = 1; i <= 4; ++i) {
+    presets.append(focusSmallEveryMinutes * i);
+  }
+  return presets;
+}
+
+void StatusTrayWindow::buildPostponeMenu() {
+  postponeMenu->clear();
+  int smallEveryMinutes = preferences->smallEvery->get() / 60;
+  int maxMinutes =
+      smallEveryMinutes * preferences->postponeMaxMinutePercent->get() / 100;
+  QList<int> presets = postponePresets(maxMinutes);
+  for (int minutes : presets) {
+    QAction* action = postponeMenu->addAction(tr("%n min", "", minutes));
+    connect(action, &QAction::triggered, this,
+            [this, minutes]() { emit postponePresetRequested(minutes); });
+  }
+  postponeMenu->addSeparator();
+  QAction* customAction = postponeMenu->addAction(tr("Custom…"));
+  connect(customAction, &QAction::triggered, this,
+          &StatusTrayWindow::postponeRequested);
+}
+
+void StatusTrayWindow::buildMeetingMenu() {
+  meetingMenu->clear();
+  struct Preset {
+    int minutes;
+    QString label;
+  };
+  QList<Preset> presets = {
+      {30, tr("%n min", "", 30)},
+      {60, tr("%n min", "", 60)},
+      {120, tr("%n hours", "", 2)},
+  };
+  for (const auto& preset : presets) {
+    QAction* action = meetingMenu->addAction(preset.label);
+    connect(action, &QAction::triggered, this, [this, minutes = preset.minutes]() {
+      emit meetingPresetRequested(minutes);
+    });
+  }
+  meetingMenu->addSeparator();
+  QAction* customAction = meetingMenu->addAction(tr("Custom…"));
+  connect(customAction, &QAction::triggered, this, &StatusTrayWindow::meetingRequested);
+}
+
+void StatusTrayWindow::buildFocusMenu() {
+  focusMenu->clear();
+  int focusSmallEveryMinutes = preferences->focusSmallEvery->get() / 60;
+  QList<int> presets = focusPresets(focusSmallEveryMinutes);
+  for (int minutes : presets) {
+    QAction* action = focusMenu->addAction(tr("%n min", "", minutes));
+    connect(action, &QAction::triggered, this,
+            [this, minutes]() { emit focusPresetRequested(minutes); });
+  }
+  focusMenu->addSeparator();
+  QAction* customAction = focusMenu->addAction(tr("Custom…"));
+  connect(customAction, &QAction::triggered, this, &StatusTrayWindow::focusRequested);
+}
+
 void StatusTrayWindow::update(TrayData data) {
   nextBreakAction->setText(
       tr("Next break after %1").arg(formatTime(data.secondsToNextBreak)));
@@ -109,12 +193,12 @@ void StatusTrayWindow::update(TrayData data) {
                              !data.pauseReasons && !data.isInMeeting);
   smallBreakInsteadAction->setVisible(data.bigBreakEnabled && data.isBreaking &&
                                       data.smallBreaksBeforeBigBreak == 0);
-  postponeMenu->setVisible(!data.isInMeeting && !data.pauseReasons &&
-                           !data.isPostponing && !data.isFocusMode);
-  meetingAction->setVisible(!data.isBreaking && !data.isInMeeting &&
-                            !data.pauseReasons && !data.isFocusMode);
-  focusAction->setVisible(!data.isInMeeting && !data.pauseReasons &&
-                          !data.isPostponing && !data.isFocusMode);
+  postponeMenu->menuAction()->setVisible(!data.isInMeeting && !data.pauseReasons &&
+                                         !data.isPostponing && !data.isFocusMode);
+  meetingMenu->menuAction()->setVisible(!data.isBreaking && !data.isInMeeting &&
+                                        !data.pauseReasons && !data.isFocusMode);
+  focusMenu->menuAction()->setVisible(!data.isInMeeting && !data.pauseReasons &&
+                                      !data.isPostponing && !data.isFocusMode);
   endFocusAction->setVisible(data.isFocusMode && !data.isBreaking);
   endMeetingAction->setVisible(data.isInMeeting);
   extendMeetingMenu->menuAction()->setVisible(data.isInMeeting);

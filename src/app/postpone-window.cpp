@@ -38,6 +38,8 @@ PostponeWindow::PostponeWindow(SanePreferences* preferences, BreakDatabase* db,
   });
 }
 
+void PostponeWindow::setMinutes(int minutes) { ui->postponeMinutes->setValue(minutes); }
+
 void PostponeWindow::onMinutesUpdate(int minutes) {
   ui->postponeButton->setEnabled(minutes > 0);
   ui->totalMinutesLabel->setArgs({minutes});

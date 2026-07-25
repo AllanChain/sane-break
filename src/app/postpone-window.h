@@ -29,6 +29,8 @@ class PostponeWindow : public QDialog {
                  QWidget* parent = nullptr);
   ~PostponeWindow() = default;
 
+  void setMinutes(int minutes);
+
  signals:
   void postponeRequested(int seconds);
 

@@ -228,6 +228,9 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
   controllers->add(PrefGroup::Schedule, new PrefController<QSpinBox, int>(
                                             ui->postponeExtendBreakBox,
                                             preferences->postponeExtendBreakPercent));
+  controllers->add(PrefGroup::Schedule,
+                   new PrefController<QSpinBox, int>(ui->minReasonLengthBox,
+                                                     preferences->minReasonLength));
 
   // Focus schedule
   controllers->add(PrefGroup::Schedule,

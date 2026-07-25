@@ -7,6 +7,7 @@
 #include <QObject>
 #include <QPointer>
 #include <QTimer>
+#include <optional>
 
 #include "app/pref-window.h"
 #include "app/tray.h"
@@ -27,12 +28,13 @@ class SaneBreakApp : public AbstractApp {
 
   void start() override;
   void doLockScreen() override;
-  void openPostponeWindow();
-  void openMeetingWindow();
-  void openFocusWindow();
 
   void showPreferences();
   void openStatsWindow();
+
+  void openPostponeWindow(std::optional<int> presetMinutes = std::nullopt);
+  void openMeetingWindow(std::optional<int> presetMinutes = std::nullopt);
+  void openFocusWindow(std::optional<int> presetMinutes = std::nullopt);
 
  signals:
   void quit();

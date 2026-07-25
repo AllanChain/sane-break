@@ -15,7 +15,6 @@
 #include "ui_focus-window.h"
 
 namespace {
-constexpr int kMinReasonLength = 6;
 constexpr auto kHelperTextStyle = "color: #6b7280;";
 constexpr auto kErrorTextStyle = "color: #ef4444;";
 }  // namespace
@@ -68,17 +67,27 @@ void FocusWindow::updateTextFromPreferences() {
   ui->confirmButton->setArgs({preferences->focusSmallFor->get()});
 }
 
+void FocusWindow::setMinutes(int minutes) {
+  updateTextFromPreferences();
+  ui->spinBox->setValue(minutes);
+}
+
 void FocusWindow::onInputUpdate() {
   QString reason = ui->reasonEdit->text().trimmed();
-  int remainingChars = kMinReasonLength - reason.length();
-  bool hasLongEnoughReason = remainingChars <= 0;
+  int minReasonLength = preferences->minReasonLength->get();
+  bool hasLongEnoughReason = reason.length() >= minReasonLength;
 
   ui->confirmButton->setEnabled(hasLongEnoughReason);
 
   if (reason.isEmpty()) {
     ui->reasonHelpLabel->setStyleSheet(kHelperTextStyle);
-    ui->reasonHelpLabel->setText(
-        tr("Enter at least %1 characters.").arg(kMinReasonLength));
+    if (minReasonLength == 0) {
+      ui->reasonHelpLabel->setText(
+          tr("Optional — briefly describe what you're working on."));
+    } else {
+      ui->reasonHelpLabel->setText(
+          tr("Enter at least %1 characters.").arg(minReasonLength));
+    }
     return;
   }
 
