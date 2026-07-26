@@ -59,6 +59,22 @@
   </screenshots>
 
   <releases>
+  <release version="0.10.3" date="2027-06-26">
+    <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.10.3</url>
+    <description>
+      <p>Features</p>
+      <ul>
+        <li>Add/remove break windows on display change</li>
+        <li>Reduce friction for postpone, meeting, and focus</li>
+        <li>Treat idle inhibitors as user activity</li>
+        <li>Case insensitive program monitoring</li>
+      </ul>
+      <p>Bug fixes</p>
+      <ul>
+        <li>Fix auto start failure on Flatpak</li>
+      </ul>
+    </description>
+  </release>
   <release version="0.10.2" date="2026-06-11">
     <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.10.2</url>
     <description>
