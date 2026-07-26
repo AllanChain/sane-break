@@ -119,4 +119,15 @@ install(
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
+# Static Qt builds pull in ALL default SQL drivers (incl. psql -> libpq.dll,
+# odbc -> odbc32). We only use SQLite, so exclude the rest to avoid
+# unintended runtime DLL dependencies (libpq.dll, etc.).
+if(TARGET Qt6::Sql)
+  qt6_import_plugins(sane-break-app
+      EXCLUDE
+          Qt6::QPSQLDriverPlugin
+          Qt6::QODBCDriverPlugin
+  )
+endif()
+
 qt_finalize_executable(sane-break-app)
