@@ -41,6 +41,8 @@ class DummyIdleTime : public SystemIdleTime {
   void setMinIdleTime(int) override {};
   void setIdleMode(IdleMode mode) override { m_recordedMode = mode; };
   IdleMode recordedMode() const { return m_recordedMode; };
+  bool isInhibited() const override { return m_inhibited; }
+  void setInhibited(bool inhibited) { m_inhibited = inhibited; }
   void setIdle(bool idle) {
     m_isIdle = idle;
     if (idle) {
@@ -52,6 +54,7 @@ class DummyIdleTime : public SystemIdleTime {
 
  private:
   IdleMode m_recordedMode = IdleMode::InhibitorAware;
+  bool m_inhibited = false;
 };
 
 class DummyBreakWindows : public AbstractBreakWindows {

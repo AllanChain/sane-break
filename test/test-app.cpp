@@ -355,6 +355,55 @@ class TestApp : public QObject {
     QCOMPARE(data.smallBreaksBeforeBigBreak(), deps.preferences->bigAfter->get() - 1);
     QVERIFY(!data.postBreak().isActive());
   }
+  // An active inhibitor at break end means the user is still using the machine;
+  // resume normal scheduling instead of entering post-break idle.
+  void inhibitor_at_break_end_resumes_instead_of_post_break_idle_data() {
+    QTest::addColumn<bool>("autoCloseWindow");
+    QTest::newRow("auto-close") << true;
+    QTest::newRow("keep-window-open") << false;
+  }
+  void inhibitor_at_break_end_resumes_instead_of_post_break_idle() {
+    QFETCH(bool, autoCloseWindow);
+    deps.preferences->autoCloseWindowAfterSmallBreak->set(autoCloseWindow);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.breakNow();
+    // User is idle (no real input) but an inhibitor is holding the display on.
+    deps.idleTimer->setIdle(true);
+    deps.idleTimer->setInhibited(true);
+    app.advanceToBreakEnd();
+
+    QCOMPARE(app.currentState(), AppState::Normal);
+    QVERIFY(!app.trayData.pauseReasons);
+  }
+  // Without an inhibitor, an idle user still enters post-break idle.
+  void no_inhibitor_idle_at_break_end_enters_post_break_idle() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.breakNow();
+    deps.idleTimer->setIdle(true);
+    deps.idleTimer->setInhibited(false);
+    app.advanceToBreakEnd();
+
+    QCOMPARE(app.currentState(), AppState::PostBreakIdle);
+    QVERIFY(app.trayData.pauseReasons);
+  }
+  // Opting out of treatInhibitorAsActivity keeps the old pause-on-idle behavior.
+  void inhibitor_ignored_when_pref_disabled() {
+    deps.preferences->treatInhibitorAsActivity->set(false);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.breakNow();
+    deps.idleTimer->setIdle(true);
+    deps.idleTimer->setInhibited(true);
+    app.advanceToBreakEnd();
+
+    QCOMPARE(app.currentState(), AppState::PostBreakIdle);
+    QVERIFY(app.trayData.pauseReasons);
+  }
   void lock_screen_timer_running() {
     int autoScreenLockSeconds = 20;
     deps.preferences->autoScreenLock->set(autoScreenLockSeconds);

@@ -46,6 +46,10 @@ void InhibitorProxyIdleTime::setIdleMode(IdleMode mode) {
   reevaluate();
 }
 
+bool InhibitorProxyIdleTime::isInhibited() const {
+  return m_inhibitor->isIdleInhibited();
+}
+
 void InhibitorProxyIdleTime::onSourceIdleStart() { reevaluate(); }
 
 void InhibitorProxyIdleTime::onSourceIdleEnd() { reevaluate(); }

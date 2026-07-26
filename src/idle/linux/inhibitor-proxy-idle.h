@@ -33,6 +33,7 @@ class InhibitorProxyIdleTime : public SystemIdleTime {
   void setWatchAccuracy(int accuracy) override;
   void setMinIdleTime(int idleTime) override;
   void setIdleMode(IdleMode mode) override;
+  bool isInhibited() const override;
 
  private slots:
   void onSourceIdleStart();

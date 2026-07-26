@@ -47,6 +47,9 @@ class COREIDLE_EXPORT SystemIdleTime : public QObject {
   virtual void setIdleMode(IdleMode mode) { m_idleMode = mode; }
   IdleMode idleMode() const { return m_idleMode; }
   bool isIdle() { return m_isIdle; }
+  // Whether an idle/display inhibitor is currently active, independent of
+  // IdleMode. Used at break end to treat an inhibitor as user activity.
+  virtual bool isInhibited() const { return false; }
  signals:
   void idleStart();
   void idleEnd();

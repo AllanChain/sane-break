@@ -428,7 +428,12 @@ void BreakPhaseFullScreen::tick(AppContext* app, AppStateBreak* breakState) {
     // record break type before break completion mutates the cycle
     auto breakType = app->data->breakType();
     BreakCompletion completion = breakState->completeBreak(app);
-    if (app->idleTimer->isIdle()) {
+    // An active inhibitor means the user is still using the machine (e.g.
+    // watching a video); resume instead of entering post-break idle.
+    bool inhibitorCountsAsActivity =
+        app->preferences->treatInhibitorAsActivity->get() &&
+        app->idleTimer->isInhibited();
+    if (app->idleTimer->isIdle() && !inhibitorCountsAsActivity) {
       // Check if window should auto-close based on preferences and break type
       bool keepWindowOpen =
           (breakType == BreakType::Small &&

@@ -24,11 +24,13 @@ class ReadBasedIdleTime : public SystemIdleTime {
   // IdleReader, which zeroes idle while inhibited (in InhibitorAware mode) and passes
   // it through unchanged (in InputOnly mode). No-op if never called.
   void setInhibitor(std::function<bool()> inhibited);
+  bool isInhibited() const override { return m_inhibitedFn ? m_inhibitedFn() : false; }
 
  private:
   QTimer* m_timer;
   QTimer* m_delay;
-  std::function<int()> m_rawReader;  // raw input idle (always available)
+  std::function<int()> m_rawReader;     // raw input idle (always available)
+  std::function<bool()> m_inhibitedFn;  // cached for isInhibited()
   // When set, read(m_idleMode) applies inhibitor-aware zeroing; otherwise raw is
   // used directly. Mode is read from the base SystemIdleTime::m_idleMode at tick.
   std::unique_ptr<IdleReader> m_reader;
