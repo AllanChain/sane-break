@@ -217,7 +217,7 @@ void BreakWindow::showFullScreen() {
   QPropertyAnimation* resizeAnim =
       new QPropertyAnimation(m_waylandWorkaround ? mainWidget : this, "geometry");
   resizeAnim->setStartValue(m_waylandWorkaround ? mainWidget->geometry() : geometry());
-  resizeAnim->setEndValue(m_waylandWorkaround ? screen()->availableGeometry()
+  resizeAnim->setEndValue(m_waylandWorkaround ? m_intendedScreenGeometry
                                               : screen()->geometry());
   resizeAnim->setDuration(300);
   resizeAnim->start();
@@ -263,10 +263,15 @@ void BreakWindow::showFlashPrompt() {
 
   QPropertyAnimation* resizeAnim =
       new QPropertyAnimation(m_waylandWorkaround ? mainWidget : this, "geometry");
-  QRect rect =
-      m_waylandWorkaround ? screen()->availableGeometry() : screen()->geometry();
-  QRect targetGeometry = QRect(rect.x() + rect.width() / 2 - SMALL_WINDOW_WIDTH / 2,
-                               rect.y(), SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
+  QRect rect = screen()->geometry();
+  QRect targetGeometry = m_waylandWorkaround
+                             ? QRect(m_intendedScreenGeometry.x() +
+                                         m_intendedScreenGeometry.width() / 2 -
+                                         SMALL_WINDOW_WIDTH / 2,
+                                     m_intendedScreenGeometry.y(),
+                                     SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT)
+                             : QRect(rect.x() + rect.width() / 2 - SMALL_WINDOW_WIDTH / 2,
+                                     rect.y(), SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
   resizeAnim->setStartValue(m_waylandWorkaround ? mainWidget->geometry() : geometry());
   resizeAnim->setEndValue(targetGeometry);
   resizeAnim->setDuration(100);
@@ -274,15 +279,19 @@ void BreakWindow::showFlashPrompt() {
 }
 
 void BreakWindow::initSize(QScreen* screen) {
+  m_intendedScreenGeometry = screen->geometry();
   if (m_waylandWorkaround) {
-    QRect rect = screen->availableGeometry();
+    QRect rect = m_intendedScreenGeometry;
     // Avoid using full height when initializing the main window. GNOME will refuse to
     // make the window always on top (done in custom shell extension) if it is too large
     // See https://askubuntu.com/questions/1122921.
     rect.setHeight(100);
     setGeometry(rect);
-    mainWidget->setGeometry(rect.x() + rect.width() / 2 - SMALL_WINDOW_WIDTH / 2,
-                            rect.y(), SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
+    mainWidget->setGeometry(m_intendedScreenGeometry.x() +
+                              m_intendedScreenGeometry.width() / 2 -
+                              SMALL_WINDOW_WIDTH / 2,
+                          m_intendedScreenGeometry.y(),
+                          SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
   } else {
     QRect rect = screen->geometry();
     setGeometry(rect.x() + rect.width() / 2 - SMALL_WINDOW_WIDTH / 2, rect.y(),
@@ -298,7 +307,7 @@ void BreakWindow::initSize(QScreen* screen) {
     QString path = url.isLocalFile() ? url.toLocalFile() : m_data.theme.backgroundImage;
     QPixmap original(path);
     if (!original.isNull()) {
-      QSize targetSize = m_waylandWorkaround ? screen->availableGeometry().size()
+      QSize targetSize = m_waylandWorkaround ? m_intendedScreenGeometry.size()
                                              : screen->geometry().size();
       QPixmap scaled = original.scaled(targetSize, Qt::KeepAspectRatioByExpanding,
                                        Qt::SmoothTransformation);

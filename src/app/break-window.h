@@ -60,6 +60,7 @@ class BreakWindow : public QMainWindow {
   QGraphicsOpacityEffect* m_bgImageOpacity = nullptr;
   bool m_waylandWorkaround = false;
   bool m_supportTransparentInput = true;
+  QRect m_intendedScreenGeometry;
   int m_totalSeconds;
 
   static void colorizeButton(QPushButton* button, QColor color);
