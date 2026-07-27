@@ -98,7 +98,8 @@ export default class SaneBreakGNOME extends Extension {
 
   _applyWindowWorkaround(window) {
     // GNOME does not expose layer-shell here, so the shell extension forcefully
-    // stretches the transparent Wayland workaround window to cover the monitor.
+    // stretches the transparent Wayland workaround window to cover the full
+    // virtual desktop.
     const [w, h] = global.display.get_size();
     window.stick();
     window.move_resize_frame(false, 0, 0, w, h);
