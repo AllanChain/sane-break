@@ -341,7 +341,7 @@
     <message>
         <location filename="../../src/app/focus-window.cpp" line="86"/>
         <source>Optional — briefly describe what you&apos;re working on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Необов&apos;язково – стисло опишіть над чим працюєте.</translation>
     </message>
     <message>
         <location filename="../../src/app/focus-window.cpp" line="89"/>
@@ -489,7 +489,7 @@
     <message>
         <location filename="../../src/app/meeting-window.cpp" line="114"/>
         <source>Optional — briefly describe what you&apos;re working on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Необов&apos;язково – стисло опишіть над чим працюєте.</translation>
     </message>
     <message>
         <location filename="../../src/app/meeting-window.cpp" line="117"/>
@@ -951,12 +951,12 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="862"/>
         <source>Minimum number of characters required for the reason when entering meeting or focus mode. Set to 0 to make the reason optional.</source>
         <extracomment>Tooltip for minimum reason length</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Найменша кількість символів необхідна для причини під час переходу в режим зустрічі або зосередження. Встановіть на 0, щоб зробити причину необов&apos;язковою.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="865"/>
         <source>Minimum reason length for meeting and focus mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Мінімальна довжина причини для режиму зустрічі або зосередження</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="897"/>
@@ -1030,12 +1030,12 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="1566"/>
         <source>Video players, presentations, and some games prevent the screen from sleeping. When on, that counts as activity so the idle pause won&apos;t trigger while they run; when off, only your actual input counts. Effectiveness varies by platform: full on ext-idle-notify Wayland; best-effort on X11 where only XScreenSaverSuspend-based inhibition is detected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Програвачі відео, презентації і деякі ігри запобігають вимкненню екрана. Коли ввімкнено, це зараховується як активність і не спричиніть початок неробочої паузи, поки ці програми продовжують працювати; коли вимкнено, зараховується виключно ваша безпосередня активність. Дієвість залежить від платформи: повна підтримка на Wayland через ext-idle-notify; з докладанням всіх розумних зусиль на X11, де запобігання може бути виявлено лише через XScreenSaverSuspend.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1569"/>
         <source>When an app keeps the screen awake, count it as activity (e.g. video playback)</source>
-        <translation type="unfinished"></translation>
+        <translation>Якщо застосунок тримає екран в активному стані, зараховувати це як активність (наприклад, програвання відео)</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1576"/>
@@ -1528,7 +1528,7 @@ v%1
         <location filename="../../src/app/tray.cpp" line="155"/>
         <location filename="../../src/app/tray.cpp" line="174"/>
         <source>%n min</source>
-        <translation type="unfinished">
+        <translation>
             <numerusform>%n хв</numerusform>
             <numerusform>%n хв</numerusform>
             <numerusform>%n хв</numerusform>
@@ -1539,15 +1539,15 @@ v%1
         <location filename="../../src/app/tray.cpp" line="165"/>
         <location filename="../../src/app/tray.cpp" line="179"/>
         <source>Custom…</source>
-        <translation type="unfinished"></translation>
+        <translation>Власний…</translation>
     </message>
     <message numerus="yes">
         <location filename="../../src/app/tray.cpp" line="156"/>
         <source>%n hours</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n година</numerusform>
+            <numerusform>%n години</numerusform>
+            <numerusform>%n годин</numerusform>
         </translation>
     </message>
     <message>
