@@ -59,7 +59,17 @@
   </screenshots>
 
   <releases>
-  <release version="0.10.3" date="2027-06-26">
+  <release version="0.10.4" date="2026-08-01">
+    <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.10.4</url>
+    <description>
+      <p>Bug fixes</p>
+      <ul>
+        <li>Fix multi-display window placement on GNOME</li>
+        <li>Fix treating inhibitors as activity at post-break</li>
+      </ul>
+    </description>
+  </release>
+  <release version="0.10.3" date="2026-07-26">
     <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.10.3</url>
     <description>
       <p>Features</p>
