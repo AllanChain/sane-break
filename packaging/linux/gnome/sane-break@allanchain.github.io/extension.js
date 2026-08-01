@@ -97,11 +97,19 @@ export default class SaneBreakGNOME extends Extension {
   }
 
   _applyWindowWorkaround(window) {
-    // GNOME does not expose layer-shell here, so the shell extension forcefully
-    // stretches the transparent Wayland workaround window to cover the monitor.
-    const [w, h] = global.display.get_size();
+    // GNOME does not expose layer-shell, so the shell extension stretches the
+    // transparent Wayland workaround window over a monitor instead. Sane Break
+    // creates one window per screen, each pinned to its own output, so stretch
+    // every window over the monitor it currently sits on.
+    const monitorGeometry = global.display.get_monitor_geometry(window.get_monitor());
     window.stick();
-    window.move_resize_frame(false, 0, 0, w, h);
+    window.move_resize_frame(
+      false,
+      monitorGeometry.x,
+      monitorGeometry.y,
+      monitorGeometry.width,
+      monitorGeometry.height,
+    );
     window.raise_and_make_recent_on_workspace(window.get_workspace());
     window.make_above();
   }

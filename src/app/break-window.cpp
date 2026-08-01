@@ -228,8 +228,11 @@ void BreakWindow::showFullScreen() {
   QPropertyAnimation* resizeAnim =
       new QPropertyAnimation(m_waylandWorkaround ? mainWidget : this, "geometry");
   resizeAnim->setStartValue(m_waylandWorkaround ? mainWidget->geometry() : geometry());
-  resizeAnim->setEndValue(m_waylandWorkaround ? screen()->availableGeometry()
-                                              : screen()->geometry());
+  // Animate to the screen this window was pinned to (see screenIdentity()) so
+  // the overlay always follows the display the window was created for, even if
+  // Qt migrates the window after a screen change.
+  resizeAnim->setEndValue(m_waylandWorkaround ? m_screen->availableGeometry()
+                                              : m_screen->geometry());
   resizeAnim->setDuration(300);
   resizeAnim->start();
 
@@ -273,7 +276,7 @@ void BreakWindow::showFlashPrompt() {
   QPropertyAnimation* resizeAnim =
       new QPropertyAnimation(m_waylandWorkaround ? mainWidget : this, "geometry");
   QRect rect =
-      m_waylandWorkaround ? screen()->availableGeometry() : screen()->geometry();
+      m_waylandWorkaround ? m_screen->availableGeometry() : m_screen->geometry();
   QRect targetGeometry = QRect(rect.x() + rect.width() / 2 - SMALL_WINDOW_WIDTH / 2,
                                rect.y(), SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
   resizeAnim->setStartValue(m_waylandWorkaround ? mainWidget->geometry() : geometry());
