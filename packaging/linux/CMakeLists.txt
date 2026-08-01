@@ -45,7 +45,9 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND SANE_MAKE_DEB)
       "A gentle break reminder that helps you avoid mindlessly skipping breaks"
   )
   set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Allan Chain")
-  set(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt6gui6(>=6.4), libqt6multimedia6(>=6.4)")
+  set(CPACK_DEBIAN_PACKAGE_DEPENDS
+      "libqt6gui6(>=6.4), libqt6multimedia6(>=6.4), libqt6sql6(>=6.4)"
+  )
   set(CPACK_DEBIAN_PACKAGE_RECOMMENDS
       "qt6-wayland(>=6.4), layer-shell-qt(>=6.2), libxss1(>=1.2.3)"
   )
