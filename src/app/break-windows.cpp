@@ -58,7 +58,6 @@ void removeWindowsIf(QList<T*>& windows, Pred pred) {
     if (pred(w)) toDestroy << w;
   for (T* w : std::as_const(toDestroy)) {
     windows.removeOne(w);
-    w->close();
     w->deleteLater();
   }
 }
