@@ -44,9 +44,21 @@ class IdleTimeWayland : public IdleTimeInterface {
   // notifier version. Called from the constructor after binding and from
   // setIdleMode() on a mode change.
   void chooseGetIdleNotification();
+  // Re-create the idle notification on a minIdleTime/mode change. The old request is
+  // kept alive during the switch; see the pattern comment on the members below.
+  void recreateNotification();
   wl_seat* seat;
   ext_idle_notifier_v1* idleNotifier = nullptr;
+  // Re-creation pattern: an ext_idle_notification_v1 event (idled/resumed) belongs to
+  // the request that fired it, and its timeout is fixed at creation. Re-creating the
+  // request (on a minIdleTime/mode change) would drop a pending idle->resumed
+  // transition, so while we think the user is idle we keep the request that already
+  // fired idled alive until it either reports resumed (user became active) or the new
+  // request confirms idle again. idleNotification is always the request armed with the
+  // latest settings; pendingResumeNotification is the kept one awaiting a resume.
   ext_idle_notification_v1* idleNotification = nullptr;
+  // Kept request that already fired idled; only fires resumed from here on.
+  ext_idle_notification_v1* pendingResumeNotification = nullptr;
 
   struct ext_idle_notification_v1* (*get_idle_notification)(
       struct ext_idle_notifier_v1* ext_idle_notifier_v1, uint32_t timeout,

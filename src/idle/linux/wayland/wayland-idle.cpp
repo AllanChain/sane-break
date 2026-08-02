@@ -73,16 +73,40 @@ void IdleTimeWayland::globalAdded(void* data, wl_registry* registry, uint32_t na
 
 void IdleTimeWayland::globalRemoved(void*, wl_registry*, uint32_t) {};
 
-void IdleTimeWayland::idled(void* data, ext_idle_notification_v1*) {
+void IdleTimeWayland::idled(void* data, ext_idle_notification_v1* object) {
   IdleTimeWayland* self = static_cast<IdleTimeWayland*>(data);
   if (!self->isWatching) return;
-  self->m_isIdle = true;
-  emit self->idleStart();
+  // The pending-resume request already fired idled; it only fires resumed from here.
+  if (object == self->pendingResumeNotification) return;
+  if (object != self->idleNotification) return;  // stale object
+  if (self->pendingResumeNotification != nullptr) {
+    // The new request re-confirmed idle; the old request's resume is redundant now.
+    ext_idle_notification_v1_destroy(self->pendingResumeNotification);
+    self->pendingResumeNotification = nullptr;
+  }
+  if (!self->m_isIdle) {
+    self->m_isIdle = true;
+    emit self->idleStart();
+  }
 };
 
-void IdleTimeWayland::resumed(void* data, ext_idle_notification_v1*) {
+void IdleTimeWayland::resumed(void* data, ext_idle_notification_v1* object) {
   IdleTimeWayland* self = static_cast<IdleTimeWayland*>(data);
   if (!self->isWatching) return;
+  if (object == self->pendingResumeNotification) {
+    // User resumed before the new request re-confirmed idle: report active now.
+    ext_idle_notification_v1_destroy(self->pendingResumeNotification);
+    self->pendingResumeNotification = nullptr;
+    self->m_isIdle = false;
+    emit self->idleEnd();
+    return;
+  }
+  if (object != self->idleNotification) return;  // stale object
+  if (self->pendingResumeNotification != nullptr) {
+    // Defensive: never keep two requests that can report resume.
+    ext_idle_notification_v1_destroy(self->pendingResumeNotification);
+    self->pendingResumeNotification = nullptr;
+  }
   self->m_isIdle = false;
   emit self->idleEnd();
 };
@@ -91,12 +115,20 @@ void IdleTimeWayland::startWatching() {
   if (idleNotifier == nullptr) return;
   isWatching = true;
   m_isIdle = false;
+  if (pendingResumeNotification != nullptr) {
+    ext_idle_notification_v1_destroy(pendingResumeNotification);
+    pendingResumeNotification = nullptr;
+  }
   idleNotification = get_idle_notification(idleNotifier, m_minIdleTime, seat);
   ext_idle_notification_v1_add_listener(idleNotification, &idleListener, this);
 }
 
 void IdleTimeWayland::stopWatching() {
   isWatching = false;
+  if (pendingResumeNotification != nullptr) {
+    ext_idle_notification_v1_destroy(pendingResumeNotification);
+    pendingResumeNotification = nullptr;
+  }
   if (idleNotification != nullptr) {
     ext_idle_notification_v1_destroy(idleNotification);
     idleNotification = nullptr;
@@ -107,11 +139,7 @@ void IdleTimeWayland::setMinIdleTime(int idleTime) {
   if (idleTime == m_minIdleTime) return;
   m_minIdleTime = idleTime;
   if (!isWatching) return;
-  if (idleNotification != nullptr) {
-    ext_idle_notification_v1_destroy(idleNotification);
-  }
-  idleNotification = get_idle_notification(idleNotifier, m_minIdleTime, seat);
-  ext_idle_notification_v1_add_listener(idleNotification, &idleListener, this);
+  recreateNotification();
 }
 
 void IdleTimeWayland::setIdleMode(IdleMode mode) {
@@ -121,8 +149,32 @@ void IdleTimeWayland::setIdleMode(IdleMode mode) {
   // new request (v1 vs v2) takes effect immediately (mirrors setMinIdleTime()).
   chooseGetIdleNotification();
   if (!isWatching) return;
-  if (idleNotification != nullptr) {
-    ext_idle_notification_v1_destroy(idleNotification);
+  recreateNotification();
+}
+
+void IdleTimeWayland::recreateNotification() {
+  // Keep the old request alive while idle so a pending resume isn't dropped (see
+  // the pattern comment on the members in the header).
+  if (m_isIdle) {
+    if (pendingResumeNotification == nullptr) {
+      // The current request already fired idled; keep it for the pending resume.
+      pendingResumeNotification = idleNotification;
+      idleNotification = nullptr;
+    } else if (idleNotification != nullptr) {
+      // Another switch before confirmation: discard the intermediate request.
+      ext_idle_notification_v1_destroy(idleNotification);
+      idleNotification = nullptr;
+    }
+  } else {
+    if (pendingResumeNotification != nullptr) {
+      // Defensive: no pending resume when the user is not idle.
+      ext_idle_notification_v1_destroy(pendingResumeNotification);
+      pendingResumeNotification = nullptr;
+    }
+    if (idleNotification != nullptr) {
+      ext_idle_notification_v1_destroy(idleNotification);
+      idleNotification = nullptr;
+    }
   }
   idleNotification = get_idle_notification(idleNotifier, m_minIdleTime, seat);
   ext_idle_notification_v1_add_listener(idleNotification, &idleListener, this);
@@ -130,5 +182,7 @@ void IdleTimeWayland::setIdleMode(IdleMode mode) {
 
 IdleTimeWayland::~IdleTimeWayland() {
   if (idleNotifier != nullptr) ext_idle_notifier_v1_destroy(idleNotifier);
+  if (pendingResumeNotification != nullptr)
+    ext_idle_notification_v1_destroy(pendingResumeNotification);
   if (idleNotification != nullptr) ext_idle_notification_v1_destroy(idleNotification);
 }
