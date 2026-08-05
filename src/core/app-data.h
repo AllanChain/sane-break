@@ -209,6 +209,11 @@ class AppData : public QObject {
   void makeNextBreakBig();
   void makeNextBreakLastSmallBeforeBig();
   void finalizePendingPostBreak(bool resetCycle, bool undoPostponeShrink);
+  // Called when a pause ends: refills the countdown when the pause was long enough
+  // to cover the would-be break (or exceeded resetAfterPause), discards an active
+  // postpone whose break was covered by the pause, and resets the break cycle for
+  // very long pauses.
+  void settlePauseAfterResume();
 
  signals:
   void changed();

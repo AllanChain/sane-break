@@ -170,14 +170,17 @@ void AppStateNormal::tick(AppContext* app) {
   app->checkBreakReadiness();
 }
 void AppStateNormal::onIdleStart(AppContext* app) {
-  // When in postpone mode, disable pausing
+  // A transient idle right after postponing must not swallow the postponed
+  // break: keep the countdown running and let the break fire on schedule.
   if (app->data->schedule().isPostponing()) return;
   app->data->pause().addReasons(PauseReason::Idle);
   app->transitionTo(std::make_unique<AppStatePaused>());
 }
 void AppStateNormal::onPauseRequest(AppContext* app, PauseReasons) {
-  // When in postpone mode, disable pausing
-  if (app->data->schedule().isPostponing()) return;
+  // Explicit pause requests (meeting apps, battery, external control, ...) are
+  // honored even while a break is postponed: a user-configured pause takes
+  // precedence over the postponed break. Only transient idle pauses are
+  // suppressed during postpone, see onIdleStart.
   app->transitionTo(std::make_unique<AppStatePaused>());
 }
 void AppStateNormal::onMenuAction(AppContext* app, MenuAction action) {
@@ -211,26 +214,7 @@ void AppStatePaused::enter(AppContext* app) {
  */
 void AppStatePaused::exit(AppContext* app) {
   app->closeCurrentSpan(pausedSpanData(m_currentSpanReasons));
-  BreakConfig config = app->data->currentBreakConfig();
-  // Calculate the total duration of the next break to determine if breaks would have
-  // occurred during pause
-  int nextBreakDuration =
-      (app->data->breakType() == BreakType::Big ? config.bigFor : config.smallFor);
-  int secondsToNextBreakEnd =
-      app->data->schedule().secondsToNextBreak() + nextBreakDuration;
-  // If user was paused longer than the break duration or longer than resetAfterPause
-  // setting, refill the break timer to avoid immediate breaks
-  if (app->data->pause().secondsPaused() > secondsToNextBreakEnd ||
-      app->data->pause().secondsPaused() > app->preferences->resetAfterPause->get()) {
-    app->data->schedule().refillSecondsToNextBreak(config);
-  }
-  // If user was paused longer than resetCycleAfterPause setting, reset the entire break
-  // cycle
-  if (app->data->pause().secondsPaused() >
-      app->preferences->resetCycleAfterPause->get()) {
-    app->data->resetBreakCycle();
-  }
-  app->data->pause().resetSecondsPaused();
+  app->data->settlePauseAfterResume();
   // Ensure pause reasons are cleared on exit
   app->data->pause().clearReasons();
   m_currentSpanType.clear();

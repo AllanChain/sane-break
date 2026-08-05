@@ -439,7 +439,36 @@ void AppData::finalizePendingPostBreak(bool resetCycle, bool undoPostponeShrink)
 
   if (changedState) emit changed();
 }
+void AppData::settlePauseAfterResume() {
+  BreakConfig config = currentBreakConfig();
+  int nextBreakDuration =
+      (breakType() == BreakType::Big ? config.bigFor : config.smallFor);
+  int secondsToNextBreakEnd = m_schedule.secondsToNextBreak() + nextBreakDuration;
+  int secondsPaused = m_pause.secondsPaused();
 
+  // If user was paused longer than the break duration or longer than
+  // resetAfterPause, refill the break timer to avoid immediate breaks.
+  if (secondsPaused > secondsToNextBreakEnd ||
+      secondsPaused > preferences->resetAfterPause->get()) {
+    m_schedule.refillSecondsToNextBreak(config);
+  }
+  // If the pause ran past the end of the would-be (postponed) break, the break is
+  // considered taken: discard the postpone so its penalties (extended break, shrunk
+  // next session) don't apply, and drop any postpone-added seconds so the next
+  // session starts fresh.
+  if (secondsPaused > secondsToNextBreakEnd && m_schedule.isPostponing()) {
+    m_schedule.resetPostpone();
+    if (m_schedule.secondsToNextBreak() > config.smallEvery) {
+      m_schedule.setSecondsToNextBreak(config.smallEvery);
+    }
+  }
+  // If user was paused longer than resetCycleAfterPause, reset the entire break
+  // cycle.
+  if (secondsPaused > preferences->resetCycleAfterPause->get()) {
+    resetBreakCycle();
+  }
+  m_pause.resetSecondsPaused();
+}
 bool PostponeData::isPostponing() const { return secondsPostponed() > 0; }
 void PostponeData::reset() {
   plannedSecondsToPostpone = actualSecondsToNextBreakWhenBreak = 0;

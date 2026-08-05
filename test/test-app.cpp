@@ -600,6 +600,119 @@ class TestApp : public QObject {
     app.advance(1);
     QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
   }
+  // A program-monitor pause (e.g. a meeting app running) must be honored even
+  // while a break is postponed. Otherwise the postponed break fires mid-meeting.
+  void pause_request_honored_during_postpone() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.postpone(120);
+    QVERIFY(app.trayData.isPostponing);
+
+    emit deps.systemMonitor->pauseRequested(PauseReason::AppOpen);
+    QCOMPARE(app.trayData.pauseReasons, PauseReason::AppOpen);
+    // Countdown frozen while paused: the postponed break must not fire.
+    int secondsToNextBreak = app.trayData.secondsToNextBreak;
+    app.advance(secondsToNextBreak + 10);
+    QVERIFY(!app.trayData.isBreaking);
+    QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
+
+    // Once the meeting app closes, the countdown resumes and the postponed break
+    // fires.
+    emit deps.systemMonitor->resumeRequested(PauseReason::AppOpen);
+    QVERIFY(!app.trayData.pauseReasons);
+    app.advance(1);
+    QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
+  }
+
+  // Postpone keeps its promise: a transient idle right after postponing must
+  // not swallow the postponed break (breaks still fire on schedule).
+  void idle_ignored_during_postpone() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.postpone(120);
+    QVERIFY(app.trayData.isPostponing);
+
+    deps.idleTimer->setIdle(true);
+    // Idle pause is suppressed during postpone
+    QCOMPARE(app.trayData.pauseReasons.toInt(), 0);
+    // Countdown keeps running and the postponed break fires
+    app.advance(app.trayData.secondsToNextBreak);
+    QVERIFY(app.trayData.isBreaking);
+  }
+
+  // A pause that runs past the end of the would-be (postponed) break fulfills the
+  // postpone: the break is considered taken, the postpone is discarded, and the
+  // countdown restarts fresh.
+  void long_pause_during_postpone_voids_postpone() {
+    deps.preferences->pauseOnBattery->set(true);
+    deps.preferences->smallEvery->set(100);
+    deps.preferences->smallFor->set(10);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.postpone(50);  // countdown 150
+    QVERIFY(app.trayData.isPostponing);
+
+    emit deps.systemMonitor->pauseRequested(PauseReason::OnBattery);
+    app.advance(200);  // pause covers the break ending at 150 + 10
+    emit deps.systemMonitor->resumeRequested(PauseReason::OnBattery);
+
+    QVERIFY(!app.trayData.isPostponing);
+    QCOMPARE(app.trayData.secondsToNextBreak, 100);
+  }
+  // ...and the postponed break's penalties (extended break, shrunk next session)
+  // must not apply to the next cycle.
+  void long_pause_during_postpone_clears_penalties() {
+    deps.preferences->pauseOnBattery->set(true);
+    deps.preferences->smallEvery->set(100);
+    deps.preferences->smallFor->set(10);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.postpone(50);
+    emit deps.systemMonitor->pauseRequested(PauseReason::OnBattery);
+    app.advance(200);
+    emit deps.systemMonitor->resumeRequested(PauseReason::OnBattery);
+    QCOMPARE(app.trayData.secondsToNextBreak, 100);
+
+    // Next break completes with a full session: no shrink from the discarded postpone
+    app.advance(app.trayData.secondsToNextBreak);
+    app.advanceToBreakEnd();
+    QCOMPARE(app.trayData.secondsToNextBreak, 100);
+  }
+  // A short pause that does not cover the postponed break keeps the postpone intact.
+  void short_pause_during_postpone_keeps_postpone() {
+    deps.preferences->pauseOnBattery->set(true);
+    deps.preferences->smallEvery->set(100);
+    deps.preferences->smallFor->set(10);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.postpone(50);  // countdown 150
+    emit deps.systemMonitor->pauseRequested(PauseReason::OnBattery);
+    app.advance(100);  // 100 < 150 + 10: break not covered
+    emit deps.systemMonitor->resumeRequested(PauseReason::OnBattery);
+
+    QVERIFY(app.trayData.isPostponing);
+    QCOMPARE(app.trayData.secondsToNextBreak, 150);
+  }
+  // A long sleep during postpone has the same effect as a long pause: the postpone
+  // is discarded and the countdown restarts fresh.
+  void long_sleep_during_postpone_voids_postpone() {
+    deps.preferences->smallEvery->set(100);
+    deps.preferences->smallFor->set(10);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.postpone(50);                          // countdown 150
+    emit deps.systemMonitor->sleepEnded(200);  // covers the break ending at 160
+
+    QVERIFY(!app.trayData.isPostponing);
+    QCOMPARE(app.trayData.secondsToNextBreak, 100);
+  }
+
   // If paused for a long time, we consider the user has taken a break and reset timer.
   void reset_countdown_after_pause() {
     NiceMock<DummyApp> app(deps);
