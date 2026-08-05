@@ -45,9 +45,17 @@ class DummyIdleTime : public SystemIdleTime {
     SystemIdleTime::setIdleDetection(idleTime, mode);
     m_recordedMinIdleTime = idleTime;
     m_recordedMode = mode;
+    // Some backends (InhibitorProxyIdleTime over Wayland) can emit idleStart
+    // synchronously from within setIdleDetection, e.g. when a break switches to
+    // InputOnly while the user is idle. One-shot flag to simulate that.
+    if (m_emitIdleStartOnDetection) {
+      m_emitIdleStartOnDetection = false;
+      setIdle(true);
+    }
   };
   IdleMode recordedMode() const { return m_recordedMode; };
   int recordedMinIdleTime() const { return m_recordedMinIdleTime; };
+  void setEmitIdleStartOnDetection(bool enable) { m_emitIdleStartOnDetection = enable; }
   bool isInhibited() const override { return m_inhibited; }
   void setInhibited(bool inhibited) { m_inhibited = inhibited; }
   void setIdle(bool idle) {
@@ -62,6 +70,7 @@ class DummyIdleTime : public SystemIdleTime {
  private:
   IdleMode m_recordedMode = IdleMode::InhibitorAware;
   int m_recordedMinIdleTime = 0;
+  bool m_emitIdleStartOnDetection = false;
   bool m_inhibited = false;
 };
 

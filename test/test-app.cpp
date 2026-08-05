@@ -234,6 +234,23 @@ class TestApp : public QObject {
     QCOMPARE(deps.idleTimer->recordedMinIdleTime(),
              deps.preferences->pauseOnIdleFor->get() * 1000);
   }
+  // Some backends (InhibitorProxyIdleTime over Wayland) emit idleStart
+  // synchronously from setIdleDetection when a break enters while the user is idle
+  // and an inhibitor had masked the pause. The phase does not exist yet during
+  // enter(); the signal must be dropped and the initial phase picked from
+  // idleTimer->isIdle() right after, instead of dereferencing a null phase.
+  void idle_start_during_break_entry_is_handled_safely() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+    deps.idleTimer->setEmitIdleStartOnDetection(true);
+    app.advance(app.trayData.secondsToNextBreak);
+    QVERIFY(app.trayData.isBreaking);
+    // The synchronous signal set the idle state, so enter() chose the full-screen
+    // phase from idleTimer->isIdle() and the break still completes normally.
+    QVERIFY(deps.idleTimer->isIdle());
+    app.advanceToBreakEnd();
+    QVERIFY(!app.trayData.isBreaking);
+  }
   // Force break also uses InputOnly — an inhibitor must not prevent force-break
   // escalation when the user is actually active.
   void idle_mode_during_force_break_is_input_only() {

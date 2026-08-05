@@ -343,9 +343,21 @@ void AppStateBreak::exit(AppContext* app) {
 }
 void AppStateBreak::tick(AppContext* app) { m_currentPhase->tick(app, this); }
 void AppStateBreak::onIdleStart(AppContext* app) {
+  // Idle signals only make sense relative to an existing phase — they drive the
+  // Prompt <-> FullScreen transitions. During enter() no phase exists yet, and the
+  // initial phase is picked from idleTimer->isIdle() instead. setIdleDetection()
+  // can still fire idleStart synchronously (the proxy re-evaluates on a mode
+  // change), but that signal reports the same state the isIdle() check is about to
+  // read, so dropping it cannot change the chosen phase.
+  if (!m_currentPhase) return;
   m_currentPhase->onIdleStart(app, this);
 }
-void AppStateBreak::onIdleEnd(AppContext* app) { m_currentPhase->onIdleEnd(app, this); }
+void AppStateBreak::onIdleEnd(AppContext* app) {
+  // Same invariant: before the first phase exists, the idle state is applied by
+  // enter()'s isIdle() check, not by these signals.
+  if (!m_currentPhase) return;
+  m_currentPhase->onIdleEnd(app, this);
+}
 void AppStateBreak::onPauseRequest(AppContext* app, PauseReasons reasons) {
   // We don't exit break if request pause on idle - continue with break instead
   if (reasons != PauseReason::Idle) {
