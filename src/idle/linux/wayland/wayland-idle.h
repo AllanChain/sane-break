@@ -28,8 +28,7 @@ class IdleTimeWayland : public IdleTimeInterface {
   void startWatching() override;
   void stopWatching() override;
   void setWatchAccuracy(int) override {};
-  void setMinIdleTime(int idleTime) override;
-  void setIdleMode(IdleMode mode) override;
+  void setIdleDetection(int idleTime, IdleMode mode) override;
 
  private:
   static void globalAdded(void* data, wl_registry* registry, uint32_t name,
@@ -42,9 +41,9 @@ class IdleTimeWayland : public IdleTimeInterface {
   // Choose get_idle_notification (v1, respects inhibitors) vs
   // get_input_idle_notification (v2, input-only) based on the mode and the bound
   // notifier version. Called from the constructor after binding and from
-  // setIdleMode() on a mode change.
+  // setIdleDetection() on a mode change.
   void chooseGetIdleNotification();
-  // Re-create the idle notification on a minIdleTime/mode change. The old request is
+  // Re-create the idle notification on a setIdleDetection() change. The old request is
   // kept alive during the switch; see the pattern comment on the members below.
   void recreateNotification();
   wl_seat* seat;

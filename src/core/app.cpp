@@ -69,7 +69,15 @@ AbstractApp::AbstractApp(const AppDependencies& deps, QObject* parent)
   connect(preferences->pauseOnBattery, &SettingWithSignal::changed, this,
           &AbstractApp::onBatterySettingChange);
   connect(preferences->treatInhibitorAsActivity, &SettingWithSignal::changed, this,
-          [this]() { applyIdleMode(); });
+          [this]() {
+            // Only states that follow the preference re-apply it; Break pins
+            // InputOnly, and Paused/PostBreakIdle inherit the preceding settings.
+            if (m_currentState && (m_currentState->getID() == AppState::Normal ||
+                                   m_currentState->getID() == AppState::Meeting)) {
+              idleTimer->setIdleDetection(idleTimer->minIdleTime(),
+                                          preferredIdleMode());
+            }
+          });
   connect(preferences->smallEvery, &SettingWithSignal::changed, this, [this]() {
     if (!this->data->focus().isActive()) {
       this->data->schedule().resetSecondsToNextBreak(this->data->currentBreakConfig());
@@ -86,10 +94,9 @@ AbstractApp::AbstractApp(const AppDependencies& deps, QObject* parent)
 
 void AbstractApp::start() {
   db->logEvent("app::start");
+  // AppStateNormal::enter applies the preferred idle threshold and mode, so the
+  // correct notification request / wrapper is already active before watching.
   transitionTo(std::make_unique<AppStateNormal>());
-  // Apply the idle mode before watching so the correct notification request /
-  // wrapper is active first.
-  applyIdleMode();
   idleTimer->startWatching();
   m_countDownTimer->start();
   m_systemMonitor->start();

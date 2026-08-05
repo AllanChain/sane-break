@@ -35,14 +35,12 @@ void InhibitorProxyIdleTime::setWatchAccuracy(int accuracy) {
   m_source->setWatchAccuracy(accuracy);
 }
 
-void InhibitorProxyIdleTime::setMinIdleTime(int idleTime) {
+void InhibitorProxyIdleTime::setIdleDetection(int idleTime, IdleMode mode) {
   m_minIdleTime = idleTime;
-  m_source->setMinIdleTime(idleTime);
-}
-
-void InhibitorProxyIdleTime::setIdleMode(IdleMode mode) {
   m_idleMode = mode;
-  m_source->setIdleMode(mode);
+  // Forward a single call so the source (Wayland) re-creates its notification
+  // once instead of once per setter.
+  m_source->setIdleDetection(idleTime, mode);
   reevaluate();
 }
 

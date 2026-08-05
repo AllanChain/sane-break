@@ -100,10 +100,8 @@ class AppContext : public QObject {
   void transitionTo(std::unique_ptr<AppState> state);
   void exitCurrentState();
   void checkBreakReadiness();
-  // Apply the user's preferred idle mode (treatInhibitorAsActivity pref → IdleMode)
-  // to the idle timer. Called on start, on preference change, and by states that
-  // resume normal idle measurement after a break (which overrides it to InputOnly).
-  void applyIdleMode();
+  // Map the treatInhibitorAsActivity preference to the idle measurement mechanism.
+  IdleMode preferredIdleMode() const;
 
  signals:
   void appStateChanged();

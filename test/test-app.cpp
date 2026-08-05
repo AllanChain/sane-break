@@ -213,6 +213,27 @@ class TestApp : public QObject {
     QVERIFY(!app.trayData.isBreaking);
     QCOMPARE(deps.idleTimer->recordedMode(), IdleMode::InhibitorAware);
   }
+  // State entries apply the idle threshold and mode in one setIdleDetection() call
+  // (backends that re-arm their watcher only re-create the request once), with the
+  // right values for each state.
+  void idle_settings_applied_together_on_state_entries() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+    QCOMPARE(deps.idleTimer->recordedMode(), IdleMode::InhibitorAware);
+    QCOMPARE(deps.idleTimer->recordedMinIdleTime(),
+             deps.preferences->pauseOnIdleFor->get() * 1000);
+
+    app.advance(app.trayData.secondsToNextBreak);
+    QVERIFY(app.trayData.isBreaking);
+    QCOMPARE(deps.idleTimer->recordedMode(), IdleMode::InputOnly);
+    QCOMPARE(deps.idleTimer->recordedMinIdleTime(), 2000);
+
+    app.advanceToBreakEnd();
+    QVERIFY(!app.trayData.isBreaking);
+    QCOMPARE(deps.idleTimer->recordedMode(), IdleMode::InhibitorAware);
+    QCOMPARE(deps.idleTimer->recordedMinIdleTime(),
+             deps.preferences->pauseOnIdleFor->get() * 1000);
+  }
   // Force break also uses InputOnly — an inhibitor must not prevent force-break
   // escalation when the user is actually active.
   void idle_mode_during_force_break_is_input_only() {

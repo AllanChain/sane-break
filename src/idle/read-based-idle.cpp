@@ -45,8 +45,6 @@ void ReadBasedIdleTime::setWatchAccuracy(int accuracy) {
   m_timer->start();
 };
 
-void ReadBasedIdleTime::setMinIdleTime(int idleTime) { m_minIdleTime = idleTime; };
-
 void ReadBasedIdleTime::setInhibitor(std::function<bool()> inhibited) {
   m_inhibitedFn = inhibited;
   m_reader = std::make_unique<IdleReader>(m_rawReader, std::move(inhibited));

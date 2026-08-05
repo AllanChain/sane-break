@@ -19,7 +19,6 @@ class ReadBasedIdleTime : public SystemIdleTime {
   void startWatching() override;
   void stopWatching() override;
   void setWatchAccuracy(int accuracy) override;
-  void setMinIdleTime(int idleTime) override;
   // Install an inhibitor monitor. When present, tick() routes the raw reader through
   // IdleReader, which zeroes idle while inhibited (in InhibitorAware mode) and passes
   // it through unchanged (in InputOnly mode). No-op if never called.

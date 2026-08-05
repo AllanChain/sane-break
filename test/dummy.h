@@ -38,9 +38,16 @@ class DummyIdleTime : public SystemIdleTime {
   void startWatching() override { m_isIdle = false; };
   void stopWatching() override {};
   void setWatchAccuracy(int) override {};
-  void setMinIdleTime(int) override {};
-  void setIdleMode(IdleMode mode) override { m_recordedMode = mode; };
+  void setIdleDetection(int idleTime, IdleMode mode) override {
+    // Keep the base members in sync so minIdleTime()/idleMode() reflect what the
+    // production backends would have applied (the app reads them back, e.g. the
+    // treatInhibitorAsActivity preference handler).
+    SystemIdleTime::setIdleDetection(idleTime, mode);
+    m_recordedMinIdleTime = idleTime;
+    m_recordedMode = mode;
+  };
   IdleMode recordedMode() const { return m_recordedMode; };
+  int recordedMinIdleTime() const { return m_recordedMinIdleTime; };
   bool isInhibited() const override { return m_inhibited; }
   void setInhibited(bool inhibited) { m_inhibited = inhibited; }
   void setIdle(bool idle) {
@@ -54,6 +61,7 @@ class DummyIdleTime : public SystemIdleTime {
 
  private:
   IdleMode m_recordedMode = IdleMode::InhibitorAware;
+  int m_recordedMinIdleTime = 0;
   bool m_inhibited = false;
 };
 

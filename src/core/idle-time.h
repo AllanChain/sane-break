@@ -40,11 +40,13 @@ class COREIDLE_EXPORT SystemIdleTime : public QObject {
   int watchAccuracy() { return m_watchAccuracy; }
   int minIdleTime() { return m_minIdleTime; }
   virtual void setWatchAccuracy(int accuracy) = 0;
-  virtual void setMinIdleTime(int idleTime) = 0;
-  // Select how idle is measured. Default no-op just records the mode; backends
-  // that support inhibitor-aware idle (Wayland v1/v2 switch, or polling backends
-  // with an inhibitor monitor wired in) override this.
-  virtual void setIdleMode(IdleMode mode) { m_idleMode = mode; }
+  // Apply the idle threshold and mechanism together. The default just records
+  // both; backends that re-arm a watcher on either change (Wayland) override
+  // this so the request is re-created once instead of once per setting.
+  virtual void setIdleDetection(int idleTime, IdleMode mode) {
+    m_minIdleTime = idleTime;
+    m_idleMode = mode;
+  }
   IdleMode idleMode() const { return m_idleMode; }
   bool isIdle() { return m_isIdle; }
   // Whether an idle/display inhibitor is currently active, independent of

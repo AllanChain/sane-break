@@ -135,19 +135,17 @@ void IdleTimeWayland::stopWatching() {
   }
 }
 
-void IdleTimeWayland::setMinIdleTime(int idleTime) {
-  if (idleTime == m_minIdleTime) return;
+void IdleTimeWayland::setIdleDetection(int idleTime, IdleMode mode) {
+  const bool idleTimeChanged = idleTime != m_minIdleTime;
+  const bool modeChanged = mode != m_idleMode;
+  if (!idleTimeChanged && !modeChanged) return;
   m_minIdleTime = idleTime;
-  if (!isWatching) return;
-  recreateNotification();
-}
-
-void IdleTimeWayland::setIdleMode(IdleMode mode) {
-  if (mode == m_idleMode) return;
   m_idleMode = mode;
-  // Re-evaluate which request to use, then re-create the notification object so the
-  // new request (v1 vs v2) takes effect immediately (mirrors setMinIdleTime()).
-  chooseGetIdleNotification();
+  // Re-evaluate which request to use on a mode change, then re-create the
+  // notification object so the new settings (v1 vs v2 request, timeout) take
+  // effect immediately. Doing both changes in one re-creation avoids arming an
+  // intermediate request with a stale combination of mode and timeout.
+  if (modeChanged) chooseGetIdleNotification();
   if (!isWatching) return;
   recreateNotification();
 }
