@@ -6,6 +6,8 @@ add_library(
   program-monitor.cpp
   program-monitor.h
   screen-lock.h
+  screen-lock-status.cpp
+  screen-lock-status.h
   screen-monitor.cpp
   screen-monitor.h
   sleep-monitor.cpp
@@ -34,16 +36,28 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     PRIVATE macos/auto-start.mm
             macos/battery.cpp
             macos/battery.h
+            macos/lock-status.h
+            macos/lock-status.mm
             macos/program-monitor.mm
             macos/screen-lock.cpp
             macos/workspace.h
             macos/workspace.mm
   )
+  # lock-status.mm: CGSessionCopyCurrentDictionary() lives in ApplicationServices. The
+  # distributed notification center it also uses is in CoreFoundation, already linked.
+  target_link_libraries(sane-lib PRIVATE "-framework ApplicationServices")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-  target_link_libraries(sane-lib PRIVATE ntdll)
+  # wtsapi32 for WTSRegisterSessionNotification, the session lock/unlock notifications
+  target_link_libraries(sane-lib PRIVATE ntdll wtsapi32)
   target_sources(
-    sane-lib PRIVATE windows/auto-start.cpp windows/battery.cpp windows/battery.h
-                     windows/screen-lock.cpp windows/program-monitor.cpp
+    sane-lib
+    PRIVATE windows/auto-start.cpp
+            windows/battery.cpp
+            windows/battery.h
+            windows/screen-lock.cpp
+            windows/program-monitor.cpp
+            windows/lock-status.h
+            windows/lock-status.cpp
   )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   find_package(
@@ -57,6 +71,8 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     PRIVATE linux/auto-start.cpp
             linux/battery.cpp
             linux/battery.h
+            linux/lock-status.h
+            linux/lock-status.cpp
             linux/screen-lock.cpp
             linux/program-monitor.cpp
             linux/system-check.cpp

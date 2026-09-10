@@ -66,41 +66,6 @@ std::optional<int> focusCyclesForDuration(int seconds, int secondsPerCycle) {
   return static_cast<int>(cycles);
 }
 
-QString pauseReasonName(PauseReason reason) {
-  switch (reason) {
-    case PauseReason::Idle:
-      return "idle";
-    case PauseReason::OnBattery:
-      return "on-battery";
-    case PauseReason::AppOpen:
-      return "app-open";
-    case PauseReason::Sleep:
-      return "sleep";
-    case PauseReason::UnknownMonitor:
-      return "unknown-monitor";
-    case PauseReason::ExternalControl:
-      return "external-control";
-  }
-  return "unknown";
-}
-
-QStringList pauseReasonNames(PauseReasons reasons) {
-  QStringList names;
-  for (PauseReason reason :
-       {PauseReason::Idle, PauseReason::OnBattery, PauseReason::AppOpen,
-        PauseReason::Sleep, PauseReason::UnknownMonitor,
-        PauseReason::ExternalControl}) {
-    if (reasons.testFlag(reason)) names.append(pauseReasonName(reason));
-  }
-  return names;
-}
-
-QJsonArray pauseReasonsToJson(PauseReasons reasons) {
-  QJsonArray names;
-  for (const QString& reason : pauseReasonNames(reasons)) names.append(reason);
-  return names;
-}
-
 QString statusModeName(const TrayData& data) {
   if (data.isBreaking) return "break";
   if (data.isInMeeting) return "meeting";
@@ -122,7 +87,7 @@ QJsonObject statusToJson(const TrayData& data) {
       {"nextBreakSeconds", data.secondsToNextBreak},
       {"bigBreakEnabled", data.bigBreakEnabled},
       {"nextBigBreakSeconds", data.secondsToNextBigBreak},
-      {"pauseReasons", pauseReasonsToJson(data.pauseReasons)},
+      {"pauseReasons", QJsonArray::fromStringList(pauseReasonIds(data.pauseReasons))},
       {"isPostponing", data.isPostponing},
       {"meeting",
        QJsonObject{

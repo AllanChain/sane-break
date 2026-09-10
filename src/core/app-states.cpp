@@ -19,43 +19,15 @@
 
 namespace {
 
-QString pauseReasonName(PauseReason reason) {
-  switch (reason) {
-    case PauseReason::Idle:
-      return "idle";
-    case PauseReason::OnBattery:
-      return "on-battery";
-    case PauseReason::AppOpen:
-      return "app-open";
-    case PauseReason::Sleep:
-      return "sleep";
-    case PauseReason::UnknownMonitor:
-      return "unknown-monitor";
-    case PauseReason::ExternalControl:
-      return "external-control";
-  }
-  return "unknown";
-}
-
-QJsonArray pauseReasonsToJson(PauseReasons reasons) {
-  QJsonArray reasonNames;
-  for (PauseReason reason :
-       {PauseReason::Idle, PauseReason::OnBattery, PauseReason::AppOpen,
-        PauseReason::Sleep, PauseReason::UnknownMonitor,
-        PauseReason::ExternalControl}) {
-    if (reasons.testFlag(reason)) reasonNames.append(pauseReasonName(reason));
-  }
-  return reasonNames;
-}
-
 QString effectivePauseSpanType(PauseReasons reasons) {
+  // Absence - no input, or a locked session - is away time, not a deliberate pause.
   // Sleep is tracked as its own span in AppContext::onSleepEnd().
-  if (reasons.testFlag(PauseReason::Idle)) return "away";
+  if (reasons & AbsencePauseReasons) return "away";
   return "paused";
 }
 
 QJsonObject pausedSpanData(PauseReasons reasons) {
-  return {{"reasons", pauseReasonsToJson(reasons)}};
+  return {{"reasons", QJsonArray::fromStringList(pauseReasonIds(reasons))}};
 }
 
 }  // namespace
@@ -343,12 +315,18 @@ void AppStateBreak::onIdleEnd(AppContext* app) {
   m_currentPhase->onIdleEnd(app, this);
 }
 void AppStateBreak::onPauseRequest(AppContext* app, PauseReasons reasons) {
-  // We don't exit break if request pause on idle - continue with break instead
-  if (reasons != PauseReason::Idle) {
-    // For non-idle pause requests, finish current break and transition to paused state
-    this->completeBreak(app);
-    app->transitionTo(std::make_unique<AppStatePaused>());
+  // An absence pause (idle, a locked screen) must not exit the break: the break tracks
+  // presence on its own. Drop the reason AppContext already recorded - a leftover would
+  // report a stale "paused" state (tray and CLI) after the break ends without ever
+  // pausing the countdown, which is driven by the state machine, not by the reason set.
+  const PauseReasons needsAttending = reasons & ~AbsencePauseReasons;
+  if (!needsAttending) {
+    app->data->pause().removeReasons(reasons);
+    return;
   }
+  // For other pause requests, finish current break and transition to paused state
+  this->completeBreak(app);
+  app->transitionTo(std::make_unique<AppStatePaused>());
 }
 BreaksDataInit AppStateBreak::dataInit(AppContext* app) {
   int flashFor = app->preferences->flashFor->get();
@@ -469,7 +447,7 @@ void BreakPhaseFullScreen::showWindowClickableWidgets(AppContext* app,
 
 void AppStatePostBreakIdle::enter(AppContext* app) {
   app->openCurrentSpan("away",
-                       {{"reasons", QJsonArray{pauseReasonName(PauseReason::Idle)}}});
+                       {{"reasons", QJsonArray{pauseReasonId(PauseReason::Idle)}}});
   app->screenLockTimer->stop();
   app->data->pause().addReasons(PauseReason::Idle);
   if (m_keepWindowOpen) {
@@ -519,7 +497,7 @@ bool AppStatePostBreakIdle::onSleepEnd(AppContext* app, int sleptSeconds) {
   // Sleep contributes to post-break inactivity, but this state should remain in the
   // same deferred-finalization mode after wake.
   app->openCurrentSpan("away",
-                       {{"reasons", QJsonArray{pauseReasonName(PauseReason::Idle)}}});
+                       {{"reasons", QJsonArray{pauseReasonId(PauseReason::Idle)}}});
   app->data->postBreak().addIdleSeconds(sleptSeconds);
   return true;
 }

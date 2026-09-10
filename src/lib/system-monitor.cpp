@@ -12,6 +12,7 @@
 #include "idle/factory.h"
 #include "lib/battery-status.h"
 #include "lib/program-monitor.h"
+#include "lib/screen-lock-status.h"
 #include "lib/screen-monitor.h"
 #include "lib/sleep-monitor.h"
 
@@ -21,6 +22,7 @@ SystemMonitor::SystemMonitor(SanePreferences* preferences, QObject* parent)
   batteryWatcher = BatteryStatus::createWatcher(this);
   runningProgramsMonitor = new RunningProgramsMonitor(this);
   screenMonitor = new ScreenMonitor(this);
+  screenLockStatus = ScreenLockStatus::createWatcher(this);
 
   connect(sleepMonitor, &SleepMonitor::sleepEnd, this, &SystemMonitor::sleepEnded);
   connect(batteryWatcher, &BatteryStatus::onBattery, this, [this]() {
@@ -35,6 +37,11 @@ SystemMonitor::SystemMonitor(SanePreferences* preferences, QObject* parent)
           [this]() { emit pauseRequested(PauseReason::AppOpen); });
   connect(runningProgramsMonitor, &RunningProgramsMonitor::programStopped, this,
           [this]() { emit resumeRequested(PauseReason::AppOpen); });
+
+  connect(screenLockStatus, &ScreenLockStatus::screenLocked, this,
+          [this]() { emit pauseRequested(PauseReason::ScreenLock); });
+  connect(screenLockStatus, &ScreenLockStatus::screenUnlocked, this,
+          [this]() { emit resumeRequested(PauseReason::ScreenLock); });
 
   connect(preferences->programsToMonitor, &SettingWithSignal::changed, this, [this]() {
     runningProgramsMonitor->setPrograms(this->preferences->programsToMonitor->get());
@@ -62,6 +69,7 @@ void SystemMonitor::start() {
   runningProgramsMonitor->startMonitoring();
   screenMonitor->setKnownMonitors(preferences->knownMonitors->get());
   screenMonitor->startMonitoring();
+  screenLockStatus->startWatching();
 }
 
 bool SystemMonitor::isOnBattery() { return batteryWatcher->isOnBattery; }

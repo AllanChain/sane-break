@@ -177,6 +177,28 @@ class TestCommand : public QObject {
     QCOMPARE(app.trayData.pauseReasons, PauseReason::ExternalControl);
   }
 
+  // The pause-reason id and its position in the array are both machine-stable schema.
+  // flags.h owns the single mapping the CLI status output and the break spans share, so
+  // this one assertion guards both consumers against a renamed or reordered id.
+  void cli_reports_screen_lock_pause_reason() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    emit deps.systemMonitor->pauseRequested(PauseReason::ScreenLock);
+
+    CliCommandResult result = executeCliCommand(&app, {"status"});
+    QVERIFY2(result.ok, qPrintable(result.message));
+    QJsonObject status;
+    assertJsonObject(result.message, &status);
+    QCOMPARE(status["mode"].toString(), QString("paused"));
+    QJsonArray reasons = status["pauseReasons"].toArray();
+    QCOMPARE(reasons.size(), 1);
+    QCOMPARE(reasons.at(0).toString(), QString("screen-lock"));
+
+    emit deps.systemMonitor->resumeRequested(PauseReason::ScreenLock);
+    QVERIFY(!app.trayData.pauseReasons);
+  }
+
   void cli_starts_meeting() {
     NiceMock<DummyApp> app(deps);
     app.start();
