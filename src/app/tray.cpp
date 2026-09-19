@@ -221,7 +221,9 @@ void StatusTrayWindow::update(TrayData data) {
     setTitle(tr("Meeting mode — until %1 (%2 left)")
                  .arg(endTimeStr, formatTime(data.meetingSecondsRemaining)));
   } else if (data.pauseReasons) {
-    if (data.pauseReasons.testFlag(PauseReason::OnBattery)) {
+    if (data.pauseReasons.testFlag(PauseReason::ScreenLock)) {
+      setTitle(tr("Paused on screen lock"));
+    } else if (data.pauseReasons.testFlag(PauseReason::OnBattery)) {
       setTitle(tr("Paused on battery"));
     } else if (data.pauseReasons.testFlag(PauseReason::AppOpen)) {
       setTitle(tr("Paused on app running"));

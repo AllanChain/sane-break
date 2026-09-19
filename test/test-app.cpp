@@ -1713,6 +1713,77 @@ class TestApp : public QObject {
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
     QVERIFY(!app.trayData.isBreaking);
   }
+  // Screen lock pauses the schedule like the other environment-based pauses
+  void screen_lock_pauses() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    emit deps.systemMonitor->pauseRequested(PauseReason::ScreenLock);
+    QCOMPARE(app.trayData.pauseReasons, PauseReason::ScreenLock);
+    // Countdown stopped
+    int secondsToNextBreak = app.trayData.secondsToNextBreak;
+    app.advance(1);
+    QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
+
+    emit deps.systemMonitor->resumeRequested(PauseReason::ScreenLock);
+    QVERIFY(!app.trayData.pauseReasons);
+    // Countdown resumed
+    app.advance(1);
+    QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak - 1);
+  }
+  // A lock is an absence pause, like idle, so it is recorded as away time rather than
+  // generic paused time. Otherwise one physical absence lands in two buckets depending
+  // on whether it happened to cross the idle threshold, and locked-screen time shows up
+  // in the stats "Paused" column and on the timeline instead of being excluded.
+  void screen_lock_pause_is_recorded_as_away() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    emit deps.systemMonitor->pauseRequested(PauseReason::ScreenLock);
+    emit deps.systemMonitor->resumeRequested(PauseReason::ScreenLock);
+
+    QSqlQuery query;
+    QVERIFY(query.exec(R"(
+      SELECT type, json_extract(data, '$.reasons[0]')
+      FROM spans
+      WHERE type IN ('paused', 'away')
+      ORDER BY id
+    )"));
+
+    QVERIFY(query.next());
+    QCOMPARE(query.value(0).toString(), QString("away"));
+    // Pins the id that the CLI JSON schema and the span data share.
+    QCOMPARE(query.value(1).toString(), QString("screen-lock"));
+
+    QVERIFY(!query.next());
+  }
+  // A lock is an absence pause, so - like idle - it must not interrupt a running
+  // break, and it must not linger in the reason set afterwards: a leftover reason
+  // would report "paused" in the tray and CLI while the countdown keeps running.
+  void screen_lock_ignored_during_break() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
+    app.breakNow();
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+
+    EXPECT_CALL(*deps.breakWindows, destroy()).Times(0);
+    emit deps.systemMonitor->pauseRequested(PauseReason::ScreenLock);
+    QVERIFY(app.trayData.isBreaking);
+    QCOMPARE(app.trayData.pauseReasons.toInt(), 0);
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+
+    // Unlocking after a break that was never paused stays a no-op
+    emit deps.systemMonitor->resumeRequested(PauseReason::ScreenLock);
+    QVERIFY(app.trayData.isBreaking);
+    QCOMPARE(app.trayData.pauseReasons.toInt(), 0);
+
+    // The break then runs to its normal end with no stale pause left behind
+    app.advanceToBreakEnd();
+    QVERIFY(!app.trayData.isBreaking);
+    QCOMPARE(app.trayData.pauseReasons.toInt(), 0);
+  }
   // Extend meeting before it ends
   void meeting_extend_before_end() {
     NiceMock<DummyApp> app(deps);

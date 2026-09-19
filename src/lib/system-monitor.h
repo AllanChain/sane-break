@@ -13,6 +13,7 @@
 #include "core/system-monitor.h"
 #include "lib/battery-status.h"
 #include "lib/program-monitor.h"
+#include "lib/screen-lock-status.h"
 #include "lib/screen-monitor.h"
 #include "lib/sleep-monitor.h"
 
@@ -30,4 +31,5 @@ class SystemMonitor : public AbstractSystemMonitor {
   BatteryStatus* batteryWatcher;
   RunningProgramsMonitor* runningProgramsMonitor;
   ScreenMonitor* screenMonitor;
+  ScreenLockStatus* screenLockStatus;
 };
