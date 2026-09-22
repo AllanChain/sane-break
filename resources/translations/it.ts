@@ -656,7 +656,7 @@
         <location filename="../../src/app/pref-window.ui" line="964"/>
         <source>After idle for that long during break, Sane Break will keep full screen and there&apos;s no way back.</source>
         <extracomment>Tooltip for &quot;Confirm break after&quot; config</extracomment>
-        <translation type="unfinished">Dopo essere stato inattivo per quel periodo durante la pausa, Sane Break rimarrà a schermo intero e non ci sarà modo di tornare indietro.</translation>
+        <translation>Dopo essere stato inattivo per quel periodo durante la pausa, Sane Break rimarrà a schermo intero e non ci sarà modo di tornare indietro.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="967"/>
@@ -801,9 +801,9 @@ Tutti i colori sono in formato &lt;code&gt;#AARRGGBB&lt;/code&gt;.</translation>
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
         <extracomment>Tooltip for &quot;Auto screen lock&quot; config</extracomment>
-        <translation type="unfinished">Supponiamo che tu l&apos;abbia configurato su 2 minuti. Se la pausa è più breve di 2 minuti,
-lo schermo si bloccherà 2 minuti dopo l&apos;inizio della pausa, a condizione che non ci sia attività dopo la
-pausa. Se la pausa è più lunga di 2 minuti, lo schermo verrà bloccato comunque.</translation>
+        <translation>Diciamo che l&apos;hai configurato a 2 minuti. Se la pausa è più breve di 2 minuti, il
+schermo si chiuderà 2 minuti dopo l&apos;inizio della pausa, a condizione che non c&apos;è attività dopo il
+Pausa. Se la pausa è più lunga di 2 minuti, lo schermo sarà bloccato indipendentemente.</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="2034"/>
@@ -867,13 +867,13 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="1888"/>
         <location filename="../../src/app/pref-window.ui" line="1902"/>
         <source>Play</source>
-        <translation type="unfinished">Riproduci</translation>
+        <translation>Riproduci</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1504"/>
         <source>Sane Break will pause if it detects no activity for this many minutes</source>
         <extracomment>Tooltip for &quot;Pause if idle for&quot; config</extracomment>
-        <translation type="unfinished">Sane Break metterà in pausa se rileva nessuna attività per questo numero di minuti</translation>
+        <translation>Sane Break andrà in pausa se non rileva nessuna attività per questo numero di minuti</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1507"/>
@@ -896,7 +896,7 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="1700"/>
         <location filename="../../src/app/pref-window.ui" line="1754"/>
         <source> min</source>
-        <translation type="unfinished">min</translation>
+        <translation> min</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="284"/>
@@ -906,7 +906,7 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="1032"/>
         <location filename="../../src/app/pref-window.ui" line="1062"/>
         <source> sec</source>
-        <translation type="unfinished">sec</translation>
+        <translation> sec</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="328"/>
