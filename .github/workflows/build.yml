@@ -255,7 +255,7 @@ jobs:
     - name: Install Wayland & X11
       run: |
         sudo apt update
-        sudo apt install -y libcli11-dev libwayland-dev wayland-protocols libxss-dev
+        sudo apt install -y libcli11-dev libwayland-dev wayland-protocols libxss-dev zsync
 
     - name: Install Qt
       uses: jurplel/install-qt-action@v4
@@ -306,12 +306,16 @@ jobs:
           AppDir/usr/share/metainfo/io.github.AllanChain.sane-break.appdata.xml
         ../../linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage \
           --plugin qt --deploy-deps-only=AppDir/usr/lib/sane-break
+        test -f sane-break-x86_64.AppImage.zsync
         mkdir ../release
-        cp Sane_Break-x86_64.AppImage ../release/sane-break.AppImage
+        cp sane-break-x86_64.AppImage sane-break-x86_64.AppImage.zsync ../release/
       env:
         EXTRA_PLATFORM_PLUGINS: libqwayland.so
         EXTRA_QT_MODULES: waylandcompositor
         LINUXDEPLOY_EXCLUDED_LIBRARIES: libmysqlclient.so*;libqsqlmimer.so;libqsqlmysql.so;libqsqlodbc.so;libqsqlpsql.so;libqsqloci.so
+        # Embed GitHub Releases update information and generate the matching .zsync
+        LDAI_OUTPUT: sane-break-x86_64.AppImage
+        LDAI_UPDATE_INFORMATION: gh-releases-zsync|AllanChain|sane-break|latest|sane-break-x86_64.AppImage.zsync
 
     - name: Attestation
       uses: actions/attest@v4
@@ -321,7 +325,13 @@ jobs:
     - name: Create Artifact
       uses: actions/upload-artifact@v7
       with:
-         path: ./release/sane-break.AppImage
+         path: ./release/sane-break-x86_64.AppImage
+         archive: false
+
+    - name: Create Artifact (zsync)
+      uses: actions/upload-artifact@v7
+      with:
+         path: ./release/sane-break-x86_64.AppImage.zsync
          archive: false
 
   build-gnome:
