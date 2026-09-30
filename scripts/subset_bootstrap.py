@@ -9,12 +9,11 @@
 # ///
 
 import re
-from pathlib import Path
 import tempfile
 import urllib.request
+from pathlib import Path
 
-from fontTools.subset import Subsetter, save_font, load_font, Options
-
+from fontTools.subset import Options, Subsetter, load_font, save_font
 
 PROJ_ROOT = Path(__file__).parent.parent
 UI_DIR = PROJ_ROOT / "src" / "app"
@@ -33,7 +32,7 @@ def find_codepoints() -> set[int]:
             content = ui_file.read_text(encoding="utf-8", errors="ignore")
             matches = pattern.findall(content)
             codepoints.update(matches)
-        except Exception:
+        except OSError:
             pass
     return {int(code, 16) for code in codepoints}
 

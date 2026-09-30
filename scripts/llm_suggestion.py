@@ -360,7 +360,8 @@ if __name__ == "__main__":
                 lang = futures[future]
                 try:
                     future.result()
-                except Exception as exc:
+                # One language failing should not abort the others.
+                except Exception as exc:  # noqa: BLE001
                     exit_code = 1
                     emit_progress(progress_queue, lang, "error", str(exc))
     finally:

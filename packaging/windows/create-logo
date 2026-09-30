@@ -1,13 +1,12 @@
 #!/usr/bin/python
 
 # Sane Break is a gentle break reminder that helps you avoid mindlessly skipping breaks
-# Copyright (C) 2024-2025 Sane Break developers
+# Copyright (C) 2024-2026 Sane Break developers
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import subprocess
 import shutil
+import subprocess
 from pathlib import Path
-
 
 OUTPUT_PATH = Path(__file__).parent / "logo"
 SOURCE_SVG = OUTPUT_PATH.parent.parent.parent / "resources" / "images" / "icon.svg"
@@ -21,7 +20,8 @@ def export_png(width: int, *filenames: list[str]):
             f"--export-width={width}",
             f"--export-filename={OUTPUT_PATH / filenames[0]}",
             str(SOURCE_SVG),
-        ]
+        ],
+        check=True,
     )
     for filename in filenames[1:]:
         shutil.copyfile(OUTPUT_PATH / filenames[0], OUTPUT_PATH / filename)
