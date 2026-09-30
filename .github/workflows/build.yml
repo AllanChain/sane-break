@@ -66,7 +66,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v7
-    - uses: AllanChain/install-qt-static@v6.11
+    - uses: AllanChain/install-qt-static@v6.12
     - uses: ilammy/msvc-dev-cmd@v1
 
     - name: Install NSIS
@@ -121,7 +121,7 @@ jobs:
         arch: [x86_64, arm64]
     steps:
     - uses: actions/checkout@v7
-    - uses: AllanChain/install-qt-static@v6.11
+    - uses: AllanChain/install-qt-static@v6.12
 
     - name: Build Project
       run: |
