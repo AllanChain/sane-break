@@ -61,6 +61,8 @@ AbstractApp::AbstractApp(const AppDependencies& deps, QObject* parent)
 
   connect(breakWindows, &AbstractBreakWindows::lockScreenRequested, this,
           &AbstractApp::doLockScreen);
+  connect(breakWindows, &AbstractBreakWindows::pauseMediaRequested, this,
+          &AbstractApp::doPauseMedia);
   connect(breakWindows, &AbstractBreakWindows::exitForceBreakRequested, this,
           [this]() { onMenuAction(Action::ExitForceBreak{}); });
   connect(breakWindows, &AbstractBreakWindows::startBreakRequested, this,

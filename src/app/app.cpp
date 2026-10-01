@@ -29,6 +29,7 @@
 #include "core/preferences.h"
 #include "focus-window.h"
 #include "idle/factory.h"
+#include "lib/media-control.h"
 #include "lib/screen-lock.h"
 #include "lib/system-monitor.h"
 #include "lib/timer.h"
@@ -117,6 +118,8 @@ void SaneBreakApp::start() {
 }
 
 void SaneBreakApp::doLockScreen() { lockScreen(); }
+
+void SaneBreakApp::doPauseMedia() { pauseAllMedia(); }
 
 static void showAndActivate(QWidget* window) {
   window->show();

@@ -3,6 +3,7 @@ add_library(
   auto-start.h
   battery-status.cpp
   battery-status.h
+  media-control.h
   program-monitor.cpp
   program-monitor.h
   screen-lock.h
@@ -38,6 +39,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
             macos/battery.h
             macos/lock-status.h
             macos/lock-status.mm
+            macos/media-control.cpp
             macos/program-monitor.mm
             macos/screen-lock.cpp
             macos/workspace.h
@@ -48,12 +50,14 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
   target_link_libraries(sane-lib PRIVATE "-framework ApplicationServices")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   # wtsapi32 for WTSRegisterSessionNotification, the session lock/unlock notifications
-  target_link_libraries(sane-lib PRIVATE ntdll wtsapi32)
+  # WindowsApp for the C++/WinRT GlobalSystemMediaTransportControlsSessionManager
+  target_link_libraries(sane-lib PRIVATE ntdll wtsapi32 WindowsApp)
   target_sources(
     sane-lib
     PRIVATE windows/auto-start.cpp
             windows/battery.cpp
             windows/battery.h
+            windows/media-control.cpp
             windows/screen-lock.cpp
             windows/program-monitor.cpp
             windows/lock-status.h
@@ -75,6 +79,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
             linux/lock-status.cpp
             linux/logind.h
             linux/logind.cpp
+            linux/media-control.cpp
             linux/screen-lock.cpp
             linux/program-monitor.cpp
             linux/system-check.cpp

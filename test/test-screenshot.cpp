@@ -88,6 +88,7 @@ class TestScreenshot : public QObject {
     data.show.endTime = true;
     data.show.buttons = true;
     BreakWindow window(data);
+    window.initSize(QApplication::primaryScreen());
     window.setGeometry(0, 0, 800, 600);
     window.show();
     QApplication::processEvents();
@@ -95,7 +96,8 @@ class TestScreenshot : public QObject {
     window.setTime(45, "14:30:00");
     window.setClock("14:29");
     window.showButtons(AbstractBreakWindows::Button::LockScreen |
-                       AbstractBreakWindows::Button::ExitForceBreak);
+                       AbstractBreakWindows::Button::ExitForceBreak |
+                       AbstractBreakWindows::Button::PauseMedia);
     QApplication::processEvents();
     saveScreenshot(&window, "break-window");
   }

@@ -84,4 +84,5 @@ class AbstractApp : public AppContext {
   void updateTray();
 
   virtual void doLockScreen() = 0;
+  virtual void doPauseMedia() = 0;
 };

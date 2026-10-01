@@ -327,6 +327,8 @@ void BreakWindows::createOnScreen(QScreen* screen) {
           &BreakWindows::lockScreenRequested);
   connect(w, &BreakWindow::exitForceBreakRequested, this,
           &BreakWindows::exitForceBreakRequested);
+  connect(w, &BreakWindow::pauseMediaRequested, this,
+          &BreakWindows::pauseMediaRequested);
   connect(w, &QObject::destroyed, this, [this](QObject* obj) {
     // destroyed fires from ~QObject; only use the pointer for identity (removeOne),
     // never dereference it as a BreakWindow.

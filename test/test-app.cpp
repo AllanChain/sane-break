@@ -561,6 +561,16 @@ class TestApp : public QObject {
     QVERIFY(!deps.screenLockTimer->isActive());
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
   }
+  // The break window's pause-media button is routed up to the app, mirroring the
+  // lock-screen button.
+  void pause_media_request_reaches_app() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    EXPECT_CALL(app, doPauseMedia()).Times(1);
+    emit deps.breakWindows->pauseMediaRequested();
+    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+  }
   void postpone_time() {
     NiceMock<DummyApp> app(deps);
     app.start();
