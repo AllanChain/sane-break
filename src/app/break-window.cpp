@@ -93,8 +93,10 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget* parent)
   hoverColor.setAlpha(40);
   ui->buttons->setStyleSheet(
       ui->buttons->styleSheet().replace("#aaaaaaaa", hoverColor.name(QColor::HexArgb)));
-  colorizeButton(ui->lockScreen, data.theme.messageColor);
-  colorizeButton(ui->exitForceBreak, data.theme.messageColor);
+  // The glyphs are rich-text QLabels nested inside the buttons; let clicks and
+  // hover fall through to the button underneath.
+  ui->lockScreenIcon->setAttribute(Qt::WA_TransparentForMouseEvents);
+  ui->exitForceBreakIcon->setAttribute(Qt::WA_TransparentForMouseEvents);
   ui->lockScreenGroup->setVisible(false);
   ui->exitForceBreakGroup->setVisible(false);
   connect(ui->lockScreen, &QPushButton::pressed, this,
@@ -336,12 +338,4 @@ void BreakWindow::initSize(QScreen* screen) {
       m_bgImageLabel->hide();
     }
   }
-}
-
-void BreakWindow::colorizeButton(QPushButton* button, QColor color) {
-  auto pixmap = button->icon().pixmap(button->iconSize());
-  auto mask = pixmap.mask();
-  pixmap.fill(color);
-  pixmap.setMask(mask);
-  button->setIcon(pixmap);
 }

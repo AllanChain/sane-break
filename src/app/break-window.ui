@@ -200,22 +200,57 @@ QPushButton::hover {
               <property name="text">
                <string notr="true"/>
               </property>
-              <property name="icon">
-               <iconset resource="../../resources/index.qrc">
-                <normaloff>:/images/lock.png</normaloff>:/images/lock.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>64</width>
-                <height>64</height>
-               </size>
-              </property>
               <property name="checkable">
                <bool>false</bool>
               </property>
               <property name="flat">
                <bool>false</bool>
               </property>
+              <layout class="QVBoxLayout" name="lockScreenLayout">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>2</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
+                <widget class="QLabel" name="lockScreenIcon">
+                 <property name="styleSheet">
+                  <string notr="true">QLabel {
+  background: transparent;
+  font-size: 56px;
+}
+</string>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>bootstrap-icons</family>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string notr="true">&amp;#xF47A;</string>
+                 </property>
+                 <property name="textFormat">
+                  <enum>Qt::TextFormat::RichText</enum>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
+                 </property>
+                 <property name="margin">
+                  <number>4</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </widget>
             </item>
             <item alignment="Qt::AlignmentFlag::AlignHCenter">
@@ -257,19 +292,54 @@ QPushButton::hover {
               <property name="text">
                <string notr="true"/>
               </property>
-              <property name="icon">
-               <iconset resource="../../resources/index.qrc">
-                <normaloff>:/images/restart.png</normaloff>:/images/restart.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>64</width>
-                <height>64</height>
-               </size>
-              </property>
               <property name="flat">
                <bool>false</bool>
               </property>
+              <layout class="QVBoxLayout" name="exitForceBreakLayout">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>8</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
+                <widget class="QLabel" name="exitForceBreakIcon">
+                 <property name="styleSheet">
+                  <string notr="true">QLabel {
+  background: transparent;
+  font-size: 56px;
+}
+</string>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>bootstrap-icons</family>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string notr="true">&amp;#xF117;</string>
+                 </property>
+                 <property name="textFormat">
+                  <enum>Qt::TextFormat::RichText</enum>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
+                 </property>
+                 <property name="margin">
+                  <number>4</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </widget>
             </item>
             <item>

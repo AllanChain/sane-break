@@ -12,7 +12,6 @@
 #include <QMainWindow>
 #include <QProgressBar>
 #include <QPropertyAnimation>
-#include <QPushButton>
 #include <QScreen>
 #include <QSequentialAnimationGroup>
 #include <QString>
@@ -67,6 +66,4 @@ class BreakWindow : public QMainWindow {
   bool m_supportTransparentInput = true;
   int m_totalSeconds;
   QScreen* m_screen = nullptr;
-
-  static void colorizeButton(QPushButton* button, QColor color);
 };
