@@ -361,7 +361,8 @@ void BreakPhasePrompt::enter(AppContext* app, AppStateBreak*) {
   m_spanId = app->db->openSpan("flash");
   app->breakWindows->showFlashPrompt();
   app->breakWindows->showButtons(AbstractBreakWindows::Button::ExitForceBreak |
-                                     AbstractBreakWindows::Button::LockScreen,
+                                     AbstractBreakWindows::Button::LockScreen |
+                                     AbstractBreakWindows::Button::PauseMedia,
                                  false);
   // screenLockTimer should only be active in BreakPhaseFullScreen and AppStatePaused
   app->screenLockTimer->stop();
@@ -437,7 +438,8 @@ bool BreakPhaseFullScreen::canExitOnActivity(AppContext* app,
 }
 void BreakPhaseFullScreen::showWindowClickableWidgets(AppContext* app,
                                                       AppStateBreak* breakState) {
-  AbstractBreakWindows::Buttons buttons = AbstractBreakWindows::Button::LockScreen;
+  AbstractBreakWindows::Buttons buttons = AbstractBreakWindows::Button::LockScreen |
+                                          AbstractBreakWindows::Button::PauseMedia;
   if (breakState->data->numberForceBreakExits() <
       app->preferences->maxForceBreakExits->get()) {
     buttons |= AbstractBreakWindows::Button::ExitForceBreak;
@@ -452,7 +454,8 @@ void AppStatePostBreakIdle::enter(AppContext* app) {
   app->data->pause().addReasons(PauseReason::Idle);
   if (m_keepWindowOpen) {
     app->breakWindows->showButtons(AbstractBreakWindows::Button::ExitForceBreak |
-                                       AbstractBreakWindows::Button::LockScreen,
+                                       AbstractBreakWindows::Button::LockScreen |
+                                       AbstractBreakWindows::Button::PauseMedia,
                                    false);
   }
 }

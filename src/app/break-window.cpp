@@ -96,12 +96,16 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget* parent)
   // hover fall through to the button underneath.
   ui->lockScreenIcon->setAttribute(Qt::WA_TransparentForMouseEvents);
   ui->exitForceBreakIcon->setAttribute(Qt::WA_TransparentForMouseEvents);
+  ui->pauseMediaIcon->setAttribute(Qt::WA_TransparentForMouseEvents);
   ui->lockScreenGroup->setVisible(false);
   ui->exitForceBreakGroup->setVisible(false);
+  ui->pauseMediaGroup->setVisible(false);
   connect(ui->lockScreen, &QPushButton::pressed, this,
           &BreakWindow::lockScreenRequested);
   connect(ui->exitForceBreak, &QPushButton::pressed, this,
           &BreakWindow::exitForceBreakRequested);
+  connect(ui->pauseMedia, &QPushButton::pressed, this,
+          &BreakWindow::pauseMediaRequested);
 
   ui->postponeLabel->setVisible(false);
 
@@ -198,6 +202,8 @@ void BreakWindow::showButtons(AbstractBreakWindows::Buttons buttons, bool show) 
     ui->lockScreenGroup->setVisible(show);
   if (buttons.testFlag(AbstractBreakWindows::Button::ExitForceBreak))
     ui->exitForceBreakGroup->setVisible(show);
+  if (buttons.testFlag(AbstractBreakWindows::Button::PauseMedia))
+    ui->pauseMediaGroup->setVisible(show);
 }
 
 void BreakWindow::showFullScreen() {

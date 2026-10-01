@@ -264,6 +264,92 @@ QPushButton::hover {
           </widget>
          </item>
          <item alignment="Qt::AlignmentFlag::AlignHCenter">
+          <widget class="QWidget" name="pauseMediaGroup" native="true">
+           <layout class="QVBoxLayout" name="pauseMediaGroupLayout">
+            <item alignment="Qt::AlignmentFlag::AlignHCenter">
+             <widget class="QPushButton" name="pauseMedia">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>80</width>
+                <height>80</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>80</width>
+                <height>80</height>
+               </size>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="flat">
+               <bool>false</bool>
+              </property>
+              <layout class="QVBoxLayout" name="pauseMediaLayout">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>2</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
+                <widget class="QLabel" name="pauseMediaIcon">
+                 <property name="styleSheet">
+                  <string notr="true">QLabel {
+  background: transparent;
+  font-size: 56px;
+}
+</string>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>bootstrap-icons</family>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string notr="true">&amp;#xF4C3;</string>
+                 </property>
+                 <property name="textFormat">
+                  <enum>Qt::TextFormat::RichText</enum>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
+                 </property>
+                 <property name="margin">
+                  <number>4</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignmentFlag::AlignHCenter">
+             <widget class="QLabel" name="pauseMediaLabel">
+              <property name="text">
+               <string>Pause Media</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item alignment="Qt::AlignmentFlag::AlignHCenter">
           <widget class="QWidget" name="exitForceBreakGroup" native="true">
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <item alignment="Qt::AlignmentFlag::AlignHCenter">

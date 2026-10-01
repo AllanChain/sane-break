@@ -28,6 +28,7 @@ class SaneBreakApp : public AbstractApp {
 
   void start() override;
   void doLockScreen() override;
+  void doPauseMedia() override;
 
   void showPreferences();
   void openStatsWindow();

@@ -52,6 +52,7 @@ class BreakWindow : public QMainWindow {
  signals:
   void lockScreenRequested();
   void exitForceBreakRequested();
+  void pauseMediaRequested();
 
  private:
   Ui::BreakReminder* ui;

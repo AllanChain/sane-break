@@ -43,6 +43,7 @@ class AbstractBreakWindows : public QObject {
   enum class Button {
     LockScreen = 1 << 0,
     ExitForceBreak = 1 << 1,
+    PauseMedia = 1 << 2,
   };
   Q_DECLARE_FLAGS(Buttons, Button)
   using QObject::QObject;
@@ -64,6 +65,7 @@ class AbstractBreakWindows : public QObject {
  signals:
   void lockScreenRequested();
   void exitForceBreakRequested();
+  void pauseMediaRequested();
   void startBreakRequested();
 };
 

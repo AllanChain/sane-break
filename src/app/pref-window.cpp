@@ -691,7 +691,8 @@ void PreferenceWindow::openBreakWindowPreview() {
   QTimer::singleShot(2000, [this]() {
     breakWindows->showFullScreen();
     breakWindows->showButtons(AbstractBreakWindows::Button::LockScreen |
-                              AbstractBreakWindows::Button::ExitForceBreak);
+                              AbstractBreakWindows::Button::ExitForceBreak |
+                              AbstractBreakWindows::Button::PauseMedia);
     QTimer::singleShot(4000, [this]() {
       breakWindows->destroy();
       if (!preferences->bigBreakEnabled->get()) return;
@@ -700,7 +701,8 @@ void PreferenceWindow::openBreakWindowPreview() {
       QTimer::singleShot(2000, [this]() {
         breakWindows->showFullScreen();
         breakWindows->showButtons(AbstractBreakWindows::Button::LockScreen |
-                                  AbstractBreakWindows::Button::ExitForceBreak);
+                                  AbstractBreakWindows::Button::ExitForceBreak |
+                                  AbstractBreakWindows::Button::PauseMedia);
         QTimer::singleShot(4000, [this]() { breakWindows->destroy(); });
       });
     });
