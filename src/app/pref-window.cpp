@@ -513,10 +513,6 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
   ui->languageLink->setHidden(true);
 #endif
 
-#ifdef LINUX_DIST_FLATPAK
-  ui->autoScreenLock->setHidden(true);
-  ui->autoScreenLockLabel->setHidden(true);
-#else
   ui->autoScreenLock->addItem(tr("Disabled"), 0);
   ui->autoScreenLock->addItem(tr("%n sec", "", 30), 30);
   ui->autoScreenLock->addItem(tr("%n min", "", 1), 60);
@@ -525,7 +521,6 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
   controllers->add(PrefGroup::General,
                    new PrefController<QComboBox, int>(ui->autoScreenLock,
                                                       preferences->autoScreenLock));
-#endif
 
 #ifdef Q_OS_LINUX
   ui->quickBreak->setText(tr("Start next break after middle clicking on tray icon"));

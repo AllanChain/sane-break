@@ -32,9 +32,6 @@ class LinuxScreenLockStatus : public ScreenLockStatus {
   // Finds this session's LockedHint on the given bus and subscribes to its property
   // changes. A failed subscribe is not fatal: the base class poll covers it.
   bool bind(QDBusConnection& bus);
-  // This process' logind session object path, or the "auto" alias when it cannot be
-  // resolved.
-  QString logindSessionPath(const QDBusConnection& bus);
 
   QDBusInterface* m_props = nullptr;  // org.freedesktop.DBus.Properties on the session
   QString m_path;

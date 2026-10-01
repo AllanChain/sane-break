@@ -31,7 +31,6 @@
 #include <Qt>
 #include <algorithm>
 
-#include "config.h"
 #include "core/break-windows.h"
 #include "lib/utils.h"
 #include "ui_break-window.h"
@@ -195,11 +194,8 @@ void BreakWindow::setTime(int remainingTime, QString estimatedEndTime) {
 void BreakWindow::setClock(QString hourMinute) { ui->clock->setText(hourMinute); }
 
 void BreakWindow::showButtons(AbstractBreakWindows::Buttons buttons, bool show) {
-  // Lock screen is not supported on Flatpak
-#ifndef LINUX_DIST_FLATPAK
   if (buttons.testFlag(AbstractBreakWindows::Button::LockScreen))
     ui->lockScreenGroup->setVisible(show);
-#endif
   if (buttons.testFlag(AbstractBreakWindows::Button::ExitForceBreak))
     ui->exitForceBreakGroup->setVisible(show);
 }
