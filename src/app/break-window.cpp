@@ -238,6 +238,16 @@ void BreakWindow::showFullScreen() {
   resizeAnim->setEndValue(m_waylandWorkaround ? m_screen->availableGeometry()
                                               : m_screen->geometry());
   resizeAnim->setDuration(300);
+#ifdef Q_OS_WINDOWS
+  // A topmost, non-activating window is not treated as a fullscreen window by
+  // the shell: once it covers the screen the taskbar re-raises itself above it,
+  // which undoes a single raise. Re-assert the z-order a few times while the
+  // taskbar settles, then leave it alone.
+  connect(resizeAnim, &QPropertyAnimation::finished, this, [this] {
+    for (int delay : {0, 100, 200, 350, 600, 1000, 1500})
+      QTimer::singleShot(delay, this, &BreakWindow::raise);
+  });
+#endif
   resizeAnim->start();
 
   if (m_bgImageLabel) {
