@@ -66,12 +66,17 @@
         <translation type="unfinished">Přestávka prodloužena jako náhrada za odložení</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.ui" line="224"/>
+        <location filename="../../src/app/break-window.ui" line="259"/>
         <source>Lock Screen</source>
         <translation type="unfinished">Zamknout obrazovku</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.ui" line="278"/>
+        <location filename="../../src/app/break-window.ui" line="345"/>
+        <source>Pause Media</source>
+        <translation type="unfinished">Pozastavit média</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/break-window.ui" line="434"/>
         <source>Exit Force Break</source>
         <translation type="unfinished">Ukončit nucenou přestávku</translation>
     </message>
@@ -79,12 +84,12 @@
 <context>
     <name>BreakWindow</name>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="187"/>
+        <location filename="../../src/app/break-window.cpp" line="192"/>
         <source>Break will end at: %1</source>
         <translation type="unfinished">Přestávka skončí v: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="189"/>
+        <location filename="../../src/app/break-window.cpp" line="194"/>
         <source>Break has ended</source>
         <translation type="unfinished">Přestávka skončila</translation>
     </message>
@@ -92,122 +97,122 @@
 <context>
     <name>Cli</name>
     <message>
-        <location filename="../../src/core/cli.cpp" line="171"/>
+        <location filename="../../src/core/cli.cpp" line="136"/>
         <source>Show the application version</source>
         <translation type="unfinished">Zobrazit verzi aplikace</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="176"/>
+        <location filename="../../src/core/cli.cpp" line="141"/>
         <source>Show this help text</source>
         <translation type="unfinished">Zobrazit tento text nápovědy</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="233"/>
+        <location filename="../../src/core/cli.cpp" line="198"/>
         <source>Start the next break immediately</source>
         <translation type="unfinished">Okamžitě zahájit další přestávku</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="236"/>
+        <location filename="../../src/core/cli.cpp" line="201"/>
         <source>Start the next big break immediately</source>
         <translation type="unfinished">Okamžitě zahájit další velkou přestávku</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="239"/>
+        <location filename="../../src/core/cli.cpp" line="204"/>
         <source>Pause breaks by external control</source>
         <translation type="unfinished">Pozastavit přestávky pomocí externího ovládání</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="242"/>
+        <location filename="../../src/core/cli.cpp" line="207"/>
         <source>Resume breaks paused by external control</source>
         <translation type="unfinished">Obnovit přestávky pozastavené externím ovládáním</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="245"/>
+        <location filename="../../src/core/cli.cpp" line="210"/>
         <source>Enable breaks by clearing all pause reasons</source>
         <translation type="unfinished">Povolit přestávky vymazáním všech důvodů pozastavení</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="249"/>
+        <location filename="../../src/core/cli.cpp" line="214"/>
         <source>Show current break status</source>
         <translation type="unfinished">Zobrazit aktuální stav přestávky</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="257"/>
+        <location filename="../../src/core/cli.cpp" line="222"/>
         <source>Manage meeting or presentation mode</source>
         <translation type="unfinished">Spravovat režim schůzky nebo přednášky</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="262"/>
+        <location filename="../../src/core/cli.cpp" line="227"/>
         <source>Start meeting mode for a duration</source>
         <translation type="unfinished">Spustit režim schůzky na určitou dobu</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="265"/>
+        <location filename="../../src/core/cli.cpp" line="230"/>
         <source>Meeting duration, for example 45m, 2700s, or 1h</source>
         <translation type="unfinished">Doba trvání schůzky, například 45m, 2700s nebo 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="269"/>
+        <location filename="../../src/core/cli.cpp" line="234"/>
         <source>Meeting reason</source>
         <translation type="unfinished">Důvod schůzky</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="272"/>
+        <location filename="../../src/core/cli.cpp" line="237"/>
         <source>End meeting mode</source>
         <translation type="unfinished">Ukončit režim schůzky</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="275"/>
+        <location filename="../../src/core/cli.cpp" line="240"/>
         <source>Start a break immediately</source>
         <translation type="unfinished">Okamžitě zahájit přestávku</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="278"/>
+        <location filename="../../src/core/cli.cpp" line="243"/>
         <source>Schedule the next break after this duration</source>
         <translation type="unfinished">Naplánovat další přestávku po uplynutí této doby</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="283"/>
+        <location filename="../../src/core/cli.cpp" line="248"/>
         <source>Extend the current meeting</source>
         <translation type="unfinished">Prodloužit aktuální schůzku</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="287"/>
+        <location filename="../../src/core/cli.cpp" line="252"/>
         <source>Duration to extend, for example 10m, 600s, or 1h</source>
         <translation type="unfinished">Doba prodloužení, například 10m, 600s nebo 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="294"/>
+        <location filename="../../src/core/cli.cpp" line="259"/>
         <source>Manage focus mode</source>
         <translation type="unfinished">Spravovat režim zaměření</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="299"/>
+        <location filename="../../src/core/cli.cpp" line="264"/>
         <source>Start focus mode for a duration</source>
         <translation type="unfinished">Spustit režim zaměření na určitou dobu</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="302"/>
+        <location filename="../../src/core/cli.cpp" line="267"/>
         <source>Focus duration, for example 50m, 3000s, or 1h</source>
         <translation type="unfinished">Doba trvání zaměření, například 50m, 3000s nebo 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="306"/>
+        <location filename="../../src/core/cli.cpp" line="271"/>
         <source>Focus reason</source>
         <translation type="unfinished">Důvod zaměření</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="309"/>
+        <location filename="../../src/core/cli.cpp" line="274"/>
         <source>End focus mode</source>
         <translation type="unfinished">Ukončit režim zaměření</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="313"/>
+        <location filename="../../src/core/cli.cpp" line="278"/>
         <source>Postpone the next break</source>
         <translation type="unfinished">Odložit další přestávku</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="317"/>
+        <location filename="../../src/core/cli.cpp" line="282"/>
         <source>Duration to postpone, for example 10m, 600s, or 1h. Bare numbers are minutes.</source>
         <translation type="unfinished">Doba odložení, například 10m, 600s nebo 1h. Holá čísla znamenají minuty.</translation>
     </message>
@@ -365,12 +370,12 @@
 <context>
     <name>HeadsUpWindow</name>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="112"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="97"/>
         <source>Break soon</source>
         <translation type="unfinished">Brzy přestávka</translation>
     </message>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="121"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="106"/>
         <source>Click to start</source>
         <translation type="unfinished">Kliknutím spustit</translation>
     </message>
@@ -1188,9 +1193,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="522"/>
-        <location filename="../../src/app/pref-window.cpp" line="523"/>
-        <location filename="../../src/app/pref-window.cpp" line="524"/>
+        <location filename="../../src/app/pref-window.cpp" line="518"/>
+        <location filename="../../src/app/pref-window.cpp" line="519"/>
+        <location filename="../../src/app/pref-window.cpp" line="520"/>
         <source>%n min</source>
         <translation type="unfinished">
             <numerusform>%n minuta</numerusform>
@@ -1209,7 +1214,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="521"/>
+        <location filename="../../src/app/pref-window.cpp" line="517"/>
         <source>%n sec</source>
         <translation type="unfinished">
             <numerusform>%n sekunda</numerusform>
@@ -1218,68 +1223,68 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="520"/>
+        <location filename="../../src/app/pref-window.cpp" line="516"/>
         <source>Disabled</source>
         <translation type="unfinished">Vypnuto</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="531"/>
+        <location filename="../../src/app/pref-window.cpp" line="526"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation type="unfinished">Začít další přestávku po stisku prostředního tlačítka na ikoně v panelu</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="536"/>
+        <location filename="../../src/app/pref-window.cpp" line="531"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation type="unfinished">Začít další přestávku po dvojitém kliknutí na ikonu v panelu</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="614"/>
+        <location filename="../../src/app/pref-window.cpp" line="609"/>
         <source>Save</source>
         <translation type="unfinished">Uložit</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="615"/>
+        <location filename="../../src/app/pref-window.cpp" line="610"/>
         <source>Discard</source>
         <translation type="unfinished">Zahodit</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="616"/>
+        <location filename="../../src/app/pref-window.cpp" line="611"/>
         <source>Cancel</source>
         <translation type="unfinished">Zrušit</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="653"/>
+        <location filename="../../src/app/pref-window.cpp" line="648"/>
         <source>Select Sound File</source>
         <translation type="unfinished">Vybrat zvukový soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="654"/>
+        <location filename="../../src/app/pref-window.cpp" line="649"/>
         <source>Sound Files (*.mp3 *.wav *.ogg *.flac *.m4a)</source>
         <translation type="unfinished">Zvukové soubory (*.mp3 *.wav *.ogg *.flac *.m4a)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="664"/>
-        <location filename="../../src/app/pref-window.cpp" line="685"/>
+        <location filename="../../src/app/pref-window.cpp" line="659"/>
+        <location filename="../../src/app/pref-window.cpp" line="680"/>
         <source>Error</source>
         <translation type="unfinished">Chyba</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="665"/>
+        <location filename="../../src/app/pref-window.cpp" line="660"/>
         <source>Failed to save a copy of the selected sound file.</source>
         <translation type="unfinished">Nepodařilo se uložit kopii vybraného zvukového souboru.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="674"/>
+        <location filename="../../src/app/pref-window.cpp" line="669"/>
         <source>Select Background Image</source>
         <translation type="unfinished">Vybrat obrázek pozadí</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="675"/>
+        <location filename="../../src/app/pref-window.cpp" line="670"/>
         <source>Image Files (*.png *.jpg *.jpeg *.bmp *.webp)</source>
         <translation type="unfinished">Obrázkové soubory (*.png *.jpg *.jpeg *.bmp *.webp)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="686"/>
+        <location filename="../../src/app/pref-window.cpp" line="681"/>
         <source>Failed to save a copy of the selected image file.</source>
         <translation type="unfinished">Nepodařilo se uložit kopii vybraného obrázkového souboru.</translation>
     </message>
@@ -1289,12 +1294,12 @@ v%1
         <translation type="unfinished">Nastavení automatického spuštění selhalo</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="611"/>
+        <location filename="../../src/app/pref-window.cpp" line="606"/>
         <source>The preferences have been modified.</source>
         <translation type="unfinished">Nastavení bylo změněno.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="612"/>
+        <location filename="../../src/app/pref-window.cpp" line="607"/>
         <source>Do you want to save your changes?</source>
         <translation type="unfinished">Chcete uložit své změny?</translation>
     </message>
@@ -1359,48 +1364,48 @@ v%1
 <context>
     <name>SaneBreakApp</name>
     <message>
-        <location filename="../../src/app/app.cpp" line="167"/>
+        <location filename="../../src/app/app.cpp" line="170"/>
         <source>No further postpones are allowed.</source>
         <translation type="unfinished">Další odložení není povoleno.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="160"/>
-        <location filename="../../src/app/app.cpp" line="169"/>
+        <location filename="../../src/app/app.cpp" line="163"/>
+        <location filename="../../src/app/app.cpp" line="172"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="157"/>
+        <location filename="../../src/app/app.cpp" line="160"/>
         <source>Cannot postpone during focus mode.</source>
         <translation type="unfinished">Nelze odložit během režimu zaměření.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="158"/>
+        <location filename="../../src/app/app.cpp" line="161"/>
         <source>End focus mode first if you want to postpone.</source>
         <translation type="unfinished">Pokud chcete odložit, nejprve ukončete režim zaměření.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="166"/>
+        <location filename="../../src/app/app.cpp" line="169"/>
         <source>You have already postponed this break once.</source>
         <translation type="unfinished">Tuto přestávku jste již jednou odložili.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="204"/>
+        <location filename="../../src/app/app.cpp" line="207"/>
         <source>Are you sure to quit Sane Break?</source>
         <translation type="unfinished">Opravdu chcete ukončit Sane Break?</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="205"/>
+        <location filename="../../src/app/app.cpp" line="208"/>
         <source>You can postpone the breaks instead.</source>
         <translation type="unfinished">Můžete místo toho přestávky odložit.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="207"/>
+        <location filename="../../src/app/app.cpp" line="210"/>
         <source>Cancel</source>
         <translation type="unfinished">Zrušit</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="208"/>
+        <location filename="../../src/app/app.cpp" line="211"/>
         <source>Postpone</source>
         <translation type="unfinished">Odložit</translation>
     </message>
@@ -1425,7 +1430,7 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="209"/>
+        <location filename="../../src/app/app.cpp" line="212"/>
         <source>Yes</source>
         <translation type="unfinished">Ano</translation>
     </message>
@@ -1433,12 +1438,12 @@ v%1
 <context>
     <name>SanePreferences</name>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="67"/>
+        <location filename="../../src/core/preferences.cpp" line="80"/>
         <source>Time for a small break</source>
         <translation>Čas na malou přestávku</translation>
     </message>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="70"/>
+        <location filename="../../src/core/preferences.cpp" line="83"/>
         <source>Time for a big break</source>
         <translation>Čas na velkou přestávku</translation>
     </message>
@@ -1558,13 +1563,13 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="210"/>
-        <location filename="../../src/app/tray.cpp" line="237"/>
+        <location filename="../../src/app/tray.cpp" line="239"/>
         <source>big break</source>
         <translation>velká přestávka</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="211"/>
-        <location filename="../../src/app/tray.cpp" line="237"/>
+        <location filename="../../src/app/tray.cpp" line="239"/>
         <source>small break</source>
         <translation>malá přestávka</translation>
     </message>
@@ -1658,12 +1663,17 @@ v%1
         <translation type="unfinished">Ukončit schůzku (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="231"/>
+        <location filename="../../src/app/tray.cpp" line="225"/>
+        <source>Paused on screen lock</source>
+        <translation type="unfinished">Pozastaveno kvůli zámku obrazovky</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tray.cpp" line="233"/>
         <source>Paused on unknown monitor</source>
         <translation type="unfinished">Pozastaveno kvůli neznámému monitoru</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="233"/>
+        <location filename="../../src/app/tray.cpp" line="235"/>
         <source>Paused by external control</source>
         <translation type="unfinished">Pozastaveno externím ovládáním</translation>
     </message>
@@ -1677,17 +1687,17 @@ v%1
         <translation type="unfinished">Režim schůzky — do %1 (%2 zbývá)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="225"/>
+        <location filename="../../src/app/tray.cpp" line="227"/>
         <source>Paused on battery</source>
         <translation type="unfinished">Pozastaveno kvůli baterii</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="227"/>
+        <location filename="../../src/app/tray.cpp" line="229"/>
         <source>Paused on app running</source>
         <translation type="unfinished">Pozastaveno kvůli běžící aplikaci</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="229"/>
+        <location filename="../../src/app/tray.cpp" line="231"/>
         <source>Paused on idle</source>
         <translation type="unfinished">Pozastaveno kvůli nečinnosti</translation>
     </message>

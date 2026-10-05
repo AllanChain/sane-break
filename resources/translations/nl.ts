@@ -70,12 +70,17 @@
         <translation type="unfinished">Pauze verlengd om uitstel te compenseren</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.ui" line="224"/>
+        <location filename="../../src/app/break-window.ui" line="259"/>
         <source>Lock Screen</source>
         <translation>Scherm vergrendelen</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.ui" line="278"/>
+        <location filename="../../src/app/break-window.ui" line="345"/>
+        <source>Pause Media</source>
+        <translation type="unfinished">Media pauzeren</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/break-window.ui" line="434"/>
         <source>Exit Force Break</source>
         <translation>Gedwongen pauze beëindigen</translation>
     </message>
@@ -91,12 +96,12 @@
         <translation type="vanished">Tijd voor een korte pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="187"/>
+        <location filename="../../src/app/break-window.cpp" line="192"/>
         <source>Break will end at: %1</source>
         <translation type="unfinished">Pauze eindigt om: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="189"/>
+        <location filename="../../src/app/break-window.cpp" line="194"/>
         <source>Break has ended</source>
         <translation type="unfinished">Pauze is afgelopen</translation>
     </message>
@@ -104,122 +109,122 @@
 <context>
     <name>Cli</name>
     <message>
-        <location filename="../../src/core/cli.cpp" line="171"/>
+        <location filename="../../src/core/cli.cpp" line="136"/>
         <source>Show the application version</source>
         <translation type="unfinished">Toon de versie van het programma</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="176"/>
+        <location filename="../../src/core/cli.cpp" line="141"/>
         <source>Show this help text</source>
         <translation type="unfinished">Toon deze helppagina</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="233"/>
+        <location filename="../../src/core/cli.cpp" line="198"/>
         <source>Start the next break immediately</source>
         <translation type="unfinished">Start de volgende pauze direct</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="236"/>
+        <location filename="../../src/core/cli.cpp" line="201"/>
         <source>Start the next big break immediately</source>
         <translation type="unfinished">Start de volgende lange pauze direct</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="239"/>
+        <location filename="../../src/core/cli.cpp" line="204"/>
         <source>Pause breaks by external control</source>
         <translation type="unfinished">Pauzes opschorten via externe besturing</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="242"/>
+        <location filename="../../src/core/cli.cpp" line="207"/>
         <source>Resume breaks paused by external control</source>
         <translation type="unfinished">Hervat pauzes die zijn opgeschort via externe besturing</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="245"/>
+        <location filename="../../src/core/cli.cpp" line="210"/>
         <source>Enable breaks by clearing all pause reasons</source>
         <translation type="unfinished">Schakel pauzes in door alle redenen voor opschorting te wissen</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="249"/>
+        <location filename="../../src/core/cli.cpp" line="214"/>
         <source>Show current break status</source>
         <translation type="unfinished">Toon huidige pauzestatus</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="257"/>
+        <location filename="../../src/core/cli.cpp" line="222"/>
         <source>Manage meeting or presentation mode</source>
         <translation type="unfinished">Beheer vergaderings- of presentatiemodus</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="262"/>
+        <location filename="../../src/core/cli.cpp" line="227"/>
         <source>Start meeting mode for a duration</source>
         <translation type="unfinished">Start vergaderingsmodus voor een bepaalde duur</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="265"/>
+        <location filename="../../src/core/cli.cpp" line="230"/>
         <source>Meeting duration, for example 45m, 2700s, or 1h</source>
         <translation type="unfinished">Duur van vergadering, bijvoorbeeld 45m, 2700s of 1u</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="269"/>
+        <location filename="../../src/core/cli.cpp" line="234"/>
         <source>Meeting reason</source>
         <translation type="unfinished">Reden voor vergadering</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="272"/>
+        <location filename="../../src/core/cli.cpp" line="237"/>
         <source>End meeting mode</source>
         <translation type="unfinished">Beëindig vergaderingsmodus</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="275"/>
+        <location filename="../../src/core/cli.cpp" line="240"/>
         <source>Start a break immediately</source>
         <translation type="unfinished">Start direct een pauze</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="278"/>
+        <location filename="../../src/core/cli.cpp" line="243"/>
         <source>Schedule the next break after this duration</source>
         <translation type="unfinished">Plan de volgende pauze na deze duur</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="283"/>
+        <location filename="../../src/core/cli.cpp" line="248"/>
         <source>Extend the current meeting</source>
         <translation type="unfinished">Verleng de huidige vergadering</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="287"/>
+        <location filename="../../src/core/cli.cpp" line="252"/>
         <source>Duration to extend, for example 10m, 600s, or 1h</source>
         <translation type="unfinished">Te verlengen duur, bijvoorbeeld 10m, 600s of 1u</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="294"/>
+        <location filename="../../src/core/cli.cpp" line="259"/>
         <source>Manage focus mode</source>
         <translation type="unfinished">Beheer concentratiemodus</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="299"/>
+        <location filename="../../src/core/cli.cpp" line="264"/>
         <source>Start focus mode for a duration</source>
         <translation type="unfinished">Start concentratiemodus voor een bepaalde duur</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="302"/>
+        <location filename="../../src/core/cli.cpp" line="267"/>
         <source>Focus duration, for example 50m, 3000s, or 1h</source>
         <translation type="unfinished">Duur van concentratieperiode, bijvoorbeeld 50m, 3000s of 1u</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="306"/>
+        <location filename="../../src/core/cli.cpp" line="271"/>
         <source>Focus reason</source>
         <translation type="unfinished">Reden voor concentratie</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="309"/>
+        <location filename="../../src/core/cli.cpp" line="274"/>
         <source>End focus mode</source>
         <translation type="unfinished">Beëindig concentratiemodus</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="313"/>
+        <location filename="../../src/core/cli.cpp" line="278"/>
         <source>Postpone the next break</source>
         <translation type="unfinished">Stel de volgende pauze uit</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="317"/>
+        <location filename="../../src/core/cli.cpp" line="282"/>
         <source>Duration to postpone, for example 10m, 600s, or 1h. Bare numbers are minutes.</source>
         <translation type="unfinished">Uitstelduur, bijvoorbeeld 10m, 600s of 1u. Losse getallen worden gezien als minuten.</translation>
     </message>
@@ -377,12 +382,12 @@
 <context>
     <name>HeadsUpWindow</name>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="112"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="97"/>
         <source>Break soon</source>
         <translation type="unfinished">Binnenkort pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="121"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="106"/>
         <source>Click to start</source>
         <translation type="unfinished">Klik om te starten</translation>
     </message>
@@ -1270,9 +1275,9 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="522"/>
-        <location filename="../../src/app/pref-window.cpp" line="523"/>
-        <location filename="../../src/app/pref-window.cpp" line="524"/>
+        <location filename="../../src/app/pref-window.cpp" line="518"/>
+        <location filename="../../src/app/pref-window.cpp" line="519"/>
+        <location filename="../../src/app/pref-window.cpp" line="520"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min.</numerusform>
@@ -1289,7 +1294,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="521"/>
+        <location filename="../../src/app/pref-window.cpp" line="517"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec.</numerusform>
@@ -1297,68 +1302,68 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="520"/>
+        <location filename="../../src/app/pref-window.cpp" line="516"/>
         <source>Disabled</source>
         <translation>Uitgeschakeld</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="531"/>
+        <location filename="../../src/app/pref-window.cpp" line="526"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>Volgende pauze starten na middelklikken op systeemvakpictogram</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="536"/>
+        <location filename="../../src/app/pref-window.cpp" line="531"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>Volgende pauze starten na dubbelklikken op systeemvakpictogram</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="614"/>
+        <location filename="../../src/app/pref-window.cpp" line="609"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="615"/>
+        <location filename="../../src/app/pref-window.cpp" line="610"/>
         <source>Discard</source>
         <translation>Verwerpen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="616"/>
+        <location filename="../../src/app/pref-window.cpp" line="611"/>
         <source>Cancel</source>
         <translation>Annuleren</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="653"/>
+        <location filename="../../src/app/pref-window.cpp" line="648"/>
         <source>Select Sound File</source>
         <translation type="unfinished">Geluidsbestand selecteren</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="654"/>
+        <location filename="../../src/app/pref-window.cpp" line="649"/>
         <source>Sound Files (*.mp3 *.wav *.ogg *.flac *.m4a)</source>
         <translation type="unfinished">Geluidsbestanden (*.mp3 *.wav *.ogg *.flac *.m4a)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="664"/>
-        <location filename="../../src/app/pref-window.cpp" line="685"/>
+        <location filename="../../src/app/pref-window.cpp" line="659"/>
+        <location filename="../../src/app/pref-window.cpp" line="680"/>
         <source>Error</source>
         <translation type="unfinished">Fout</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="665"/>
+        <location filename="../../src/app/pref-window.cpp" line="660"/>
         <source>Failed to save a copy of the selected sound file.</source>
         <translation type="unfinished">Kan geen kopie van het geselecteerde geluidsbestand opslaan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="674"/>
+        <location filename="../../src/app/pref-window.cpp" line="669"/>
         <source>Select Background Image</source>
         <translation type="unfinished">Achtergrondafbeelding selecteren</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="675"/>
+        <location filename="../../src/app/pref-window.cpp" line="670"/>
         <source>Image Files (*.png *.jpg *.jpeg *.bmp *.webp)</source>
         <translation type="unfinished">Afbeeldingsbestanden (*.png *.jpg *.jpeg *.bmp *.webp)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="686"/>
+        <location filename="../../src/app/pref-window.cpp" line="681"/>
         <source>Failed to save a copy of the selected image file.</source>
         <translation type="unfinished">Kan geen kopie van het geselecteerde afbeeldingsbestand opslaan.</translation>
     </message>
@@ -1368,12 +1373,12 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation>Automatisch opstarten is niet mogelijk</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="611"/>
+        <location filename="../../src/app/pref-window.cpp" line="606"/>
         <source>The preferences have been modified.</source>
         <translation>De instellingen zijn aangepast.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="612"/>
+        <location filename="../../src/app/pref-window.cpp" line="607"/>
         <source>Do you want to save your changes?</source>
         <translation>Wilt u de instellingen opslaan?</translation>
     </message>
@@ -1458,7 +1463,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation type="vanished">Lange pauze</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="208"/>
+        <location filename="../../src/app/app.cpp" line="211"/>
         <source>Postpone</source>
         <translation>Uitstellen</translation>
     </message>
@@ -1494,43 +1499,43 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation type="vanished">Instellingen</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="167"/>
+        <location filename="../../src/app/app.cpp" line="170"/>
         <source>No further postpones are allowed.</source>
         <translation type="unfinished">Verdere uitstelling is niet toegestaan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="160"/>
-        <location filename="../../src/app/app.cpp" line="169"/>
+        <location filename="../../src/app/app.cpp" line="163"/>
+        <location filename="../../src/app/app.cpp" line="172"/>
         <source>OK</source>
         <translation type="unfinished">Oké</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="157"/>
+        <location filename="../../src/app/app.cpp" line="160"/>
         <source>Cannot postpone during focus mode.</source>
         <translation type="unfinished">Uitstellen is niet mogelijk tijdens de concentratiemodus.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="158"/>
+        <location filename="../../src/app/app.cpp" line="161"/>
         <source>End focus mode first if you want to postpone.</source>
         <translation type="unfinished">Beëindig eerst de concentratiemodus als u wilt uitstellen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="166"/>
+        <location filename="../../src/app/app.cpp" line="169"/>
         <source>You have already postponed this break once.</source>
         <translation type="unfinished">U hebt deze pauze al één keer uitgesteld.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="204"/>
+        <location filename="../../src/app/app.cpp" line="207"/>
         <source>Are you sure to quit Sane Break?</source>
         <translation>Weet u zeker dat u Sane Break wilt afsluiten?</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="205"/>
+        <location filename="../../src/app/app.cpp" line="208"/>
         <source>You can postpone the breaks instead.</source>
         <translation>U kunt ook de pauzes uitstellen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="207"/>
+        <location filename="../../src/app/app.cpp" line="210"/>
         <source>Cancel</source>
         <translation>Annuleren</translation>
     </message>
@@ -1553,7 +1558,7 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="209"/>
+        <location filename="../../src/app/app.cpp" line="212"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
@@ -1577,12 +1582,12 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
 <context>
     <name>SanePreferences</name>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="67"/>
+        <location filename="../../src/core/preferences.cpp" line="80"/>
         <source>Time for a small break</source>
         <translation>Tijd voor een korte pauze</translation>
     </message>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="70"/>
+        <location filename="../../src/core/preferences.cpp" line="83"/>
         <source>Time for a big break</source>
         <translation>Tijd voor een lange pauze</translation>
     </message>
@@ -1701,13 +1706,13 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="210"/>
-        <location filename="../../src/app/tray.cpp" line="237"/>
+        <location filename="../../src/app/tray.cpp" line="239"/>
         <source>big break</source>
         <translation>lange pauze</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="211"/>
-        <location filename="../../src/app/tray.cpp" line="237"/>
+        <location filename="../../src/app/tray.cpp" line="239"/>
         <source>small break</source>
         <translation>korte pauze</translation>
     </message>
@@ -1798,12 +1803,17 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation type="unfinished">Vergadering beëindigen (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="231"/>
+        <location filename="../../src/app/tray.cpp" line="225"/>
+        <source>Paused on screen lock</source>
+        <translation type="unfinished">Opgeschort tijdens schermvergrendeling</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tray.cpp" line="233"/>
         <source>Paused on unknown monitor</source>
         <translation type="unfinished">Opgeschort vanwege onbekende monitor</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="233"/>
+        <location filename="../../src/app/tray.cpp" line="235"/>
         <source>Paused by external control</source>
         <translation type="unfinished">Opgeschort via externe besturing</translation>
     </message>
@@ -1817,17 +1827,17 @@ Alle kleuren zijn in &lt;code&gt;#AARRGGBB&lt;/code&gt;-formaat.</translation>
         <translation type="unfinished">Vergaderingsmodus — tot %1 (%2 resterend)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="225"/>
+        <location filename="../../src/app/tray.cpp" line="227"/>
         <source>Paused on battery</source>
         <translation>Opgeschort tijdens werken op accu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="227"/>
+        <location filename="../../src/app/tray.cpp" line="229"/>
         <source>Paused on app running</source>
         <translation>Opgeschort tijdens actief programma</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="229"/>
+        <location filename="../../src/app/tray.cpp" line="231"/>
         <source>Paused on idle</source>
         <translation>Opgeschort tijdens inactiviteit</translation>
     </message>

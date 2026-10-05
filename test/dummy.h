@@ -135,6 +135,7 @@ class DummyApp : public AbstractApp {
             [this](TrayData data) { trayData = data; });
   };
   MOCK_METHOD(void, doLockScreen, (), (override));
+  MOCK_METHOD(void, doPauseMedia, (), (override));
   AppState::StateID currentState() { return m_currentState->getID(); }
   void advance(int secs) {
     QVERIFY2(m_countDownTimer->isActive(),

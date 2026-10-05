@@ -66,12 +66,17 @@
         <translation type="unfinished">Pausa estesa per compensare il rimando</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.ui" line="224"/>
+        <location filename="../../src/app/break-window.ui" line="259"/>
         <source>Lock Screen</source>
         <translation type="unfinished">Blocca schermo</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.ui" line="278"/>
+        <location filename="../../src/app/break-window.ui" line="345"/>
+        <source>Pause Media</source>
+        <translation type="unfinished">Metti in pausa i media</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/break-window.ui" line="434"/>
         <source>Exit Force Break</source>
         <translation type="unfinished">Esci dalla pausa forzata</translation>
     </message>
@@ -79,12 +84,12 @@
 <context>
     <name>BreakWindow</name>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="187"/>
+        <location filename="../../src/app/break-window.cpp" line="192"/>
         <source>Break will end at: %1</source>
         <translation>La pausa finirà a: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="189"/>
+        <location filename="../../src/app/break-window.cpp" line="194"/>
         <source>Break has ended</source>
         <translation type="unfinished">La pausa è terminata</translation>
     </message>
@@ -92,122 +97,122 @@
 <context>
     <name>Cli</name>
     <message>
-        <location filename="../../src/core/cli.cpp" line="171"/>
+        <location filename="../../src/core/cli.cpp" line="136"/>
         <source>Show the application version</source>
         <translation type="unfinished">Mostra la versione dell&apos;applicazione</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="176"/>
+        <location filename="../../src/core/cli.cpp" line="141"/>
         <source>Show this help text</source>
         <translation type="unfinished">Mostra questo testo di aiuto</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="233"/>
+        <location filename="../../src/core/cli.cpp" line="198"/>
         <source>Start the next break immediately</source>
         <translation type="unfinished">Avvia immediatamente la prossima pausa</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="236"/>
+        <location filename="../../src/core/cli.cpp" line="201"/>
         <source>Start the next big break immediately</source>
         <translation type="unfinished">Avvia immediatamente la prossima pausa lunga</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="239"/>
+        <location filename="../../src/core/cli.cpp" line="204"/>
         <source>Pause breaks by external control</source>
         <translation type="unfinished">Metti in pausa le pause tramite controllo esterno</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="242"/>
+        <location filename="../../src/core/cli.cpp" line="207"/>
         <source>Resume breaks paused by external control</source>
         <translation type="unfinished">Riprendi le pause messe in pausa tramite controllo esterno</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="245"/>
+        <location filename="../../src/core/cli.cpp" line="210"/>
         <source>Enable breaks by clearing all pause reasons</source>
         <translation type="unfinished">Abilita le pause cancellando tutti i motivi di pausa</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="249"/>
+        <location filename="../../src/core/cli.cpp" line="214"/>
         <source>Show current break status</source>
         <translation type="unfinished">Mostra lo stato attuale della pausa</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="257"/>
+        <location filename="../../src/core/cli.cpp" line="222"/>
         <source>Manage meeting or presentation mode</source>
         <translation type="unfinished">Gestisci la modalità riunione o presentazione</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="262"/>
+        <location filename="../../src/core/cli.cpp" line="227"/>
         <source>Start meeting mode for a duration</source>
         <translation type="unfinished">Avvia la modalità riunione per una durata</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="265"/>
+        <location filename="../../src/core/cli.cpp" line="230"/>
         <source>Meeting duration, for example 45m, 2700s, or 1h</source>
         <translation type="unfinished">Durata della riunione, ad esempio 45m, 2700s o 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="269"/>
+        <location filename="../../src/core/cli.cpp" line="234"/>
         <source>Meeting reason</source>
         <translation type="unfinished">Motivo della riunione</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="272"/>
+        <location filename="../../src/core/cli.cpp" line="237"/>
         <source>End meeting mode</source>
         <translation type="unfinished">Termina la modalità riunione</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="275"/>
+        <location filename="../../src/core/cli.cpp" line="240"/>
         <source>Start a break immediately</source>
         <translation type="unfinished">Avvia una pausa immediatamente</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="278"/>
+        <location filename="../../src/core/cli.cpp" line="243"/>
         <source>Schedule the next break after this duration</source>
         <translation type="unfinished">Programma la prossima pausa dopo questa durata</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="283"/>
+        <location filename="../../src/core/cli.cpp" line="248"/>
         <source>Extend the current meeting</source>
         <translation type="unfinished">Estendi la riunione corrente</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="287"/>
+        <location filename="../../src/core/cli.cpp" line="252"/>
         <source>Duration to extend, for example 10m, 600s, or 1h</source>
         <translation type="unfinished">Durata dell&apos;estensione, ad esempio 10m, 600s o 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="294"/>
+        <location filename="../../src/core/cli.cpp" line="259"/>
         <source>Manage focus mode</source>
         <translation type="unfinished">Gestisci la modalità concentrazione</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="299"/>
+        <location filename="../../src/core/cli.cpp" line="264"/>
         <source>Start focus mode for a duration</source>
         <translation type="unfinished">Avvia la modalità concentrazione per una durata</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="302"/>
+        <location filename="../../src/core/cli.cpp" line="267"/>
         <source>Focus duration, for example 50m, 3000s, or 1h</source>
         <translation type="unfinished">Durata della concentrazione, ad esempio 50m, 3000s o 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="306"/>
+        <location filename="../../src/core/cli.cpp" line="271"/>
         <source>Focus reason</source>
         <translation type="unfinished">Motivo della concentrazione</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="309"/>
+        <location filename="../../src/core/cli.cpp" line="274"/>
         <source>End focus mode</source>
         <translation type="unfinished">Termina la modalità concentrazione</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="313"/>
+        <location filename="../../src/core/cli.cpp" line="278"/>
         <source>Postpone the next break</source>
         <translation type="unfinished">Rimanda la prossima pausa</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="317"/>
+        <location filename="../../src/core/cli.cpp" line="282"/>
         <source>Duration to postpone, for example 10m, 600s, or 1h. Bare numbers are minutes.</source>
         <translation type="unfinished">Durata del rimando, ad esempio 10m, 600s o 1h. I numeri nudi sono minuti.</translation>
     </message>
@@ -365,12 +370,12 @@
 <context>
     <name>HeadsUpWindow</name>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="112"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="97"/>
         <source>Break soon</source>
         <translation type="unfinished">Pausa imminente</translation>
     </message>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="121"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="106"/>
         <source>Click to start</source>
         <translation type="unfinished">Clicca per iniziare</translation>
     </message>
@@ -1186,9 +1191,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="522"/>
-        <location filename="../../src/app/pref-window.cpp" line="523"/>
-        <location filename="../../src/app/pref-window.cpp" line="524"/>
+        <location filename="../../src/app/pref-window.cpp" line="518"/>
+        <location filename="../../src/app/pref-window.cpp" line="519"/>
+        <location filename="../../src/app/pref-window.cpp" line="520"/>
         <source>%n min</source>
         <translation type="unfinished">
             <numerusform>%n minuto</numerusform>
@@ -1205,7 +1210,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="521"/>
+        <location filename="../../src/app/pref-window.cpp" line="517"/>
         <source>%n sec</source>
         <translation type="unfinished">
             <numerusform>%n secondo</numerusform>
@@ -1213,68 +1218,68 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="520"/>
+        <location filename="../../src/app/pref-window.cpp" line="516"/>
         <source>Disabled</source>
         <translation>Disattivato</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="531"/>
+        <location filename="../../src/app/pref-window.cpp" line="526"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation type="unfinished">Inizia la prossima pausa dopo aver fatto clic col tasto centrale sull&apos;icona nella barra</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="536"/>
+        <location filename="../../src/app/pref-window.cpp" line="531"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation type="unfinished">Inizia la prossima pausa dopo aver fatto doppio clic sull&apos;icona nella barra</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="614"/>
+        <location filename="../../src/app/pref-window.cpp" line="609"/>
         <source>Save</source>
         <translation>Salva</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="615"/>
+        <location filename="../../src/app/pref-window.cpp" line="610"/>
         <source>Discard</source>
         <translation>Scarta</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="616"/>
+        <location filename="../../src/app/pref-window.cpp" line="611"/>
         <source>Cancel</source>
         <translation>Annulla</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="653"/>
+        <location filename="../../src/app/pref-window.cpp" line="648"/>
         <source>Select Sound File</source>
         <translation type="unfinished">Seleziona file audio</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="654"/>
+        <location filename="../../src/app/pref-window.cpp" line="649"/>
         <source>Sound Files (*.mp3 *.wav *.ogg *.flac *.m4a)</source>
         <translation type="unfinished">File audio (*.mp3 *.wav *.ogg *.flac *.m4a)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="664"/>
-        <location filename="../../src/app/pref-window.cpp" line="685"/>
+        <location filename="../../src/app/pref-window.cpp" line="659"/>
+        <location filename="../../src/app/pref-window.cpp" line="680"/>
         <source>Error</source>
         <translation type="unfinished">Errore</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="665"/>
+        <location filename="../../src/app/pref-window.cpp" line="660"/>
         <source>Failed to save a copy of the selected sound file.</source>
         <translation type="unfinished">Impossibile salvare una copia del file audio selezionato.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="674"/>
+        <location filename="../../src/app/pref-window.cpp" line="669"/>
         <source>Select Background Image</source>
         <translation type="unfinished">Seleziona immagine di sfondo</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="675"/>
+        <location filename="../../src/app/pref-window.cpp" line="670"/>
         <source>Image Files (*.png *.jpg *.jpeg *.bmp *.webp)</source>
         <translation type="unfinished">File immagine (*.png *.jpg *.jpeg *.bmp *.webp)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="686"/>
+        <location filename="../../src/app/pref-window.cpp" line="681"/>
         <source>Failed to save a copy of the selected image file.</source>
         <translation type="unfinished">Impossibile salvare una copia del file immagine selezionato.</translation>
     </message>
@@ -1284,12 +1289,12 @@ v%1
         <translation type="unfinished">Impostazione avvio automatico fallita</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="611"/>
+        <location filename="../../src/app/pref-window.cpp" line="606"/>
         <source>The preferences have been modified.</source>
         <translation>Le impostazioni sono state modificate.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="612"/>
+        <location filename="../../src/app/pref-window.cpp" line="607"/>
         <source>Do you want to save your changes?</source>
         <translation>Vuoi salvare i tuoi cambiamenti?</translation>
     </message>
@@ -1354,48 +1359,48 @@ v%1
 <context>
     <name>SaneBreakApp</name>
     <message>
-        <location filename="../../src/app/app.cpp" line="167"/>
+        <location filename="../../src/app/app.cpp" line="170"/>
         <source>No further postpones are allowed.</source>
         <translation type="unfinished">Non è consentito ulteriore rimando.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="160"/>
-        <location filename="../../src/app/app.cpp" line="169"/>
+        <location filename="../../src/app/app.cpp" line="163"/>
+        <location filename="../../src/app/app.cpp" line="172"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="157"/>
+        <location filename="../../src/app/app.cpp" line="160"/>
         <source>Cannot postpone during focus mode.</source>
         <translation type="unfinished">Non è possibile rimandare durante la modalità concentrazione.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="158"/>
+        <location filename="../../src/app/app.cpp" line="161"/>
         <source>End focus mode first if you want to postpone.</source>
         <translation type="unfinished">Termina prima la modalità concentrazione se vuoi rimandare.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="166"/>
+        <location filename="../../src/app/app.cpp" line="169"/>
         <source>You have already postponed this break once.</source>
         <translation type="unfinished">Hai già rimandato questa pausa una volta.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="204"/>
+        <location filename="../../src/app/app.cpp" line="207"/>
         <source>Are you sure to quit Sane Break?</source>
         <translation>Vuoi chiudere Sane Break?</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="205"/>
+        <location filename="../../src/app/app.cpp" line="208"/>
         <source>You can postpone the breaks instead.</source>
         <translation>Puoi rimandare le pause invece.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="207"/>
+        <location filename="../../src/app/app.cpp" line="210"/>
         <source>Cancel</source>
         <translation>Annulla</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="208"/>
+        <location filename="../../src/app/app.cpp" line="211"/>
         <source>Postpone</source>
         <translation type="unfinished">Posponi</translation>
     </message>
@@ -1418,7 +1423,7 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="209"/>
+        <location filename="../../src/app/app.cpp" line="212"/>
         <source>Yes</source>
         <translation>Sì</translation>
     </message>
@@ -1426,12 +1431,12 @@ v%1
 <context>
     <name>SanePreferences</name>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="67"/>
+        <location filename="../../src/core/preferences.cpp" line="80"/>
         <source>Time for a small break</source>
         <translation>Tempo per una pausa breve</translation>
     </message>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="70"/>
+        <location filename="../../src/core/preferences.cpp" line="83"/>
         <source>Time for a big break</source>
         <translation>Tempo per una pausa lunga</translation>
     </message>
@@ -1550,13 +1555,13 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="210"/>
-        <location filename="../../src/app/tray.cpp" line="237"/>
+        <location filename="../../src/app/tray.cpp" line="239"/>
         <source>big break</source>
         <translation>pausa lunga</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="211"/>
-        <location filename="../../src/app/tray.cpp" line="237"/>
+        <location filename="../../src/app/tray.cpp" line="239"/>
         <source>small break</source>
         <translation>pausa breve</translation>
     </message>
@@ -1647,12 +1652,17 @@ v%1
         <translation type="unfinished">Esci dalla riunione (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="231"/>
+        <location filename="../../src/app/tray.cpp" line="225"/>
+        <source>Paused on screen lock</source>
+        <translation type="unfinished">In pausa per blocco schermo</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tray.cpp" line="233"/>
         <source>Paused on unknown monitor</source>
         <translation type="unfinished">In pausa per monitor sconosciuto</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="233"/>
+        <location filename="../../src/app/tray.cpp" line="235"/>
         <source>Paused by external control</source>
         <translation type="unfinished">In pausa per controllo esterno</translation>
     </message>
@@ -1666,17 +1676,17 @@ v%1
         <translation type="unfinished">Modalità riunione — fino alle %1 (%2 rimanenti)</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="225"/>
+        <location filename="../../src/app/tray.cpp" line="227"/>
         <source>Paused on battery</source>
         <translation type="unfinished">In pausa sulla batteria</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="227"/>
+        <location filename="../../src/app/tray.cpp" line="229"/>
         <source>Paused on app running</source>
         <translation type="unfinished">In pausa perché un&apos;&apos;app è in esecuzione</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="229"/>
+        <location filename="../../src/app/tray.cpp" line="231"/>
         <source>Paused on idle</source>
         <translation type="unfinished">In pausa per inattività</translation>
     </message>
