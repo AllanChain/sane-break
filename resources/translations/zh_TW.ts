@@ -66,12 +66,17 @@
         <translation>休息時間為彌補推遲而延長</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.ui" line="224"/>
+        <location filename="../../src/app/break-window.ui" line="259"/>
         <source>Lock Screen</source>
         <translation>鎖屏</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.ui" line="278"/>
+        <location filename="../../src/app/break-window.ui" line="345"/>
+        <source>Pause Media</source>
+        <translation type="unfinished">暫停媒體播放</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/break-window.ui" line="434"/>
         <source>Exit Force Break</source>
         <translation>退出強制休息</translation>
     </message>
@@ -79,12 +84,12 @@
 <context>
     <name>BreakWindow</name>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="187"/>
+        <location filename="../../src/app/break-window.cpp" line="192"/>
         <source>Break will end at: %1</source>
         <translation>休息將在 %1 結束</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="189"/>
+        <location filename="../../src/app/break-window.cpp" line="194"/>
         <source>Break has ended</source>
         <translation>休息已結束</translation>
     </message>
@@ -92,122 +97,122 @@
 <context>
     <name>Cli</name>
     <message>
-        <location filename="../../src/core/cli.cpp" line="171"/>
+        <location filename="../../src/core/cli.cpp" line="136"/>
         <source>Show the application version</source>
         <translation>顯示應用版本</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="176"/>
+        <location filename="../../src/core/cli.cpp" line="141"/>
         <source>Show this help text</source>
         <translation>顯示此幫助文本</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="233"/>
+        <location filename="../../src/core/cli.cpp" line="198"/>
         <source>Start the next break immediately</source>
         <translation>立即開始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="236"/>
+        <location filename="../../src/core/cli.cpp" line="201"/>
         <source>Start the next big break immediately</source>
         <translation>立即開始下一次大休息</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="239"/>
+        <location filename="../../src/core/cli.cpp" line="204"/>
         <source>Pause breaks by external control</source>
         <translation>通過外部控制暫停休息</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="242"/>
+        <location filename="../../src/core/cli.cpp" line="207"/>
         <source>Resume breaks paused by external control</source>
         <translation>恢復被外部控制暫停的休息</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="245"/>
+        <location filename="../../src/core/cli.cpp" line="210"/>
         <source>Enable breaks by clearing all pause reasons</source>
         <translation>清除所有暫停原因以啟用休息</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="249"/>
+        <location filename="../../src/core/cli.cpp" line="214"/>
         <source>Show current break status</source>
         <translation>顯示當前休息狀態</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="257"/>
+        <location filename="../../src/core/cli.cpp" line="222"/>
         <source>Manage meeting or presentation mode</source>
         <translation>管理會議或演示模式</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="262"/>
+        <location filename="../../src/core/cli.cpp" line="227"/>
         <source>Start meeting mode for a duration</source>
         <translation>啟動指定時長的會議模式</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="265"/>
+        <location filename="../../src/core/cli.cpp" line="230"/>
         <source>Meeting duration, for example 45m, 2700s, or 1h</source>
         <translation>會議時長，例如 45m、2700s 或 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="269"/>
+        <location filename="../../src/core/cli.cpp" line="234"/>
         <source>Meeting reason</source>
         <translation>會議原因</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="272"/>
+        <location filename="../../src/core/cli.cpp" line="237"/>
         <source>End meeting mode</source>
         <translation>結束會議模式</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="275"/>
+        <location filename="../../src/core/cli.cpp" line="240"/>
         <source>Start a break immediately</source>
         <translation>立即開始休息</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="278"/>
+        <location filename="../../src/core/cli.cpp" line="243"/>
         <source>Schedule the next break after this duration</source>
         <translation>在此時長後安排下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="283"/>
+        <location filename="../../src/core/cli.cpp" line="248"/>
         <source>Extend the current meeting</source>
         <translation>延長當前會議</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="287"/>
+        <location filename="../../src/core/cli.cpp" line="252"/>
         <source>Duration to extend, for example 10m, 600s, or 1h</source>
         <translation>延長的時長，例如 10m、600s 或 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="294"/>
+        <location filename="../../src/core/cli.cpp" line="259"/>
         <source>Manage focus mode</source>
         <translation>管理專注模式</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="299"/>
+        <location filename="../../src/core/cli.cpp" line="264"/>
         <source>Start focus mode for a duration</source>
         <translation>啟動指定時長的專注模式</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="302"/>
+        <location filename="../../src/core/cli.cpp" line="267"/>
         <source>Focus duration, for example 50m, 3000s, or 1h</source>
         <translation>專注時長，例如 50m、3000s 或 1h</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="306"/>
+        <location filename="../../src/core/cli.cpp" line="271"/>
         <source>Focus reason</source>
         <translation>專注原因</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="309"/>
+        <location filename="../../src/core/cli.cpp" line="274"/>
         <source>End focus mode</source>
         <translation>結束專注模式</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="313"/>
+        <location filename="../../src/core/cli.cpp" line="278"/>
         <source>Postpone the next break</source>
         <translation>推遲下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="317"/>
+        <location filename="../../src/core/cli.cpp" line="282"/>
         <source>Duration to postpone, for example 10m, 600s, or 1h. Bare numbers are minutes.</source>
         <translation>推遲的時長，例如 10m、600s 或 1h。純數字表示分鐘。</translation>
     </message>
@@ -357,12 +362,12 @@
 <context>
     <name>HeadsUpWindow</name>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="112"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="97"/>
         <source>Break soon</source>
         <translation>即將休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="121"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="106"/>
         <source>Click to start</source>
         <translation>點擊開始</translation>
     </message>
@@ -1154,9 +1159,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="522"/>
-        <location filename="../../src/app/pref-window.cpp" line="523"/>
-        <location filename="../../src/app/pref-window.cpp" line="524"/>
+        <location filename="../../src/app/pref-window.cpp" line="518"/>
+        <location filename="../../src/app/pref-window.cpp" line="519"/>
+        <location filename="../../src/app/pref-window.cpp" line="520"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n 分鐘</numerusform>
@@ -1171,75 +1176,75 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="521"/>
+        <location filename="../../src/app/pref-window.cpp" line="517"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n 秒</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="520"/>
+        <location filename="../../src/app/pref-window.cpp" line="516"/>
         <source>Disabled</source>
         <translation>禁用</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="531"/>
+        <location filename="../../src/app/pref-window.cpp" line="526"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation>在中鍵托盤圖標後，立刻開始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="536"/>
+        <location filename="../../src/app/pref-window.cpp" line="531"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation>在雙擊托盤圖標後，立刻開始下一次休息</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="614"/>
+        <location filename="../../src/app/pref-window.cpp" line="609"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="615"/>
+        <location filename="../../src/app/pref-window.cpp" line="610"/>
         <source>Discard</source>
         <translation>放棄</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="616"/>
+        <location filename="../../src/app/pref-window.cpp" line="611"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="653"/>
+        <location filename="../../src/app/pref-window.cpp" line="648"/>
         <source>Select Sound File</source>
         <translation>選取聲音文件</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="654"/>
+        <location filename="../../src/app/pref-window.cpp" line="649"/>
         <source>Sound Files (*.mp3 *.wav *.ogg *.flac *.m4a)</source>
         <translation>聲音文件 (*.mp3 *.wav *.ogg *.flac *.m4a)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="664"/>
-        <location filename="../../src/app/pref-window.cpp" line="685"/>
+        <location filename="../../src/app/pref-window.cpp" line="659"/>
+        <location filename="../../src/app/pref-window.cpp" line="680"/>
         <source>Error</source>
         <translation>錯誤</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="665"/>
+        <location filename="../../src/app/pref-window.cpp" line="660"/>
         <source>Failed to save a copy of the selected sound file.</source>
         <translation>保存所選的聲音文件失敗。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="674"/>
+        <location filename="../../src/app/pref-window.cpp" line="669"/>
         <source>Select Background Image</source>
         <translation>選擇背景圖片</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="675"/>
+        <location filename="../../src/app/pref-window.cpp" line="670"/>
         <source>Image Files (*.png *.jpg *.jpeg *.bmp *.webp)</source>
         <translation>圖片文件 (*.png *.jpg *.jpeg *.bmp *.webp)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="686"/>
+        <location filename="../../src/app/pref-window.cpp" line="681"/>
         <source>Failed to save a copy of the selected image file.</source>
         <translation>保存所選的圖片文件失敗。</translation>
     </message>
@@ -1249,12 +1254,12 @@ v%1
         <translation>設置開機自啟失敗</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="611"/>
+        <location filename="../../src/app/pref-window.cpp" line="606"/>
         <source>The preferences have been modified.</source>
         <translation>偏好設置已被修改。</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="612"/>
+        <location filename="../../src/app/pref-window.cpp" line="607"/>
         <source>Do you want to save your changes?</source>
         <translation>是否保存修改？</translation>
     </message>
@@ -1315,53 +1320,53 @@ v%1
 <context>
     <name>SaneBreakApp</name>
     <message>
-        <location filename="../../src/app/app.cpp" line="167"/>
+        <location filename="../../src/app/app.cpp" line="170"/>
         <source>No further postpones are allowed.</source>
         <translation>不能再次推遲。</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="160"/>
-        <location filename="../../src/app/app.cpp" line="169"/>
+        <location filename="../../src/app/app.cpp" line="163"/>
+        <location filename="../../src/app/app.cpp" line="172"/>
         <source>OK</source>
         <translation>好的</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="157"/>
+        <location filename="../../src/app/app.cpp" line="160"/>
         <source>Cannot postpone during focus mode.</source>
         <translation>專注模式不允許推遲休息。</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="158"/>
+        <location filename="../../src/app/app.cpp" line="161"/>
         <source>End focus mode first if you want to postpone.</source>
         <translation>如需推遲，先退出專注模式。</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="166"/>
+        <location filename="../../src/app/app.cpp" line="169"/>
         <source>You have already postponed this break once.</source>
         <translation>這次休息您已經推遲過一次了。</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="204"/>
+        <location filename="../../src/app/app.cpp" line="207"/>
         <source>Are you sure to quit Sane Break?</source>
         <translation>確定退出 Sane Break？</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="205"/>
+        <location filename="../../src/app/app.cpp" line="208"/>
         <source>You can postpone the breaks instead.</source>
         <translation>你可以推遲休息而非退出。</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="207"/>
+        <location filename="../../src/app/app.cpp" line="210"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="208"/>
+        <location filename="../../src/app/app.cpp" line="211"/>
         <source>Postpone</source>
         <translation>推遲</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="209"/>
+        <location filename="../../src/app/app.cpp" line="212"/>
         <source>Yes</source>
         <translation>是的</translation>
     </message>
@@ -1369,12 +1374,12 @@ v%1
 <context>
     <name>SanePreferences</name>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="67"/>
+        <location filename="../../src/core/preferences.cpp" line="80"/>
         <source>Time for a small break</source>
         <translation>小休息時間</translation>
     </message>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="70"/>
+        <location filename="../../src/core/preferences.cpp" line="83"/>
         <source>Time for a big break</source>
         <translation>大休息時間</translation>
     </message>
@@ -1461,13 +1466,13 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="210"/>
-        <location filename="../../src/app/tray.cpp" line="237"/>
+        <location filename="../../src/app/tray.cpp" line="239"/>
         <source>big break</source>
         <translation>大休息</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="211"/>
-        <location filename="../../src/app/tray.cpp" line="237"/>
+        <location filename="../../src/app/tray.cpp" line="239"/>
         <source>small break</source>
         <translation>小休息</translation>
     </message>
@@ -1552,26 +1557,31 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="225"/>
+        <source>Paused on screen lock</source>
+        <translation type="unfinished">因屏幕鎖定而暫停</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tray.cpp" line="227"/>
         <source>Paused on battery</source>
         <translation>因電池供電而暫停</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="227"/>
+        <location filename="../../src/app/tray.cpp" line="229"/>
         <source>Paused on app running</source>
         <translation>因特定應用運行而暫停</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="229"/>
+        <location filename="../../src/app/tray.cpp" line="231"/>
         <source>Paused on idle</source>
         <translation>因用戶空閒而暫停</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="231"/>
+        <location filename="../../src/app/tray.cpp" line="233"/>
         <source>Paused on unknown monitor</source>
         <translation>因未知顯示器而暫停</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="233"/>
+        <location filename="../../src/app/tray.cpp" line="235"/>
         <source>Paused by external control</source>
         <translation>被外部控制暫停</translation>
     </message>

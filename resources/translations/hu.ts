@@ -66,12 +66,17 @@
         <translation type="unfinished">A szünet meghosszabbítva az elhalasztás ellentételezésére</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.ui" line="224"/>
+        <location filename="../../src/app/break-window.ui" line="259"/>
         <source>Lock Screen</source>
         <translation type="unfinished">Képernyő zárolása</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.ui" line="278"/>
+        <location filename="../../src/app/break-window.ui" line="345"/>
+        <source>Pause Media</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/break-window.ui" line="434"/>
         <source>Exit Force Break</source>
         <translation type="unfinished">Kényszerített szünet elhagyása</translation>
     </message>
@@ -79,12 +84,12 @@
 <context>
     <name>BreakWindow</name>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="187"/>
+        <location filename="../../src/app/break-window.cpp" line="192"/>
         <source>Break will end at: %1</source>
         <translation type="unfinished">A szünet vége: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/break-window.cpp" line="189"/>
+        <location filename="../../src/app/break-window.cpp" line="194"/>
         <source>Break has ended</source>
         <translation type="unfinished">A szünet véget ért</translation>
     </message>
@@ -92,122 +97,122 @@
 <context>
     <name>Cli</name>
     <message>
-        <location filename="../../src/core/cli.cpp" line="171"/>
+        <location filename="../../src/core/cli.cpp" line="136"/>
         <source>Show the application version</source>
         <translation type="unfinished">Alkalmazás verziójának megjelenítése</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="176"/>
+        <location filename="../../src/core/cli.cpp" line="141"/>
         <source>Show this help text</source>
         <translation type="unfinished">Súgó szöveg megjelenítése</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="233"/>
+        <location filename="../../src/core/cli.cpp" line="198"/>
         <source>Start the next break immediately</source>
         <translation type="unfinished">Következő szünet azonnali indítása</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="236"/>
+        <location filename="../../src/core/cli.cpp" line="201"/>
         <source>Start the next big break immediately</source>
         <translation type="unfinished">Következő nagy szünet azonnali indítása</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="239"/>
+        <location filename="../../src/core/cli.cpp" line="204"/>
         <source>Pause breaks by external control</source>
         <translation type="unfinished">Szünetek szüneteltetése külső vezérléssel</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="242"/>
+        <location filename="../../src/core/cli.cpp" line="207"/>
         <source>Resume breaks paused by external control</source>
         <translation type="unfinished">Külső vezérléssel szüneteltetett szünetek folytatása</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="245"/>
+        <location filename="../../src/core/cli.cpp" line="210"/>
         <source>Enable breaks by clearing all pause reasons</source>
         <translation type="unfinished">Szünetek engedélyezése az összes szüneteltetési ok törlésével</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="249"/>
+        <location filename="../../src/core/cli.cpp" line="214"/>
         <source>Show current break status</source>
         <translation type="unfinished">Jelenlegi szünet állapotának megjelenítése</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="257"/>
+        <location filename="../../src/core/cli.cpp" line="222"/>
         <source>Manage meeting or presentation mode</source>
         <translation type="unfinished">Találkozó vagy prezentációs mód kezelése</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="262"/>
+        <location filename="../../src/core/cli.cpp" line="227"/>
         <source>Start meeting mode for a duration</source>
         <translation type="unfinished">Találkozó mód indítása egy meghatározott időtartamra</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="265"/>
+        <location filename="../../src/core/cli.cpp" line="230"/>
         <source>Meeting duration, for example 45m, 2700s, or 1h</source>
         <translation type="unfinished">Találkozó időtartama, például 45p, 2700mp vagy 1ó</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="269"/>
+        <location filename="../../src/core/cli.cpp" line="234"/>
         <source>Meeting reason</source>
         <translation type="unfinished">Találkozó oka</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="272"/>
+        <location filename="../../src/core/cli.cpp" line="237"/>
         <source>End meeting mode</source>
         <translation type="unfinished">Találkozó mód befejezése</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="275"/>
+        <location filename="../../src/core/cli.cpp" line="240"/>
         <source>Start a break immediately</source>
         <translation type="unfinished">Szünet azonnali indítása</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="278"/>
+        <location filename="../../src/core/cli.cpp" line="243"/>
         <source>Schedule the next break after this duration</source>
         <translation type="unfinished">Következő szünet ütemezése ezen időtartam után</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="283"/>
+        <location filename="../../src/core/cli.cpp" line="248"/>
         <source>Extend the current meeting</source>
         <translation type="unfinished">Jelenlegi találkozó meghosszabbítása</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="287"/>
+        <location filename="../../src/core/cli.cpp" line="252"/>
         <source>Duration to extend, for example 10m, 600s, or 1h</source>
         <translation type="unfinished">Meghosszabbítás időtartama, például 10p, 600mp vagy 1ó</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="294"/>
+        <location filename="../../src/core/cli.cpp" line="259"/>
         <source>Manage focus mode</source>
         <translation type="unfinished">Fókusz mód kezelése</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="299"/>
+        <location filename="../../src/core/cli.cpp" line="264"/>
         <source>Start focus mode for a duration</source>
         <translation type="unfinished">Fókusz mód indítása egy meghatározott időtartamra</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="302"/>
+        <location filename="../../src/core/cli.cpp" line="267"/>
         <source>Focus duration, for example 50m, 3000s, or 1h</source>
         <translation type="unfinished">Fókusz időtartama, például 50p, 3000mp vagy 1ó</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="306"/>
+        <location filename="../../src/core/cli.cpp" line="271"/>
         <source>Focus reason</source>
         <translation type="unfinished">Fókuszálás oka</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="309"/>
+        <location filename="../../src/core/cli.cpp" line="274"/>
         <source>End focus mode</source>
         <translation type="unfinished">Fókusz mód befejezése</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="313"/>
+        <location filename="../../src/core/cli.cpp" line="278"/>
         <source>Postpone the next break</source>
         <translation type="unfinished">Következő szünet elhalasztása</translation>
     </message>
     <message>
-        <location filename="../../src/core/cli.cpp" line="317"/>
+        <location filename="../../src/core/cli.cpp" line="282"/>
         <source>Duration to postpone, for example 10m, 600s, or 1h. Bare numbers are minutes.</source>
         <translation type="unfinished">Elhalasztás időtartama, például 10p, 600mp vagy 1ó. A puszta számok perceket jelentenek.</translation>
     </message>
@@ -357,12 +362,12 @@
 <context>
     <name>HeadsUpWindow</name>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="112"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="97"/>
         <source>Break soon</source>
         <translation type="unfinished">Hamarosan szünet</translation>
     </message>
     <message>
-        <location filename="../../src/app/heads-up-window.cpp" line="121"/>
+        <location filename="../../src/app/heads-up-window.cpp" line="106"/>
         <source>Click to start</source>
         <translation type="unfinished">Kattintson az indításhoz</translation>
     </message>
@@ -1154,9 +1159,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="522"/>
-        <location filename="../../src/app/pref-window.cpp" line="523"/>
-        <location filename="../../src/app/pref-window.cpp" line="524"/>
+        <location filename="../../src/app/pref-window.cpp" line="518"/>
+        <location filename="../../src/app/pref-window.cpp" line="519"/>
+        <location filename="../../src/app/pref-window.cpp" line="520"/>
         <source>%n min</source>
         <translation type="unfinished">
             <numerusform>%n perc</numerusform>
@@ -1171,75 +1176,75 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="521"/>
+        <location filename="../../src/app/pref-window.cpp" line="517"/>
         <source>%n sec</source>
         <translation type="unfinished">
             <numerusform>%n mp</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="520"/>
+        <location filename="../../src/app/pref-window.cpp" line="516"/>
         <source>Disabled</source>
         <translation type="unfinished">Letiltva</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="531"/>
+        <location filename="../../src/app/pref-window.cpp" line="526"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation type="unfinished">Következő szünet indítása a tálca ikon középső gombbal történő kattintásával</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="536"/>
+        <location filename="../../src/app/pref-window.cpp" line="531"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation type="unfinished">Következő szünet indítása a tálca ikon dupla kattintásával</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="614"/>
+        <location filename="../../src/app/pref-window.cpp" line="609"/>
         <source>Save</source>
         <translation type="unfinished">Mentés</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="615"/>
+        <location filename="../../src/app/pref-window.cpp" line="610"/>
         <source>Discard</source>
         <translation type="unfinished">Elvetés</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="616"/>
+        <location filename="../../src/app/pref-window.cpp" line="611"/>
         <source>Cancel</source>
         <translation type="unfinished">Mégse</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="653"/>
+        <location filename="../../src/app/pref-window.cpp" line="648"/>
         <source>Select Sound File</source>
         <translation type="unfinished">Hangfájl kiválasztása</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="654"/>
+        <location filename="../../src/app/pref-window.cpp" line="649"/>
         <source>Sound Files (*.mp3 *.wav *.ogg *.flac *.m4a)</source>
         <translation type="unfinished">Hangfájlok (*.mp3 *.wav *.ogg *.flac *.m4a)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="664"/>
-        <location filename="../../src/app/pref-window.cpp" line="685"/>
+        <location filename="../../src/app/pref-window.cpp" line="659"/>
+        <location filename="../../src/app/pref-window.cpp" line="680"/>
         <source>Error</source>
         <translation type="unfinished">Hiba</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="665"/>
+        <location filename="../../src/app/pref-window.cpp" line="660"/>
         <source>Failed to save a copy of the selected sound file.</source>
         <translation type="unfinished">Nem sikerült menteni a kiválasztott hangfájl másolatát.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="674"/>
+        <location filename="../../src/app/pref-window.cpp" line="669"/>
         <source>Select Background Image</source>
         <translation type="unfinished">Háttérkép kiválasztása</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="675"/>
+        <location filename="../../src/app/pref-window.cpp" line="670"/>
         <source>Image Files (*.png *.jpg *.jpeg *.bmp *.webp)</source>
         <translation type="unfinished">Képfájlok (*.png *.jpg *.jpeg *.bmp *.webp)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="686"/>
+        <location filename="../../src/app/pref-window.cpp" line="681"/>
         <source>Failed to save a copy of the selected image file.</source>
         <translation type="unfinished">Nem sikerült menteni a kiválasztott képfájl másolatát.</translation>
     </message>
@@ -1249,12 +1254,12 @@ v%1
         <translation type="unfinished">Az automatikus indítás beállítása sikertelen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="611"/>
+        <location filename="../../src/app/pref-window.cpp" line="606"/>
         <source>The preferences have been modified.</source>
         <translation type="unfinished">A beállítások módosultak.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="612"/>
+        <location filename="../../src/app/pref-window.cpp" line="607"/>
         <source>Do you want to save your changes?</source>
         <translation type="unfinished">Szeretné menteni a változtatásokat?</translation>
     </message>
@@ -1315,53 +1320,53 @@ v%1
 <context>
     <name>SaneBreakApp</name>
     <message>
-        <location filename="../../src/app/app.cpp" line="167"/>
+        <location filename="../../src/app/app.cpp" line="170"/>
         <source>No further postpones are allowed.</source>
         <translation type="unfinished">További elhalasztás nem engedélyezett.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="160"/>
-        <location filename="../../src/app/app.cpp" line="169"/>
+        <location filename="../../src/app/app.cpp" line="163"/>
+        <location filename="../../src/app/app.cpp" line="172"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="157"/>
+        <location filename="../../src/app/app.cpp" line="160"/>
         <source>Cannot postpone during focus mode.</source>
         <translation type="unfinished">Nem halasztható el fókusz mód közben.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="158"/>
+        <location filename="../../src/app/app.cpp" line="161"/>
         <source>End focus mode first if you want to postpone.</source>
         <translation type="unfinished">Először fejezze be a fókusz módot, ha el akarja halasztani.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="166"/>
+        <location filename="../../src/app/app.cpp" line="169"/>
         <source>You have already postponed this break once.</source>
         <translation type="unfinished">Ezt a szünetet már egyszer elhalasztotta.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="204"/>
+        <location filename="../../src/app/app.cpp" line="207"/>
         <source>Are you sure to quit Sane Break?</source>
         <translation type="unfinished">Biztosan ki szeretne lépni a Sane Break-ből?</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="205"/>
+        <location filename="../../src/app/app.cpp" line="208"/>
         <source>You can postpone the breaks instead.</source>
         <translation type="unfinished">Inkább elhalaszthatja a szüneteket.</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="207"/>
+        <location filename="../../src/app/app.cpp" line="210"/>
         <source>Cancel</source>
         <translation type="unfinished">Mégse</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="208"/>
+        <location filename="../../src/app/app.cpp" line="211"/>
         <source>Postpone</source>
         <translation type="unfinished">Elhalasztás</translation>
     </message>
     <message>
-        <location filename="../../src/app/app.cpp" line="209"/>
+        <location filename="../../src/app/app.cpp" line="212"/>
         <source>Yes</source>
         <translation type="unfinished">Igen</translation>
     </message>
@@ -1369,12 +1374,12 @@ v%1
 <context>
     <name>SanePreferences</name>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="67"/>
+        <location filename="../../src/core/preferences.cpp" line="80"/>
         <source>Time for a small break</source>
         <translation>Itt az idő egy kis szünetre</translation>
     </message>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="70"/>
+        <location filename="../../src/core/preferences.cpp" line="83"/>
         <source>Time for a big break</source>
         <translation>Itt az idő egy nagyobb szünetre</translation>
     </message>
@@ -1461,13 +1466,13 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="210"/>
-        <location filename="../../src/app/tray.cpp" line="237"/>
+        <location filename="../../src/app/tray.cpp" line="239"/>
         <source>big break</source>
         <translation>nagy szünet</translation>
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="211"/>
-        <location filename="../../src/app/tray.cpp" line="237"/>
+        <location filename="../../src/app/tray.cpp" line="239"/>
         <source>small break</source>
         <translation>kis szünet</translation>
     </message>
@@ -1552,26 +1557,31 @@ v%1
     </message>
     <message>
         <location filename="../../src/app/tray.cpp" line="225"/>
+        <source>Paused on screen lock</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/tray.cpp" line="227"/>
         <source>Paused on battery</source>
         <translation type="unfinished">Szüneteltetve akkumulátorról</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="227"/>
+        <location filename="../../src/app/tray.cpp" line="229"/>
         <source>Paused on app running</source>
         <translation type="unfinished">Szüneteltetve futó alkalmazás miatt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="229"/>
+        <location filename="../../src/app/tray.cpp" line="231"/>
         <source>Paused on idle</source>
         <translation type="unfinished">Szüneteltetve tétlenség miatt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="231"/>
+        <location filename="../../src/app/tray.cpp" line="233"/>
         <source>Paused on unknown monitor</source>
         <translation type="unfinished">Szüneteltetve ismeretlen monitor miatt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tray.cpp" line="233"/>
+        <location filename="../../src/app/tray.cpp" line="235"/>
         <source>Paused by external control</source>
         <translation type="unfinished">Szüneteltetve külső vezérlés által</translation>
     </message>
