@@ -14,7 +14,7 @@ class HeadsUpWindow : public QWidget {
   Q_PROPERTY(qreal progress MEMBER m_progress NOTIFY progressChanged)
 
  public:
-  HeadsUpWindow(int totalSeconds, QColor bgColor, QColor highlightColor,
+  HeadsUpWindow(int totalSeconds, QColor backgroundColor, QColor flashColor,
                 QColor textColor, QWidget* parent = nullptr);
   void initSize(QScreen* screen);
   void setTime(int remainingSeconds);

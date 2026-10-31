@@ -112,9 +112,9 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget* parent)
   m_progressAnim = new QPropertyAnimation(ui->progressBar, "value", this);
   m_totalSeconds = data.totalSeconds;
 
-  int baseDuration = data.theme.flashAnimationDuration;
+  int baseDuration = data.flashAnimationDuration;
   if (baseDuration <= 0) {
-    setColor(data.theme.mainBackground);
+    setColor(data.theme.background);
     return;
   }
   auto* bgAnimGroup = new QSequentialAnimationGroup(this);
@@ -123,17 +123,17 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget* parent)
   // Flash burst
   for (int i = 0; i < flashCount; ++i) {
     auto* flash = new QPropertyAnimation(this, "color");
-    flash->setStartValue(data.theme.highlightBackground);
-    flash->setEndValue(data.theme.mainBackground);
+    flash->setStartValue(data.theme.flash);
+    flash->setEndValue(data.theme.background);
     flash->setDuration(baseDuration);
     bgAnimGroup->addAnimation(flash);
   }
 
   // Fade to semi-transparent quiet state
-  QColor quietColor = data.theme.mainBackground;
+  QColor quietColor = data.theme.background;
   quietColor.setAlphaF(quietColor.alphaF() * 0.5);
   auto* fadeOut = new QPropertyAnimation(this, "color");
-  fadeOut->setStartValue(data.theme.mainBackground);
+  fadeOut->setStartValue(data.theme.background);
   fadeOut->setEndValue(quietColor);
   fadeOut->setDuration(500);
   bgAnimGroup->addAnimation(fadeOut);
@@ -144,7 +144,7 @@ BreakWindow::BreakWindow(BreakWindowData data, QWidget* parent)
   // Fade back to prepare for next flash burst
   auto* fadeIn = new QPropertyAnimation(this, "color");
   fadeIn->setStartValue(quietColor);
-  fadeIn->setEndValue(data.theme.mainBackground);
+  fadeIn->setEndValue(data.theme.background);
   fadeIn->setDuration(300);
   bgAnimGroup->addAnimation(fadeIn);
 
@@ -214,7 +214,7 @@ void BreakWindow::showFullScreen() {
     windowHandle()->setFlag(Qt::WindowTransparentForInput, false);
   }
   if (m_bgAnim) m_bgAnim->stop();
-  setProperty("color", m_data.theme.mainBackground);
+  setProperty("color", m_data.theme.background);
 
   ui->breakLabel->setText(m_data.message.fullScreen);
   ui->progressBar->setVisible(m_data.show.prograssBar);
@@ -276,7 +276,7 @@ void BreakWindow::showFlashPrompt() {
   if (m_bgAnim) {
     m_bgAnim->start();
   } else {
-    setColor(m_data.theme.mainBackground);
+    setColor(m_data.theme.background);
   }
 
   ui->breakLabel->setText(m_data.message.prompt);

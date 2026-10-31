@@ -179,9 +179,9 @@ class TestScreenshot : public QObject {
   }
 
   void headsUpWindow() {
-    auto* window = new HeadsUpWindow(30, prefs->backgroundColor->get(),
-                                     prefs->smallHighlightColor->get(),
-                                     prefs->messageColor->get());
+    auto* window =
+        new HeadsUpWindow(30, prefs->smallBackgroundColor->get(),
+                          prefs->smallFlashColor->get(), prefs->messageColor->get());
     window->setAttribute(Qt::WA_DeleteOnClose, false);
     window->show();
     QApplication::processEvents();

@@ -15,17 +15,17 @@
 #include <QWindow>
 #include <algorithm>
 
-HeadsUpWindow::HeadsUpWindow(int totalSeconds, QColor bgColor, QColor highlightColor,
-                             QColor textColor, QWidget* parent)
+HeadsUpWindow::HeadsUpWindow(int totalSeconds, QColor backgroundColor,
+                             QColor flashColor, QColor textColor, QWidget* parent)
     : QWidget(parent),
       m_totalSeconds(std::max(1, totalSeconds)),
       m_textColor(textColor) {
-  // Static fill color blends background toward highlight, 75/25
+  // Static fill color blends background toward the flash color, 75/25
   m_fillColor =
-      QColor::fromRgbF(0.75 * bgColor.redF() + 0.25 * highlightColor.redF(),
-                       0.75 * bgColor.greenF() + 0.25 * highlightColor.greenF(),
-                       0.75 * bgColor.blueF() + 0.25 * highlightColor.blueF(),
-                       0.75 * bgColor.alphaF() + 0.25 * highlightColor.alphaF());
+      QColor::fromRgbF(0.75 * backgroundColor.redF() + 0.25 * flashColor.redF(),
+                       0.75 * backgroundColor.greenF() + 0.25 * flashColor.greenF(),
+                       0.75 * backgroundColor.blueF() + 0.25 * flashColor.blueF(),
+                       0.75 * backgroundColor.alphaF() + 0.25 * flashColor.alphaF());
   setAttribute(Qt::WA_TranslucentBackground);
   setAttribute(Qt::WA_ShowWithoutActivating);
   setAttribute(Qt::WA_MacAlwaysShowToolWindow);

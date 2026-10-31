@@ -1342,12 +1342,26 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
              </widget>
             </item>
             <item>
-             <layout class="QGridLayout" name="gridLayout_11" columnstretch="1,2,1,2">
+             <widget class="QLabel" name="label_smallTheme">
+              <property name="text">
+               <string>&lt;h4&gt;Small break&lt;/h4&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayout_smallTheme" columnstretch="1,2,1,2">
               <property name="horizontalSpacing">
                <number>12</number>
               </property>
-              <item row="1" column="3">
-               <widget class="ColorEdit" name="bigHighlight">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_smallBackgroundColor">
+                <property name="text">
+                 <string>Background color</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="ColorEdit" name="smallBackgroundColor">
                 <property name="text">
                  <string/>
                 </property>
@@ -1356,27 +1370,163 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                 </property>
                </widget>
               </item>
-              <item row="1" column="1">
-               <widget class="ColorEdit" name="smallHighlight">
+              <item row="0" column="2">
+               <widget class="QLabel" name="label_smallFlash">
                 <property name="text">
-                 <string/>
-                </property>
-                <property name="clearButtonEnabled">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="ColorEdit" name="countDownColor">
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="clearButtonEnabled">
-                 <bool>false</bool>
+                 <string>Prompt flash</string>
                 </property>
                </widget>
               </item>
               <item row="0" column="3">
+               <widget class="ColorEdit" name="smallFlash">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="smallBackgroundImageLayout">
+              <item>
+               <widget class="QLabel" name="smallBackgroundImageLabel">
+                <property name="text">
+                 <string>Background image</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="smallBackgroundImagePath">
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+                <property name="placeholderText">
+                 <string>None</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="browseSmallBackgroundImage">
+                <property name="text">
+                 <string>Browse</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="clearSmallBackgroundImage">
+                <property name="text">
+                 <string>Clear</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_bigTheme">
+              <property name="text">
+               <string>&lt;h4&gt;Big break&lt;/h4&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayout_bigTheme" columnstretch="1,2,1,2">
+              <property name="horizontalSpacing">
+               <number>12</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_bigBackgroundColor">
+                <property name="text">
+                 <string>Background color</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="ColorEdit" name="bigBackgroundColor">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLabel" name="label_bigFlash">
+                <property name="text">
+                 <string>Prompt flash</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="ColorEdit" name="bigFlash">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="bigBackgroundImageLayout">
+              <item>
+               <widget class="QLabel" name="bigBackgroundImageLabel">
+                <property name="text">
+                 <string>Background image</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="bigBackgroundImagePath">
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+                <property name="placeholderText">
+                 <string>None</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="browseBigBackgroundImage">
+                <property name="text">
+                 <string>Browse</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="clearBigBackgroundImage">
+                <property name="text">
+                 <string>Clear</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_sharedTheme">
+              <property name="text">
+               <string>&lt;h4&gt;Shared&lt;/h4&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QGridLayout" name="gridLayout_sharedTheme" columnstretch="1,2,1,2">
+              <property name="horizontalSpacing">
+               <number>12</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_messageColor">
+                <property name="text">
+                 <string>Message</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
                <widget class="ColorEdit" name="messageColor">
                 <property name="text">
                  <string/>
@@ -1387,82 +1537,19 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
                </widget>
               </item>
               <item row="0" column="2">
-               <widget class="QLabel" name="label_43">
-                <property name="text">
-                 <string>Message</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_42">
-                <property name="text">
-                 <string>Background</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_44">
+               <widget class="QLabel" name="label_countDownColor">
                 <property name="text">
                  <string>Count down</string>
                 </property>
                </widget>
               </item>
-              <item row="0" column="1">
-               <widget class="ColorEdit" name="backgroundColor">
+              <item row="0" column="3">
+               <widget class="ColorEdit" name="countDownColor">
                 <property name="text">
                  <string/>
                 </property>
                 <property name="clearButtonEnabled">
                  <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="2">
-               <widget class="QLabel" name="label_41">
-                <property name="text">
-                 <string>Big break</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_30">
-                <property name="text">
-                 <string>Small break</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="backgroundImageLayout">
-              <item>
-               <widget class="QLabel" name="backgroundImageLabel">
-                <property name="text">
-                 <string>Background image</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="backgroundImagePath">
-                <property name="readOnly">
-                 <bool>true</bool>
-                </property>
-                <property name="placeholderText">
-                 <string>None</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="browseBackgroundImage">
-                <property name="text">
-                 <string>Browse</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="clearBackgroundImage">
-                <property name="text">
-                 <string>Clear</string>
                 </property>
                </widget>
               </item>

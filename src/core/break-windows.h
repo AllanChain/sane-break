@@ -13,28 +13,32 @@
 #include "core/flags.h"
 #include "core/preferences.h"
 
+struct BreakWindowTheme {
+  QColor background;
+  QColor flash;
+  QColor messageColor;
+  QColor countDownColor;
+  QString backgroundImage;
+};
+struct BreakWindowShow {
+  bool prograssBar;
+  bool countdown;
+  bool clock;
+  bool endTime;
+  bool buttons;
+};
+struct BreakWindowMessage {
+  QString prompt;
+  QString fullScreen;
+};
+
 struct BreakWindowData {
   int totalSeconds;
   bool isPostponed = false;
-  struct {
-    QString prompt;
-    QString fullScreen;
-  } message;
-  struct {
-    QColor mainBackground;
-    QColor highlightBackground;
-    QColor messageColor;
-    QColor countDownColor;
-    int flashAnimationDuration;
-    QString backgroundImage;
-  } theme;
-  struct {
-    bool prograssBar;
-    bool countdown;
-    bool clock;
-    bool endTime;
-    bool buttons;
-  } show;
+  int flashAnimationDuration = 0;
+  BreakWindowMessage message;
+  BreakWindowTheme theme;
+  BreakWindowShow show;
 };
 
 class AbstractBreakWindows : public QObject {

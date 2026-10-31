@@ -11,6 +11,7 @@
 #include <QSettings>
 #include <QString>
 #include <QStringList>
+#include <initializer_list>
 
 namespace {
 // Validators for integer settings. Return std::nullopt when valid, otherwise a
@@ -23,6 +24,22 @@ auto nonNegativeInt = [](int v) -> std::optional<QString> {
   if (v >= 0) return std::nullopt;
   return QStringLiteral("must not be negative");
 };
+
+void migrateSettings(QSettings* settings) {
+  auto copy = [settings](const char* legacy,
+                         std::initializer_list<const char*> targets) {
+    if (!settings->contains(legacy)) return;
+    for (const char* target : targets) {
+      if (settings->contains(target)) continue;
+      settings->setValue(target, settings->value(legacy));
+    }
+  };
+  copy("theme/background", {"theme/small-background", "theme/big-background"});
+  copy("theme/background-image",
+       {"theme/small-background-image", "theme/big-background-image"});
+  copy("theme/small-bg", {"theme/small-flash"});
+  copy("theme/big-bg", {"theme/big-flash"});
+}
 }  // namespace
 
 SanePreferences* SanePreferences::createDefault(QObject* parent) {
@@ -37,6 +54,7 @@ SanePreferences* SanePreferences::createDefault(QObject* parent) {
 
 SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
     : QObject(parent), settings(settings) {
+  migrateSettings(settings);
   shownWelcome = new Setting<bool>(settings, "shown-welcome", false);
 
   smallEvery = new Setting<int>(settings, "break/small-every", 1200, positiveInt);
@@ -69,13 +87,17 @@ SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
       new Setting<QColor>(settings, "theme/count-down", QColor(236, 239, 244, 255));
   messageColor =
       new Setting<QColor>(settings, "theme/message", QColor(236, 239, 244, 255));
-  backgroundColor =
-      new Setting<QColor>(settings, "theme/background", QColor(46, 52, 64, 255));
-  smallHighlightColor =
-      new Setting<QColor>(settings, "theme/small-bg", QColor(235, 203, 139, 100));
-  bigHighlightColor =
-      new Setting<QColor>(settings, "theme/big-bg", QColor(180, 142, 173, 100));
-  backgroundImage = new Setting<QString>(settings, "theme/background-image", "");
+  smallBackgroundColor =
+      new Setting<QColor>(settings, "theme/small-background", QColor(46, 52, 64, 255));
+  bigBackgroundColor =
+      new Setting<QColor>(settings, "theme/big-background", QColor(46, 52, 64, 255));
+  smallFlashColor =
+      new Setting<QColor>(settings, "theme/small-flash", QColor(235, 203, 139, 100));
+  bigFlashColor =
+      new Setting<QColor>(settings, "theme/big-flash", QColor(180, 142, 173, 100));
+  smallBackgroundImage =
+      new Setting<QString>(settings, "theme/small-background-image", "");
+  bigBackgroundImage = new Setting<QString>(settings, "theme/big-background-image", "");
   smallMessages = new Setting<QStringList>(settings, "break/small-msg", []() {
     return QStringList({tr("Time for a small break")});
   });

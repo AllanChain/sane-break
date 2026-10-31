@@ -66,15 +66,13 @@ class BreakWindows : public AbstractBreakWindows {
   };
   std::optional<ActiveBreak> m_activeBreak;
 
-  // HeadsUpWindow constructor arguments + remaining time, remembered so
-  // hot-plugged screens get a correctly-stated heads-up pill.
+  // Heads-up window theme + remaining time, remembered so hot-plugged screens get a
+  // correctly-stated heads-up pill.
   struct ActiveHeadsUp {
     int totalSeconds = 0;
     BreakType breakType = BreakType::Small;
     int remaining = 0;
-    QColor bgColor;
-    QColor highlightColor;
-    QColor textColor;
+    BreakWindowTheme theme;
   };
   std::optional<ActiveHeadsUp> m_activeHeadsUp;
 

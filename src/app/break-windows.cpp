@@ -114,69 +114,79 @@ BreakWindows::BreakWindows(QObject* parent) : AbstractBreakWindows(parent) {
 #endif
 }
 
-BreakWindowData BreakWindows::createData(BreakType type, SanePreferences* preferences,
-                                         int breakDuration, bool isPostponed) {
-  int flashSpeed = preferences->flashSpeed->get();
-  int flashAnimationDuration = flashSpeed > 0 ? 60000 / flashSpeed : 0;
-  QString promptMessage = type == BreakType::Big
-                              ? preferences->bigMessages->defaultValue()[0]
-                              : preferences->smallMessages->defaultValue()[0];
-  QStringList messagesToRoll = type == BreakType::Big
-                                   ? preferences->bigMessages->get()
-                                   : preferences->smallMessages->get();
-  QString fullScreenMessage = "";
+QString rollMessages(const QStringList messagesToRoll) {
   if (!messagesToRoll.empty()) {
     int randomIndex = QRandomGenerator::global()->bounded(messagesToRoll.size());
-    fullScreenMessage = messagesToRoll[randomIndex];
+    return messagesToRoll[randomIndex];
   }
+  return "";
+}
+
+BreakWindowMessage breakMessage(BreakType type, SanePreferences* preferences) {
   if (type == BreakType::Small) {
     return {
-        .totalSeconds = breakDuration,
-        .isPostponed = isPostponed,
-        .message = {.prompt = promptMessage, .fullScreen = fullScreenMessage},
-        .theme =
-            {
-                .mainBackground = preferences->backgroundColor->get(),
-                .highlightBackground = preferences->smallHighlightColor->get(),
-                .messageColor = preferences->messageColor->get(),
-                .countDownColor = preferences->countDownColor->get(),
-                .flashAnimationDuration = flashAnimationDuration,
-                .backgroundImage = preferences->backgroundImage->get(),
-            },
-        .show =
-            {
-                .prograssBar = preferences->smallBreakShowProgressBar->get(),
-                .countdown = preferences->smallBreakShowCountdown->get(),
-                .clock = preferences->smallBreakShowClock->get(),
-                .endTime = preferences->smallBreakShowEndTime->get(),
-                .buttons = preferences->smallBreakShowButtons->get(),
-            },
+        .prompt = preferences->smallMessages->defaultValue()[0],
+        .fullScreen = rollMessages(preferences->smallMessages->get()),
     };
-
   } else {
     return {
-        .totalSeconds = breakDuration,
-        .isPostponed = isPostponed,
-        .message = {.prompt = promptMessage, .fullScreen = fullScreenMessage},
-        .theme =
-            {
-                .mainBackground = preferences->backgroundColor->get(),
-                .highlightBackground = preferences->bigHighlightColor->get(),
-                .messageColor = preferences->messageColor->get(),
-                .countDownColor = preferences->countDownColor->get(),
-                .flashAnimationDuration = flashAnimationDuration,
-                .backgroundImage = preferences->backgroundImage->get(),
-            },
-        .show =
-            {
-                .prograssBar = preferences->bigBreakShowProgressBar->get(),
-                .countdown = preferences->bigBreakShowCountdown->get(),
-                .clock = preferences->bigBreakShowClock->get(),
-                .endTime = preferences->bigBreakShowEndTime->get(),
-                .buttons = preferences->bigBreakShowButtons->get(),
-            },
+        .prompt = preferences->bigMessages->defaultValue()[0],
+        .fullScreen = rollMessages(preferences->bigMessages->get()),
     };
   }
+}
+
+BreakWindowTheme breakTheme(BreakType type, SanePreferences* preferences) {
+  if (type == BreakType::Small) {
+    return {
+        .background = preferences->smallBackgroundColor->get(),
+        .flash = preferences->smallFlashColor->get(),
+        .messageColor = preferences->messageColor->get(),
+        .countDownColor = preferences->countDownColor->get(),
+        .backgroundImage = preferences->smallBackgroundImage->get(),
+    };
+  } else {
+    return {
+        .background = preferences->bigBackgroundColor->get(),
+        .flash = preferences->bigFlashColor->get(),
+        .messageColor = preferences->messageColor->get(),
+        .countDownColor = preferences->countDownColor->get(),
+        .backgroundImage = preferences->bigBackgroundImage->get(),
+    };
+  }
+}
+
+BreakWindowShow breakShow(BreakType type, SanePreferences* preferences) {
+  if (type == BreakType::Small) {
+    return {
+        .prograssBar = preferences->smallBreakShowProgressBar->get(),
+        .countdown = preferences->smallBreakShowCountdown->get(),
+        .clock = preferences->smallBreakShowClock->get(),
+        .endTime = preferences->smallBreakShowEndTime->get(),
+        .buttons = preferences->smallBreakShowButtons->get(),
+    };
+  } else {
+    return {
+        .prograssBar = preferences->bigBreakShowProgressBar->get(),
+        .countdown = preferences->bigBreakShowCountdown->get(),
+        .clock = preferences->bigBreakShowClock->get(),
+        .endTime = preferences->bigBreakShowEndTime->get(),
+        .buttons = preferences->bigBreakShowButtons->get(),
+    };
+  }
+}
+
+BreakWindowData BreakWindows::createData(BreakType type, SanePreferences* preferences,
+                                         int breakDuration, bool isPostponed) {
+  const int flashSpeed = preferences->flashSpeed->get();
+  return {
+      .totalSeconds = breakDuration,
+      .isPostponed = isPostponed,
+      .flashAnimationDuration = flashSpeed > 0 ? 60000 / flashSpeed : 0,
+      .message = breakMessage(type, preferences),
+      .theme = breakTheme(type, preferences),
+      .show = breakShow(type, preferences),
+  };
 }
 void BreakWindows::create(BreakWindowData data) {
   m_activeBreak.emplace();
@@ -268,15 +278,13 @@ void BreakWindows::showHeadsUp(int totalSeconds, BreakType breakType,
     hideHeadsUp();
   }
   if (!m_headsUpWindows.isEmpty()) return;
+  // The pill tints its fill with the prompt flash colour, so it shares the theme
+  // selector with the full-screen windows.
   m_activeHeadsUp.emplace(ActiveHeadsUp{
       .totalSeconds = totalSeconds,
       .breakType = breakType,
       .remaining = totalSeconds,
-      .bgColor = preferences->backgroundColor->get(),
-      .highlightColor = breakType == BreakType::Small
-                            ? preferences->smallHighlightColor->get()
-                            : preferences->bigHighlightColor->get(),
-      .textColor = preferences->messageColor->get(),
+      .theme = breakTheme(breakType, preferences),
   });
   m_screenDebounce->stop();
   QList<QScreen*> screens = QApplication::screens();
@@ -338,9 +346,9 @@ void BreakWindows::createOnScreen(QScreen* screen) {
 
 void BreakWindows::createHeadsUpOnScreen(QScreen* screen) {
   if (!isValidScreen(screen)) return;
-  auto* w =
-      new HeadsUpWindow(m_activeHeadsUp->totalSeconds, m_activeHeadsUp->bgColor,
-                        m_activeHeadsUp->highlightColor, m_activeHeadsUp->textColor);
+  auto* w = new HeadsUpWindow(
+      m_activeHeadsUp->totalSeconds, m_activeHeadsUp->theme.background,
+      m_activeHeadsUp->theme.flash, m_activeHeadsUp->theme.messageColor);
   m_headsUpWindows.append(w);
   w->initSize(screen);
 #ifdef Q_OS_LINUX

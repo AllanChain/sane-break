@@ -193,7 +193,11 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
     ui->autoCloseWindowAfterBigBreak->setEnabled(enabled);
     // Interface tab
     ui->bigBreakMessages->setEnabled(enabled);
-    ui->bigHighlight->setEnabled(enabled);
+    ui->bigBackgroundColor->setEnabled(enabled);
+    ui->bigFlash->setEnabled(enabled);
+    ui->bigBackgroundImagePath->setEnabled(enabled);
+    ui->browseBigBackgroundImage->setEnabled(enabled);
+    ui->clearBigBackgroundImage->setEnabled(enabled);
     ui->bigBreakShowProgressBar->setEnabled(enabled);
     ui->bigBreakShowCountdown->setEnabled(enabled);
     ui->bigBreakShowClock->setEnabled(enabled);
@@ -305,17 +309,19 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
       new PrefController<QSpinBox, int>(ui->flashSpeedBox, preferences->flashSpeed));
 
   controllers->add(PrefGroup::Interface,
-                   new PrefController<QLineEdit, QColor>(ui->backgroundColor,
-                                                         preferences->backgroundColor));
+                   new PrefController<QLineEdit, QColor>(
+                       ui->smallBackgroundColor, preferences->smallBackgroundColor));
+  controllers->add(PrefGroup::Interface,
+                   new PrefController<QLineEdit, QColor>(
+                       ui->bigBackgroundColor, preferences->bigBackgroundColor));
+  controllers->add(PrefGroup::Interface,
+                   new PrefController<QLineEdit, QColor>(ui->smallFlash,
+                                                         preferences->smallFlashColor));
+  controllers->add(PrefGroup::Interface, new PrefController<QLineEdit, QColor>(
+                                             ui->bigFlash, preferences->bigFlashColor));
   controllers->add(PrefGroup::Interface,
                    new PrefController<QLineEdit, QColor>(ui->messageColor,
                                                          preferences->messageColor));
-  controllers->add(PrefGroup::Interface,
-                   new PrefController<QLineEdit, QColor>(
-                       ui->smallHighlight, preferences->smallHighlightColor));
-  controllers->add(PrefGroup::Interface,
-                   new PrefController<QLineEdit, QColor>(
-                       ui->bigHighlight, preferences->bigHighlightColor));
   controllers->add(PrefGroup::Interface,
                    new PrefController<QLineEdit, QColor>(ui->countDownColor,
                                                          preferences->countDownColor));
@@ -359,13 +365,22 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
                    new PrefController<QCheckBox, bool>(
                        ui->bigBreakShowButtons, preferences->bigBreakShowButtons));
 
+  controllers->add(PrefGroup::Interface, new PrefController<QLineEdit, QString>(
+                                             ui->smallBackgroundImagePath,
+                                             preferences->smallBackgroundImage));
   controllers->add(PrefGroup::Interface,
                    new PrefController<QLineEdit, QString>(
-                       ui->backgroundImagePath, preferences->backgroundImage));
-  connect(ui->browseBackgroundImage, &QPushButton::pressed, this,
-          &PreferenceWindow::browseForBackgroundImage);
-  connect(ui->clearBackgroundImage, &QPushButton::pressed, this,
-          [this]() { ui->backgroundImagePath->setText(""); });
+                       ui->bigBackgroundImagePath, preferences->bigBackgroundImage));
+  connect(ui->browseSmallBackgroundImage, &QPushButton::pressed, this, [this]() {
+    browseForBackgroundImage(ui->smallBackgroundImagePath, BreakType::Small);
+  });
+  connect(ui->clearSmallBackgroundImage, &QPushButton::pressed, this,
+          [this]() { ui->smallBackgroundImagePath->setText(""); });
+  connect(ui->browseBigBackgroundImage, &QPushButton::pressed, this, [this]() {
+    browseForBackgroundImage(ui->bigBackgroundImagePath, BreakType::Big);
+  });
+  connect(ui->clearBigBackgroundImage, &QPushButton::pressed, this,
+          [this]() { ui->bigBackgroundImagePath->setText(""); });
 
   /***************************************************************************
    *                                                                         *
@@ -643,46 +658,43 @@ void PreferenceWindow::openWeblate() {
   QDesktopServices::openUrl(QUrl("https://hosted.weblate.org/engage/sane-break/"));
 }
 
+QString PreferenceWindow::importFileToAppData(const QString& file,
+                                              const QString& subdirectory) {
+  QString dir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
+                "/" + subdirectory;
+  QDir().mkpath(dir);
+
+  QString destPath = dir + "/" + QFileInfo(file).fileName();
+  if (QFile::exists(destPath)) QFile::remove(destPath);
+  if (!QFile::copy(file, destPath)) {
+    QMessageBox::warning(this, tr("Error"),
+                         tr("Failed to save a copy of the selected file."));
+    return {};
+  }
+  return destPath;
+}
+
 void PreferenceWindow::browseForSound(QComboBox* comboBox) {
   QString file =
       QFileDialog::getOpenFileName(this, tr("Select Sound File"), QString(),
                                    tr("Sound Files (*.mp3 *.wav *.ogg *.flac *.m4a)"));
   if (file.isEmpty()) return;
 
-  QString soundDir =
-      QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/sounds";
-  QDir().mkpath(soundDir);
-
-  QString destPath = soundDir + "/" + QFileInfo(file).fileName();
-  if (QFile::exists(destPath)) QFile::remove(destPath);
-  if (!QFile::copy(file, destPath)) {
-    QMessageBox::warning(this, tr("Error"),
-                         tr("Failed to save a copy of the selected sound file."));
-    return;
-  }
-
+  QString destPath = importFileToAppData(file, "sounds");
+  if (destPath.isEmpty()) return;
   comboBox->setEditText(QUrl::fromLocalFile(destPath).toString());
 }
 
-void PreferenceWindow::browseForBackgroundImage() {
+void PreferenceWindow::browseForBackgroundImage(QLineEdit* target, BreakType type) {
   QString file =
       QFileDialog::getOpenFileName(this, tr("Select Background Image"), QString(),
                                    tr("Image Files (*.png *.jpg *.jpeg *.bmp *.webp)"));
   if (file.isEmpty()) return;
 
-  QString imageDir =
-      QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/images";
-  QDir().mkpath(imageDir);
-
-  QString destPath = imageDir + "/" + QFileInfo(file).fileName();
-  if (QFile::exists(destPath)) QFile::remove(destPath);
-  if (!QFile::copy(file, destPath)) {
-    QMessageBox::warning(this, tr("Error"),
-                         tr("Failed to save a copy of the selected image file."));
-    return;
-  }
-
-  ui->backgroundImagePath->setText(QUrl::fromLocalFile(destPath).toString());
+  QString destPath =
+      importFileToAppData(file, type == BreakType::Big ? "images/big" : "images/small");
+  if (destPath.isEmpty()) return;
+  target->setText(QUrl::fromLocalFile(destPath).toString());
 }
 
 void PreferenceWindow::openBreakWindowPreview() {

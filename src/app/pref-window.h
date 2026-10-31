@@ -288,7 +288,10 @@ class PreferenceWindow : public QMainWindow {
   void openSourceCode();
   void openWeblate();
   void browseForSound(QComboBox* comboBox);
-  void browseForBackgroundImage();
+  void browseForBackgroundImage(QLineEdit* target, BreakType type);
+  // Copies `file` into `<app data>/<subdirectory>` and returns the destination path,
+  // or an empty string after warning the user.
+  QString importFileToAppData(const QString& file, const QString& subdirectory);
   void openBreakWindowPreview();
   void closeEvent(QCloseEvent* event);
   void showEvent(QShowEvent* event);

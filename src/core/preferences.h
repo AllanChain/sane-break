@@ -144,9 +144,12 @@ class SanePreferences : public QObject {
   Setting<int>* flashSpeed;
   Setting<QColor>* messageColor;
   Setting<QColor>* countDownColor;
-  Setting<QColor>* backgroundColor;
-  Setting<QColor>* smallHighlightColor;
-  Setting<QColor>* bigHighlightColor;
+  Setting<QColor>* smallBackgroundColor;
+  Setting<QColor>* bigBackgroundColor;
+  Setting<QColor>* smallFlashColor;
+  Setting<QColor>* bigFlashColor;
+  Setting<QString>* smallBackgroundImage;
+  Setting<QString>* bigBackgroundImage;
   Setting<QStringList>* smallMessages;
   Setting<QStringList>* bigMessages;
 
@@ -160,7 +163,6 @@ class SanePreferences : public QObject {
   Setting<bool>* bigBreakShowClock;
   Setting<bool>* bigBreakShowEndTime;
   Setting<bool>* bigBreakShowButtons;
-  Setting<QString>* backgroundImage;
 
   Setting<int>* pauseOnIdleFor;
   Setting<int>* resetAfterPause;
