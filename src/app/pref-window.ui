@@ -1113,7 +1113,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
             <item>
              <widget class="QLabel" name="label_27">
               <property name="text">
-               <string>&lt;h3&gt;Prompt Appearance&lt;/h3&gt;</string>
+               <string>&lt;h3&gt;Flashing Prompt&lt;/h3&gt;</string>
               </property>
              </widget>
             </item>
@@ -1170,6 +1170,13 @@ QPushButton[flat=&quot;true&quot;]:checked {
              </layout>
             </item>
             <item>
+             <widget class="QLabel" name="label_45">
+              <property name="text">
+               <string>&lt;h3&gt;Full-Screen Break&lt;/h3&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <layout class="QGridLayout" name="gridLayout">
               <property name="horizontalSpacing">
                <number>12</number>
@@ -1190,7 +1197,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
               <item row="0" column="1">
                <widget class="QLabel" name="label_34">
                 <property name="text">
-                 <string>Big break prompt messages:</string>
+                 <string>Big break messages:</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
@@ -1200,7 +1207,7 @@ QPushButton[flat=&quot;true&quot;]:checked {
               <item row="0" column="0">
                <widget class="QLabel" name="label">
                 <property name="text">
-                 <string>Small break prompt messages:</string>
+                 <string>Small break messages:</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
@@ -1227,7 +1234,10 @@ QPushButton[flat=&quot;true&quot;]:checked {
               <property name="text">
                <string>&lt;h3&gt;Components to Show&lt;/h3&gt;
 
-&lt;p&gt;User interface components to show in the prompt and full-screen window.&lt;/p&gt;</string>
+&lt;p&gt;User interface components to show in the full-screen break window. The progress bar also appears in the flashing prompt.&lt;/p&gt;</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
