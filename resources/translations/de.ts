@@ -599,14 +599,14 @@
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1843"/>
-        <location filename="../../src/app/pref-window.ui" line="1881"/>
+        <location filename="../../src/app/pref-window.ui" line="1940"/>
+        <location filename="../../src/app/pref-window.ui" line="1978"/>
         <source>Bell before breaks</source>
         <translation>Klang vor Pause</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1798"/>
-        <location filename="../../src/app/pref-window.ui" line="1923"/>
+        <location filename="../../src/app/pref-window.ui" line="1895"/>
+        <location filename="../../src/app/pref-window.ui" line="2020"/>
         <source>Bell after breaks</source>
         <translation>Klang nach Pause</translation>
     </message>
@@ -684,20 +684,18 @@
         <translation>Blink-Geschwindigkeit</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1186"/>
-        <location filename="../../src/app/pref-window.ui" line="1219"/>
+        <location filename="../../src/app/pref-window.ui" line="1193"/>
+        <location filename="../../src/app/pref-window.ui" line="1226"/>
         <source>(One line per message)</source>
         <translation>(Eine Zeile pro Nachricht)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1193"/>
         <source>Big break prompt messages:</source>
-        <translation>Nachrichten bei großer Pause:</translation>
+        <translation type="vanished">Nachrichten bei großer Pause:</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1203"/>
         <source>Small break prompt messages:</source>
-        <translation>Nachrichten bei kleiner Pause:</translation>
+        <translation type="vanished">Nachrichten bei kleiner Pause:</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="1082"/>
@@ -715,93 +713,89 @@
         <translation type="unfinished">Male</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1228"/>
         <source>&lt;h3&gt;Components to Show&lt;/h3&gt;
 
 &lt;p&gt;User interface components to show in the prompt and full-screen window.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;h3&gt;Zu zeigende Komponenten&lt;/h3&gt;
+        <translation type="obsolete">&lt;h3&gt;Zu zeigende Komponenten&lt;/h3&gt;
 
 &lt;p&gt;Benutzeroberflächenkomponenten, die in der Erinnerung und im Vollbildfenster angezeigt werden.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1253"/>
-        <location filename="../../src/app/pref-window.ui" line="1299"/>
+        <location filename="../../src/app/pref-window.ui" line="1263"/>
+        <location filename="../../src/app/pref-window.ui" line="1309"/>
         <source>Time when break ends</source>
         <translation type="unfinished">Zeitpunkt des Pausenendes</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1274"/>
-        <location filename="../../src/app/pref-window.ui" line="1320"/>
+        <location filename="../../src/app/pref-window.ui" line="1284"/>
+        <location filename="../../src/app/pref-window.ui" line="1330"/>
         <source>Countdown timer</source>
         <translation type="unfinished">Abzählzeit</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1246"/>
-        <location filename="../../src/app/pref-window.ui" line="1292"/>
+        <location filename="../../src/app/pref-window.ui" line="1256"/>
+        <location filename="../../src/app/pref-window.ui" line="1302"/>
         <source>Progress bar</source>
         <translation type="unfinished">Fortschrittsbalken</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1260"/>
-        <location filename="../../src/app/pref-window.ui" line="1306"/>
+        <location filename="../../src/app/pref-window.ui" line="1270"/>
+        <location filename="../../src/app/pref-window.ui" line="1316"/>
         <source>Clock</source>
         <translation>Uhr</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1267"/>
-        <location filename="../../src/app/pref-window.ui" line="1313"/>
+        <location filename="../../src/app/pref-window.ui" line="1277"/>
+        <location filename="../../src/app/pref-window.ui" line="1323"/>
         <source>Buttons</source>
         <translation>Knöpfe</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1329"/>
+        <location filename="../../src/app/pref-window.ui" line="1339"/>
         <source>&lt;h3&gt;Color Theme&lt;/h3&gt;
 All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</source>
         <translation>&lt;h3&gt;Farbschema&lt;/h3&gt;
 Alle Farben sind im &lt;code&gt;#AARRGGBB&lt;/code&gt;-Format.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1413"/>
         <source>Big break</source>
-        <translation>Große Pause</translation>
+        <translation type="vanished">Große Pause</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1382"/>
+        <location filename="../../src/app/pref-window.ui" line="1525"/>
         <source>Message</source>
         <translation>Nachricht</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1420"/>
         <source>Small break</source>
-        <translation>Kleine Pause</translation>
+        <translation type="vanished">Kleine Pause</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1389"/>
         <source>Background</source>
-        <translation>Hintergrund</translation>
+        <translation type="vanished">Hintergrund</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1396"/>
+        <location filename="../../src/app/pref-window.ui" line="1542"/>
         <source>Count down</source>
         <translation>Countdown</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1495"/>
+        <location filename="../../src/app/pref-window.ui" line="1592"/>
         <source>&lt;h3&gt;Pause Conditions&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;Bedingungen fürs Pausieren&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1716"/>
+        <location filename="../../src/app/pref-window.ui" line="1813"/>
         <source>Long pause threshold</source>
         <translation>Schwellenwert lange Pause</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1770"/>
+        <location filename="../../src/app/pref-window.ui" line="1867"/>
         <source>Short pause threshold</source>
         <translation>Schwellenwert kurze Pause</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2029"/>
+        <location filename="../../src/app/pref-window.ui" line="2126"/>
         <source>Let&apos;s say you&apos;ve configured it to 2 minutes. If the break is shorter than 2 minutes, the
 screen will lock 2 minutes after the break starts, provided there is no activity after the
 break. If the break is longer than 2 minutes, the screen will be locked regardless.</source>
@@ -809,17 +803,17 @@ break. If the break is longer than 2 minutes, the screen will be locked regardle
         <translation>Angenommen, 2 Minuten sind eingestellt. Wenn die Pause kürzer als 2 Minuten ist, wird der Bildschirm 2 Minuten nach Beginn der Pause gesperrt, sofern keine Aktivität stattfindet. Bei Pausen länger als 2 Minuten wird der Bildschirm unabhängig davon gesperrt.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2034"/>
+        <location filename="../../src/app/pref-window.ui" line="2131"/>
         <source>Automatic screen lock after break start</source>
         <translation>Automatische Bildschirmsperre nach Pausenbeginn</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1980"/>
+        <location filename="../../src/app/pref-window.ui" line="2077"/>
         <source>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Help translate!&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;https://hosted.weblate.org/engage/sane-break/&quot;&gt;Übersetzen helfen!&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2151"/>
+        <location filename="../../src/app/pref-window.ui" line="2248"/>
         <source>&lt;div&gt;
 &lt;span style=&quot;font-size: 26px; font-weight: bold&quot;&gt;Sane Break&lt;/span&gt;
 v%1
@@ -854,39 +848,38 @@ v%1
         <translation type="vanished">Verschiebe-Minuten</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1116"/>
         <source>&lt;h3&gt;Prompt Appearance&lt;/h3&gt;</source>
-        <translation>&lt;h3&gt;Erscheinungsbild der Benachrichtigung&lt;/h3&gt;</translation>
+        <translation type="vanished">&lt;h3&gt;Erscheinungsbild der Benachrichtigung&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1795"/>
-        <location filename="../../src/app/pref-window.ui" line="1840"/>
+        <location filename="../../src/app/pref-window.ui" line="1892"/>
+        <location filename="../../src/app/pref-window.ui" line="1937"/>
         <source>Try restart Sane Break if no sound</source>
         <translation>Versuche, Sane Break neu zu starten, wenn kein Ton vorhanden ist</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1812"/>
-        <location filename="../../src/app/pref-window.ui" line="1826"/>
-        <location filename="../../src/app/pref-window.ui" line="1888"/>
-        <location filename="../../src/app/pref-window.ui" line="1902"/>
+        <location filename="../../src/app/pref-window.ui" line="1909"/>
+        <location filename="../../src/app/pref-window.ui" line="1923"/>
+        <location filename="../../src/app/pref-window.ui" line="1985"/>
+        <location filename="../../src/app/pref-window.ui" line="1999"/>
         <source>Play</source>
         <translation>Wiedergeben</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1504"/>
+        <location filename="../../src/app/pref-window.ui" line="1601"/>
         <source>Sane Break will pause if it detects no activity for this many minutes</source>
         <extracomment>Tooltip for &quot;Pause if idle for&quot; config</extracomment>
         <translation>Sane Break pausiert, wenn es für diese Anzahl von Minuten keine Aktivität feststellt</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1507"/>
+        <location filename="../../src/app/pref-window.ui" line="1604"/>
         <source>Pause if idle for</source>
         <translation>Pausiere bei Inaktivität von</translation>
     </message>
     <message>
         <location filename="../../src/app/pref-window.ui" line="275"/>
         <location filename="../../src/app/pref-window.ui" line="531"/>
-        <location filename="../../src/app/pref-window.ui" line="1786"/>
+        <location filename="../../src/app/pref-window.ui" line="1883"/>
         <source>&lt;h3&gt;Small Breaks&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;Kleine Pausen&lt;/h3&gt;</translation>
     </message>
@@ -895,9 +888,9 @@ v%1
         <location filename="../../src/app/pref-window.ui" line="436"/>
         <location filename="../../src/app/pref-window.ui" line="591"/>
         <location filename="../../src/app/pref-window.ui" line="692"/>
-        <location filename="../../src/app/pref-window.ui" line="1548"/>
-        <location filename="../../src/app/pref-window.ui" line="1700"/>
-        <location filename="../../src/app/pref-window.ui" line="1754"/>
+        <location filename="../../src/app/pref-window.ui" line="1645"/>
+        <location filename="../../src/app/pref-window.ui" line="1797"/>
+        <location filename="../../src/app/pref-window.ui" line="1851"/>
         <source> min</source>
         <translation> min</translation>
     </message>
@@ -926,7 +919,7 @@ v%1
     <message>
         <location filename="../../src/app/pref-window.ui" line="391"/>
         <location filename="../../src/app/pref-window.ui" line="647"/>
-        <location filename="../../src/app/pref-window.ui" line="1859"/>
+        <location filename="../../src/app/pref-window.ui" line="1956"/>
         <source>&lt;h3&gt;Big Breaks&lt;/h3&gt;</source>
         <translation>&lt;h3&gt;Große Pausen&lt;/h3&gt;</translation>
     </message>
@@ -1012,87 +1005,138 @@ v%1
         <translation type="unfinished">Hinweis vor Pause anzeigen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1237"/>
+        <location filename="../../src/app/pref-window.ui" line="1116"/>
+        <source>&lt;h3&gt;Flashing Prompt&lt;/h3&gt;</source>
+        <translation type="unfinished">&lt;h3&gt;Blinkende Benachrichtigung&lt;/h3&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1175"/>
+        <source>&lt;h3&gt;Full-Screen Break&lt;/h3&gt;</source>
+        <translation type="unfinished">&lt;h3&gt;Vollbildpause&lt;/h3&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1200"/>
+        <source>Big break messages:</source>
+        <translation type="unfinished">Nachrichten bei großer Pause:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1210"/>
+        <source>Small break messages:</source>
+        <translation type="unfinished">Nachrichten bei kleiner Pause:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1235"/>
+        <source>&lt;h3&gt;Components to Show&lt;/h3&gt;
+
+&lt;p&gt;User interface components to show in the full-screen break window. The progress bar also appears in the flashing prompt.&lt;/p&gt;</source>
+        <translation type="unfinished">&lt;h3&gt;Zu zeigende Komponenten&lt;/h3&gt;
+
+&lt;p&gt;Benutzeroberflächenkomponenten, die im Vollbild-Pausenfenster angezeigt werden. Der Fortschrittsbalken erscheint auch in der blinkenden Benachrichtigung.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1247"/>
+        <location filename="../../src/app/pref-window.ui" line="1347"/>
         <source>&lt;h4&gt;Small break&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Kleine Pause&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1283"/>
+        <location filename="../../src/app/pref-window.ui" line="1293"/>
+        <location filename="../../src/app/pref-window.ui" line="1430"/>
         <source>&lt;h4&gt;Big break&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Große Pause&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1431"/>
+        <location filename="../../src/app/pref-window.ui" line="1359"/>
+        <location filename="../../src/app/pref-window.ui" line="1442"/>
+        <source>Background color</source>
+        <translation type="unfinished">Hintergrundfarbe</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1376"/>
+        <location filename="../../src/app/pref-window.ui" line="1459"/>
+        <source>Prompt flash</source>
+        <translation type="unfinished">Blinken der Benachrichtigung</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1397"/>
+        <location filename="../../src/app/pref-window.ui" line="1480"/>
         <source>Background image</source>
         <translation type="unfinished">Hintergrundbild</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1441"/>
+        <location filename="../../src/app/pref-window.ui" line="1407"/>
+        <location filename="../../src/app/pref-window.ui" line="1490"/>
         <source>None</source>
         <translation type="unfinished">Keine</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1455"/>
+        <location filename="../../src/app/pref-window.ui" line="1421"/>
+        <location filename="../../src/app/pref-window.ui" line="1504"/>
         <source>Clear</source>
         <translation type="unfinished">Löschen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1471"/>
+        <location filename="../../src/app/pref-window.ui" line="1513"/>
+        <source>&lt;h4&gt;Shared&lt;/h4&gt;</source>
+        <translation type="unfinished">&lt;h4&gt;Gemeinsam&lt;/h4&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.ui" line="1568"/>
         <source>&lt;p&gt;To preview break windows, save all changes first. The preview begins with a 2-second flashing prompt, followed by a 4-second full-screen break. A small break window will appear first, then a big break window.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Für eine Vorschau des Erscheinungsbilds der Pausen, zuerst alle Änderungen speichern. Die Vorschau beginnt jeweils mit einer 2-sekündigen blinkenden Benachrichtigung, gefolgt von einer 4-sekündigen Vollbildpause. Zuerst erfolgt die Vorschau der kleinen Pause, darauf die der Großen.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1481"/>
+        <location filename="../../src/app/pref-window.ui" line="1578"/>
         <source>Preview Break Windows</source>
         <translation type="unfinished">Pausenfenster vorhersehen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1566"/>
+        <location filename="../../src/app/pref-window.ui" line="1663"/>
         <source>Video players, presentations, and some games prevent the screen from sleeping. When on, that counts as activity so the idle pause won&apos;t trigger while they run; when off, only your actual input counts. Effectiveness varies by platform: full on ext-idle-notify Wayland; best-effort on X11 where only XScreenSaverSuspend-based inhibition is detected.</source>
         <translation type="unfinished">Videoplayer, Präsentationen und einige Spiele verhindern, dass der Bildschirm in den Ruhezustand geht. Wenn aktiviert, zählt dies als Aktivität, sodass die Inaktivitäts-Pause nicht ausgelöst wird, während sie laufen; wenn deaktiviert, zählt nur Ihre tatsächliche Eingabe. Die Wirksamkeit variiert je nach Plattform: vollständig bei ext-idle-notify unter Wayland; nach bestem Ermessen unter X11, wo nur auf XScreenSaverSuspend basierende Unterdrückung erkannt wird.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1569"/>
+        <location filename="../../src/app/pref-window.ui" line="1666"/>
         <source>When an app keeps the screen awake, count it as activity (e.g. video playback)</source>
         <translation type="unfinished">Wenn eine App den Bildschirm wach hält, zähle dies als Aktivität (z. B. Videowiedergabe)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1576"/>
+        <location filename="../../src/app/pref-window.ui" line="1673"/>
         <source>Pause on battery</source>
         <translation type="unfinished">Bei Akkunutzung anhalten</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1583"/>
+        <location filename="../../src/app/pref-window.ui" line="1680"/>
         <source>Pause breaks when any of the following program is running:</source>
         <translation type="unfinished">Pausieren Sie Pausen, wenn eines der folgenden Programme läuft:</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1590"/>
+        <location filename="../../src/app/pref-window.ui" line="1687"/>
         <source>(Write one program name per line)</source>
         <translation type="unfinished">(Pro Zeile einen Programmnamen eingeben)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1597"/>
+        <location filename="../../src/app/pref-window.ui" line="1694"/>
         <source>&lt;h3&gt;External Monitors&lt;/h3&gt;</source>
         <translation type="unfinished">&lt;h3&gt;Externe Monitore&lt;/h3&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1604"/>
+        <location filename="../../src/app/pref-window.ui" line="1701"/>
         <source>Pause when unknown monitor is connected</source>
         <translation type="unfinished">Pausieren, wenn ein unbekannter Monitor angeschlossen wird</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1626"/>
+        <location filename="../../src/app/pref-window.ui" line="1723"/>
         <source>Mark currently connected monitors as known</source>
         <translation type="unfinished">Derzeit angeschlossene Monitore als bekannt markieren</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1646"/>
+        <location filename="../../src/app/pref-window.ui" line="1743"/>
         <source>Remove selected</source>
         <translation type="unfinished">Ausgewählte entfernen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1655"/>
+        <location filename="../../src/app/pref-window.ui" line="1752"/>
         <source>&lt;h3&gt;Reset Break Schedule After Pause&lt;/h3&gt;
 &lt;p&gt;Sane Break will adjust the break schedule after pausing:&lt;/p&gt;
 &lt;ul&gt;
@@ -1107,11 +1151,12 @@ v%1
 &lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1448"/>
-        <location filename="../../src/app/pref-window.ui" line="1819"/>
-        <location filename="../../src/app/pref-window.ui" line="1833"/>
-        <location filename="../../src/app/pref-window.ui" line="1895"/>
-        <location filename="../../src/app/pref-window.ui" line="1909"/>
+        <location filename="../../src/app/pref-window.ui" line="1414"/>
+        <location filename="../../src/app/pref-window.ui" line="1497"/>
+        <location filename="../../src/app/pref-window.ui" line="1916"/>
+        <location filename="../../src/app/pref-window.ui" line="1930"/>
+        <location filename="../../src/app/pref-window.ui" line="1992"/>
+        <location filename="../../src/app/pref-window.ui" line="2006"/>
         <source>Browse</source>
         <translation type="unfinished">Durchsuchen</translation>
     </message>
@@ -1126,62 +1171,62 @@ v%1
         <translation type="unfinished">Wenn Sie den Fokusmodus über das Systemtray aktivieren, folgen die Pausen stattdessen diesem Plan. Verwenden Sie ihn für kürzere Pausen, wenn Sie sich konzentrieren müssen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1935"/>
+        <location filename="../../src/app/pref-window.ui" line="2032"/>
         <source>&lt;strong&gt;Tip&lt;/strong&gt;: Use &lt;i&gt;Browse&lt;/i&gt; to select a custom sound file. A copy of the file will be saved so it can always be played.</source>
         <translation type="unfinished">&lt;strong&gt;Tipp&lt;/strong&gt;: Verwenden Sie &lt;i&gt;Durchsuchen&lt;/i&gt;, um eine benutzerdefinierte Sounddatei auszuwählen. Eine Kopie der Datei wird gespeichert, damit sie immer wiedergegeben werden kann.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1973"/>
+        <location filename="../../src/app/pref-window.ui" line="2070"/>
         <source>Configuration file</source>
         <translation>Konfigurationsdatei</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2003"/>
+        <location filename="../../src/app/pref-window.ui" line="2100"/>
         <source>Database file</source>
         <translation type="unfinished">Datenbankdatei</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2049"/>
+        <location filename="../../src/app/pref-window.ui" line="2146"/>
         <source>Launch Sane Break at start up</source>
         <translation type="unfinished">Sane Break beim Start starten</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2175"/>
+        <location filename="../../src/app/pref-window.ui" line="2272"/>
         <source>Get the Source Code</source>
         <translation type="unfinished">Quellcode abrufen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2204"/>
+        <location filename="../../src/app/pref-window.ui" line="2301"/>
         <source>Help Us Translate!</source>
         <translation type="unfinished">Helfen Sie uns zu übersetzen!</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2237"/>
+        <location filename="../../src/app/pref-window.ui" line="2334"/>
         <source>Revert to Last Saved</source>
         <translation type="unfinished">Auf zuletzt Gespeichertes zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1951"/>
+        <location filename="../../src/app/pref-window.ui" line="2048"/>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="1990"/>
+        <location filename="../../src/app/pref-window.ui" line="2087"/>
         <source>Change of language will take effect after app restart.</source>
         <translation type="unfinished">Die Sprachänderung wirkt nach einem Neustart der App.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2195"/>
+        <location filename="../../src/app/pref-window.ui" line="2292"/>
         <source>Third-party Libraries Licenses</source>
         <translation type="unfinished">Lizenzbedingungen von Drittanbieter-Bibliotheken</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2244"/>
+        <location filename="../../src/app/pref-window.ui" line="2341"/>
         <source>Defaults</source>
         <translation type="unfinished">Standardwerte</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.ui" line="2267"/>
+        <location filename="../../src/app/pref-window.ui" line="2364"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
@@ -1189,9 +1234,9 @@ v%1
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="518"/>
-        <location filename="../../src/app/pref-window.cpp" line="519"/>
-        <location filename="../../src/app/pref-window.cpp" line="520"/>
+        <location filename="../../src/app/pref-window.cpp" line="533"/>
+        <location filename="../../src/app/pref-window.cpp" line="534"/>
+        <location filename="../../src/app/pref-window.cpp" line="535"/>
         <source>%n min</source>
         <translation type="unfinished">
             <numerusform>%n Minute</numerusform>
@@ -1200,7 +1245,7 @@ v%1
     </message>
     <message numerus="yes">
         <location filename="../../src/app/pref-window.cpp" line="178"/>
-        <location filename="../../src/app/pref-window.cpp" line="220"/>
+        <location filename="../../src/app/pref-window.cpp" line="224"/>
         <source>Every %n min</source>
         <translation type="unfinished">
             <numerusform>Alle %n Minute</numerusform>
@@ -1208,7 +1253,7 @@ v%1
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="517"/>
+        <location filename="../../src/app/pref-window.cpp" line="532"/>
         <source>%n sec</source>
         <translation type="unfinished">
             <numerusform>%n Sekunde</numerusform>
@@ -1216,83 +1261,85 @@ v%1
         </translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="516"/>
+        <location filename="../../src/app/pref-window.cpp" line="531"/>
         <source>Disabled</source>
         <translation type="unfinished">Deaktiviert</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="526"/>
+        <location filename="../../src/app/pref-window.cpp" line="541"/>
         <source>Start next break after middle clicking on tray icon</source>
         <translation type="unfinished">Nächste Pause nach Mittelklick auf das Systemtray-Symbol starten</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="531"/>
+        <location filename="../../src/app/pref-window.cpp" line="546"/>
         <source>Start next break after double clicking on tray icon</source>
         <translation type="unfinished">Nächste Pause nach Doppelklick auf das Systemtray-Symbol starten</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="609"/>
+        <location filename="../../src/app/pref-window.cpp" line="624"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="610"/>
+        <location filename="../../src/app/pref-window.cpp" line="625"/>
         <source>Discard</source>
         <translation>Verwerfen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="611"/>
+        <location filename="../../src/app/pref-window.cpp" line="626"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="648"/>
+        <location filename="../../src/app/pref-window.cpp" line="671"/>
+        <source>Failed to save a copy of the selected file.</source>
+        <translation type="unfinished">Konnte keine Kopie der ausgewählten Datei speichern.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/pref-window.cpp" line="679"/>
         <source>Select Sound File</source>
         <translation type="unfinished">Sounddatei auswählen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="649"/>
+        <location filename="../../src/app/pref-window.cpp" line="680"/>
         <source>Sound Files (*.mp3 *.wav *.ogg *.flac *.m4a)</source>
         <translation type="unfinished">Sounddateien (*.mp3 *.wav *.ogg *.flac *.m4a)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="659"/>
-        <location filename="../../src/app/pref-window.cpp" line="680"/>
+        <location filename="../../src/app/pref-window.cpp" line="670"/>
         <source>Error</source>
         <translation type="unfinished">Fehler</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="660"/>
         <source>Failed to save a copy of the selected sound file.</source>
-        <translation type="unfinished">Konnte keine Kopie der ausgewählten Sounddatei speichern.</translation>
+        <translation type="obsolete">Konnte keine Kopie der ausgewählten Sounddatei speichern.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="669"/>
+        <location filename="../../src/app/pref-window.cpp" line="690"/>
         <source>Select Background Image</source>
         <translation type="unfinished">Hintergrundbild auswählen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="670"/>
+        <location filename="../../src/app/pref-window.cpp" line="691"/>
         <source>Image Files (*.png *.jpg *.jpeg *.bmp *.webp)</source>
         <translation type="unfinished">Bilddateien (*.png *.jpg *.jpeg *.bmp *.webp)</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="681"/>
         <source>Failed to save a copy of the selected image file.</source>
-        <translation type="unfinished">Konnte keine Kopie der ausgewählten Bilddatei speichern.</translation>
+        <translation type="obsolete">Konnte keine Kopie der ausgewählten Bilddatei speichern.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="496"/>
+        <location filename="../../src/app/pref-window.cpp" line="511"/>
         <source>Setting autostart failed</source>
         <translation type="unfinished">Festlegen des Autostarts fehlgeschlagen</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="606"/>
+        <location filename="../../src/app/pref-window.cpp" line="621"/>
         <source>The preferences have been modified.</source>
         <translation type="unfinished">Die Einstellungen wurden geändert.</translation>
     </message>
     <message>
-        <location filename="../../src/app/pref-window.cpp" line="607"/>
+        <location filename="../../src/app/pref-window.cpp" line="622"/>
         <source>Do you want to save your changes?</source>
         <translation type="unfinished">Möchten Sie Ihre Änderungen speichern?</translation>
     </message>
@@ -1429,12 +1476,12 @@ v%1
 <context>
     <name>SanePreferences</name>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="80"/>
+        <location filename="../../src/core/preferences.cpp" line="102"/>
         <source>Time for a small break</source>
         <translation>Zeit für eine kleine Pause</translation>
     </message>
     <message>
-        <location filename="../../src/core/preferences.cpp" line="83"/>
+        <location filename="../../src/core/preferences.cpp" line="105"/>
         <source>Time for a big break</source>
         <translation>Zeit für eine große Pause</translation>
     </message>

@@ -4,9 +4,9 @@
 <context>
     <name>PreferenceWindow</name>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="518"/>
-        <location filename="../../src/app/pref-window.cpp" line="519"/>
-        <location filename="../../src/app/pref-window.cpp" line="520"/>
+        <location filename="../../src/app/pref-window.cpp" line="533"/>
+        <location filename="../../src/app/pref-window.cpp" line="534"/>
+        <location filename="../../src/app/pref-window.cpp" line="535"/>
         <source>%n min</source>
         <translation>
             <numerusform>%n min</numerusform>
@@ -15,7 +15,7 @@
     </message>
     <message numerus="yes">
         <location filename="../../src/app/pref-window.cpp" line="178"/>
-        <location filename="../../src/app/pref-window.cpp" line="220"/>
+        <location filename="../../src/app/pref-window.cpp" line="224"/>
         <source>Every %n min</source>
         <translation>
             <numerusform>Every %n min</numerusform>
@@ -23,7 +23,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../../src/app/pref-window.cpp" line="517"/>
+        <location filename="../../src/app/pref-window.cpp" line="532"/>
         <source>%n sec</source>
         <translation>
             <numerusform>%n sec</numerusform>
