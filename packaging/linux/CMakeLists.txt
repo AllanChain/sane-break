@@ -19,6 +19,13 @@ install(
   DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps
   RENAME io.github.AllanChain.sane-break.svg
 )
+# appimagetool cannot derive .DirIcon from an SVG, so a 256x256 PNG is installed as well
+# for use as the AppImage top-level icon.
+install(
+  FILES ${CMAKE_SOURCE_DIR}/resources/images/icon.png
+  DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/256x256/apps
+  RENAME io.github.AllanChain.sane-break.png
+)
 install(
   PROGRAMS sane-break.desktop
   DESTINATION ${CMAKE_INSTALL_DATADIR}/applications

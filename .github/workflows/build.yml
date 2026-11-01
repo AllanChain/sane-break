@@ -304,6 +304,9 @@ jobs:
         cmake --install . --prefix AppDir/usr
         cp AppDir/usr/share/metainfo/io.github.AllanChain.sane-break.metainfo.xml \
           AppDir/usr/share/metainfo/io.github.AllanChain.sane-break.appdata.xml
+        # appimagetool needs a PNG icon at the AppDir root to create .DirIcon
+        cp AppDir/usr/share/icons/hicolor/256x256/apps/io.github.AllanChain.sane-break.png \
+          AppDir/
         ../../linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage \
           --plugin qt --deploy-deps-only=AppDir/usr/lib/sane-break
         test -f sane-break-x86_64.AppImage.zsync
