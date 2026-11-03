@@ -59,16 +59,32 @@
   </screenshots>
 
   <releases>
+  <release version="0.10.7" date="2026-11-03">
+    <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.10.7</url>
+    <description>
+      <p>Features</p>
+      <ul>
+        <li>Pause media playback from the break window</li>
+        <li>Separate theme settings for small and big breaks</li>
+        <li>Enable screen lock in Flatpak builds</li>
+      </ul>
+      <p>Other improvements</p>
+      <ul>
+        <li>Use font icons for break window buttons</li>
+        <li>Clarify break message wording</li>
+      </ul>
+    </description>
+  </release>
   <release version="0.10.6" date="2026-10-01">
     <url type="details">https://github.com/AllanChain/sane-break/releases/tag/v0.10.6</url>
     <description>
       <p>Features</p>
       <ul>
-        <li>pause on screen lock</li>
+        <li>Pause on screen lock</li>
       </ul>
       <p>Other improvements</p>
       <ul>
-        <li>mark GNOME 51 as supported</li>
+        <li>Mark GNOME 51 as supported</li>
       </ul>
     </description>
   </release>
