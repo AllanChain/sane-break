@@ -44,3 +44,12 @@ add_custom_target(
     "SCREENSHOT_DIR=${CMAKE_SOURCE_DIR}/screenshots" $<TARGET_FILE:test-screenshot>
   DEPENDS test-screenshot
 )
+
+# QPA is used only by the regression test to simulate physical screen events.
+find_package(Qt6 REQUIRED COMPONENTS GuiPrivate)
+add_executable(
+  test-display-changes test-display-changes.cpp ${CMAKE_SOURCE_DIR}/resources/index.qrc
+)
+target_link_libraries(test-display-changes PRIVATE Qt::Test Qt6::GuiPrivate sane-gui)
+add_test(NAME test-display-changes COMMAND test-display-changes)
+add_dependencies(check test-display-changes)

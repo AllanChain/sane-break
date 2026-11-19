@@ -31,7 +31,8 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y libcli11-dev libgmock-dev libgl1-mesa-dev
+        sudo apt install -y libcli11-dev libgmock-dev libgl1-mesa-dev \
+          libxkbcommon-dev libpulse0
 
     - name: Install Qt
       uses: jurplel/install-qt-action@v4

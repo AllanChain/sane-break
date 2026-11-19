@@ -78,9 +78,10 @@ class BreakWindows : public AbstractBreakWindows {
 
   void createOnScreen(QScreen* screen);
   void createHeadsUpOnScreen(QScreen* screen);
-  // Creates windows on newly-attached screens for the active break/heads-up.
-  // Debounced via m_screenDebounce; removal is handled elsewhere (screenRemoved
-  // handler + per-window destroyed signal).
+  void watchScreen(QScreen* screen);
+  void scheduleScreenReconcile();
+  // Rebuild native surfaces after a burst of topology/geometry changes, keeping
+  // the active break state rather than restarting the break.
   void reconcileScreens();
   static bool isValidScreen(QScreen* screen);
 
@@ -88,9 +89,9 @@ class BreakWindows : public AbstractBreakWindows {
   QList<HeadsUpWindow*> m_headsUpWindows;
   SoundPlayer* soundPlayer;
   QTimer* clockUpdateTimer;
-  // Debounces screenAdded so we don't read transient/invalid geometry during macOS
-  // mid-EDID negotiation or non-transactional multi-screen bursts.
+  // All display changes share one debounce, including late resolution/DPI changes.
   QTimer* m_screenDebounce = nullptr;
+  int m_screenRetries = 0;
   void updateClocks();
 
 #ifdef Q_OS_LINUX

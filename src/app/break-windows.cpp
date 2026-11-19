@@ -47,7 +47,7 @@ namespace {
 template <typename T>
 concept ScreenAwareWindow = requires(T* w, QScreen* s) {
   { w->screenIdentity() } -> std::same_as<QScreen*>;
-  w->close();
+  w->hide();
   w->deleteLater();
 };
 
@@ -58,15 +58,11 @@ void removeWindowsIf(QList<T*>& windows, Pred pred) {
     if (pred(w)) toDestroy << w;
   for (T* w : std::as_const(toDestroy)) {
     windows.removeOne(w);
+    // Hide synchronously before Qt migrates the native surface to another screen.
+    // Destruction must remain deferred (notably during macOS screen removal).
+    w->hide();
     w->deleteLater();
   }
-}
-
-template <ScreenAwareWindow T>
-bool hasWindowOn(const QList<T*>& windows, QScreen* screen) {
-  for (T* w : windows)
-    if (w->screenIdentity() == screen) return true;
-  return false;
 }
 
 }  // namespace
@@ -76,11 +72,8 @@ BreakWindows::BreakWindows(QObject* parent) : AbstractBreakWindows(parent) {
   clockUpdateTimer = new QTimer(this);
   connect(clockUpdateTimer, &QTimer::timeout, this, &BreakWindows::updateClocks);
 
-  // Reconcile break/heads-up windows with the current set of screens when displays
-  // are hot-plugged mid-break. Removal is handled immediately (synchronous, pointer
-  // comparison only — safe before the QScreen is destroyed); addition is debounced so
-  // we don't read transient/invalid geometry during macOS mid-EDID negotiation or
-  // non-transactional multi-screen bursts.
+  // A display switch can add a screen, remove another and only then settle on
+  // its final resolution. Debounce the whole sequence, not only screenAdded.
   m_screenDebounce = new QTimer(this);
   m_screenDebounce->setSingleShot(true);
   m_screenDebounce->setInterval(400);
@@ -92,11 +85,15 @@ BreakWindows::BreakWindows(QObject* parent) : AbstractBreakWindows(parent) {
                     [screen](auto* w) { return w->screenIdentity() == screen; });
     removeWindowsIf(m_headsUpWindows,
                     [screen](auto* w) { return w->screenIdentity() == screen; });
+    scheduleScreenReconcile();
   });
-  connect(qApp, &QGuiApplication::screenAdded, this, [this](QScreen*) {
-    // Nothing to reconcile when no break or heads-up windows are active.
-    if (m_activeBreak || m_activeHeadsUp) m_screenDebounce->start();
+  connect(qApp, &QGuiApplication::screenAdded, this, [this](QScreen* screen) {
+    watchScreen(screen);
+    scheduleScreenReconcile();
   });
+  connect(qApp, &QGuiApplication::primaryScreenChanged, this,
+          &BreakWindows::scheduleScreenReconcile);
+  for (QScreen* screen : QGuiApplication::screens()) watchScreen(screen);
 
 #ifdef Q_OS_LINUX
   if (QGuiApplication::platformName() == "wayland" && LinuxSystemSupport::layerShell) {
@@ -197,11 +194,14 @@ void BreakWindows::create(BreakWindowData data) {
   // AppStateBreak::enter() sets the real time, causing a brief visual glitch
   // where the progress bar animates to empty and then back to full.
   m_activeBreak->remainingTime = data.totalSeconds;
-  // A pending debounce from a previous break is harmless (reconcile finds every
-  // screen covered) but stopping it avoids a redundant pass.
+  // Do not rebuild newly-created windows for a previous display change.
   m_screenDebounce->stop();
   QList<QScreen*> screens = QApplication::screens();
-  for (QScreen* screen : std::as_const(screens)) createOnScreen(screen);
+  for (QScreen* screen : std::as_const(screens)) {
+    createOnScreen(screen);
+    if (!isValidScreen(screen)) scheduleScreenReconcile();
+  }
+  if (screens.isEmpty()) scheduleScreenReconcile();
   updateClocks();  // Set the initial clock
   clockUpdateTimer->start(3000);
 }
@@ -288,7 +288,11 @@ void BreakWindows::showHeadsUp(int totalSeconds, BreakType breakType,
   });
   m_screenDebounce->stop();
   QList<QScreen*> screens = QApplication::screens();
-  for (QScreen* screen : std::as_const(screens)) createHeadsUpOnScreen(screen);
+  for (QScreen* screen : std::as_const(screens)) {
+    createHeadsUpOnScreen(screen);
+    if (!isValidScreen(screen)) scheduleScreenReconcile();
+  }
+  if (screens.isEmpty()) scheduleScreenReconcile();
 }
 void BreakWindows::setHeadsUpTime(int remainingTime) {
   if (m_activeHeadsUp) m_activeHeadsUp->remaining = remainingTime;
@@ -366,21 +370,50 @@ void BreakWindows::createHeadsUpOnScreen(QScreen* screen) {
 }
 
 void BreakWindows::reconcileScreens() {
-  // Add pass only — removal is handled immediately by the screenRemoved handler
-  // and per-window by the destroyed signal, so there is nothing to catch here.
+  if (!m_activeBreak && !m_activeHeadsUp) return;
+  // Recreating also refreshes translucent native backing surfaces and background
+  // image scaling after a monitor/DPI switch. Do not call destroy(): it clears
+  // the remembered phase, time and button state.
+  removeWindowsIf(m_windows, [](auto*) { return true; });
+  removeWindowsIf(m_headsUpWindows, [](auto*) { return true; });
   QList<QScreen*> current = QGuiApplication::screens();
+  bool pendingGeometry = current.isEmpty();
+  for (QScreen* screen : current)
+    if (!isValidScreen(screen)) pendingGeometry = true;
   if (m_activeBreak) {
     for (QScreen* screen : current) {
       if (!isValidScreen(screen)) continue;
-      if (hasWindowOn(m_windows, screen)) continue;
       createOnScreen(screen);
     }
   }
   if (m_activeHeadsUp) {
     for (QScreen* screen : current) {
       if (!isValidScreen(screen)) continue;
-      if (hasWindowOn(m_headsUpWindows, screen)) continue;
       createHeadsUpOnScreen(screen);
     }
   }
+  updateClocks();
+  // Empty geometry during display negotiation must not permanently drop an
+  // overlay. Retry briefly; later screen signals start a fresh retry budget.
+  if (pendingGeometry && m_screenRetries > 0) {
+    --m_screenRetries;
+    m_screenDebounce->start();
+  }
+}
+
+void BreakWindows::watchScreen(QScreen* screen) {
+  connect(screen, &QScreen::geometryChanged, this,
+          &BreakWindows::scheduleScreenReconcile);
+  connect(screen, &QScreen::availableGeometryChanged, this,
+          &BreakWindows::scheduleScreenReconcile);
+  connect(screen, &QScreen::logicalDotsPerInchChanged, this,
+          &BreakWindows::scheduleScreenReconcile);
+  connect(screen, &QScreen::physicalDotsPerInchChanged, this,
+          &BreakWindows::scheduleScreenReconcile);
+}
+
+void BreakWindows::scheduleScreenReconcile() {
+  if (!m_activeBreak && !m_activeHeadsUp) return;
+  m_screenRetries = 5;
+  m_screenDebounce->start();
 }
