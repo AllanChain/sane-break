@@ -6,6 +6,7 @@
 
 #include <QColor>
 #include <QPropertyAnimation>
+#include <QRect>
 #include <QScreen>
 #include <QWidget>
 
@@ -20,6 +21,7 @@ class HeadsUpWindow : public QWidget {
   void setTime(int remainingSeconds);
   // Raw screen identity captured in initSize; see BreakWindow::screenIdentity().
   QScreen* screenIdentity() const { return m_screen; }
+  bool matchesScreenState(QScreen* screen) const;
 
  signals:
   void clicked();
@@ -36,6 +38,9 @@ class HeadsUpWindow : public QWidget {
   QColor m_textColor;
   QPropertyAnimation* m_progressAnim;
   QScreen* m_screen = nullptr;
+  QRect m_screenRect;
+  qreal m_screenDpr = 0;
+  qreal m_screenLogicalDpi = 0;
 
   static const int PILL_WIDTH = 280;
   static const int PILL_HEIGHT = 56;

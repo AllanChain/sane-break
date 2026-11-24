@@ -12,6 +12,7 @@
 #include <QMainWindow>
 #include <QProgressBar>
 #include <QPropertyAnimation>
+#include <QRect>
 #include <QScreen>
 #include <QSequentialAnimationGroup>
 #include <QString>
@@ -35,9 +36,9 @@ class BreakWindow : public QMainWindow {
   static const int SMALL_WINDOW_WIDTH;
   static const int SMALL_WINDOW_HEIGHT;
 
-  void setTime(int remainingTime, QString estimatedEndTime);
+  void setTime(int remainingTime, QString estimatedEndTime, bool animate = true);
   void setClock(QString hourMinite);
-  void showFullScreen();
+  void showFullScreen(bool animate = true);
   void showFlashPrompt();
   void showButtons(AbstractBreakWindows::Buttons buttons, bool show = true);
 
@@ -46,6 +47,7 @@ class BreakWindow : public QMainWindow {
   // a screen is removed (Qt migrates windows to the primary screen), so we match by
   // this pointer instead. Never dereference a screen that has been removed.
   QScreen* screenIdentity() const { return m_screen; }
+  bool matchesScreenState(QScreen* screen) const;
   QColor color() const;
   void setColor(const QColor& color);
 
@@ -55,6 +57,8 @@ class BreakWindow : public QMainWindow {
   void pauseMediaRequested();
 
  private:
+  QRect screenRect(QScreen* screen) const;
+
   Ui::BreakReminder* ui;
   QWidget* mainWidget;
   QColor backgroundColor;
@@ -67,4 +71,7 @@ class BreakWindow : public QMainWindow {
   bool m_supportTransparentInput = true;
   int m_totalSeconds;
   QScreen* m_screen = nullptr;
+  QRect m_screenRect;
+  qreal m_screenDpr = 0;
+  qreal m_screenLogicalDpi = 0;
 };
