@@ -166,7 +166,7 @@ void BreakWindow::setColor(const QColor& color) {
                     .arg(backgroundColor.alpha()));
 }
 
-void BreakWindow::setTime(int remainingTime, QString estimatedEndTime) {
+void BreakWindow::setTime(int remainingTime, QString estimatedEndTime, bool animate) {
   // Drive the progress bar from the authoritative remaining time.  Each call
   // starts a short animation from the bar's current value to the new target,
   // giving smooth sub-second interpolation without a long-running animation
@@ -181,7 +181,7 @@ void BreakWindow::setTime(int remainingTime, QString estimatedEndTime) {
   m_progressAnim->stop();
   m_progressAnim->setStartValue(ui->progressBar->value());
   m_progressAnim->setEndValue(targetValue);
-  m_progressAnim->setDuration(1000);
+  m_progressAnim->setDuration(animate ? 1000 : 0);
   m_progressAnim->start();
   if (m_totalSeconds <= 60) {
     ui->countDownLabel->setText(QString("%1").arg(remainingTime));
@@ -206,7 +206,7 @@ void BreakWindow::showButtons(AbstractBreakWindows::Buttons buttons, bool show) 
     ui->pauseMediaGroup->setVisible(show);
 }
 
-void BreakWindow::showFullScreen() {
+void BreakWindow::showFullScreen(bool animate) {
   mainWidget->setProperty("isFullScreen", true);
   if (m_supportTransparentInput) {
     // setWindowFlag will reparent the window and do a lot of unnecessary works
@@ -235,9 +235,8 @@ void BreakWindow::showFullScreen() {
   // Animate to the screen this window was pinned to (see screenIdentity()) so
   // the overlay always follows the display the window was created for, even if
   // Qt migrates the window after a screen change.
-  resizeAnim->setEndValue(m_waylandWorkaround ? m_screen->availableGeometry()
-                                              : m_screen->geometry());
-  resizeAnim->setDuration(300);
+  resizeAnim->setEndValue(screenRect(m_screen));
+  resizeAnim->setDuration(animate ? 300 : 0);
 #ifdef Q_OS_WINDOWS
   // A topmost, non-activating window is not treated as a fullscreen window by
   // the shell: once it covers the screen the taskbar re-raises itself above it,
@@ -248,14 +247,14 @@ void BreakWindow::showFullScreen() {
       QTimer::singleShot(delay, this, &BreakWindow::raise);
   });
 #endif
-  resizeAnim->start();
+  resizeAnim->start(QAbstractAnimation::DeleteWhenStopped);
 
   if (m_bgImageLabel) {
     m_bgImageLabel->show();
     auto* fadeIn = new QPropertyAnimation(m_bgImageOpacity, "opacity");
     fadeIn->setStartValue(0.0);
     fadeIn->setEndValue(1.0);
-    fadeIn->setDuration(800);
+    fadeIn->setDuration(animate ? 800 : 0);
     fadeIn->start(QPropertyAnimation::DeleteWhenStopped);
   }
 }
@@ -289,20 +288,26 @@ void BreakWindow::showFlashPrompt() {
 
   QPropertyAnimation* resizeAnim =
       new QPropertyAnimation(m_waylandWorkaround ? mainWidget : this, "geometry");
-  QRect rect =
-      m_waylandWorkaround ? m_screen->availableGeometry() : m_screen->geometry();
+  QRect rect = screenRect(m_screen);
   QRect targetGeometry = QRect(rect.x() + rect.width() / 2 - SMALL_WINDOW_WIDTH / 2,
                                rect.y(), SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
   resizeAnim->setStartValue(m_waylandWorkaround ? mainWidget->geometry() : geometry());
   resizeAnim->setEndValue(targetGeometry);
   resizeAnim->setDuration(100);
-  resizeAnim->start();
+  resizeAnim->start(QAbstractAnimation::DeleteWhenStopped);
+}
+
+QRect BreakWindow::screenRect(QScreen* screen) const {
+  return m_waylandWorkaround ? screen->availableGeometry() : screen->geometry();
 }
 
 void BreakWindow::initSize(QScreen* screen) {
   m_screen = screen;
+  m_screenRect = screenRect(screen);
+  m_screenDpr = screen->devicePixelRatio();
+  m_screenLogicalDpi = screen->logicalDotsPerInch();
   if (m_waylandWorkaround) {
-    QRect rect = screen->availableGeometry();
+    QRect rect = m_screenRect;
     // Avoid using full height when initializing the main window. GNOME will refuse to
     // make the window always on top (done in custom shell extension) if it is too large
     // See https://askubuntu.com/questions/1122921.
@@ -311,9 +316,8 @@ void BreakWindow::initSize(QScreen* screen) {
     mainWidget->setGeometry(rect.x() + rect.width() / 2 - SMALL_WINDOW_WIDTH / 2,
                             rect.y(), SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
   } else {
-    QRect rect = screen->geometry();
-    setGeometry(rect.x() + rect.width() / 2 - SMALL_WINDOW_WIDTH / 2, rect.y(),
-                SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
+    setGeometry(m_screenRect.x() + m_screenRect.width() / 2 - SMALL_WINDOW_WIDTH / 2,
+                m_screenRect.y(), SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT);
   }
   createWinId();
   // Pin the surface to the requested output. On Wayland + layer-shell this makes
@@ -331,8 +335,7 @@ void BreakWindow::initSize(QScreen* screen) {
     QString path = url.isLocalFile() ? url.toLocalFile() : m_data.theme.backgroundImage;
     QPixmap original(path);
     if (!original.isNull()) {
-      QSize targetSize = m_waylandWorkaround ? screen->availableGeometry().size()
-                                             : screen->geometry().size();
+      QSize targetSize = m_screenRect.size();
       QPixmap scaled = original.scaled(targetSize, Qt::KeepAspectRatioByExpanding,
                                        Qt::SmoothTransformation);
       int x = (scaled.width() - targetSize.width()) / 2;
@@ -350,4 +353,11 @@ void BreakWindow::initSize(QScreen* screen) {
       m_bgImageLabel->hide();
     }
   }
+}
+
+bool BreakWindow::matchesScreenState(QScreen* screen) const {
+  if (!screen || m_screen != screen) return false;
+  return m_screenRect == screenRect(screen) &&
+         qFuzzyCompare(m_screenDpr, screen->devicePixelRatio()) &&
+         qFuzzyCompare(m_screenLogicalDpi, screen->logicalDotsPerInch());
 }

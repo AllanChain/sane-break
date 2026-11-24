@@ -76,20 +76,20 @@ class BreakWindows : public AbstractBreakWindows {
   };
   std::optional<ActiveHeadsUp> m_activeHeadsUp;
 
-  void createOnScreen(QScreen* screen);
+  void createOnScreen(QScreen* screen, bool animate = true);
   void createHeadsUpOnScreen(QScreen* screen);
-  // Creates windows on newly-attached screens for the active break/heads-up.
-  // Debounced via m_screenDebounce; removal is handled elsewhere (screenRemoved
-  // handler + per-window destroyed signal).
+  void watchScreen(QScreen* screen);
+  void scheduleScreenReconcile();
+  // Reconciles break/heads-up windows against the settled display configuration,
+  // creating missing windows and replacing only screens whose geometry/DPI changed.
   void reconcileScreens();
-  static bool isValidScreen(QScreen* screen);
 
   QList<BreakWindow*> m_windows;
   QList<HeadsUpWindow*> m_headsUpWindows;
   SoundPlayer* soundPlayer;
   QTimer* clockUpdateTimer;
-  // Debounces screenAdded so we don't read transient/invalid geometry during macOS
-  // mid-EDID negotiation or non-transactional multi-screen bursts.
+  // Debounces screen topology/geometry/DPI bursts so we don't act on transient
+  // intermediate states during EDID negotiation or display reconfiguration.
   QTimer* m_screenDebounce = nullptr;
   void updateClocks();
 

@@ -57,9 +57,19 @@ void HeadsUpWindow::setTime(int remainingSeconds) {
 void HeadsUpWindow::initSize(QScreen* screen) {
   m_screen = screen;
   QRect geo = screen->availableGeometry();
+  m_screenRect = geo;
+  m_screenDpr = screen->devicePixelRatio();
+  m_screenLogicalDpi = screen->logicalDotsPerInch();
   move(geo.x() + (geo.width() - PILL_WIDTH) / 2, geo.y() + 16);
   createWinId();
   if (windowHandle() && screen) windowHandle()->setScreen(screen);
+}
+
+bool HeadsUpWindow::matchesScreenState(QScreen* screen) const {
+  if (!screen || m_screen != screen) return false;
+  return m_screenRect == screen->availableGeometry() &&
+         qFuzzyCompare(m_screenDpr, screen->devicePixelRatio()) &&
+         qFuzzyCompare(m_screenLogicalDpi, screen->logicalDotsPerInch());
 }
 
 void HeadsUpWindow::paintEvent(QPaintEvent*) {
