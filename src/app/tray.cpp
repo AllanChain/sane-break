@@ -23,6 +23,7 @@
 #include <algorithm>
 #include <optional>
 
+#include "core/app-data.h"
 #include "core/app.h"
 #include "core/flags.h"
 #include "core/preferences.h"
@@ -129,9 +130,7 @@ QList<int> StatusTrayWindow::focusPresets(int focusSmallEveryMinutes) {
 
 void StatusTrayWindow::buildPostponeMenu() {
   postponeMenu->clear();
-  int smallEveryMinutes = preferences->smallEvery->get() / 60;
-  int maxMinutes =
-      smallEveryMinutes * preferences->postponeMaxMinutePercent->get() / 100;
+  int maxMinutes = PostponeRules::maxPostponeMinutes(preferences);
   QList<int> presets = postponePresets(maxMinutes);
   for (int minutes : presets) {
     QAction* action = postponeMenu->addAction(tr("%n min", "", minutes));

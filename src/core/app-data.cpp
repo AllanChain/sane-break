@@ -4,10 +4,60 @@
 
 #include "core/app-data.h"
 
+#include <QtGlobal>
 #include <algorithm>
 
 #include "core/flags.h"
 #include "core/preferences.h"
+
+namespace {
+
+BreakConfig normalBreakConfig(SanePreferences* preferences) {
+  return {
+      .smallEvery = preferences->smallEvery->get(),
+      .smallFor = preferences->smallFor->get(),
+      .bigEnabled = preferences->bigBreakEnabled->get(),
+      .bigAfter = preferences->bigAfter->get(),
+      .bigFor = preferences->bigFor->get(),
+  };
+}
+
+}  // namespace
+
+namespace PostponeRules {
+
+int maxPostponeMinutes(SanePreferences* preferences) {
+  int smallEvery = preferences->smallEvery->get();
+  int maxMinutePercent = preferences->postponeMaxMinutePercent->get();
+  if (smallEvery <= 0 || maxMinutePercent <= 0) return 0;
+  return static_cast<int>(static_cast<qint64>(smallEvery) * maxMinutePercent / 60 /
+                          100);
+}
+
+PostponeImpact calculateImpact(const BreakConfig& config, int postponedSeconds,
+                               int extendBreakPercent, int shrinkNextPercent) {
+  if (postponedSeconds <= 0) return {};
+  int breakForReference = config.bigEnabled ? config.bigFor : config.smallFor;
+  int breakExtensionSeconds =
+      config.smallEvery > 0 ? static_cast<int>(static_cast<qint64>(extendBreakPercent) *
+                                               postponedSeconds * breakForReference /
+                                               config.smallEvery / 100)
+                            : 0;
+  int nextSessionShrinkSeconds =
+      static_cast<int>(static_cast<qint64>(postponedSeconds) * shrinkNextPercent / 100);
+  return {
+      .breakExtensionSeconds = breakExtensionSeconds,
+      .nextSessionShrinkSeconds = nextSessionShrinkSeconds,
+  };
+}
+
+PostponeImpact calculateImpact(SanePreferences* preferences, int postponedSeconds) {
+  return calculateImpact(normalBreakConfig(preferences), postponedSeconds,
+                         preferences->postponeExtendBreakPercent->get(),
+                         preferences->postponeShrinkNextPercent->get());
+}
+
+}  // namespace PostponeRules
 
 AppData::AppData(QObject* parent, SanePreferences* preferences)
     : QObject(parent), preferences(preferences) {
@@ -292,13 +342,7 @@ BreakConfig AppData::currentBreakConfig() const {
         .bigFor = preferences->focusBigFor->get(),
     };
   }
-  return {
-      .smallEvery = preferences->smallEvery->get(),
-      .smallFor = preferences->smallFor->get(),
-      .bigEnabled = preferences->bigBreakEnabled->get(),
-      .bigAfter = preferences->bigAfter->get(),
-      .bigFor = preferences->bigFor->get(),
-  };
+  return normalBreakConfig(preferences);
 }
 BreakCycleCounter& AppData::activeCycle() {
   return m_focus.isActive() ? m_focus.m_cycle : m_schedule.m_cycle;
@@ -328,11 +372,13 @@ BreakCompletion AppData::completeBreak() {
   }
   // Must come after focus clear: if focus just ended, currentBreakConfig()
   // returns the normal interval instead of the focus interval.
-  completion.nextSessionBaseSeconds = currentBreakConfig().smallEvery;
+  BreakConfig nextConfig = currentBreakConfig();
+  PostponeImpact postponeImpact =
+      PostponeRules::calculateImpact(nextConfig, m_schedule.secondsPostponed(), 0,
+                                     preferences->postponeShrinkNextPercent->get());
+  completion.nextSessionBaseSeconds = nextConfig.smallEvery;
   completion.nextSessionAdjustedSeconds =
-      completion.nextSessionBaseSeconds -
-      m_schedule.secondsPostponed() * preferences->postponeShrinkNextPercent->get() /
-          100;
+      completion.nextSessionBaseSeconds - postponeImpact.nextSessionShrinkSeconds;
   m_schedule.setSecondsToNextBreak(completion.nextSessionAdjustedSeconds, false);
   m_schedule.resetPostpone(false);
   emit changed();
@@ -340,12 +386,11 @@ BreakCompletion AppData::completeBreak() {
 }
 int AppData::breakDuration() const {
   BreakConfig config = currentBreakConfig();
-  int totalSeconds = breakType() == BreakType::Big ? config.bigFor : config.smallFor;
-  int breakForReference = config.bigEnabled ? config.bigFor : config.smallFor;
-  totalSeconds += preferences->postponeExtendBreakPercent->get() *
-                  m_schedule.secondsPostponed() * breakForReference /
-                  config.smallEvery / 100;
-  return totalSeconds;
+  int baseSeconds = breakType() == BreakType::Big ? config.bigFor : config.smallFor;
+  PostponeImpact postponeImpact =
+      PostponeRules::calculateImpact(config, m_schedule.secondsPostponed(),
+                                     preferences->postponeExtendBreakPercent->get(), 0);
+  return baseSeconds + postponeImpact.breakExtensionSeconds;
 }
 void AppData::resetBreakCycle() {
   activeCycle().reset();

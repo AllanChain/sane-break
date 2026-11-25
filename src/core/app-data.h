@@ -29,6 +29,18 @@ struct PostponeData {
   void reset();
 };
 
+struct PostponeImpact {
+  int breakExtensionSeconds = 0;
+  int nextSessionShrinkSeconds = 0;
+};
+
+namespace PostponeRules {
+int maxPostponeMinutes(SanePreferences* preferences);
+PostponeImpact calculateImpact(const BreakConfig& config, int postponedSeconds,
+                               int extendBreakPercent, int shrinkNextPercent);
+PostponeImpact calculateImpact(SanePreferences* preferences, int postponedSeconds);
+}  // namespace PostponeRules
+
 class BreakCycleCounter {
  public:
   int smallBreaksBeforeBigBreak(const BreakConfig& config) const;

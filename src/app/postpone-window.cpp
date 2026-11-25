@@ -17,6 +17,7 @@
 #include <QTimer>
 #include <Qt>
 
+#include "core/app-data.h"
 #include "core/db.h"
 #include "core/preferences.h"
 #include "ui_postpone-window.h"
@@ -26,9 +27,7 @@ PostponeWindow::PostponeWindow(SanePreferences* preferences, BreakDatabase* db,
     : QDialog(parent), ui(new Ui::PostponeUI), preferences(preferences), db(db) {
   ui->setupUi(this);
   setAttribute(Qt::WA_DeleteOnClose);
-  ui->postponeMinutes->setMaximum(preferences->smallEvery->get() *
-                                  preferences->postponeMaxMinutePercent->get() / 60 /
-                                  100);
+  ui->postponeMinutes->setMaximum(PostponeRules::maxPostponeMinutes(preferences));
   onMinutesUpdate(0);
   connect(ui->postponeMinutes, &QSpinBox::valueChanged, this,
           &PostponeWindow::onMinutesUpdate);
@@ -43,13 +42,7 @@ void PostponeWindow::setMinutes(int minutes) { ui->postponeMinutes->setValue(min
 void PostponeWindow::onMinutesUpdate(int minutes) {
   ui->postponeButton->setEnabled(minutes > 0);
   ui->totalMinutesLabel->setArgs({minutes});
-  int shrinkNextMinutes = minutes * preferences->postponeShrinkNextPercent->get() / 100;
-  ui->nextSessionLabel->setArgs({shrinkNextMinutes});
-  int breakForReference = preferences->bigBreakEnabled->get()
-                              ? preferences->bigFor->get()
-                              : preferences->smallFor->get();
-  int breakExtensionSeconds = preferences->postponeExtendBreakPercent->get() * minutes *
-                              60 * breakForReference / preferences->smallEvery->get() /
-                              100;
-  ui->breakExtensionLabel->setArgs({breakExtensionSeconds});
+  PostponeImpact impact = PostponeRules::calculateImpact(preferences, minutes * 60);
+  ui->nextSessionLabel->setArgs({impact.nextSessionShrinkSeconds / 60});
+  ui->breakExtensionLabel->setArgs({impact.breakExtensionSeconds});
 }

@@ -1871,6 +1871,28 @@ class TestApp : public QObject {
     QCOMPARE(app.currentState(), AppState::Normal);
     QVERIFY(!app.trayData.pauseReasons);
   }
+  void postpone_rules_match_core_calculations() {
+    deps.preferences->smallEvery->set(1200);
+    deps.preferences->smallFor->set(20);
+    deps.preferences->bigBreakEnabled->set(true);
+    deps.preferences->bigFor->set(60);
+    deps.preferences->postponeMaxMinutePercent->set(50);
+    deps.preferences->postponeExtendBreakPercent->set(100);
+    deps.preferences->postponeShrinkNextPercent->set(50);
+
+    QCOMPARE(PostponeRules::maxPostponeMinutes(deps.preferences), 10);
+
+    AppData data(nullptr, deps.preferences);
+    data.schedule().postpone(300);
+    PostponeImpact impact = PostponeRules::calculateImpact(deps.preferences, 300);
+    QCOMPARE(impact.breakExtensionSeconds, 15);
+    QCOMPARE(impact.nextSessionShrinkSeconds, 150);
+    QCOMPARE(data.breakDuration(), 20 + impact.breakExtensionSeconds);
+
+    BreakCompletion completion = data.completeBreak();
+    QCOMPARE(completion.nextSessionAdjustedSeconds,
+             1200 - impact.nextSessionShrinkSeconds);
+  }
 };
 
 QTEST_MAIN(TestApp)
