@@ -152,12 +152,10 @@ void AbstractApp::startFocus(int totalCycles, const QString& reason) {
       db->openSpan("focus", {{"totalCycles", totalCycles}, {"reason", reason}}));
   data->focus().start(totalCycles);
   data->schedule().resetPostpone();
-  if (m_currentState->getID() == AppState::Break) {
-    onMenuAction(Action::ReenterBreak{});
-  } else {
+  if (m_currentState->getID() != AppState::Break) {
     data->schedule().earlyBreak();
-    transitionTo(std::make_unique<AppStateBreak>());
   }
+  transitionTo(std::make_unique<AppStateBreak>(), /*force=*/true);
 }
 
 void AbstractApp::endFocus() { onMenuAction(Action::EndFocus{}); }

@@ -884,10 +884,12 @@ class TestApp : public QObject {
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
     // Triggering small break instead is deleting previous windows and creating new ones
+    QSignalSpy stateSpy(&app, &AppContext::appStateChanged);
     EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
     EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
     app.smallBreakInstead();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+    QCOMPARE(stateSpy.count(), 1);
     // We are still in breaking mode. Verify the break has not magically ended.
     QVERIFY(app.trayData.isBreaking);
 
@@ -1037,7 +1039,7 @@ class TestApp : public QObject {
     QCOMPARE(app.currentState(), AppState::Meeting);
     QVERIFY(!app.trayData.pauseReasons);
   }
-  // System pause during meeting stays in Meeting
+  // System pause during meeting stays in Meeting and leaves no stale pause reasons
   void meeting_blocks_system_pause() {
     NiceMock<DummyApp> app(deps);
     app.start();
@@ -1046,6 +1048,11 @@ class TestApp : public QObject {
     emit deps.systemMonitor->pauseRequested(PauseReason::OnBattery);
 
     QCOMPARE(app.currentState(), AppState::Meeting);
+    QVERIFY(!app.trayData.pauseReasons);
+
+    app.endMeetingBreakLater(300);
+    QCOMPARE(app.currentState(), AppState::Normal);
+    QVERIFY(!app.trayData.pauseReasons);
   }
   // endMeetingBreakLater sets 5min countdown and big break
   void meeting_end_break_soon() {
@@ -1575,7 +1582,7 @@ class TestApp : public QObject {
 
     int normalSmallBreaksBeforeBig = app.trayData.smallBreaksBeforeBigBreak;
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, 10, _)).Times(1);
     app.startFocus(1, "deep work");
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
     app.advanceToBreakEnd();
@@ -1583,7 +1590,7 @@ class TestApp : public QObject {
     // Focus entry break advances the focus-only cycle, so the next focus break is big.
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Big, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Big, _, 20, _)).Times(1);
     app.advance(app.trayData.secondsToNextBreak);
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
     app.advanceToBreakEnd();
@@ -1808,6 +1815,61 @@ class TestApp : public QObject {
     QCOMPARE(app.trayData.meetingSecondsRemaining, 1400);
     QVERIFY(app.trayData.isInMeeting);
     QVERIFY(Mock::VerifyAndClearExpectations(deps.meetingPrompt));
+  }
+  // Re-entering break via smallBreakInstead creates a fresh state so a synchronous
+  // idleStart from setIdleDetection() during enter() cannot touch the exited phase.
+  void idle_start_during_break_reentry_is_handled_safely() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.bigBreakNow();
+    QVERIFY(app.trayData.isBreaking);
+
+    deps.idleTimer->setEmitIdleStartOnDetection(true);
+    EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, showFullScreen()).Times(1);
+    app.smallBreakInstead();
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+    QVERIFY(app.trayData.isBreaking);
+  }
+  // A non-idle pause arriving during PostBreakIdle is preserved when idle ends.
+  void pause_during_post_break_idle_transitions_to_paused_on_idle_end() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.breakNow();
+    deps.idleTimer->setIdle(true);
+    app.advanceToBreakEnd();
+    QCOMPARE(app.currentState(), AppState::PostBreakIdle);
+
+    emit deps.systemMonitor->pauseRequested(PauseReason::OnBattery);
+    QCOMPARE(app.currentState(), AppState::PostBreakIdle);
+    QVERIFY(app.trayData.pauseReasons.testFlag(PauseReason::OnBattery));
+
+    deps.idleTimer->setIdle(false);
+    QCOMPARE(app.currentState(), AppState::Paused);
+    QCOMPARE(app.trayData.pauseReasons, PauseReasons(PauseReason::OnBattery));
+  }
+  // A non-idle pause that starts and ends during PostBreakIdle lets idleEnd return
+  // directly to Normal without entering Paused.
+  void pause_and_resume_during_post_break_idle_returns_to_normal() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.breakNow();
+    deps.idleTimer->setIdle(true);
+    app.advanceToBreakEnd();
+    QCOMPARE(app.currentState(), AppState::PostBreakIdle);
+
+    emit deps.systemMonitor->pauseRequested(PauseReason::OnBattery);
+    QVERIFY(app.trayData.pauseReasons.testFlag(PauseReason::OnBattery));
+    emit deps.systemMonitor->resumeRequested(PauseReason::OnBattery);
+    QVERIFY(!app.trayData.pauseReasons.testFlag(PauseReason::OnBattery));
+
+    deps.idleTimer->setIdle(false);
+    QCOMPARE(app.currentState(), AppState::Normal);
+    QVERIFY(!app.trayData.pauseReasons);
   }
 };
 

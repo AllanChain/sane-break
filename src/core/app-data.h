@@ -29,6 +29,20 @@ struct PostponeData {
   void reset();
 };
 
+class BreakCycleCounter {
+ public:
+  int smallBreaksBeforeBigBreak(const BreakConfig& config) const;
+  BreakType breakType(const BreakConfig& config) const;
+
+  void reset();
+  void makeNextBreakBig(const BreakConfig& config);
+  void makeNextBreakLastSmallBeforeBig(const BreakConfig& config);
+  void recordCompletedBreak(BreakType completedBreakType);
+
+ private:
+  int m_completedSmallBreaks = 0;
+};
+
 class BreakScheduleState {
  public:
   void setOnChanged(std::function<void()> onChanged);
@@ -47,22 +61,15 @@ class BreakScheduleState {
   void earlyBreak();
   bool isBreakExtendedByPostpone() const;
 
-  int smallBreaksBeforeBigBreak(const BreakConfig& config) const;
-  BreakType breakType(const BreakConfig& config) const;
-  int breakDuration(const BreakConfig& config, int postponeExtendBreakPercent) const;
-
-  void resetCycle(bool notify = true);
-  void makeNextBreakBig(const BreakConfig& config, bool notify = true);
-  void makeNextBreakLastSmallBeforeBig(const BreakConfig& config, bool notify = true);
-  void recordCompletedBreak(BreakType completedBreakType, bool notify = true);
-
+  const BreakCycleCounter& cycle() const;
   const PostponeData& postponeData() const;
 
  protected:
+  friend class AppData;
   void notifyChanged();
 
   std::function<void()> m_onChanged;
-  int m_completedSmallBreaks = 0;
+  BreakCycleCounter m_cycle;
   int m_secondsToNextBreak = 0;
   PostponeData m_postponeData;
 };
@@ -129,15 +136,11 @@ class FocusState {
   void setCyclesRemaining(int cycles);
   void setSpanId(int id);
 
-  int smallBreaksBeforeBigBreak(const BreakConfig& config) const;
-  BreakType breakType(const BreakConfig& config) const;
-  void resetCycle(bool notify = true);
-  void makeNextBreakBig(const BreakConfig& config, bool notify = true);
-  void makeNextBreakLastSmallBeforeBig(const BreakConfig& config, bool notify = true);
-  void recordCompletedBreak(BreakType completedBreakType, bool notify = true);
+  const BreakCycleCounter& cycle() const;
   bool advanceAfterCompletedBreak(bool notify = true);
 
  protected:
+  friend class AppData;
   void clear();
   void notifyChanged();
 
@@ -147,7 +150,7 @@ class FocusState {
   int m_cyclesRemaining = 0;
   int m_totalCycles = 0;
   int m_spanId = -1;
-  int m_completedSmallBreaks = 0;
+  BreakCycleCounter m_cycle;
 };
 
 struct BreakCompletion {
@@ -219,6 +222,9 @@ class AppData : public QObject {
   void changed();
 
  protected:
+  BreakCycleCounter& activeCycle();
+  const BreakCycleCounter& activeCycle() const;
+
   BreakScheduleState m_schedule;
   PauseState m_pause;
   MeetingState m_meeting;

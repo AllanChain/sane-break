@@ -37,14 +37,13 @@ struct ExtendMeeting {
   int seconds;
 };
 struct EndFocus {};
-struct ReenterBreak {};
 }  // namespace Action
 
 using MenuAction =
     std::variant<Action::BreakNow, Action::BigBreakNow, Action::SmallBreakInstead,
                  Action::EnableBreaks, Action::ExitForceBreak,
                  Action::EndMeetingBreakNow, Action::EndMeetingBreakLater,
-                 Action::ExtendMeeting, Action::EndFocus, Action::ReenterBreak>;
+                 Action::ExtendMeeting, Action::EndFocus>;
 
 class AppContext;
 
@@ -52,14 +51,11 @@ class AppContext;
 //
 // Two event dispatch mechanisms:
 // - onMenuAction(MenuAction): for user-initiated commands. AppContext is a pure
-// pass-through;
-//   states receive the variant directly. Add new user actions as structs in the Action
-//   namespace.
-// - Virtual methods (onIdleStart, onPauseRequest, etc.): for system/platform events
-// where
-//   AppContext needs framework-level logic around the dispatch (e.g. onPauseRequest
-//   adds pause reasons before delegating, onSleepEnd applies a default fallback). Add
-//   new system events as virtual methods here.
+//   pass-through; states receive the variant directly. Add new user actions as structs
+//   in the Action namespace.
+// - Virtual methods (onIdleStart, onPauseRequest, etc.): for system/platform events.
+//   onPauseRequest and onResumeRequest are pure virtual so every state explicitly
+//   declares how it accepts, tracks, or ignores pause reasons.
 class AppState {
  public:
   enum StateID { Normal, Paused, Break, PostBreakIdle, Meeting };
@@ -73,8 +69,8 @@ class AppState {
   // behavior (pause → add slept seconds → resume).
   virtual bool onSleepEnd(AppContext*, int) { return false; };
   virtual void onMenuAction(AppContext*, MenuAction) {};
-  virtual void onPauseRequest(AppContext*, PauseReasons) {};
-  virtual void onResumeRequest(AppContext*, PauseReasons) {};
+  virtual void onPauseRequest(AppContext*, PauseReasons) = 0;
+  virtual void onResumeRequest(AppContext*, PauseReasons) = 0;
   virtual ~AppState() = default;
 };
 
@@ -97,7 +93,7 @@ class AppContext : public QObject {
   void closeCurrentSpan(const QJsonObject& extraData = {},
                         const QDateTime& endTime = {});
 
-  void transitionTo(std::unique_ptr<AppState> state);
+  void transitionTo(std::unique_ptr<AppState> state, bool force = false);
   void exitCurrentState();
   void checkBreakReadiness();
   // Map the treatInhibitorAsActivity preference to the idle measurement mechanism.
@@ -128,6 +124,7 @@ class AppStateNormal : public AppState {
   void onIdleStart(AppContext* app) override;
   void onMenuAction(AppContext* app, MenuAction action) override;
   void onPauseRequest(AppContext* app, PauseReasons reasons) override;
+  void onResumeRequest(AppContext*, PauseReasons) override {}
 };
 
 // Paused state: break schedule is temporarily suspended
@@ -144,6 +141,8 @@ class AppStatePaused : public AppState {
   void onResumeRequest(AppContext* app, PauseReasons reasons) override;
 
  protected:
+  void syncPauseSpan(AppContext* app);
+
   QString m_currentSpanType;
   PauseReasons m_currentSpanReasons = {};
 };
@@ -167,6 +166,7 @@ class AppStateBreak : public AppState {
   void onIdleEnd(AppContext* app) override;
   void onMenuAction(AppContext* app, MenuAction action) override;
   void onPauseRequest(AppContext* app, PauseReasons reasons) override;
+  void onResumeRequest(AppContext*, PauseReasons) override {}
 
   BreaksDataInit dataInit(AppContext*);
   std::unique_ptr<BreaksData> data;
@@ -220,6 +220,8 @@ class AppStatePostBreakIdle : public AppState {
   void tick(AppContext* app) override;
   void onIdleEnd(AppContext* app) override;
   bool onSleepEnd(AppContext* app, int sleptSeconds) override;
+  void onPauseRequest(AppContext* app, PauseReasons reasons) override;
+  void onResumeRequest(AppContext* app, PauseReasons reasons) override;
 
  protected:
   void finalize(AppContext* app);
@@ -236,4 +238,6 @@ class AppStateMeeting : public AppState {
   void tick(AppContext* app) override;
   bool onSleepEnd(AppContext* app, int sleptSeconds) override;
   void onMenuAction(AppContext* app, MenuAction action) override;
+  void onPauseRequest(AppContext*, PauseReasons) override {}
+  void onResumeRequest(AppContext*, PauseReasons) override {}
 };

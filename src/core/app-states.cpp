@@ -32,8 +32,8 @@ QJsonObject pausedSpanData(PauseReasons reasons) {
 
 }  // namespace
 
-void AppContext::transitionTo(std::unique_ptr<AppState> state) {
-  if (m_currentState && m_currentState->getID() == state->getID()) {
+void AppContext::transitionTo(std::unique_ptr<AppState> state, bool force) {
+  if (!force && m_currentState && m_currentState->getID() == state->getID()) {
     return;  // no need to transition
   }
   if (m_currentState) m_currentState->exit(this);
@@ -96,11 +96,9 @@ void AppContext::onSleepEnd(int sleptSeconds) {
   onResumeRequest(PauseReason::Sleep);
 }
 void AppContext::onPauseRequest(PauseReasons reasons) {
-  data->pause().addReasons(reasons);
   m_currentState->onPauseRequest(this, reasons);
 }
 void AppContext::onResumeRequest(PauseReasons reasons) {
-  data->pause().removeReasons(reasons);
   m_currentState->onResumeRequest(this, reasons);
 }
 
@@ -148,11 +146,12 @@ void AppStateNormal::onIdleStart(AppContext* app) {
   app->data->pause().addReasons(PauseReason::Idle);
   app->transitionTo(std::make_unique<AppStatePaused>());
 }
-void AppStateNormal::onPauseRequest(AppContext* app, PauseReasons) {
+void AppStateNormal::onPauseRequest(AppContext* app, PauseReasons reasons) {
   // Explicit pause requests (meeting apps, battery, external control, ...) are
   // honored even while a break is postponed: a user-configured pause takes
   // precedence over the postponed break. Only transient idle pauses are
   // suppressed during postpone, see onIdleStart.
+  app->data->pause().addReasons(reasons);
   app->transitionTo(std::make_unique<AppStatePaused>());
 }
 void AppStateNormal::onMenuAction(AppContext* app, MenuAction action) {
@@ -192,62 +191,39 @@ void AppStatePaused::exit(AppContext* app) {
   m_currentSpanType.clear();
   m_currentSpanReasons = {};
 }
-void AppStatePaused::tick(AppContext* app) { app->data->pause().tickSecondsPaused(); }
-void AppStatePaused::onIdleStart(AppContext* app) {
-  app->data->pause().addReasons(PauseReason::Idle);
-  m_currentSpanReasons |= app->data->pause().reasons();
-  QString nextSpanType = effectivePauseSpanType(app->data->pause().reasons());
+void AppStatePaused::syncPauseSpan(AppContext* app) {
+  PauseReasons reasons = app->data->pause().reasons();
+  if (!reasons) {
+    app->transitionTo(std::make_unique<AppStateNormal>());
+    return;
+  }
+  m_currentSpanReasons |= reasons;
+  QString nextSpanType = effectivePauseSpanType(reasons);
   if (nextSpanType != m_currentSpanType) {
     app->closeCurrentSpan(pausedSpanData(m_currentSpanReasons));
     m_currentSpanType = nextSpanType;
-    m_currentSpanReasons = app->data->pause().reasons();
+    m_currentSpanReasons = reasons;
     app->openCurrentSpan(m_currentSpanType, pausedSpanData(m_currentSpanReasons));
   }
+}
+void AppStatePaused::tick(AppContext* app) { app->data->pause().tickSecondsPaused(); }
+void AppStatePaused::onIdleStart(AppContext* app) {
+  app->data->pause().addReasons(PauseReason::Idle);
+  syncPauseSpan(app);
 }
 void AppStatePaused::onIdleEnd(AppContext* app) {
   // We need to clear screenLockTimer when going through break -> paused -> idleEnd
   app->screenLockTimer->stop();
   app->data->pause().removeReasons(PauseReason::Idle);
-  if (app->data->pause().reasons()) {
-    QString nextSpanType = effectivePauseSpanType(app->data->pause().reasons());
-    if (nextSpanType != m_currentSpanType) {
-      app->closeCurrentSpan(pausedSpanData(m_currentSpanReasons));
-      m_currentSpanType = nextSpanType;
-      m_currentSpanReasons = app->data->pause().reasons();
-      app->openCurrentSpan(m_currentSpanType, pausedSpanData(m_currentSpanReasons));
-    } else {
-      m_currentSpanReasons |= app->data->pause().reasons();
-    }
-  }
-  if (!app->data->pause().reasons()) {
-    app->transitionTo(std::make_unique<AppStateNormal>());
-  }
+  syncPauseSpan(app);
 }
-void AppStatePaused::onPauseRequest(AppContext* app, PauseReasons) {
-  m_currentSpanReasons |= app->data->pause().reasons();
-  QString nextSpanType = effectivePauseSpanType(app->data->pause().reasons());
-  if (nextSpanType == m_currentSpanType) return;
-
-  app->closeCurrentSpan(pausedSpanData(m_currentSpanReasons));
-  m_currentSpanType = nextSpanType;
-  m_currentSpanReasons = app->data->pause().reasons();
-  app->openCurrentSpan(m_currentSpanType, pausedSpanData(m_currentSpanReasons));
+void AppStatePaused::onPauseRequest(AppContext* app, PauseReasons reasons) {
+  app->data->pause().addReasons(reasons);
+  syncPauseSpan(app);
 }
-void AppStatePaused::onResumeRequest(AppContext* app, PauseReasons) {
-  if (app->data->pause().reasons()) {
-    QString nextSpanType = effectivePauseSpanType(app->data->pause().reasons());
-    if (nextSpanType != m_currentSpanType) {
-      app->closeCurrentSpan(pausedSpanData(m_currentSpanReasons));
-      m_currentSpanType = nextSpanType;
-      m_currentSpanReasons = app->data->pause().reasons();
-      app->openCurrentSpan(m_currentSpanType, pausedSpanData(m_currentSpanReasons));
-    } else {
-      m_currentSpanReasons |= app->data->pause().reasons();
-    }
-  }
-  if (!app->data->pause().reasons()) {
-    app->transitionTo(std::make_unique<AppStateNormal>());
-  }
+void AppStatePaused::onResumeRequest(AppContext* app, PauseReasons reasons) {
+  app->data->pause().removeReasons(reasons);
+  syncPauseSpan(app);
 }
 void AppStatePaused::onMenuAction(AppContext* app, MenuAction action) {
   if (std::get_if<Action::EnableBreaks>(&action)) {
@@ -316,16 +292,12 @@ void AppStateBreak::onIdleEnd(AppContext* app) {
 }
 void AppStateBreak::onPauseRequest(AppContext* app, PauseReasons reasons) {
   // An absence pause (idle, a locked screen) must not exit the break: the break tracks
-  // presence on its own. Drop the reason AppContext already recorded - a leftover would
-  // report a stale "paused" state (tray and CLI) after the break ends without ever
-  // pausing the countdown, which is driven by the state machine, not by the reason set.
+  // presence on its own, so ignore it without recording a stale pause reason.
   const PauseReasons needsAttending = reasons & ~AbsencePauseReasons;
-  if (!needsAttending) {
-    app->data->pause().removeReasons(reasons);
-    return;
-  }
+  if (!needsAttending) return;
   // For other pause requests, finish current break and transition to paused state
   this->completeBreak(app);
+  app->data->pause().addReasons(reasons);
   app->transitionTo(std::make_unique<AppStatePaused>());
 }
 BreaksDataInit AppStateBreak::dataInit(AppContext* app) {
@@ -342,18 +314,14 @@ BreaksDataInit AppStateBreak::dataInit(AppContext* app) {
 }
 void AppStateBreak::onMenuAction(AppContext* app, MenuAction action) {
   if (std::get_if<Action::SmallBreakInstead>(&action)) {
-    this->exit(app);
     app->data->makeNextBreakLastSmallBeforeBig();
     app->db->logEvent("break::small-instead");
-    this->enter(app);
+    app->transitionTo(std::make_unique<AppStateBreak>(), /*force=*/true);
   } else if (std::get_if<Action::ExitForceBreak>(&action)) {
     data->init(dataInit(app));
     data->recordForceBreakExit();
     app->db->logEvent("break::exit-force");
     this->transitionTo(app, std::make_unique<BreakPhasePrompt>());
-  } else if (std::get_if<Action::ReenterBreak>(&action)) {
-    this->exit(app);
-    this->enter(app);
   }
 }
 
@@ -503,6 +471,14 @@ bool AppStatePostBreakIdle::onSleepEnd(AppContext* app, int sleptSeconds) {
                        {{"reasons", QJsonArray{pauseReasonId(PauseReason::Idle)}}});
   app->data->postBreak().addIdleSeconds(sleptSeconds);
   return true;
+}
+
+void AppStatePostBreakIdle::onPauseRequest(AppContext* app, PauseReasons reasons) {
+  app->data->pause().addReasons(reasons);
+}
+
+void AppStatePostBreakIdle::onResumeRequest(AppContext* app, PauseReasons reasons) {
+  app->data->pause().removeReasons(reasons);
 }
 
 void AppStateMeeting::enter(AppContext* app) {
