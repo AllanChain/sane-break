@@ -6,6 +6,7 @@
 
 #include <QDialog>
 #include <QPointer>
+#include <memory>
 
 #include "core/meeting-prompt.h"
 
@@ -16,12 +17,13 @@ class MeetingPrompt;
 class MeetingPrompt : public AbstractMeetingPrompt {
   Q_OBJECT
  public:
-  using AbstractMeetingPrompt::AbstractMeetingPrompt;
+  MeetingPrompt(QObject* parent, SanePreferences* preferences);
+  ~MeetingPrompt() override;
   void showEndPrompt() override;
   void closeEndPrompt() override;
   void setTime(int seconds) override;
 
  private:
   QPointer<QDialog> dialog;
-  Ui::MeetingPrompt* ui = nullptr;
+  std::unique_ptr<Ui::MeetingPrompt> ui;
 };

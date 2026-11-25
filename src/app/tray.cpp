@@ -319,7 +319,7 @@ QPixmap renderTrayIcon(TrayIconSpec spec) {
 
 StatusTray::StatusTray(SanePreferences* preferences, QObject* parent)
     : StatusTrayWindow(preferences, parent) {
-  icon = new QSystemTrayIcon();
+  icon = new QSystemTrayIcon(this);
   icon->setContextMenu(menu);
   connect(icon, &QSystemTrayIcon::activated, this, &StatusTray::onIconTrigger);
 
@@ -357,7 +357,7 @@ void StatusTray::update(TrayData data) {
   if (flashTrayFor > 0 && data.secondsToNextBreak <= flashTrayFor &&
       data.secondsToNextBreak > 0 && !data.pauseReasons && !data.isBreaking) {
     if (!flashTimer->isActive()) {
-      QTimer::singleShot(500, [this]() {
+      QTimer::singleShot(500, this, [this]() {
         icon->setIcon(emptyIconPixmap);
         flashTimer->start(1000);
       });
