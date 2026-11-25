@@ -152,7 +152,7 @@ class TestScreenshot : public QObject {
   }
 
   void meetingWindow() {
-    auto* window = new MeetingWindow(prefs, db);
+    auto* window = new MeetingWindow(prefs);
     window->setAttribute(Qt::WA_DeleteOnClose, false);
     window->show();
     QApplication::processEvents();
@@ -161,7 +161,7 @@ class TestScreenshot : public QObject {
   }
 
   void postponeWindow() {
-    auto* window = new PostponeWindow(prefs, db);
+    auto* window = new PostponeWindow(prefs);
     window->setAttribute(Qt::WA_DeleteOnClose, false);
     window->show();
     QApplication::processEvents();

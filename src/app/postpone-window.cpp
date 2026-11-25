@@ -18,13 +18,11 @@
 #include <Qt>
 
 #include "core/app-data.h"
-#include "core/db.h"
 #include "core/preferences.h"
 #include "ui_postpone-window.h"
 
-PostponeWindow::PostponeWindow(SanePreferences* preferences, BreakDatabase* db,
-                               QWidget* parent)
-    : QDialog(parent), ui(new Ui::PostponeUI), preferences(preferences), db(db) {
+PostponeWindow::PostponeWindow(SanePreferences* preferences, QWidget* parent)
+    : QDialog(parent), ui(new Ui::PostponeUI), preferences(preferences) {
   ui->setupUi(this);
   setAttribute(Qt::WA_DeleteOnClose);
   ui->postponeMinutes->setMaximum(PostponeRules::maxPostponeMinutes(preferences));

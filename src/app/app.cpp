@@ -183,7 +183,7 @@ void SaneBreakApp::openPostponeWindow(std::optional<int> presetMinutes) {
       return;
   }
   if (!postponeWindow) {
-    postponeWindow = new PostponeWindow(preferences, db);
+    postponeWindow = new PostponeWindow(preferences);
     connect(postponeWindow, &PostponeWindow::postponeRequested, this,
             &SaneBreakApp::postpone);
   }
@@ -194,7 +194,7 @@ void SaneBreakApp::openPostponeWindow(std::optional<int> presetMinutes) {
 void SaneBreakApp::openMeetingWindow(std::optional<int> presetMinutes) {
   if (m_currentState->getID() == AppState::Meeting) return;
   if (!meetingWindow) {
-    meetingWindow = new MeetingWindow(preferences, db);
+    meetingWindow = new MeetingWindow(preferences);
     connect(meetingWindow, &MeetingWindow::meetingRequested, this,
             [this](QTime endTime, QString reason) {
               QDateTime now = QDateTime::currentDateTime();

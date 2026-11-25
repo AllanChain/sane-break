@@ -14,7 +14,6 @@
 #include <QStringList>
 #include <QTimer>
 
-#include "core/db.h"
 #include "core/preferences.h"
 
 namespace Ui {
@@ -25,8 +24,7 @@ class PostponeWindow : public QDialog {
   Q_OBJECT
 
  public:
-  PostponeWindow(SanePreferences* preferences, BreakDatabase* db,
-                 QWidget* parent = nullptr);
+  explicit PostponeWindow(SanePreferences* preferences, QWidget* parent = nullptr);
   ~PostponeWindow() = default;
 
   void setMinutes(int minutes);
@@ -37,7 +35,6 @@ class PostponeWindow : public QDialog {
  private:
   Ui::PostponeUI* ui;
   SanePreferences* preferences;
-  BreakDatabase* db;
 
   void onMinutesUpdate(int minutes);
 };

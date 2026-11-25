@@ -17,7 +17,6 @@
 #include <QTimer>
 #include <optional>
 
-#include "core/db.h"
 #include "core/preferences.h"
 
 namespace MeetingTime {
@@ -36,8 +35,7 @@ class MeetingWindow : public QDialog {
   Q_OBJECT
 
  public:
-  MeetingWindow(SanePreferences* preferences, BreakDatabase* db,
-                QWidget* parent = nullptr);
+  explicit MeetingWindow(SanePreferences* preferences, QWidget* parent = nullptr);
   ~MeetingWindow() = default;
 
   void setEndTime(QTime endTime);
@@ -48,7 +46,6 @@ class MeetingWindow : public QDialog {
  private:
   Ui::MeetingUI* ui;
   SanePreferences* preferences;
-  BreakDatabase* db;
 
   void onInputUpdate();
 };

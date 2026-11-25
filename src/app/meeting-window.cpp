@@ -19,7 +19,6 @@
 #include <Qt>
 #include <optional>
 
-#include "core/db.h"
 #include "core/preferences.h"
 #include "ui_meeting-window.h"
 
@@ -47,9 +46,8 @@ std::optional<QDateTime> resolveEndDateTime(const QDateTime& now,
 
 }  // namespace MeetingTime
 
-MeetingWindow::MeetingWindow(SanePreferences* preferences, BreakDatabase* db,
-                             QWidget* parent)
-    : QDialog(parent), ui(new Ui::MeetingUI), preferences(preferences), db(db) {
+MeetingWindow::MeetingWindow(SanePreferences* preferences, QWidget* parent)
+    : QDialog(parent), ui(new Ui::MeetingUI), preferences(preferences) {
   ui->setupUi(this);
   setAttribute(Qt::WA_DeleteOnClose);
   QLocale timeLocale = QLocale::system();
