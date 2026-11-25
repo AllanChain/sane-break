@@ -4,11 +4,10 @@
 
 #pragma once
 
+#include <QColor>
 #include <QFlags>
-#include <QList>
-#include <QMainWindow>
 #include <QObject>
-#include <QScreen>
+#include <QString>
 
 #include "core/flags.h"
 #include "core/preferences.h"

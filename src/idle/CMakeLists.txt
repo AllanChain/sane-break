@@ -1,4 +1,4 @@
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Gui)
 add_library(
   sane-idle STATIC
   factory.cpp
@@ -27,4 +27,4 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
   target_sources(sane-idle PRIVATE macos-idle.h macos-inhibitor.h macos-inhibitor.cpp)
 endif()
-target_link_libraries(sane-idle PUBLIC Qt6::Widgets)
+target_link_libraries(sane-idle PUBLIC Qt6::Gui)

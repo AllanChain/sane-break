@@ -1,10 +1,10 @@
-find_package(Qt6 REQUIRED COMPONENTS Widgets Sql Network)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Sql Network)
 
 # core/idle-time.h is also used by sane-idle, so we are making it separate
 add_library(sane-core-idle STATIC idle-time.h)
 set_target_properties(sane-core-idle PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_compile_definitions(sane-core-idle PRIVATE BUILD_COREIDLE_LIB)
-target_link_libraries(sane-core-idle PRIVATE Qt6::Widgets)
+target_link_libraries(sane-core-idle PRIVATE Qt6::Core)
 
 add_library(
   sane-core STATIC
@@ -50,9 +50,7 @@ set(SANE_BREAK_CLI_CONTROL_ENABLED
     CACHE INTERNAL "Whether CLI control feature is built" FORCE
 )
 
-target_link_libraries(
-  sane-core PUBLIC Qt6::Widgets Qt6::Sql Qt6::Network sane-core-idle
-)
+target_link_libraries(sane-core PUBLIC Qt6::Gui Qt6::Sql Qt6::Network sane-core-idle)
 
 if(SANE_BREAK_CLI_CONTROL_ENABLED)
   target_sources(sane-core PRIVATE cli.cpp cli.h command-ipc.cpp command-ipc.h)

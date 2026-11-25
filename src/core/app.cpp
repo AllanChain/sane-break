@@ -4,7 +4,6 @@
 
 #include "core/app.h"
 
-#include <QGuiApplication>
 #include <QJsonArray>
 #include <QObject>
 #include <memory>
