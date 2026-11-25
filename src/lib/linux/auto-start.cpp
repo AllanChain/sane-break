@@ -97,7 +97,7 @@ void AutoStart::setEnabled(bool enabled) {
 
 bool AutoStart::isEnabled([[maybe_unused]] SanePreferences* preferences) {
 #ifdef LINUX_DIST_FLATPAK
-  return preferences->autoStart;
+  return preferences->autoStart->get();
 #endif
   QFile file(QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) +
              "/autostart/sane-break.desktop");
