@@ -3,10 +3,12 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <QCoreApplication>
+#include <QElapsedTimer>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QLocalServer>
+#include <QLocalSocket>
 #include <QObject>
 #include <QSqlDatabase>
 #include <QTest>
@@ -561,6 +563,140 @@ class TestCommand : public QObject {
     assertJsonObject(result.message, &response);
     QCOMPARE(response["error"].toString(), QString("postpone-during-meeting"));
     QVERIFY(app.trayData.isInMeeting);
+  }
+
+  void command_server_does_not_block_on_stalled_client() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    CliCommandServer server(&app);
+    QString errorMessage;
+    if (!server.start(&errorMessage)) {
+      QSKIP(qPrintable(QString("QLocalServer unavailable in this environment: %1")
+                           .arg(errorMessage)));
+    }
+
+    // Hold open a client socket that never sends any bytes.
+    QLocalSocket stalledClient;
+    stalledClient.connectToServer(externalCommandServerName());
+    QVERIFY(stalledClient.waitForConnected(500));
+    QCoreApplication::processEvents();
+
+    QElapsedTimer elapsed;
+    elapsed.start();
+    auto pauseFuture =
+        std::async(std::launch::async, []() { return sendCliCommand({"pause"}, 500); });
+    CliCommandResult pauseResult = waitForFuture(pauseFuture);
+    QVERIFY2(pauseResult.ok, qPrintable(pauseResult.message));
+    QVERIFY2(elapsed.elapsed() < 500,
+             qPrintable(QString("Server stalled for %1ms").arg(elapsed.elapsed())));
+    QCOMPARE(app.trayData.pauseReasons, PauseReason::ExternalControl);
+    stalledClient.abort();
+  }
+
+  void command_server_handles_fragmented_and_unframed_requests() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    CliCommandServer server(&app);
+    QString errorMessage;
+    if (!server.start(&errorMessage)) {
+      QSKIP(qPrintable(QString("QLocalServer unavailable in this environment: %1")
+                           .arg(errorMessage)));
+    }
+
+    auto sendFragmented = [&](const QByteArray& firstChunk,
+                              const QByteArray& secondChunk) {
+      QLocalSocket client;
+      client.connectToServer(externalCommandServerName());
+      if (!client.waitForConnected(500)) return QByteArray();
+      client.write(firstChunk);
+      client.flush();
+      QCoreApplication::processEvents();
+      client.write(secondChunk);
+      client.flush();
+      QElapsedTimer timer;
+      timer.start();
+      QByteArray response;
+      while (!response.contains('\n') && timer.elapsed() < 1000) {
+        QCoreApplication::processEvents();
+        response += client.readAll();
+        QTest::qWait(5);
+      }
+      return response.trimmed();
+    };
+
+    // Unframed JSON split into two writes (no trailing newline).
+    QByteArray unframed =
+        sendFragmented(R"({"version":1,"argu)", R"(ments":["pause"]})");
+    QJsonObject unframedJson;
+    assertJsonObject(QString::fromUtf8(unframed), &unframedJson);
+    QVERIFY(unframedJson["ok"].toBool());
+    QCOMPARE(app.trayData.pauseReasons, PauseReason::ExternalControl);
+
+    // Newline-framed JSON split into two writes.
+    QByteArray framed =
+        sendFragmented(R"({"version":1,"arguments":)", "[\"resume\"]}\n");
+    QJsonObject framedJson;
+    assertJsonObject(QString::fromUtf8(framed), &framedJson);
+    QVERIFY(framedJson["ok"].toBool());
+    QVERIFY(!app.trayData.pauseReasons);
+  }
+
+  void command_server_rejects_malformed_and_oversized_requests() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    CliCommandServer server(&app);
+    QString errorMessage;
+    if (!server.start(&errorMessage)) {
+      QSKIP(qPrintable(QString("QLocalServer unavailable in this environment: %1")
+                           .arg(errorMessage)));
+    }
+
+    auto sendRaw = [&](const QByteArray& raw) {
+      QLocalSocket client;
+      client.connectToServer(externalCommandServerName());
+      if (!client.waitForConnected(500)) return QByteArray();
+      client.write(raw);
+      client.flush();
+      QElapsedTimer timer;
+      timer.start();
+      QByteArray response;
+      while (!response.contains('\n') && timer.elapsed() < 1000) {
+        QCoreApplication::processEvents();
+        response += client.readAll();
+        QTest::qWait(5);
+      }
+      return response.trimmed();
+    };
+
+    // Malformed framed JSON receives an immediate error response.
+    QJsonObject malformedJson;
+    assertJsonObject(QString::fromUtf8(sendRaw("not-json\n")), &malformedJson);
+    QVERIFY(!malformedJson["ok"].toBool());
+
+    // Oversized payload (> 64 KiB) is rejected immediately without waiting for newline.
+    QJsonObject oversizedJson;
+    assertJsonObject(QString::fromUtf8(sendRaw(QByteArray(70 * 1024, 'a'))),
+                     &oversizedJson);
+    QVERIFY(!oversizedJson["ok"].toBool());
+
+    // Abrupt EOF on malformed unframed JSON cleans up without stalling later clients.
+    {
+      QLocalSocket badClient;
+      badClient.connectToServer(externalCommandServerName());
+      QVERIFY(badClient.waitForConnected(500));
+      badClient.write("{bad");
+      badClient.flush();
+      badClient.disconnectFromServer();
+      QCoreApplication::processEvents();
+    }
+
+    auto statusFuture = std::async(std::launch::async,
+                                   []() { return sendCliCommand({"status"}, 500); });
+    CliCommandResult statusResult = waitForFuture(statusFuture);
+    QVERIFY2(statusResult.ok, qPrintable(statusResult.message));
   }
 };
 
