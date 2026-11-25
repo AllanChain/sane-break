@@ -220,6 +220,7 @@ class AppStatePostBreakIdle : public AppState {
   void tick(AppContext* app) override;
   void onIdleEnd(AppContext* app) override;
   bool onSleepEnd(AppContext* app, int sleptSeconds) override;
+  void onMenuAction(AppContext* app, MenuAction action) override;
   void onPauseRequest(AppContext* app, PauseReasons reasons) override;
   void onResumeRequest(AppContext* app, PauseReasons reasons) override;
 

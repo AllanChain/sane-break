@@ -155,24 +155,32 @@ void SaneBreakApp::openFocusWindow(std::optional<int> presetMinutes) {
 }
 
 void SaneBreakApp::openPostponeWindow(std::optional<int> presetMinutes) {
-  if (data->focus().isActive()) {
-    QMessageBox msgBox;
-    msgBox.setText(tr("Cannot postpone during focus mode."));
-    msgBox.setInformativeText(tr("End focus mode first if you want to postpone."));
-    msgBox.setIcon(QMessageBox::Icon::Warning);
-    msgBox.addButton(QMessageBox::Ok)->setText(tr("OK"));
-    msgBox.exec();
-    return;
-  }
-  if (data->schedule().isPostponing()) {
-    QMessageBox msgBox;
-    msgBox.setText(tr("You have already postponed this break once."));
-    msgBox.setInformativeText(tr("No further postpones are allowed."));
-    msgBox.setIcon(QMessageBox::Icon::Warning);
-    msgBox.addButton(QMessageBox::Ok)->setText(tr("OK"));
-    msgBox.setDefaultButton(QMessageBox::Cancel);
-    msgBox.exec();
-    return;
+  switch (canPostpone()) {
+    case CommandError::PostponeDuringFocus: {
+      QMessageBox msgBox;
+      msgBox.setText(tr("Cannot postpone during focus mode."));
+      msgBox.setInformativeText(tr("End focus mode first if you want to postpone."));
+      msgBox.setIcon(QMessageBox::Icon::Warning);
+      msgBox.addButton(QMessageBox::Ok)->setText(tr("OK"));
+      msgBox.exec();
+      return;
+    }
+    case CommandError::AlreadyPostponing: {
+      QMessageBox msgBox;
+      msgBox.setText(tr("You have already postponed this break once."));
+      msgBox.setInformativeText(tr("No further postpones are allowed."));
+      msgBox.setIcon(QMessageBox::Icon::Warning);
+      msgBox.addButton(QMessageBox::Ok)->setText(tr("OK"));
+      msgBox.setDefaultButton(QMessageBox::Cancel);
+      msgBox.exec();
+      return;
+    }
+    case CommandError::PostponeDuringMeeting:
+      return;
+    case CommandError::None:
+      break;
+    default:
+      return;
   }
   if (!postponeWindow) {
     postponeWindow = new PostponeWindow(preferences, db);

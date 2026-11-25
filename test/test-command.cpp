@@ -519,6 +519,49 @@ class TestCommand : public QObject {
         !externalCommandServerName().contains(QStringLiteral("\\\\.\\pipe\\LOCAL\\")));
 #endif
   }
+
+  void cli_rejects_postpone_when_already_postponing() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+    app.postpone(5 * 60);
+
+    int secondsToNextBreak = app.trayData.secondsToNextBreak;
+    CliCommandResult result = executeCliCommand(&app, {"postpone", "5m"});
+
+    QVERIFY(!result.ok);
+    QJsonObject response;
+    assertJsonObject(result.message, &response);
+    QCOMPARE(response["error"].toString(), QString("already-postponing"));
+    QCOMPARE(app.trayData.secondsToNextBreak, secondsToNextBreak);
+  }
+
+  void cli_rejects_postpone_during_focus() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+    app.startFocus(2, "deep work");
+
+    CliCommandResult result = executeCliCommand(&app, {"postpone", "5m"});
+
+    QVERIFY(!result.ok);
+    QJsonObject response;
+    assertJsonObject(result.message, &response);
+    QCOMPARE(response["error"].toString(), QString("postpone-during-focus"));
+    QVERIFY(app.trayData.isFocusMode);
+  }
+
+  void cli_rejects_postpone_during_meeting() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+    app.startMeeting(10 * 60, "client call");
+
+    CliCommandResult result = executeCliCommand(&app, {"postpone", "5m"});
+
+    QVERIFY(!result.ok);
+    QJsonObject response;
+    assertJsonObject(result.message, &response);
+    QCOMPARE(response["error"].toString(), QString("postpone-during-meeting"));
+    QVERIFY(app.trayData.isInMeeting);
+  }
 };
 
 QTEST_MAIN(TestCommand)

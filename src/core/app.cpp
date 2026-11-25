@@ -146,22 +146,35 @@ void AbstractApp::resumeFromExternalControl() {
   onResumeRequest(PauseReason::ExternalControl);
 }
 
-void AbstractApp::startFocus(int totalCycles, const QString& reason) {
-  if (data->focus().isActive() || m_currentState->getID() == AppState::Meeting) return;
+CommandError AbstractApp::startFocus(int totalCycles, const QString& reason) {
+  if (data->focus().isActive()) return CommandError::FocusAlreadyActive;
+  if (m_currentState && m_currentState->getID() == AppState::Meeting) {
+    return CommandError::FocusDuringMeeting;
+  }
   data->focus().setSpanId(
       db->openSpan("focus", {{"totalCycles", totalCycles}, {"reason", reason}}));
   data->focus().start(totalCycles);
   data->schedule().resetPostpone();
-  if (m_currentState->getID() != AppState::Break) {
+  if (!m_currentState || m_currentState->getID() != AppState::Break) {
     data->schedule().earlyBreak();
   }
   transitionTo(std::make_unique<AppStateBreak>(), /*force=*/true);
+  return CommandError::None;
 }
 
-void AbstractApp::endFocus() { onMenuAction(Action::EndFocus{}); }
+CommandError AbstractApp::endFocus() {
+  if (!data->focus().isActive()) return CommandError::FocusNotActive;
+  if (m_currentState && m_currentState->getID() == AppState::Break) {
+    return CommandError::FocusEndDuringBreak;
+  }
+  onMenuAction(Action::EndFocus{});
+  return CommandError::None;
+}
 
-void AbstractApp::startMeeting(int seconds, const QString& reason) {
-  if (m_currentState->getID() == AppState::Meeting) return;
+CommandError AbstractApp::startMeeting(int seconds, const QString& reason) {
+  if (m_currentState && m_currentState->getID() == AppState::Meeting) {
+    return CommandError::MeetingAlreadyActive;
+  }
   data->schedule().resetPostpone();
   if (data->focus().isActive()) {
     db->closeSpan(data->focus().spanId(), {{"reason", "meeting"}});
@@ -169,26 +182,50 @@ void AbstractApp::startMeeting(int seconds, const QString& reason) {
   }
   data->meeting().set(seconds, seconds, reason);
   transitionTo(std::make_unique<AppStateMeeting>());
+  return CommandError::None;
 }
 
-void AbstractApp::endMeetingBreakNow() { onMenuAction(Action::EndMeetingBreakNow{}); }
+CommandError AbstractApp::endMeetingBreakNow() {
+  if (!m_currentState || m_currentState->getID() != AppState::Meeting) {
+    return CommandError::MeetingNotActive;
+  }
+  onMenuAction(Action::EndMeetingBreakNow{});
+  return CommandError::None;
+}
 
-void AbstractApp::endMeetingBreakLater(int seconds) {
+CommandError AbstractApp::endMeetingBreakLater(int seconds) {
+  if (!m_currentState || m_currentState->getID() != AppState::Meeting) {
+    return CommandError::MeetingNotActive;
+  }
   onMenuAction(Action::EndMeetingBreakLater{seconds});
+  return CommandError::None;
 }
 
-void AbstractApp::extendMeeting(int seconds) {
+CommandError AbstractApp::extendMeeting(int seconds) {
+  if (!m_currentState || m_currentState->getID() != AppState::Meeting) {
+    return CommandError::MeetingNotActive;
+  }
   onMenuAction(Action::ExtendMeeting{seconds});
+  return CommandError::None;
 }
 
-void AbstractApp::postpone(int seconds) {
-  // This is defensive. This should already be handled by App.
-  if (data->schedule().isPostponing() || data->focus().isActive()) return;
+CommandError AbstractApp::canPostpone() const {
+  if (m_currentState && m_currentState->getID() == AppState::Meeting) {
+    return CommandError::PostponeDuringMeeting;
+  }
+  if (data->focus().isActive()) return CommandError::PostponeDuringFocus;
+  if (data->schedule().isPostponing()) return CommandError::AlreadyPostponing;
+  return CommandError::None;
+}
+
+CommandError AbstractApp::postpone(int seconds) {
+  if (CommandError error = canPostpone(); error != CommandError::None) return error;
   db->logEvent("postpone", {{"seconds", seconds}});
   // Exit current break if we are postponing breaks
   transitionTo(std::make_unique<AppStateNormal>());
   data->schedule().postpone(seconds);
   checkBreakReadiness();
+  return CommandError::None;
 }
 
 void AbstractApp::onBatterySettingChange() {

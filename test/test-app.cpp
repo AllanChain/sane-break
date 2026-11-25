@@ -1893,6 +1893,43 @@ class TestApp : public QObject {
     QCOMPARE(completion.nextSessionAdjustedSeconds,
              1200 - impact.nextSessionShrinkSeconds);
   }
+  void postpone_rejected_during_meeting() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+    app.startMeeting(600, "standup");
+
+    QCOMPARE(app.canPostpone(), CommandError::PostponeDuringMeeting);
+    QCOMPARE(app.postpone(300), CommandError::PostponeDuringMeeting);
+    QCOMPARE(app.currentState(), AppState::Meeting);
+    QVERIFY(app.trayData.isInMeeting);
+  }
+  void end_focus_rejected_when_inactive() {
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    QCOMPARE(app.endFocus(), CommandError::FocusNotActive);
+    QCOMPARE(app.currentState(), AppState::Normal);
+    QVERIFY(!app.trayData.isBreaking);
+  }
+  void end_focus_during_post_break_idle_triggers_final_break() {
+    deps.preferences->focusSmallEvery->set(600);
+    deps.preferences->focusSmallFor->set(10);
+    deps.preferences->focusBigBreakEnabled->set(false);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    app.startFocus(3, "deep work");
+    deps.idleTimer->setIdle(true);
+    app.advanceToBreakEnd();
+    QCOMPARE(app.currentState(), AppState::PostBreakIdle);
+
+    QCOMPARE(app.endFocus(), CommandError::None);
+    QCOMPARE(app.currentState(), AppState::Break);
+    QVERIFY(app.trayData.isBreaking);
+
+    app.advanceToBreakEnd();
+    QVERIFY(!app.trayData.isFocusMode);
+  }
 };
 
 QTEST_MAIN(TestApp)

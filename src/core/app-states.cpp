@@ -477,6 +477,15 @@ void AppStatePostBreakIdle::onPauseRequest(AppContext* app, PauseReasons reasons
   app->data->pause().addReasons(reasons);
 }
 
+void AppStatePostBreakIdle::onMenuAction(AppContext* app, MenuAction action) {
+  if (std::get_if<Action::EndFocus>(&action)) {
+    app->data->pause().clearReasons();
+    app->data->focus().setCyclesRemaining(1);
+    app->data->schedule().earlyBreak();
+    app->transitionTo(std::make_unique<AppStateBreak>());
+  }
+}
+
 void AppStatePostBreakIdle::onResumeRequest(AppContext* app, PauseReasons reasons) {
   app->data->pause().removeReasons(reasons);
 }

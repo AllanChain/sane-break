@@ -180,6 +180,237 @@ CliCommandResult handleCliParseError(const CLI::App& app,
   return jsonErrorResult("cli-parse-error", QString::fromStdString(err.str()));
 }
 
+CliCommandResult invalidDurationResult(const std::string& rawInput) {
+  QString input = QString::fromStdString(rawInput);
+  return jsonErrorResult("invalid-duration",
+                         QString("Invalid duration \"%1\". Use a positive duration "
+                                 "such as 10m, 600s, or 1h.")
+                             .arg(input),
+                         {{"input", input}});
+}
+
+CliCommandResult commandResult(AbstractApp* app, CommandError error) {
+  switch (error) {
+    case CommandError::None:
+      return jsonStatusResult(app->trayDataSnapshot());
+    case CommandError::MeetingAlreadyActive:
+      return jsonErrorResult("meeting-already-active",
+                             QStringLiteral("Meeting mode is already active."));
+    case CommandError::MeetingNotActive:
+      return jsonErrorResult("meeting-not-active",
+                             QStringLiteral("Meeting mode is not active."));
+    case CommandError::FocusAlreadyActive:
+      return jsonErrorResult("focus-already-active",
+                             QStringLiteral("Focus mode is already active."));
+    case CommandError::FocusNotActive:
+      return jsonErrorResult("focus-not-active",
+                             QStringLiteral("Focus mode is not active."));
+    case CommandError::FocusDuringMeeting:
+      return jsonErrorResult(
+          "focus-during-meeting",
+          QStringLiteral("Cannot start focus mode during meeting mode."));
+    case CommandError::FocusEndDuringBreak:
+      return jsonErrorResult("focus-end-during-break",
+                             QStringLiteral("Cannot end focus mode during a break."));
+    case CommandError::AlreadyPostponing:
+      return jsonErrorResult("already-postponing",
+                             QStringLiteral("Break has already been postponed."));
+    case CommandError::PostponeDuringFocus:
+      return jsonErrorResult("postpone-during-focus",
+                             QStringLiteral("Cannot postpone during focus mode."));
+    case CommandError::PostponeDuringMeeting:
+      return jsonErrorResult("postpone-during-meeting",
+                             QStringLiteral("Cannot postpone during meeting mode."));
+  }
+  return jsonErrorResult("command-error", QStringLiteral("Command failed."));
+}
+
+struct CliCommands {
+  CLI::App* breakNow = nullptr;
+  CLI::App* bigBreakNow = nullptr;
+  CLI::App* pause = nullptr;
+  CLI::App* resume = nullptr;
+  CLI::App* enableBreak = nullptr;
+  CLI::App* status = nullptr;
+  CLI::App* meetingStart = nullptr;
+  CLI::App* meetingEnd = nullptr;
+  CLI::App* meetingExtend = nullptr;
+  CLI::App* focusStart = nullptr;
+  CLI::App* focusEnd = nullptr;
+  CLI::App* postpone = nullptr;
+
+  std::string meetingStartDuration;
+  std::string meetingStartReason;
+  std::string meetingEndBreakLater;
+  std::string meetingExtendDuration;
+  bool meetingEndBreakNow = false;
+  std::string focusStartDuration;
+  std::string focusStartReason;
+  std::string postponeTime;
+};
+
+void registerCliCommands(CLI::App& cli, CliCommands& commands) {
+  commands.breakNow =
+      addCliCommand(cli, QStringLiteral("break-now"),
+                    CliTranslation::tr("Start the next break immediately"));
+  commands.bigBreakNow =
+      addCliCommand(cli, QStringLiteral("big-break-now"),
+                    CliTranslation::tr("Start the next big break immediately"));
+  commands.pause =
+      addCliCommand(cli, QStringLiteral("pause"),
+                    CliTranslation::tr("Pause breaks by external control"));
+  commands.resume =
+      addCliCommand(cli, QStringLiteral("resume"),
+                    CliTranslation::tr("Resume breaks paused by external control"));
+  commands.enableBreak =
+      addCliCommand(cli, QStringLiteral("enable-break"),
+                    CliTranslation::tr("Enable breaks by clearing all pause reasons"));
+  commands.status = addCliCommand(cli, QStringLiteral("status"),
+                                  CliTranslation::tr("Show current break status"));
+
+  CLI::App* meeting =
+      addCliCommand(cli, QStringLiteral("meeting"),
+                    CliTranslation::tr("Manage meeting or presentation mode"));
+  meeting->require_subcommand(1, 1);
+
+  commands.meetingStart =
+      addCliCommand(*meeting, QStringLiteral("start"),
+                    CliTranslation::tr("Start meeting mode for a duration"));
+  commands.meetingStart
+      ->add_option("--for", commands.meetingStartDuration,
+                   CliTranslation::tr("Meeting duration, for example 45m, 2700s, or 1h")
+                       .toStdString())
+      ->required();
+  commands.meetingStart->add_option("--reason", commands.meetingStartReason,
+                                    CliTranslation::tr("Meeting reason").toStdString());
+
+  commands.meetingEnd = addCliCommand(*meeting, QStringLiteral("end"),
+                                      CliTranslation::tr("End meeting mode"));
+  CLI::Option* meetingEndBreakNowOption = commands.meetingEnd->add_flag(
+      "--break-now", commands.meetingEndBreakNow,
+      CliTranslation::tr("Start a break immediately").toStdString());
+  CLI::Option* meetingEndBreakLaterOption = commands.meetingEnd->add_option(
+      "--break-later", commands.meetingEndBreakLater,
+      CliTranslation::tr("Schedule the next break after this duration").toStdString());
+  meetingEndBreakNowOption->excludes(meetingEndBreakLaterOption);
+
+  commands.meetingExtend =
+      addCliCommand(*meeting, QStringLiteral("extend"),
+                    CliTranslation::tr("Extend the current meeting"));
+  commands.meetingExtend
+      ->add_option(
+          "time", commands.meetingExtendDuration,
+          CliTranslation::tr("Duration to extend, for example 10m, 600s, or 1h")
+              .toStdString())
+      ->required();
+
+  CLI::App* focus = addCliCommand(cli, QStringLiteral("focus"),
+                                  CliTranslation::tr("Manage focus mode"));
+  focus->require_subcommand(1, 1);
+
+  commands.focusStart =
+      addCliCommand(*focus, QStringLiteral("start"),
+                    CliTranslation::tr("Start focus mode for a duration"));
+  commands.focusStart
+      ->add_option("--for", commands.focusStartDuration,
+                   CliTranslation::tr("Focus duration, for example 50m, 3000s, or 1h")
+                       .toStdString())
+      ->required();
+  commands.focusStart->add_option("--reason", commands.focusStartReason,
+                                  CliTranslation::tr("Focus reason").toStdString());
+
+  commands.focusEnd = addCliCommand(*focus, QStringLiteral("end"),
+                                    CliTranslation::tr("End focus mode"));
+
+  commands.postpone = addCliCommand(cli, QStringLiteral("postpone"),
+                                    CliTranslation::tr("Postpone the next break"));
+  commands.postpone
+      ->add_option(
+          "time", commands.postponeTime,
+          CliTranslation::tr("Duration to postpone, for example 10m, 600s, or 1h. "
+                             "Bare numbers are minutes.")
+              .toStdString())
+      ->required();
+}
+
+CliCommandResult dispatchCliCommand(AbstractApp* app, const CliCommands& commands) {
+  if (commands.breakNow->parsed()) {
+    app->breakNow();
+    return jsonStatusResult(app->trayDataSnapshot());
+  }
+  if (commands.bigBreakNow->parsed()) {
+    app->bigBreakNow();
+    return jsonStatusResult(app->trayDataSnapshot());
+  }
+  if (commands.pause->parsed()) {
+    app->pauseByExternalControl();
+    return jsonStatusResult(app->trayDataSnapshot());
+  }
+  if (commands.resume->parsed()) {
+    app->resumeFromExternalControl();
+    return jsonStatusResult(app->trayDataSnapshot());
+  }
+  if (commands.enableBreak->parsed()) {
+    app->enableBreak();
+    return jsonStatusResult(app->trayDataSnapshot());
+  }
+  if (commands.status->parsed()) {
+    return jsonStatusResult(app->trayDataSnapshot());
+  }
+
+  if (commands.meetingStart->parsed()) {
+    std::optional<int> seconds = parseDurationSeconds(commands.meetingStartDuration);
+    if (!seconds) return invalidDurationResult(commands.meetingStartDuration);
+    return commandResult(
+        app, app->startMeeting(*seconds,
+                               QString::fromStdString(commands.meetingStartReason)));
+  }
+
+  if (commands.meetingEnd->parsed()) {
+    if (commands.meetingEndBreakNow) {
+      return commandResult(app, app->endMeetingBreakNow());
+    }
+    int seconds = app->preferences->smallEvery->get();
+    if (!commands.meetingEndBreakLater.empty()) {
+      std::optional<int> parsedSeconds =
+          parseDurationSeconds(commands.meetingEndBreakLater);
+      if (!parsedSeconds) return invalidDurationResult(commands.meetingEndBreakLater);
+      seconds = *parsedSeconds;
+    }
+    return commandResult(app, app->endMeetingBreakLater(seconds));
+  }
+
+  if (commands.meetingExtend->parsed()) {
+    std::optional<int> seconds = parseDurationSeconds(commands.meetingExtendDuration);
+    if (!seconds) return invalidDurationResult(commands.meetingExtendDuration);
+    return commandResult(app, app->extendMeeting(*seconds));
+  }
+
+  if (commands.focusStart->parsed()) {
+    std::optional<int> seconds = parseDurationSeconds(commands.focusStartDuration);
+    std::optional<int> cycles =
+        seconds
+            ? focusCyclesForDuration(*seconds, app->preferences->focusSmallEvery->get())
+            : std::nullopt;
+    if (!cycles) return invalidDurationResult(commands.focusStartDuration);
+    return commandResult(
+        app,
+        app->startFocus(*cycles, QString::fromStdString(commands.focusStartReason)));
+  }
+
+  if (commands.focusEnd->parsed()) {
+    return commandResult(app, app->endFocus());
+  }
+
+  if (commands.postpone->parsed()) {
+    std::optional<int> seconds = parseDurationSeconds(commands.postponeTime);
+    if (!seconds) return invalidDurationResult(commands.postponeTime);
+    return commandResult(app, app->postpone(*seconds));
+  }
+
+  return jsonErrorResult("expected-command", QStringLiteral("Expected a command."));
+}
+
 }  // namespace
 
 bool shouldLaunchGuiForArguments(const QStringList& arguments) {
@@ -193,96 +424,8 @@ CliCommandResult executeCliCommand(AbstractApp* app, const QStringList& argument
   CLI::App cli{"Sane Break", kProgramName};
   configureRootCli(cli);
 
-  CLI::App* breakNow =
-      addCliCommand(cli, QStringLiteral("break-now"),
-                    CliTranslation::tr("Start the next break immediately"));
-  CLI::App* bigBreakNow =
-      addCliCommand(cli, QStringLiteral("big-break-now"),
-                    CliTranslation::tr("Start the next big break immediately"));
-  CLI::App* pause =
-      addCliCommand(cli, QStringLiteral("pause"),
-                    CliTranslation::tr("Pause breaks by external control"));
-  CLI::App* resume =
-      addCliCommand(cli, QStringLiteral("resume"),
-                    CliTranslation::tr("Resume breaks paused by external control"));
-  CLI::App* enableBreak =
-      addCliCommand(cli, QStringLiteral("enable-break"),
-                    CliTranslation::tr("Enable breaks by clearing all pause reasons"));
-
-  bool jsonStatus = false;
-  CLI::App* status = addCliCommand(cli, QStringLiteral("status"),
-                                   CliTranslation::tr("Show current break status"));
-  std::string meetingStartDuration;
-  std::string meetingStartReason;
-  std::string meetingEndBreakLater;
-  std::string meetingExtendDuration;
-  bool meetingEndBreakNow = false;
-  CLI::App* meeting =
-      addCliCommand(cli, QStringLiteral("meeting"),
-                    CliTranslation::tr("Manage meeting or presentation mode"));
-  meeting->require_subcommand(1, 1);
-
-  CLI::App* meetingStart =
-      addCliCommand(*meeting, QStringLiteral("start"),
-                    CliTranslation::tr("Start meeting mode for a duration"));
-  meetingStart
-      ->add_option("--for", meetingStartDuration,
-                   CliTranslation::tr("Meeting duration, for example 45m, 2700s, or 1h")
-                       .toStdString())
-      ->required();
-  meetingStart->add_option("--reason", meetingStartReason,
-                           CliTranslation::tr("Meeting reason").toStdString());
-
-  CLI::App* meetingEnd = addCliCommand(*meeting, QStringLiteral("end"),
-                                       CliTranslation::tr("End meeting mode"));
-  CLI::Option* meetingEndBreakNowOption = meetingEnd->add_flag(
-      "--break-now", meetingEndBreakNow,
-      CliTranslation::tr("Start a break immediately").toStdString());
-  CLI::Option* meetingEndBreakLaterOption = meetingEnd->add_option(
-      "--break-later", meetingEndBreakLater,
-      CliTranslation::tr("Schedule the next break after this duration").toStdString());
-  meetingEndBreakNowOption->excludes(meetingEndBreakLaterOption);
-
-  CLI::App* meetingExtend =
-      addCliCommand(*meeting, QStringLiteral("extend"),
-                    CliTranslation::tr("Extend the current meeting"));
-  meetingExtend
-      ->add_option(
-          "time", meetingExtendDuration,
-          CliTranslation::tr("Duration to extend, for example 10m, 600s, or 1h")
-              .toStdString())
-      ->required();
-
-  std::string focusStartDuration;
-  std::string focusStartReason;
-  CLI::App* focus = addCliCommand(cli, QStringLiteral("focus"),
-                                  CliTranslation::tr("Manage focus mode"));
-  focus->require_subcommand(1, 1);
-
-  CLI::App* focusStart =
-      addCliCommand(*focus, QStringLiteral("start"),
-                    CliTranslation::tr("Start focus mode for a duration"));
-  focusStart
-      ->add_option("--for", focusStartDuration,
-                   CliTranslation::tr("Focus duration, for example 50m, 3000s, or 1h")
-                       .toStdString())
-      ->required();
-  focusStart->add_option("--reason", focusStartReason,
-                         CliTranslation::tr("Focus reason").toStdString());
-
-  CLI::App* focusEnd = addCliCommand(*focus, QStringLiteral("end"),
-                                     CliTranslation::tr("End focus mode"));
-
-  std::string postponeTime;
-  CLI::App* postpone = addCliCommand(cli, QStringLiteral("postpone"),
-                                     CliTranslation::tr("Postpone the next break"));
-  postpone
-      ->add_option(
-          "time", postponeTime,
-          CliTranslation::tr("Duration to postpone, for example 10m, 600s, or 1h. "
-                             "Bare numbers are minutes.")
-              .toStdString())
-      ->required();
+  CliCommands commands;
+  registerCliCommands(cli, commands);
 
   std::vector<std::string> cliArguments = toCliArguments(arguments);
   try {
@@ -291,162 +434,5 @@ CliCommandResult executeCliCommand(AbstractApp* app, const QStringList& argument
     return handleCliParseError(cli, error);
   }
 
-  if (breakNow->parsed()) {
-    app->breakNow();
-    return jsonStatusResult(app->trayDataSnapshot());
-  }
-
-  if (bigBreakNow->parsed()) {
-    app->bigBreakNow();
-    return jsonStatusResult(app->trayDataSnapshot());
-  }
-
-  if (pause->parsed()) {
-    app->pauseByExternalControl();
-    return jsonStatusResult(app->trayDataSnapshot());
-  }
-
-  if (resume->parsed()) {
-    app->resumeFromExternalControl();
-    return jsonStatusResult(app->trayDataSnapshot());
-  }
-
-  if (enableBreak->parsed()) {
-    app->enableBreak();
-    return jsonStatusResult(app->trayDataSnapshot());
-  }
-
-  if (status->parsed()) {
-    Q_UNUSED(jsonStatus);
-    return jsonStatusResult(app->trayDataSnapshot());
-  }
-
-  if (meetingStart->parsed()) {
-    if (app->trayDataSnapshot().isInMeeting) {
-      return jsonErrorResult("meeting-already-active",
-                             QStringLiteral("Meeting mode is already active."));
-    }
-
-    std::optional<int> seconds = parseDurationSeconds(meetingStartDuration);
-    if (!seconds) {
-      return jsonErrorResult("invalid-duration",
-                             QString("Invalid duration \"%1\". Use a positive duration "
-                                     "such as 10m, 600s, or 1h.")
-                                 .arg(QString::fromStdString(meetingStartDuration)),
-                             {{"input", QString::fromStdString(meetingStartDuration)}});
-    }
-
-    app->startMeeting(*seconds, QString::fromStdString(meetingStartReason));
-    return jsonStatusResult(app->trayDataSnapshot());
-  }
-
-  if (meetingEnd->parsed()) {
-    if (!app->trayDataSnapshot().isInMeeting) {
-      return jsonErrorResult("meeting-not-active",
-                             QStringLiteral("Meeting mode is not active."));
-    }
-
-    if (meetingEndBreakNow) {
-      app->endMeetingBreakNow();
-      return jsonStatusResult(app->trayDataSnapshot());
-    }
-
-    int seconds = app->preferences->smallEvery->get();
-    if (!meetingEndBreakLater.empty()) {
-      std::optional<int> parsedSeconds = parseDurationSeconds(meetingEndBreakLater);
-      if (!parsedSeconds) {
-        return jsonErrorResult(
-            "invalid-duration",
-            QString(
-                "Invalid duration \"%1\". Use a positive duration such as 10m, 600s, "
-                "or 1h.")
-                .arg(QString::fromStdString(meetingEndBreakLater)),
-            {{"input", QString::fromStdString(meetingEndBreakLater)}});
-      }
-      seconds = *parsedSeconds;
-    }
-
-    app->endMeetingBreakLater(seconds);
-    return jsonStatusResult(app->trayDataSnapshot());
-  }
-
-  if (meetingExtend->parsed()) {
-    if (!app->trayDataSnapshot().isInMeeting) {
-      return jsonErrorResult("meeting-not-active",
-                             QStringLiteral("Meeting mode is not active."));
-    }
-
-    std::optional<int> seconds = parseDurationSeconds(meetingExtendDuration);
-    if (!seconds) {
-      return jsonErrorResult(
-          "invalid-duration",
-          QString("Invalid duration \"%1\". Use a positive duration such as 10m, 600s, "
-                  "or 1h.")
-              .arg(QString::fromStdString(meetingExtendDuration)),
-          {{"input", QString::fromStdString(meetingExtendDuration)}});
-    }
-
-    app->extendMeeting(*seconds);
-    return jsonStatusResult(app->trayDataSnapshot());
-  }
-
-  if (focusStart->parsed()) {
-    TrayData data = app->trayDataSnapshot();
-    if (data.isFocusMode) {
-      return jsonErrorResult("focus-already-active",
-                             QStringLiteral("Focus mode is already active."));
-    }
-    if (data.isInMeeting) {
-      return jsonErrorResult(
-          "focus-during-meeting",
-          QStringLiteral("Cannot start focus mode during meeting mode."));
-    }
-
-    std::optional<int> seconds = parseDurationSeconds(focusStartDuration);
-    std::optional<int> cycles =
-        seconds
-            ? focusCyclesForDuration(*seconds, app->preferences->focusSmallEvery->get())
-            : std::nullopt;
-    if (!cycles) {
-      return jsonErrorResult("invalid-duration",
-                             QString("Invalid duration \"%1\". Use a positive duration "
-                                     "such as 10m, 600s, or 1h.")
-                                 .arg(QString::fromStdString(focusStartDuration)),
-                             {{"input", QString::fromStdString(focusStartDuration)}});
-    }
-
-    app->startFocus(*cycles, QString::fromStdString(focusStartReason));
-    return jsonStatusResult(app->trayDataSnapshot());
-  }
-
-  if (focusEnd->parsed()) {
-    TrayData data = app->trayDataSnapshot();
-    if (!data.isFocusMode) {
-      return jsonErrorResult("focus-not-active",
-                             QStringLiteral("Focus mode is not active."));
-    }
-    if (data.isBreaking) {
-      return jsonErrorResult("focus-end-during-break",
-                             QStringLiteral("Cannot end focus mode during a break."));
-    }
-
-    app->endFocus();
-    return jsonStatusResult(app->trayDataSnapshot());
-  }
-
-  if (postpone->parsed()) {
-    std::optional<int> seconds = parseDurationSeconds(postponeTime);
-    if (!seconds) {
-      return jsonErrorResult("invalid-duration",
-                             QString("Invalid duration \"%1\". Use a positive duration "
-                                     "such as 10m, 600s, or 1h.")
-                                 .arg(QString::fromStdString(postponeTime)),
-                             {{"input", QString::fromStdString(postponeTime)}});
-    }
-
-    app->postpone(*seconds);
-    return jsonStatusResult(app->trayDataSnapshot());
-  }
-
-  return jsonErrorResult("expected-command", QStringLiteral("Expected a command."));
+  return dispatchCliCommand(app, commands);
 }

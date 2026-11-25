@@ -45,6 +45,19 @@ struct TrayData {
   int focusTotalCycles;
 };
 
+enum class CommandError {
+  None,
+  MeetingAlreadyActive,
+  MeetingNotActive,
+  FocusAlreadyActive,
+  FocusNotActive,
+  FocusDuringMeeting,
+  FocusEndDuringBreak,
+  AlreadyPostponing,
+  PostponeDuringFocus,
+  PostponeDuringMeeting,
+};
+
 class AbstractApp : public AppContext {
   Q_OBJECT
  public:
@@ -57,18 +70,19 @@ class AbstractApp : public AppContext {
   void bigBreakNow();
   // Take a small break when big break is on
   void smallBreakInstead();
-  void postpone(int seconds);
+  CommandError canPostpone() const;
+  CommandError postpone(int seconds);
   void enableBreak();
   void pauseByExternalControl();
   void resumeFromExternalControl();
 
-  void startMeeting(int seconds, const QString& reason);
-  void endMeetingBreakNow();
-  void endMeetingBreakLater(int seconds);
-  void extendMeeting(int seconds);
+  CommandError startMeeting(int seconds, const QString& reason);
+  CommandError endMeetingBreakNow();
+  CommandError endMeetingBreakLater(int seconds);
+  CommandError extendMeeting(int seconds);
 
-  void startFocus(int totalCycles, const QString& reason);
-  void endFocus();
+  CommandError startFocus(int totalCycles, const QString& reason);
+  CommandError endFocus();
 
   TrayData trayDataSnapshot() const;
 
