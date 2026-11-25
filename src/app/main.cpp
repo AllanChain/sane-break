@@ -19,6 +19,7 @@
 #include <QThread>
 #include <QTranslator>
 #include <Qt>
+#include <memory>
 
 #include "app.h"
 #include "app/welcome.h"
@@ -86,7 +87,7 @@ int main(int argc, char* argv[]) {
 
   if (waitForTray()) a.setQuitOnLastWindowClosed(false);
 
-  SanePreferences* preferences = SanePreferences::createDefault();
+  std::unique_ptr<SanePreferences> preferences(SanePreferences::createDefault());
 
 #ifdef WITH_TRANSLATIONS
   LanguageSelect::setLanguage(preferences->language->get());
@@ -138,7 +139,7 @@ int main(int argc, char* argv[]) {
   QFontDatabase::addApplicationFont(":/fonts/bootstrap-icons.ttf");
 
   if (!QFile::exists(preferences->settings->fileName())) {
-    WelcomeWindow* welcome = new WelcomeWindow(preferences);
+    WelcomeWindow* welcome = new WelcomeWindow(preferences.get());
     if (welcome->exec() == QDialog::Rejected) {
       return 0;
     } else {
@@ -147,9 +148,9 @@ int main(int argc, char* argv[]) {
     welcome->deleteLater();
   }
 
-  SaneBreakApp* app = SaneBreakApp::create(preferences, &a);
+  std::unique_ptr<SaneBreakApp> app(SaneBreakApp::create(preferences.get()));
 #ifdef SANE_BREAK_CLI_CONTROL_ENABLED
-  CliCommandServer commandServer(app);
+  CliCommandServer commandServer(app.get());
   QString commandServerError;
   if (!commandServer.start(&commandServerError)) {
     qWarning().noquote() << QCoreApplication::tr("Could not start command server: %1")

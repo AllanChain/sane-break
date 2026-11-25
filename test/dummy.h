@@ -25,10 +25,11 @@
 #include "core/timer.h"
 #include "gmock/gmock.h"
 
-inline SanePreferences* tempPreferences() {
+inline SanePreferences* tempPreferences(QObject* parent = nullptr) {
   QTemporaryFile tempFile;
   (void)tempFile.open();
-  return new SanePreferences(new QSettings(tempFile.fileName(), QSettings::IniFormat));
+  return new SanePreferences(new QSettings(tempFile.fileName(), QSettings::IniFormat),
+                             parent);
 }
 
 class DummyIdleTime : public SystemIdleTime {
@@ -158,7 +159,7 @@ class DummyApp : public AbstractApp {
     auto db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(":memory:");
     auto preferences = tempPreferences();
-    return {
+    DummyAppDependencies deps = {
         .preferences = preferences,
         .db = new BreakDatabase(db, parent),
         .countDownTimer = new AbstractTimer(parent),
@@ -168,5 +169,9 @@ class DummyApp : public AbstractApp {
         .breakWindows = new testing::NiceMock<DummyBreakWindows>(parent),
         .meetingPrompt = new testing::NiceMock<DummyMeetingPrompt>(parent, preferences),
     };
+    // Parent preferences last so QObject's FIFO child deletion destroys dependents
+    // first.
+    if (parent) preferences->setParent(parent);
+    return deps;
   };
 };

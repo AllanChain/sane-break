@@ -7,11 +7,13 @@
 
 #include <QDateTime>
 #include <QObject>
+#include <QPointer>
 #include <QRegularExpression>
 #include <QSignalSpy>
 #include <QSqlQuery>
 #include <QTest>
 #include <QTimer>
+#include <memory>
 
 #include "core/app.h"
 #include "core/flags.h"
@@ -1929,6 +1931,20 @@ class TestApp : public QObject {
 
     app.advanceToBreakEnd();
     QVERIFY(!app.trayData.isFocusMode);
+  }
+  void preferences_owns_settings_and_qsettings() {
+    std::unique_ptr<SanePreferences> prefs(tempPreferences());
+    QPointer<QSettings> qsettings(prefs->settings);
+    QPointer<SettingWithSignal> smallEvery(prefs->smallEvery);
+    QPointer<SettingWithSignal> quickBreak(prefs->quickBreak);
+    QCOMPARE(qsettings->parent(), prefs.get());
+    QCOMPARE(smallEvery->parent(), prefs.get());
+    QCOMPARE(quickBreak->parent(), prefs.get());
+
+    prefs.reset();
+    QVERIFY(qsettings.isNull());
+    QVERIFY(smallEvery.isNull());
+    QVERIFY(quickBreak.isNull());
   }
 };
 

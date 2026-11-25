@@ -40,6 +40,20 @@ void migrateSettings(QSettings* settings) {
   copy("theme/small-bg", {"theme/small-flash"});
   copy("theme/big-bg", {"theme/big-flash"});
 }
+template <typename T>
+Setting<T>* makeSetting(SanePreferences* owner, QSettings* settings, const QString& key,
+                        const T& defaultValue,
+                        typename Setting<T>::Validator validator = {}) {
+  return new Setting<T>(settings, key, defaultValue, std::move(validator), owner);
+}
+
+template <typename T>
+Setting<T>* makeSetting(SanePreferences* owner, QSettings* settings, const QString& key,
+                        std::function<T()> defaultValueFunction,
+                        typename Setting<T>::Validator validator = {}) {
+  return new Setting<T>(settings, key, std::move(defaultValueFunction),
+                        std::move(validator), owner);
+}
 }  // namespace
 
 SanePreferences* SanePreferences::createDefault(QObject* parent) {
@@ -54,103 +68,118 @@ SanePreferences* SanePreferences::createDefault(QObject* parent) {
 
 SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
     : QObject(parent), settings(settings) {
+  if (settings && !settings->parent()) settings->setParent(this);
   migrateSettings(settings);
-  shownWelcome = new Setting<bool>(settings, "shown-welcome", false);
+  shownWelcome = makeSetting<bool>(this, settings, "shown-welcome", false);
 
-  smallEvery = new Setting<int>(settings, "break/small-every", 1200, positiveInt);
-  smallFor = new Setting<int>(settings, "break/small-for", 20, positiveInt);
-  bigBreakEnabled = new Setting<bool>(settings, "break/big-enabled", true);
-  bigAfter = new Setting<int>(settings, "break/big-after", 3, positiveInt);
-  bigFor = new Setting<int>(settings, "break/big-for", 60, positiveInt);
+  smallEvery = makeSetting<int>(this, settings, "break/small-every", 1200, positiveInt);
+  smallFor = makeSetting<int>(this, settings, "break/small-for", 20, positiveInt);
+  bigBreakEnabled = makeSetting<bool>(this, settings, "break/big-enabled", true);
+  bigAfter = makeSetting<int>(this, settings, "break/big-after", 3, positiveInt);
+  bigFor = makeSetting<int>(this, settings, "break/big-for", 60, positiveInt);
 
-  focusSmallEvery = new Setting<int>(settings, "focus/small-every", 1200, positiveInt);
-  focusSmallFor = new Setting<int>(settings, "focus/small-for", 20, positiveInt);
-  focusBigBreakEnabled = new Setting<bool>(settings, "focus/big-enabled", false);
-  focusBigAfter = new Setting<int>(settings, "focus/big-after", 3, positiveInt);
-  focusBigFor = new Setting<int>(settings, "focus/big-for", 60, positiveInt);
+  focusSmallEvery =
+      makeSetting<int>(this, settings, "focus/small-every", 1200, positiveInt);
+  focusSmallFor = makeSetting<int>(this, settings, "focus/small-for", 20, positiveInt);
+  focusBigBreakEnabled = makeSetting<bool>(this, settings, "focus/big-enabled", false);
+  focusBigAfter = makeSetting<int>(this, settings, "focus/big-after", 3, positiveInt);
+  focusBigFor = makeSetting<int>(this, settings, "focus/big-for", 60, positiveInt);
 
   postponeMaxMinutePercent =
-      new Setting<int>(settings, "postpone/max-minute-ratio", 50, nonNegativeInt);
-  postponeShrinkNextPercent = new Setting<int>(
-      settings, "postpone/shrink-next-session-ratio", 100, nonNegativeInt);
-  postponeExtendBreakPercent =
-      new Setting<int>(settings, "postpone/extend-break-ratio", 100, nonNegativeInt);
+      makeSetting<int>(this, settings, "postpone/max-minute-ratio", 50, nonNegativeInt);
+  postponeShrinkNextPercent = makeSetting<int>(
+      this, settings, "postpone/shrink-next-session-ratio", 100, nonNegativeInt);
+  postponeExtendBreakPercent = makeSetting<int>(
+      this, settings, "postpone/extend-break-ratio", 100, nonNegativeInt);
 
-  minReasonLength = new Setting<int>(settings, "reason/min-length", 0, nonNegativeInt);
+  minReasonLength =
+      makeSetting<int>(this, settings, "reason/min-length", 0, nonNegativeInt);
 
-  flashFor = new Setting<int>(settings, "break/flash-for", 30, positiveInt);
-  confirmAfter = new Setting<int>(settings, "break/confirm-after", 30, positiveInt);
-  flashTrayFor = new Setting<int>(settings, "break/flash-tray-for", 30, nonNegativeInt);
-  headsUpFor = new Setting<int>(settings, "break/heads-up-for", 30, nonNegativeInt);
-  flashSpeed = new Setting<int>(settings, "break/flash-speed", 120, nonNegativeInt);
-  countDownColor =
-      new Setting<QColor>(settings, "theme/count-down", QColor(236, 239, 244, 255));
+  flashFor = makeSetting<int>(this, settings, "break/flash-for", 30, positiveInt);
+  confirmAfter =
+      makeSetting<int>(this, settings, "break/confirm-after", 30, positiveInt);
+  flashTrayFor =
+      makeSetting<int>(this, settings, "break/flash-tray-for", 30, nonNegativeInt);
+  headsUpFor =
+      makeSetting<int>(this, settings, "break/heads-up-for", 30, nonNegativeInt);
+  flashSpeed =
+      makeSetting<int>(this, settings, "break/flash-speed", 120, nonNegativeInt);
+  countDownColor = makeSetting<QColor>(this, settings, "theme/count-down",
+                                       QColor(236, 239, 244, 255));
   messageColor =
-      new Setting<QColor>(settings, "theme/message", QColor(236, 239, 244, 255));
-  smallBackgroundColor =
-      new Setting<QColor>(settings, "theme/small-background", QColor(46, 52, 64, 255));
-  bigBackgroundColor =
-      new Setting<QColor>(settings, "theme/big-background", QColor(46, 52, 64, 255));
-  smallFlashColor =
-      new Setting<QColor>(settings, "theme/small-flash", QColor(235, 203, 139, 100));
-  bigFlashColor =
-      new Setting<QColor>(settings, "theme/big-flash", QColor(180, 142, 173, 100));
+      makeSetting<QColor>(this, settings, "theme/message", QColor(236, 239, 244, 255));
+  smallBackgroundColor = makeSetting<QColor>(this, settings, "theme/small-background",
+                                             QColor(46, 52, 64, 255));
+  bigBackgroundColor = makeSetting<QColor>(this, settings, "theme/big-background",
+                                           QColor(46, 52, 64, 255));
+  smallFlashColor = makeSetting<QColor>(this, settings, "theme/small-flash",
+                                        QColor(235, 203, 139, 100));
+  bigFlashColor = makeSetting<QColor>(this, settings, "theme/big-flash",
+                                      QColor(180, 142, 173, 100));
   smallBackgroundImage =
-      new Setting<QString>(settings, "theme/small-background-image", "");
-  bigBackgroundImage = new Setting<QString>(settings, "theme/big-background-image", "");
-  smallMessages = new Setting<QStringList>(settings, "break/small-msg", []() {
-    return QStringList({tr("Time for a small break")});
-  });
-  bigMessages = new Setting<QStringList>(settings, "break/big-msg", []() {
-    return QStringList({tr("Time for a big break")});
-  });
-  maxForceBreakExits =
-      new Setting<int>(settings, "break/max-force-break-exits", 2, nonNegativeInt);
-  autoCloseWindowAfterSmallBreak =
-      new Setting<bool>(settings, "break/auto-close-window-after-small-break", true);
-  autoCloseWindowAfterBigBreak =
-      new Setting<bool>(settings, "break/auto-close-window-after-big-break", true);
+      makeSetting<QString>(this, settings, "theme/small-background-image", "");
+  bigBackgroundImage =
+      makeSetting<QString>(this, settings, "theme/big-background-image", "");
+  smallMessages = makeSetting<QStringList>(
+      this, settings, "break/small-msg", std::function<QStringList()>([]() {
+        return QStringList({tr("Time for a small break")});
+      }));
+  bigMessages = makeSetting<QStringList>(
+      this, settings, "break/big-msg", std::function<QStringList()>([]() {
+        return QStringList({tr("Time for a big break")});
+      }));
+  maxForceBreakExits = makeSetting<int>(this, settings, "break/max-force-break-exits",
+                                        2, nonNegativeInt);
+  autoCloseWindowAfterSmallBreak = makeSetting<bool>(
+      this, settings, "break/auto-close-window-after-small-break", true);
+  autoCloseWindowAfterBigBreak = makeSetting<bool>(
+      this, settings, "break/auto-close-window-after-big-break", true);
 
   smallBreakShowProgressBar =
-      new Setting<bool>(settings, "ui/small-break-show-progress-bar", true);
+      makeSetting<bool>(this, settings, "ui/small-break-show-progress-bar", true);
   smallBreakShowCountdown =
-      new Setting<bool>(settings, "ui/small-break-show-countdown", true);
-  smallBreakShowClock = new Setting<bool>(settings, "ui/small-break-show-clock", false);
+      makeSetting<bool>(this, settings, "ui/small-break-show-countdown", true);
+  smallBreakShowClock =
+      makeSetting<bool>(this, settings, "ui/small-break-show-clock", false);
   smallBreakShowEndTime =
-      new Setting<bool>(settings, "ui/small-break-show-end-time", false);
+      makeSetting<bool>(this, settings, "ui/small-break-show-end-time", false);
   smallBreakShowButtons =
-      new Setting<bool>(settings, "ui/small-break-show-buttons", true);
+      makeSetting<bool>(this, settings, "ui/small-break-show-buttons", true);
   bigBreakShowProgressBar =
-      new Setting<bool>(settings, "ui/big-break-show-progress-bar", true);
+      makeSetting<bool>(this, settings, "ui/big-break-show-progress-bar", true);
   bigBreakShowCountdown =
-      new Setting<bool>(settings, "ui/big-break-show-countdown", true);
-  bigBreakShowClock = new Setting<bool>(settings, "ui/big-break-show-clock", false);
+      makeSetting<bool>(this, settings, "ui/big-break-show-countdown", true);
+  bigBreakShowClock =
+      makeSetting<bool>(this, settings, "ui/big-break-show-clock", false);
   bigBreakShowEndTime =
-      new Setting<bool>(settings, "ui/big-break-show-end-time", false);
-  bigBreakShowButtons = new Setting<bool>(settings, "ui/big-break-show-buttons", true);
+      makeSetting<bool>(this, settings, "ui/big-break-show-end-time", false);
+  bigBreakShowButtons =
+      makeSetting<bool>(this, settings, "ui/big-break-show-buttons", true);
 
-  pauseOnIdleFor = new Setting<int>(settings, "pause/on-idle-for", 180, positiveInt);
-  resetAfterPause = new Setting<int>(settings, "pause/reset-after", 120, positiveInt);
+  pauseOnIdleFor =
+      makeSetting<int>(this, settings, "pause/on-idle-for", 180, positiveInt);
+  resetAfterPause =
+      makeSetting<int>(this, settings, "pause/reset-after", 120, positiveInt);
   resetCycleAfterPause =
-      new Setting<int>(settings, "pause/reset-cycle-after", 300, positiveInt);
-  pauseOnBattery = new Setting<bool>(settings, "pause/on-battery", false);
+      makeSetting<int>(this, settings, "pause/reset-cycle-after", 300, positiveInt);
+  pauseOnBattery = makeSetting<bool>(this, settings, "pause/on-battery", false);
   treatInhibitorAsActivity =
-      new Setting<bool>(settings, "pause/treat-inhibitor-as-activity", true);
-  programsToMonitor =
-      new Setting<QStringList>(settings, "pause/programs-to-monitor", QStringList());
+      makeSetting<bool>(this, settings, "pause/treat-inhibitor-as-activity", true);
+  programsToMonitor = makeSetting<QStringList>(
+      this, settings, "pause/programs-to-monitor", QStringList());
   pauseOnUnknownMonitor =
-      new Setting<bool>(settings, "pause/on-unknown-monitor", false);
+      makeSetting<bool>(this, settings, "pause/on-unknown-monitor", false);
   knownMonitors =
-      new Setting<QStringList>(settings, "pause/known-monitors", QStringList());
+      makeSetting<QStringList>(this, settings, "pause/known-monitors", QStringList());
 
-  smallStartBell = new Setting<QString>(settings, "bell/small-start", "");
-  smallEndBell = new Setting<QString>(settings, "bell/small-end", "");
-  bigStartBell = new Setting<QString>(settings, "bell/start", "");
-  bigEndBell = new Setting<QString>(settings, "bell/end", "");
+  smallStartBell = makeSetting<QString>(this, settings, "bell/small-start", "");
+  smallEndBell = makeSetting<QString>(this, settings, "bell/small-end", "");
+  bigStartBell = makeSetting<QString>(this, settings, "bell/start", "");
+  bigEndBell = makeSetting<QString>(this, settings, "bell/end", "");
 
-  language = new Setting<QString>(settings, "language", "");
-  autoStart = new Setting<bool>(settings, "auto-start", false);
+  language = makeSetting<QString>(this, settings, "language", "");
+  autoStart = makeSetting<bool>(this, settings, "auto-start", false);
   autoScreenLock =
-      new Setting<int>(settings, "break/auto-screen-lock", 0, nonNegativeInt);
-  quickBreak = new Setting<bool>(settings, "break/quick-break", false);
+      makeSetting<int>(this, settings, "break/auto-screen-lock", 0, nonNegativeInt);
+  quickBreak = makeSetting<bool>(this, settings, "break/quick-break", false);
 }

@@ -8,6 +8,7 @@
 #include <QObject>
 #include <QTest>
 #include <QTimer>
+#include <memory>
 
 #include "core/flags.h"
 #include "dummy.h"
@@ -31,7 +32,7 @@ class TestWindow : public QObject {
   void cleanup() { delete depsParent; }
   // Data for `tick_with_force_break`
   void tick_with_force_break_data() {
-    auto preferences = tempPreferences();
+    std::unique_ptr<SanePreferences> preferences(tempPreferences());
     QTest::addColumn<BreakType>("type");
     QTest::addColumn<int>("duration");
 
