@@ -6,47 +6,43 @@
 
 #include <qglobal.h>
 
-#include <QAudioOutput>
 #include <QCheckBox>
+#include <QCloseEvent>
 #include <QColor>
 #include <QComboBox>
 #include <QDesktopServices>
 #include <QDir>
 #include <QEvent>
+#include <QFile>
 #include <QFileDialog>
 #include <QFileInfo>
-#include <QGridLayout>
 #include <QIcon>
 #include <QKeySequence>
-#include <QLabel>
 #include <QLineEdit>
+#include <QList>
 #include <QListWidget>
 #include <QMainWindow>
-#include <QMediaPlayer>
 #include <QMessageBox>
 #include <QPlainTextEdit>
-#include <QProcess>
 #include <QPushButton>
 #include <QSettings>
 #include <QShortcut>
-#include <QSlider>
+#include <QShowEvent>
 #include <QSpinBox>
 #include <QStandardPaths>
 #include <QString>
 #include <QStringList>
+#include <QStyle>
 #include <QTimer>
 #include <QUrl>
-#include <QVBoxLayout>
 #include <QWidget>
 #include <Qt>
-#include <QtContainerFwd>
-#include <functional>
 
 #include "app/break-windows.h"
+#include "app/pref-controller.h"
 #include "app/sound-player.h"
 #include "app/text-window.h"
 #include "app/widgets/language-select.h"
-#include "app/widgets/stepped-slider.h"
 #include "config.h"
 #include "core/break-windows.h"
 #include "core/db.h"
@@ -55,84 +51,6 @@
 #include "lib/auto-start.h"
 #include "lib/screen-monitor.h"
 #include "ui_pref-window.h"
-
-void PrefControllerBase::saveIfDirty() {
-  if (isDirty) {
-    saveValue();
-    isDirty = false;
-    emit dirtyChanged();
-  }
-}
-
-void PrefControllerBase::load() {
-  changeMeansDirty = false;
-  loadValue();
-  emit loaded();
-  emit explictSync();
-  changeMeansDirty = true;
-  if (isDirty) {
-    isDirty = false;
-    emit dirtyChanged();
-  }
-}
-
-void PrefControllerBase::onChange() {
-  // Do nothing if the change is caused by loading values
-  if (!changeMeansDirty) return;
-  if (!isDirty) {
-    isDirty = true;
-    emit dirtyChanged();
-  }
-  emit changed();
-  emit explictSync();
-}
-
-PrefControllerBase* ControllerHolder::add(PrefGroup group,
-                                          PrefControllerBase* controller) {
-  m_controllers[group].append(controller);
-  connect(controller, &PrefControllerBase::dirtyChanged, this,
-          &ControllerHolder::onDirtyChange);
-  return controller;
-}
-
-void ControllerHolder::forEach(std::function<void(PrefControllerBase*)> func) {
-  for (const auto& controllerList : m_controllers) {
-    for (const auto& controller : controllerList) {
-      func(controller);
-    }
-  }
-}
-
-void ControllerHolder::onDirtyChange() {
-  bool currentIsDirty = false;
-  forEach([&currentIsDirty](PrefControllerBase* controller) {
-    if (controller->isDirty) currentIsDirty = true;
-  });
-  if (isDirty != currentIsDirty) {
-    isDirty = currentIsDirty;
-    emit dirtyChanged(currentIsDirty);
-  }
-}
-
-void ControllerHolder::load() {
-  forEach([](PrefControllerBase* controller) { controller->load(); });
-}
-
-void ControllerHolder::reloadDirty() {
-  forEach([](PrefControllerBase* controller) {
-    if (controller->isDirty) controller->load();
-  });
-}
-
-void ControllerHolder::save() {
-  forEach([](PrefControllerBase* controller) { controller->saveIfDirty(); });
-}
-
-void ControllerHolder::setGroupToDefault(PrefGroup group) {
-  for (auto& controller : m_controllers[group]) {
-    controller->setToDefault();
-  }
-}
 
 PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent)
     : QMainWindow(parent), ui(new Ui::PrefWindow), preferences(preferences) {
@@ -148,12 +66,29 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
   controllers = new ControllerHolder(this);
   autoStart = new AutoStart(this);
   breakWindows = new BreakWindows(this);
+  previewTimer = new QTimer(this);
+  previewTimer->setSingleShot(true);
+  connect(previewTimer, &QTimer::timeout, this,
+          &PreferenceWindow::advanceBreakWindowPreview);
 
-  /***************************************************************************
-   *                                                                         *
-   *                               Tab switch                                *
-   *                                                                         *
-   ****************************************************************************/
+  setupTabs();
+  setupScheduleTab();
+  setupReminderTab();
+  setupInterfaceTab();
+  setupPauseTab();
+  setupSoundTab();
+  setupGeneralTab();
+  setupAboutTab();
+  setupControlBar();
+}
+
+PreferenceWindow::~PreferenceWindow() {
+  stopBreakWindowPreview();
+  if (openingTextWindow) openingTextWindow->close();
+  delete ui;
+}
+
+void PreferenceWindow::setupTabs() {
   tabButtons = {ui->tabScheduleButton, ui->tabReminderButton, ui->tabInterfaceButton,
                 ui->tabPauseButton,    ui->tabSoundButton,    ui->tabGeneralButton,
                 ui->tabAboutButton};
@@ -163,16 +98,13 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
   }
   // Qt Designer is having problem setting align center
   ui->sideBar->layout()->setAlignment(ui->sidebarImage, Qt::AlignHCenter);
+}
 
-  /***************************************************************************
-   *                                                                         *
-   *                              Schedule tab                               *
-   *                                                                         *
-   ****************************************************************************/
+void PreferenceWindow::setupScheduleTab() {
   connect(controllers->add(PrefGroup::Schedule,
                            new PrefController<QSpinBox, int>(
                                ui->smallBreakEveryBox, preferences->smallEvery, 60)),
-          &PrefControllerBase::explictSync, this, [this]() {
+          &PrefControllerBase::explicitSync, this, [this]() {
             int value = ui->smallBreakEveryBox->value();
             ui->bigBreakAfterBox->setToolTip(
                 tr("Every %n min", "", value * ui->bigBreakAfterBox->value()));
@@ -182,43 +114,15 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
   controllers->add(
       PrefGroup::Schedule,
       new PrefController<QSpinBox, int>(ui->smallBreakForBox, preferences->smallFor));
-  auto syncBigBreakEnabled = [this]() {
-    bool enabled = ui->bigBreakEnabled->isChecked();
-    // Schedule tab
-    ui->bigBreakAfterBox->setEnabled(enabled);
-    ui->bigBreakAfterSlider->setEnabled(enabled);
-    ui->bigBreakForBox->setEnabled(enabled);
-    ui->bigBreakForSlider->setEnabled(enabled);
-    // Reminder tab
-    ui->autoCloseWindowAfterBigBreak->setEnabled(enabled);
-    // Interface tab
-    ui->bigBreakMessages->setEnabled(enabled);
-    ui->bigBackgroundColor->setEnabled(enabled);
-    ui->bigFlash->setEnabled(enabled);
-    ui->bigBackgroundImagePath->setEnabled(enabled);
-    ui->browseBigBackgroundImage->setEnabled(enabled);
-    ui->clearBigBackgroundImage->setEnabled(enabled);
-    ui->bigBreakShowProgressBar->setEnabled(enabled);
-    ui->bigBreakShowCountdown->setEnabled(enabled);
-    ui->bigBreakShowClock->setEnabled(enabled);
-    ui->bigBreakShowEndTime->setEnabled(enabled);
-    ui->bigBreakShowButtons->setEnabled(enabled);
-    // Sound tab
-    ui->bigStartBellSelect->setEnabled(enabled);
-    ui->bigEndBellSelect->setEnabled(enabled);
-    ui->playBigStart->setEnabled(enabled);
-    ui->playBigEnd->setEnabled(enabled);
-    ui->browseBigStart->setEnabled(enabled);
-    ui->browseBigEnd->setEnabled(enabled);
-  };
   connect(controllers->add(PrefGroup::Schedule,
                            new PrefController<QCheckBox, bool>(
                                ui->bigBreakEnabled, preferences->bigBreakEnabled)),
-          &PrefControllerBase::explictSync, this, syncBigBreakEnabled);
+          &PrefControllerBase::explicitSync, this,
+          &PreferenceWindow::syncBigBreakEnabled);
   connect(controllers->add(PrefGroup::Schedule,
                            new PrefController<QSpinBox, int>(ui->bigBreakAfterBox,
                                                              preferences->bigAfter)),
-          &PrefControllerBase::explictSync, this, [this]() {
+          &PrefControllerBase::explicitSync, this, [this]() {
             int value = ui->bigBreakAfterBox->value();
             ui->bigBreakAfterBox->setToolTip(
                 tr("Every %n min", "", value * ui->smallBreakEveryBox->value()));
@@ -253,23 +157,55 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
   connect(controllers->add(PrefGroup::Schedule, new PrefController<QCheckBox, bool>(
                                                     ui->focusBigBreakEnabled,
                                                     preferences->focusBigBreakEnabled)),
-          &PrefControllerBase::explictSync, this, syncFocusBigBreakEnabled);
+          &PrefControllerBase::explicitSync, this, syncFocusBigBreakEnabled);
   controllers->add(PrefGroup::Schedule,
                    new PrefController<QSpinBox, int>(ui->focusBigBreakAfterBox,
                                                      preferences->focusBigAfter));
   controllers->add(PrefGroup::Schedule,
                    new PrefController<QSpinBox, int>(ui->focusBigBreakForBox,
                                                      preferences->focusBigFor, 60));
+}
 
-  /***************************************************************************
-   *                                                                         *
-   *                              Reminder tab                               *
-   *                                                                         *
-   ****************************************************************************/
+void PreferenceWindow::syncBigBreakEnabled() {
+  bool enabled = ui->bigBreakEnabled->isChecked();
+  QWidget* const bigBreakWidgets[] = {
+      // Schedule tab
+      ui->bigBreakAfterBox,
+      ui->bigBreakAfterSlider,
+      ui->bigBreakForBox,
+      ui->bigBreakForSlider,
+      // Reminder tab
+      ui->autoCloseWindowAfterBigBreak,
+      // Interface tab
+      ui->bigBreakMessages,
+      ui->bigBackgroundColor,
+      ui->bigFlash,
+      ui->bigBackgroundImagePath,
+      ui->browseBigBackgroundImage,
+      ui->clearBigBackgroundImage,
+      ui->bigBreakShowProgressBar,
+      ui->bigBreakShowCountdown,
+      ui->bigBreakShowClock,
+      ui->bigBreakShowEndTime,
+      ui->bigBreakShowButtons,
+      // Sound tab
+      ui->bigStartBellSelect,
+      ui->bigEndBellSelect,
+      ui->playBigStart,
+      ui->playBigEnd,
+      ui->browseBigStart,
+      ui->browseBigEnd,
+  };
+  for (QWidget* widget : bigBreakWidgets) {
+    widget->setEnabled(enabled);
+  }
+}
+
+void PreferenceWindow::setupReminderTab() {
   connect(controllers->add(PrefGroup::Reminder,
                            new PrefController<QSpinBox, int>(ui->flashForBox,
                                                              preferences->flashFor)),
-          &PrefControllerBase::explictSync, this, [this]() {
+          &PrefControllerBase::explicitSync, this, [this]() {
             ui->confirmAfterBox->setMaximum(ui->flashForBox->value());
             ui->confirmAfterSlider->setMaximum(ui->flashForBox->value());
             ui->reminderBehaviorLabel->setArgs(
@@ -278,7 +214,7 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
   connect(controllers->add(PrefGroup::Reminder,
                            new PrefController<QSpinBox, int>(
                                ui->confirmAfterBox, preferences->confirmAfter)),
-          &PrefControllerBase::explictSync, this, [this]() {
+          &PrefControllerBase::explicitSync, this, [this]() {
             ui->reminderBehaviorLabel->setArgs(
                 {ui->flashForBox->value(), ui->confirmAfterBox->value()});
           });
@@ -298,12 +234,9 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
   controllers->add(PrefGroup::Reminder, new PrefController<QCheckBox, bool>(
                                             ui->autoCloseWindowAfterBigBreak,
                                             preferences->autoCloseWindowAfterBigBreak));
+}
 
-  /***************************************************************************
-   *                                                                         *
-   *                             Interface tab                               *
-   *                                                                         *
-   ****************************************************************************/
+void PreferenceWindow::setupInterfaceTab() {
   controllers->add(
       PrefGroup::Interface,
       new PrefController<QSpinBox, int>(ui->flashSpeedBox, preferences->flashSpeed));
@@ -381,12 +314,9 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
   });
   connect(ui->clearBigBackgroundImage, &QPushButton::pressed, this,
           [this]() { ui->bigBackgroundImagePath->setText(""); });
+}
 
-  /***************************************************************************
-   *                                                                         *
-   *                                Pause tab                                *
-   *                                                                         *
-   ****************************************************************************/
+void PreferenceWindow::setupPauseTab() {
   controllers->add(PrefGroup::Pause,
                    new PrefController<QSpinBox, int>(ui->pauseOnIdleBox,
                                                      preferences->pauseOnIdleFor, 60));
@@ -396,7 +326,7 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
   connect(controllers->add(PrefGroup::Pause,
                            new PrefController<QSpinBox, int>(
                                ui->resetBreakBox, preferences->resetAfterPause, 60)),
-          &PrefControllerBase::explictSync, this, [this]() {
+          &PrefControllerBase::explicitSync, this, [this]() {
             ui->resetCycleBox->setMinimum(ui->resetBreakBox->value());
             ui->resetCycleSlider->setMinimum(ui->resetBreakBox->value());
           });
@@ -404,7 +334,7 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
       controllers->add(PrefGroup::Pause,
                        new PrefController<QSpinBox, int>(
                            ui->resetCycleBox, preferences->resetCycleAfterPause, 60)),
-      &PrefControllerBase::explictSync, this, [this]() {
+      &PrefControllerBase::explicitSync, this, [this]() {
         ui->resetBreakBox->setMaximum(ui->resetCycleBox->value());
         ui->resetBreakSlider->setMaximum(ui->resetCycleBox->value());
       });
@@ -434,7 +364,7 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
     ui->removeKnownMonitorButton->setEnabled(
         enabled && !ui->knownMonitorsList->selectedItems().isEmpty());
   };
-  connect(pauseOnUnknownMonitorController, &PrefControllerBase::explictSync, this,
+  connect(pauseOnUnknownMonitorController, &PrefControllerBase::explicitSync, this,
           syncMonitorWidgets);
   connect(ui->knownMonitorsList, &QListWidget::itemSelectionChanged, this,
           syncMonitorWidgets);
@@ -448,12 +378,9 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
   });
   connect(ui->removeKnownMonitorButton, &QPushButton::pressed, this,
           [this]() { qDeleteAll(ui->knownMonitorsList->selectedItems()); });
+}
 
-  /***************************************************************************
-   *                                                                         *
-   *                                Sound tab                                *
-   *                                                                         *
-   ****************************************************************************/
+void PreferenceWindow::setupSoundTab() {
   QStringList soundFiles = {"", "qrc:/sounds/chime.mp3", "qrc:/sounds/ding.mp3",
                             "qrc:/sounds/wood.mp3", "qrc:/sounds/bell.mp3"};
   QList<QComboBox*> soundSelects = {ui->smallStartBellSelect, ui->smallEndBellSelect,
@@ -476,12 +403,9 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
     controllers->add(PrefGroup::Sound, new PrefController<QComboBox, QString>(
                                            soundSelects[i], soundSettings[i]));
   }
+}
 
-  /***************************************************************************
-   *                                                                         *
-   *                               General tab                               *
-   *                                                                         *
-   ****************************************************************************/
+void PreferenceWindow::setupGeneralTab() {
   ui->configFile->setText(preferences->settings->fileName());
   ui->dbFile->setText(BreakDatabase::dbPath());
 
@@ -550,23 +474,18 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
 #ifdef Q_OS_MAC
   ui->quickBreak->setHidden(true);
 #endif
-  /***************************************************************************
-   *                                                                         *
-   *                                About tab                                *
-   *                                                                         *
-   ****************************************************************************/
+}
+
+void PreferenceWindow::setupAboutTab() {
   ui->copyrightLabel->setArgs({PROJECT_VERSION});
   connect(ui->noticeButton, &QPushButton::pressed, this, &PreferenceWindow::openNotice);
   connect(ui->sourceCodeButton, &QPushButton::pressed, this,
           &PreferenceWindow::openSourceCode);
   connect(ui->helpTranslateButton, &QPushButton::pressed, this,
           &PreferenceWindow::openWeblate);
+}
 
-  /***************************************************************************
-   *                                                                         *
-   *                               Bottom row                                *
-   *                                                                         *
-   ****************************************************************************/
+void PreferenceWindow::setupControlBar() {
   connect(ui->resetButton, &QPushButton::pressed, controllers, &ControllerHolder::load);
   connect(ui->saveButton, &QPushButton::pressed, controllers, &ControllerHolder::save);
   connect(ui->defaultsButton, &QPushButton::pressed, this, [this]() {
@@ -583,10 +502,9 @@ PreferenceWindow::PreferenceWindow(SanePreferences* preferences, QWidget* parent
           &QPushButton::setEnabled);
 }
 
-PreferenceWindow::~PreferenceWindow() { delete ui; }
-
 void PreferenceWindow::closeEvent(QCloseEvent* event) {
   if (!confirmLeave()) return event->ignore();
+  stopBreakWindowPreview();
   QMainWindow::closeEvent(event);
 }
 
@@ -640,12 +558,13 @@ bool PreferenceWindow::confirmLeave() {
 }
 
 void PreferenceWindow::openNotice() {
-  if (openingTextWindow != nullptr) {
+  if (openingTextWindow) {
     openingTextWindow->close();
   }
   QFile noticeFile(":/NOTICE.md");
   if (noticeFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
     openingTextWindow = new TextWindow(noticeFile.readAll());
+    openingTextWindow->setAttribute(Qt::WA_DeleteOnClose);
     openingTextWindow->show();
   }
 }
@@ -698,27 +617,53 @@ void PreferenceWindow::browseForBackgroundImage(QLineEdit* target, BreakType typ
 }
 
 void PreferenceWindow::openBreakWindowPreview() {
+  stopBreakWindowPreview();
   breakWindows->create(BreakType::Small, preferences, preferences->smallFor->get());
   breakWindows->showFlashPrompt();
-  QTimer::singleShot(2000, [this]() {
-    breakWindows->showFullScreen();
-    breakWindows->showButtons(AbstractBreakWindows::Button::LockScreen |
-                              AbstractBreakWindows::Button::ExitForceBreak |
-                              AbstractBreakWindows::Button::PauseMedia);
-    QTimer::singleShot(4000, [this]() {
+  previewStep = PreviewStep::SmallFullScreen;
+  previewTimer->start(2000);
+}
+
+void PreferenceWindow::advanceBreakWindowPreview() {
+  constexpr AbstractBreakWindows::Buttons previewButtons =
+      AbstractBreakWindows::Button::LockScreen |
+      AbstractBreakWindows::Button::ExitForceBreak |
+      AbstractBreakWindows::Button::PauseMedia;
+
+  switch (previewStep) {
+    case PreviewStep::SmallFullScreen:
+      breakWindows->showFullScreen();
+      breakWindows->showButtons(previewButtons);
+      previewStep = preferences->bigBreakEnabled->get() ? PreviewStep::BigPrompt
+                                                        : PreviewStep::Finish;
+      previewTimer->start(4000);
+      break;
+    case PreviewStep::BigPrompt:
       breakWindows->destroy();
-      if (!preferences->bigBreakEnabled->get()) return;
       breakWindows->create(BreakType::Big, preferences, preferences->bigFor->get());
       breakWindows->showFlashPrompt();
-      QTimer::singleShot(2000, [this]() {
-        breakWindows->showFullScreen();
-        breakWindows->showButtons(AbstractBreakWindows::Button::LockScreen |
-                                  AbstractBreakWindows::Button::ExitForceBreak |
-                                  AbstractBreakWindows::Button::PauseMedia);
-        QTimer::singleShot(4000, [this]() { breakWindows->destroy(); });
-      });
-    });
-  });
+      previewStep = PreviewStep::BigFullScreen;
+      previewTimer->start(2000);
+      break;
+    case PreviewStep::BigFullScreen:
+      breakWindows->showFullScreen();
+      breakWindows->showButtons(previewButtons);
+      previewStep = PreviewStep::Finish;
+      previewTimer->start(4000);
+      break;
+    case PreviewStep::Finish:
+    case PreviewStep::Idle:
+      stopBreakWindowPreview();
+      break;
+  }
+}
+
+void PreferenceWindow::stopBreakWindowPreview() {
+  previewTimer->stop();
+  if (previewStep != PreviewStep::Idle) {
+    breakWindows->destroy();
+    previewStep = PreviewStep::Idle;
+  }
 }
 
 void PreferenceWindow::forceThemeUpdate() {

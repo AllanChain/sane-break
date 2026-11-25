@@ -31,6 +31,11 @@ endforeach()
 # sane-idle static library.
 target_sources(test-idle-reader PRIVATE ${CMAKE_SOURCE_DIR}/src/idle/idle-reader.cpp)
 
+add_executable(test-pref-window test-pref-window.cpp)
+target_link_libraries(test-pref-window PRIVATE Qt::Test sane-gui)
+add_test(NAME test-pref-window COMMAND test-pref-window)
+add_dependencies(check test-pref-window)
+
 # Screenshot harness (not part of check target)
 add_executable(
   test-screenshot test-screenshot.cpp ${CMAKE_SOURCE_DIR}/resources/index.qrc

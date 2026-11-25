@@ -20,6 +20,8 @@ add_library(
   meeting-window.cpp
   meeting-window.h
   meeting-window.ui
+  pref-controller.cpp
+  pref-controller.h
   pref-window.cpp
   pref-window.h
   pref-window.ui

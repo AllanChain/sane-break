@@ -4,261 +4,27 @@
 
 #pragma once
 
-#include <QAbstractItemModel>
-#include <QCheckBox>
-#include <QCloseEvent>
-#include <QColor>
-#include <QComboBox>
-#include <QEvent>
-#include <QLabel>
-#include <QLineEdit>
 #include <QList>
-#include <QListWidget>
 #include <QMainWindow>
-#include <QMap>
-#include <QPlainTextEdit>
-#include <QProcess>
-#include <QPushButton>
-#include <QSlider>
-#include <QSpinBox>
+#include <QPointer>
 #include <QString>
-#include <QStringList>
-#include <QWidget>
-#include <Qt>
-#include <QtGlobal>
-#include <functional>
 
-#include "app/break-windows.h"
-#include "app/text-window.h"
-#include "core/preferences.h"
-#include "lib/auto-start.h"
-#include "sound-player.h"
-#include "widgets/language-select.h"
+#include "core/flags.h"
 
-class PrefControllerBase : public QObject {
-  Q_OBJECT
- public:
-  PrefControllerBase(QObject* parent = 0) : QObject(parent) {}
-  bool isDirty = false;
-  bool changeMeansDirty = true;
-  void saveIfDirty();
-  void load();
-  virtual void saveValue() = 0;
-  virtual void loadValue() = 0;
-  virtual void setToDefault() = 0;
-  void onChange();
- signals:
-  void loaded();
-  void changed();
-  // This is like changed for underlying widgets, but also emits when values are loaded
-  // from settings (which does not necessarily change the value of the widget). This is
-  // useful when we want to sync the labels with the value of the setting.
-  void explictSync();
-  void dirtyChanged();
-};
-
-// PrefControllerBase defines common behaviors without template.
-// PrefControllerTemplate defined behaviors with the template.
-template <typename W, typename T>
-class PrefControllerTemplate : public PrefControllerBase {
- public:
-  W* widget;
-  Setting<T>* setting;
-  PrefControllerTemplate(W* parent, Setting<T>* setting)
-      : widget(parent), setting(setting) {}
-  virtual void setValue(T) = 0;
-  void loadValue() override { setValue(setting->get()); }
-  void setToDefault() override { setValue(setting->defaultValue()); }
-};
-
-template <typename W, typename T>
-class PrefController : public PrefControllerTemplate<W, T> {};
-
-template <>
-class PrefController<QCheckBox, bool> : public PrefControllerTemplate<QCheckBox, bool> {
- public:
-  PrefController(QCheckBox* parent, Setting<bool>* setting)
-      : PrefControllerTemplate(parent, setting) {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
-    connect(widget, &QCheckBox::checkStateChanged, this, &PrefControllerBase::onChange);
-#else
-    connect(widget, &QCheckBox::stateChanged, this, &PrefControllerBase::onChange);
-#endif
-  };
-  void setValue(bool value) { widget->setChecked(value); }
-  void saveValue() { setting->set(widget->isChecked()); }
-};
-
-template <>
-class PrefController<QSlider, int> : public PrefControllerTemplate<QSlider, int> {
- public:
-  int multiplier;
-  PrefController(QSlider* parent, Setting<int>* setting, int multiplier = 1)
-      : PrefControllerTemplate(parent, setting), multiplier(multiplier) {
-    connect(widget, &QSlider::valueChanged, this, &PrefControllerBase::onChange);
-  };
-  void setValue(int value) { widget->setValue(value / multiplier); }
-  void saveValue() { setting->set(widget->value() * multiplier); }
-};
-
-template <>
-class PrefController<QSpinBox, int> : public PrefControllerTemplate<QSpinBox, int> {
- public:
-  int multiplier;
-  PrefController(QSpinBox* parent, Setting<int>* setting, int multiplier = 1)
-      : PrefControllerTemplate(parent, setting), multiplier(multiplier) {
-    connect(widget, &QSpinBox::valueChanged, this, &PrefControllerBase::onChange);
-  };
-  void setValue(int value) { widget->setValue(value / multiplier); }
-  void saveValue() { setting->set(widget->value() * multiplier); }
-};
-
-template <>
-class PrefController<QPlainTextEdit, QStringList>
-    : public PrefControllerTemplate<QPlainTextEdit, QStringList> {
- public:
-  PrefController(QPlainTextEdit* parent, Setting<QStringList>* setting)
-      : PrefControllerTemplate(parent, setting) {
-    connect(widget, &QPlainTextEdit::textChanged, this, &PrefControllerBase::onChange);
-  };
-  void setValue(QStringList value) { widget->setPlainText(value.join("\n")); }
-  void saveValue() {
-    setting->set(widget->toPlainText().split("\n", Qt::SkipEmptyParts));
-  }
-};
-
-template <>
-class PrefController<QListWidget, QStringList>
-    : public PrefControllerTemplate<QListWidget, QStringList> {
- public:
-  PrefController(QListWidget* parent, Setting<QStringList>* setting)
-      : PrefControllerTemplate(parent, setting) {
-    auto* model = widget->model();
-    connect(model, &QAbstractItemModel::rowsInserted, this,
-            &PrefControllerBase::onChange);
-    connect(model, &QAbstractItemModel::rowsRemoved, this,
-            &PrefControllerBase::onChange);
-    connect(model, &QAbstractItemModel::dataChanged, this,
-            &PrefControllerBase::onChange);
-  };
-  void setValue(QStringList value) {
-    widget->clear();
-    widget->addItems(value);
-  }
-  void saveValue() {
-    QStringList items;
-    for (int i = 0; i < widget->count(); ++i) {
-      items.append(widget->item(i)->text());
-    }
-    setting->set(items);
-  }
-};
-
-template <>
-class PrefController<QLineEdit, QStringList>
-    : public PrefControllerTemplate<QLineEdit, QStringList> {
- public:
-  PrefController(QLineEdit* parent, Setting<QStringList>* setting)
-      : PrefControllerTemplate(parent, setting) {
-    connect(widget, &QLineEdit::textChanged, this, &PrefControllerBase::onChange);
-  };
-  void setValue(QStringList value) { widget->setText(value.join(",")); }
-  void saveValue() { setting->set(widget->text().split(",", Qt::SkipEmptyParts)); }
-};
-
-template <>
-class PrefController<QComboBox, int> : public PrefControllerTemplate<QComboBox, int> {
- public:
-  PrefController(QComboBox* parent, Setting<int>* setting)
-      : PrefControllerTemplate(parent, setting) {
-    connect(widget, &QComboBox::currentIndexChanged, this,
-            &PrefControllerBase::onChange);
-  };
-  void setValue(int value) { widget->setCurrentIndex(widget->findData(value)); }
-  void saveValue() { setting->set(widget->currentData().toInt()); }
-};
-
-template <>
-class PrefController<LanguageSelect, QString>
-    : public PrefControllerTemplate<LanguageSelect, QString> {
- public:
-  PrefController(LanguageSelect* parent, Setting<QString>* setting)
-      : PrefControllerTemplate(parent, setting) {
-    connect(widget, &LanguageSelect::currentIndexChanged, this,
-            &PrefControllerBase::onChange);
-  };
-  void setValue(QString value) { widget->setCurrentIndex(widget->findData(value)); }
-  void saveValue() { setting->set(widget->currentData().toString()); }
-};
-
-template <>
-class PrefController<QComboBox, QString>
-    : public PrefControllerTemplate<QComboBox, QString> {
- public:
-  PrefController(QComboBox* parent, Setting<QString>* setting)
-      : PrefControllerTemplate(parent, setting) {
-    connect(widget, &QComboBox::currentIndexChanged, this,
-            &PrefControllerBase::onChange);
-    connect(widget, &QComboBox::currentTextChanged, this,
-            &PrefControllerBase::onChange);
-  };
-  void setValue(QString value) { widget->setEditText(value); }
-  void saveValue() { setting->set(widget->currentText()); }
-};
-
-template <>
-class PrefController<QLineEdit, QString>
-    : public PrefControllerTemplate<QLineEdit, QString> {
- public:
-  PrefController(QLineEdit* parent, Setting<QString>* setting)
-      : PrefControllerTemplate(parent, setting) {
-    connect(widget, &QLineEdit::textChanged, this, &PrefControllerBase::onChange);
-  };
-  void setValue(QString value) { widget->setText(value); }
-  void saveValue() { setting->set(widget->text()); }
-};
-
-template <>
-class PrefController<QLineEdit, QColor>
-    : public PrefControllerTemplate<QLineEdit, QColor> {
- public:
-  PrefController(QLineEdit* parent, Setting<QColor>* setting)
-      : PrefControllerTemplate(parent, setting) {
-    connect(widget, &QLineEdit::textChanged, this, &PrefControllerBase::onChange);
-  };
-  void setValue(QColor value) { widget->setText(value.name(QColor::HexArgb)); }
-  void saveValue() { setting->set(widget->text()); }
-};
-
-enum class PrefGroup {
-  Schedule = 0,
-  Reminder = 1,
-  Interface = 2,
-  Pause = 3,
-  Sound = 4,
-  General = 5,
-};
-
-class ControllerHolder : public QObject {
-  Q_OBJECT
-
- public:
-  ControllerHolder(QObject* parent = 0) : QObject(parent) {};
-  PrefControllerBase* add(PrefGroup, PrefControllerBase*);
-  bool isDirty = false;
-  void onDirtyChange();
-  void load();
-  void save();
-  void reloadDirty();
-  void setGroupToDefault(PrefGroup);
-  void forEach(std::function<void(PrefControllerBase*)>);
-
- signals:
-  void dirtyChanged(bool dirty);
-
- private:
-  QMap<PrefGroup, QList<PrefControllerBase*>> m_controllers = {};
-};
+class AutoStart;
+class BreakWindows;
+class ControllerHolder;
+class QCloseEvent;
+class QComboBox;
+class QEvent;
+class QLineEdit;
+class QPushButton;
+class QShowEvent;
+class QTimer;
+class QWidget;
+class SanePreferences;
+class SoundPlayer;
+class TextWindow;
 
 namespace Ui {
 class PrefWindow;
@@ -268,18 +34,39 @@ class PreferenceWindow : public QMainWindow {
   Q_OBJECT
 
  public:
-  PreferenceWindow(SanePreferences* preferences, QWidget* parent = nullptr);
-  ~PreferenceWindow();
+  explicit PreferenceWindow(SanePreferences* preferences, QWidget* parent = nullptr);
+  ~PreferenceWindow() override;
 
  private:
+  enum class PreviewStep {
+    Idle,
+    SmallFullScreen,
+    BigPrompt,
+    BigFullScreen,
+    Finish,
+  };
+
   Ui::PrefWindow* ui;
   SanePreferences* preferences;
   QList<QPushButton*> tabButtons;
   SoundPlayer* soundPlayer;
   ControllerHolder* controllers;
   AutoStart* autoStart;
-  TextWindow* openingTextWindow = nullptr;
+  QPointer<TextWindow> openingTextWindow;
   BreakWindows* breakWindows;
+  QTimer* previewTimer;
+  PreviewStep previewStep = PreviewStep::Idle;
+
+  void setupTabs();
+  void setupScheduleTab();
+  void setupReminderTab();
+  void setupInterfaceTab();
+  void setupPauseTab();
+  void setupSoundTab();
+  void setupGeneralTab();
+  void setupAboutTab();
+  void setupControlBar();
+  void syncBigBreakEnabled();
 
   bool confirmLeave();
   void setTab(int tabNum, int totalTabCount);
@@ -293,7 +80,9 @@ class PreferenceWindow : public QMainWindow {
   // or an empty string after warning the user.
   QString importFileToAppData(const QString& file, const QString& subdirectory);
   void openBreakWindowPreview();
-  void closeEvent(QCloseEvent* event);
-  void showEvent(QShowEvent* event);
-  void changeEvent(QEvent* event);
+  void advanceBreakWindowPreview();
+  void stopBreakWindowPreview();
+  void closeEvent(QCloseEvent* event) override;
+  void showEvent(QShowEvent* event) override;
+  void changeEvent(QEvent* event) override;
 };
