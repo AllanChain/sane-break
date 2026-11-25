@@ -151,57 +151,33 @@ QString rollMessages(const QStringList messagesToRoll) {
 }
 
 BreakWindowMessage breakMessage(BreakType type, SanePreferences* preferences) {
-  if (type == BreakType::Small) {
-    return {
-        .prompt = preferences->smallMessages->defaultValue()[0],
-        .fullScreen = rollMessages(preferences->smallMessages->get()),
-    };
-  } else {
-    return {
-        .prompt = preferences->bigMessages->defaultValue()[0],
-        .fullScreen = rollMessages(preferences->bigMessages->get()),
-    };
-  }
+  BreakTypeSettings settings = preferences->breakSettings(type);
+  return {
+      .prompt = settings.messages->defaultValue()[0],
+      .fullScreen = rollMessages(settings.messages->get()),
+  };
 }
 
 BreakWindowTheme breakTheme(BreakType type, SanePreferences* preferences) {
-  if (type == BreakType::Small) {
-    return {
-        .background = preferences->smallBackgroundColor->get(),
-        .flash = preferences->smallFlashColor->get(),
-        .messageColor = preferences->messageColor->get(),
-        .countDownColor = preferences->countDownColor->get(),
-        .backgroundImage = preferences->smallBackgroundImage->get(),
-    };
-  } else {
-    return {
-        .background = preferences->bigBackgroundColor->get(),
-        .flash = preferences->bigFlashColor->get(),
-        .messageColor = preferences->messageColor->get(),
-        .countDownColor = preferences->countDownColor->get(),
-        .backgroundImage = preferences->bigBackgroundImage->get(),
-    };
-  }
+  BreakTypeSettings settings = preferences->breakSettings(type);
+  return {
+      .background = settings.backgroundColor->get(),
+      .flash = settings.flashColor->get(),
+      .messageColor = preferences->messageColor->get(),
+      .countDownColor = preferences->countDownColor->get(),
+      .backgroundImage = settings.backgroundImage->get(),
+  };
 }
 
 BreakWindowShow breakShow(BreakType type, SanePreferences* preferences) {
-  if (type == BreakType::Small) {
-    return {
-        .prograssBar = preferences->smallBreakShowProgressBar->get(),
-        .countdown = preferences->smallBreakShowCountdown->get(),
-        .clock = preferences->smallBreakShowClock->get(),
-        .endTime = preferences->smallBreakShowEndTime->get(),
-        .buttons = preferences->smallBreakShowButtons->get(),
-    };
-  } else {
-    return {
-        .prograssBar = preferences->bigBreakShowProgressBar->get(),
-        .countdown = preferences->bigBreakShowCountdown->get(),
-        .clock = preferences->bigBreakShowClock->get(),
-        .endTime = preferences->bigBreakShowEndTime->get(),
-        .buttons = preferences->bigBreakShowButtons->get(),
-    };
-  }
+  BreakTypeSettings settings = preferences->breakSettings(type);
+  return {
+      .prograssBar = settings.showProgressBar->get(),
+      .countdown = settings.showCountdown->get(),
+      .clock = settings.showClock->get(),
+      .endTime = settings.showEndTime->get(),
+      .buttons = settings.showButtons->get(),
+  };
 }
 
 BreakWindowData BreakWindows::createData(BreakType type, SanePreferences* preferences,
@@ -247,13 +223,11 @@ void BreakWindows::destroy() {
 }
 
 void BreakWindows::playEnterSound(BreakType type, SanePreferences* preferences) {
-  soundPlayer->play(type == BreakType::Small ? preferences->smallStartBell->get()
-                                             : preferences->bigStartBell->get());
+  soundPlayer->play(preferences->breakSettings(type).startBell->get());
 }
 
 void BreakWindows::playExitSound(BreakType type, SanePreferences* preferences) {
-  soundPlayer->play(type == BreakType::Small ? preferences->smallEndBell->get()
-                                             : preferences->bigEndBell->get());
+  soundPlayer->play(preferences->breakSettings(type).endBell->get());
 }
 
 void BreakWindows::setTime(int remainingTime) {

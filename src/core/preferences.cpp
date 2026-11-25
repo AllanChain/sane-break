@@ -183,3 +183,36 @@ SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
       makeSetting<int>(this, settings, "break/auto-screen-lock", 0, nonNegativeInt);
   quickBreak = makeSetting<bool>(this, settings, "break/quick-break", false);
 }
+
+BreakTypeSettings SanePreferences::breakSettings(BreakType type) const {
+  if (type == BreakType::Big) {
+    return {
+        .backgroundColor = bigBackgroundColor,
+        .flashColor = bigFlashColor,
+        .backgroundImage = bigBackgroundImage,
+        .messages = bigMessages,
+        .showProgressBar = bigBreakShowProgressBar,
+        .showCountdown = bigBreakShowCountdown,
+        .showClock = bigBreakShowClock,
+        .showEndTime = bigBreakShowEndTime,
+        .showButtons = bigBreakShowButtons,
+        .autoCloseWindow = autoCloseWindowAfterBigBreak,
+        .startBell = bigStartBell,
+        .endBell = bigEndBell,
+    };
+  }
+  return {
+      .backgroundColor = smallBackgroundColor,
+      .flashColor = smallFlashColor,
+      .backgroundImage = smallBackgroundImage,
+      .messages = smallMessages,
+      .showProgressBar = smallBreakShowProgressBar,
+      .showCountdown = smallBreakShowCountdown,
+      .showClock = smallBreakShowClock,
+      .showEndTime = smallBreakShowEndTime,
+      .showButtons = smallBreakShowButtons,
+      .autoCloseWindow = autoCloseWindowAfterSmallBreak,
+      .startBell = smallStartBell,
+      .endBell = smallEndBell,
+  };
+}

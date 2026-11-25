@@ -377,10 +377,7 @@ void BreakPhaseFullScreen::tick(AppContext* app, AppStateBreak* breakState) {
     if (app->idleTimer->isIdle() && !inhibitorCountsAsActivity) {
       // Check if window should auto-close based on preferences and break type
       bool keepWindowOpen =
-          (breakType == BreakType::Small &&
-           !app->preferences->autoCloseWindowAfterSmallBreak->get()) ||
-          (breakType == BreakType::Big &&
-           !app->preferences->autoCloseWindowAfterBigBreak->get());
+          !app->preferences->breakSettings(breakType).autoCloseWindow->get();
       app->data->postBreak().setPending(completion);
       breakState->preserveBreakWindowsOnExit(keepWindowOpen);
       app->transitionTo(std::make_unique<AppStatePostBreakIdle>(keepWindowOpen));

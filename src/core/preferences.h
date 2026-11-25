@@ -18,6 +18,8 @@
 #include <type_traits>
 #include <utility>
 
+#include "core/flags.h"
+
 class SettingWithSignal : public QObject {
   Q_OBJECT
  public:
@@ -106,11 +108,27 @@ class Setting : public SettingWithSignal {
   bool m_cached = false;
 };
 
+struct BreakTypeSettings {
+  Setting<QColor>* backgroundColor;
+  Setting<QColor>* flashColor;
+  Setting<QString>* backgroundImage;
+  Setting<QStringList>* messages;
+  Setting<bool>* showProgressBar;
+  Setting<bool>* showCountdown;
+  Setting<bool>* showClock;
+  Setting<bool>* showEndTime;
+  Setting<bool>* showButtons;
+  Setting<bool>* autoCloseWindow;
+  Setting<QString>* startBell;
+  Setting<QString>* endBell;
+};
+
 class SanePreferences : public QObject {
   Q_OBJECT
  public:
   SanePreferences(QSettings* settings, QObject* parent = nullptr);
   static SanePreferences* createDefault(QObject* parent = nullptr);
+  BreakTypeSettings breakSettings(BreakType type) const;
   QSettings* settings;
 
   Setting<bool>* shownWelcome;
