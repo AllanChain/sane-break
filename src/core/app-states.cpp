@@ -30,6 +30,13 @@ QJsonObject pausedSpanData(PauseReasons reasons) {
   return {{"reasons", QJsonArray::fromStringList(pauseReasonIds(reasons))}};
 }
 
+QMap<QString, QString> breakHookEnv(BreakType breakType, int durationSeconds) {
+  return {
+      {"SANE_BREAK_TYPE", breakType == BreakType::Big ? "big" : "small"},
+      {"SANE_BREAK_DURATION", QString::number(durationSeconds)},
+  };
+}
+
 }  // namespace
 
 void AppContext::transitionTo(std::unique_ptr<AppState> state, bool force) {
@@ -177,6 +184,8 @@ void AppStatePaused::enter(AppContext* app) {
   m_currentSpanReasons = app->data->pause().reasons();
   m_currentSpanType = effectivePauseSpanType(m_currentSpanReasons);
   app->openCurrentSpan(m_currentSpanType, pausedSpanData(m_currentSpanReasons));
+  app->doRunHook("pause-start", {{"SANE_BREAK_PAUSE_REASONS",
+                                  pauseReasonIds(m_currentSpanReasons).join(",")}});
 }
 
 /* To avoid immediate breaks after break resume, we consider the user have already
@@ -184,6 +193,8 @@ void AppStatePaused::enter(AppContext* app) {
  * have configured `resetAfterPause`, we just reset it.
  */
 void AppStatePaused::exit(AppContext* app) {
+  app->doRunHook("pause-end", {{"SANE_BREAK_PAUSE_REASONS",
+                                pauseReasonIds(m_currentSpanReasons).join(",")}});
   app->closeCurrentSpan(pausedSpanData(m_currentSpanReasons));
   app->data->settlePauseAfterResume();
   // Ensure pause reasons are cleared on exit
@@ -238,8 +249,9 @@ void AppStatePaused::onMenuAction(AppContext* app, MenuAction action) {
 }
 
 void AppStateBreak::enter(AppContext* app) {
-  app->openCurrentSpan(
-      "break", {{"type", app->data->breakType() == BreakType::Big ? "big" : "small"}});
+  breakType = app->data->breakType();
+  app->openCurrentSpan("break",
+                       {{"type", breakType == BreakType::Big ? "big" : "small"}});
   data = std::make_unique<BreaksData>(dataInit(app));
   // On focus entry break, exhaust force break exits so the exit button is hidden
   if (app->data->focus().isActive() && !app->data->focus().entryBreakDone()) {
@@ -254,13 +266,13 @@ void AppStateBreak::enter(AppContext* app) {
   // user is active — we need to detect actual presence to drive phase transitions
   // (prompt ↔ full-screen), force-break escalation, and post-break auto-close.
   app->idleTimer->setIdleDetection(2000, IdleMode::InputOnly);
-  app->breakWindows->create(app->data->breakType(), app->preferences,
-                            data->totalSeconds(),
+  app->breakWindows->create(breakType, app->preferences, data->totalSeconds(),
                             app->data->schedule().isBreakExtendedByPostpone());
   // Ensure we set the time at least once to initialize the UI in case user is idle and
   // no tick occurs
   app->breakWindows->setTime(data->remainingSeconds());
-  app->breakWindows->playEnterSound(app->data->breakType(), app->preferences);
+  app->breakWindows->playEnterSound(breakType, app->preferences);
+  app->doRunHook("break-start", breakHookEnv(breakType, data->totalSeconds()));
   if (app->idleTimer->isIdle()) {
     this->transitionTo(app, std::make_unique<BreakPhaseFullScreen>());
   } else {
@@ -269,7 +281,11 @@ void AppStateBreak::enter(AppContext* app) {
 }
 void AppStateBreak::exit(AppContext* app) {
   if (m_currentPhase) m_currentPhase->exit(app, this);
-  app->closeCurrentSpan({{"normal-exit", (data->remainingSeconds() <= 0)}});
+  const bool normalExit = data->remainingSeconds() <= 0;
+  QMap<QString, QString> hookEnv = breakHookEnv(breakType, data->totalSeconds());
+  hookEnv.insert("SANE_BREAK_COMPLETED", normalExit ? "1" : "0");
+  app->doRunHook("break-end", hookEnv);
+  app->closeCurrentSpan({{"normal-exit", normalExit}});
   if (!m_preserveBreakWindowsOnExit) app->breakWindows->destroy();
   m_preserveBreakWindowsOnExit = false;
 }
@@ -327,7 +343,7 @@ void AppStateBreak::onMenuAction(AppContext* app, MenuAction action) {
   }
 }
 
-void BreakPhasePrompt::enter(AppContext* app, AppStateBreak*) {
+void BreakPhasePrompt::enter(AppContext* app, AppStateBreak* breakState) {
   m_spanId = app->db->openSpan("flash");
   app->breakWindows->showFlashPrompt();
   app->breakWindows->showButtons(AbstractBreakWindows::Button::ExitForceBreak |
@@ -336,6 +352,8 @@ void BreakPhasePrompt::enter(AppContext* app, AppStateBreak*) {
                                  false);
   // screenLockTimer should only be active in BreakPhaseFullScreen and AppStatePaused
   app->screenLockTimer->stop();
+  app->doRunHook("break-prompt",
+                 breakHookEnv(breakState->breakType, breakState->data->totalSeconds()));
 }
 void BreakPhasePrompt::exit(AppContext* app, AppStateBreak*) {
   app->db->closeSpan(m_spanId);
@@ -359,6 +377,8 @@ void BreakPhaseFullScreen::enter(AppContext* app, AppStateBreak* breakState) {
   if (int secs = app->preferences->autoScreenLock->get(); secs > 0) {
     app->screenLockTimer->start(secs * 1000);
   }
+  app->doRunHook("break-fullscreen",
+                 breakHookEnv(breakState->breakType, breakState->data->totalSeconds()));
 }
 void BreakPhaseFullScreen::tick(AppContext* app, AppStateBreak* breakState) {
   breakState->data->tickRemainingTime();

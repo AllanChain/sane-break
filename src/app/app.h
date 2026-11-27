@@ -29,6 +29,7 @@ class SaneBreakApp : public AbstractApp {
   void start() override;
   void doLockScreen() override;
   void doPauseMedia() override;
+  void doRunHook(const QString& event, const QMap<QString, QString>& env = {}) override;
 
   void showPreferences();
   void openStatsWindow();

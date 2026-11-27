@@ -182,6 +182,7 @@ SanePreferences::SanePreferences(QSettings* settings, QObject* parent)
   autoScreenLock =
       makeSetting<int>(this, settings, "break/auto-screen-lock", 0, nonNegativeInt);
   quickBreak = makeSetting<bool>(this, settings, "break/quick-break", false);
+  hookScript = makeSetting<QString>(this, settings, "hook-script", "");
 }
 
 BreakTypeSettings SanePreferences::breakSettings(BreakType type) const {

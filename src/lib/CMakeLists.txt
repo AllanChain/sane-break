@@ -3,6 +3,8 @@ add_library(
   auto-start.h
   battery-status.cpp
   battery-status.h
+  hook-runner.cpp
+  hook-runner.h
   media-control.h
   program-monitor.cpp
   program-monitor.h

@@ -474,6 +474,21 @@ void PreferenceWindow::setupGeneralTab() {
 #ifdef Q_OS_MAC
   ui->quickBreak->setHidden(true);
 #endif
+
+#if defined(LINUX_DIST_FLATPAK) || defined(SANE_APP_STORE)
+  ui->hookScriptLabel->setHidden(true);
+  ui->hookScriptPath->setHidden(true);
+  ui->browseHookScript->setHidden(true);
+  ui->clearHookScript->setHidden(true);
+#else
+  controllers->add(PrefGroup::General,
+                   new PrefController<QLineEdit, QString>(ui->hookScriptPath,
+                                                          preferences->hookScript));
+  connect(ui->browseHookScript, &QPushButton::pressed, this,
+          &PreferenceWindow::browseForHookScript);
+  connect(ui->clearHookScript, &QPushButton::pressed, this,
+          [this]() { ui->hookScriptPath->setText(""); });
+#endif
 }
 
 void PreferenceWindow::setupAboutTab() {
@@ -614,6 +629,12 @@ void PreferenceWindow::browseForBackgroundImage(QLineEdit* target, BreakType typ
       importFileToAppData(file, type == BreakType::Big ? "images/big" : "images/small");
   if (destPath.isEmpty()) return;
   target->setText(QUrl::fromLocalFile(destPath).toString());
+}
+
+void PreferenceWindow::browseForHookScript() {
+  QString file = QFileDialog::getOpenFileName(this, tr("Select Hook Script"));
+  if (file.isEmpty()) return;
+  ui->hookScriptPath->setText(QDir::toNativeSeparators(file));
 }
 
 void PreferenceWindow::openBreakWindowPreview() {

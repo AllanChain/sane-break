@@ -11,6 +11,7 @@
 #include <QSettings>
 #include <QSignalSpy>
 #include <QSpinBox>
+#include <QTemporaryDir>
 #include <QTemporaryFile>
 #include <QTest>
 #include <QTimer>
@@ -19,7 +20,9 @@
 #include "app/break-window.h"
 #include "app/pref-controller.h"
 #include "app/pref-window.h"
+#include "config.h"
 #include "core/preferences.h"
+#include "lib/hook-runner.h"
 
 class TestPrefWindow : public QObject {
   Q_OBJECT
@@ -189,6 +192,58 @@ class TestPrefWindow : public QObject {
     window.reset();
     QCoreApplication::processEvents();
     QCOMPARE(openBreakWindowCount(), 0);
+  }
+
+  void hook_script_pref_and_runner() {
+    QTemporaryFile tempFile;
+    QObject root;
+    SanePreferences* prefs = makePreferences(tempFile, &root);
+
+    PreferenceWindow window(prefs);
+    window.show();
+    QCoreApplication::processEvents();
+
+    auto* hookScriptPath = window.findChild<QLineEdit*>("hookScriptPath");
+    auto* clearHookScript = window.findChild<QPushButton*>("clearHookScript");
+    auto* saveButton = window.findChild<QPushButton*>("saveButton");
+    QVERIFY(hookScriptPath && clearHookScript && saveButton);
+
+#if defined(LINUX_DIST_FLATPAK) || defined(SANE_APP_STORE)
+    QVERIFY(!hookScriptPath->isVisible());
+#else
+    hookScriptPath->setText("/usr/bin/true");
+    emit saveButton->pressed();
+    QCOMPARE(prefs->hookScript->get(), QString("/usr/bin/true"));
+
+    emit clearHookScript->pressed();
+    emit saveButton->pressed();
+    QCOMPARE(prefs->hookScript->get(), QString(""));
+
+    QTemporaryDir tempDir;
+    QVERIFY(tempDir.isValid());
+    QString outPath = tempDir.filePath("out.txt");
+    QString scriptPath = tempDir.filePath("hook.sh");
+
+    QFile scriptFile(scriptPath);
+    QVERIFY(scriptFile.open(QIODevice::WriteOnly | QIODevice::Text));
+    scriptFile.write("#!/bin/sh\n");
+    scriptFile.write(
+        "printf '%s|%s|%s' \"$1\" \"$SANE_BREAK_EVENT\" "
+        "\"$SANE_BREAK_TYPE\" > \"$SANE_TEST_OUT\"\n");
+    scriptFile.close();
+    QVERIFY(QFile::setPermissions(scriptPath, QFileDevice::ReadOwner |
+                                                  QFileDevice::WriteOwner |
+                                                  QFileDevice::ExeOwner));
+
+    runHookScript(scriptPath, "break-fullscreen",
+                  {{"SANE_BREAK_TYPE", "big"}, {"SANE_TEST_OUT", outPath}});
+
+    QTRY_VERIFY_WITH_TIMEOUT(QFileInfo(outPath).size() > 0, 2000);
+    QFile resultFile(outPath);
+    QVERIFY(resultFile.open(QIODevice::ReadOnly));
+    QCOMPARE(QString::fromUtf8(resultFile.readAll()),
+             QString("break-fullscreen|break-fullscreen|big"));
+#endif
   }
 };
 

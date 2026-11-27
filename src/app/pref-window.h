@@ -76,6 +76,7 @@ class PreferenceWindow : public QMainWindow {
   void openWeblate();
   void browseForSound(QComboBox* comboBox);
   void browseForBackgroundImage(QLineEdit* target, BreakType type);
+  void browseForHookScript();
   // Copies `file` into `<app data>/<subdirectory>` and returns the destination path,
   // or an empty string after warning the user.
   QString importFileToAppData(const QString& file, const QString& subdirectory);

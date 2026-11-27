@@ -203,4 +203,5 @@ class SanePreferences : public QObject {
   Setting<bool>* quickBreak;
   Setting<QString>* language;
   Setting<bool>* autoStart;
+  Setting<QString>* hookScript;
 };

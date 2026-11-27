@@ -1969,6 +1969,73 @@ class TestApp : public QObject {
     QVERIFY(smallEvery.isNull());
     QVERIFY(quickBreak.isNull());
   }
+  void lifecycle_hooks_fire_on_break_and_pause_transitions() {
+    deps.preferences->smallFor->set(20);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    QMap<QString, QString> expectedBreakEnv = {
+        {"SANE_BREAK_TYPE", "small"},
+        {"SANE_BREAK_DURATION", "20"},
+    };
+    QMap<QString, QString> expectedEndEnv = expectedBreakEnv;
+    expectedEndEnv.insert("SANE_BREAK_COMPLETED", "1");
+
+    {
+      testing::InSequence seq;
+      EXPECT_CALL(app, doRunHook(QString("break-start"), expectedBreakEnv)).Times(1);
+      EXPECT_CALL(app, doRunHook(QString("break-prompt"), expectedBreakEnv)).Times(1);
+      EXPECT_CALL(app, doRunHook(QString("break-fullscreen"), expectedBreakEnv))
+          .Times(1);
+      EXPECT_CALL(app, doRunHook(QString("break-end"), expectedEndEnv)).Times(1);
+    }
+
+    app.advance(app.trayData.secondsToNextBreak);
+    deps.idleTimer->setIdle(true);
+    app.advanceToBreakEnd();
+    deps.idleTimer->setIdle(false);
+    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+
+    QMap<QString, QString> expectedPauseEnv = {
+        {"SANE_BREAK_PAUSE_REASONS", "external-control"},
+    };
+    {
+      testing::InSequence seq;
+      EXPECT_CALL(app, doRunHook(QString("pause-start"), expectedPauseEnv)).Times(1);
+      EXPECT_CALL(app, doRunHook(QString("pause-end"), expectedPauseEnv)).Times(1);
+    }
+    app.pauseByExternalControl();
+    app.resumeFromExternalControl();
+    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+  }
+  void lifecycle_hooks_report_incomplete_break_and_big_break_type() {
+    deps.preferences->smallEvery->set(600);
+    deps.preferences->smallFor->set(20);
+    deps.preferences->bigBreakEnabled->set(true);
+    deps.preferences->bigAfter->set(1);
+    deps.preferences->bigFor->set(60);
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    QMap<QString, QString> expectedBigEnv = {
+        {"SANE_BREAK_TYPE", "big"},
+        {"SANE_BREAK_DURATION", "60"},
+    };
+    QMap<QString, QString> expectedIncompleteEndEnv = expectedBigEnv;
+    expectedIncompleteEndEnv.insert("SANE_BREAK_COMPLETED", "0");
+
+    {
+      testing::InSequence seq;
+      EXPECT_CALL(app, doRunHook(QString("break-start"), expectedBigEnv)).Times(1);
+      EXPECT_CALL(app, doRunHook(QString("break-prompt"), expectedBigEnv)).Times(1);
+      EXPECT_CALL(app, doRunHook(QString("break-end"), expectedIncompleteEndEnv))
+          .Times(1);
+    }
+
+    app.bigBreakNow();
+    QCOMPARE(app.postpone(300), CommandError::None);
+    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+  }
 };
 
 QTEST_MAIN(TestApp)

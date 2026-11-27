@@ -5,7 +5,9 @@
 #pragma once
 
 #include <QFlags>
+#include <QMap>
 #include <QObject>
+#include <QString>
 #include <memory>
 #include <variant>
 
@@ -99,6 +101,10 @@ class AppContext : public QObject {
   void checkBreakReadiness();
   // Map the treatInhibitorAsActivity preference to the idle measurement mechanism.
   IdleMode preferredIdleMode() const;
+  virtual void doRunHook(const QString& event, const QMap<QString, QString>& env = {}) {
+    Q_UNUSED(event);
+    Q_UNUSED(env);
+  }
 
  signals:
   void appStateChanged();
@@ -171,6 +177,7 @@ class AppStateBreak : public AppState {
 
   BreaksDataInit dataInit(AppContext*);
   std::unique_ptr<BreaksData> data;
+  BreakType breakType = BreakType::Small;
 
  protected:
   std::unique_ptr<BreakPhase> m_currentPhase;

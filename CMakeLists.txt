@@ -39,4 +39,6 @@ if(TESTING)
   add_subdirectory(test)
 endif()
 
+option(SANE_APP_STORE "Build for sandboxed App Store" OFF)
+
 configure_file(config.h.cmake config.h)

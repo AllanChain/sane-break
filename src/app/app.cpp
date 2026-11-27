@@ -29,6 +29,7 @@
 #include "core/preferences.h"
 #include "focus-window.h"
 #include "idle/factory.h"
+#include "lib/hook-runner.h"
 #include "lib/media-control.h"
 #include "lib/screen-lock.h"
 #include "lib/system-monitor.h"
@@ -120,6 +121,10 @@ void SaneBreakApp::start() {
 void SaneBreakApp::doLockScreen() { lockScreen(); }
 
 void SaneBreakApp::doPauseMedia() { pauseAllMedia(); }
+
+void SaneBreakApp::doRunHook(const QString& event, const QMap<QString, QString>& env) {
+  runHookScript(preferences->hookScript->get(), event, env);
+}
 
 static void showAndActivate(QWidget* window) {
   window->show();
