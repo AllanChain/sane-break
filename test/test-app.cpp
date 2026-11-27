@@ -172,6 +172,29 @@ class TestApp : public QObject {
     int smallEvery = deps.preferences->smallEvery->get();
     QCOMPARE(app.trayData.secondsToNextBreak, smallEvery);
   }
+  void defer_force_break() {
+    NiceMock<DummyApp> app(deps);
+    deps.preferences->flashFor->set(30);
+    app.start();
+
+    app.advance(app.trayData.secondsToNextBreak);
+    QVERIFY(app.trayData.isBreaking);
+
+    // Advance 25s into the 30s prompt (5s left before force break)
+    app.advance(25);
+    app.deferForceBreak();
+
+    // Force break should now be 30s away instead of 5s away
+    EXPECT_CALL(*deps.breakWindows, showFullScreen()).Times(0);
+    app.advance(29);
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+
+    // A second call during the same break is a no-op
+    app.deferForceBreak();
+    EXPECT_CALL(*deps.breakWindows, showFullScreen()).Times(1);
+    app.advance(1);
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+  }
   // Advance a full cycle of breaks and see if small and big breaks are shown correctly
   void show_big_break() {
     NiceMock<DummyApp> app(deps);

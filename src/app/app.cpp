@@ -187,6 +187,7 @@ void SaneBreakApp::openPostponeWindow(std::optional<int> presetMinutes) {
     connect(postponeWindow, &PostponeWindow::postponeRequested, this,
             &SaneBreakApp::postpone);
   }
+  deferForceBreak();
   postponeWindow->setMinutes(presetMinutes.value_or(0));
   showAndActivate(postponeWindow);
 }
@@ -204,6 +205,7 @@ void SaneBreakApp::openMeetingWindow(std::optional<int> presetMinutes) {
               if (seconds > 0) startMeeting(seconds, reason);
             });
   }
+  deferForceBreak();
   int minutes = presetMinutes.value_or(30);
   QTime endTime = QTime::currentTime().addSecs(minutes * 60);
   meetingWindow->setEndTime(endTime);

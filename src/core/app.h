@@ -70,6 +70,7 @@ class AbstractApp : public AppContext {
   void bigBreakNow();
   // Take a small break when big break is on
   void smallBreakInstead();
+  void deferForceBreak();
   CommandError canPostpone() const;
   CommandError postpone(int seconds);
   void enableBreak();

@@ -138,6 +138,7 @@ void AbstractApp::breakNow() { onMenuAction(Action::BreakNow{}); }
 void AbstractApp::bigBreakNow() { onMenuAction(Action::BigBreakNow{}); }
 void AbstractApp::enableBreak() { onMenuAction(Action::EnableBreaks{}); }
 void AbstractApp::smallBreakInstead() { onMenuAction(Action::SmallBreakInstead{}); }
+void AbstractApp::deferForceBreak() { onMenuAction(Action::DeferForceBreak{}); }
 void AbstractApp::pauseByExternalControl() {
   onPauseRequest(PauseReason::ExternalControl);
 }

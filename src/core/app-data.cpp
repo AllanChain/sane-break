@@ -476,6 +476,11 @@ int BreaksData::totalSeconds() { return m_totalSeconds; };
 bool BreaksData::isForceBreak() { return m_secondsToForceBreak <= 0; };
 void BreaksData::tickSecondsToForceBreak() { m_secondsToForceBreak--; };
 void BreaksData::resetSecondsToForceBreak() { m_secondsToForceBreak = 0; };
+void BreaksData::deferForceBreak(int minSeconds) {
+  if (m_hasDeferredForceBreak || isForceBreak()) return;
+  m_hasDeferredForceBreak = true;
+  m_secondsToForceBreak = std::max(minSeconds, m_secondsToForceBreak);
+}
 
 int BreaksData::remainingSeconds() { return m_remainingSeconds; };
 void BreaksData::tickRemainingTime() { m_remainingSeconds--; };

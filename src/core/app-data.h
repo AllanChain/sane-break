@@ -260,6 +260,7 @@ class BreaksData {
   bool isForceBreak();
   void tickSecondsToForceBreak();
   void resetSecondsToForceBreak();
+  void deferForceBreak(int minSeconds = 30);
 
   int remainingSeconds();
   void tickRemainingTime();
@@ -273,4 +274,5 @@ class BreaksData {
   int m_secondsToForceBreak;
   int m_remainingSeconds;
   int m_numberForceBreakExits = 0;
+  bool m_hasDeferredForceBreak = false;
 };

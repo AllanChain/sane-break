@@ -322,6 +322,8 @@ void AppStateBreak::onMenuAction(AppContext* app, MenuAction action) {
     data->recordForceBreakExit();
     app->db->logEvent("break::exit-force");
     this->transitionTo(app, std::make_unique<BreakPhasePrompt>());
+  } else if (std::get_if<Action::DeferForceBreak>(&action)) {
+    data->deferForceBreak();
   }
 }
 
