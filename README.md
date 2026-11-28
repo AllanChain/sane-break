@@ -2,7 +2,7 @@
   <img src="./resources/images/icon.svg" width="150" height="150">
 </p>
 <h1 align="center">Sane Break</h1>
-<p align=center>
+<p align="center">
   <a href="https://github.com/AllanChain/sane-break/releases">
     <img src="https://img.shields.io/github/v/release/AllanChain/sane-break" alt="GitHub release">
   </a>
@@ -11,248 +11,82 @@
     <img src="https://img.shields.io/flathub/downloads/io.github.AllanChain.sane-break?logo=flathub" alt="Flathub Downloads">
   </a>
   <a href="https://github.com/AllanChain/sane-break/releases">
-    <img src="https://img.shields.io/github/downloads/AllanChain/sane-break/total?logo=github&color=black" alt="total downloads">
+    <img src="https://img.shields.io/github/downloads/AllanChain/sane-break/total?logo=github&color=black" alt="Total downloads">
   </a>
   <a href="https://hosted.weblate.org/engage/sane-break/">
-    <img src="https://hosted.weblate.org/widget/sane-break/sane-break/svg-badge.svg" alt="Translation status" />
+    <img src="https://hosted.weblate.org/widget/sane-break/sane-break/svg-badge.svg" alt="Translation status">
   </a>
 </p>
 
-Sane Break is a cross-platform break reminder designed to help you take meaningful breaks without disrupting your workflow.
+<p align="center">
+  A gentle, cross-platform break reminder designed to help you take meaningful rests without disrupting your workflow.
+</p>
 
-<a href="https://apps.microsoft.com/detail/9n1c3x5dwhxx?referrer=appbadge&mode=direct">
-  <img width="200" src="https://get.microsoft.com/images/en-us%20dark.svg">
-</a>
-&nbsp;
-<a href="https://apps.apple.com/us/app/sane-break/id6740942634">
-  <img height="55" alt="Download on the Mac App Store" src="https://github.com/user-attachments/assets/2b6f067b-d275-4a2f-ba13-4fb9c6bd63fe">
-</a>
-&nbsp;
-<a href="https://flathub.org/apps/io.github.AllanChain.sane-break">
-  <img height="55" alt="Get it on Flathub" src="https://flathub.org/api/badge?locale=en">
-</a>
+<p align="center">
+  <a href="https://allanchain.github.io/sane-break/"><b>Website &amp; Interactive Demo</b></a>
+  ·
+  <a href="https://allanchain.github.io/sane-break/installation"><b>Installation</b></a>
+  ·
+  <a href="https://allanchain.github.io/sane-break/breaks-and-schedule"><b>User Guide</b></a>
+  ·
+  <a href="https://allanchain.github.io/sane-break/cli"><b>CLI &amp; Hooks</b></a>
+</p>
 
-## 🤔 Why another break reminder?
+<p align="center">
+  <a href="https://apps.microsoft.com/detail/9n1c3x5dwhxx?referrer=appbadge&mode=direct">
+    <img width="200" alt="Download from the Microsoft Store" src="https://get.microsoft.com/images/en-us%20dark.svg">
+  </a>
+  &nbsp;
+  <a href="https://apps.apple.com/us/app/sane-break/id6740942634">
+    <img height="55" alt="Download on the Mac App Store" src="https://github.com/user-attachments/assets/2b6f067b-d275-4a2f-ba13-4fb9c6bd63fe">
+  </a>
+  &nbsp;
+  <a href="https://flathub.org/apps/io.github.AllanChain.sane-break">
+    <img height="55" alt="Get it on Flathub" src="https://flathub.org/api/badge?locale=en">
+  </a>
+</p>
 
-Most break reminder apps send notifications before the break is scheduled, but that merely informs me that a break is _going to happen_, rather than telling me it's _happening right now_. Even with a warning, when the break actually happens I'm too often deeply focused on a task. Then, the program either forces the break, interrupting my work, or I can use a "skip" or "postpone" button. Accepting abrupt interruption is too harsh, so I tend to click "skip" or "postpone". Then, that becomes an almost instinctive habit, and before I know it, hours have passed without a single break.
+## Why Sane Break?
 
-In contrast, Sane Break allows me to take ownership of _when_ to stop and break. It starts by providing a gentle, non-intrusive reminder through a flashing window. The break officially begins as soon as I naturally pause after finishing my current task. This way, Sane Break offers the flexibility to wrap up my work and take a break on my terms, rather than forcing an abrupt interruption.
+Traditional break reminders either block your screen mid-sentence or put a prominent Skip button right on the reminder window. Accepting an abrupt interruption is jarring, so clicking Skip or Postpone quickly turns into muscle memory, and hours pass without a single rest.
 
-Sane Break aims to strike a balance between respecting your workflow and ensuring you take the breaks you need.
+Sane Break is inspired by [RSIBreak](https://apps.kde.org/rsibreak/) and [WorkRave](https://workrave.org/) and uses a two-phase reminder system so you control the exact moment a break begins (read more in [No break reminder works (for me)](https://allanchain.github.io/blog/post/sane-break-intro/)).
 
-For more details about the motivation behind Sane Break, you can refer to [No break reminder works (for me)](https://allanchain.github.io/blog/post/sane-break-intro/).
+- **Phase 1 (Flashing Prompt)** displays a small, click-through banner at the top of the screen while you finish typing your current thought.
+- **Phase 2 (Full-Screen Break)** expands the reminder to full screen as soon as you stop keyboard and mouse input for 2 seconds (or after a configurable timeout if you ignore the prompt). During the initial grace period, resuming input shrinks the window right back to the flashing prompt.
+- **Intentional Friction** keeps skip and postpone buttons off the break prompt so dismissals never become a reflex.
 
-## Two phase system
+An [interactive two-phase break demo](https://allanchain.github.io/sane-break/) is available on the documentation site.
 
-Sane Break uses a two-phase system:
+## Key Features
 
-- Phase 1: A small, unobtrusive reminder that encourages you to find a good stopping point.
-- Phase 2: The reminder grows to full screen during the actual break.
+- **[Two-Phase Breaks and Pre-Break Warnings](https://allanchain.github.io/sane-break/breaks-and-schedule)** combine alternating small and big break cycles with an optional floating heads-up countdown pill and tray icon indicator.
+- **[Focus Mode, Meeting Mode, and Mindful Postponing](https://allanchain.github.io/sane-break/modes-and-postponing)** adapt breaks around Pomodoro-style deep work, calls, and urgent deadlines. Postponing is limited to once per break and balances the delay by extending the upcoming rest and shortening the next work session.
+- **[Context-Aware Automatic Pause](https://allanchain.github.io/sane-break/automatic-pause)** pauses the schedule during user idle, screen lock, system sleep, battery power, monitored applications, or connections to unrecognized external monitors and projectors, and resets the break cycle after longer absences.
+- **[Local-Only Activity Timeline and Customization](https://allanchain.github.io/sane-break/customization)** plot daily breaks, focus sessions, meetings, and pauses from a local SQLite database with zero network requests, alongside independent small and big break themes and sound bells.
+- **[CLI Control and Lifecycle Hook Scripts](https://allanchain.github.io/sane-break/cli)** output JSON status for status bars like Waybar, trigger modes from keyboard shortcuts, and run custom scripts or dynamic wallpaper overrides on break events.
 
-Transition to phase 2 happens when you stop working on your computer, or when you ignore the reminder and keep working for too long (configurable).
-
-This design was inspired by [RSIBreak](https://apps.kde.org/rsibreak/) and has similarities to [WorkRave](https://workrave.org/). Sane Break has some other improvements:
-
-- No big buttons for skipping or postponing to avoid mindless dismissals.
-- [Cross-platform support](#installation)
-- modern framework and UI style built with Qt6
-
-## 🎬 Demo video
-
-https://github.com/user-attachments/assets/35002673-ce83-4848-bd5e-6cc6dbbd4c8c
-
-<details>
-  <summary>📷 <b>Screenshots</b></summary>
-
-![flashing](https://github.com/user-attachments/assets/1ec11caf-3b3d-4429-881d-4d909ec4c3c7)
-![fullscreen](https://github.com/user-attachments/assets/59164505-3446-4ef7-b0e0-5ffe0a607c44)
-![macos](https://github.com/user-attachments/assets/2f28406e-0601-4786-ab5d-194a7cfae050)
-
-</details>
+<p align="center">
+  <img src="./screenshots/stats-window.png" width="48%" alt="Weekly activity and break statistics">
+  <img src="./screenshots/postpone-window.png" width="48%" alt="Mindful postpone dialog">
+</p>
+<p align="center">
+  <img src="./screenshots/pref-schedule.png" width="48%" alt="Break schedule preferences">
+  <img src="./screenshots/pref-pause.png" width="48%" alt="Automatic pause preferences">
+</p>
 
 ## Installation
 
-### macOS
+- **Windows** packages are available on the [Microsoft Store](https://apps.microsoft.com/detail/9n1c3x5dwhxx?referrer=appbadge&mode=direct) and as `sane-break-windows.zip` on the [GitHub releases page](https://github.com/AllanChain/sane-break/releases).
+- **macOS** packages can be installed via Homebrew (`brew install allanchain/tap/sane-break`), the [Mac App Store](https://apps.apple.com/us/app/sane-break/id6740942634), or `.dmg` installers on the [GitHub releases page](https://github.com/AllanChain/sane-break/releases).
+- **Linux** packages are available on [Flathub](https://flathub.org/apps/io.github.AllanChain.sane-break) (`flatpak install flathub io.github.AllanChain.sane-break`), the AUR (`yay -S sane-break`), [Fedora Copr](https://copr.fedorainfracloud.org/coprs/allanchain/sane-break/) (`sudo dnf copr enable allanchain/sane-break && sudo dnf install sane-break`), and as `.deb` and AppImage binaries on the [GitHub releases page](https://github.com/AllanChain/sane-break/releases).
 
-For macOS, the recommended installation method is Homebrew:
-
-```bash
-brew install allanchain/tap/sane-break
-```
-
-Sane Break is also available on the [App Store](https://apps.apple.com/us/app/sane-break/id6740942634).
-
-### Windows
-
-Download the Windows package (`sane-break-windows.zip`) from the [release page](https://github.com/AllanChain/sane-break/releases) and extract it. Put the `.exe` executable anywhere you like. x86 version of Windows 10 or newer is supported. Older versions may be supported too.
-
-### Linux
-
-Sane Break requires Qt>=6.4 for X11 support and Qt>=6.6 for Wayland support.
-It works best on KDE Wayland, and X11 is also fully supported.
-Sane Break will also work with Wayland compositors with [wlr layer shell](https://wayland.app/protocols/wlr-layer-shell-unstable-v1) and [idle notify](https://wayland.app/protocols/ext-idle-notify-v1) protocols support.
-Although GNOME Wayland does not support these protocols, some special workaround are made so that Sane Break will work with GNOME.
-
-#### Precompiled packages
-
-##### Flatpak
-
-Sane Break can be installed from Flathub with
-
-```bash
-flatpak install flathub io.github.AllanChain.sane-break
-```
-
-Note that if you are using GNOME, please download the GNOME shell extension for Sane Break from the [release page](https://github.com/AllanChain/sane-break/releases) and run:
-```bash
-gnome-extensions install sane-break-gnome-extension.zip
-gnome-extensions enable sane-break@allanchain.github.io
-```
-You may need to logout and login from the Wayland session to make the extension work.
-
-##### .deb packages
-
-If you are using Ubuntu 24.10 (and above) or Debian Trixie (and above), you can install the `.deb` package directly from the [release page](https://github.com/AllanChain/sane-break/releases) since `v0.6.0`. And make sure to enable the GNOME shell extension with:
-```bash
-gnome-extensions enable sane-break@allanchain.github.io
-```
-
-The difference between Wayland Ubuntu Oracular build and Debian Trixie build is the layer shell support. If you are using a Debian-based distro and a Wayland compositor with layer shell protocol support (e.g. KDE Neon), you probably need the Debian Trixie build. Otherwise, the Ubuntu Oracular build is good to go.
-
-##### RPM packages from Copr
-
-If you are using Fedora or similar distros, you can install Sane Break from [Copr](https://copr.fedorainfracloud.org/coprs/allanchain/sane-break/):
-
-```bash
-sudo dnf copr enable allanchain/sane-break
-sudo dnf install sane-break
-```
-
-For GNOME users, sure to enable the GNOME shell extension with:
-```bash
-gnome-extensions enable sane-break@allanchain.github.io
-```
-
-You can contribute to the package by submitting PR to https://github.com/AllanChain/sane-break.spec
-
-##### AppImage version
-
-Starting from `v0.9.0`, Sane Break also provides an experimental AppImage binary. It has several known limitations such as doesn't respect system themes. We are open to contributions to improve the AppImage version.
-
-##### i3wm Configuration
-
-For i3 window manager users, add the following to your `~/.config/i3/config` to make Sane Break sticky across all workspaces:
-
-```
-for_window [instance="sane-break"] floating enable, sticky enable
-```
-
-To prevent accidentally hiding the break window, you may also want to:
-
-```
-# Prevent moving Sane Break to scratchpad
-bindsym $mod+x [floating instance="^(?!sane-break).*$"] move scratchpad
-
-# Optionally disable floating toggle to prevent other windows from popping up
-# bindsym $mod+Shift+space floating toggle
-```
-
-**Note:** There will always be ways to bypass the break reminder in i3wm, as global shortcuts cannot be captured by applications. These are recommended configurations, but you may need to customize based on your setup. For more discussion, see [#121](https://github.com/AllanChain/sane-break/issues/121).
-
-#### Compiling from source
-
-Assume all required packages described below is installed, you can use the following commands to compile and install Sane Break.
-
-```bash
-git clone https://github.com/AllanChain/sane-break
-cd sane-break
-mkdir build
-cd build
-cmake ..
-cmake --build . --parallel
-sudo cmake --install .
-```
-
-The above command will automatically enable X11 or Wayland support based on libraries found.
-
-To build with translations, install `qt6-tools` package (name may vary across distros).
-
-##### Arch-based distros
-
-For Arch-based distros, it's recommended to directly install the AUR package:
-```bash
-yay -S sane-break
-```
-
-If you want to build it manually, make sure the following packages are installed:
-```bash
-yay -S qt6-base qt6-multimedia cli11
-yay -S libxss # X support
-yay -S layer-shell-qt # Wayland support
-```
-
-If you want to enable just X11 or Wayland support, you are strongly encouraged to install Sane Break by compiling from source.
-
-##### Debian-based distros
-
-For KDE users (e.g. KDE Neon), just install
-```bash
-apt install qt6-base-dev qt6-multimedia-dev libcli11-dev
-apt install libxss-dev # X support
-apt install qt6-wayland-dev liblayershellqtinterface-dev # Wayland support
-```
-
-For GNOME users, `liblayershellqtinterface-dev` is optional, and please make sure to enable the GNOME shell extension `sane-break@allanchain.github.io` after building and installing Sane Break.
-
-##### Others
-
-For Guix (see also [#23](https://github.com/AllanChain/sane-break/issues/23)):
-```bash
-guix shell --container make cmake gcc-toolchain pkg-config vulkan-headers \
-  qtbase@6 qtmultimedia cli11 \
-  libxkbcommon libxscrnsaver libx11 \  # X support
-  layer-shell-qt qtwayland@6 wayland   # Wayland support
-```
-
-## FAQ
-
-### What if I really want to skip a break?
-
-You can postpone or quit via tray icon before Sane Break enters force break mode. If it's already in the force break mode, you can first click "Exit Force Break" and then postpone via tray icon.
-
-### Will Sane Break pause when I'm away?
-
-Yes, Sane Break will automatically pause and stop prompting breaks if there is no user input for a configurable amount of time, determined by the "Pause if idle for" setting. Additionally, if the idle time extends beyond a certain threshold, Sane Break will reset the break timer and break cycle, starting from a small break. These thresholds can be configured using the "Reset break after paused for" and "Reset cycle after paused for" settings.
-
-**Note for Wayland** (and possibly other platforms): Some applications, such as mpv, simulate user inputs to prevent the computer from sleeping automatically. Sane Break cannot distinguish between simulated and real inputs, so it will treat these simulations as active use. This means breaks can still occur while watching videos.
-
-### Why doesn't autostart work?
-
-Autostart via the in-app setting may fail on some desktop environments that don't provide the D-Bus portal interface (`org.freedesktop.portal.Background`) required for Flatpak applications. This is known to affect COSMIC desktop and potentially other environments. If you encounter this issue, you can manually create a desktop file at `~/.config/autostart/io.github.AllanChain.sane-break.desktop` with the following content:
-
-```desktop
-[Desktop Entry]
-Type=Application
-Name=io.github.AllanChain.sane-break
-X-XDP-Autostart=io.github.AllanChain.sane-break
-Exec=flatpak run --command=sane-break io.github.AllanChain.sane-break
-X-Flatpak=io.github.AllanChain.sane-break
-```
-
-### Where are settings stored?
-
-The default locations for settings are:
-- On Linux and macOS: ` ~/.config/SaneBreak/SaneBreak.ini`
-- On Windows: `%APPDATA%\SaneBreak\SaneBreak.ini`
-
-Beside default locations, Qt also supports reading settings from [other locations](https://doc.qt.io/qt-6/qsettings.html#locations-where-application-settings-are-stored).
-
-If you want to make Sane Break portable, especially on Windows, you can put an empty file named `SaneBreak.ini` next to the `.exe` file and Sane Break will automatically pick that file for settings.
+The [Installation Guide](https://allanchain.github.io/sane-break/installation) covers GNOME Wayland Shell extension setup, i3wm window rules, Linux Flatpak autostart, Windows portable mode, and building from source with CMake and Qt 6.
 
 ## Contributing
 
-### Translations
+Translations are hosted on [Weblate](https://hosted.weblate.org/engage/sane-break/).
 
 <a href="https://hosted.weblate.org/engage/sane-break/">
-<img src="https://hosted.weblate.org/widget/sane-break/sane-break/open-graph.png" alt="Translation status" />
+  <img src="https://hosted.weblate.org/widget/sane-break/sane-break/open-graph.png" alt="Translation status">
 </a>
