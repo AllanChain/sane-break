@@ -46,6 +46,7 @@ add_custom_target(
   screenshot
   COMMAND
     ${CMAKE_COMMAND} -E env "QT_QPA_PLATFORM=offscreen:size=1920x1080"
-    "SCREENSHOT_DIR=${CMAKE_SOURCE_DIR}/screenshots" $<TARGET_FILE:test-screenshot>
+    "QT_SCALE_FACTOR=2" "SCREENSHOT_DIR=${CMAKE_SOURCE_DIR}/screenshots"
+    $<TARGET_FILE:test-screenshot>
   DEPENDS test-screenshot
 )
