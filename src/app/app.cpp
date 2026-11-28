@@ -126,6 +126,12 @@ void SaneBreakApp::doRunHook(const QString& event, const QMap<QString, QString>&
   runHookScript(preferences->hookScript->get(), event, env);
 }
 
+QJsonObject SaneBreakApp::doRunCustomizeHook(const QString& event,
+                                             const QJsonObject& input,
+                                             const QMap<QString, QString>& env) {
+  return runCustomizeHookScript(preferences->hookScript->get(), event, input, env);
+}
+
 static void showAndActivate(QWidget* window) {
   window->show();
   window->raise();

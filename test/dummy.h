@@ -79,7 +79,8 @@ class DummyBreakWindows : public AbstractBreakWindows {
   Q_OBJECT
  public:
   using AbstractBreakWindows::AbstractBreakWindows;
-  MOCK_METHOD(void, create, (BreakType, SanePreferences*, int, bool), (override));
+  using AbstractBreakWindows::create;
+  MOCK_METHOD(void, create, (BreakWindowData), (override));
   MOCK_METHOD(void, destroy, (), ());
   MOCK_METHOD(void, setTime, (int), ());
   MOCK_METHOD(void, showFullScreen, (), ());
@@ -138,6 +139,9 @@ class DummyApp : public AbstractApp {
   MOCK_METHOD(void, doLockScreen, (), (override));
   MOCK_METHOD(void, doPauseMedia, (), (override));
   MOCK_METHOD(void, doRunHook, (const QString&, (const QMap<QString, QString>&)),
+              (override));
+  MOCK_METHOD(QJsonObject, doRunCustomizeHook,
+              (const QString&, const QJsonObject&, (const QMap<QString, QString>&)),
               (override));
   AppState::StateID currentState() { return m_currentState->getID(); }
   void advance(int secs) {

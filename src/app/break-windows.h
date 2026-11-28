@@ -29,11 +29,8 @@ class BreakWindows : public AbstractBreakWindows {
   BreakWindows(QObject* parent = nullptr);
   ~BreakWindows() = default;
 
-  void create(BreakType, SanePreferences*, int breakDuration,
-              bool isPostponed = false) override;
-  void create(BreakWindowData);
-  static BreakWindowData createData(BreakType, SanePreferences*, int breakDuration,
-                                    bool isPostponed = false);
+  using AbstractBreakWindows::create;
+  void create(BreakWindowData) override;
   void destroy() override;
   void setTime(int remainingTime) override;
   void showFullScreen() override;

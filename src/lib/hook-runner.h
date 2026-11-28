@@ -4,8 +4,14 @@
 
 #pragma once
 
+#include <QJsonObject>
 #include <QMap>
 #include <QString>
 
 void runHookScript(const QString& command, const QString& event,
                    const QMap<QString, QString>& env = {});
+
+QJsonObject runCustomizeHookScript(const QString& command, const QString& event,
+                                   const QJsonObject& input,
+                                   const QMap<QString, QString>& env = {},
+                                   int timeoutMs = 1000);

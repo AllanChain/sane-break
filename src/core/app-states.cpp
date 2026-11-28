@@ -266,13 +266,19 @@ void AppStateBreak::enter(AppContext* app) {
   // user is active — we need to detect actual presence to drive phase transitions
   // (prompt ↔ full-screen), force-break escalation, and post-break auto-close.
   app->idleTimer->setIdleDetection(2000, IdleMode::InputOnly);
-  app->breakWindows->create(breakType, app->preferences, data->totalSeconds(),
-                            app->data->schedule().isBreakExtendedByPostpone());
+  QMap<QString, QString> hookEnv = breakHookEnv(breakType, data->totalSeconds());
+  BreakWindowData windowData =
+      BreakWindowData::create(breakType, app->preferences, data->totalSeconds(),
+                              app->data->schedule().isBreakExtendedByPostpone());
+  QJsonObject overrides = app->doRunCustomizeHook(
+      "break-customize", windowData.toCustomizationJson(), hookEnv);
+  windowData.applyCustomizationJson(overrides);
+  app->breakWindows->create(windowData);
   // Ensure we set the time at least once to initialize the UI in case user is idle and
   // no tick occurs
   app->breakWindows->setTime(data->remainingSeconds());
   app->breakWindows->playEnterSound(breakType, app->preferences);
-  app->doRunHook("break-start", breakHookEnv(breakType, data->totalSeconds()));
+  app->doRunHook("break-start", hookEnv);
   if (app->idleTimer->isIdle()) {
     this->transitionTo(app, std::make_unique<BreakPhaseFullScreen>());
   } else {

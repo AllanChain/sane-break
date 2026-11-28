@@ -6,6 +6,7 @@
 
 #include <QColor>
 #include <QFlags>
+#include <QJsonObject>
 #include <QObject>
 #include <QString>
 
@@ -32,12 +33,18 @@ struct BreakWindowMessage {
 };
 
 struct BreakWindowData {
-  int totalSeconds;
+  BreakType type = BreakType::Small;
+  int totalSeconds = 0;
   bool isPostponed = false;
   int flashAnimationDuration = 0;
   BreakWindowMessage message;
   BreakWindowTheme theme;
   BreakWindowShow show;
+
+  static BreakWindowData create(BreakType type, SanePreferences* preferences,
+                                int breakDuration, bool isPostponed = false);
+  QJsonObject toCustomizationJson() const;
+  void applyCustomizationJson(const QJsonObject& json);
 };
 
 class AbstractBreakWindows : public QObject {
@@ -51,8 +58,11 @@ class AbstractBreakWindows : public QObject {
   Q_DECLARE_FLAGS(Buttons, Button)
   using QObject::QObject;
   ~AbstractBreakWindows() = default;
-  virtual void create(BreakType, SanePreferences*, int breakDuration,
-                      bool isPostponed = false) = 0;
+  virtual void create(BreakWindowData data) = 0;
+  void create(BreakType type, SanePreferences* preferences, int breakDuration,
+              bool isPostponed = false) {
+    create(BreakWindowData::create(type, preferences, breakDuration, isPostponed));
+  }
   virtual void destroy() = 0;
   virtual void setTime(int remainingTime) = 0;
   virtual void showFullScreen() = 0;

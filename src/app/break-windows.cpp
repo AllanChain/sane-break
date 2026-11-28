@@ -142,56 +142,6 @@ BreakWindows::BreakWindows(QObject* parent) : AbstractBreakWindows(parent) {
 #endif
 }
 
-QString rollMessages(const QStringList messagesToRoll) {
-  if (!messagesToRoll.empty()) {
-    int randomIndex = QRandomGenerator::global()->bounded(messagesToRoll.size());
-    return messagesToRoll[randomIndex];
-  }
-  return "";
-}
-
-BreakWindowMessage breakMessage(BreakType type, SanePreferences* preferences) {
-  BreakTypeSettings settings = preferences->breakSettings(type);
-  return {
-      .prompt = settings.messages->defaultValue()[0],
-      .fullScreen = rollMessages(settings.messages->get()),
-  };
-}
-
-BreakWindowTheme breakTheme(BreakType type, SanePreferences* preferences) {
-  BreakTypeSettings settings = preferences->breakSettings(type);
-  return {
-      .background = settings.backgroundColor->get(),
-      .flash = settings.flashColor->get(),
-      .messageColor = preferences->messageColor->get(),
-      .countDownColor = preferences->countDownColor->get(),
-      .backgroundImage = settings.backgroundImage->get(),
-  };
-}
-
-BreakWindowShow breakShow(BreakType type, SanePreferences* preferences) {
-  BreakTypeSettings settings = preferences->breakSettings(type);
-  return {
-      .prograssBar = settings.showProgressBar->get(),
-      .countdown = settings.showCountdown->get(),
-      .clock = settings.showClock->get(),
-      .endTime = settings.showEndTime->get(),
-      .buttons = settings.showButtons->get(),
-  };
-}
-
-BreakWindowData BreakWindows::createData(BreakType type, SanePreferences* preferences,
-                                         int breakDuration, bool isPostponed) {
-  const int flashSpeed = preferences->flashSpeed->get();
-  return {
-      .totalSeconds = breakDuration,
-      .isPostponed = isPostponed,
-      .flashAnimationDuration = flashSpeed > 0 ? 60000 / flashSpeed : 0,
-      .message = breakMessage(type, preferences),
-      .theme = breakTheme(type, preferences),
-      .show = breakShow(type, preferences),
-  };
-}
 void BreakWindows::create(BreakWindowData data) {
   m_activeBreak.emplace();
   m_activeBreak->data = data;
@@ -205,10 +155,6 @@ void BreakWindows::create(BreakWindowData data) {
   for (QScreen* screen : std::as_const(screens)) createOnScreen(screen);
   updateClocks();  // Set the initial clock
   clockUpdateTimer->start(3000);
-}
-void BreakWindows::create(BreakType type, SanePreferences* preferences,
-                          int breakDuration, bool isPostponed) {
-  create(createData(type, preferences, breakDuration, isPostponed));
 }
 
 void BreakWindows::destroy() {
@@ -283,7 +229,7 @@ void BreakWindows::showHeadsUp(int totalSeconds, BreakType breakType,
       .totalSeconds = totalSeconds,
       .breakType = breakType,
       .remaining = totalSeconds,
-      .theme = breakTheme(breakType, preferences),
+      .theme = BreakWindowData::create(breakType, preferences, totalSeconds).theme,
   });
   QList<QScreen*> screens = QApplication::screens();
   for (QScreen* screen : std::as_const(screens)) createHeadsUpOnScreen(screen);

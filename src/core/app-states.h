@@ -105,6 +105,13 @@ class AppContext : public QObject {
     Q_UNUSED(event);
     Q_UNUSED(env);
   }
+  virtual QJsonObject doRunCustomizeHook(const QString& event, const QJsonObject& input,
+                                         const QMap<QString, QString>& env = {}) {
+    Q_UNUSED(event);
+    Q_UNUSED(input);
+    Q_UNUSED(env);
+    return {};
+  }
 
  signals:
   void appStateChanged();

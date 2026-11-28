@@ -5,6 +5,8 @@
 #include <QApplication>
 #include <QCheckBox>
 #include <QComboBox>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QLineEdit>
 #include <QPointer>
 #include <QPushButton>
@@ -243,6 +245,68 @@ class TestPrefWindow : public QObject {
     QVERIFY(resultFile.open(QIODevice::ReadOnly));
     QCOMPARE(QString::fromUtf8(resultFile.readAll()),
              QString("break-fullscreen|break-fullscreen|big"));
+
+    // Customize hook reads stdin JSON and outputs override JSON on stdout
+    QString customizeScriptPath = tempDir.filePath("customize.sh");
+    QString stdinDumpPath = tempDir.filePath("stdin.json");
+    {
+      QFile f(customizeScriptPath);
+      QVERIFY(f.open(QIODevice::WriteOnly | QIODevice::Text));
+      f.write("#!/bin/sh\n");
+      f.write("cat > \"$SANE_STDIN_DUMP\"\n");
+      f.write(
+          "printf '{\"message\":{\"fullScreen\":\"%s:%s\"}}' "
+          "\"$SANE_BREAK_EVENT\" \"$SANE_BREAK_DURATION\"\n");
+      f.close();
+      QVERIFY(QFile::setPermissions(customizeScriptPath, QFileDevice::ReadOwner |
+                                                             QFileDevice::WriteOwner |
+                                                             QFileDevice::ExeOwner));
+    }
+
+    QJsonObject inputJson = {
+        {"message", QJsonObject{{"fullScreen", "Original"}}},
+    };
+    QJsonObject resultJson = runCustomizeHookScript(
+        customizeScriptPath, "break-customize", inputJson,
+        {{"SANE_BREAK_DURATION", "30"}, {"SANE_STDIN_DUMP", stdinDumpPath}});
+    QCOMPARE(resultJson["message"].toObject()["fullScreen"].toString(),
+             QString("break-customize:30"));
+
+    QFile stdinFile(stdinDumpPath);
+    QVERIFY(stdinFile.open(QIODevice::ReadOnly));
+    QJsonDocument dumpedDoc = QJsonDocument::fromJson(stdinFile.readAll());
+    QCOMPARE(dumpedDoc.object(), inputJson);
+
+    // Empty stdout on exit code 0 is a silent no-op
+    QCOMPARE(runCustomizeHookScript("/usr/bin/true", "break-customize", inputJson),
+             QJsonObject());
+
+    // Invalid JSON and timeout return empty object gracefully
+    QString badJsonScript = tempDir.filePath("bad-json.sh");
+    {
+      QFile f(badJsonScript);
+      QVERIFY(f.open(QIODevice::WriteOnly | QIODevice::Text));
+      f.write("#!/bin/sh\nprintf 'not-json'\n");
+      f.close();
+      QVERIFY(QFile::setPermissions(badJsonScript, QFileDevice::ReadOwner |
+                                                       QFileDevice::WriteOwner |
+                                                       QFileDevice::ExeOwner));
+    }
+    QCOMPARE(runCustomizeHookScript(badJsonScript, "break-customize", inputJson),
+             QJsonObject());
+
+    QString slowScript = tempDir.filePath("slow.sh");
+    {
+      QFile f(slowScript);
+      QVERIFY(f.open(QIODevice::WriteOnly | QIODevice::Text));
+      f.write("#!/bin/sh\nsleep 5\n");
+      f.close();
+      QVERIFY(QFile::setPermissions(slowScript, QFileDevice::ReadOwner |
+                                                    QFileDevice::WriteOwner |
+                                                    QFileDevice::ExeOwner));
+    }
+    QCOMPARE(runCustomizeHookScript(slowScript, "break-customize", inputJson, {}, 50),
+             QJsonObject());
 #endif
   }
 };

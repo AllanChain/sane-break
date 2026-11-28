@@ -15,6 +15,7 @@
 #include "gmock/gmock.h"
 
 using testing::_;
+using testing::Field;
 using testing::Mock;
 using testing::NiceMock;
 
@@ -52,7 +53,8 @@ class TestWindow : public QObject {
 
     QFETCH(BreakType, type);
 
-    EXPECT_CALL(*deps.breakWindows, create(type, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(Field(&BreakWindowData::type, type)))
+        .Times(1);
     if (type == BreakType::Small) {
       app.breakNow();
     } else {
@@ -85,7 +87,9 @@ class TestWindow : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Small)))
+        .Times(1);
     app.breakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
@@ -128,7 +132,7 @@ class TestWindow : public QObject {
 
     // User activity after break so that we go to normal state
     deps.idleTimer->setIdle(false);
-    EXPECT_CALL(*deps.breakWindows, create(_, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows, create(_)).Times(1);
     app.breakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 

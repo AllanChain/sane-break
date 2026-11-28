@@ -81,7 +81,7 @@ class TestScreenshot : public QObject {
 
   void breakWindow() {
     BreakWindowData data =
-        BreakWindows::createData(BreakType::Big, prefs, prefs->bigFor->get());
+        BreakWindowData::create(BreakType::Big, prefs, prefs->bigFor->get());
     data.show.prograssBar = true;
     data.show.countdown = true;
     data.show.clock = true;

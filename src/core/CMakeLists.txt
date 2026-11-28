@@ -14,6 +14,7 @@ add_library(
   app-states.h
   app.cpp
   app.h
+  break-windows.cpp
   break-windows.h
   meeting-prompt.h
   flags.h

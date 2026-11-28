@@ -6,22 +6,27 @@
 #include <qtestcase.h>
 
 #include <QDateTime>
+#include <QJsonObject>
 #include <QObject>
 #include <QPointer>
 #include <QRegularExpression>
 #include <QSignalSpy>
 #include <QSqlQuery>
+#include <QTemporaryDir>
 #include <QTest>
 #include <QTimer>
+#include <QUrl>
 #include <memory>
 
 #include "core/app.h"
+#include "core/break-windows.h"
 #include "core/flags.h"
 #include "core/idle-time.h"
 #include "dummy.h"
 #include "gmock/gmock.h"
 
-using testing::Mock, testing::NiceMock, testing::_;
+using testing::AllOf, testing::Field, testing::Mock, testing::NiceMock, testing::Return,
+    testing::SaveArg, testing::_;
 
 static int sumTrackedSeconds(BreakDatabase* db, const QDate& from, const QDate& to) {
   int total = 0;
@@ -127,7 +132,9 @@ class TestApp : public QObject {
     app.start();
 
     // Break window will show
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Small)))
+        .Times(1);
     app.advance(app.trayData.secondsToNextBreak);
     // Correctly advaces to next break
     QCOMPARE(app.trayData.secondsToNextBreak, 0);
@@ -201,9 +208,12 @@ class TestApp : public QObject {
     app.start();
 
     int numberOfBreaks = deps.preferences->bigAfter->get();
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _))
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Small)))
         .Times(numberOfBreaks - 1);
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Big, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Big)))
+        .Times(1);
     for (int j = 0; j < numberOfBreaks; j++) {
       QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, numberOfBreaks - j - 1);
       app.advance(app.trayData.secondsToNextBreak);
@@ -904,13 +914,17 @@ class TestApp : public QObject {
     app.start();
 
     // Verify we successfully triggered a big break
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Big, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Big)))
+        .Times(1);
     app.bigBreakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
     // Triggering small break instead is deleting previous windows and creating new ones
     QSignalSpy stateSpy(&app, &AppContext::appStateChanged);
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Small)))
+        .Times(1);
     EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
     app.smallBreakInstead();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
@@ -930,7 +944,9 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Small)))
+        .Times(1);
     app.breakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
@@ -945,7 +961,9 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Small)))
+        .Times(1);
     app.breakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
@@ -958,7 +976,9 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Small)))
+        .Times(1);
     app.breakNow();
     EXPECT_CALL(*deps.breakWindows, destroy()).Times(0);
     deps.idleTimer->setIdle(true);
@@ -972,7 +992,9 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Small)))
+        .Times(1);
     app.breakNow();
     EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
     emit deps.systemMonitor->sleepEnded(1);
@@ -1174,9 +1196,12 @@ class TestApp : public QObject {
     app.start();
 
     int numberOfBreaks = deps.preferences->bigAfter->get();
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _))
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Small)))
         .Times(numberOfBreaks);
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Big, _, _, _)).Times(0);
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Big)))
+        .Times(0);
     for (int j = 0; j < numberOfBreaks; j++) {
       app.advance(app.trayData.secondsToNextBreak);
       app.advanceToBreakEnd();
@@ -1198,7 +1223,9 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Small)))
+        .Times(1);
     app.bigBreakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
   }
@@ -1456,7 +1483,9 @@ class TestApp : public QObject {
     deps.preferences->focusSmallEvery->set(600);
     deps.preferences->focusSmallFor->set(10);
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Small)))
+        .Times(1);
     app.startFocus(4, "deep work");
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
     QVERIFY(app.trayData.isBreaking);
@@ -1607,7 +1636,10 @@ class TestApp : public QObject {
 
     int normalSmallBreaksBeforeBig = app.trayData.smallBreaksBeforeBigBreak;
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, 10, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(AllOf(Field(&BreakWindowData::type, BreakType::Small),
+                             Field(&BreakWindowData::totalSeconds, 10))))
+        .Times(1);
     app.startFocus(1, "deep work");
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
     app.advanceToBreakEnd();
@@ -1615,7 +1647,10 @@ class TestApp : public QObject {
     // Focus entry break advances the focus-only cycle, so the next focus break is big.
     QCOMPARE(app.trayData.smallBreaksBeforeBigBreak, 0);
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Big, _, 20, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(AllOf(Field(&BreakWindowData::type, BreakType::Big),
+                             Field(&BreakWindowData::totalSeconds, 20))))
+        .Times(1);
     app.advance(app.trayData.secondsToNextBreak);
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
     app.advanceToBreakEnd();
@@ -1678,14 +1713,19 @@ class TestApp : public QObject {
     app.start();
 
     // Start a normal break
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Small)))
+        .Times(1);
     app.breakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
     QVERIFY(app.trayData.isBreaking);
 
     // Enter focus mode during the break — break should restart
     EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, 10, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(AllOf(Field(&BreakWindowData::type, BreakType::Small),
+                             Field(&BreakWindowData::totalSeconds, 10))))
+        .Times(1);
     app.startFocus(3, "deep work");
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
     QVERIFY(app.trayData.isBreaking);
@@ -1712,7 +1752,10 @@ class TestApp : public QObject {
 
     // Enter focus during this break-after-postpone
     EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, 10, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(AllOf(Field(&BreakWindowData::type, BreakType::Small),
+                             Field(&BreakWindowData::totalSeconds, 10))))
+        .Times(1);
     app.startFocus(3, "deep work");
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
     QVERIFY(app.trayData.isFocusMode);
@@ -1746,7 +1789,9 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Small)))
+        .Times(1);
     app.breakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
@@ -1806,7 +1851,9 @@ class TestApp : public QObject {
     NiceMock<DummyApp> app(deps);
     app.start();
 
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Small)))
+        .Times(1);
     app.breakNow();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
 
@@ -1852,7 +1899,9 @@ class TestApp : public QObject {
 
     deps.idleTimer->setEmitIdleStartOnDetection(true);
     EXPECT_CALL(*deps.breakWindows, destroy()).Times(1);
-    EXPECT_CALL(*deps.breakWindows, create(BreakType::Small, _, _, _)).Times(1);
+    EXPECT_CALL(*deps.breakWindows,
+                create(Field(&BreakWindowData::type, BreakType::Small)))
+        .Times(1);
     EXPECT_CALL(*deps.breakWindows, showFullScreen()).Times(1);
     app.smallBreakInstead();
     QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
@@ -2035,6 +2084,143 @@ class TestApp : public QObject {
     app.bigBreakNow();
     QCOMPARE(app.postpone(300), CommandError::None);
     QVERIFY(Mock::VerifyAndClearExpectations(&app));
+  }
+  void break_window_data_customization_json_roundtrip_and_validation() {
+    QTemporaryDir tempDir;
+    QVERIFY(tempDir.isValid());
+    QString validImgPath = tempDir.filePath("bg.png");
+    {
+      QFile f(validImgPath);
+      QVERIFY(f.open(QIODevice::WriteOnly));
+      f.write("fake-image");
+    }
+
+    deps.preferences->smallMessages->set({"Take a breather"});
+    deps.preferences->smallBackgroundColor->set(QColor::fromString("#ff2e3440"));
+    deps.preferences->smallFlashColor->set(QColor::fromString("#64ebcb8b"));
+    deps.preferences->messageColor->set(QColor::fromString("#ffeceff4"));
+    deps.preferences->countDownColor->set(QColor::fromString("#ffd8dee9"));
+    deps.preferences->smallBackgroundImage->set("file:///default/image.png");
+    deps.preferences->smallBreakShowProgressBar->set(true);
+    deps.preferences->smallBreakShowCountdown->set(true);
+    deps.preferences->smallBreakShowClock->set(false);
+    deps.preferences->smallBreakShowEndTime->set(false);
+    deps.preferences->smallBreakShowButtons->set(true);
+
+    BreakWindowData data =
+        BreakWindowData::create(BreakType::Small, deps.preferences, 20, false);
+    QJsonObject defaultJson = data.toCustomizationJson();
+
+    QCOMPARE(defaultJson["message"].toObject()["fullScreen"].toString(),
+             QString("Take a breather"));
+    QCOMPARE(defaultJson["theme"].toObject()["background"].toString(),
+             QString("#ff2e3440"));
+    QCOMPARE(defaultJson["theme"].toObject()["flash"].toString(), QString("#64ebcb8b"));
+    QCOMPARE(defaultJson["theme"].toObject()["messageColor"].toString(),
+             QString("#ffeceff4"));
+    QCOMPARE(defaultJson["theme"].toObject()["countDownColor"].toString(),
+             QString("#ffd8dee9"));
+    QCOMPARE(defaultJson["theme"].toObject()["backgroundImage"].toString(),
+             QString("file:///default/image.png"));
+    QCOMPARE(defaultJson["show"].toObject()["progressBar"].toBool(), true);
+    QCOMPARE(defaultJson["show"].toObject()["clock"].toBool(), false);
+
+    // Valid partial overrides + existing file path
+    data.applyCustomizationJson({
+        {"message", QJsonObject{{"prompt", "Custom prompt"},
+                                {"fullScreen", "Custom full screen"}}},
+        {"theme", QJsonObject{{"background", "#80112233"},
+                              {"flash", "#40aabbcc"},
+                              {"messageColor", "#ff00ff00"},
+                              {"countDownColor", "#ff0000ff"},
+                              {"backgroundImage", validImgPath}}},
+        {"show", QJsonObject{{"progressBar", false},
+                             {"countdown", false},
+                             {"clock", true},
+                             {"endTime", true},
+                             {"buttons", false}}},
+    });
+    QCOMPARE(data.message.prompt, QString("Custom prompt"));
+    QCOMPARE(data.message.fullScreen, QString("Custom full screen"));
+    QCOMPARE(data.theme.background, QColor::fromString("#80112233"));
+    QCOMPARE(data.theme.flash, QColor::fromString("#40aabbcc"));
+    QCOMPARE(data.theme.messageColor, QColor::fromString("#ff00ff00"));
+    QCOMPARE(data.theme.countDownColor, QColor::fromString("#ff0000ff"));
+    QCOMPARE(data.theme.backgroundImage, validImgPath);
+    QCOMPARE(data.show.prograssBar, false);
+    QCOMPARE(data.show.countdown, false);
+    QCOMPARE(data.show.clock, true);
+    QCOMPARE(data.show.endTime, true);
+    QCOMPARE(data.show.buttons, false);
+
+    // Invalid colors, non-existing file, directory path, and wrong JSON types are
+    // ignored
+    data.applyCustomizationJson({
+        {"message", QJsonObject{{"prompt", 123}, {"fullScreen", true}}},
+        {"theme", QJsonObject{{"background", "not-a-color"},
+                              {"backgroundImage", tempDir.filePath("missing.png")}}},
+        {"show", QJsonObject{{"progressBar", "no"}, {"clock", 1}}},
+    });
+    QCOMPARE(data.message.prompt, QString("Custom prompt"));
+    QCOMPARE(data.message.fullScreen, QString("Custom full screen"));
+    QCOMPARE(data.theme.background, QColor::fromString("#80112233"));
+    QCOMPARE(data.theme.backgroundImage, validImgPath);
+    QCOMPARE(data.show.prograssBar, false);
+    QCOMPARE(data.show.clock, true);
+
+    // Directory path (exists, but not a file) is ignored
+    data.applyCustomizationJson(
+        {{"theme", QJsonObject{{"backgroundImage", tempDir.path()}}}});
+    QCOMPARE(data.theme.backgroundImage, validImgPath);
+
+    // Clearing image with "" works, and file:// URL to existing file resolves
+    data.applyCustomizationJson({{"theme", QJsonObject{{"backgroundImage", ""}}}});
+    QCOMPARE(data.theme.backgroundImage, QString(""));
+
+    QString fileUrl = QUrl::fromLocalFile(validImgPath).toString();
+    data.applyCustomizationJson({{"theme", QJsonObject{{"backgroundImage", fileUrl}}}});
+    QCOMPARE(data.theme.backgroundImage, validImgPath);
+  }
+  void break_customize_hook_runs_before_break_start_and_applies_overrides() {
+    deps.preferences->smallFor->set(25);
+    deps.preferences->smallMessages->set({"Default message"});
+    NiceMock<DummyApp> app(deps);
+    app.start();
+
+    QMap<QString, QString> expectedEnv = {
+        {"SANE_BREAK_TYPE", "small"},
+        {"SANE_BREAK_DURATION", "25"},
+    };
+    QJsonObject overrideJson = {
+        {"message", QJsonObject{{"fullScreen", "Hooked break message"}}},
+        {"theme", QJsonObject{{"background", "#ff123456"}}},
+        {"show", QJsonObject{{"clock", true}, {"buttons", false}}},
+    };
+
+    QJsonObject capturedInput;
+    BreakWindowData capturedWindowData;
+    {
+      testing::InSequence seq;
+      EXPECT_CALL(app, doRunCustomizeHook(QString("break-customize"), _, expectedEnv))
+          .WillOnce(testing::DoAll(SaveArg<1>(&capturedInput), Return(overrideJson)));
+      EXPECT_CALL(*deps.breakWindows, create(_))
+          .WillOnce(SaveArg<0>(&capturedWindowData));
+      EXPECT_CALL(app, doRunHook(QString("break-start"), expectedEnv)).Times(1);
+      EXPECT_CALL(app, doRunHook(QString("break-prompt"), expectedEnv)).Times(1);
+    }
+
+    app.breakNow();
+    QVERIFY(Mock::VerifyAndClearExpectations(&app));
+    QVERIFY(Mock::VerifyAndClearExpectations(deps.breakWindows));
+
+    QCOMPARE(capturedInput["message"].toObject()["fullScreen"].toString(),
+             QString("Default message"));
+    QCOMPARE(capturedWindowData.type, BreakType::Small);
+    QCOMPARE(capturedWindowData.totalSeconds, 25);
+    QCOMPARE(capturedWindowData.message.fullScreen, QString("Hooked break message"));
+    QCOMPARE(capturedWindowData.theme.background, QColor::fromString("#ff123456"));
+    QCOMPARE(capturedWindowData.show.clock, true);
+    QCOMPARE(capturedWindowData.show.buttons, false);
   }
 };
 

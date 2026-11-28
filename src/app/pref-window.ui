@@ -2116,7 +2116,7 @@ All color are in &lt;code&gt;#AARRGGBB&lt;/code&gt; format.</string>
               <item row="4" column="0">
                <widget class="QLabel" name="hookScriptLabel">
                 <property name="toolTip">
-                 <string>Command or script executed on break and pause events (break-start, break-prompt, break-fullscreen, break-end, pause-start, pause-end).</string>
+                 <string>Command or script executed on break and pause events (break-customize, break-start, break-prompt, break-fullscreen, break-end, pause-start, pause-end).</string>
                 </property>
                 <property name="text">
                  <string>Lifecycle hook script</string>
